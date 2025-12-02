@@ -1124,6 +1124,12 @@ Score: 12,450
 └─────────────────────────────────────────────┘
 ```
 
+**Loading Screen Text:**
+
+> "The Sarimanok guards the land through the night. Survive until dawn."
+
+Displayed briefly when starting a run (during scene transition).
+
 ## Gameplay HUD Layout
 
 ```
@@ -2136,6 +2142,7 @@ Builds on Week 4, adds:
 **Tasks:**
 
 - [ ] Main menu screen (Story Mode, Shop, Quit)
+- [ ] Add loading screen tagline ("The Sarimanok guards the land through the night...")
 - [ ] Shop screen UI
 - [ ] Buy Damage upgrade (+2% per purchase)
 - [ ] Buy HP upgrade (+5 per purchase)
