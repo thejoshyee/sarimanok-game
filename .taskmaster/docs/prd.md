@@ -358,6 +358,7 @@ On contact with player:
 ```
 Every frame:
   Float toward player (slower, erratic movement)
+  Add slight sine wave to path for "floating" feel
 
 Every 2 seconds:
   Shoot fireball projectile toward player
@@ -365,6 +366,16 @@ Every 2 seconds:
 On contact with player:
   player.take_damage(damage)
 ```
+
+**Santelmo Fireball Specs:**
+
+| Property | Value                         |
+| -------- | ----------------------------- |
+| Speed    | 150 pixels/second             |
+| Damage   | 8                             |
+| Cooldown | 2.0 seconds                   |
+| Size     | 16x16 pixels                  |
+| Lifetime | 5 seconds (despawn if no hit) |
 
 **Manananggal (Boss):**
 
@@ -382,6 +393,23 @@ On death:
   Bonus gold drop (100g)
   Does NOT end game (still must survive to 30:00)
 ```
+
+**Manananggal Dive Attack Specs:**
+
+| Property      | Value                                                  |
+| ------------- | ------------------------------------------------------ |
+| Telegraph     | 1.0 second warning (sprite flashes red, screech sound) |
+| Dive Speed    | 3x normal speed (270 pixels/second)                    |
+| Dive Duration | 0.5 seconds                                            |
+| Cooldown      | 5.0 seconds between dives                              |
+| Damage        | 25 (same as contact damage)                            |
+
+**Enemy Collision Rules:**
+
+- Enemies pass through each other (no inter-enemy collision)
+- This is intentional for performance and gameplay (allows swarming)
+- Enemies DO collide with player (deal damage on overlap)
+- Enemies DO NOT collide with arena boundaries (spawn outside, walk in)
 
 **Cultural Note - Manananggal:**
 The Manananggal is a type of Aswang from Filipino folklore. It's a self-segmenting vampire—a woman whose upper torso detaches from her lower body, sprouting bat-like wings to fly through the night hunting prey. More iconic and visually striking than a generic shapeshifter.
@@ -406,6 +434,26 @@ The Manananggal is a type of Aswang from Filipino folklore. It's a self-segmenti
 - Base rate decreases (faster spawns) as time progresses
 - Harder enemies are added to the pool over time
 - Never remove earlier enemies (Green Duwendes spawn all game)
+
+**Spawn Rate Formula:**
+
+```gdscript
+# Exponential difficulty scaling - spawns increase 5% per minute
+var base_spawn_interval = 2.0  # seconds between spawns at 0:00
+var difficulty_scale = 1.05    # 5% faster spawns per minute
+
+func get_spawn_interval(elapsed_minutes: float) -> float:
+    return base_spawn_interval / pow(difficulty_scale, elapsed_minutes)
+
+# Examples:
+# 0:00  = 2.0s between spawns
+# 5:00  = 1.57s between spawns
+# 10:00 = 1.23s between spawns
+# 20:00 = 0.75s between spawns
+# 30:00 = 0.46s between spawns
+```
+
+This creates smooth difficulty progression rather than hard jumps at time thresholds.
 
 ### Enemy Drops
 
@@ -1144,17 +1192,20 @@ All placeholders are simple colored rectangles matching final sprite sizes:
 | Tileset (all tiles) | Simple colored tiles | Green/brown/gray   | 32x32 each |
 | All icons           | ColorRect            | Gray               | 16x16      |
 
-## Parallel Development Timeline
+## Parallel Development Timeline (Accelerated for Baby Buffer)
 
 ```
 JOSH (Code)                    ERICKA (Art)
 ───────────────────────────────────────────────────
 Week 1-2: Core gameplay        Week 1-2: Sarimanok (all 3 variants)
 Week 3-4: Weapons, enemies     Week 3-4: Duwendes + Santelmo
-Week 5-6: Progression, shop    Week 5-6: Manananggal + Icons
-Week 7: Art integration        Week 7: Tileset + UI elements
-Week 8+: Polish together       Week 8+: Polish together
+Week 5: Progression, shop      Week 5: Manananggal Boss
+Week 6: Characters, Endless    Week 6: All Icons + Pickups ← ART COMPLETE
+Week 7: Art integration        Week 7: Tileset + UI elements (if time)
+Week 8+: Polish together       Week 8+: Rest before baby / polish if able
 ```
+
+**Why accelerated:** Baby due March 21. Completing core art by Week 6 gives 5+ weeks buffer instead of 3.
 
 ## Sprite Swap Process (Week 7)
 
@@ -1231,7 +1282,7 @@ func _ready():
 
 Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art delays.
 
-**Primary Plan:** Ericka creates all art (target: complete by Week 8)
+**Primary Plan:** Ericka creates all art (target: complete by Week 6 for baby buffer)
 
 **Backup Plans:**
 
@@ -1246,12 +1297,16 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 - UI: Can use Godot's default theme with custom colors
 - Tileset: Can use free tileset assets
 
-**Art Checkpoints:**
-| Week | Check | Action if Not Ready |
-|------|-------|---------------------|
-| Week 5 | Sarimanok + Duwendes done? | If no, Josh starts backup art |
-| Week 7 | Boss done? | If no, use larger placeholder |
-| Week 8 | All art ready? | Ship whatever is ready, refine placeholders for rest |
+**Art Checkpoints (Accelerated):**
+
+| Week   | Required Art                      | Action if Not Ready                     |
+| ------ | --------------------------------- | --------------------------------------- |
+| Week 4 | Sarimanok (all 3) + Green Duwende | Josh starts backup art immediately      |
+| Week 5 | Red/Black Duwende + Santelmo      | Use recolors of Green Duwende           |
+| Week 6 | Manananggal + All Icons           | Use larger placeholder for boss         |
+| Week 7 | Tileset + UI (nice-to-have)       | Use placeholder tiles, default UI theme |
+
+**Why Week 6 deadline:** Baby due March 21. Completing essential art by Week 6 (mid-January) gives 8+ weeks buffer before due date. Tileset and UI polish can happen in Weeks 7-8 if Ericka is able, but are NOT blockers.
 
 **The game is SHIPPABLE with placeholders.** Real art is "Should Have," not "Must Have" for Early Access.
 
@@ -1546,6 +1601,36 @@ At 10 hrs/week art = **4-5 weeks** of art (parallel to coding)
 | Aswang roar    | Boss spawn         |
 | Dawn ambience  | Victory transition |
 
+## Audio Specifications
+
+**Music:**
+
+| Property       | Value                                   |
+| -------------- | --------------------------------------- |
+| Loop Length    | 1-2 minutes per track                   |
+| Format         | OGG Vorbis (smaller file size than WAV) |
+| Transitions    | 0.5 second crossfade between tracks     |
+| Volume Default | 80% (allow headroom for SFX)            |
+
+**Sound Effects:**
+
+| Property                     | Value                                            |
+| ---------------------------- | ------------------------------------------------ |
+| Format                       | WAV (16-bit, 44.1kHz)                            |
+| Max Simultaneous             | 8 sounds playing at once                         |
+| Priority (highest to lowest) | Player hurt > Pickup > Level up > Weapon > Enemy |
+| Polyphony Limit              | 3 instances of same sound simultaneously         |
+
+**Music Triggers:**
+
+| Event                      | Action                                |
+| -------------------------- | ------------------------------------- |
+| Enter Main Menu            | Play Menu theme (loop)                |
+| Start Run                  | Crossfade to Night theme              |
+| Manananggal Spawns (20:00) | Crossfade to Boss theme               |
+| Victory (30:00)            | Cut to Victory jingle + Dawn ambience |
+| Player Death               | Fade out music over 1 second          |
+
 ## Audio Sources (Free)
 
 - freesound.org (CC0 sound effects)
@@ -1585,6 +1670,35 @@ At 10 hrs/week art = **4-5 weeks** of art (parallel to coding)
 | ESC           | Pause           |
 | Mouse         | Menu navigation |
 | Click         | Select          |
+
+## Input Action Mapping (Godot Project Settings)
+
+Configure these in Project Settings > Input Map before coding begins:
+
+| Action Name | Primary Key | Secondary Key | Controller                     |
+| ----------- | ----------- | ------------- | ------------------------------ |
+| move_up     | W           | Up Arrow      | D-pad Up / Left Stick Up       |
+| move_down   | S           | Down Arrow    | D-pad Down / Left Stick Down   |
+| move_left   | A           | Left Arrow    | D-pad Left / Left Stick Left   |
+| move_right  | D           | Right Arrow   | D-pad Right / Left Stick Right |
+| pause       | Escape      | —             | Start Button                   |
+| ui_accept   | Enter       | Space         | A Button (Xbox) / Cross (PS)   |
+| ui_cancel   | Escape      | —             | B Button (Xbox) / Circle (PS)  |
+
+**Usage in code:**
+
+```gdscript
+func _process(delta):
+    var input_vector = Vector2.ZERO
+    input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+    input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+    input_vector = input_vector.normalized()
+
+    velocity = input_vector * move_speed
+    move_and_slide()
+```
+
+**Note:** Using `get_action_strength()` instead of `is_action_pressed()` allows analog stick support for smooth movement.
 
 ## Performance Architecture
 
