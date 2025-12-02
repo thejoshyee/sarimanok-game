@@ -1,0 +1,30 @@
+# Godot 4.x
+.godot/
+*.tmp
+export_presets.cfg
+
+# Logs
+logs
+*.log
+
+# Environment variables
+.env
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Cursor MCP config (may contain API keys)
+.cursor/mcp.json
+
+# TaskMaster user-specific state
+.taskmaster/state.json
