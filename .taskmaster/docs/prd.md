@@ -531,14 +531,16 @@ Weapons attack automatically on a cooldown. Player collects weapons through leve
 **Why It's Important:**
 Weapons are your primary way to kill enemies. Different weapons create different playstyles.
 
-### Weapon Roster (4 Total)
+### Weapon Roster (6 Total: 4 Unique + 2 Clones)
 
-| Weapon              | Type       | Behavior                        | Cooldown | Base Damage |
-| ------------------- | ---------- | ------------------------------- | -------- | ----------- |
-| **Peck**            | Melee      | Quick jab in facing direction   | 0.5s     | 10          |
-| **Wing Slap**       | AOE        | Circle around player            | 1.5s     | 8           |
-| **Feather Shot**    | Projectile | Shoots feather at nearest enemy | 1.0s     | 12          |
-| **Spiral Feathers** | Orbital    | 4 feathers orbit player         | Passive  | 6           |
+| Weapon              | Type       | Behavior                         | Cooldown | Base Damage |
+| ------------------- | ---------- | -------------------------------- | -------- | ----------- |
+| **Peck**            | Melee      | Quick jab in facing direction    | 0.5s     | 10          |
+| **Wing Slap**       | AOE        | Circle around player             | 1.5s     | 8           |
+| **Feather Shot**    | Projectile | Shoots feather at nearest enemy  | 1.0s     | 12          |
+| **Spiral Feathers** | Orbital    | 4 feathers orbit player          | Passive  | 6           |
+| **Ice Shard**       | Projectile | Slow feather + enemy slow debuff | 1.2s     | 10          |
+| **Flame Wing**      | AOE        | Smaller, stronger AOE circle     | 1.5s     | 10          |
 
 ### Weapon Descriptions
 
@@ -621,6 +623,69 @@ Player can hold up to **4 weapons** at once.
 
 If you have 4 weapons and level up, you'll only see upgrade options for existing weapons ("+1" options), not new weapons.
 
+### Clone Weapons (2 Additional - Low-Cost Variety)
+
+To increase build variety without scope explosion, add 2 "clone" weapons that reuse existing weapon logic with different stats/visuals:
+
+| Clone Weapon   | Base Weapon  | Visual Change | Stat Change                                   |
+| -------------- | ------------ | ------------- | --------------------------------------------- |
+| **Ice Shard**  | Feather Shot | Blue feather  | Slower projectile + 0.5s slow debuff on enemy |
+| **Flame Wing** | Wing Slap    | Orange AOE    | +20% damage, smaller radius                   |
+
+**Ice Shard:**
+
+- Reuses Feather Shot projectile logic
+- Blue-tinted feather sprite (recolor)
+- Slower projectile speed (100 vs 150)
+- Applies 0.5s slow debuff to hit enemies (50% speed reduction)
+- Great for kiting and crowd control
+
+**Flame Wing:**
+
+- Reuses Wing Slap AOE logic
+- Orange/red AOE effect (recolor)
+- +20% damage (10 base vs 8)
+- 75% radius of Wing Slap
+- Higher risk/reward for aggressive players
+
+**Clone Weapon Upgrades follow same pattern as base weapons.**
+
+### Data-Driven Weapon Architecture
+
+To make adding weapons trivial (10-15 minutes per weapon), use Godot Resources:
+
+```gdscript
+# weapons/weapon_data.gd - Data-driven weapon definitions
+class_name WeaponData
+extends Resource
+
+@export var id: String
+@export var display_name: String
+@export var description: String
+@export var base_damage: int
+@export var cooldown: float
+@export var weapon_type: String  # "projectile", "aoe", "melee", "orbital"
+@export var sprite: Texture2D
+@export var icon: Texture2D
+@export var upgrades: Array[Dictionary]  # [{level, damage, effect_description}]
+
+# Optional modifiers (for clones and variants)
+@export var debuff_type: String = ""  # "slow", "burn", etc.
+@export var debuff_duration: float = 0.0
+@export var debuff_strength: float = 0.0  # e.g., 0.5 = 50% slow
+@export var radius_modifier: float = 1.0
+@export var speed_modifier: float = 1.0
+@export var projectile_count: int = 1
+@export var pierce_count: int = 1
+```
+
+**Benefits:**
+
+- New weapons = create `.tres` resource file, no code changes
+- Clone weapons share base weapon's script, just different data
+- Easy to balance (tweak numbers in Inspector, no recompile)
+- Update 1 weapon additions become trivial
+
 **Technical Requirements:**
 
 - Weapon base class with cooldown timer
@@ -629,6 +694,8 @@ If you have 4 weapons and level up, you'll only see upgrade options for existing
 - Weapons fire automatically when cooldown ready
 - Visual effects for each weapon attack
 - Damage detection using Area2D
+- **WeaponData Resource for data-driven definitions**
+- **Debuff system for slow/burn effects (used by clone weapons)**
 
 **Definition of Done:**
 
@@ -636,11 +703,15 @@ If you have 4 weapons and level up, you'll only see upgrade options for existing
 - [ ] Wing Slap attack works (AOE circle)
 - [ ] Feather Shot works (projectile)
 - [ ] Spiral Feathers works (orbiting feathers)
+- [ ] Ice Shard works (slow projectile + slow debuff)
+- [ ] Flame Wing works (smaller AOE, higher damage)
 - [ ] All weapons auto-fire on cooldown
 - [ ] Weapons can be upgraded to level 5
-- [ ] Max 4 weapons enforced
+- [ ] Max 6 weapons enforced
 - [ ] Weapon effects visible and satisfying
 - [ ] Damage numbers show on hit
+- [ ] WeaponData Resource system implemented
+- [ ] Debuff system works (slow effect)
 - [ ] No console errors
 
 ---
@@ -1390,18 +1461,20 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 
 **Note:** Manananggal is 48x48 to emphasize boss status. Flying torso with bat-like wings, grotesque but readable silhouette.
 
-### Weapon Icons (4 for EA)
+### Weapon Icons (6 for EA: 4 Unique + 2 Clone Recolors)
 
-| Asset                | Size  | Est. Time | Priority |
-| -------------------- | ----- | --------- | -------- |
-| Peck icon            | 16x16 | 30 min    | EA       |
-| Wing Slap icon       | 16x16 | 30 min    | EA       |
-| Feather Shot icon    | 16x16 | 30 min    | EA       |
-| Spiral Feathers icon | 16x16 | 30 min    | EA       |
+| Asset                | Size  | Est. Time                        | Priority |
+| -------------------- | ----- | -------------------------------- | -------- |
+| Peck icon            | 16x16 | 30 min                           | EA       |
+| Wing Slap icon       | 16x16 | 30 min                           | EA       |
+| Feather Shot icon    | 16x16 | 30 min                           | EA       |
+| Spiral Feathers icon | 16x16 | 30 min                           | EA       |
+| Ice Shard icon       | 16x16 | 15 min (blue recolor of Feather) | EA       |
+| Flame Wing icon      | 16x16 | 15 min (orange recolor of Wing)  | EA       |
 
-**Total EA icon time: ~2 hrs**
+**Total EA icon time: ~2.5 hrs**
 
-### Weapon Effects (4 for EA)
+### Weapon Effects (6 for EA: 4 Unique + 2 Clone Recolors)
 
 | Asset              | Size  | Est. Time                              | Priority |
 | ------------------ | ----- | -------------------------------------- | -------- |
@@ -1409,8 +1482,12 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 | Wing Slap circle   | 64x64 | 1-2 hrs                                | EA       |
 | Feather projectile | 16x16 | 30 min                                 | EA       |
 | Spiral Feathers    | —     | 0 (reuses Feather projectile, rotated) | EA       |
+| Ice Shard proj     | 16x16 | 15 min (blue recolor of Feather)       | EA       |
+| Flame Wing circle  | 64x64 | 15 min (orange recolor of Wing Slap)   | EA       |
 
-**Total EA effect time: ~2.5-3.5 hrs**
+**Total EA effect time: ~3-4 hrs**
+
+**Note:** Clone weapon art is just recoloring existing sprites. Ice Shard = blue Feather, Flame Wing = orange Wing Slap. This adds build variety with minimal art investment (~1 hour total for both clones).
 
 ### Passive Icons (4 for EA)
 
@@ -1708,6 +1785,34 @@ At 10 hrs/week art = **2-2.5 weeks** of art (parallel to coding) - much more ach
 | Max Simultaneous             | 8 sounds playing at once                         |
 | Priority (highest to lowest) | Player hurt > Pickup > Level up > Weapon > Enemy |
 | Polyphony Limit              | 3 instances of same sound simultaneously         |
+
+**Pitch Randomization (CRITICAL for repetitive sounds):**
+
+Repetitive sounds (enemy hit, enemy death, pickups) will play 10,000+ times per run. Without pitch variation, they become annoying and fatiguing. Apply pitch randomization to all high-frequency sounds:
+
+```gdscript
+# AudioManager.gd - Pitch randomization for repetitive sounds
+func play_sfx(sound_name: String, pitch_variance: float = 0.1):
+    var player = get_available_audio_player()
+    player.stream = sfx_library[sound_name]
+    player.pitch_scale = randf_range(1.0 - pitch_variance, 1.0 + pitch_variance)
+    player.play()
+
+# Usage:
+# play_sfx("enemy_hit", 0.1)  # Plays at 0.9x to 1.1x pitch
+# play_sfx("enemy_death", 0.15)  # Wider variance for death sounds
+# play_sfx("pickup_xp", 0.1)
+```
+
+**Priority SFX (must feel satisfying - test these 100+ times!):**
+
+| Sound       | Priority | Pitch Variance | Notes                              |
+| ----------- | -------- | -------------- | ---------------------------------- |
+| Enemy hit   | HIGH     | ±10%           | Most frequent - must not annoy     |
+| Enemy death | HIGH     | ±15%           | Satisfying "pop" feel              |
+| XP pickup   | HIGH     | ±10%           | Subtle, rewarding                  |
+| Gold pickup | MEDIUM   | ±10%           | Slightly different from XP         |
+| Player hurt | HIGH     | ±5%            | Less variance - should feel urgent |
 
 **Music Triggers:**
 
@@ -2179,16 +2284,19 @@ Builds on Week 1, adds:
 
 ---
 
-## Week 3: Full Arsenal
+## Week 3: Full Arsenal + Data-Driven Architecture
 
-**End State: "I can build different weapon combos"**
+**End State: "I can build different weapon combos with scalable architecture"**
 
 Builds on Week 2, adds:
 
 - Feather Shot weapon (projectile toward nearest enemy)
-- All 3 passives working (Thick Plumage, Racing Legs)
+- All 4 passives working (Thick Plumage, Racing Legs, Magnetic Aura)
 - All weapons/passives upgrade to level 5
-- Max 3 weapons enforced
+- **Data-driven WeaponData Resource system**
+- **2 Clone weapons (Ice Shard, Flame Wing) for build variety**
+- **Damage numbers on enemy hit (debugging tool)**
+- **Enemy damage flash (white flash on hit)**
 
 **Tasks:**
 
@@ -2197,17 +2305,23 @@ Builds on Week 2, adds:
 - [ ] Racing Legs passive (+speed)
 - [ ] **Spiral Feathers weapon (4 feathers orbit player, damage on contact)**
 - [ ] **Magnetic Aura passive (+20% pickup range per level, max 5 = +100%)**
+- [ ] **WeaponData Resource class (data-driven weapon definitions)**
+- [ ] **Debuff system (slow effect for Ice Shard)**
+- [ ] **Ice Shard clone weapon (blue Feather Shot + 0.5s slow debuff)**
+- [ ] **Flame Wing clone weapon (orange Wing Slap, +20% damage, smaller radius)**
 - [ ] Weapon upgrades to level 5 work
 - [ ] Passive upgrades to level 5 work
-- [ ] Max 4 weapons enforced in level-up pool
+- [ ] Max 6 weapons enforced in level-up pool
 - [ ] Level-up pool includes all weapons/passives correctly
+- [ ] **Damage numbers (floating text on enemy hit - CRITICAL for balance testing)**
+- [ ] **Enemy damage flash (white flash on hit - game feel)**
 - [ ] **Placeholder SFX: Wing Slap sound**
 - [ ] **Placeholder SFX: Feather Shot sound**
 - [ ] **Placeholder SFX: Spiral Feathers sound**
 - [ ] **Placeholder SFX: Enemy death sound**
 - [ ] **Placeholder SFX: Gold pickup sound**
 
-**Integration Test:** Can you max out 4 weapons and 4 passives in one run?
+**Integration Test:** Can you max out 6 weapons and 4 passives in one run? Do damage numbers appear on hits?
 
 ---
 
@@ -2329,9 +2443,11 @@ At the end of Week 6, you have a SHIPPABLE game:
 
 ---
 
-## Week 7: Polish Pass 1 + Controller
+## Week 7: Polish Pass 1 + Controller Polish
 
-**End State: "The game FEELS good and works with controller"**
+**End State: "The game FEELS good and controller experience is polished"**
+
+> **Note:** Core controller input mapping was set up in Week 1 using `get_action_strength()`. This week focuses on controller UX polish (UI navigation, button prompts).
 
 Builds on Week 6, adds:
 
@@ -2341,7 +2457,7 @@ Builds on Week 6, adds:
 - Invincibility flash when damaged
 - Enemy death particles
 - Pickup magnet visual
-- Basic controller support (movement + UI navigation)
+- Controller UX polish (UI navigation + button prompts)
 
 **Tasks:**
 
@@ -2359,18 +2475,16 @@ Builds on Week 6, adds:
 - [ ] Tutorial flags saved (don't repeat)
 - [ ] Screen shake on enemy hits
 - [ ] Flash effect when player takes damage
-- [ ] **Enemy damage flash (white flash on hit - critical for game feel)**
 - [ ] Particle effect on enemy death
 - [ ] Visual feedback for pickup magnet range
-- [ ] **Damage numbers (floating text on enemy hit - shows upgrade impact)**
 - [ ] **Level-up screen juice (particle burst, scale animation)**
 - [ ] **In-game bug report button (links to Google Form or Discord)**
-- [ ] Basic controller support (input mapping for gamepad)
-- [ ] Controller UI navigation (D-pad/stick for menus)
+- [ ] Controller UI navigation (D-pad/stick for menus - core input already works from Week 1)
 - [ ] Controller button prompts (show controller icons if controller detected)
+- [ ] **Test controller gameplay feel (stick sensitivity, dead zones)**
 - [ ] **Test text legibility at 1280x720 window (Steam Deck resolution)**
 
-**Integration Test:** Play entire run with controller, adjust volume mid-game, verify tutorials don't repeat, see damage numbers
+**Integration Test:** Play entire run with controller, adjust volume mid-game, verify tutorials don't repeat, screen shake feels good
 
 ---
 
@@ -2471,6 +2585,18 @@ Adds:
 ## Week 10: Steam Build, Demo & Achievements
 
 **End State: "Ready for Steam with demo and achievements"**
+
+**🎯 CODE COMPLETE MILESTONE (February 2-8, 2026)**
+
+This is the critical "feature freeze" milestone. By end of Week 10:
+
+- All features implemented and working
+- All art integrated (or refined placeholders)
+- Demo submitted for Next Fest review (Feb 9 deadline)
+- Weeks 11-14 are ONLY for bugs, balance, and launch logistics
+- **This gives 6 weeks buffer before baby (due March 21)**
+
+If baby arrives early or complications occur, the game is SHIPPABLE from this point.
 
 Adds:
 
@@ -3123,15 +3249,16 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 - 3 characters (Classic, Shadow, Golden Sarimanok)
 - 4 enemies (Green Duwende, Red Duwende, Santelmo, Manananggal boss)
-- 4 weapons (Peck, Wing Slap, Feather Shot, Spiral Feathers)
+- 6 weapons (Peck, Wing Slap, Feather Shot, Spiral Feathers + Ice Shard, Flame Wing clones)
 - 4 passives (Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura)
 - 3 shop upgrades
 - 1 stage (bounded farm arena)
 - 2 modes (Story + Endless)
 - 5-8 Steam achievements
-- Basic controller support
-- Damage numbers on hit
-- Placeholder SFX from Week 2-3 (polished in Week 9)
+- Controller support (input Week 1, polish Week 7)
+- Damage numbers on hit (Week 3 for balance testing)
+- Pitch-randomized SFX (placeholder Week 2-3, polished Week 9)
+- Data-driven weapon architecture (trivial to add more weapons post-launch)
 
 **Deferred to Update 1:** Black Duwende, Enhanced Endless Scaling, Additional Achievements, Steam Cloud Saves, Mac/Linux
 
@@ -3153,13 +3280,14 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 ---
 
-**Version:** 1.7  
+**Version:** 1.8  
 **Created:** December 2025  
 **Authors:** Josh & Ericka  
 **Cultural Consultant:** Ericka
 
 **Version History:**
 
+- v1.8: Build variety & polish timing improvements - ADDED: Data-driven WeaponData Resource architecture (trivial to add weapons post-launch), 2 clone weapons (Ice Shard, Flame Wing) for 6 total weapons with minimal art effort, debuff system (slow effect), pitch randomization for repetitive SFX (prevents ear fatigue), Week 10 "Code Complete" milestone (6-week baby buffer). MOVED EARLIER: Damage numbers and enemy flash moved from Week 7 to Week 3 (critical for balance testing). RENAMED: Week 7 "Controller Support" → "Controller Polish" (core input already in Week 1). EA now ships with 6 weapons instead of 4.
 - v1.7: Steam Next Fest & Asset Strategy overhaul - ADDED: Steam Next Fest February 2026 strategy (demo live Feb 23 - Mar 2, EA launch ~Mar 8), 10-minute time-limited demo, asset pack outsourcing (UI, tileset, pickups bought; Ericka does characters/enemies only - reduces art from 36-46 hrs to 18-24 hrs), Steam setup moved to Week 1 (pay fee Day 1 for Jan 5 Next Fest registration deadline), Week 14 added for EA launch after Next Fest, Area2D for enemies (performance optimization), tr() localization prep, accessibility options (colorblind mode, reduced motion), analytics logging. Budget updated to $140-305.
 - v1.6: Content depth increase for stronger EA launch - MOVED TO EA: Golden Sarimanok (3rd character), Spiral Feathers (4th weapon), Magnetic Aura (4th passive). ADDED: Placeholder SFX in Weeks 2-3 for game feel, Damage numbers promoted to Must Have (Week 7), Enemy damage flash, Level-up juice, In-game bug report button. EA now ships with 3 characters, 4 enemies, 4 weapons, 4 passives = 11 base items with 55 upgrade choices. DEFERRED to Update 1: Black Duwende, Enhanced Endless Scaling, Additional Achievements, Steam Cloud Saves, Mac/Linux.
 - v1.5: Scope rebalance for EA launch - ADDED to EA: Simplified Endless Mode, Basic Controller Support, 5-8 Steam Achievements. DEFERRED to Update 1: Black Duwende (5th enemy), Golden Sarimanok (3rd character), Spiral Feathers (4th weapon), Magnetic Aura (4th passive), Enhanced Endless Scaling. EA now ships with 2 characters, 4 enemies, 3 weapons, 3 passives, Story + Endless Modes, controller support, and achievements. Enemy stat scaling replaces Black Duwende for late-game difficulty.
@@ -3179,13 +3307,13 @@ This PRD defines a **30-minute action roguelite** that combines:
 ├─────────────────────────────────────────────────┤
 │ CHARACTERS: 3 (Classic, Shadow, Golden)         │
 │ ENEMIES: 4 (2 Duwendes, Santelmo, Manananggal)  │
-│ WEAPONS: 4 (Peck, Wing Slap, Feather, Spiral)   │
+│ WEAPONS: 6 (4 unique + 2 clones for variety)    │
 │ PASSIVES: 4 (Damage, HP, Speed, Pickup Range)   │
 │ SHOP: 3 upgrades (Damage, HP, Speed)            │
 │ MODES: 2 (Story 30min + Endless)                │
 │ STAGE: 1 (Bounded farm arena)                   │
 │ ACHIEVEMENTS: 5-8 Steam achievements            │
-│ CONTROLLER: Basic support included              │
+│ CONTROLLER: Input Week 1, Polish Week 7         │
 │ DEMO: 10-minute time-limited for Next Fest      │
 ├─────────────────────────────────────────────────┤
 │ PLATFORM: Windows (Mac/Linux post-launch)       │
@@ -3200,7 +3328,8 @@ This PRD defines a **30-minute action roguelite** that combines:
 │ STEAM SETUP: Week 1 (pay fee, verification)     │
 │ STORE PAGE: Week 4 (submit), Week 5 (live)      │
 │ NEXT FEST REG: Jan 5 deadline (Week 5)          │
-│ DEMO SUBMIT: Feb 9 deadline (Week 10)           │
 │ MINIMUM SHIPPABLE: Week 6 (MVP checkpoint)      │
+│ CODE COMPLETE: Week 10 (Feb 2-8, 2026)          │
+│ DEMO SUBMIT: Feb 9 deadline (end of Week 10)    │
 └─────────────────────────────────────────────────┘
 ```
