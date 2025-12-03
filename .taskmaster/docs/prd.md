@@ -2,7 +2,7 @@
 
 ## Product Requirements Document - MVP (Early Access)
 
-**Version:** 1.5  
+**Version:** 1.6  
 **Platform:** Windows via Steam Early Access (Mac/Linux in future update)  
 **Engine:** Godot 4.x  
 **Art Style:** Top-down pixel art (32x32 sprites, 48x48 boss)  
@@ -49,7 +49,7 @@ The game combines:
 | Genre proven    | Vampire Survivors: 5M+ copies, countless successful clones  |
 | Solo dev viable | Void Miner: 1 dev, 6 months, $40k+ revenue                  |
 | Niche untapped  | Zero Filipino folklore games in survivor genre              |
-| Scope minimal   | 2 characters, 4 enemies, 3 weapons = achievable in 3 months |
+| Scope minimal   | 3 characters, 4 enemies, 4 weapons = achievable in 3 months |
 | Cultural hook   | Filipino diaspora is large and underserved                  |
 
 ## Target Audience
@@ -246,14 +246,13 @@ Multiple characters add replayability. Each variant encourages a different plays
 **Cultural Significance:**
 The Sarimanok symbolizes good fortune, prosperity, and royalty. As a spiritual link between the seen and unseen worlds, it's the perfect guardian against creatures of darkness. The color variants can represent different aspects: classic (balance), shadow (aggression), golden (protection).
 
-### Character Roster (2 Variants)
+### Character Roster (3 Variants)
 
 | Character               | Colors           | HP  | Speed | Damage | Playstyle                      | Unlock                      |
 | ----------------------- | ---------------- | --- | ----- | ------ | ------------------------------ | --------------------------- |
 | **Sarimanok (Classic)** | Rainbow/vibrant  | 100 | 100%  | 100%   | Balanced, good for learning    | Default                     |
 | **Sarimanok (Shadow)**  | Dark purple/blue | 80  | 100%  | 125%   | Glass cannon, high risk/reward | Survive 15:00 in Story Mode |
-
-**Note:** Golden Sarimanok (tank variant) deferred to Update 1.
+| **Sarimanok (Golden)**  | Gold/red/bronze  | 130 | 85%   | 100%   | Tank, sustained survival       | Beat Story Mode (30:00)     |
 
 **Unlock Progression:**
 
@@ -295,10 +294,12 @@ The Sarimanok symbolizes good fortune, prosperity, and royalty. As a spiritual l
 
 **Definition of Done:**
 
-- [ ] Both Sarimanok variants implemented with correct stats
+- [ ] All 3 Sarimanok variants implemented with correct stats
 - [ ] Character select screen works
 - [ ] Shadow shows unlock requirement (locked until 15:00 survived)
 - [ ] Shadow unlocks correctly after surviving 15:00
+- [ ] Golden shows unlock requirement (locked until Story Mode beaten)
+- [ ] Golden unlocks correctly after beating Story Mode
 - [ ] Sarimanok moves in 8 directions smoothly
 - [ ] Movement speed matches character's value
 - [ ] Sprite flips correctly left/right
@@ -527,15 +528,14 @@ Weapons attack automatically on a cooldown. Player collects weapons through leve
 **Why It's Important:**
 Weapons are your primary way to kill enemies. Different weapons create different playstyles.
 
-### Weapon Roster (3 Total)
+### Weapon Roster (4 Total)
 
-| Weapon           | Type       | Behavior                        | Cooldown | Base Damage |
-| ---------------- | ---------- | ------------------------------- | -------- | ----------- |
-| **Peck**         | Melee      | Quick jab in facing direction   | 0.5s     | 10          |
-| **Wing Slap**    | AOE        | Circle around player            | 1.5s     | 8           |
-| **Feather Shot** | Projectile | Shoots feather at nearest enemy | 1.0s     | 12          |
-
-**Note:** Spiral Feathers (orbiting weapon) deferred to Update 1.
+| Weapon              | Type       | Behavior                        | Cooldown | Base Damage |
+| ------------------- | ---------- | ------------------------------- | -------- | ----------- |
+| **Peck**            | Melee      | Quick jab in facing direction   | 0.5s     | 10          |
+| **Wing Slap**       | AOE        | Circle around player            | 1.5s     | 8           |
+| **Feather Shot**    | Projectile | Shoots feather at nearest enemy | 1.0s     | 12          |
+| **Spiral Feathers** | Orbital    | 4 feathers orbit player         | Passive  | 6           |
 
 ### Weapon Descriptions
 
@@ -559,6 +559,14 @@ Weapons are your primary way to kill enemies. Different weapons create different
 - Travels across screen
 - Pierces through 1 enemy (at level 1)
 - Good for ranged threats (Santelmo)
+
+**Spiral Feathers:**
+
+- 4 feathers orbit the player constantly
+- Damages enemies on contact
+- No cooldown (always active)
+- Great for close-range protection
+- Reuses Feather Shot projectile sprite (rotated)
 
 ### Weapon Levels
 
@@ -594,11 +602,21 @@ Each weapon can be upgraded to Level 5 through level-up choices:
 | 4     | 18     | Feathers pierce 2 enemies |
 | 5     | 24     | 4 feathers, pierce 3      |
 
+**Spiral Feathers Upgrades:**
+
+| Level | Damage | Effect                   |
+| ----- | ------ | ------------------------ |
+| 1     | 6      | 4 orbiting feathers      |
+| 2     | 8      | +33% damage              |
+| 3     | 10     | Faster rotation speed    |
+| 4     | 12     | 6 orbiting feathers      |
+| 5     | 16     | 8 feathers, larger orbit |
+
 ### Maximum Weapons
 
-Player can hold up to **3 weapons** at once.
+Player can hold up to **4 weapons** at once.
 
-If you have 3 weapons and level up, you'll only see upgrade options for existing weapons ("+1" options), not new weapons.
+If you have 4 weapons and level up, you'll only see upgrade options for existing weapons ("+1" options), not new weapons.
 
 **Technical Requirements:**
 
@@ -614,11 +632,12 @@ If you have 3 weapons and level up, you'll only see upgrade options for existing
 - [ ] Peck attack works (melee cone)
 - [ ] Wing Slap attack works (AOE circle)
 - [ ] Feather Shot works (projectile)
+- [ ] Spiral Feathers works (orbiting feathers)
 - [ ] All weapons auto-fire on cooldown
 - [ ] Weapons can be upgraded to level 5
-- [ ] Max 3 weapons enforced
+- [ ] Max 4 weapons enforced
 - [ ] Weapon effects visible and satisfying
-- [ ] Damage numbers show on hit (nice-to-have)
+- [ ] Damage numbers show on hit
 - [ ] No console errors
 
 ---
@@ -631,15 +650,14 @@ Passives are stat boosts that stack. Collect them through level-up choices. No a
 **Why It's Important:**
 Passives add build variety without art burden. They're "free content."
 
-### Passive Roster (3 Total)
+### Passive Roster (4 Total)
 
-| Passive           | Per Level       | Max Level | At Max            |
-| ----------------- | --------------- | --------- | ----------------- |
-| **Iron Beak**     | +10% Damage     | 5         | +50% total damage |
-| **Thick Plumage** | +15 Max HP      | 5         | +75 HP            |
-| **Racing Legs**   | +10% Move Speed | 5         | +50% move speed   |
-
-**Note:** Magnetic Aura (pickup range passive) deferred to Update 1.
+| Passive           | Per Level         | Max Level | At Max             |
+| ----------------- | ----------------- | --------- | ------------------ |
+| **Iron Beak**     | +10% Damage       | 5         | +50% total damage  |
+| **Thick Plumage** | +15 Max HP        | 5         | +75 HP             |
+| **Racing Legs**   | +10% Move Speed   | 5         | +50% move speed    |
+| **Magnetic Aura** | +20% Pickup Range | 5         | +100% pickup range |
 
 ### How Passives Stack
 
@@ -671,6 +689,7 @@ Peck Level 5 (35 damage) + Iron Beak Level 5 (150%):
 - [ ] Iron Beak increases damage correctly
 - [ ] Thick Plumage increases max HP correctly
 - [ ] Racing Legs increases move speed correctly
+- [ ] Magnetic Aura increases pickup range correctly
 - [ ] Passives stack additively
 - [ ] Passives appear in level-up choices
 - [ ] Passives can be upgraded to level 5
@@ -1342,15 +1361,15 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 
 ## Complete Asset List
 
-### Player Characters (2 for EA, 1 for Update 1)
+### Player Characters (3 for EA)
 
 | Asset               | Frames | Est. Time      | Priority |
 | ------------------- | ------ | -------------- | -------- |
 | Sarimanok (Classic) | 2      | 3-4 hrs        | EA       |
 | Sarimanok (Shadow)  | 2      | 1 hr (recolor) | EA       |
-| Sarimanok (Golden)  | 2      | 1 hr (recolor) | Update 1 |
+| Sarimanok (Golden)  | 2      | 1 hr (recolor) | EA       |
 
-**Total EA player time: ~4-5 hrs**
+**Total EA player time: ~5-6 hrs**
 
 **Note:** Classic Sarimanok requires more time due to elaborate, colorful design. Keep details minimal at 32x32 but capture the iconic silhouette (decorative tail, distinctive head crest). Reference traditional Maranao art for color palette. Shadow and Golden variants are recolors with adjusted palettes.
 
@@ -1368,38 +1387,38 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 
 **Note:** Manananggal is 48x48 to emphasize boss status. Flying torso with bat-like wings, grotesque but readable silhouette.
 
-### Weapon Icons (3 for EA, 1 for Update 1)
+### Weapon Icons (4 for EA)
 
 | Asset                | Size  | Est. Time | Priority |
 | -------------------- | ----- | --------- | -------- |
 | Peck icon            | 16x16 | 30 min    | EA       |
 | Wing Slap icon       | 16x16 | 30 min    | EA       |
 | Feather Shot icon    | 16x16 | 30 min    | EA       |
-| Spiral Feathers icon | 16x16 | 30 min    | Update 1 |
+| Spiral Feathers icon | 16x16 | 30 min    | EA       |
 
-**Total EA icon time: ~1.5 hrs**
+**Total EA icon time: ~2 hrs**
 
-### Weapon Effects (3 for EA, 1 for Update 1)
+### Weapon Effects (4 for EA)
 
 | Asset              | Size  | Est. Time                              | Priority |
 | ------------------ | ----- | -------------------------------------- | -------- |
 | Peck hit effect    | 32x32 | 1 hr                                   | EA       |
 | Wing Slap circle   | 64x64 | 1-2 hrs                                | EA       |
 | Feather projectile | 16x16 | 30 min                                 | EA       |
-| Spiral Feathers    | —     | 0 (reuses Feather projectile, rotated) | Update 1 |
+| Spiral Feathers    | —     | 0 (reuses Feather projectile, rotated) | EA       |
 
 **Total EA effect time: ~2.5-3.5 hrs**
 
-### Passive Icons (3 for EA, 1 for Update 1)
+### Passive Icons (4 for EA)
 
 | Asset         | Size  | Est. Time | Priority |
 | ------------- | ----- | --------- | -------- |
 | Iron Beak     | 16x16 | 30 min    | EA       |
 | Thick Plumage | 16x16 | 30 min    | EA       |
 | Racing Legs   | 16x16 | 30 min    | EA       |
-| Magnetic Aura | 16x16 | 30 min    | Update 1 |
+| Magnetic Aura | 16x16 | 30 min    | EA       |
 
-**Total EA passive time: ~1.5 hrs**
+**Total EA passive time: ~2 hrs**
 
 ### Pickups (2)
 
@@ -1571,17 +1590,17 @@ camera.position_smoothing_enabled = true
 
 | Category              | EA Time       | Update 1        |
 | --------------------- | ------------- | --------------- |
-| Player (2 variants)   | 4-5 hrs       | +1 hr (Golden)  |
+| Player (3 variants)   | 5-6 hrs       | —               |
 | Enemies (4 for EA)    | 9.5-13.5 hrs  | +20 min (Black) |
-| Weapon icons          | 1.5 hrs       | +30 min         |
+| Weapon icons          | 2 hrs         | —               |
 | Weapon effects        | 2.5-3.5 hrs   | —               |
-| Passive icons         | 1.5 hrs       | +30 min         |
+| Passive icons         | 2 hrs         | —               |
 | Pickups               | 1 hr          | —               |
 | Environment (tileset) | 5-8 hrs       | —               |
 | UI                    | 9 hrs         | —               |
-| **EA TOTAL**          | **34-44 hrs** |                 |
+| **EA TOTAL**          | **36-46 hrs** |                 |
 
-At 10 hrs/week art = **3.5-4.5 weeks** of art (parallel to coding)
+At 10 hrs/week art = **3.5-5 weeks** of art (parallel to coding)
 
 ---
 
@@ -1596,25 +1615,26 @@ At 10 hrs/week art = **3.5-4.5 weeks** of art (parallel to coding)
 | Boss theme     | When Manananggal spawns | Intense, dramatic          |
 | Victory jingle | Dawn/win                | Triumphant, Sarimanok crow |
 
-## Sound Effects (15)
+## Sound Effects (16)
 
-| Sound          | Trigger            |
-| -------------- | ------------------ |
-| Peck attack    | Weapon fires       |
-| Wing Slap      | Weapon fires       |
-| Feather Shot   | Weapon fires       |
-| Enemy hit      | Damage dealt       |
-| Enemy death    | Enemy killed       |
-| Player hurt    | Take damage        |
-| Player death   | HP = 0             |
-| XP pickup      | Collect gem        |
-| Gold pickup    | Collect coin       |
-| Level up       | XP bar fills       |
-| Menu click     | Button press       |
-| Menu hover     | Mouse over button  |
-| Cockadoodledoo | Victory            |
-| Aswang roar    | Boss spawn         |
-| Dawn ambience  | Victory transition |
+| Sound           | Trigger            |
+| --------------- | ------------------ |
+| Peck attack     | Weapon fires       |
+| Wing Slap       | Weapon fires       |
+| Feather Shot    | Weapon fires       |
+| Spiral Feathers | Orbiting feathers  |
+| Enemy hit       | Damage dealt       |
+| Enemy death     | Enemy killed       |
+| Player hurt     | Take damage        |
+| Player death    | HP = 0             |
+| XP pickup       | Collect gem        |
+| Gold pickup     | Collect coin       |
+| Level up        | XP bar fills       |
+| Menu click      | Button press       |
+| Menu hover      | Mouse over button  |
+| Cockadoodledoo  | Victory            |
+| Aswang roar     | Boss spawn         |
+| Dawn ambience   | Victory transition |
 
 ## Audio Specifications
 
@@ -1895,6 +1915,11 @@ func get_move_speed() -> float:
     var passive_bonus = passives.get("racing_legs", 0) * 0.10  # +10% per level
     return base * (1.0 + shop_bonus + passive_bonus)
 
+func get_pickup_range() -> float:
+    var base = 50.0  # Base pickup range in pixels
+    var passive_bonus = passives.get("magnetic_aura", 0) * 0.20  # +20% per level
+    return base * (1.0 + passive_bonus)
+
 # ═══════════════════════════════════════════════
 # FUNCTIONS
 # ═══════════════════════════════════════════════
@@ -2069,6 +2094,9 @@ Builds on Week 1, adds:
 - [ ] Add Red Duwende (recolor, different stats)
 - [ ] Timer displays on screen
 - [ ] Enemy stat scaling (HP/damage increase over time)
+- [ ] **Placeholder SFX: Peck attack sound (use BFXR or free sound pack)**
+- [ ] **Placeholder SFX: Enemy hit sound**
+- [ ] **Placeholder SFX: XP pickup sound**
 
 **Integration Test:** Can you reach level 10 with 2 weapons + 1 passive?
 
@@ -2090,12 +2118,19 @@ Builds on Week 2, adds:
 - [ ] Feather Shot weapon (projectile)
 - [ ] Thick Plumage passive (+HP)
 - [ ] Racing Legs passive (+speed)
+- [ ] **Spiral Feathers weapon (4 feathers orbit player, damage on contact)**
+- [ ] **Magnetic Aura passive (+20% pickup range per level, max 5 = +100%)**
 - [ ] Weapon upgrades to level 5 work
 - [ ] Passive upgrades to level 5 work
-- [ ] Max 3 weapons enforced in level-up pool
+- [ ] Max 4 weapons enforced in level-up pool
 - [ ] Level-up pool includes all weapons/passives correctly
+- [ ] **Placeholder SFX: Wing Slap sound**
+- [ ] **Placeholder SFX: Feather Shot sound**
+- [ ] **Placeholder SFX: Spiral Feathers sound**
+- [ ] **Placeholder SFX: Enemy death sound**
+- [ ] **Placeholder SFX: Gold pickup sound**
 
-**Integration Test:** Can you max out 3 weapons and 3 passives in one run?
+**Integration Test:** Can you max out 4 weapons and 4 passives in one run?
 
 ---
 
@@ -2182,25 +2217,28 @@ Builds on Week 5, adds:
 - [ ] Character select screen before run
 - [ ] Classic Sarimanok (default, balanced stats)
 - [ ] Shadow Sarimanok (80 HP, 125% damage - glass cannon)
+- [ ] **Golden Sarimanok (130 HP, 85% speed, 100% damage - tank build)**
 - [ ] Lock/unlock display with requirements shown
 - [ ] Shadow unlocks: survive 15:00 in Story Mode (single run)
+- [ ] **Golden unlocks: beat Story Mode (survive to 30:00)**
 - [ ] High score tracking for Story Mode
 - [ ] Simplified Endless Mode (disable 30:00 win condition, keep everything else)
 - [ ] Endless Mode unlocks after beating Story Mode
 - [ ] Endless Mode best time tracking
 - [ ] **STEAM:** Submit store page for review
 
-**Integration Test:** Survive 15:00, unlock Shadow, beat Story Mode, unlock and play Endless Mode
+**Integration Test:** Survive 15:00, unlock Shadow, beat Story Mode, unlock Golden and Endless Mode
 
 **MINIMUM VIABLE PRODUCT CHECKPOINT:**
 
 ```
 At the end of Week 6, you have a SHIPPABLE game:
 - Complete survivor game with core loop
-- 2 characters, 4 enemies, 3 weapons, 3 passives
+- 3 characters, 4 enemies, 4 weapons, 4 passives
 - Story Mode + Endless Mode
 - Shop progression
 - Save system
+- Placeholder SFX for game feel
 - This is SHIPPABLE as Early Access!
 ```
 
@@ -2234,13 +2272,17 @@ Builds on Week 6, adds:
 - [ ] Tutorial flags saved (don't repeat)
 - [ ] Screen shake on enemy hits
 - [ ] Flash effect when player takes damage
+- [ ] **Enemy damage flash (white flash on hit - critical for game feel)**
 - [ ] Particle effect on enemy death
 - [ ] Visual feedback for pickup magnet range
+- [ ] **Damage numbers (floating text on enemy hit - shows upgrade impact)**
+- [ ] **Level-up screen juice (particle burst, scale animation)**
+- [ ] **In-game bug report button (links to Google Form or Discord)**
 - [ ] Basic controller support (input mapping for gamepad)
 - [ ] Controller UI navigation (D-pad/stick for menus)
 - [ ] Controller button prompts (show controller icons if controller detected)
 
-**Integration Test:** Play entire run with controller, adjust volume mid-game, verify tutorials don't repeat
+**Integration Test:** Play entire run with controller, adjust volume mid-game, verify tutorials don't repeat, see damage numbers
 
 ---
 
@@ -2289,41 +2331,42 @@ This week focuses on swapping placeholders for real sprites:
 
 ---
 
-## Week 9: Audio & Juice
+## Week 9: Audio Polish & Final Juice
 
-**End State: "The game SOUNDS good"**
+**End State: "The game SOUNDS polished and professional"**
+
+> **Note:** Placeholder SFX were added in Weeks 2-3 for game feel testing. This week focuses on replacing placeholders with final audio and adding music.
 
 Adds:
 
 - Menu music track
 - Gameplay music track
 - Boss music track
-- Sound effects (attack, hit, death, pickup, level up)
+- Replace placeholder SFX with final, polished sounds
 - COCKADOODLEDOO victory sound
 - Audio manager (respects volume settings)
 - More particle polish
-- Damage numbers (if time)
 
 **Tasks:**
 
 - [ ] Source/create menu music
 - [ ] Source/create gameplay music
 - [ ] Source/create boss music (triggers at 20:00)
-- [ ] Peck attack sound
-- [ ] Wing Slap sound
-- [ ] Feather Shot sound
-- [ ] Enemy hit sound
-- [ ] Enemy death sound
+- [ ] **Replace placeholder Peck sound with final version**
+- [ ] **Replace placeholder Wing Slap sound with final version**
+- [ ] **Replace placeholder Feather Shot sound with final version**
+- [ ] **Replace placeholder Spiral Feathers sound with final version**
+- [ ] **Replace placeholder enemy hit sound with final version**
+- [ ] **Replace placeholder enemy death sound with final version**
 - [ ] Player hurt sound
-- [ ] XP pickup sound
-- [ ] Gold pickup sound
+- [ ] **Replace placeholder XP pickup sound with final version**
+- [ ] **Replace placeholder Gold pickup sound with final version**
 - [ ] Level up sound
 - [ ] Menu click sound
 - [ ] COCKADOODLEDOO victory sound!
 - [ ] Manananggal roar on spawn
 - [ ] Audio manager respects volume settings
 - [ ] Polish particle effects
-- [ ] (Optional) Damage numbers on hit
 
 **Integration Test:** Play full run with eyes closed - can you tell what's happening by sound?
 
@@ -2477,13 +2520,14 @@ Focus on:
 - [ ] Player moves in all 8 directions
 - [ ] Player takes damage from enemies
 - [ ] Player dies at 0 HP
-- [ ] Character select works for both variants (Classic, Shadow)
+- [ ] Character select works for all 3 variants (Classic, Shadow, Golden)
 - [ ] Peck attack damages enemies
 - [ ] Wing Slap damages nearby enemies
 - [ ] Feather Shot fires projectiles
+- [ ] Spiral Feathers orbit and damage enemies
 - [ ] All weapons auto-fire correctly
 - [ ] Weapons upgrade through level-ups
-- [ ] Passives boost stats correctly (Iron Beak, Thick Plumage, Racing Legs)
+- [ ] Passives boost stats correctly (Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura)
 
 ## Enemies
 
@@ -2541,14 +2585,15 @@ Focus on:
 ## Must Have (Launch Blockers)
 
 - [ ] Core gameplay loop works (move, attack, level up, win/lose)
-- [ ] Both character variants implemented (Classic, Shadow)
+- [ ] All 3 character variants implemented (Classic, Shadow, Golden)
 - [ ] All 4 enemies implemented (Green Duwende, Red Duwende, Santelmo, Manananggal)
-- [ ] All 3 weapons implemented (Peck, Wing Slap, Feather Shot)
-- [ ] All 3 passives implemented (Iron Beak, Thick Plumage, Racing Legs)
+- [ ] All 4 weapons implemented (Peck, Wing Slap, Feather Shot, Spiral Feathers)
+- [ ] All 4 passives implemented (Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura)
 - [ ] Shop system works
 - [ ] Story Mode works (30-minute survival)
 - [ ] Endless Mode works (unlocks after Story Mode)
 - [ ] Save system works
+- [ ] Damage numbers on enemy hit
 - [ ] No game-breaking bugs
 - [ ] 60 FPS performance
 - [ ] Basic controller support
@@ -2566,34 +2611,31 @@ Focus on:
 
 ## Deferred to Update 1
 
-- [ ] Golden Sarimanok (3rd character - tank, 130 HP, 85% speed)
-- [ ] Spiral Feathers (4th weapon - orbiting feathers)
-- [ ] Magnetic Aura (4th passive - +pickup range)
 - [ ] Black Duwende (5th enemy - tanky, fast, spawns 16:00+)
 - [ ] Enhanced Endless Mode scaling (accelerated spawn/HP after 30:00)
 - [ ] Additional achievements (expand to 15+)
+- [ ] Steam Cloud Saves
+- [ ] Mac/Linux builds
 
 ## Nice to Have (If Time)
 
-- [ ] Damage numbers floating
 - [ ] More detailed animations
+- [ ] Additional visual polish
 
 ---
 
 # Post-Launch Roadmap
 
-## Update 1: Complete the Package (Week 1-2 Post-Launch)
+## Update 1: Expand the Experience (When Ready Post-Baby)
 
 Features deferred from EA launch:
 
-- Golden Sarimanok (3rd character - tank, 130 HP, 85% speed)
-- Spiral Feathers weapon (orbiting feathers)
-- Magnetic Aura passive (+pickup range)
 - Black Duwende (5th enemy - HP 50, Damage 15, Speed 120, spawns 16:00+)
 - Enhanced Endless Mode scaling (accelerated difficulty after 30:00)
 - Additional achievements (expand from 8 to 15+)
+- Steam Cloud Saves
 
-This update brings the game to the originally planned scope.
+**Note:** Golden Sarimanok, Spiral Feathers, and Magnetic Aura were moved to EA launch for stronger initial content. Update 1 is now focused on expanding rather than completing.
 
 ## Update 2: More Enemies (Month 1)
 
@@ -2819,17 +2861,19 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 **EA Launch Scope:**
 
-- 2 characters (Classic + Shadow Sarimanok)
+- 3 characters (Classic, Shadow, Golden Sarimanok)
 - 4 enemies (Green Duwende, Red Duwende, Santelmo, Manananggal boss)
-- 3 weapons (Peck, Wing Slap, Feather Shot)
-- 3 passives (Damage, HP, Speed)
+- 4 weapons (Peck, Wing Slap, Feather Shot, Spiral Feathers)
+- 4 passives (Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura)
 - 3 shop upgrades
 - 1 stage (bounded farm arena)
 - 2 modes (Story + Endless)
 - 5-8 Steam achievements
 - Basic controller support
+- Damage numbers on hit
+- Placeholder SFX from Week 2-3 (polished in Week 9)
 
-**Deferred to Update 1:** Golden Sarimanok, Black Duwende, Spiral Feathers, Magnetic Aura, Enhanced Endless Scaling, Additional Achievements
+**Deferred to Update 1:** Black Duwende, Enhanced Endless Scaling, Additional Achievements, Steam Cloud Saves, Mac/Linux
 
 **Timeline:** 13 weeks
 **Target Launch:** Early March 2026
@@ -2842,13 +2886,14 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 ---
 
-**Version:** 1.4  
+**Version:** 1.6  
 **Created:** December 2025  
 **Authors:** Josh & Ericka  
 **Cultural Consultant:** Ericka
 
 **Version History:**
 
+- v1.6: Content depth increase for stronger EA launch - MOVED TO EA: Golden Sarimanok (3rd character), Spiral Feathers (4th weapon), Magnetic Aura (4th passive). ADDED: Placeholder SFX in Weeks 2-3 for game feel, Damage numbers promoted to Must Have (Week 7), Enemy damage flash, Level-up juice, In-game bug report button. EA now ships with 3 characters, 4 enemies, 4 weapons, 4 passives = 11 base items with 55 upgrade choices. DEFERRED to Update 1: Black Duwende, Enhanced Endless Scaling, Additional Achievements, Steam Cloud Saves, Mac/Linux.
 - v1.5: Scope rebalance for EA launch - ADDED to EA: Simplified Endless Mode, Basic Controller Support, 5-8 Steam Achievements. DEFERRED to Update 1: Black Duwende (5th enemy), Golden Sarimanok (3rd character), Spiral Feathers (4th weapon), Magnetic Aura (4th passive), Enhanced Endless Scaling. EA now ships with 2 characters, 4 enemies, 3 weapons, 3 passives, Story + Endless Modes, controller support, and achievements. Enemy stat scaling replaces Black Duwende for late-game difficulty.
 - v1.4: Scope reduction for EA launch - deferred to Update 1: Golden Sarimanok (3rd character), Endless Mode, Spiral Feathers (4th weapon), Magnetic Aura (4th passive), Steam achievements, Controller support. EA now ships with 2 characters, 3 weapons, 3 passives, Story Mode only, keyboard only. Based on Vampire Survivors EA launch comparison showing simpler scope is viable.
 - v1.3: Restructured roadmap to 13-week vertical slices (each week = playable game), added Performance Architecture section, added art contingency plan, moved Settings/Controller/Tutorial to Should Have, added save file versioning, added Steam achievements for metrics, changed to Windows-only for EA (Mac/Linux post-launch), added character unlock conditions (Shadow: 15:00 Story, Golden: beat Story), moved Steamworks setup to Week 5
@@ -2864,15 +2909,16 @@ This PRD defines a **30-minute action roguelite** that combines:
 ┌─────────────────────────────────────────────────┐
 │           SARIMANOK SURVIVOR MVP                │
 ├─────────────────────────────────────────────────┤
-│ CHARACTERS: 2 (Classic + Shadow Sarimanok)      │
+│ CHARACTERS: 3 (Classic, Shadow, Golden)         │
 │ ENEMIES: 4 (2 Duwendes, Santelmo, Manananggal)  │
-│ WEAPONS: 3 (Peck, Wing Slap, Feather Shot)      │
-│ PASSIVES: 3 (Damage, HP, Speed)                 │
+│ WEAPONS: 4 (Peck, Wing Slap, Feather, Spiral)   │
+│ PASSIVES: 4 (Damage, HP, Speed, Pickup Range)   │
 │ SHOP: 3 upgrades (Damage, HP, Speed)            │
 │ MODES: 2 (Story 30min + Endless)                │
 │ STAGE: 1 (Bounded farm arena)                   │
 │ ACHIEVEMENTS: 5-8 Steam achievements            │
 │ CONTROLLER: Basic support included              │
+│ GAME FEEL: Damage numbers, placeholder SFX      │
 ├─────────────────────────────────────────────────┤
 │ PLATFORM: Windows (Mac/Linux post-launch)       │
 │ SPRITES: 32x32, 48x48 boss, 16x16 icons         │
