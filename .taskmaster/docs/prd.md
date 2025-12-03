@@ -2,7 +2,7 @@
 
 ## Product Requirements Document - MVP (Early Access)
 
-**Version:** 1.6  
+**Version:** 2.0 FINAL  
 **Platform:** Windows via Steam Early Access (Mac/Linux in future update)  
 **Engine:** Godot 4.x  
 **Art Style:** Top-down pixel art (32x32 sprites, 48x48 boss)  
@@ -1395,11 +1395,29 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 1. Josh creates simplified pixel art (basic shapes, strong silhouettes)
 2. Purchase asset packs from itch.io (Filipino-themed if possible)
 3. Use free assets from OpenGameArt.org
+4. **16x16 Filipino Mythology Asset Pack** (see below)
+
+**16x16 Asset Pack Fallback Strategy:**
+
+We have access to a 16x16 Filipino mythology creature asset pack that can serve as emergency fallback:
+
+- **Upscaling approach:** Use [Lospec Pixel Art Scaler](https://lospec.com/pixel-art-scaler/) to scale 16x16 → 32x32 (2x)
+- **Result:** Maintains chunky pixel aesthetic, zero code changes needed
+- **Code approach:** All code assumes 32x32 display size; art scales to fit
+- **Can mix sources:** Some custom 32x32 + some upscaled 16x16 works fine
+
+**Workflow if using asset pack:**
+
+1. Export 16x16 sprites from asset pack
+2. Upload to Lospec Pixel Art Scaler
+3. Scale 2x (maintains pixel-perfect edges)
+4. Download 32x32 result
+5. Import to Godot as normal
 
 **Minimum Viable Art (if backup needed):**
 
 - Player: Must have recognizable shape (even refined placeholder acceptable for EA)
-- Enemies: Can use simple shapes with color coding
+- Enemies: Can use simple shapes with color coding OR upscaled 16x16 pack
 - UI: Can use Godot's default theme with custom colors
 - Tileset: Can use free tileset assets
 
@@ -1408,9 +1426,20 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 | Week   | Required Art                     | Action if Not Ready                     |
 | ------ | -------------------------------- | --------------------------------------- |
 | Week 4 | Sarimanok (both) + Green Duwende | Josh starts backup art immediately      |
-| Week 5 | Red Duwende + Santelmo           | Use recolors of Green Duwende           |
-| Week 6 | Manananggal + All Icons          | Use larger placeholder for boss         |
+| Week 5 | Red Duwende + Santelmo           | Use recolors OR upscaled 16x16 pack     |
+| Week 6 | Manananggal + All Icons          | See Manananggal fallback below          |
 | Week 7 | Tileset + UI (nice-to-have)      | Use placeholder tiles, default UI theme |
+
+**Manananggal Boss Fallback:**
+
+The 48x48 animated Manananggal is the highest-risk art asset (5-7 hours, complex design). If it blocks progress:
+
+- **Fallback option:** Use static 48x48 sprite (no animation) that just moves
+- **Implementation:** Single frame, bob up/down in code (simple tween)
+- **Visual impact:** Still reads as "big scary boss" - animation is nice-to-have
+- **Time saved:** 4-5 hours (just need 1 frame instead of 4)
+
+Do NOT let one asset block the entire launch.
 
 **Note:** Black Duwende art deferred to Update 1.
 
@@ -1731,6 +1760,32 @@ camera.position_smoothing_enabled = true
 **Previous total: 36-46 hrs → New total: 18-24 hrs (HALVED!)**
 
 At 10 hrs/week art = **2-2.5 weeks** of art (parallel to coding) - much more achievable with baby timeline!
+
+---
+
+## Steam Marketing Art (Capsule Images)
+
+> **Critical for Next Fest:** Your Steam capsule art is the single most important marketing asset. It determines click-through rates and wishlist conversions. Bad capsule = no clicks = no wishlists.
+
+**Required Steam Assets:**
+
+| Asset          | Size      | Priority     | Notes                                       |
+| -------------- | --------- | ------------ | ------------------------------------------- |
+| Main Capsule   | 616×353   | **CRITICAL** | Shows in search, browse, Next Fest listings |
+| Small Capsule  | 231×87    | Required     | Shows in wishlists, library                 |
+| Header Capsule | 460×215   | Required     | Shows on store page header                  |
+| Library Hero   | 3840×1240 | Nice-to-have | Shows in Steam library (big mode)           |
+| Library Logo   | 1280×720  | Nice-to-have | Shows in Steam library                      |
+
+**Recommendation:** Do NOT use scaled pixel art for the main capsule—it usually looks amateur at Steam's display sizes. Options:
+
+1. **Commission illustration** (~$300-500 from Fiverr/ArtStation) - Professional, eye-catching
+2. **Ericka creates high-res illustration** (10-15 hrs) - Custom, matches game vision
+3. **Last resort:** Composite of upscaled sprites with strong typography and effects
+
+**Timeline:** Week 8-9 (after core art is done, before demo submission)
+
+**Tip:** Look at successful survivor games on Steam for capsule art inspiration. Notice how few use raw pixel art.
 
 ---
 
@@ -2205,6 +2260,20 @@ func migrate_save(data: Dictionary, from_version: int) -> Dictionary:
 
 ---
 
+## ⚠️ BEFORE WEEK 1 - DO TODAY (Not Week 1!)
+
+> **URGENT:** Steam verification can take 1-4 weeks. You MUST start this process IMMEDIATELY to meet the January 5, 2026 Next Fest registration deadline. You cannot register for Next Fest without a LIVE "Coming Soon" store page, and you cannot have a store page without completed verification.
+
+**Do these TODAY (December 3, 2025):**
+
+- [ ] **Pay $100 Steam Direct fee** - [partner.steamgames.com](https://partner.steamgames.com)
+- [ ] **Start Steamworks account verification** - Submit ID, tax info, bank details
+- [ ] **Monitor verification status daily** - Follow up if no progress after 5 business days
+
+**Why this can't wait:** If verification stalls over the holidays (Dec 23 - Jan 1), you risk missing the Jan 5 deadline entirely. Starting today gives you 4+ weeks buffer.
+
+---
+
 ## Week 1: The Core Loop
 
 **End State: "I can play a survivor game"**
@@ -2452,12 +2521,12 @@ At the end of Week 6, you have a SHIPPABLE game:
 Builds on Week 6, adds:
 
 - Settings menu (Music volume, SFX volume, Fullscreen, Screen Shake toggle)
-- Basic tutorial overlays (first run only)
+- Integrated tutorial through level design (NOT overlay system)
 - Screen shake on hits
 - Invincibility flash when damaged
 - Enemy death particles
 - Pickup magnet visual
-- Controller UX polish (UI navigation + button prompts)
+- Controller UX polish (UI navigation + button prompts + device switching)
 
 **Tasks:**
 
@@ -2469,10 +2538,12 @@ Builds on Week 6, adds:
 - [ ] **Reduced motion option (disable particles for motion-sensitive players)**
 - [ ] **Colorblind mode consideration (Green/Red Duwende distinction - add shape/size difference)**
 - [ ] Settings persist in save file
-- [ ] Tutorial: "WASD to move" on first run (disappears after movement)
-- [ ] Tutorial: "Weapons attack automatically!" text
-- [ ] "Survive until dawn" goal visible
-- [ ] Tutorial flags saved (don't repeat)
+- [ ] **Tutorial through level design (NOT overlays):**
+  - [ ] First 30 seconds: spawn pattern forces player to discover movement
+  - [ ] First weapon pickup placed in obvious path (learn by doing)
+  - [ ] First level-up is semi-scripted to demonstrate system
+  - [ ] Minimal text - icon-based learning where possible
+  - [ ] Brief "Survive until dawn" goal text at run start (fades after 3s)
 - [ ] Screen shake on enemy hits
 - [ ] Flash effect when player takes damage
 - [ ] Particle effect on enemy death
@@ -2481,10 +2552,14 @@ Builds on Week 6, adds:
 - [ ] **In-game bug report button (links to Google Form or Discord)**
 - [ ] Controller UI navigation (D-pad/stick for menus - core input already works from Week 1)
 - [ ] Controller button prompts (show controller icons if controller detected)
+- [ ] **Input device switching detection (3-5 hrs):**
+  - [ ] Track last input method (keyboard vs controller)
+  - [ ] Swap UI prompt icons dynamically when device changes
+  - [ ] Test switching mid-game (should update prompts immediately)
 - [ ] **Test controller gameplay feel (stick sensitivity, dead zones)**
 - [ ] **Test text legibility at 1280x720 window (Steam Deck resolution)**
 
-**Integration Test:** Play entire run with controller, adjust volume mid-game, verify tutorials don't repeat, screen shake feels good
+**Integration Test:** Play entire run with controller, switch to keyboard mid-game (prompts should update), verify tutorial teaches without blocking gameplay
 
 ---
 
@@ -2621,9 +2696,16 @@ Adds:
 - [ ] Take 5-10 screenshots for store page
 - [ ] Upload screenshots to Steam page
 - [ ] Upload trailer to Steam page
+- [ ] **GodotSteam Integration (4-8 hrs first-time setup):**
+  - [ ] Download GodotSteam GDExtension from [godotsteam.com](https://godotsteam.com/)
+  - [ ] Follow setup guide for Godot 4.x
+  - [ ] Initialize Steam API in autoload
+  - [ ] Test Steam overlay appears in-game (Shift+Tab)
+  - [ ] Verify Steam username displays correctly
 - [ ] Implement Steam achievements (5-8 total)
 - [ ] Hook achievement triggers to gameplay events
-- [ ] Test achievement unlocks
+- [ ] Test achievement unlocks via Steam API
+- [ ] **Fallback if GodotSteam problematic:** Ship without achievements, patch in Week 1 post-launch
 
 **Steam Achievements (EA):**
 
@@ -2967,6 +3049,67 @@ Steam Next Fest is a week-long event where players try demos of upcoming games. 
 
 ---
 
+# Wishlist Building Strategy (Pre-Next Fest)
+
+> **Critical Insight:** Visibility during Steam Next Fest scales directly with the number of wishlists you accumulate BEFORE the festival begins. More pre-fest wishlists = better algorithmic placement = more wishlists during fest.
+
+## Target
+
+**7,000+ wishlists before February 23, 2026**
+
+This is the minimum threshold for meaningful algorithmic visibility during Next Fest.
+
+## Timeline
+
+| Week              | Milestone            | Action                       |
+| ----------------- | -------------------- | ---------------------------- |
+| Week 5 (Jan 6-12) | Store page goes LIVE | Start all wishlist campaigns |
+| Week 6-9          | Active marketing     | Execute channels below       |
+| Week 10-12        | Pre-fest push        | Increase posting frequency   |
+| Week 13 (Feb 23)  | Next Fest begins     | Reap the wishlist wave       |
+
+## Marketing Channels
+
+**Filipino Community (Primary - Unique Cultural Hook):**
+
+| Channel                         | Action                                                         | Frequency |
+| ------------------------------- | -------------------------------------------------------------- | --------- |
+| r/Philippines                   | Dev updates, cultural context posts, "Filipino game dev" angle | Weekly    |
+| r/PHGamers                      | Gameplay clips, demo announcements                             | Weekly    |
+| Filipino Gaming Discord servers | Behind-the-scenes, dev Q&A                                     | 2x/week   |
+| Filipino Facebook gaming groups | Shareable GIF clips, cultural creature spotlights              | 2x/week   |
+
+**General Gaming:**
+
+| Channel                       | Action                                                | Frequency      |
+| ----------------------------- | ----------------------------------------------------- | -------------- |
+| Twitter/X                     | GIF gameplay clips, dev progress, creature reveals    | Daily          |
+| TikTok                        | 30-sec gameplay clips, "Filipino mythology explained" | 3x/week        |
+| r/roguelites, r/survivorgames | Demo announcements, gameplay clips                    | Key milestones |
+| itch.io DevLog                | Development diary with screenshots                    | Weekly         |
+
+**Press & Influencers (Week 9-10):**
+
+- Prepare press kit (screenshots, trailer, logo, description, key art)
+- Identify 20-30 small/mid YouTubers and streamers who cover survivor games
+- Send personalized emails with Steam keys before Next Fest
+
+## Content Ideas
+
+- "Meet the Duwende" creature spotlight posts (cultural education + marketing)
+- "Why I'm making a Filipino mythology game" personal story post
+- Side-by-side: Folklore art vs game sprite comparisons
+- "30 seconds of chaos" gameplay GIFs
+- Ericka's art process videos (if comfortable)
+
+## Tracking
+
+- Check Steam wishlist count weekly (visible in Steamworks)
+- Goal: ~1,000 wishlists/week average from Week 5-13
+- Adjust channel focus based on what's working
+
+---
+
 # Demo Strategy
 
 ## Demo Configuration
@@ -3280,13 +3423,14 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 ---
 
-**Version:** 1.8  
+**Version:** 2.0 FINAL  
 **Created:** December 2025  
 **Authors:** Josh & Ericka  
 **Cultural Consultant:** Ericka
 
 **Version History:**
 
+- v2.0 FINAL: Production readiness & tracking sections - ADDED: URGENT "Before Week 1" Steam setup callout (verification takes 1-4 weeks, must start TODAY for Jan 5 deadline), Steam Marketing Art section (capsule art requirements for Next Fest visibility), Wishlist Building Strategy (7,000+ target, Filipino community channels, content calendar), 16x16 asset pack fallback with Lospec upscaler workflow, Manananggal static sprite fallback. UPDATED: Week 7 tutorial redesigned as "level design teaching" not overlays, added input device switching tasks. Week 10 added GodotSteam integration tasks. Quick Reference Card updated with new tracking items. Architecture is LOCKED - ready to start coding.
 - v1.8: Build variety & polish timing improvements - ADDED: Data-driven WeaponData Resource architecture (trivial to add weapons post-launch), 2 clone weapons (Ice Shard, Flame Wing) for 6 total weapons with minimal art effort, debuff system (slow effect), pitch randomization for repetitive SFX (prevents ear fatigue), Week 10 "Code Complete" milestone (6-week baby buffer). MOVED EARLIER: Damage numbers and enemy flash moved from Week 7 to Week 3 (critical for balance testing). RENAMED: Week 7 "Controller Support" → "Controller Polish" (core input already in Week 1). EA now ships with 6 weapons instead of 4.
 - v1.7: Steam Next Fest & Asset Strategy overhaul - ADDED: Steam Next Fest February 2026 strategy (demo live Feb 23 - Mar 2, EA launch ~Mar 8), 10-minute time-limited demo, asset pack outsourcing (UI, tileset, pickups bought; Ericka does characters/enemies only - reduces art from 36-46 hrs to 18-24 hrs), Steam setup moved to Week 1 (pay fee Day 1 for Jan 5 Next Fest registration deadline), Week 14 added for EA launch after Next Fest, Area2D for enemies (performance optimization), tr() localization prep, accessibility options (colorblind mode, reduced motion), analytics logging. Budget updated to $140-305.
 - v1.6: Content depth increase for stronger EA launch - MOVED TO EA: Golden Sarimanok (3rd character), Spiral Feathers (4th weapon), Magnetic Aura (4th passive). ADDED: Placeholder SFX in Weeks 2-3 for game feel, Damage numbers promoted to Must Have (Week 7), Enemy damage flash, Level-up juice, In-game bug report button. EA now ships with 3 characters, 4 enemies, 4 weapons, 4 passives = 11 base items with 55 upgrade choices. DEFERRED to Update 1: Black Duwende, Enhanced Endless Scaling, Additional Achievements, Steam Cloud Saves, Mac/Linux.
@@ -3319,15 +3463,18 @@ This PRD defines a **30-minute action roguelite** that combines:
 │ PLATFORM: Windows (Mac/Linux post-launch)       │
 │ SPRITES: 32x32, 48x48 boss, 16x16 icons         │
 │ ASSET PACKS: UI + Tileset (~$30-50)             │
+│ ART FALLBACK: 16x16 pack → Lospec 2x upscale    │
 │ TIMELINE: 14 weeks (includes Next Fest)         │
 │ NEXT FEST: Feb 23 - Mar 2, 2026 (Demo live!)    │
 │ LAUNCH: ~March 8, 2026 (after Next Fest)        │
 │ BABY DUE: March 21, 2026 (~2 week buffer)       │
 │ PRICE: $2.99-4.99                               │
 ├─────────────────────────────────────────────────┤
-│ STEAM SETUP: Week 1 (pay fee, verification)     │
+│ ⚠️ STEAM SETUP: DO TODAY (not Week 1!)          │
 │ STORE PAGE: Week 4 (submit), Week 5 (live)      │
 │ NEXT FEST REG: Jan 5 deadline (Week 5)          │
+│ WISHLIST TARGET: 7,000+ before Feb 23           │
+│ CAPSULE ART: Week 8-9 (commission or custom)    │
 │ MINIMUM SHIPPABLE: Week 6 (MVP checkpoint)      │
 │ CODE COMPLETE: Week 10 (Feb 2-8, 2026)          │
 │ DEMO SUBMIT: Feb 9 deadline (end of Week 10)    │
