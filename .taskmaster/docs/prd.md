@@ -10,8 +10,9 @@
 **Reference Games:** Vampire Survivors, Void Miner, Brotato  
 **Team Size:** 1-2 first-time developers (husband/wife team)  
 **Target Playtime:** 30 minutes per run  
-**Timeline:** 13 weeks  
-**Target Launch:** Early March 2026  
+**Timeline:** 14 weeks (includes Next Fest week)  
+**Next Fest:** February 23 - March 2, 2026 (Demo live!)  
+**Target Launch:** ~March 8, 2026 (Right after Next Fest)  
 **Price:** $2.99-4.99 USD
 
 **Title Alternatives Under Consideration:**
@@ -497,11 +498,13 @@ This creates smooth difficulty progression rather than hard jumps at time thresh
 
 **Technical Requirements:**
 
-- Enemy scene with CharacterBody2D
+- Enemy scene with **Area2D** (NOT CharacterBody2D - see note below)
 - Simple pathfinding (just move toward player)
 - Spawn manager that tracks time and spawn rates
 - Object pooling for performance (reuse enemy instances)
-- Death: Play particle effect, drop XP gem + Gold coin, queue_free()
+- Death: Play particle effect, drop XP gem + Gold coin, return to pool
+
+**Why Area2D instead of CharacterBody2D:** Enemies only need to move toward the player (simple vector math) and detect overlap for damage. CharacterBody2D includes physics overhead (collision response, move_and_slide) that tanks FPS with 200+ enemies on screen. Area2D is lightweight and sufficient for our needs.
 
 **Definition of Done:**
 
@@ -1572,35 +1575,85 @@ camera.position_smoothing_enabled = true
 - Week 1-6: Simple colored tiles (green for grass, brown for dirt)
 - Week 9: Replace tileset PNG with Ericka's finished art
 
-### UI Elements
+### UI Elements - OUTSOURCED TO ASSET PACK
 
-| Asset                 | Est. Time |
-| --------------------- | --------- |
-| HP Bar                | 1 hr      |
-| XP Bar                | 1 hr      |
-| Weapon slots          | 1 hr      |
-| Button sprites        | 2 hrs     |
-| Menu backgrounds      | 2 hrs     |
-| Level up frame        | 1 hr      |
-| Results screen layout | 1 hr      |
+**Buy a UI asset pack (~$10-15) instead of custom art:**
 
-**Total UI time: ~9 hrs**
+| Asset                 | Source     | Est. Time |
+| --------------------- | ---------- | --------- |
+| HP Bar                | Asset pack | 0         |
+| XP Bar                | Asset pack | 0         |
+| Weapon slots          | Asset pack | 0         |
+| Button sprites        | Asset pack | 0         |
+| Menu backgrounds      | Asset pack | 0         |
+| Level up frame        | Asset pack | 0         |
+| Results screen layout | Asset pack | 0         |
 
-## Total Art Summary
+**Total UI time: ~0 hrs** (purchased asset pack)
 
-| Category              | EA Time       | Update 1        |
-| --------------------- | ------------- | --------------- |
-| Player (3 variants)   | 5-6 hrs       | —               |
-| Enemies (4 for EA)    | 9.5-13.5 hrs  | +20 min (Black) |
-| Weapon icons          | 2 hrs         | —               |
-| Weapon effects        | 2.5-3.5 hrs   | —               |
-| Passive icons         | 2 hrs         | —               |
-| Pickups               | 1 hr          | —               |
-| Environment (tileset) | 5-8 hrs       | —               |
-| UI                    | 9 hrs         | —               |
-| **EA TOTAL**          | **36-46 hrs** |                 |
+### Pickups - OUTSOURCED TO ASSET PACK
 
-At 10 hrs/week art = **3.5-5 weeks** of art (parallel to coding)
+| Asset     | Source     | Est. Time |
+| --------- | ---------- | --------- |
+| XP Gem    | Asset pack | 0         |
+| Gold Coin | Asset pack | 0         |
+
+**Total pickup time: ~0 hrs** (purchased asset pack or included in UI pack)
+
+### Environment (Tilemap) - OUTSOURCED TO ASSET PACK
+
+**Buy a tileset asset pack (~$10-20) instead of custom art:**
+
+| Asset                         | Source                                 | Est. Time |
+| ----------------------------- | -------------------------------------- | --------- |
+| Farm tileset (all tiles)      | Asset pack                             | 0         |
+| Edge decorations (in tileset) | Asset pack                             | 0         |
+| Bahay kubo (optional)         | Ericka (1-2 Filipino elements if time) | 1-2 hrs   |
+| Dawn overlay/effect           | Simple gradient in Godot               | 30 min    |
+
+**Total environment time: ~0.5-2.5 hrs** (mostly purchased)
+
+## Asset Pack Strategy
+
+**Why outsource generic elements:**
+
+- Filipino identity is in the CHARACTERS and ENEMIES, not the UI or grass tiles
+- A farm is a farm - nothing uniquely Filipino about generic tileset
+- Saves Ericka ~15-18 hours of work (critical with baby coming)
+- Professional-looking assets for $20-40 total
+
+**Buy from asset packs (~$30-50 total):**
+
+- UI kit (buttons, panels, HP/XP bars) - $10-15 from itch.io
+- Tileset (grass, dirt, trees, fences) - $10-20 from itch.io
+- Pickups (gems, coins) - often included in UI kit
+
+**Ericka creates (cultural identity - this is what makes the game FILIPINO):**
+
+- Sarimanok (all 3 variants) - **Classic FIRST for demo**
+- All enemies (Duwendes, Santelmo, Manananggal)
+- Weapon icons (bird-themed)
+- 1-2 Filipino tileset elements (bahay kubo, rice crops) - optional
+
+## Total Art Summary (Updated with Outsourcing)
+
+| Category                  | Source     | Ericka Time   | Update 1        |
+| ------------------------- | ---------- | ------------- | --------------- |
+| Player (3 variants)       | Ericka     | 5-6 hrs       | —               |
+| Enemies (4 for EA)        | Ericka     | 9.5-13.5 hrs  | +20 min (Black) |
+| Weapon icons              | Ericka     | 2 hrs         | —               |
+| Weapon effects            | Ericka     | 2.5-3.5 hrs   | —               |
+| Passive icons             | Asset pack | 0             | —               |
+| Pickups                   | Asset pack | 0             | —               |
+| Environment (tileset)     | Asset pack | 0             | —               |
+| Filipino tiles (optional) | Ericka     | 1-2 hrs       | —               |
+| UI                        | Asset pack | 0             | —               |
+| **ERICKA TOTAL**          | —          | **18-24 hrs** |                 |
+| **ASSET PACK COST**       | —          | **$30-50**    |                 |
+
+**Previous total: 36-46 hrs → New total: 18-24 hrs (HALVED!)**
+
+At 10 hrs/week art = **2-2.5 weeks** of art (parallel to coding) - much more achievable with baby timeline!
 
 ---
 
@@ -1666,12 +1719,26 @@ At 10 hrs/week art = **3.5-5 weeks** of art (parallel to coding)
 | Victory (30:00)            | Cut to Victory jingle + Dawn ambience |
 | Player Death               | Fade out music over 1 second          |
 
-## Audio Sources (Free)
+## Audio Sources
+
+**START BROWSING MUSIC NOW!** Finding the right vibe takes time. Don't wait until Week 9.
+
+**Sound Effects (Free):**
 
 - freesound.org (CC0 sound effects)
 - opengameart.org (free game audio)
-- Friend/family musician (if available)
-- AI-generated music (with care)
+- BFXR (generate retro sound effects)
+
+**Music Options (Pick ONE approach):**
+
+| Option            | Cost      | Pros                               | Cons                               |
+| ----------------- | --------- | ---------------------------------- | ---------------------------------- |
+| Pixabay Music     | Free      | No attribution, large library      | Generic, may not fit Filipino vibe |
+| Epidemic Sound    | $15/month | High quality, huge library         | Subscription model                 |
+| Fiverr Commission | $50-150   | Custom, can request Filipino style | Takes time, variable quality       |
+| OpenGameArt       | Free      | Game-focused                       | Limited selection                  |
+
+**Recommendation:** Start with free sources (Pixabay, OpenGameArt). If nothing fits, commission from Fiverr with specific direction: "Filipino-inspired chiptune/pixel art game music, night survival theme, boss battle intensity"
 
 ---
 
@@ -2009,12 +2076,13 @@ func migrate_save(data: Dictionary, from_version: int) -> Dictionary:
 
 ---
 
-# Development Roadmap (13 Weeks - Vertical Slices)
+# Development Roadmap (14 Weeks - Vertical Slices + Next Fest)
 
 **Start:** December 1, 2025  
-**Launch:** First week of March 2026  
+**Next Fest:** February 23 - March 2, 2026 (Demo live!)  
+**Launch:** ~March 8, 2026 (Right after Next Fest)  
 **Baby Due:** March 21, 2026  
-**Buffer:** 3 weeks before baby
+**Buffer:** ~2 weeks before baby
 
 ## Time Model
 
@@ -2045,15 +2113,23 @@ What's playable at end of week:
 - Player dies when HP = 0
 - Game over screen shows "You died"
 
+**CRITICAL PARALLEL TASKS (Steam Setup for Next Fest):**
+
+- [ ] **STEAM:** Pay $100 Steam Direct fee (do this Day 1!)
+- [ ] **STEAM:** Start Steamworks account verification (ID, tax info - takes 3-7 days)
+- [ ] **ASSETS:** Buy UI asset pack (buttons, panels, HP/XP bars) - ~$10-15
+- [ ] **ASSETS:** Buy tileset asset pack (grass, dirt, trees, fences) - ~$10-20
+
 **Tasks:**
 
 - [ ] Create project structure
 - [ ] Set up project settings (640×360 viewport, canvas_items stretch)
+- [ ] **Configure Input Map in Project Settings with controller bindings from Day 1**
 - [ ] Create TileMap with placeholder tileset (simple colored squares)
 - [ ] Paint basic 60×34 arena with placeholder tiles
 - [ ] Set up Camera2D with limits (0,0 to 1920,1088)
 - [ ] Add invisible boundary collision (StaticBody2D)
-- [ ] Implement player movement (WASD)
+- [ ] Implement player movement (WASD) using `Input.get_action_strength()` for analog support
 - [ ] Create placeholder Sarimanok sprite (colored rectangle 32x32)
 - [ ] Implement Peck attack (auto-fire, cooldown)
 - [ ] Create placeholder Duwende (green rectangle 32x32)
@@ -2062,6 +2138,7 @@ What's playable at end of week:
 - [ ] Duwende dies and drops placeholder XP gem
 - [ ] Player takes damage from enemy contact
 - [ ] Player dies at 0 HP, shows game over
+- [ ] **Use `tr()` function for all UI text strings (localization prep - costs nothing now)**
 
 **Integration Test:** Can you survive for 60 seconds dodging and pecking?
 
@@ -2147,6 +2224,12 @@ Builds on Week 3, adds:
 - Gold drops from enemies
 - Gold persists after run (saved to file)
 
+**CRITICAL PARALLEL TASKS (Steam Store Page):**
+
+- [ ] **STEAM:** Steamworks verification should be complete by now
+- [ ] **STEAM:** Create "Coming Soon" store page draft (description, placeholder screenshots)
+- [ ] **STEAM:** Submit store page for review (allow holiday buffer! Review takes 2-5 business days)
+
 **Tasks:**
 
 - [ ] Santelmo enemy (floats, shoots fireballs)
@@ -2162,7 +2245,7 @@ Builds on Week 3, adds:
 
 **Integration Test:** Can you beat the game (survive to 30:00)?
 
-_Note: This is a holiday week (late December) - scope is appropriate_
+_Note: This is a holiday week (late December) - scope is appropriate. Submit store page BEFORE Christmas break!_
 
 ---
 
@@ -2178,13 +2261,17 @@ Builds on Week 4, adds:
 - Shop upgrades persist in save file
 - Gold deducts on purchase
 
-**PARALLEL TASK: Pay $100 Steam Direct fee, start Steamworks account verification**
+**CRITICAL PARALLEL TASKS (Next Fest Registration - DEADLINE JAN 5!):**
+
+- [ ] **STEAM:** Store page should be LIVE after review approval
+- [ ] **STEAM:** Register for Steam Next Fest February 2026 by January 5 deadline!
+- [ ] **STEAM:** Update store page with any new screenshots from gameplay
 
 **Tasks:**
 
 - [ ] Main menu screen (Story Mode, Shop, Quit)
 - [ ] Add loading screen tagline ("The Sarimanok guards the land through the night...")
-- [ ] Shop screen UI
+- [ ] Shop screen UI (use purchased UI asset pack)
 - [ ] Buy Damage upgrade (+2% per purchase)
 - [ ] Buy HP upgrade (+5 per purchase)
 - [ ] Buy Speed upgrade (+1% per purchase)
@@ -2192,8 +2279,6 @@ Builds on Week 4, adds:
 - [ ] Upgrades apply at run start
 - [ ] Gold deducts correctly on purchase
 - [ ] BUY button disabled when insufficient gold
-- [ ] **STEAM:** Pay Steam Direct fee
-- [ ] **STEAM:** Start Steamworks verification process
 
 **Integration Test:** Die, buy upgrade, start new run - are you stronger?
 
@@ -2265,6 +2350,8 @@ Builds on Week 6, adds:
 - [ ] SFX volume slider
 - [ ] Fullscreen toggle
 - [ ] Screen shake toggle (accessibility)
+- [ ] **Reduced motion option (disable particles for motion-sensitive players)**
+- [ ] **Colorblind mode consideration (Green/Red Duwende distinction - add shape/size difference)**
 - [ ] Settings persist in save file
 - [ ] Tutorial: "WASD to move" on first run (disappears after movement)
 - [ ] Tutorial: "Weapons attack automatically!" text
@@ -2281,6 +2368,7 @@ Builds on Week 6, adds:
 - [ ] Basic controller support (input mapping for gamepad)
 - [ ] Controller UI navigation (D-pad/stick for menus)
 - [ ] Controller button prompts (show controller icons if controller detected)
+- [ ] **Test text legibility at 1280x720 window (Steam Deck resolution)**
 
 **Integration Test:** Play entire run with controller, adjust volume mid-game, verify tutorials don't repeat, see damage numbers
 
@@ -2292,42 +2380,50 @@ Builds on Week 6, adds:
 
 This week focuses on swapping placeholders for real sprites:
 
-- Import Sarimanok sprites (both variants)
+- Import Sarimanok sprites (all variants)
 - Import Duwende sprites (Green + Red)
 - Import Santelmo sprite
 - Import Manananggal sprite
-- Import tileset, paint arena
+- Import purchased tileset asset pack, paint arena
 - Import weapon/passive icons
-- Import pickup sprites
+- Import purchased pickup sprites (or asset pack)
 - Adjust hitboxes if needed
+
+**PRIORITY ORDER (Sarimanok first for demo!):**
+
+1. **Sarimanok Classic** - FIRST priority (needed for Next Fest demo)
+2. Sarimanok Shadow & Golden
+3. All enemies
+4. Everything else
 
 **Tasks:**
 
-- [ ] Import and set up Sarimanok Classic sprite
+- [ ] **Import and set up Sarimanok Classic sprite (PRIORITY - demo character)**
 - [ ] Import and set up Sarimanok Shadow sprite
+- [ ] Import and set up Sarimanok Golden sprite
 - [ ] Import and set up Green Duwende sprite
 - [ ] Import and set up Red Duwende sprite
 - [ ] Import and set up Santelmo sprite
 - [ ] Import and set up Manananggal boss sprite
-- [ ] Import tileset PNG
+- [ ] Import purchased tileset asset pack
 - [ ] Set up TileMap with tileset
 - [ ] Paint arena with final tiles
-- [ ] Import all weapon icons
-- [ ] Import all passive icons
-- [ ] Import XP gem sprite
-- [ ] Import Gold coin sprite
+- [ ] Import all weapon icons (Ericka creates)
+- [ ] Import all passive icons (can use asset pack)
+- [ ] Import XP gem sprite (asset pack)
+- [ ] Import Gold coin sprite (asset pack)
 - [ ] Adjust hitboxes if sprite shapes differ from placeholders
 - [ ] Test all animations work correctly
 
 **Note:** Black Duwende sprite deferred to Update 1.
 
-**Fallback:** If art not ready, continue with refined placeholders. Game is still SHIPPABLE.
+**Fallback:** If art not ready, continue with refined placeholders + asset packs. Game is still SHIPPABLE.
 
 **Art Checkpoint:**
 
 - If Ericka's art is ready: swap everything
-- If partially ready: swap what's done, keep placeholders for rest
-- If not ready: refine placeholders (add outlines, better colors)
+- If partially ready: swap what's done, use asset packs for generic elements
+- If not ready: use asset packs + refined placeholders
 
 ---
 
@@ -2372,21 +2468,28 @@ Adds:
 
 ---
 
-## Week 10: Steam Build, Achievements & Marketing
+## Week 10: Steam Build, Demo & Achievements
 
-**End State: "Ready for Steam with achievements"**
+**End State: "Ready for Steam with demo and achievements"**
 
 Adds:
 
 - Build exports correctly for Windows
+- **Demo build ready for Next Fest (10-minute time limit)**
 - Test on different Windows machines if possible
 - Record trailer footage
 - Take screenshots
 - Steam achievements (5-8 for EA)
 
+**CRITICAL: Next Fest Demo Deadline is February 9!**
+
 **Tasks:**
 
 - [ ] Export Windows build
+- [ ] **Build demo version (10-minute time limit)**
+- [ ] **Demo end screen with "Survive to dawn..." teaser and wishlist CTA**
+- [ ] **Demo has no shop access (removes meta-progression hook)**
+- [ ] **Submit demo for Next Fest review by February 9 deadline**
 - [ ] Test Windows build on different machine (if available)
 - [ ] Record 30-60 second trailer footage
 - [ ] Take 5-10 screenshots for store page
@@ -2409,7 +2512,7 @@ Adds:
 | Perfectionist   | Beat Story Mode without taking damage in final 5 min | Challenge   |
 | Endless Night   | Survive 45:00 in Endless Mode                        | Endurance   |
 
-**Integration Test:** Build runs standalone, no crashes in 30-minute run, achievements trigger correctly
+**Integration Test:** Build runs standalone, no crashes in 30-minute run, demo cuts off at 10:00, achievements trigger correctly
 
 ---
 
@@ -2427,6 +2530,8 @@ Focus on:
 - Performance test (200+ enemies)
 - Get feedback from 3-5 people
 
+**Note:** Press Preview starts February 12 (yours won't be in it since we skipped Jan 26 deadline - that's fine)
+
 **Tasks:**
 
 - [ ] Playtest 10+ full runs
@@ -2441,6 +2546,9 @@ Focus on:
 - [ ] Send build to 3-5 friends/family for feedback
 - [ ] Document and address feedback
 - [ ] Finalize trailer (add music, titles)
+- [ ] **Add basic analytics logging to local file (death location, weapon picks, run length, time survived)**
+- [ ] **Add error logging/crash reporting to file for player bug reports**
+- [ ] **Wrap critical systems in error handling**
 
 **Integration Test:** Can a first-time player beat Story Mode in 3-5 attempts?
 
@@ -2475,11 +2583,39 @@ Focus on:
 
 ---
 
-## Week 13: LAUNCH
+## Week 13: NEXT FEST (February 23 - March 2)
 
-**End State: "GAME IS LIVE"**
+**End State: "Demo is LIVE, collecting wishlists!"**
 
-- Launch on Steam Early Access
+**Steam Next Fest runs February 23 - March 2, 2026**
+
+- Demo goes live on Steam Next Fest
+- Monitor demo feedback
+- Collect wishlists
+- Engage with players trying the demo
+- Prepare for EA launch
+
+**Tasks:**
+
+- [ ] **Set demo LIVE on February 23 (Next Fest start)**
+- [ ] Monitor demo feedback and bug reports
+- [ ] Engage in Steam discussions
+- [ ] Post about Next Fest participation to Filipino gaming communities
+- [ ] Track wishlist growth during Next Fest
+- [ ] Fix any critical bugs found in demo
+- [ ] Prepare EA launch announcement
+- [ ] Final polish based on Next Fest feedback
+
+**Integration Test:** Demo works for thousands of players, wishlist count growing
+
+---
+
+## Week 14: EARLY ACCESS LAUNCH (~March 8)
+
+**End State: "GAME IS LIVE ON STEAM!"**
+
+- Launch on Steam Early Access (right after Next Fest ends)
+- Convert wishlists to sales
 - Monitor for critical bugs
 - Hotfix if needed
 - Respond to community feedback
@@ -2487,7 +2623,7 @@ Focus on:
 
 **Tasks:**
 
-- [ ] Press the LAUNCH button!
+- [ ] Press the LAUNCH button! (~March 8)
 - [ ] Post launch announcement to r/Philippines
 - [ ] Post to Filipino gaming communities
 - [ ] Monitor Steam discussions for bug reports
@@ -2498,7 +2634,7 @@ Focus on:
 
 ---
 
-## Buffer: 3 Weeks Before Baby (March 1-21)
+## Buffer: ~2 Weeks Before Baby (March 8-21)
 
 **Purpose:** Rest and handle any emergencies before baby arrives
 
@@ -2674,31 +2810,155 @@ Add new creatures from Filipino mythology:
 
 ---
 
+# Steam Next Fest Strategy
+
+## Target Event: Steam Next Fest February 2026
+
+**Dates:** February 23 - March 2, 2026
+
+Steam Next Fest is a week-long event where players try demos of upcoming games. This is a massive visibility opportunity - thousands of players browse new demos during the event.
+
+## Critical Deadlines
+
+| Date       | Deadline                            | Action Required                                 |
+| ---------- | ----------------------------------- | ----------------------------------------------- |
+| **Jan 5**  | Registration deadline               | Register with live "Coming Soon" store page     |
+| Jan 11     | Trailer pull for official marketing | SKIP - won't have polished trailer by then      |
+| Jan 26     | Press Preview demo deadline         | SKIP - too tight, not critical                  |
+| **Feb 9**  | Final submission deadline           | Demo + store page must be ready for review      |
+| Feb 12     | Press Preview starts                | (We won't be in it - that's fine)               |
+| **Feb 23** | Next Fest begins                    | Set demo LIVE at 10am PDT                       |
+| Mar 2      | Next Fest ends                      | Wrap-up featuring most-played demos             |
+| **~Mar 8** | EA Launch                           | Right after Next Fest - ride the wishlist wave! |
+
+## Why This Timing is Perfect
+
+1. **Maximum exposure:** Thousands of players browse Next Fest demos
+2. **Wishlist conversion:** Players try demo → wishlist → get notified on launch → buy
+3. **Immediate launch:** EA launches right after Next Fest while wishlists are hot
+4. **Filipino community:** Share demo in communities during Next Fest week
+5. **Streamer coverage:** More likely to try free demos than paid games
+
+---
+
+# Demo Strategy
+
+## Demo Configuration
+
+**Type:** Time-limited demo (same build as full game with timer check)
+
+| Setting          | Value                                                  |
+| ---------------- | ------------------------------------------------------ |
+| Time Limit       | 10 minutes                                             |
+| Cut-off Point    | Before Santelmo spawns (10:00) and before boss (20:00) |
+| Shop Access      | DISABLED (removes meta-progression hook)               |
+| Character Select | Classic Sarimanok only                                 |
+| Save Data        | Does not persist                                       |
+
+## What Players Experience in Demo
+
+**They SEE:**
+
+- Core gameplay loop (move, auto-attack, dodge)
+- Green Duwende + Red Duwende (first 8 minutes of enemies)
+- XP collection and level-up system
+- 2-3 weapons and passives (depending on RNG)
+- Timer counting up
+
+**They DON'T SEE:**
+
+- Santelmo (spawns at 10:00)
+- Manananggal boss (spawns at 20:00)
+- Victory/dawn sequence (30:00)
+- Shop/meta-progression
+- Shadow or Golden Sarimanok
+
+## Demo End Screen
+
+When timer hits 10:00:
+
+```
+┌─────────────────────────────────────────────┐
+│                                             │
+│     The night is far from over...           │
+│                                             │
+│     Survive to dawn to discover             │
+│     the Sarimanok's true power.             │
+│                                             │
+│         [WISHLIST NOW]  [EXIT]              │
+│                                             │
+│     Full game: $2.99-4.99 Early Access      │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+**Key elements:**
+
+- Creates intrigue ("what happens at dawn?")
+- Direct wishlist CTA button
+- Shows price (impulse-buy territory)
+
+## Technical Implementation
+
+The demo is the SAME build as the full game with these checks:
+
+```gdscript
+# In GameState.gd or main game scene
+var is_demo: bool = true  # Set to false in full game build
+
+func _process(delta):
+    if is_demo and time_survived >= 600.0:  # 10 minutes = 600 seconds
+        show_demo_end_screen()
+
+func show_demo_end_screen():
+    get_tree().paused = true
+    # Show demo end UI with wishlist button
+    # Wishlist button opens Steam store page in browser
+```
+
+**Demo build cost:** ~2-4 hours (timer check + end screen UI)
+
+---
+
 # Budget Estimate
 
-## MVP Costs
+## MVP Costs (Updated with Asset Pack Strategy)
 
-| Item             | Cost                  |
-| ---------------- | --------------------- |
-| Aseprite license | $20                   |
-| Steam Direct fee | $100                  |
-| Sound effects    | $0 (free sources)     |
-| Music            | $0-50 (free or cheap) |
-| Marketing        | $0 (organic)          |
-| **Total**        | **~$120-170**         |
+| Item                   | Cost                        |
+| ---------------------- | --------------------------- |
+| Aseprite license       | $20                         |
+| Steam Direct fee       | $100                        |
+| **UI asset pack**      | **$10-15**                  |
+| **Tileset asset pack** | **$10-20**                  |
+| Sound effects          | $0 (free sources)           |
+| Music                  | $0-150 (free or commission) |
+| Marketing              | $0 (organic)                |
+| **Total**              | **~$140-305**               |
 
-## Time Investment
+**Asset Pack Sources:**
 
-| Task            | Hours           |
-| --------------- | --------------- |
-| Programming     | 150-200 hrs     |
-| Art             | 40-50 hrs       |
-| Audio           | 10-15 hrs       |
-| Testing/Polish  | 30-40 hrs       |
-| Marketing/Steam | 20-30 hrs       |
-| **Total**       | **250-335 hrs** |
+- itch.io (pixel art UI kits, tilesets) - $5-20 each
+- Kenney.nl (free, professional quality)
+- Game-icons.net (free icons, CC0)
 
-At 20 hrs/week = 12-17 weeks (4 months timeline has buffer)
+**Music Sources:**
+
+- Pixabay Music (free, no attribution required)
+- Epidemic Sound ($15/month subscription)
+- Fiverr commission ($50-150 for 4 tracks)
+
+## Time Investment (Updated with Outsourcing)
+
+| Task            | Hours                            |
+| --------------- | -------------------------------- |
+| Programming     | 150-200 hrs                      |
+| Art (Ericka)    | **18-24 hrs** (down from 40-50!) |
+| Audio           | 10-15 hrs                        |
+| Testing/Polish  | 30-40 hrs                        |
+| Marketing/Steam | 20-30 hrs                        |
+| **Total**       | **228-309 hrs**                  |
+
+At 20 hrs/week = 11-15 weeks (14-week timeline has buffer)
 
 ---
 
@@ -2875,9 +3135,16 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 **Deferred to Update 1:** Black Duwende, Enhanced Endless Scaling, Additional Achievements, Steam Cloud Saves, Mac/Linux
 
-**Timeline:** 13 weeks
-**Target Launch:** Early March 2026
+**Timeline:** 14 weeks (includes Next Fest week)
+**Next Fest:** February 23 - March 2, 2026 (Demo live!)
+**Target Launch:** ~March 8, 2026 (Right after Next Fest)
 **Price:** $2.99-4.99
+
+**Marketing Strategy:**
+
+- Demo available during Steam Next Fest (massive visibility!)
+- Wishlist collection during Next Fest week
+- EA launch immediately after Next Fest while wishlists are hot
 
 **If successful:** Update 1 within 2 weeks to add deferred features
 **If not:** Valuable learning experience, minimal financial risk
@@ -2886,13 +3153,14 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 ---
 
-**Version:** 1.6  
+**Version:** 1.7  
 **Created:** December 2025  
 **Authors:** Josh & Ericka  
 **Cultural Consultant:** Ericka
 
 **Version History:**
 
+- v1.7: Steam Next Fest & Asset Strategy overhaul - ADDED: Steam Next Fest February 2026 strategy (demo live Feb 23 - Mar 2, EA launch ~Mar 8), 10-minute time-limited demo, asset pack outsourcing (UI, tileset, pickups bought; Ericka does characters/enemies only - reduces art from 36-46 hrs to 18-24 hrs), Steam setup moved to Week 1 (pay fee Day 1 for Jan 5 Next Fest registration deadline), Week 14 added for EA launch after Next Fest, Area2D for enemies (performance optimization), tr() localization prep, accessibility options (colorblind mode, reduced motion), analytics logging. Budget updated to $140-305.
 - v1.6: Content depth increase for stronger EA launch - MOVED TO EA: Golden Sarimanok (3rd character), Spiral Feathers (4th weapon), Magnetic Aura (4th passive). ADDED: Placeholder SFX in Weeks 2-3 for game feel, Damage numbers promoted to Must Have (Week 7), Enemy damage flash, Level-up juice, In-game bug report button. EA now ships with 3 characters, 4 enemies, 4 weapons, 4 passives = 11 base items with 55 upgrade choices. DEFERRED to Update 1: Black Duwende, Enhanced Endless Scaling, Additional Achievements, Steam Cloud Saves, Mac/Linux.
 - v1.5: Scope rebalance for EA launch - ADDED to EA: Simplified Endless Mode, Basic Controller Support, 5-8 Steam Achievements. DEFERRED to Update 1: Black Duwende (5th enemy), Golden Sarimanok (3rd character), Spiral Feathers (4th weapon), Magnetic Aura (4th passive), Enhanced Endless Scaling. EA now ships with 2 characters, 4 enemies, 3 weapons, 3 passives, Story + Endless Modes, controller support, and achievements. Enemy stat scaling replaces Black Duwende for late-game difficulty.
 - v1.4: Scope reduction for EA launch - deferred to Update 1: Golden Sarimanok (3rd character), Endless Mode, Spiral Feathers (4th weapon), Magnetic Aura (4th passive), Steam achievements, Controller support. EA now ships with 2 characters, 3 weapons, 3 passives, Story Mode only, keyboard only. Based on Vampire Survivors EA launch comparison showing simpler scope is viable.
@@ -2918,17 +3186,21 @@ This PRD defines a **30-minute action roguelite** that combines:
 │ STAGE: 1 (Bounded farm arena)                   │
 │ ACHIEVEMENTS: 5-8 Steam achievements            │
 │ CONTROLLER: Basic support included              │
-│ GAME FEEL: Damage numbers, placeholder SFX      │
+│ DEMO: 10-minute time-limited for Next Fest      │
 ├─────────────────────────────────────────────────┤
 │ PLATFORM: Windows (Mac/Linux post-launch)       │
 │ SPRITES: 32x32, 48x48 boss, 16x16 icons         │
-│ TIMELINE: 13 weeks (vertical slices)            │
-│ LAUNCH: First week of March 2026                │
-│ BABY DUE: March 21, 2026 (3 week buffer)        │
+│ ASSET PACKS: UI + Tileset (~$30-50)             │
+│ TIMELINE: 14 weeks (includes Next Fest)         │
+│ NEXT FEST: Feb 23 - Mar 2, 2026 (Demo live!)    │
+│ LAUNCH: ~March 8, 2026 (after Next Fest)        │
+│ BABY DUE: March 21, 2026 (~2 week buffer)       │
 │ PRICE: $2.99-4.99                               │
 ├─────────────────────────────────────────────────┤
-│ MINIMUM SHIPPABLE: Week 6                       │
-│ STEAM SETUP: Week 5 (parallel)                  │
-│ STORE PAGE: Week 6 (submit for review)          │
+│ STEAM SETUP: Week 1 (pay fee, verification)     │
+│ STORE PAGE: Week 4 (submit), Week 5 (live)      │
+│ NEXT FEST REG: Jan 5 deadline (Week 5)          │
+│ DEMO SUBMIT: Feb 9 deadline (Week 10)           │
+│ MINIMUM SHIPPABLE: Week 6 (MVP checkpoint)      │
 └─────────────────────────────────────────────────┘
 ```
