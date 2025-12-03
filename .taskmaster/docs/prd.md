@@ -1779,11 +1779,68 @@ At 10 hrs/week art = **2-2.5 weeks** of art (parallel to coding) - much more ach
 
 **Recommendation:** Do NOT use scaled pixel art for the main capsule—it usually looks amateur at Steam's display sizes. Options:
 
-1. **Commission illustration** (~$300-500 from Fiverr/ArtStation) - Professional, eye-catching
+1. **Commission illustration** (~$200-400 from Fiverr/ArtStation) - Professional, eye-catching - **RECOMMENDED**
 2. **Ericka creates high-res illustration** (10-15 hrs) - Custom, matches game vision
 3. **Last resort:** Composite of upscaled sprites with strong typography and effects
 
-**Timeline:** Week 8-9 (after core art is done, before demo submission)
+### Artist Sourcing Timeline
+
+| Week     | Action                                              | Time Investment |
+| -------- | --------------------------------------------------- | --------------- |
+| Week 4-5 | Browse artists, save 5-10 candidates                | 2-3 hours total |
+| Week 6   | Review portfolios, contact top 3, commission winner | 1-2 hours       |
+| Week 6-7 | Artist works (5-10 business days typical)           | -               |
+| Week 8   | Receive final art, request revisions if needed      | 30 min          |
+| Week 8   | Upload to Steam store page                          | 15 min          |
+
+### Where to Find Artists
+
+| Platform                 | Price Range | How to Search                                             |
+| ------------------------ | ----------- | --------------------------------------------------------- |
+| **Fiverr**               | $100-300    | Search "Steam capsule art" or "game key art illustration" |
+| **ArtStation**           | $200-500    | Browse "Games" category, filter by style                  |
+| **Twitter/X**            | $150-400    | Search #commissionsopen #gameart                          |
+| **r/gameDevClassifieds** | $100-300    | Post your brief with budget                               |
+| **r/HungryArtists**      | $80-250     | Post commission request                                   |
+
+### What to Look For in Portfolio
+
+- Previous game art or key art (not just character art)
+- Dynamic compositions with action/energy
+- Filipino or Southeast Asian cultural art experience (bonus)
+- Clean typography integration in existing work
+- Pixel art stylization OR painterly game art style
+
+### Commission Brief Template (Save for Week 6)
+
+```
+PROJECT: Steam Capsule Art for "Sarimanok Survivor"
+SIZE: 616x353 pixels (can work larger, will scale down)
+STYLE: Painterly/stylized (NOT pixel art)
+DEADLINE: 10 business days
+
+SUBJECT: The Sarimanok (legendary Filipino bird) in heroic pose,
+facing off against shadowy creatures (duwendes/aswang) at night.
+Moon or mystical light in background. Filipino folklore aesthetic.
+
+MUST INCLUDE:
+- Sarimanok as central focus (colorful, vibrant)
+- Night/dusk atmosphere
+- Space for game title text (top or bottom)
+- Action/energy feel (this is a survivor game)
+
+REFERENCE IMAGES: [Attach Sarimanok reference art + similar game capsules]
+
+BUDGET: $XXX (include 1 revision round)
+```
+
+### Backup Plan
+
+If commission falls through or quality is poor:
+
+1. Request full refund (Fiverr has buyer protection)
+2. Ericka creates simplified illustration (4-6 hours emergency sprint)
+3. Use high-quality composite: upscaled Sarimanok sprite + professional typography + gradient background (serviceable, not ideal)
 
 **Tip:** Look at successful survivor games on Steam for capsule art inspiration. Notice how few use raw pixel art.
 
@@ -1899,6 +1956,30 @@ func play_sfx(sound_name: String, pitch_variance: float = 0.1):
 | OpenGameArt       | Free      | Game-focused                       | Limited selection                  |
 
 **Recommendation:** Start with free sources (Pixabay, OpenGameArt). If nothing fits, commission from Fiverr with specific direction: "Filipino-inspired chiptune/pixel art game music, night survival theme, boss battle intensity"
+
+## Audio Sourcing Strategy (Do in Week 1-2!)
+
+### Sound Effects Pack (Buy Early - Don't Hunt Individual Sounds!)
+
+**Recommendation**: Purchase a cohesive SFX pack rather than hunting 20+ individual sounds. This saves HOURS of curation time.
+
+| Source                                                | Cost   | Contents                    | Pros                        |
+| ----------------------------------------------------- | ------ | --------------------------- | --------------------------- |
+| [Gamedev Market](https://www.gamedevmarket.net)       | $15-30 | Fantasy RPG SFX bundles     | Cohesive, game-ready        |
+| [Humble Bundle Audio](https://humblebundle.com)       | $15-25 | Periodic game audio bundles | Great value if timing works |
+| [Sonniss GDC Audio](https://sonniss.com/gameaudiogdc) | Free   | 30GB+ professional sounds   | Requires curation time      |
+
+**Action**: Browse and purchase a Fantasy/RPG SFX pack in Week 1. Having cohesive audio assets ready prevents the "hunting for sounds" time sink in Week 9.
+
+### Music Strategy
+
+1. **First choice**: Pixabay Music (free, no attribution)
+2. **Backup**: Fiverr commission ($50-150 for 4 tracks)
+3. **Browse NOW** - Finding the right vibe takes time. Don't wait until Week 9!
+
+### Pitch Randomization (Already specified in Weeks 2-3)
+
+The PRD correctly specifies pitch randomization for repetitive sounds. This is CRITICAL - without it, hearing the same "enemy hit" sound 10,000 times per run causes ear fatigue.
 
 ---
 
@@ -2076,6 +2157,26 @@ Save file location: `user://save_data.json`
   }
 }
 ```
+
+### Save File Safety
+
+**Always backup before writing** to prevent data loss from crashes or power failures:
+
+```gdscript
+func save_game():
+    # Backup existing save before overwriting
+    if FileAccess.file_exists("user://save_data.json"):
+        var backup_path = OS.get_user_data_dir() + "/save_data.backup.json"
+        var source_path = OS.get_user_data_dir() + "/save_data.json"
+        DirAccess.copy_absolute(source_path, backup_path)
+
+    # Then write new save...
+    var save_data = { ... }
+    var file = FileAccess.open("user://save_data.json", FileAccess.WRITE)
+    file.store_string(JSON.stringify(save_data))
+```
+
+**Why this matters**: If save write fails mid-operation (crash, power loss), the backup ensures the player doesn't lose ALL progress - just the most recent run.
 
 ## GameState Singleton
 
@@ -2271,6 +2372,21 @@ func migrate_save(data: Dictionary, from_version: int) -> Dictionary:
 - [ ] **Monitor verification status daily** - Follow up if no progress after 5 business days
 
 **Why this can't wait:** If verification stalls over the holidays (Dec 23 - Jan 1), you risk missing the Jan 5 deadline entirely. Starting today gives you 4+ weeks buffer.
+
+### Steam Verification Timeline (Detailed)
+
+| Day           | Action                        | Notes                             |
+| ------------- | ----------------------------- | --------------------------------- |
+| Day 1 (Today) | Pay $100 Steam Direct fee     | Creates Steamworks account        |
+| Day 1         | Submit identity verification  | Government ID required            |
+| Day 2-7       | Identity verification pending | Typically 2-5 business days       |
+| Day 7-14      | Submit bank/tax info          | Only available after ID verified  |
+| Day 14-28     | Bank/tax verification         | Can take 1-3 weeks                |
+| Day 28+       | 30-day waiting period starts  | Cannot release until this expires |
+
+**CRITICAL**: You cannot create a store page until verification completes.
+**Risk**: If verification stalls over holidays (Dec 23 - Jan 1), you risk missing Jan 5 Next Fest deadline.
+**Mitigation**: Start TODAY. Follow up with Steam Support if no progress after 5 business days.
 
 ---
 
@@ -2512,11 +2628,18 @@ At the end of Week 6, you have a SHIPPABLE game:
 
 ---
 
-## Week 7: Polish Pass 1 + Controller Polish
+## Week 7: Polish Pass 1 + Controller UX Polish
 
 **End State: "The game FEELS good and controller experience is polished"**
 
-> **Note:** Core controller input mapping was set up in Week 1 using `get_action_strength()`. This week focuses on controller UX polish (UI navigation, button prompts).
+> **IMPORTANT DISTINCTION:**
+>
+> - **Week 1**: Core controller INPUT was set up using `Input.get_action_strength()` - the game WORKS with controllers from Day 1
+> - **Week 7**: Controller UX POLISH - making the experience feel native:
+>   - UI navigation with D-pad/stick (menu navigation)
+>   - Dynamic button prompt icons (Xbox vs PlayStation vs keyboard icons)
+>   - Input device switching detection (prompts update when player switches from keyboard to controller mid-game)
+>   - Dead zone tuning and stick sensitivity adjustments
 
 Builds on Week 6, adds:
 
@@ -2696,16 +2819,17 @@ Adds:
 - [ ] Take 5-10 screenshots for store page
 - [ ] Upload screenshots to Steam page
 - [ ] Upload trailer to Steam page
-- [ ] **GodotSteam Integration (4-8 hrs first-time setup):**
-  - [ ] Download GodotSteam GDExtension from [godotsteam.com](https://godotsteam.com/)
-  - [ ] Follow setup guide for Godot 4.x
-  - [ ] Initialize Steam API in autoload
+- [ ] **GodotSteam Integration (2-4 hrs - easier than expected!):**
+  - [ ] Install GodotSteam GDExtension from Godot Asset Library (2-3 min)
+  - [ ] Create Steam autoload with initialization code (15-30 min)
   - [ ] Test Steam overlay appears in-game (Shift+Tab)
   - [ ] Verify Steam username displays correctly
-- [ ] Implement Steam achievements (5-8 total)
+  - [ ] **IMPORTANT**: Use Compatibility rendering mode (Forward+ breaks Steam overlay)
+  - [ ] **IMPORTANT**: Set `SteamAppId` environment variable BEFORE `Steam.steamInit()`
+- [ ] Implement Steam achievements (5-8 total) - 1-2 hrs
 - [ ] Hook achievement triggers to gameplay events
-- [ ] Test achievement unlocks via Steam API
-- [ ] **Fallback if GodotSteam problematic:** Ship without achievements, patch in Week 1 post-launch
+- [ ] Test achievement unlocks via Steam API - 30-60 min
+- [ ] **Fallback if issues occur:** Ship WITHOUT achievements on Day 1, add in Day 1-3 hotfix. Achievements are not launch blockers for EA.
 
 **Steam Achievements (EA):**
 
@@ -3059,6 +3183,19 @@ Steam Next Fest is a week-long event where players try demos of upcoming games. 
 
 This is the minimum threshold for meaningful algorithmic visibility during Next Fest.
 
+### Wishlist Target Reality Check
+
+**Context:**
+
+- This is an **ASPIRATIONAL goal**, not a launch blocker
+- Many successful EA games launch with 2,000-5,000 wishlists
+- Filipino community is underserved = potential viral spread
+- Cultural hook may outperform generic survivor games
+
+**If you hit 3,000-5,000 wishlists**: Launch anyway. The low price point ($2.99-4.99) makes impulse purchases viable regardless of wishlist count.
+
+**Do NOT delay launch to hit wishlist targets.** The primary goal is shipping before the baby arrives, not hitting a viral metric.
+
 ## Timeline
 
 | Week              | Milestone            | Action                       |
@@ -3166,6 +3303,19 @@ When timer hits 10:00:
 - Creates intrigue ("what happens at dawn?")
 - Direct wishlist CTA button
 - Shows price (impulse-buy territory)
+
+### Demo End Screen Enhancement (Optional Polish)
+
+When timer hits 10:00, add a brief "oh no" moment for stronger emotional hook:
+
+1. Screen darkens slightly (0.5s fade)
+2. Distant Manananggal screech plays (boss preview without showing boss)
+3. Text fades in: "The night is far from over..."
+4. Pause 2 seconds for tension
+5. "Survive to dawn to discover the Sarimanok's true power."
+6. [WISHLIST NOW] button appears
+
+This teases the boss encounter without spoiling it, creating stronger desire to play the full game.
 
 ## Technical Implementation
 
