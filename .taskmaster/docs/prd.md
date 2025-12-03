@@ -2,7 +2,7 @@
 
 ## Product Requirements Document - MVP (Early Access)
 
-**Version:** 2.2  
+**Version:** 2.3  
 **Platform:** Windows via Steam Early Access (Mac/Linux in future update)  
 **Engine:** Godot 4.x  
 **Art Style:** Top-down pixel art (32x32 sprites, 48x48 boss)  
@@ -1981,6 +1981,19 @@ func play_sfx(sound_name: String, pitch_variance: float = 0.1):
 
 The PRD correctly specifies pitch randomization for repetitive sounds. This is CRITICAL - without it, hearing the same "enemy hit" sound 10,000 times per run causes ear fatigue.
 
+### Filipino Audio Identity (Don't Use Generic Sounds!)
+
+Your visual identity is Filipino. Your audio identity should match. These sounds need special attention:
+
+| Sound                     | Generic Trap           | Filipino Solution                                                                 |
+| ------------------------- | ---------------------- | --------------------------------------------------------------------------------- |
+| **Sarimanok crow**        | Generic rooster        | Research actual Filipino rooster sounds OR commission a unique mystical bird cry  |
+| **Night ambience**        | Generic crickets/frogs | Add "tiktik" clicking sound (aswang presence indicator from folklore)             |
+| **Manananggal screech**   | Generic monster roar   | Create something unique and memorable - this is your boss's audio signature       |
+| **Provincial atmosphere** | Generic forest         | Consider adding distant karaoke/jeepney sounds for authenticity (optional polish) |
+
+**Action**: When sourcing/creating audio in Week 9, prioritize these unique sounds. They differentiate your game from generic survivor clones.
+
 ---
 
 # Technical Specifications
@@ -2411,6 +2424,7 @@ What's playable at end of week:
 - [ ] **STEAM ART:** Commission/Create Placeholder Capsule Art (Critical for Store Page launch) - Budget $50-100
 - [ ] **ASSETS:** Buy UI asset pack (buttons, panels, HP/XP bars) - ~$10-15
 - [ ] **ASSETS:** Buy tileset asset pack (grass, dirt, trees, fences) - ~$10-20
+- [ ] **AUDIO:** Buy Fantasy/RPG SFX pack (~$15-30) - Don't hunt individual sounds!
 
 **Tasks:**
 
@@ -2432,6 +2446,7 @@ What's playable at end of week:
 - [ ] Player takes damage from enemy contact
 - [ ] Player dies at 0 HP, shows game over
 - [ ] **Use `tr()` function for all UI text strings (localization prep - costs nothing now)**
+- [ ] **Create `localization/translations.csv` with initial UI strings (30 min - enables community translations later)**
 
 **Integration Test:** Can you survive for 60 seconds dodging and pecking?
 
@@ -2783,6 +2798,8 @@ Adds:
 - [ ] Manananggal roar on spawn
 - [ ] Audio manager respects volume settings
 - [ ] Polish particle effects
+- [ ] **Create Discord server with #bug-reports, #feedback, and #general channels (community hub for Next Fest)**
+- [ ] **Draft trailer storyboard (5-7 key shots showing: Sarimanok hero, enemy swarms, weapon variety, Filipino creatures, victory dawn)**
 
 **Integration Test:** Play full run with eyes closed - can you tell what's happening by sound?
 
@@ -2838,6 +2855,8 @@ Adds:
 - [ ] Hook achievement triggers to gameplay events
 - [ ] Test achievement unlocks via Steam API - 30-60 min
 - [ ] **Fallback if issues occur:** Ship WITHOUT achievements on Day 1, add in Day 1-3 hotfix. Achievements are not launch blockers for EA.
+- [ ] **Add basic analytics logging to local file (death location, weapon picks, run length, time survived) - CRITICAL for Update 1 balance data**
+- [ ] **Add error logging/crash reporting to file for player bug reports**
 
 **Steam Achievements (EA):**
 
@@ -2886,11 +2905,12 @@ Focus on:
 - [ ] Send build to 3-5 friends/family for feedback
 - [ ] Document and address feedback
 - [ ] Finalize trailer (add music, titles)
-- [ ] **Add basic analytics logging to local file (death location, weapon picks, run length, time survived)**
-- [ ] **Add error logging/crash reporting to file for player bug reports**
 - [ ] **Wrap critical systems in error handling**
+- [ ] **Test on Steam Deck (if available) - verify controls, text readability at 1280x720, and performance**
 
 **Integration Test:** Can a first-time player beat Story Mode in 3-5 attempts?
+
+> **Note:** Analytics logging moved to Week 10 - this data is CRITICAL for Update 1 balance decisions.
 
 ---
 
@@ -3588,6 +3608,7 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 **Version History:**
 
+- v2.3: Gap Analysis Additions - ADDED: Localization CSV setup to Week 1 (enables community translations), SFX pack purchase to Week 1 Critical Tasks, Discord server setup to Week 9, Trailer storyboard planning to Week 9, Analytics logging moved from Week 11 to Week 10 (critical for Update 1 balance), Steam Deck testing to Week 11, Filipino Audio Identity section (Sarimanok crow, tiktik sounds, Manananggal screech - don't use generic sounds).
 - v2.2: Critical Production Fixes - Explicit "Pay Steam Fee Today" step, moved Controller Input Map to Week 1 (free support), added Capsule Art commission to Week 1 to unblock Store Page.
 - v2.1: Gap fixes from scope analysis - ADDED: Audio bus setup to Week 1 tasks (5 min, prevents headaches), Window mode toggle (Fullscreen/Windowed/Borderless) to Week 7 Settings, Resolution dropdown to Week 7 Settings, Impact frames/hitstop to Week 7 juice, XP gem magnetism visual feedback to Week 7. UPDATED: Week 4 store page deadline explicit (submit by Dec 20, live by Dec 28-30), Quick Reference Card store page timing.
 - v2.0 FINAL: Production readiness & tracking sections - ADDED: URGENT "Before Week 1" Steam setup callout (verification takes 1-4 weeks, must start TODAY for Jan 5 deadline), Steam Marketing Art section (capsule art requirements for Next Fest visibility), Wishlist Building Strategy (7,000+ target, Filipino community channels, content calendar), 16x16 asset pack fallback with Lospec upscaler workflow, Manananggal static sprite fallback. UPDATED: Week 7 tutorial redesigned as "level design teaching" not overlays, added input device switching tasks. Week 10 added GodotSteam integration tasks. Quick Reference Card updated with new tracking items. Architecture is LOCKED - ready to start coding.
