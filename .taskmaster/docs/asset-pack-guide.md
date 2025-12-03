@@ -6,12 +6,12 @@
 
 ## What You Need
 
-| Asset Type | Budget | Priority |
-|------------|--------|----------|
-| UI Kit (buttons, panels, HP/XP bars) | $10-15 | HIGH |
-| Tileset (grass, dirt, trees, fences) | $10-20 | HIGH |
-| SFX Pack (fantasy/RPG sounds) | $15-30 | MEDIUM |
-| Pickups (gems, coins) | Often included in UI kit | LOW |
+| Asset Type                           | Budget                   | Priority |
+| ------------------------------------ | ------------------------ | -------- |
+| UI Kit (buttons, panels, HP/XP bars) | $10-15                   | HIGH     |
+| Tileset (grass, dirt, trees, fences) | $10-20                   | HIGH     |
+| SFX Pack (fantasy/RPG sounds)        | $15-30                   | MEDIUM   |
+| Pickups (gems, coins)                | Often included in UI kit | LOW      |
 
 **Total Budget: ~$30-50**
 
@@ -22,11 +22,13 @@
 ### UI Asset Packs
 
 **itch.io** (Best for pixel art indie games)
+
 - Search: https://itch.io/game-assets/tag-pixel-art/tag-ui
 - Look for: "Fantasy UI", "RPG UI Kit", "Pixel UI"
 - Price range: $5-20
 
 **Recommended packs to check:**
+
 - "Pixel Art GUI Elements" type packs
 - Look for: HP bars, XP bars, buttons, panels, frames
 - Ensure it matches 16x16 or 32x32 pixel scale
@@ -34,11 +36,13 @@
 ### Tileset Asset Packs
 
 **itch.io**
+
 - Search: https://itch.io/game-assets/tag-tileset/tag-pixel-art
 - Look for: "Farm tileset", "Grass tileset", "Fantasy outdoor"
 - Ensure 32x32 tile size (matches your sprites)
 
 **Kenney.nl** (FREE, high quality)
+
 - https://kenney.nl/assets
 - Look for: "Roguelike/RPG Pack", "Tiny Town", "Pixel Platformer"
 - All CC0 license (free to use commercially)
@@ -46,15 +50,18 @@
 ### SFX Packs
 
 **Gamedev Market**
+
 - https://www.gamedevmarket.net/category/audio/
 - Search: "Fantasy SFX", "RPG Sound Effects"
 - Price: $15-30 for comprehensive packs
 
 **Humble Bundle** (check for current audio bundles)
+
 - https://www.humblebundle.com/
 - Great value if timing works
 
 **Free Options:**
+
 - Sonniss GDC Audio: https://sonniss.com/gameaudiogdc (30GB+ free sounds)
 - Freesound.org (requires curation time)
 
@@ -63,6 +70,7 @@
 ## What to Look For
 
 ### UI Pack Checklist
+
 - [ ] HP bar (filled/empty states)
 - [ ] XP bar (filled/empty states)
 - [ ] Button sprites (normal, hover, pressed)
@@ -71,6 +79,7 @@
 - [ ] Commercial license included
 
 ### Tileset Checklist
+
 - [ ] Grass variations (2-3 types)
 - [ ] Dirt/path tiles
 - [ ] Fence pieces (left, middle, right, post)
@@ -80,6 +89,7 @@
 - [ ] Commercial license included
 
 ### SFX Pack Checklist
+
 - [ ] Hit/impact sounds (varied)
 - [ ] Pickup sounds (coins, gems)
 - [ ] UI click sounds
@@ -129,5 +139,4 @@ Godot will automatically import PNG files. Configure import settings as needed (
 
 ---
 
-*Guide created: December 2025*
-
+_Guide created: December 2025_

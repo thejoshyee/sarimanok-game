@@ -117,6 +117,5 @@ Created by a Filipino-American husband and wife team, Sarimanok Survivor celebra
 
 ---
 
-*Draft created: December 2025*
-*Update with actual screenshots and trailer when available*
-
+_Draft created: December 2025_
+_Update with actual screenshots and trailer when available_
