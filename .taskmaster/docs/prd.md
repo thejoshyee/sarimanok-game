@@ -2,7 +2,7 @@
 
 ## Product Requirements Document - MVP (Early Access)
 
-**Version:** 1.4  
+**Version:** 1.5  
 **Platform:** Windows via Steam Early Access (Mac/Linux in future update)  
 **Engine:** Godot 4.x  
 **Art Style:** Top-down pixel art (32x32 sprites, 48x48 boss)  
@@ -49,7 +49,7 @@ The game combines:
 | Genre proven    | Vampire Survivors: 5M+ copies, countless successful clones  |
 | Solo dev viable | Void Miner: 1 dev, 6 months, $40k+ revenue                  |
 | Niche untapped  | Zero Filipino folklore games in survivor genre              |
-| Scope minimal   | 2 characters, 5 enemies, 3 weapons = achievable in 3 months |
+| Scope minimal   | 2 characters, 4 enemies, 3 weapons = achievable in 3 months |
 | Cultural hook   | Filipino diaspora is large and underserved                  |
 
 ## Target Audience
@@ -319,15 +319,16 @@ Enemies spawn at screen edges, walk toward the player, and deal damage on contac
 **Why It's Important:**
 Enemies ARE the game. Their behavior, variety, and spawn rates create the challenge.
 
-### Enemy Roster (5 Total)
+### Enemy Roster (4 Total for EA)
 
 | Enemy                  | HP  | Damage | Speed | Spawns At | Behavior                   |
 | ---------------------- | --- | ------ | ----- | --------- | -------------------------- |
 | **Green Duwende**      | 10  | 5      | 80    | 0:00+     | Walks toward player        |
 | **Red Duwende**        | 25  | 10     | 100   | 8:00+     | Faster, stronger           |
-| **Black Duwende**      | 50  | 15     | 120   | 16:00+    | Tanky, fast                |
 | **Santelmo**           | 15  | 8      | 60    | 10:00+    | Floats, shoots fireballs   |
 | **Manananggal (Boss)** | 500 | 25     | 90    | 20:00     | Boss, flying torso vampire |
+
+**Note:** Black Duwende deferred to Update 1.
 
 ### Duwende Color Variants (Cultural Note)
 
@@ -335,9 +336,35 @@ Ericka confirmed: In Filipino folklore, duwendes have different ranks/types indi
 
 - **Green:** Common, mischievous
 - **Red:** More aggressive, territorial
-- **Black:** Most powerful, dangerous
+- **Black:** Most powerful, dangerous (deferred to Update 1)
 
 This is culturally authentic AND saves art time (recolor same sprite).
+
+### Difficulty Scaling (Replaces Black Duwende for Late-Game)
+
+Instead of a third Duwende variant at 16:00+, enemy stats scale over time to create late-game challenge:
+
+```gdscript
+# Enemy stat scaling - add to spawn manager
+func get_scaled_hp(base_hp: int, elapsed_minutes: float) -> int:
+    # +5% HP per 5 minutes
+    var scale = 1.0 + (elapsed_minutes / 5.0) * 0.05
+    return int(base_hp * scale)
+
+func get_scaled_damage(base_damage: int, elapsed_minutes: float) -> int:
+    # +3% damage per 5 minutes
+    var scale = 1.0 + (elapsed_minutes / 5.0) * 0.03
+    return int(base_damage * scale)
+```
+
+| Time  | Green HP | Green Dmg | Red HP | Red Dmg | Santelmo HP |
+| ----- | -------- | --------- | ------ | ------- | ----------- |
+| 0:00  | 10       | 5         | -      | -       | -           |
+| 10:00 | 11       | 5         | 27     | 10      | 16          |
+| 20:00 | 12       | 6         | 30     | 11      | 18          |
+| 30:00 | 13       | 6         | 32     | 12      | 19          |
+
+This creates escalating challenge without requiring extra enemy art.
 
 ### Enemy Behaviors
 
@@ -420,14 +447,15 @@ The Manananggal is a type of Aswang from Filipino folklore. It's a self-segmenti
 
 **Spawn Timeline:**
 
-| Time        | Enemies Spawning        | Spawn Rate          |
-| ----------- | ----------------------- | ------------------- |
-| 0:00-8:00   | Green Duwende           | 1 per 2s → 1 per 1s |
-| 8:00-10:00  | Green + Red Duwende     | 1 per 1s            |
-| 10:00-16:00 | All Duwendes + Santelmo | 1 per 0.8s          |
-| 16:00-20:00 | All enemies             | 1 per 0.5s          |
-| 20:00       | **MANANANGGAL SPAWNS**  | One-time            |
-| 20:00-30:00 | All + Manananggal       | 1 per 0.3s (chaos!) |
+| Time        | Enemies Spawning               | Spawn Rate          |
+| ----------- | ------------------------------ | ------------------- |
+| 0:00-8:00   | Green Duwende                  | 1 per 2s → 1 per 1s |
+| 8:00-10:00  | Green + Red Duwende            | 1 per 1s            |
+| 10:00-20:00 | Green + Red Duwende + Santelmo | 1 per 0.8s → 0.5s   |
+| 20:00       | **MANANANGGAL SPAWNS**         | One-time            |
+| 20:00-30:00 | All enemies + Manananggal      | 1 per 0.3s (chaos!) |
+
+**Note:** Difficulty scaling (HP/damage increase over time) replaces Black Duwende for late-game challenge.
 
 **Spawn Rate Scaling:**
 
@@ -461,9 +489,10 @@ This creates smooth difficulty progression rather than hard jumps at time thresh
 | ------------- | ------- | --------- |
 | Green Duwende | 1       | 1         |
 | Red Duwende   | 3       | 2         |
-| Black Duwende | 5       | 5         |
 | Santelmo      | 4       | 3         |
 | Manananggal   | 50      | 100       |
+
+**Note:** Black Duwende (5 XP, 5 Gold) will be added in Update 1.
 
 **Technical Requirements:**
 
@@ -475,15 +504,16 @@ This creates smooth difficulty progression rather than hard jumps at time thresh
 
 **Definition of Done:**
 
-- [ ] All 5 enemy types implemented
+- [ ] All 4 enemy types implemented (Green Duwende, Red Duwende, Santelmo, Manananggal)
 - [ ] Enemies spawn at screen edges
 - [ ] Enemies walk toward player
 - [ ] Enemies damage player on contact
 - [ ] Enemies die when HP reaches 0
 - [ ] Enemies drop XP + Gold on death
 - [ ] Spawn timeline works correctly
-- [ ] Aswang boss spawns at 20:00
+- [ ] Manananggal boss spawns at 20:00
 - [ ] Spawn rate increases over time
+- [ ] Enemy stat scaling works (HP/damage increase over time)
 - [ ] Game handles 100+ enemies without lag
 - [ ] No console errors
 
@@ -961,12 +991,12 @@ Show results screen (same as win, different header)
 
 ---
 
-## Feature 9: Endless Mode (DEFERRED TO UPDATE 1)
+## Feature 9: Endless Mode (SIMPLIFIED FOR EA)
 
-> **Note:** This feature is deferred to Update 1 (post-launch). EA ships with Story Mode only. This section is kept for reference when implementing Update 1.
+> **Note:** Simplified Endless Mode is included in EA. Same gameplay as Story Mode but with no 30:00 win condition - just survive as long as possible. Advanced scaling deferred to Update 1.
 
 **What It Does:**
-Unlocks after beating Story Mode. No time limit—survive as long as possible. Enemies keep spawning faster and stronger.
+Unlocks after beating Story Mode. No time limit—survive as long as possible. Uses same difficulty scaling as Story Mode (spawn rate + stat scaling already implemented).
 
 **Why It's Important:**
 Replayability after beating Story Mode. Leaderboard appeal.
@@ -981,15 +1011,17 @@ Beat Story Mode (survive to 30:00)
 Endless Mode button appears on main menu
 ```
 
-### Endless Mode Rules
+### Endless Mode Rules (EA - Simplified)
 
 - Timer counts UP forever (no 30:00 win)
-- Enemy spawn rate keeps increasing
-- Enemy HP scales up over time (+5% per minute after 30:00)
+- Same spawn rate scaling as Story Mode (continues past 30:00)
+- Same HP/damage scaling as Story Mode (continues past 30:00)
 - You WILL eventually die
 - Goal: Survive as long as possible
 
-### Endless Mode Scaling (After 30:00)
+### Endless Mode Scaling (Update 1 - Enhanced)
+
+Additional scaling after 30:00 will be added in Update 1:
 
 | Time   | Spawn Rate  | Enemy HP |
 | ------ | ----------- | -------- |
@@ -1006,12 +1038,12 @@ Endless Mode button appears on main menu
 | Story Mode   | High Score    |
 | Endless Mode | Time Survived |
 
-**Definition of Done:**
+**Definition of Done (EA):**
 
 - [ ] Endless Mode locked initially
 - [ ] Unlocks after Story Mode victory
 - [ ] No win condition (play until death)
-- [ ] Enemies scale after 30:00
+- [ ] Same scaling as Story Mode (continues past 30:00)
 - [ ] Best time saved
 - [ ] No console errors
 
@@ -1031,10 +1063,11 @@ Gives reason to replay even after winning.
 | ----------------------- | ------ |
 | Kill Green Duwende      | 10     |
 | Kill Red Duwende        | 25     |
-| Kill Black Duwende      | 50     |
 | Kill Santelmo           | 40     |
-| Kill Aswang             | 500    |
+| Kill Manananggal        | 500    |
 | Survive to dawn (bonus) | 1,000  |
+
+**Note:** Black Duwende (50 points) will be added in Update 1.
 
 ### Display
 
@@ -1162,7 +1195,6 @@ All placeholders are simple colored rectangles matching final sprite sizes:
 | Sarimanok (Golden)  | ColorRect            | Gold               | 32x32      |
 | Green Duwende       | ColorRect            | Green              | 32x32      |
 | Red Duwende         | ColorRect            | Red                | 32x32      |
-| Black Duwende       | ColorRect            | Black              | 32x32      |
 | Santelmo            | ColorRect            | Orange             | 32x32      |
 | Manananggal         | ColorRect            | Dark red           | 48x48      |
 | XP Gem              | ColorRect            | Blue               | 16x16      |
@@ -1194,10 +1226,8 @@ Week 8+: Polish together       Week 8+: Rest before baby / polish if able
 /art/
 ├── sarimanok_classic.png (32x32, 2 frames horizontal)
 ├── sarimanok_shadow.png
-├── sarimanok_golden.png
 ├── duwende_green.png
 ├── duwende_red.png
-├── duwende_black.png
 ├── santelmo.png
 ├── manananggal.png (48x48, 4 frames)
 ├── tileset_farm.png (256x128, all tiles in grid)
@@ -1208,6 +1238,10 @@ Week 8+: Polish together       Week 8+: Rest before baby / polish if able
 └── ui/
     ├── hp_bar.png
     └── ...
+
+# Update 1 will add:
+# ├── sarimanok_golden.png
+# ├── duwende_black.png
 ```
 
 **Step 2: Josh imports to Godot**
@@ -1278,12 +1312,14 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 
 **Art Checkpoints (Accelerated):**
 
-| Week   | Required Art                      | Action if Not Ready                     |
-| ------ | --------------------------------- | --------------------------------------- |
-| Week 4 | Sarimanok (all 3) + Green Duwende | Josh starts backup art immediately      |
-| Week 5 | Red/Black Duwende + Santelmo      | Use recolors of Green Duwende           |
-| Week 6 | Manananggal + All Icons           | Use larger placeholder for boss         |
-| Week 7 | Tileset + UI (nice-to-have)       | Use placeholder tiles, default UI theme |
+| Week   | Required Art                     | Action if Not Ready                     |
+| ------ | -------------------------------- | --------------------------------------- |
+| Week 4 | Sarimanok (both) + Green Duwende | Josh starts backup art immediately      |
+| Week 5 | Red Duwende + Santelmo           | Use recolors of Green Duwende           |
+| Week 6 | Manananggal + All Icons          | Use larger placeholder for boss         |
+| Week 7 | Tileset + UI (nice-to-have)      | Use placeholder tiles, default UI theme |
+
+**Note:** Black Duwende art deferred to Update 1.
 
 **Why Week 6 deadline:** Baby due March 21. Completing essential art by Week 6 (mid-January) gives 8+ weeks buffer before due date. Tileset and UI polish can happen in Weeks 7-8 if Ericka is able, but are NOT blockers.
 
@@ -1318,17 +1354,17 @@ Given that Ericka is pregnant with baby due March 21, 2026, there is risk of art
 
 **Note:** Classic Sarimanok requires more time due to elaborate, colorful design. Keep details minimal at 32x32 but capture the iconic silhouette (decorative tail, distinctive head crest). Reference traditional Maranao art for color palette. Shadow and Golden variants are recolors with adjusted palettes.
 
-### Enemies (5)
+### Enemies (4 for EA, 1 for Update 1)
 
-| Asset            | Size  | Frames | Est. Time        |
-| ---------------- | ----- | ------ | ---------------- |
-| Green Duwende    | 32x32 | 2      | 2-3 hrs          |
-| Red Duwende      | 32x32 | 2      | 20 min (recolor) |
-| Black Duwende    | 32x32 | 2      | 20 min (recolor) |
-| Santelmo         | 32x32 | 2      | 2-3 hrs          |
-| Manananggal Boss | 48x48 | 4      | 5-7 hrs          |
+| Asset            | Size  | Frames | Est. Time        | Priority |
+| ---------------- | ----- | ------ | ---------------- | -------- |
+| Green Duwende    | 32x32 | 2      | 2-3 hrs          | EA       |
+| Red Duwende      | 32x32 | 2      | 20 min (recolor) | EA       |
+| Santelmo         | 32x32 | 2      | 2-3 hrs          | EA       |
+| Manananggal Boss | 48x48 | 4      | 5-7 hrs          | EA       |
+| Black Duwende    | 32x32 | 2      | 20 min (recolor) | Update 1 |
 
-**Total enemy time: ~10-14 hrs**
+**Total EA enemy time: ~9.5-13.5 hrs**
 
 **Note:** Manananggal is 48x48 to emphasize boss status. Flying torso with bat-like wings, grotesque but readable silhouette.
 
@@ -1533,19 +1569,19 @@ camera.position_smoothing_enabled = true
 
 ## Total Art Summary
 
-| Category              | Time          |
-| --------------------- | ------------- |
-| Player (3 variants)   | 5-6 hrs       |
-| Enemies               | 10-14 hrs     |
-| Weapon icons          | 2 hrs         |
-| Weapon effects        | 2.5-3.5 hrs   |
-| Passive icons         | 2 hrs         |
-| Pickups               | 1 hr          |
-| Environment (tileset) | 5-8 hrs       |
-| UI                    | 9 hrs         |
-| **TOTAL**             | **36-46 hrs** |
+| Category              | EA Time       | Update 1        |
+| --------------------- | ------------- | --------------- |
+| Player (2 variants)   | 4-5 hrs       | +1 hr (Golden)  |
+| Enemies (4 for EA)    | 9.5-13.5 hrs  | +20 min (Black) |
+| Weapon icons          | 1.5 hrs       | +30 min         |
+| Weapon effects        | 2.5-3.5 hrs   | —               |
+| Passive icons         | 1.5 hrs       | +30 min         |
+| Pickups               | 1 hr          | —               |
+| Environment (tileset) | 5-8 hrs       | —               |
+| UI                    | 9 hrs         | —               |
+| **EA TOTAL**          | **34-44 hrs** |                 |
 
-At 10 hrs/week art = **4-5 weeks** of art (parallel to coding)
+At 10 hrs/week art = **3.5-4.5 weeks** of art (parallel to coding)
 
 ---
 
@@ -2017,7 +2053,7 @@ Builds on Week 1, adds:
 - Choices: Peck +1, Wing Slap (new), Iron Beak (new)
 - Wing Slap weapon works (AOE circle)
 - Iron Beak passive increases damage
-- Red and Black Duwendes spawn (recolors, higher stats)
+- Red Duwende spawns (recolor, higher stats)
 - Timer shows on screen (counts up)
 
 **Tasks:**
@@ -2031,8 +2067,8 @@ Builds on Week 1, adds:
 - [ ] Wing Slap weapon (AOE circle around player)
 - [ ] Iron Beak passive (damage boost)
 - [ ] Add Red Duwende (recolor, different stats)
-- [ ] Add Black Duwende (recolor, different stats)
 - [ ] Timer displays on screen
+- [ ] Enemy stat scaling (HP/damage increase over time)
 
 **Integration Test:** Can you reach level 10 with 2 weapons + 1 passive?
 
@@ -2128,15 +2164,16 @@ Builds on Week 4, adds:
 
 ---
 
-## Week 6: Character Select & Polish
+## Week 6: Character Select & Endless Mode
 
-**End State: "I can pick characters and the game feels complete"**
+**End State: "I can pick characters and play Endless Mode"**
 
 Builds on Week 5, adds:
 
 - Character select screen (2 Sarimanoks with different stats)
 - Shadow Sarimanok unlocks at 15:00 survived (Story Mode)
 - High score tracking for Story Mode
+- Simplified Endless Mode (unlocks after beating Story Mode)
 
 **PARALLEL TASK: Submit Steam store page for review (verification should be done by now)**
 
@@ -2148,17 +2185,20 @@ Builds on Week 5, adds:
 - [ ] Lock/unlock display with requirements shown
 - [ ] Shadow unlocks: survive 15:00 in Story Mode (single run)
 - [ ] High score tracking for Story Mode
+- [ ] Simplified Endless Mode (disable 30:00 win condition, keep everything else)
+- [ ] Endless Mode unlocks after beating Story Mode
+- [ ] Endless Mode best time tracking
 - [ ] **STEAM:** Submit store page for review
 
-**Integration Test:** Survive 15:00, unlock Shadow, play as Shadow and beat Story Mode
+**Integration Test:** Survive 15:00, unlock Shadow, beat Story Mode, unlock and play Endless Mode
 
 **MINIMUM VIABLE PRODUCT CHECKPOINT:**
 
 ```
 At the end of Week 6, you have a SHIPPABLE game:
 - Complete survivor game with core loop
-- 2 characters, 5 enemies, 3 weapons, 3 passives
-- Story Mode (Endless deferred to Update 1)
+- 2 characters, 4 enemies, 3 weapons, 3 passives
+- Story Mode + Endless Mode
 - Shop progression
 - Save system
 - This is SHIPPABLE as Early Access!
@@ -2166,9 +2206,9 @@ At the end of Week 6, you have a SHIPPABLE game:
 
 ---
 
-## Week 7: Polish Pass 1
+## Week 7: Polish Pass 1 + Controller
 
-**End State: "The game FEELS good"**
+**End State: "The game FEELS good and works with controller"**
 
 Builds on Week 6, adds:
 
@@ -2178,8 +2218,7 @@ Builds on Week 6, adds:
 - Invincibility flash when damaged
 - Enemy death particles
 - Pickup magnet visual
-
-**Note:** Controller support deferred to Update 1. Keyboard works fine for EA.
+- Basic controller support (movement + UI navigation)
 
 **Tasks:**
 
@@ -2197,8 +2236,11 @@ Builds on Week 6, adds:
 - [ ] Flash effect when player takes damage
 - [ ] Particle effect on enemy death
 - [ ] Visual feedback for pickup magnet range
+- [ ] Basic controller support (input mapping for gamepad)
+- [ ] Controller UI navigation (D-pad/stick for menus)
+- [ ] Controller button prompts (show controller icons if controller detected)
 
-**Integration Test:** Play entire run, adjust volume mid-game, verify tutorials don't repeat
+**Integration Test:** Play entire run with controller, adjust volume mid-game, verify tutorials don't repeat
 
 ---
 
@@ -2209,7 +2251,7 @@ Builds on Week 6, adds:
 This week focuses on swapping placeholders for real sprites:
 
 - Import Sarimanok sprites (both variants)
-- Import Duwende sprites (all 3 colors)
+- Import Duwende sprites (Green + Red)
 - Import Santelmo sprite
 - Import Manananggal sprite
 - Import tileset, paint arena
@@ -2223,7 +2265,6 @@ This week focuses on swapping placeholders for real sprites:
 - [ ] Import and set up Sarimanok Shadow sprite
 - [ ] Import and set up Green Duwende sprite
 - [ ] Import and set up Red Duwende sprite
-- [ ] Import and set up Black Duwende sprite
 - [ ] Import and set up Santelmo sprite
 - [ ] Import and set up Manananggal boss sprite
 - [ ] Import tileset PNG
@@ -2235,6 +2276,8 @@ This week focuses on swapping placeholders for real sprites:
 - [ ] Import Gold coin sprite
 - [ ] Adjust hitboxes if sprite shapes differ from placeholders
 - [ ] Test all animations work correctly
+
+**Note:** Black Duwende sprite deferred to Update 1.
 
 **Fallback:** If art not ready, continue with refined placeholders. Game is still SHIPPABLE.
 
@@ -2286,9 +2329,9 @@ Adds:
 
 ---
 
-## Week 10: Steam Build & Marketing
+## Week 10: Steam Build, Achievements & Marketing
 
-**End State: "Ready for Steam"**
+**End State: "Ready for Steam with achievements"**
 
 Adds:
 
@@ -2296,8 +2339,7 @@ Adds:
 - Test on different Windows machines if possible
 - Record trailer footage
 - Take screenshots
-
-**Note:** Steam achievements deferred to Update 1. Focus on core game stability.
+- Steam achievements (5-8 for EA)
 
 **Tasks:**
 
@@ -2307,8 +2349,24 @@ Adds:
 - [ ] Take 5-10 screenshots for store page
 - [ ] Upload screenshots to Steam page
 - [ ] Upload trailer to Steam page
+- [ ] Implement Steam achievements (5-8 total)
+- [ ] Hook achievement triggers to gameplay events
+- [ ] Test achievement unlocks
 
-**Integration Test:** Build runs standalone, no crashes in 30-minute run
+**Steam Achievements (EA):**
+
+| Achievement     | Condition                                            | Type        |
+| --------------- | ---------------------------------------------------- | ----------- |
+| First Dawn      | Beat Story Mode                                      | Progression |
+| Night Owl       | Survive 15:00 in Story Mode                          | Progression |
+| Shadow Unlocked | Unlock Shadow Sarimanok                              | Unlock      |
+| Century         | Kill 100 enemies in one run                          | Combat      |
+| Maxed Out       | Get any weapon to Level 5                            | Build       |
+| Shopaholic      | Buy 10 shop upgrades total                           | Meta        |
+| Perfectionist   | Beat Story Mode without taking damage in final 5 min | Challenge   |
+| Endless Night   | Survive 45:00 in Endless Mode                        | Endurance   |
+
+**Integration Test:** Build runs standalone, no crashes in 30-minute run, achievements trigger correctly
 
 ---
 
@@ -2431,11 +2489,11 @@ Focus on:
 
 - [ ] Green Duwende spawns and walks toward player
 - [ ] Red Duwende is stronger than Green
-- [ ] Black Duwende is strongest
 - [ ] Santelmo floats and shoots fireballs
 - [ ] Manananggal spawns at 20:00
 - [ ] All enemies drop XP and Gold
 - [ ] Spawn rate increases over time
+- [ ] Enemy stat scaling works (HP/damage increase over time)
 
 ## Progression
 
@@ -2458,12 +2516,12 @@ Focus on:
 - [ ] Can retry from results
 - [ ] Gold earned adds to total
 
-## Endless Mode (DEFERRED TO UPDATE 1)
+## Endless Mode
 
 - [ ] Locked initially
 - [ ] Unlocks after Story victory
-- [ ] No time limit
-- [ ] Enemies scale after 30:00
+- [ ] No time limit (no 30:00 win condition)
+- [ ] Same scaling as Story Mode (continues past 30:00)
 - [ ] Best time saved
 
 ## Technical
@@ -2484,14 +2542,17 @@ Focus on:
 
 - [ ] Core gameplay loop works (move, attack, level up, win/lose)
 - [ ] Both character variants implemented (Classic, Shadow)
-- [ ] All 5 enemies implemented
+- [ ] All 4 enemies implemented (Green Duwende, Red Duwende, Santelmo, Manananggal)
 - [ ] All 3 weapons implemented (Peck, Wing Slap, Feather Shot)
 - [ ] All 3 passives implemented (Iron Beak, Thick Plumage, Racing Legs)
 - [ ] Shop system works
 - [ ] Story Mode works (30-minute survival)
+- [ ] Endless Mode works (unlocks after Story Mode)
 - [ ] Save system works
 - [ ] No game-breaking bugs
 - [ ] 60 FPS performance
+- [ ] Basic controller support
+- [ ] Steam achievements (5-8)
 
 ## Should Have (Polish)
 
@@ -2505,12 +2566,12 @@ Focus on:
 
 ## Deferred to Update 1
 
-- [ ] Endless Mode
-- [ ] Golden Sarimanok (3rd character)
-- [ ] Spiral Feathers (4th weapon)
-- [ ] Magnetic Aura (4th passive)
-- [ ] Steam achievements
-- [ ] Controller support
+- [ ] Golden Sarimanok (3rd character - tank, 130 HP, 85% speed)
+- [ ] Spiral Feathers (4th weapon - orbiting feathers)
+- [ ] Magnetic Aura (4th passive - +pickup range)
+- [ ] Black Duwende (5th enemy - tanky, fast, spawns 16:00+)
+- [ ] Enhanced Endless Mode scaling (accelerated spawn/HP after 30:00)
+- [ ] Additional achievements (expand to 15+)
 
 ## Nice to Have (If Time)
 
@@ -2526,11 +2587,11 @@ Focus on:
 Features deferred from EA launch:
 
 - Golden Sarimanok (3rd character - tank, 130 HP, 85% speed)
-- Endless Mode (unlocks after beating Story Mode)
 - Spiral Feathers weapon (orbiting feathers)
 - Magnetic Aura passive (+pickup range)
-- Steam achievements (8 achievements)
-- Controller support (Steam Deck compatibility)
+- Black Duwende (5th enemy - HP 50, Damage 15, Speed 120, spawns 16:00+)
+- Enhanced Endless Mode scaling (accelerated difficulty after 30:00)
+- Additional achievements (expand from 8 to 15+)
 
 This update brings the game to the originally planned scope.
 
@@ -2759,14 +2820,16 @@ This PRD defines a **30-minute action roguelite** that combines:
 **EA Launch Scope:**
 
 - 2 characters (Classic + Shadow Sarimanok)
-- 5 enemies (3 Duwendes, Santelmo, Manananggal boss)
+- 4 enemies (Green Duwende, Red Duwende, Santelmo, Manananggal boss)
 - 3 weapons (Peck, Wing Slap, Feather Shot)
 - 3 passives (Damage, HP, Speed)
 - 3 shop upgrades
 - 1 stage (bounded farm arena)
-- 1 mode (Story - Endless deferred to Update 1)
+- 2 modes (Story + Endless)
+- 5-8 Steam achievements
+- Basic controller support
 
-**Deferred to Update 1:** Golden Sarimanok, Endless Mode, Spiral Feathers, Magnetic Aura, Achievements, Controller
+**Deferred to Update 1:** Golden Sarimanok, Black Duwende, Spiral Feathers, Magnetic Aura, Enhanced Endless Scaling, Additional Achievements
 
 **Timeline:** 13 weeks
 **Target Launch:** Early March 2026
@@ -2786,6 +2849,7 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 **Version History:**
 
+- v1.5: Scope rebalance for EA launch - ADDED to EA: Simplified Endless Mode, Basic Controller Support, 5-8 Steam Achievements. DEFERRED to Update 1: Black Duwende (5th enemy), Golden Sarimanok (3rd character), Spiral Feathers (4th weapon), Magnetic Aura (4th passive), Enhanced Endless Scaling. EA now ships with 2 characters, 4 enemies, 3 weapons, 3 passives, Story + Endless Modes, controller support, and achievements. Enemy stat scaling replaces Black Duwende for late-game difficulty.
 - v1.4: Scope reduction for EA launch - deferred to Update 1: Golden Sarimanok (3rd character), Endless Mode, Spiral Feathers (4th weapon), Magnetic Aura (4th passive), Steam achievements, Controller support. EA now ships with 2 characters, 3 weapons, 3 passives, Story Mode only, keyboard only. Based on Vampire Survivors EA launch comparison showing simpler scope is viable.
 - v1.3: Restructured roadmap to 13-week vertical slices (each week = playable game), added Performance Architecture section, added art contingency plan, moved Settings/Controller/Tutorial to Should Have, added save file versioning, added Steam achievements for metrics, changed to Windows-only for EA (Mac/Linux post-launch), added character unlock conditions (Shadow: 15:00 Story, Golden: beat Story), moved Steamworks setup to Week 5
 - v1.2: Added 3 character variants, 4th weapon (Spiral Feathers), 4th passive (Magnetic Aura), changed boss to Manananggal, added bounded arena specs, standardized sprite sizes (32x32, 48x48 boss, 16x16 icons)
@@ -2801,12 +2865,14 @@ This PRD defines a **30-minute action roguelite** that combines:
 │           SARIMANOK SURVIVOR MVP                │
 ├─────────────────────────────────────────────────┤
 │ CHARACTERS: 2 (Classic + Shadow Sarimanok)      │
-│ ENEMIES: 5 (3 Duwendes, Santelmo, Manananggal)  │
+│ ENEMIES: 4 (2 Duwendes, Santelmo, Manananggal)  │
 │ WEAPONS: 3 (Peck, Wing Slap, Feather Shot)      │
 │ PASSIVES: 3 (Damage, HP, Speed)                 │
 │ SHOP: 3 upgrades (Damage, HP, Speed)            │
-│ MODES: 1 (Story 30min)                          │
+│ MODES: 2 (Story 30min + Endless)                │
 │ STAGE: 1 (Bounded farm arena)                   │
+│ ACHIEVEMENTS: 5-8 Steam achievements            │
+│ CONTROLLER: Basic support included              │
 ├─────────────────────────────────────────────────┤
 │ PLATFORM: Windows (Mac/Linux post-launch)       │
 │ SPRITES: 32x32, 48x48 boss, 16x16 icons         │
