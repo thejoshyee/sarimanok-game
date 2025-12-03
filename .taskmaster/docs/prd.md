@@ -2,7 +2,7 @@
 
 ## Product Requirements Document - MVP (Early Access)
 
-**Version:** 2.1  
+**Version:** 2.2  
 **Platform:** Windows via Steam Early Access (Mac/Linux in future update)  
 **Engine:** Godot 4.x  
 **Art Style:** Top-down pixel art (32x32 sprites, 48x48 boss)  
@@ -2367,9 +2367,10 @@ func migrate_save(data: Dictionary, from_version: int) -> Dictionary:
 
 **Do these TODAY (December 3, 2025):**
 
-- [ ] **Pay $100 Steam Direct fee** - [partner.steamgames.com](https://partner.steamgames.com)
-- [ ] **Start Steamworks account verification** - Submit ID, tax info, bank details
-- [ ] **Monitor verification status daily** - Follow up if no progress after 5 business days
+- [ ] **Pay $100 Steam Direct fee** - [partner.steamgames.com](https://partner.steamgames.com). **Do NOT wait for code or art.**
+- [ ] **Start Steamworks account verification** - Submit ID, tax info, bank details today.
+- [ ] **Monitor verification status daily** - Follow up if no progress after 5 business days.
+- [ ] **Store Page Warning**: Store Page must be LIVE before Jan 5 to register for Next Fest.
 
 **Why this can't wait:** If verification stalls over the holidays (Dec 23 - Jan 1), you risk missing the Jan 5 deadline entirely. Starting today gives you 4+ weeks buffer.
 
@@ -2407,6 +2408,7 @@ What's playable at end of week:
 
 - [ ] **STEAM:** Pay $100 Steam Direct fee (do this Day 1!)
 - [ ] **STEAM:** Start Steamworks account verification (ID, tax info - takes 3-7 days)
+- [ ] **STEAM ART:** Commission/Create Placeholder Capsule Art (Critical for Store Page launch) - Budget $50-100
 - [ ] **ASSETS:** Buy UI asset pack (buttons, panels, HP/XP bars) - ~$10-15
 - [ ] **ASSETS:** Buy tileset asset pack (grass, dirt, trees, fences) - ~$10-20
 
@@ -2415,7 +2417,7 @@ What's playable at end of week:
 - [ ] Create project structure
 - [ ] Set up project settings (640×360 viewport, canvas_items stretch)
 - [ ] **Set up Audio buses in Project Settings (Master, Music, SFX) - do this Day 1, takes 5 minutes, prevents hours of headache later**
-- [ ] **Configure Input Map in Project Settings with controller bindings from Day 1**
+- [ ] **Configure Input Map in Project Settings**: Map 'Spacebar' and 'Gamepad A' to 'ui_accept' (makes controller support free/automatic).
 - [ ] Create TileMap with placeholder tileset (simple colored squares)
 - [ ] Paint basic 60×34 arena with placeholder tiles
 - [ ] Set up Camera2D with limits (0,0 to 1920,1088)
@@ -3579,13 +3581,14 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 ---
 
-**Version:** 2.1  
+**Version:** 2.2  
 **Created:** December 2025  
 **Authors:** Josh & Ericka  
 **Cultural Consultant:** Ericka
 
 **Version History:**
 
+- v2.2: Critical Production Fixes - Explicit "Pay Steam Fee Today" step, moved Controller Input Map to Week 1 (free support), added Capsule Art commission to Week 1 to unblock Store Page.
 - v2.1: Gap fixes from scope analysis - ADDED: Audio bus setup to Week 1 tasks (5 min, prevents headaches), Window mode toggle (Fullscreen/Windowed/Borderless) to Week 7 Settings, Resolution dropdown to Week 7 Settings, Impact frames/hitstop to Week 7 juice, XP gem magnetism visual feedback to Week 7. UPDATED: Week 4 store page deadline explicit (submit by Dec 20, live by Dec 28-30), Quick Reference Card store page timing.
 - v2.0 FINAL: Production readiness & tracking sections - ADDED: URGENT "Before Week 1" Steam setup callout (verification takes 1-4 weeks, must start TODAY for Jan 5 deadline), Steam Marketing Art section (capsule art requirements for Next Fest visibility), Wishlist Building Strategy (7,000+ target, Filipino community channels, content calendar), 16x16 asset pack fallback with Lospec upscaler workflow, Manananggal static sprite fallback. UPDATED: Week 7 tutorial redesigned as "level design teaching" not overlays, added input device switching tasks. Week 10 added GodotSteam integration tasks. Quick Reference Card updated with new tracking items. Architecture is LOCKED - ready to start coding.
 - v1.8: Build variety & polish timing improvements - ADDED: Data-driven WeaponData Resource architecture (trivial to add weapons post-launch), 2 clone weapons (Ice Shard, Flame Wing) for 6 total weapons with minimal art effort, debuff system (slow effect), pitch randomization for repetitive SFX (prevents ear fatigue), Week 10 "Code Complete" milestone (6-week baby buffer). MOVED EARLIER: Damage numbers and enemy flash moved from Week 7 to Week 3 (critical for balance testing). RENAMED: Week 7 "Controller Support" → "Controller Polish" (core input already in Week 1). EA now ships with 6 weapons instead of 4.
