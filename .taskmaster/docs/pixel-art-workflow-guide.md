@@ -2,7 +2,7 @@
 
 This guide covers the complete pipeline from Aseprite to Godot 4 for Sarimanok Survivor.
 
-**Version:** 2.1  
+**Version:** 2.3  
 **Created:** December 2025  
 **For:** Josh (code integration) & Ericka (art creation)
 
@@ -108,15 +108,20 @@ If you find yourself running out of colors for all the vibrant Sarimanok variant
 2. **Load palette into Aseprite:**
 
    - Open Aseprite
-   - Go to Sprite > Color Mode > Indexed
+   - Color Mode: **RGBA** (recommended for beginners)
    - In the palette panel (bottom of screen), click the hamburger menu (three lines)
    - Select Load Palette and choose your downloaded file
+
+   **Note on Color Modes:**
+
+   - **RGBA mode** (recommended): Gives you flexibility with layer blending and works seamlessly with Godot 4. Load your palette and work from it, but you're not locked in.
+   - **Indexed mode** (optional): Strict palette enforcement, useful for retro purists, but adds complexity with layer blending issues. Only use if you specifically want the constraints.
 
 3. **Lock the palette for consistency:**
 
    - With palette loaded, save it as your project palette
    - For EVERY new sprite file, load this same palette first
-   - Working in Indexed Color Mode prevents accidental off-palette colors
+   - Discipline yourself to use only palette colors (RGBA trusts you; Indexed enforces it)
 
 4. **Create a palette reference sheet:**
    - Make a small image showing all 32 (or 64) colors
@@ -259,6 +264,19 @@ When player survives to dawn:
 
 **Dawn Overlay:** `dawn_overlay.png` (640x360 gradient) - can be created in Aseprite or Godot
 
+**How to Create Dawn Overlay in Aseprite:**
+
+1. File > New: 640x360 pixels, RGBA mode
+2. Select the Gradient tool (G)
+3. Set foreground color to warm orange/pink (#FF9966 or similar)
+4. Set background color to dark purple (#2D1B4E or similar)
+5. Draw vertical gradient from top (purple) to bottom (orange)
+6. Optional: Add a subtle yellow band near the horizon for sun glow
+7. Export as `dawn_overlay.png`
+8. In Godot, this overlays the game with reduced opacity during the dawn victory sequence
+
+**Alternative:** Create in Godot using a ColorRect with a GradientTexture2D - no art file needed.
+
 ---
 
 ## Part 3: Asset Responsibilities (Ericka vs Sourced)
@@ -331,39 +349,51 @@ These reuse existing art with color changes:
 
    - File > New
    - Width: 32, Height: 32 (matches PRD spec)
-   - Color Mode: Indexed
+   - Color Mode: RGBA (see Part 1 for why)
    - Load your palette
 
 2. **Layer organization (recommended):**
 
-   - Shadow (optional, for drop shadow)
    - Body
    - Details (eyes, beak, crest)
    - Outline (if using outlines)
 
    Keep layers separate so you can adjust parts without redrawing everything.
 
-3. **Draw your idle frame first:**
+   **Note on Shadows:** Do NOT draw shadows into your character sprites. Shadows are handled separately in Godot (see below).
+
+3. **Sprite Origin/Centering:**
+
+   Center your character in the canvas. For 32x32 sprites, the center point (16,16) should be approximately at the character's feet or center mass. This ensures:
+
+   - Proper positioning when Godot places sprites
+   - Correct rotation pivot if weapons/effects spin around the character
+   - Consistent hitbox alignment across all characters
+
+   **Tip:** Draw a small + mark at canvas center before starting, then delete it when done.
+
+4. **Draw your idle frame first:**
    - This is your "base" sprite
    - Get the silhouette right before adding details
    - Test at actual game size (View > Pixel Perfect Mode)
+   - **Zoom out frequently** to see how it reads at 100% - silhouette matters more than detail
 
 ### Creating Animations
 
-4. **Add frames for animation:**
+5. **Add frames for animation:**
 
    - Frame > New Frame (or press F6)
    - For a 2-frame walk animation: Frame 1 = neutral, Frame 2 = wings/legs slightly moved
    - Use Onion Skin (View > Onion Skinning) to see previous frame while drawing
 
-5. **Tag your animations:**
+6. **Tag your animations:**
 
    - Select frames 1-2
    - Frame > Tags > New Tag
    - Name it: "idle" or "walk"
    - **This tag name is used when importing to Godot**
 
-6. **Example animation structure for Sarimanok:**
+7. **Example animation structure for Sarimanok:**
    ```
    Frames 1-2: idle (tagged "idle")
    That's it for MVP - just 2 frames!
@@ -375,7 +405,40 @@ These reuse existing art with color changes:
 - **Sarimanok Shadow:** Duplicate file, recolor to dark purple/blue
 - **Sarimanok Golden:** Duplicate file, recolor to gold/red
 
-Recoloring tip: Use Edit > Replace Color or manually paint over. Working in Indexed mode makes this easier.
+Recoloring tip: Use Edit > Replace Color or manually paint over.
+
+### Character Shadows (Handled in Godot)
+
+**Don't bake shadows into your sprites.** Instead, create ONE separate shadow image that Godot places under all characters.
+
+**Why separate shadows?**
+
+- Ericka draws ONE shadow, reused for all characters and enemies
+- Shadow stays still while character bobs up/down (looks natural)
+- Easy to adjust size/opacity in code
+- Less work than animating shadows in every frame
+
+**Create the shadow sprite:**
+
+```
+shadow.png
+- Size: 16x8 pixels (or similar ellipse shape)
+- Color: Dark gray or black
+- Opacity: ~50% transparent
+- Shape: Simple oval/ellipse
+```
+
+**In Godot, the scene structure looks like:**
+
+```
+Player (CharacterBody2D)
+├── Shadow (Sprite2D)         ← positioned below character, z-index -1
+└── AnimatedSprite2D          ← animated character on top
+```
+
+The shadow sprite just sits there - no animation needed. The character bobs above it, creating a natural floating/walking effect.
+
+**Ericka's task:** Create one `shadow.png` (16x8 dark ellipse, 50% opacity). That's it - reused for everything.
 
 ---
 
@@ -1022,7 +1085,7 @@ flame_wing_icon.png (orange recolor)
    - File > New
    - Width: 128, Height: 64 (4x2 grid of 32x32 tiles)
    - This gives you 8 tile slots
-   - Color Mode: Indexed, same palette
+   - Color Mode: RGBA, same palette
 
 2. **Enable Grid:**
 
@@ -1040,7 +1103,23 @@ flame_wing_icon.png (orange recolor)
    └────────┴────────┴────────┴────────┘
    ```
 
-4. **Export:**
+4. **Test Seamless Tiling:**
+
+   Before finalizing any tile, test that it tiles seamlessly:
+
+   - Edit > Canvas Size - expand to 3x3 (96x96 for a single 32x32 tile)
+   - Copy your tile to all 9 positions in the grid
+   - Check for visible seams where tiles meet
+   - Edit the original tile to fix seams, then repeat test
+   - Undo (Ctrl+Z) back to original canvas size when done
+
+   **Common seam issues:**
+
+   - Grass blades cut off at edges (extend them to wrap)
+   - Dirt patches don't align (use consistent edge colors)
+   - Rice stalks create obvious grid patterns (vary placement)
+
+5. **Export:**
    - File > Export As
    - Save as `tileset_filipino.png`
 
@@ -1116,10 +1195,18 @@ Per PRD, passive icons come from asset packs:
    - This keeps pixels crisp, no blurring
 
 2. **Set viewport (already in your project.godot):**
+
    - Display > Window > Viewport Width: 640
    - Display > Window > Viewport Height: 360
    - Stretch Mode: canvas_items
    - Stretch Aspect: keep
+
+3. **Enable Integer Scaling (Godot 4.3+):**
+   - Project > Project Settings
+   - Display > Window > Stretch > Scale Mode: **integer**
+   - This ensures pixels remain perfectly square at any window size
+   - Prevents pixel distortion at non-integer scale factors (like 1.5x or 2.7x)
+   - Your game will scale by whole numbers only (2x, 3x, 4x)
 
 ### Importing Character Sprites
 
@@ -1129,6 +1216,8 @@ Per PRD, passive icons come from asset packs:
 
    - Filter: Nearest (should be default now)
    - Click "Reimport" if you change settings
+
+   **Troubleshooting blurry pixels:** If your sprites appear blurry or smoothed after import, the texture filter wasn't set correctly. Select the texture in FileSystem, go to the Import tab, verify Filter is set to "Nearest", and click "Reimport". This forces Godot to re-process the image with the correct settings.
 
 3. **Create AnimatedSprite2D in your scene:**
 
@@ -1167,6 +1256,29 @@ Per PRD, passive icons come from asset packs:
    - Add TileMap node
    - Assign your TileSet resource
    - Paint your arena!
+
+### Optional: Aseprite Importer Plugin
+
+For a faster workflow, you can install the **Godot 4 Aseprite Importer** plugin from the Asset Library. This automates much of the import process:
+
+1. **Install the plugin:**
+
+   - In Godot, go to AssetLib tab
+   - Search for "Aseprite Importer"
+   - Download and enable in Project Settings > Plugins
+
+2. **Configure the plugin:**
+
+   - In Project Settings, find the plugin settings
+   - Set the path to your Aseprite executable (e.g., `/Applications/Aseprite.app/Contents/MacOS/aseprite` on Mac)
+
+3. **Benefits:**
+   - Import `.ase` or `.aseprite` files directly (no manual PNG export)
+   - Auto-generates animations from frame tags
+   - Creates SpriteFrames resources automatically
+   - Keeps art synced—edit in Aseprite, auto-updates in Godot
+
+**Note:** This is optional. The manual PNG workflow described above works perfectly well and doesn't require plugin setup.
 
 ---
 
@@ -1450,6 +1562,32 @@ Use this for: Sarimanok, Duwendes
 
 **Timing:** 0.15 seconds per frame = ~7 FPS
 
+### Setting Animation Speed in Godot
+
+When you import animations into Godot, here's where to set the FPS:
+
+1. **Open the SpriteFrames resource:**
+
+   - Select your AnimatedSprite2D node
+   - Click on the SpriteFrames property to open the editor
+
+2. **Set animation speed:**
+
+   - In the SpriteFrames panel, find the "Speed (FPS)" field at the top
+   - Set it based on your animation type:
+     - **5 FPS** for walk/idle animations (0.2 seconds per frame)
+     - **7 FPS** for fire/wings animations (0.15 seconds per frame)
+
+3. **Enable looping:**
+   - Click the loop icon next to the animation name (should be enabled by default)
+
+**Quick Reference:**
+| Animation Type | Seconds/Frame | FPS Setting |
+| -------------- | ------------- | ----------- |
+| Walk/Idle | 0.2s | 5 FPS |
+| Fire/Flicker | 0.15s | 7 FPS |
+| Wing Flap | 0.15s | 7 FPS |
+
 ---
 
 ## Part 13: Sprite Sheet Structure for Godot Import
@@ -1567,6 +1705,10 @@ When Josh imports these sprite sheets:
 - [ ] wing_slap_circle.png (64x64, 2-3 frames = 128-192x64)
 - [ ] flame_wing_circle.png (64x64, 2-3 frames) - orange recolor
 
+### Shared Assets (1 total) - ERICKA CREATES
+
+- [ ] shadow.png (16x8, dark ellipse, ~50% opacity) - reused under all characters/enemies
+
 ### Filipino Environment Tiles - ERICKA CREATES
 
 - [ ] rice_paddy_a.png (32x32) or in tileset
@@ -1637,7 +1779,7 @@ When Josh imports these sprite sheets:
 ### Before Starting Any Sprite:
 
 - [ ] Download and load your palette (Dawnbringer 32 or Resurrect 64)
-- [ ] Set Color Mode to Indexed
+- [ ] Set Color Mode to RGBA
 - [ ] Set canvas size (32x32 for most, 48x48 for boss, 16x16 for icons)
 
 ### For Each Character/Enemy:
@@ -1687,6 +1829,8 @@ If art runs behind, Josh can continue with colored rectangles. The game is shipp
 
 **Version History:**
 
+- v2.3: Added character shadow guidance (Part 4) - shadows are a separate sprite handled in Godot, not baked into animation frames. Added shadow.png to asset checklist.
+- v2.2: Best practices update - Changed color mode recommendation from Indexed to RGBA for beginners (Part 1, 4, 7), added Godot 4.3+ integer scaling setting (Part 9), added seamless tile testing workflow (Part 7), added sprite pivot/origin discussion (Part 4), added dawn overlay creation steps (Part 2), added Aseprite importer plugin option (Part 9), added texture reimport troubleshooting (Part 9), added FPS setting location in Godot (Part 12)
 - v2.1: Added Learning Resources section (Part 0) with curated Aseprite tutorials, recommended watch order, and keyboard shortcuts reference
 - v2.0: Major update - Added Map/Arena design section, Asset Responsibilities section, detailed Filipino asset creation guides (Sarimanok, Duwende, Santelmo, Manananggal, Bahay Kubo, Rice Paddy), updated asset checklist for 6 weapons with clone recolors, clarified sourced vs created assets per PRD
 - v1.0: Initial guide
