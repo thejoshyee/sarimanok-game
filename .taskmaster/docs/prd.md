@@ -2,7 +2,7 @@
 
 ## Product Requirements Document - MVP (Early Access)
 
-**Version:** 2.0 FINAL  
+**Version:** 2.1  
 **Platform:** Windows via Steam Early Access (Mac/Linux in future update)  
 **Engine:** Godot 4.x  
 **Art Style:** Top-down pixel art (32x32 sprites, 48x48 boss)  
@@ -2414,6 +2414,7 @@ What's playable at end of week:
 
 - [ ] Create project structure
 - [ ] Set up project settings (640×360 viewport, canvas_items stretch)
+- [ ] **Set up Audio buses in Project Settings (Master, Music, SFX) - do this Day 1, takes 5 minutes, prevents hours of headache later**
 - [ ] **Configure Input Map in Project Settings with controller bindings from Day 1**
 - [ ] Create TileMap with placeholder tileset (simple colored squares)
 - [ ] Paint basic 60×34 arena with placeholder tiles
@@ -2523,11 +2524,12 @@ Builds on Week 3, adds:
 - Gold drops from enemies
 - Gold persists after run (saved to file)
 
-**CRITICAL PARALLEL TASKS (Steam Store Page):**
+**CRITICAL PARALLEL TASKS (Steam Store Page - SUBMIT BY DEC 20!):**
 
 - [ ] **STEAM:** Steamworks verification should be complete by now
 - [ ] **STEAM:** Create "Coming Soon" store page draft (description, placeholder screenshots)
-- [ ] **STEAM:** Submit store page for review (allow holiday buffer! Review takes 2-5 business days)
+- [ ] **STEAM:** Submit store page for review **BY DECEMBER 20** (allows 2-5 business day review + holiday buffer)
+- [ ] **STEAM:** Target store page LIVE by Dec 28-30 (before Jan 5 Next Fest deadline)
 
 **Tasks:**
 
@@ -2657,6 +2659,8 @@ Builds on Week 6, adds:
 - [ ] Music volume slider
 - [ ] SFX volume slider
 - [ ] Fullscreen toggle
+- [ ] **Window mode toggle (Fullscreen/Windowed/Borderless) - Steam Deck users expect this**
+- [ ] **Resolution dropdown (for non-16:9 monitors)**
 - [ ] Screen shake toggle (accessibility)
 - [ ] **Reduced motion option (disable particles for motion-sensitive players)**
 - [ ] **Colorblind mode consideration (Green/Red Duwende distinction - add shape/size difference)**
@@ -2668,9 +2672,11 @@ Builds on Week 6, adds:
   - [ ] Minimal text - icon-based learning where possible
   - [ ] Brief "Survive until dawn" goal text at run start (fades after 3s)
 - [ ] Screen shake on enemy hits
+- [ ] **Impact frames/hitstop (brief 50ms pause on big hits for satisfying feedback)**
 - [ ] Flash effect when player takes damage
 - [ ] Particle effect on enemy death
 - [ ] Visual feedback for pickup magnet range
+- [ ] **XP gem magnetism visual feedback (subtle glow/particles when in pickup range)**
 - [ ] **Level-up screen juice (particle burst, scale animation)**
 - [ ] **In-game bug report button (links to Google Form or Discord)**
 - [ ] Controller UI navigation (D-pad/stick for menus - core input already works from Week 1)
@@ -3573,13 +3579,14 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 ---
 
-**Version:** 2.0 FINAL  
+**Version:** 2.1  
 **Created:** December 2025  
 **Authors:** Josh & Ericka  
 **Cultural Consultant:** Ericka
 
 **Version History:**
 
+- v2.1: Gap fixes from scope analysis - ADDED: Audio bus setup to Week 1 tasks (5 min, prevents headaches), Window mode toggle (Fullscreen/Windowed/Borderless) to Week 7 Settings, Resolution dropdown to Week 7 Settings, Impact frames/hitstop to Week 7 juice, XP gem magnetism visual feedback to Week 7. UPDATED: Week 4 store page deadline explicit (submit by Dec 20, live by Dec 28-30), Quick Reference Card store page timing.
 - v2.0 FINAL: Production readiness & tracking sections - ADDED: URGENT "Before Week 1" Steam setup callout (verification takes 1-4 weeks, must start TODAY for Jan 5 deadline), Steam Marketing Art section (capsule art requirements for Next Fest visibility), Wishlist Building Strategy (7,000+ target, Filipino community channels, content calendar), 16x16 asset pack fallback with Lospec upscaler workflow, Manananggal static sprite fallback. UPDATED: Week 7 tutorial redesigned as "level design teaching" not overlays, added input device switching tasks. Week 10 added GodotSteam integration tasks. Quick Reference Card updated with new tracking items. Architecture is LOCKED - ready to start coding.
 - v1.8: Build variety & polish timing improvements - ADDED: Data-driven WeaponData Resource architecture (trivial to add weapons post-launch), 2 clone weapons (Ice Shard, Flame Wing) for 6 total weapons with minimal art effort, debuff system (slow effect), pitch randomization for repetitive SFX (prevents ear fatigue), Week 10 "Code Complete" milestone (6-week baby buffer). MOVED EARLIER: Damage numbers and enemy flash moved from Week 7 to Week 3 (critical for balance testing). RENAMED: Week 7 "Controller Support" → "Controller Polish" (core input already in Week 1). EA now ships with 6 weapons instead of 4.
 - v1.7: Steam Next Fest & Asset Strategy overhaul - ADDED: Steam Next Fest February 2026 strategy (demo live Feb 23 - Mar 2, EA launch ~Mar 8), 10-minute time-limited demo, asset pack outsourcing (UI, tileset, pickups bought; Ericka does characters/enemies only - reduces art from 36-46 hrs to 18-24 hrs), Steam setup moved to Week 1 (pay fee Day 1 for Jan 5 Next Fest registration deadline), Week 14 added for EA launch after Next Fest, Area2D for enemies (performance optimization), tr() localization prep, accessibility options (colorblind mode, reduced motion), analytics logging. Budget updated to $140-305.
@@ -3621,7 +3628,7 @@ This PRD defines a **30-minute action roguelite** that combines:
 │ PRICE: $2.99-4.99                               │
 ├─────────────────────────────────────────────────┤
 │ ⚠️ STEAM SETUP: DO TODAY (not Week 1!)          │
-│ STORE PAGE: Week 4 (submit), Week 5 (live)      │
+│ STORE PAGE: Submit by Dec 20, live by Dec 28-30 │
 │ NEXT FEST REG: Jan 5 deadline (Week 5)          │
 │ WISHLIST TARGET: 7,000+ before Feb 23           │
 │ CAPSULE ART: Week 8-9 (commission or custom)    │
