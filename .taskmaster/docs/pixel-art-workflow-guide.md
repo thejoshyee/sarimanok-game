@@ -2,17 +2,94 @@
 
 This guide covers the complete pipeline from Aseprite to Godot 4 for Sarimanok Survivor.
 
-**Version:** 1.0  
+**Version:** 2.1  
 **Created:** December 2025  
 **For:** Josh (code integration) & Ericka (art creation)
 
 ---
 
-## Part 1: Color Palette Setup (Do This First)
+## Table of Contents
+
+0. [Learning Resources (Start Here!)](#part-0-learning-resources-start-here)
+1. [Color Palette Setup](#part-1-color-palette-setup)
+2. [Map/Arena Visual Design](#part-2-maparena-visual-design)
+3. [Asset Responsibilities](#part-3-asset-responsibilities-ericka-vs-sourced)
+4. [Creating Character Sprites](#part-4-creating-character-sprites)
+5. [Detailed Creation Guides (Filipino Assets)](#part-5-detailed-creation-guides-filipino-assets)
+6. [Exporting Sprite Sheets](#part-6-exporting-sprite-sheets)
+7. [Creating the Tileset](#part-7-creating-the-tileset)
+8. [Creating Icons and Small Sprites](#part-8-creating-icons-and-small-sprites)
+9. [Importing into Godot 4](#part-9-importing-into-godot-4)
+10. [File Organization](#part-10-file-organization)
+11. [Pose Lists for Each Creature](#part-11-pose-lists-for-each-creature)
+12. [Animation Templates](#part-12-animation-templates-for-ericka)
+13. [Sprite Sheet Structure](#part-13-sprite-sheet-structure-for-godot-import)
+14. [Complete Asset Checklist](#part-14-complete-asset-checklist)
+
+---
+
+## Part 0: Learning Resources (Start Here!)
+
+**Philosophy: Watch these 3-4 videos, then start making. Don't fall into tutorial hell.**
+
+You don't need to be an expert before starting. Watch these focused tutorials (under 50 minutes total), then jump straight into creating the Sarimanok. You'll learn more by doing than by watching endless videos.
+
+### Recommended Tutorials
+
+| Order | Tutorial                                                                       | Creator       | Length | What You'll Learn                              |
+| ----- | ------------------------------------------------------------------------------ | ------------- | ------ | ---------------------------------------------- |
+| 1     | [Learn pixel art in 5 MINUTES](https://www.youtube.com/watch?v=lfR7Qj04-UA)    | Game Dev ASAP | 5 min  | Quick interface orientation - watch this FIRST |
+| 2     | [Aseprite Tutorial For Beginners](https://www.youtube.com/watch?v=tFsETEP01k8) | Saultoons     | 23 min | Complete tool mastery - all the tools you need |
+| 3     | [Aseprite Animation Tutorial](https://www.youtube.com/watch?v=B0enS9BJne4)     | Saultoons     | 11 min | Animation workflow - frames, timing, export    |
+| 4     | [Lighting & Shading Basics](https://www.youtube.com/watch?v=u7v4uEDwW9o)       | AdamCYounis   | 9 min  | Shading with limited palettes (optional)       |
+| 5     | [Pixel Art 101: Shading Tutorial](https://www.youtube.com/watch?v=jO9ruYaCJmU) | Pixel Pete    | 12 min | More shading techniques (optional)             |
+
+**Total time: ~39 minutes required** + pick one shading tutorial if you want (9 or 12 min)
+
+### Suggested Watch Order
+
+1. **Game Dev ASAP (5 min)** - Get oriented with the interface. Understand where everything is.
+2. **Saultoons Beginners (23 min)** - Learn all the tools. This is your main tutorial.
+3. **Saultoons Animation (11 min)** - Learn how to add frames and create animations.
+4. **AdamCYounis OR Pixel Pete** - _Optional._ Pick one if you want shading practice:
+   - AdamCYounis (9 min) - Shorter, covers limited palette shading
+   - Pixel Pete (12 min) - More detailed, covers hue shifting
+
+### After the Tutorials
+
+**Start making the Sarimanok Classic immediately.**
+
+- Don't watch more tutorials
+- Open Aseprite, create a 32x32 canvas, and start drawing
+- Use this guide as your reference
+- If you get stuck on something specific, Google it or ask AI
+- You'll learn faster by making mistakes than by watching more videos
+
+### Quick Reference: Aseprite Keyboard Shortcuts
+
+These are the shortcuts you'll use constantly. Learn them as you work:
+
+| Shortcut | Action                            |
+| -------- | --------------------------------- |
+| B        | Pencil/Brush tool                 |
+| E        | Eraser                            |
+| G        | Paint bucket (fill)               |
+| M        | Rectangular selection             |
+| V        | Move tool                         |
+| Z        | Zoom                              |
+| X        | Swap foreground/background colors |
+| [ / ]    | Decrease/increase brush size      |
+| F6       | Add new frame                     |
+| Enter    | Play/pause animation preview      |
+| Ctrl+Z   | Undo (your best friend!)          |
+
+---
+
+## Part 1: Color Palette Setup
 
 ### Palette Recommendation
 
-For your game with 3 characters, 5 enemies, 4 weapons, pickups, and a tileset:
+For your game with 3 characters, 4 enemies (5 total with Update 1), 6 weapons, pickups, and a tileset:
 
 - **32-color palette** is the sweet spot (Dawnbringer 32)
 - **64-color palette** gives more flexibility if you want richer visuals (Resurrect 64)
@@ -43,12 +120,210 @@ If you find yourself running out of colors for all the vibrant Sarimanok variant
 
 4. **Create a palette reference sheet:**
    - Make a small image showing all 32 (or 64) colors
-   - Label groups: "Sarimanok colors", "Duwende greens", "Skin tones", "Shadows", etc.
+   - Label groups: "Sarimanok colors", "Duwende greens", "Fire/Santelmo", "Skin tones", "Shadows", etc.
    - This helps both you and Ericka stay consistent
 
 ---
 
-## Part 2: Creating Character Sprites
+## Part 2: Map/Arena Visual Design
+
+The arena is a Filipino provincial farm at night. It has **three visual zones** that create depth and cultural atmosphere.
+
+### Zone Overview
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  ★    ★         ★      NIGHT SKY (gradient)        ★           ★    ★       │
+│         ★                     ○ MOON                      ★                  │
+│                                                                              │ Zone 3: Sky
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   🌴  ┌─────────┐  🌴🌴    ┌─────────┐   🌴                                  │
+│       │ BAHAY   │          │ BAHAY   │        ← Background buildings         │ Zone 2: Background
+│       │ KUBO    │          │ KUBO    │                                       │
+│       └────┬────┘          └────┬────┘                                       │
+│  ══════════╧════════════════════╧═══════════════════════════════════════════ │ ← Bamboo Fence
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│    [rice] [grass] [dirt] [grass] [crop] [grass] [rice] [grass] [dirt]       │
+│                                                                              │
+│                    MAIN PLAYING FIELD (60 x 30 tiles)                        │
+│                                                                              │ Zone 1: Playing Field
+│              Ground Layer: grass/dirt variations (SOURCED)                   │
+│              Decoration Layer: rice paddies, crops (ERICKA CREATES)          │
+│                                                                              │
+│    [grass] [crop] [grass] [dirt] [grass] [rice] [grass] [crop] [grass]      │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Zone 1: Main Playing Field (Bottom ~80% of visible area)
+
+This is where all gameplay happens. The player and enemies move here.
+
+**Ground Layer (SOURCED from asset pack):**
+
+- Grass tiles (dark, medium, light variations)
+- Dirt tiles (dark, medium, light variations)
+- Seamless tiling for natural appearance
+
+**Decoration Layer (ERICKA CREATES - Filipino elements):**
+
+- Rice paddy tiles (2-3 variations) - green stalks in muddy/flooded base
+- Vegetable crop tiles (2-3 variations) - generic farm vegetables
+- Scattered across the field for visual interest
+- NO collision - purely decorative
+
+**Layout Rules:**
+
+- Keep center mostly open for gameplay
+- Scatter decorations toward edges
+- Avoid cluttering the playing field
+- Player should always be clearly visible
+
+### Zone 2: Background Layer (Top ~20% - non-playable)
+
+Creates the Filipino provincial atmosphere. Player cannot reach this area.
+
+**Bahay Kubo Structures (ERICKA CREATES):**
+
+- 1-2 traditional nipa huts on stilts
+- Positioned at top of screen
+- Warm light glowing from windows (night scene)
+- Slightly simplified for background distance
+
+**Vegetation (SOURCED or ERICKA if time):**
+
+- Coconut palm silhouettes
+- Banana tree shapes
+- Creates depth behind the fence
+
+**Bamboo Fence (ERICKA CREATES):**
+
+- Horizontal fence line separating background from playing field
+- 3 tiles: left end, middle (repeating), right end
+- Visual boundary that says "you can't go past here"
+
+### Zone 3: Sky Layer (Parallax background)
+
+**Night Sky:**
+
+- Deep blue/purple gradient (created in Godot or as overlay image)
+- Darker at top, slightly lighter near horizon
+
+**Moon:**
+
+- Large, prominent moon for atmosphere
+- Positioned upper-right or upper-left
+- Provides the "night" lighting justification
+
+**Stars:**
+
+- Scattered small white/yellow dots
+- Can be static or subtle twinkle animation
+
+### Technical Implementation in Godot
+
+```
+Main Scene Structure:
+├── ParallaxBackground
+│   ├── ParallaxLayer (Sky + Moon + Stars)
+│   │   └── TextureRect or Sprite2D
+│   └── ParallaxLayer (Background buildings - slower parallax)
+│       └── Sprite2D (bahay_kubo_background.png)
+├── TileMap
+│   ├── Layer 0: Ground (grass, dirt)
+│   └── Layer 1: Decorations (rice paddies, crops)
+├── Player
+├── Enemies
+└── Camera2D
+```
+
+### Arena Specifications (from PRD)
+
+| Property  | Value                              |
+| --------- | ---------------------------------- |
+| Viewport  | 640 x 360 pixels                   |
+| Map Size  | 1920 x 1088 pixels (60 x 34 tiles) |
+| Tile Size | 32 x 32 pixels                     |
+| Camera    | Follows player, stops at edges     |
+
+### Dawn Transition (Victory at 30:00)
+
+When player survives to dawn:
+
+- Sky gradient shifts from night blue to warm orange/pink
+- Moon fades out
+- Stars disappear
+- Bahay kubos become silhouettes against dawn sky
+
+**Dawn Overlay:** `dawn_overlay.png` (640x360 gradient) - can be created in Aseprite or Godot
+
+---
+
+## Part 3: Asset Responsibilities (Ericka vs Sourced)
+
+### What Ericka Creates (Distinctively Filipino Assets)
+
+These are the assets that give the game its Filipino cultural identity. **This is what makes the game unique.**
+
+| Asset                   | Size    | Frames  | Est. Time        | Priority |
+| ----------------------- | ------- | ------- | ---------------- | -------- |
+| **Sarimanok Classic**   | 32x32   | 2       | 3-4 hrs          | Week 1-2 |
+| **Sarimanok Shadow**    | 32x32   | 2       | 1 hr (recolor)   | Week 1-2 |
+| **Sarimanok Golden**    | 32x32   | 2       | 1 hr (recolor)   | Week 1-2 |
+| **Green Duwende**       | 32x32   | 2       | 2-3 hrs          | Week 3-4 |
+| **Red Duwende**         | 32x32   | 2       | 20 min (recolor) | Week 3-4 |
+| **Santelmo**            | 32x32   | 2       | 2-3 hrs          | Week 3-4 |
+| **Manananggal**         | 48x48   | 4       | 5-7 hrs          | Week 5-6 |
+| Weapon Icons (4 unique) | 16x16   | 1 each  | 2 hrs total      | Week 5-6 |
+| Weapon Effects          | Various | Various | 2.5-3.5 hrs      | Week 5-6 |
+| **Filipino Tiles**      | 32x32   | 1 each  | 1-2 hrs          | Week 5-6 |
+
+**Total Ericka Time: ~18-24 hours**
+
+### Filipino Tiles Breakdown (Ericka Creates)
+
+| Tile                    | Size           | Description                            |
+| ----------------------- | -------------- | -------------------------------------- |
+| Bahay Kubo (background) | 64x64 or 96x64 | Complete small hut for background      |
+| Rice Paddy Tile A       | 32x32          | Green rice stalks in muddy base        |
+| Rice Paddy Tile B       | 32x32          | Variation with different stalk pattern |
+| Vegetable Crop Tile     | 32x32          | Generic leafy vegetables               |
+| Bamboo Fence Left       | 32x32          | Left end piece                         |
+| Bamboo Fence Middle     | 32x32          | Repeating middle section               |
+| Bamboo Fence Right      | 32x32          | Right end piece                        |
+
+### What Gets Sourced from Asset Packs (~$30-50)
+
+These are generic elements that don't need to be uniquely Filipino. A farm is a farm.
+
+| Asset Type                            | Source               | Cost     |
+| ------------------------------------- | -------------------- | -------- |
+| Generic grass tiles (dark/med/light)  | Tileset pack         | ~$10-20  |
+| Dirt tiles (dark/med/light)           | Tileset pack         | included |
+| Rocks and grass tufts                 | Tileset pack         | included |
+| Trees (silhouettes for background)    | Tileset pack         | included |
+| UI elements (HP bar, XP bar, buttons) | UI pack              | ~$10-15  |
+| Pickups (XP gem, Gold coin)           | UI pack or separate  | included |
+| Passive icons (Iron Beak, etc.)       | UI pack or icon pack | included |
+
+### Clone Weapons (Minimal Additional Work)
+
+These reuse existing art with color changes:
+
+| Clone Weapon         | Base Asset         | Change         |
+| -------------------- | ------------------ | -------------- |
+| Ice Shard icon       | Feather Shot icon  | Blue recolor   |
+| Ice Shard projectile | Feather projectile | Blue recolor   |
+| Flame Wing icon      | Wing Slap icon     | Orange recolor |
+| Flame Wing circle    | Wing Slap circle   | Orange recolor |
+
+**Time for clones: ~30 minutes total** (Edit > Replace Color in Aseprite)
+
+---
+
+## Part 4: Creating Character Sprites
 
 ### Setup for Each Character
 
@@ -104,7 +379,556 @@ Recoloring tip: Use Edit > Replace Color or manually paint over. Working in Inde
 
 ---
 
-## Part 3: Exporting Sprite Sheets
+## Part 5: Detailed Creation Guides (Filipino Assets)
+
+These step-by-step guides focus on the distinctively Filipino assets that Ericka creates.
+
+### Sarimanok Creation Guide
+
+The Sarimanok is the legendary bird of Maranao mythology - it's the HERO of your game and needs to look iconic.
+
+#### Step 1: Research and Reference
+
+Before drawing, gather reference images:
+
+- Search "Sarimanok traditional art" for authentic designs
+- Look at Maranao okir patterns (geometric/flowing decorative art)
+- Note key features: elaborate tail plumes, distinctive crest, proud posture
+- Reference traditional colors: red, orange, yellow, gold, teal
+
+**Key Sarimanok Features:**
+
+- Decorative, fan-like tail feathers (most distinctive feature)
+- Head crest or crown-like feature
+- Curved beak (often with fish in traditional art, but skip for game)
+- Proud, upright posture
+- Vibrant, royal colors
+
+#### Step 2: Silhouette First
+
+At 32x32 pixels, details are limited. Focus on a READABLE SILHOUETTE.
+
+```
+Start with basic shapes:
+         ╱╲
+        (  )  ← Head with crest bump
+         ││   ← Neck
+        ╱██╲  ← Body (rectangular-ish)
+       ╱╱  ╲╲ ← Decorative tail feathers
+```
+
+**What to include at 32x32:**
+
+- Recognizable head crest (2-3 pixels high)
+- Round body shape
+- Decorative tail (takes up bottom 1/3 of sprite)
+- Simple legs/feet
+
+**What to simplify/omit:**
+
+- Intricate okir patterns (too small)
+- Individual feather details
+- Fish in beak (not needed for gameplay)
+
+#### Step 3: Color Palette by Variant
+
+**Sarimanok Classic (Default):**
+
+- Body: Bright red/orange primary
+- Tail: Rainbow colors - red, orange, yellow, teal/green
+- Crest: Gold or bright yellow
+- Beak: Orange or gold
+- Eye: Black with white highlight
+
+**Sarimanok Shadow (Glass cannon):**
+
+- Body: Deep purple or midnight blue
+- Tail: Dark purple, blue, hints of pale violet
+- Crest: Pale blue or silver
+- Eye: Red or glowing purple (menacing)
+
+**Sarimanok Golden (Tank):**
+
+- Body: Rich gold primary
+- Tail: Gold, bronze, copper, red accents
+- Crest: Bright gold
+- Eye: Black with gold highlight
+
+#### Step 4: Animation (2-Frame Bob)
+
+The animation is simple: a gentle bob up and down.
+
+**Frame 1 (Neutral):**
+
+- Character at normal height
+- This is your base drawing
+
+**Frame 2 (Bob):**
+
+- Entire sprite shifted DOWN 1-2 pixels
+- OR: body/legs compress slightly
+- Creates bouncing effect when walking
+
+```
+Frame 1:          Frame 2:
+   ╱╲               ╱╲
+  (◉ )            (◉ )
+   ██               ██
+  ╱╱╲╲            ╱╱╲╲
+                    ─  (1-2 pixels lower)
+```
+
+#### Step 5: Export
+
+- Export as horizontal strip: 64x32 (two 32x32 frames side by side)
+- Filename: `sarimanok_classic.png`
+
+---
+
+### Duwende Creation Guide
+
+Duwendes are small goblin-like creatures from Filipino folklore. They come in different colors indicating their nature.
+
+#### Step 1: Cultural Reference
+
+**What are Duwendes?**
+
+- Small, goblin or dwarf-like creatures
+- Live in mounds, anthills, or trees
+- Colors indicate temperament:
+  - **Green:** Common, mischievous
+  - **Red:** Aggressive, territorial
+  - **Black:** Most powerful, dangerous (Update 1)
+
+#### Step 2: Silhouette Design
+
+```
+Basic Duwende shape:
+      ╱╲
+     (◉◉)  ← Large head with pointy ears
+      ╰╯   ← Small, round body
+     ╱  ╲  ← Short stubby legs
+```
+
+**Key Features at 32x32:**
+
+- Oversized head (1/2 of sprite height)
+- Pointy ears sticking out sideways
+- Small, squat body
+- Short legs
+- Mischievous expression (large eyes, small grin)
+
+#### Step 3: Color Application
+
+**Green Duwende (Base sprite):**
+
+- Skin: Forest green, darker green shadows
+- Ears: Same green with darker inner
+- Eyes: Large, white with black pupils
+- Optional: Brown loincloth or simple clothing
+
+**Red Duwende (Recolor):**
+
+- Skin: Deep red, burgundy shadows
+- Eyes: Maybe yellow for more aggressive look
+- Same sprite, different colors
+
+**Black Duwende (Update 1 - Recolor):**
+
+- Skin: Dark gray/black, purple highlights
+- Eyes: Glowing red or yellow
+- Most menacing variant
+
+#### Step 4: Animation (2-Frame Waddle)
+
+Simple walking animation toward the player.
+
+**Frame 1:**
+
+- Feet apart in "standing" position
+- Arms/hands at sides
+
+**Frame 2:**
+
+- Feet crossed or together (mid-step)
+- Slight body lean
+- Creates waddling motion when looped
+
+```
+Frame 1:          Frame 2:
+   ╱╲               ╱╲
+  (◉◉)            (◉◉)
+   ╰╯               ╰╯
+  ╱  ╲            ╲  ╱
+ feet apart      feet crossed
+```
+
+#### Step 5: Efficient Recoloring Workflow
+
+1. Complete Green Duwende fully
+2. Save as `duwende_green.aseprite`
+3. File > Save As > `duwende_red.aseprite`
+4. Edit > Replace Color (green → red)
+5. Adjust shadows and highlights
+6. Repeat for Black variant
+
+---
+
+### Santelmo Creation Guide
+
+Santelmo (Saint Elmo's Fire) is a ball of floating fire from Filipino folklore.
+
+#### Step 1: Cultural Reference
+
+**What is Santelmo?**
+
+- Ball of floating fire/light
+- Appears in forests, swamps, open fields at night
+- Sometimes considered souls of the dead
+- Known to lead travelers astray
+
+#### Step 2: Shape Design
+
+Unlike other sprites, Santelmo has no fixed form - it's amorphous fire.
+
+```
+Basic flame shape:
+      ╲ ╱
+     ( ● )  ← Bright core center
+      ╱ ╲   ← Flickering edges
+```
+
+**Design Approach:**
+
+- Circular/oval core (brightest)
+- Irregular edges (flame tendrils)
+- No eyes or face (it's fire, not a creature)
+- Semi-transparent edges for glow effect
+
+#### Step 3: Color Palette
+
+**Core (center):**
+
+- White or pale yellow (hottest part)
+
+**Middle ring:**
+
+- Bright yellow
+
+**Outer flames:**
+
+- Orange
+
+**Edge tendrils:**
+
+- Deep orange or red
+- Can use transparency for glow effect
+
+```
+Color layers from center out:
+  White → Yellow → Orange → Red/transparent
+```
+
+#### Step 4: Animation (2-Frame Flicker)
+
+Faster animation than other creatures (0.15s per frame instead of 0.2s).
+
+**Frame 1:**
+
+- Flame shape A
+- Tendrils pointing certain directions
+
+**Frame 2:**
+
+- Flame shape B (different outline)
+- Tendrils shifted/changed
+- Creates flickering fire effect
+
+```
+Frame 1:          Frame 2:
+    ╱│            │╲
+   ( ● )         ( ● )
+    ╲│╱           │╲│
+```
+
+**Key:** The outline should change between frames - fire doesn't hold shape.
+
+#### Step 5: Glow Effect (Optional)
+
+For extra polish, you can add a subtle glow:
+
+- Create a larger, more transparent circle behind the main flame
+- Use a soft orange/yellow
+- This creates the "light source" effect
+
+---
+
+### Manananggal Creation Guide
+
+The Manananggal is the BOSS enemy - it needs to look impressive and terrifying.
+
+#### Step 1: Cultural Reference
+
+**What is a Manananggal?**
+
+- A type of Aswang (Filipino shapeshifting monster)
+- Self-segmenting vampire
+- Upper torso DETACHES from lower body
+- Sprouts bat-like wings to fly
+- Most iconic and feared Filipino monster
+
+**Visual Elements:**
+
+- Human female upper torso (long black hair)
+- Bat-like wings
+- NO lower body (just trailing entrails/viscera)
+- Grotesque but recognizable
+
+#### Step 2: Larger Canvas Setup
+
+Manananggal uses **48x48 pixels** for boss presence.
+
+- File > New: 48x48
+- This gives 2.25x more pixels than regular sprites
+- Room for more detail and intimidating size
+
+#### Step 3: Silhouette Design
+
+```
+Basic Manananggal shape:
+       ╲      ╱
+        ╲    ╱   ← Bat wings spread
+         ████    ← Torso/head (hair flows)
+          ██     ← Trailing viscera below
+          ░░
+```
+
+**Key Features:**
+
+- Wide bat wings (span most of the width)
+- Human-ish torso/head area
+- Long flowing hair
+- Trailing "bottom" where body is severed
+- Grotesque but readable silhouette
+
+#### Step 4: Color Palette
+
+- **Skin:** Pale, corpse-like (gray-white or pale green)
+- **Hair:** Black, flowing
+- **Wings:** Dark gray/brown, bat-like membrane
+- **Eyes:** Glowing red (menacing)
+- **Viscera:** Dark red/maroon at bottom
+
+#### Step 5: Animation (4-Frame Wing Flap)
+
+The Manananggal needs a full wing flap cycle.
+
+```
+Frame 1 (Wings Up):     Frame 2 (Wings Mid):    Frame 3 (Wings Down):   Frame 4 (Wings Mid):
+    ╲    ╱                  ─  ─                    ╱    ╲                  ─  ─
+     ╲  ╱                   ───                    ╱  ╲                    ───
+      ██                     ██                     ██                      ██
+      ░░                     ░░                     ░░                      ░░
+
+   wings fully up      wings horizontal      wings fully down      back to horizontal
+                       (going down)                                (going up)
+```
+
+**Animation Timing:** 0.15 seconds per frame (~7 FPS)
+
+**Tips:**
+
+- Body stays mostly static
+- Wings do all the movement
+- Hair can have slight movement between frames
+- Trailing viscera can sway slightly
+
+#### Step 6: Export
+
+- Export as horizontal strip: 192x48 (four 48x48 frames)
+- Filename: `manananggal.png`
+
+---
+
+### Bahay Kubo Tile Creation Guide
+
+The Bahay Kubo (nipa hut) appears in the background to establish the Filipino farm setting.
+
+#### Step 1: Cultural Reference
+
+**What is a Bahay Kubo?**
+
+- Traditional Filipino house on stilts
+- Made of bamboo and nipa palm
+- Elevated floor (protection from flooding/pests)
+- Steep thatched roof
+- Open windows for ventilation
+
+**Key Architectural Features:**
+
+- Stilts/posts raising the house
+- Ladder for access
+- Steep triangular or gabled roof
+- Thatched roof texture (nipa/cogon grass)
+- Bamboo or amakan (woven bamboo) walls
+
+#### Step 2: Canvas Size
+
+For background use: **64x64** or **96x64** pixels
+
+This is larger than character sprites because:
+
+- It's a building, should appear bigger
+- Background elements can have more detail
+- Appears behind the playing field
+
+#### Step 3: Simplified Structure
+
+At pixel scale, simplify to essential shapes:
+
+```
+          ╱╲
+         ╱  ╲      ← Steep thatched roof (golden/tan)
+        ╱────╲
+       │ ▓▓▓▓ │    ← House body with window (warm light)
+       │ ▓▓▓▓ │
+      ═╧══════╧═   ← Stilts/floor elevation
+        │    │     ← Support posts
+```
+
+#### Step 4: Color Palette
+
+- **Roof:** Golden tan, straw yellow (thatched texture)
+- **Walls:** Brown bamboo, or tan amakan pattern
+- **Stilts:** Dark brown wood
+- **Windows:** Warm orange/yellow glow (night lighting)
+- **Shadow:** Dark area underneath the elevated house
+
+#### Step 5: Thatched Roof Technique
+
+The roof is the most recognizable feature. Create thatched texture:
+
+1. Base color: Medium tan/golden
+2. Add horizontal lines in slightly darker tan (suggesting layers)
+3. Add lighter highlights on top edge
+4. Keep it simple - suggestion of texture, not individual strands
+
+```
+Roof texture pattern:
+─────────────
+ ─ ─ ─ ─ ─ ─   ← Subtle horizontal lines
+─────────────     suggesting layered thatching
+ ─ ─ ─ ─ ─ ─
+```
+
+#### Step 6: Night Lighting
+
+Since the game is at night:
+
+- Windows should glow with warm light (oil lamp inside)
+- Rest of building is darker/cooler
+- Creates cozy "home" feeling in the dangerous night
+
+---
+
+### Rice Paddy Tile Creation Guide
+
+Rice paddies are iconic Filipino agricultural imagery.
+
+#### Step 1: Visual Reference
+
+**Rice Paddy Characteristics:**
+
+- Flooded or muddy field
+- Rows of green rice stalks
+- Standing water between plants
+- Organized but organic appearance
+
+#### Step 2: Canvas Setup
+
+- 32x32 pixels (same as other tiles)
+- Create 2-3 variations to avoid repetition
+
+#### Step 3: Design Structure
+
+```
+Rice paddy tile structure:
+┌────────────────────┐
+│  ▌▌  ▌▌  ▌▌  ▌▌   │  ← Green rice stalks (vertical lines)
+│ ▌▌  ▌▌  ▌▌  ▌▌    │
+│▌▌  ▌▌  ▌▌  ▌▌     │
+│░░░░░░░░░░░░░░░░░░░│  ← Muddy/watery base (brown + blue hints)
+└────────────────────┘
+```
+
+#### Step 4: Color Palette
+
+- **Rice stalks:** Bright green, yellow-green tips
+- **Base/water:** Brown-gray mud with subtle blue-cyan hints
+- **Variation:** Different stalk arrangements per tile
+
+#### Step 5: Seamless Tiling
+
+Rice paddies need to tile seamlessly with grass:
+
+1. Keep bottom edge similar to grass tile colors
+2. Stalks can touch top edge (they grow up)
+3. Test by placing multiple tiles adjacent
+4. Edit > Canvas Size to preview tiling
+
+#### Step 6: Variations
+
+Create 2-3 variations:
+
+- **Tile A:** Dense stalks, central cluster
+- **Tile B:** Sparser stalks, offset pattern
+- **Tile C:** Mixed with some harvested/bare patches
+
+---
+
+### Bamboo Fence Tile Creation Guide
+
+The bamboo fence separates the playable area from the background.
+
+#### Step 1: Three-Part Design
+
+Create three tiles that connect:
+
+```
+┌──────────┬──────────────────────────────────┬──────────┐
+│  LEFT    │           MIDDLE                 │  RIGHT   │
+│   ╔══    │  ═══════════════════════════════ │    ══╗   │
+│   ║      │  ║   ║   ║   ║   ║   ║   ║   ║   │      ║   │
+└──────────┴──────────────────────────────────┴──────────┘
+```
+
+#### Step 2: Bamboo Appearance
+
+- **Vertical posts:** Thick bamboo poles, segmented appearance
+- **Horizontal rails:** Thinner bamboo connecting posts
+- **Color:** Tan/golden brown, with darker segment lines
+- **Weathering:** Slight color variation for aged look
+
+#### Step 3: Tile Specifications
+
+| Tile             | Size  | Description                             |
+| ---------------- | ----- | --------------------------------------- |
+| fence_left.png   | 32x32 | Left end with post, connects to middle  |
+| fence_middle.png | 32x32 | Repeating middle section                |
+| fence_right.png  | 32x32 | Right end with post, connects to middle |
+
+#### Step 4: Connection Points
+
+Ensure tiles connect seamlessly:
+
+- Horizontal rails must align at same Y position
+- Middle tile's left edge matches its right edge
+- Left tile's right edge matches middle tile's left edge
+- Right tile's left edge matches middle tile's right edge
+
+---
+
+## Part 6: Exporting Sprite Sheets
 
 ### Single Character Export (Recommended for Your Project)
 
@@ -147,27 +971,57 @@ For 2-frame idle animation:
 Use this pattern for all exports:
 
 ```
+Characters:
 sarimanok_classic.png
 sarimanok_shadow.png
 sarimanok_golden.png
+
+Enemies:
 duwende_green.png
 duwende_red.png
-duwende_black.png
+duwende_black.png (Update 1)
 santelmo.png
 manananggal.png (48x48 per frame, so 192x48 for 4 frames)
+
+Weapons:
+feather_projectile.png
+ice_shard_projectile.png (blue recolor)
+peck_hit_effect.png
+wing_slap_circle.png
+flame_wing_circle.png (orange recolor)
+
+Icons:
+peck_icon.png
+wing_slap_icon.png
+feather_shot_icon.png
+spiral_feathers_icon.png
+ice_shard_icon.png (blue recolor)
+flame_wing_icon.png (orange recolor)
 ```
 
 ---
 
-## Part 4: Creating the Tileset
+## Part 7: Creating the Tileset
 
-### Tileset Approach (All Tiles in One File)
+### Two Tileset Approach
+
+**Tileset 1: Generic (SOURCED from asset pack)**
+
+- Grass, dirt, rocks, trees
+- Purchase from itch.io or similar (~$10-20)
+
+**Tileset 2: Filipino Elements (ERICKA CREATES)**
+
+- Rice paddies, crops, bahay kubo, bamboo fence
+- Smaller scope, focused on cultural identity
+
+### Filipino Tileset Creation
 
 1. **Create new file for tileset:**
 
    - File > New
-   - Width: 256, Height: 128 (8x4 grid of 32x32 tiles)
-   - This gives you 32 tile slots
+   - Width: 128, Height: 64 (4x2 grid of 32x32 tiles)
+   - This gives you 8 tile slots
    - Color Mode: Indexed, same palette
 
 2. **Enable Grid:**
@@ -176,69 +1030,82 @@ manananggal.png (48x48 per frame, so 192x48 for 4 frames)
    - Width: 32, Height: 32
    - View > Show > Grid (to see tile boundaries)
 
-3. **Draw each tile in its grid cell:**
+3. **Filipino Tileset Layout:**
 
    ```
-   Row 0: Ground variations (grass dark, grass med, grass light, dirt dark, dirt med, dirt light)
-   Row 1: Decorations (rice crop, vegetables, rocks small, rocks large, grass tufts)
-   Row 2: Edge pieces (fence left, fence mid, fence right, fence post, tree variants)
-   Row 3: Extra (bahay kubo pieces, more trees, future expansion)
+   ┌────────┬────────┬────────┬────────┐
+   │ Rice A │ Rice B │ Crop A │ Crop B │  Row 0: Decorations
+   ├────────┼────────┼────────┼────────┤
+   │Fence L │Fence M │Fence R │ Extra  │  Row 1: Fence pieces
+   └────────┴────────┴────────┴────────┘
    ```
 
-4. **Make tiles seamless:**
-
-   - For grass/dirt: edges should match when placed next to each other
-   - Test by copying a tile and placing it adjacent
-   - Edit > Canvas Size can help test tiling
-
-5. **Export tileset:**
+4. **Export:**
    - File > Export As
-   - Save as `tileset_farm.png`
-   - This is a simple PNG export (not sprite sheet export)
+   - Save as `tileset_filipino.png`
 
-### Tileset Layout Reference (Keep This for Godot Import)
+### Tileset Layout Reference
 
 ```
-Position (0,0) = grass_dark
-Position (1,0) = grass_med
-Position (2,0) = grass_light
-... document each tile position
+Position (0,0) = rice_paddy_a
+Position (1,0) = rice_paddy_b
+Position (2,0) = vegetable_crop_a
+Position (3,0) = vegetable_crop_b
+Position (0,1) = bamboo_fence_left
+Position (1,1) = bamboo_fence_middle
+Position (2,1) = bamboo_fence_right
+Position (3,1) = extra/future
 ```
 
 ---
 
-## Part 5: Creating Icons and Small Sprites
+## Part 8: Creating Icons and Small Sprites
 
-### Weapon/Passive Icons (16x16)
+### Weapon Icons (16x16)
 
 1. **Create new file for each icon:**
 
    - 16x16 pixels
    - Same palette
-   - One icon per file (e.g., `peck_icon.png`, `wing_slap_icon.png`)
+   - One icon per file
 
-2. **Why individual files (not a sprite sheet):**
+2. **Icons Ericka Creates (4 unique):**
 
-   - Icons are used in UI (level-up screen, HUD)
-   - Godot UI nodes work best with individual textures (just drag & drop)
-   - Easier to update one icon without re-exporting everything
-   - 8 small icons don't benefit from atlasing
+   | Icon                     | Description              | Visual                 |
+   | ------------------------ | ------------------------ | ---------------------- |
+   | peck_icon.png            | Sharp beak/jabbing point | Bird beak shape        |
+   | wing_slap_icon.png       | Wing in motion           | Wing with motion lines |
+   | feather_shot_icon.png    | Single feather           | Feather pointing right |
+   | spiral_feathers_icon.png | Feathers in circle       | 3-4 feathers in spiral |
 
-3. **Keep icons simple:**
+3. **Clone Icons (recolors):**
+
+   | Clone               | Base              | Change             |
+   | ------------------- | ----------------- | ------------------ |
+   | ice_shard_icon.png  | feather_shot_icon | Blue/cyan recolor  |
+   | flame_wing_icon.png | wing_slap_icon    | Orange/red recolor |
+
+4. **Keep icons simple:**
    - At 16x16, you have very limited space
    - Strong silhouettes, 3-4 colors max per icon
    - Test readability at actual size
 
-### Pickups (16x16)
+### Passive Icons (SOURCED)
 
-Same process:
+Per PRD, passive icons come from asset packs:
 
-- `pickup_xp.png` (blue gem)
-- `pickup_gold.png` (yellow coin)
+- Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura
+- Generic upgrade/buff icons work fine
+- Or Ericka can create if time permits
+
+### Pickups (SOURCED)
+
+- XP Gem (blue diamond) - from UI/icon pack
+- Gold Coin (yellow circle) - from UI/icon pack
 
 ---
 
-## Part 6: Importing into Godot 4
+## Part 9: Importing into Godot 4
 
 ### Project Settings (Do This Once)
 
@@ -283,11 +1150,12 @@ Same process:
    - In FileSystem, right-click > New Resource > TileSet
    - Save as `tileset_farm.tres`
 
-2. **Add your tileset image:**
+2. **Add your tileset images:**
 
    - Open the TileSet, click "Add" at bottom
-   - Select your `tileset_farm.png`
-   - Set Tile Size: 32x32
+   - Add `tileset_generic.png` (sourced)
+   - Add `tileset_filipino.png` (Ericka's)
+   - Set Tile Size: 32x32 for both
 
 3. **Configure tiles:**
 
@@ -302,13 +1170,13 @@ Same process:
 
 ---
 
-## Part 7: File Organization
+## Part 10: File Organization
 
 ### Recommended Folder Structure
 
 ```
 sarimanok-game/
-├── game/                          # Godot project
+├── game/                              # Godot project
 │   ├── sprites/
 │   │   ├── characters/
 │   │   │   ├── sarimanok_classic.png
@@ -317,39 +1185,59 @@ sarimanok-game/
 │   │   ├── enemies/
 │   │   │   ├── duwende_green.png
 │   │   │   ├── duwende_red.png
-│   │   │   ├── duwende_black.png
+│   │   │   ├── duwende_black.png      # Update 1
 │   │   │   ├── santelmo.png
 │   │   │   └── manananggal.png
 │   │   ├── weapons/
-│   │   │   └── feather_projectile.png
-│   │   ├── pickups/
+│   │   │   ├── feather_projectile.png
+│   │   │   ├── ice_shard_projectile.png
+│   │   │   ├── peck_hit_effect.png
+│   │   │   ├── wing_slap_circle.png
+│   │   │   └── flame_wing_circle.png
+│   │   ├── pickups/                   # SOURCED
 │   │   │   ├── pickup_xp.png
 │   │   │   └── pickup_gold.png
-│   │   └── icons/
-│   │       ├── peck_icon.png
-│   │       ├── wing_slap_icon.png
-│   │       └── ...
+│   │   ├── icons/
+│   │   │   ├── peck_icon.png
+│   │   │   ├── wing_slap_icon.png
+│   │   │   ├── feather_shot_icon.png
+│   │   │   ├── spiral_feathers_icon.png
+│   │   │   ├── ice_shard_icon.png
+│   │   │   ├── flame_wing_icon.png
+│   │   │   └── passives/              # SOURCED
+│   │   │       ├── iron_beak_icon.png
+│   │   │       ├── thick_plumage_icon.png
+│   │   │       ├── racing_legs_icon.png
+│   │   │       └── magnetic_aura_icon.png
+│   │   └── environment/
+│   │       ├── bahay_kubo_background.png
+│   │       └── dawn_overlay.png
 │   ├── tilesets/
-│   │   ├── tileset_farm.png
+│   │   ├── tileset_generic.png        # SOURCED
+│   │   ├── tileset_filipino.png       # Ericka creates
 │   │   └── tileset_farm.tres
 │   └── ...
 │
-└── art_source/                    # Aseprite source files (NOT in Godot)
+└── art_source/                        # Aseprite source files (NOT in Godot)
     ├── characters/
     │   ├── sarimanok_classic.aseprite
     │   ├── sarimanok_shadow.aseprite
     │   └── sarimanok_golden.aseprite
     ├── enemies/
-    │   └── ...
-    ├── tileset_farm.aseprite
-    └── palette_dawnbringer32.aseprite  # Your master palette reference
+    │   ├── duwende_green.aseprite
+    │   ├── santelmo.aseprite
+    │   └── manananggal.aseprite
+    ├── tiles/
+    │   ├── tileset_filipino.aseprite
+    │   └── bahay_kubo.aseprite
+    └── palette_dawnbringer32.aseprite  # Master palette reference
 ```
 
 **Important:** Keep `.aseprite` source files OUTSIDE the Godot project folder but in your repo. Godot doesn't need them, but you need them for edits.
 
 ---
 
-## Part 8: Pose Lists for Each Creature
+## Part 11: Pose Lists for Each Creature
 
 ### Sarimanok (Player Characters) - 32x32
 
@@ -362,6 +1250,7 @@ sarimanok-game/
 - Only 2 frames needed (per PRD: "2 frames: idle/walk (bob animation)")
 - Code handles sprite flip for direction (no separate left/right sprites needed)
 - All 3 variants use same poses, just different colors
+- **Timing:** 0.2 seconds per frame (5 FPS)
 
 **Visual Reference for Poses:**
 
@@ -373,7 +1262,7 @@ Frame 1 (Neutral):        Frame 2 (Bob):
    ╱╲  ╱╲   tail/feet       ─╱╲──╱╲─  (slightly lower)
 ```
 
-### Duwendes (All 3 Colors) - 32x32
+### Duwendes (Green, Red, Black) - 32x32
 
 | Pose | Frames | Description          |
 | ---- | ------ | -------------------- |
@@ -384,6 +1273,7 @@ Frame 1 (Neutral):        Frame 2 (Bob):
 - Simple 2-frame walk cycle
 - Green, Red, Black are recolors of same base sprite
 - Small goblin-like creature with pointy ears
+- **Timing:** 0.2 seconds per frame (5 FPS)
 
 **Visual Reference:**
 
@@ -406,6 +1296,7 @@ Frame 1:                  Frame 2:
 - Ball of floating fire
 - 2 frames = flame flicker effect
 - No walking animation (floats)
+- **Timing:** 0.15 seconds per frame (~7 FPS - faster for fire)
 
 **Visual Reference:**
 
@@ -428,6 +1319,7 @@ Frame 1:                  Frame 2:
 - 4 frames for smooth wing flap
 - Flying torso with bat wings, no lower body
 - Grotesque but readable silhouette
+- **Timing:** 0.15 seconds per frame (~7 FPS)
 
 **Visual Reference:**
 
@@ -438,7 +1330,7 @@ Frame 1:           Frame 2:           Frame 3:           Frame 4:
     ▓▓    torso        ▓▓               ▓▓                  ▓▓
 ```
 
-### Pickups - 16x16
+### Pickups - 16x16 (SOURCED)
 
 | Asset     | Frames | Description                    |
 | --------- | ------ | ------------------------------ |
@@ -450,25 +1342,29 @@ Frame 1:           Frame 2:           Frame 3:           Frame 4:
 | Asset              | Size  | Frames | Description                      |
 | ------------------ | ----- | ------ | -------------------------------- |
 | Feather Projectile | 16x16 | 1      | Single feather (code rotates it) |
+| Ice Shard Proj.    | 16x16 | 1      | Blue recolor of feather          |
 | Peck Hit           | 32x32 | 2-3    | Quick slash effect               |
 | Wing Slap Circle   | 64x64 | 2-3    | Expanding circle                 |
+| Flame Wing Circle  | 64x64 | 2-3    | Orange recolor of Wing Slap      |
 
 ### Icons - 16x16
 
-| Icon            | Frames | Description        |
-| --------------- | ------ | ------------------ |
-| Peck            | 1      | Beak/sharp point   |
-| Wing Slap       | 1      | Wing shape         |
-| Feather Shot    | 1      | Feather            |
-| Spiral Feathers | 1      | Feathers in circle |
-| Iron Beak       | 1      | Metallic beak      |
-| Thick Plumage   | 1      | Fluffy feathers    |
-| Racing Legs     | 1      | Running legs       |
-| Magnetic Aura   | 1      | Magnet or glow     |
+| Icon            | Frames | Description        | Source  |
+| --------------- | ------ | ------------------ | ------- |
+| Peck            | 1      | Beak/sharp point   | Ericka  |
+| Wing Slap       | 1      | Wing shape         | Ericka  |
+| Feather Shot    | 1      | Feather            | Ericka  |
+| Spiral Feathers | 1      | Feathers in circle | Ericka  |
+| Ice Shard       | 1      | Blue feather       | Recolor |
+| Flame Wing      | 1      | Orange wing        | Recolor |
+| Iron Beak       | 1      | Metallic beak      | Sourced |
+| Thick Plumage   | 1      | Fluffy feathers    | Sourced |
+| Racing Legs     | 1      | Running legs       | Sourced |
+| Magnetic Aura   | 1      | Magnet or glow     | Sourced |
 
 ---
 
-## Part 9: Animation Templates for Ericka
+## Part 12: Animation Templates for Ericka
 
 ### Template: 2-Frame Walk/Idle Cycle
 
@@ -556,7 +1452,7 @@ Use this for: Sarimanok, Duwendes
 
 ---
 
-## Part 10: Sprite Sheet Structure for Godot Import
+## Part 13: Sprite Sheet Structure for Godot Import
 
 ### Standard Format: Horizontal Strip
 
@@ -570,20 +1466,21 @@ All sprites should be exported as **horizontal strips** - frames side by side in
 
 ### Exact Sprite Sheet Specifications
 
-| Asset             | Frame Size  | Frames    | Total PNG Size | Filename               |
-| ----------------- | ----------- | --------- | -------------- | ---------------------- |
-| Sarimanok Classic | 32x32       | 2         | 64x32          | sarimanok_classic.png  |
-| Sarimanok Shadow  | 32x32       | 2         | 64x32          | sarimanok_shadow.png   |
-| Sarimanok Golden  | 32x32       | 2         | 64x32          | sarimanok_golden.png   |
-| Duwende Green     | 32x32       | 2         | 64x32          | duwende_green.png      |
-| Duwende Red       | 32x32       | 2         | 64x32          | duwende_red.png        |
-| Duwende Black     | 32x32       | 2         | 64x32          | duwende_black.png      |
-| Santelmo          | 32x32       | 2         | 64x32          | santelmo.png           |
-| Manananggal       | 48x48       | 4         | 192x48         | manananggal.png        |
-| XP Gem            | 16x16       | 1-2       | 16x16 or 32x16 | pickup_xp.png          |
-| Gold Coin         | 16x16       | 1-2       | 16x16 or 32x16 | pickup_gold.png        |
-| Feather           | 16x16       | 1         | 16x16          | feather_projectile.png |
-| Tileset           | 32x32 tiles | ~32 tiles | 256x128        | tileset_farm.png       |
+| Asset             | Frame Size | Frames | Total PNG Size | Filename                 |
+| ----------------- | ---------- | ------ | -------------- | ------------------------ |
+| Sarimanok Classic | 32x32      | 2      | 64x32          | sarimanok_classic.png    |
+| Sarimanok Shadow  | 32x32      | 2      | 64x32          | sarimanok_shadow.png     |
+| Sarimanok Golden  | 32x32      | 2      | 64x32          | sarimanok_golden.png     |
+| Duwende Green     | 32x32      | 2      | 64x32          | duwende_green.png        |
+| Duwende Red       | 32x32      | 2      | 64x32          | duwende_red.png          |
+| Duwende Black     | 32x32      | 2      | 64x32          | duwende_black.png        |
+| Santelmo          | 32x32      | 2      | 64x32          | santelmo.png             |
+| Manananggal       | 48x48      | 4      | 192x48         | manananggal.png          |
+| Feather Proj.     | 16x16      | 1      | 16x16          | feather_projectile.png   |
+| Ice Shard Proj.   | 16x16      | 1      | 16x16          | ice_shard_projectile.png |
+| Peck Effect       | 32x32      | 2-3    | 64-96x32       | peck_hit_effect.png      |
+| Wing Slap Circle  | 64x64      | 2-3    | 128-192x64     | wing_slap_circle.png     |
+| Flame Wing Circle | 64x64      | 2-3    | 128-192x64     | flame_wing_circle.png    |
 
 ### Visual: What Each Sprite Sheet Looks Like
 
@@ -607,21 +1504,17 @@ All sprites should be exported as **horizontal strips** - frames side by side in
 └──────────┴──────────┴──────────┴──────────┘
 ```
 
-**tileset_farm.png (256x128 total = 8 columns x 4 rows of 32x32 tiles):**
+**tileset_filipino.png (128x64 total = 4 columns x 2 rows of 32x32 tiles):**
 
 ```
-┌────┬────┬────┬────┬────┬────┬────┬────┐
-│0,0 │1,0 │2,0 │3,0 │4,0 │5,0 │6,0 │7,0 │ Row 0: Ground
-├────┼────┼────┼────┼────┼────┼────┼────┤
-│0,1 │1,1 │2,1 │3,1 │4,1 │5,1 │6,1 │7,1 │ Row 1: Decorations
-├────┼────┼────┼────┼────┼────┼────┼────┤
-│0,2 │1,2 │2,2 │3,2 │4,2 │5,2 │6,2 │7,2 │ Row 2: Edge pieces
-├────┼────┼────┼────┼────┼────┼────┼────┤
-│0,3 │1,3 │2,3 │3,3 │4,3 │5,3 │6,3 │7,3 │ Row 3: Extra/Future
-└────┴────┴────┴────┴────┴────┴────┴────┘
+┌────────┬────────┬────────┬────────┐
+│ Rice A │ Rice B │ Crop A │ Crop B │ Row 0: Decorations
+├────────┼────────┼────────┼────────┤
+│Fence L │Fence M │Fence R │ Extra  │ Row 1: Fence pieces
+└────────┴────────┴────────┴────────┘
 ```
 
-### Godot Import Settings (Week 7-8)
+### Godot Import Settings
 
 When Josh imports these sprite sheets:
 
@@ -631,47 +1524,146 @@ When Josh imports these sprite sheets:
    - Create SpriteFrames resource
    - "Add frames from sprite sheet"
    - Set Horizontal = number of frames, Vertical = 1
-   - Animation FPS: 5-8 for most, 10 for fast flicker
+   - Animation FPS: 5 for walk/idle, 7 for fire/wings
 
 2. **For tileset:**
    - Create TileSet resource
-   - Add tileset_farm.png as source
+   - Add both tileset PNGs as sources
    - Set Tile Size: 32x32
    - Godot auto-slices into grid
 
 ---
 
-## Quick Reference Checklist
+## Part 14: Complete Asset Checklist
+
+### Characters (3 total) - ERICKA CREATES
+
+- [ ] sarimanok_classic.png (32x32, 2 frames = 64x32)
+- [ ] sarimanok_shadow.png (32x32, 2 frames = 64x32) - recolor
+- [ ] sarimanok_golden.png (32x32, 2 frames = 64x32) - recolor
+
+### Enemies (4 for EA, 1 for Update 1) - ERICKA CREATES
+
+- [ ] duwende_green.png (32x32, 2 frames = 64x32)
+- [ ] duwende_red.png (32x32, 2 frames = 64x32) - recolor
+- [ ] duwende_black.png (32x32, 2 frames = 64x32) - **Update 1** - recolor
+- [ ] santelmo.png (32x32, 2 frames = 64x32)
+- [ ] manananggal.png (48x48, 4 frames = 192x48)
+
+### Weapon Icons (6 total: 4 unique + 2 recolors) - ERICKA CREATES
+
+- [ ] peck_icon.png (16x16)
+- [ ] wing_slap_icon.png (16x16)
+- [ ] feather_shot_icon.png (16x16)
+- [ ] spiral_feathers_icon.png (16x16)
+- [ ] ice_shard_icon.png (16x16) - blue recolor of feather_shot
+- [ ] flame_wing_icon.png (16x16) - orange recolor of wing_slap
+
+### Weapon Effects (5 total: 3 unique + 2 recolors) - ERICKA CREATES
+
+- [ ] feather_projectile.png (16x16, 1 frame)
+- [ ] ice_shard_projectile.png (16x16, 1 frame) - blue recolor
+- [ ] peck_hit_effect.png (32x32, 2-3 frames = 64-96x32)
+- [ ] wing_slap_circle.png (64x64, 2-3 frames = 128-192x64)
+- [ ] flame_wing_circle.png (64x64, 2-3 frames) - orange recolor
+
+### Filipino Environment Tiles - ERICKA CREATES
+
+- [ ] rice_paddy_a.png (32x32) or in tileset
+- [ ] rice_paddy_b.png (32x32) or in tileset
+- [ ] vegetable_crop_a.png (32x32) or in tileset
+- [ ] vegetable_crop_b.png (32x32) or in tileset
+- [ ] bamboo_fence_left.png (32x32) or in tileset
+- [ ] bamboo_fence_middle.png (32x32) or in tileset
+- [ ] bamboo_fence_right.png (32x32) or in tileset
+- [ ] bahay_kubo_background.png (64x64 or 96x64)
+- [ ] dawn_overlay.png (640x360 gradient)
+
+**OR export as single tileset:**
+
+- [ ] tileset_filipino.png (128x64, 8 tiles)
+
+### Passive Icons (4 total) - SOURCED from asset pack
+
+- [ ] iron_beak_icon.png (16x16)
+- [ ] thick_plumage_icon.png (16x16)
+- [ ] racing_legs_icon.png (16x16)
+- [ ] magnetic_aura_icon.png (16x16)
+
+### Pickups (2 total) - SOURCED from asset pack
+
+- [ ] pickup_xp.png (16x16, 1-2 frames)
+- [ ] pickup_gold.png (16x16, 1-2 frames)
+
+### Generic Environment - SOURCED from asset pack
+
+- [ ] tileset_generic.png (grass, dirt, rocks, trees)
+
+### UI Elements - SOURCED from asset pack
+
+- [ ] HP bar sprites
+- [ ] XP bar sprites
+- [ ] Button sprites
+- [ ] Panel backgrounds
+
+---
+
+## Asset Summary
+
+### Ericka Creates (Filipino Identity)
+
+| Category       | Count                             | Total Time     |
+| -------------- | --------------------------------- | -------------- |
+| Characters     | 3 sprites                         | 5-6 hrs        |
+| Enemies        | 4 sprites (5 with Update 1)       | 9.5-13.5 hrs   |
+| Weapon Icons   | 6 icons (4 unique + 2 recolors)   | 2.5 hrs        |
+| Weapon Effects | 5 effects (3 unique + 2 recolors) | 3-4 hrs        |
+| Filipino Tiles | 8 tiles + background              | 1-2 hrs        |
+| **TOTAL**      | ~26 files                         | **~18-24 hrs** |
+
+### Sourced from Asset Packs (~$30-50)
+
+| Category        | Source                |
+| --------------- | --------------------- |
+| Generic tileset | Tileset pack ($10-20) |
+| UI elements     | UI pack ($10-15)      |
+| Pickups         | UI pack (included)    |
+| Passive icons   | Icon pack (included)  |
+
+---
+
+## Quick Start Checklist
 
 ### Before Starting Any Sprite:
 
-- [ ] Load your palette (Dawnbringer 32 or Resurrect 64)
+- [ ] Download and load your palette (Dawnbringer 32 or Resurrect 64)
 - [ ] Set Color Mode to Indexed
 - [ ] Set canvas size (32x32 for most, 48x48 for boss, 16x16 for icons)
 
 ### For Each Character/Enemy:
 
-- [ ] Draw idle frame
+- [ ] Research the cultural reference
+- [ ] Sketch silhouette first
+- [ ] Draw idle frame (Frame 1)
 - [ ] Add animation frames
 - [ ] Tag animations ("idle", "walk", etc.)
 - [ ] Export as horizontal sprite sheet PNG
-- [ ] Name file consistently (character_name.png)
+- [ ] Name file consistently
 
-### For Tileset:
+### For Filipino Tileset:
 
-- [ ] Create 256x128 canvas (or larger if needed)
-- [ ] Enable 32x32 grid
-- [ ] Draw each tile in grid cell
-- [ ] Test that edge tiles connect seamlessly
-- [ ] Export as single PNG
-- [ ] Document which tile is where
+- [ ] Create 128x64 canvas with 32x32 grid
+- [ ] Draw rice paddy variations (Row 0)
+- [ ] Draw bamboo fence pieces (Row 1)
+- [ ] Test seamless tiling
+- [ ] Export as tileset_filipino.png
 
-### For Godot Import:
+### For Recolors:
 
-- [ ] Set project texture filter to Nearest
-- [ ] Import PNGs to correct folders
-- [ ] Create SpriteFrames for animated sprites
-- [ ] Create TileSet resource for tilemap
+- [ ] File > Save As (new filename)
+- [ ] Edit > Replace Color
+- [ ] Adjust shadows/highlights as needed
+- [ ] Export with new name
 
 ---
 
@@ -679,67 +1671,27 @@ When Josh imports these sprite sheets:
 
 Based on the PRD's parallel development timeline:
 
-**Week 1-2:** Sarimanok (all 3 variants) - The hero should look good first
+**Week 1-2:** Sarimanok Classic FIRST (hero character for demo)
 
-**Week 3-4:** Duwendes (all 3 colors) + Santelmo - Core enemies
+- Then Shadow and Golden variants
 
-**Week 5-6:** Manananggal (boss) + Icons (weapons/passives)
+**Week 3-4:** Duwendes (Green, then Red recolor) + Santelmo
 
-**Week 7:** Tileset + UI elements
+**Week 5-6:** Manananggal (boss) + All Icons + Filipino Tiles
 
-**Week 8:** Integration and polish
+**Week 7-8:** Integration, polish, any remaining assets
 
 If art runs behind, Josh can continue with colored rectangles. The game is shippable with placeholders for Early Access.
 
 ---
 
-## Complete Asset Checklist
+**Version History:**
 
-### Characters (3 total)
+- v2.1: Added Learning Resources section (Part 0) with curated Aseprite tutorials, recommended watch order, and keyboard shortcuts reference
+- v2.0: Major update - Added Map/Arena design section, Asset Responsibilities section, detailed Filipino asset creation guides (Sarimanok, Duwende, Santelmo, Manananggal, Bahay Kubo, Rice Paddy), updated asset checklist for 6 weapons with clone recolors, clarified sourced vs created assets per PRD
+- v1.0: Initial guide
 
-- [ ] sarimanok_classic.png (32x32, 2 frames)
-- [ ] sarimanok_shadow.png (32x32, 2 frames)
-- [ ] sarimanok_golden.png (32x32, 2 frames)
-
-### Enemies (5 total)
-
-- [ ] duwende_green.png (32x32, 2 frames)
-- [ ] duwende_red.png (32x32, 2 frames)
-- [ ] duwende_black.png (32x32, 2 frames)
-- [ ] santelmo.png (32x32, 2 frames)
-- [ ] manananggal.png (48x48, 4 frames)
-
-### Weapon Icons (4 total)
-
-- [ ] peck_icon.png (16x16, 1 frame)
-- [ ] wing_slap_icon.png (16x16, 1 frame)
-- [ ] feather_shot_icon.png (16x16, 1 frame)
-- [ ] spiral_feathers_icon.png (16x16, 1 frame)
-
-### Passive Icons (4 total)
-
-- [ ] iron_beak_icon.png (16x16, 1 frame)
-- [ ] thick_plumage_icon.png (16x16, 1 frame)
-- [ ] racing_legs_icon.png (16x16, 1 frame)
-- [ ] magnetic_aura_icon.png (16x16, 1 frame)
-
-### Pickups (2 total)
-
-- [ ] pickup_xp.png (16x16, 1-2 frames)
-- [ ] pickup_gold.png (16x16, 1-2 frames)
-
-### Weapon Effects (3 total)
-
-- [ ] feather_projectile.png (16x16, 1 frame)
-- [ ] peck_hit_effect.png (32x32, 2-3 frames)
-- [ ] wing_slap_circle.png (64x64, 2-3 frames)
-
-### Environment (1 tileset)
-
-- [ ] tileset_farm.png (256x128, ~32 tiles)
-
----
-
-**Total Sprites:** ~22 sprite files
-**Estimated Art Time:** 36-46 hours (per PRD)
-**At 10 hrs/week:** 4-5 weeks (parallel to coding)
+**Total Ericka Sprites:** ~26 files  
+**Estimated Ericka Art Time:** 18-24 hours  
+**Asset Pack Budget:** ~$30-50  
+**At 10 hrs/week:** 2-2.5 weeks (parallel to coding)
