@@ -141,3 +141,4 @@ Godot will automatically import PNG files. Configure import settings as needed (
 
 _Guide created: December 2025_
 
+
