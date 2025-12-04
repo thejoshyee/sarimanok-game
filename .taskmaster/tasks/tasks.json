@@ -2,23 +2,25 @@
   "master": {
     "tasks": [
       {
-        "id": 1,
+        "id": "1",
         "title": "Review existing Godot project structure and scenes",
         "description": "Analyze the current Godot 4 project under /Users/joshyee/Desktop/game-dev/sarimanok-game to understand existing scenes, scripts, and autoloads.",
         "details": "Inspect the Godot project (project.godot), scene tree, and folder layout to identify what is already implemented for player, enemies, UI, and systems such as saving or audio. Document key scenes (e.g., main scene, gameplay scene, menus), singletons, and any existing architecture decisions (naming conventions, node types, input mapping). Summarize which major MVP features appear to be fully implemented, partially implemented, or not present at all so subsequent tasks do not duplicate work.",
         "testStrategy": "Open the project in Godot 4, run the current main scene, and verify it starts without errors. Cross-check observed behavior against a short checklist of MVP features (movement, enemies, XP, gold, UI, etc.) and ensure notes are written up clearly for the rest of the team.",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
             "title": "Open project and identify Godot version, main scene, and autoloads",
             "description": "Launch the Godot 4 project located at /Users/joshyee/Desktop/game-dev/sarimanok-game. Check the project.godot file to confirm the Godot version. Identify the main scene entry point (usually main.tscn or similar) and list all autoloads (singletons) defined in the project settings. Document these details for reference.",
             "dependencies": [],
-            "details": "This step ensures the correct environment and entry point are understood before deeper exploration. Autoloads are critical for global state and cross-scene communication in Godot projects [6][7].",
-            "status": "pending",
-            "testStrategy": "Open the project in Godot 4, verify the version, locate the main scene, and check project settings for autoloads."
+            "details": "This step ensures the correct environment and entry point are understood before deeper exploration. Autoloads are critical for global state and cross-scene communication in Godot projects [6][7].\n<info added on 2025-12-04T21:45:44.384Z>\nGodot 4.5 project `sari-manok` is currently a nearly empty template with no autoloads or main scene configured. The filesystem mapping for this subtask should explicitly note the lack of configured entry point and global singletons so later tasks know they are starting from a clean slate.\n\nThis project is a fresh Godot 4.5 (Forward Plus) template with `main.tscn` present in the root project folder but not yet set as the main scene in Project Settings, and no autoloaded singletons such as `GameState` have been defined. The viewport size is configured to 640x360 per the PRD, and the project name is set to `sari-manok`, so any future folder layout (e.g., `scenes/`, `systems/`, `ui/`, `autoload/`) and singleton scripts can be introduced without conflicting with existing architecture.\n</info added on 2025-12-04T21:45:44.384Z>",
+            "status": "done",
+            "testStrategy": "Open the project in Godot 4, verify the version, locate the main scene, and check project settings for autoloads.",
+            "updatedAt": "2025-12-04T21:46:34.752Z",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -29,7 +31,8 @@
             ],
             "details": "A well-organized filesystem helps locate assets and scripts quickly. Common patterns include grouping by entity type (players, enemies) and system (UI, audio) [2][3][4].",
             "status": "pending",
-            "testStrategy": "Navigate the project directory and note the structure, taking screenshots or writing a brief outline of the layout."
+            "testStrategy": "Navigate the project directory and note the structure, taking screenshots or writing a brief outline of the layout.",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -41,7 +44,8 @@
             ],
             "details": "Scene organization is central to Godot's architecture. Each scene should have a clear responsibility and be modular for reuse [1][6].",
             "status": "pending",
-            "testStrategy": "Open each key scene in the editor, inspect the scene tree, and document the main components and their roles."
+            "testStrategy": "Open each key scene in the editor, inspect the scene tree, and document the main components and their roles.",
+            "parentId": "undefined"
           },
           {
             "id": 4,
@@ -54,7 +58,8 @@
             ],
             "details": "These systems are often implemented as autoloads or manager scripts and are essential for game-wide functionality [1][2][6].",
             "status": "pending",
-            "testStrategy": "Search for scripts and nodes related to saving, audio, and input. Run the game and verify these systems function as expected."
+            "testStrategy": "Search for scripts and nodes related to saving, audio, and input. Run the game and verify these systems function as expected.",
+            "parentId": "undefined"
           },
           {
             "id": 5,
@@ -68,144 +73,180 @@
             ],
             "details": "This summary prevents duplication of work and aligns the team on the current state of the project [1][2][3].",
             "status": "pending",
-            "testStrategy": "Cross-check observed features against the MVP checklist and write a concise report for the team."
+            "testStrategy": "Cross-check observed features against the MVP checklist and write a concise report for the team.",
+            "parentId": "undefined"
           }
-        ]
+        ],
+        "complexity": 5,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Break this task into: (1) Open the project and identify Godot version, main scene entry point, and autoloads; (2) Map the filesystem/folder layout (players, enemies, UI, systems); (3) Catalog key scenes and their responsibilities (main, gameplay, menus, HUD, etc.); (4) Identify existing systems for saving, audio, input mapping, and other cross-cutting concerns; (5) Summarize MVP feature coverage (implemented/partial/missing) and share findings with the team in a short document.",
+        "updatedAt": "2025-12-04T21:46:34.752Z"
       },
       {
-        "id": 2,
+        "id": "2",
         "title": "Map PRD features to existing implementation",
         "description": "Create a feature matrix comparing the PRD’s MVP features to what the current codebase already supports.",
         "details": "Using the PRD as a source, list all core features (characters, enemies, weapons, passives, level-up system, pickups, shop, timer/win condition, endless mode, score, UI screens, save system). For each feature, note: implemented, partially implemented, or missing; where it lives in the project (scene/script paths); and any deviations from the PRD (e.g., different stats, different unlock conditions). Identify any technical foundations already present (e.g., object pooling, data-driven resources, enemy spawn manager) that should be reused.",
         "testStrategy": "Manually verify at least one example in the project for each feature category (e.g., confirm an enemy scene exists and spawns in-game, confirm some form of save data is written to disk) and update the matrix accordingly. Ensure all entries are grounded in observed behavior, not assumptions from the PRD alone.",
         "priority": "high",
         "dependencies": [
-          1
+          "1"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 6,
+        "expansionPrompt": "Break this task into: (1) Extract a flat list of MVP features from the PRD; (2) Design the feature matrix structure (columns, statuses, links to scenes/scripts); (3) Inspect the project to locate implementations for each feature and fill in the matrix; (4) Manually verify one concrete example per feature category in a running build; (5) Note deviations from the PRD (stats, unlock rules, UX) and any reusable technical foundations (pooling, data resources, managers); (6) Review the matrix with the team and adjust priorities/dependencies for follow-up tasks."
       },
       {
-        "id": 3,
+        "id": "3",
         "title": "Confirm and document technology stack and patterns",
         "description": "Clarify which technology choices and coding patterns the project currently uses so new work aligns with them.",
         "details": "Identify the Godot version in project.godot, scripting language(s) in use (GDScript only or any C#), and any third-party addons or plugins. Document architectural patterns already adopted, such as the use of autoload singletons for GameState, object pooling patterns, spatial partitioning, data-driven Resources (e.g., WeaponData, enemy configs), and how scenes are organized for menus and gameplay. Note any custom utility modules (e.g., audio manager, input manager) so new systems can integrate instead of duplicating functionality.",
         "testStrategy": "Search the project for common singleton or manager scripts (e.g., GameState, AudioManager), open them to confirm their responsibilities, and verify in the running game that they function as expected (e.g., audio volume responds to settings). Record findings in a brief architecture overview document in the repo (e.g., docs/architecture.md).",
         "priority": "medium",
         "dependencies": [
-          1
+          "1"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 6,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Break this task into: (1) Confirm engine version, scripting languages, and active addons/plugins from project metadata; (2) Inventory autoload singletons and manager scripts, noting their responsibilities; (3) Identify architectural patterns in use (data-driven Resources, pooling, partitioning, scene organization for menus/gameplay); (4) Verify key managers in-game (e.g., audio, input, game state) behave as documented; (5) Produce a concise architecture/tech-stack overview document in the repo."
       },
       {
-        "id": 4,
+        "id": "4",
         "title": "Align player and character select features with codebase",
         "description": "Implement or complete the Sarimanok character variants and character select flow according to the PRD, reusing existing movement/combat code.",
         "details": "Based on the current player implementation, add or adjust three Sarimanok variants (Classic, Shadow, Golden) with the correct HP, speed, and damage multipliers, following existing stats conventions. Ensure the character select screen fits the current UI framework and unlock logic is wired into the save/achievement or GameState system as implemented in the project. Maintain existing animation and movement patterns (e.g., CharacterBody2D, 2-frame animations, sprite flipping, i-frames) rather than reintroducing alternative patterns.",
         "testStrategy": "From a clean profile, run the game and verify Classic is selectable and plays correctly; confirm Shadow is locked and then unlocks after surviving 15:00 in Story Mode; confirm Golden unlocks after a successful 30:00 run. Check that movement speed and HP feel consistent with the project’s units and that no runtime or console errors are produced.",
         "priority": "high",
         "dependencies": [
-          2,
-          3
+          "2",
+          "3"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 8,
+        "recommendedSubtasks": 7,
+        "expansionPrompt": "Break this task into: (1) Analyze the existing player character scene and movement/combat implementation; (2) Define stats and configuration for the three Sarimanok variants following current conventions; (3) Implement or adjust the character scenes/resources to support variants; (4) Integrate variants into the character select UI within the current UI framework; (5) Wire unlock logic into the existing save/achievement or GameState system; (6) Playtest unlock and gameplay flows from a clean profile; (7) Fix any integration bugs and update documentation for character selection and unlocks."
       },
       {
-        "id": 5,
+        "id": "5",
         "title": "Integrate enemy roster and spawn system with existing managers",
         "description": "Implement or reconcile the four-enemy roster and spawn behavior with the project’s current enemy and spawn systems.",
         "details": "Review the existing enemy scenes and spawn manager scripts to see which enemies and behaviors are already present. Add or adjust Green Duwende, Red Duwende, Santelmo, and Manananggal boss to match the PRD’s behavior and stats while fitting the existing Area2D/physics and pooling approach. Ensure the time-based spawn timeline and stat scaling (HP/damage, spawn interval) are integrated into the current spawn manager architecture rather than creating a parallel system.",
         "testStrategy": "Run test sessions and log enemy counts and types over time. Verify that from 0:00 to 30:00 the correct enemies spawn at expected times and rates, that Manananggal appears at 20:00, and that performance remains acceptable with large numbers of enemies. Confirm drops (XP and Gold) hook into the existing pickup and progression systems without errors.",
         "priority": "high",
         "dependencies": [
-          2,
-          3
+          "2",
+          "3"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 8,
+        "recommendedSubtasks": 7,
+        "expansionPrompt": "Break this task into: (1) Review current enemy scenes, behaviors, and spawn manager architecture; (2) Specify stats and behaviors for Green Duwende, Red Duwende, Santelmo, and Manananggal in project terms; (3) Implement or adjust enemy scenes/scripts to fit existing physics, damage, and pooling systems; (4) Implement the time-based spawn timeline and scaling rules within the current spawn manager; (5) Hook enemy drops into existing XP and gold pickup systems; (6) Run timed test sessions to log spawn patterns, performance, and correctness; (7) Tune balance/performance and document the spawn timeline."
       },
       {
-        "id": 6,
+        "id": "6",
         "title": "Finalize weapon and passive systems using data-driven resources",
         "description": "Ensure weapons and passives match the PRD and leverage any existing data-driven WeaponData or similar resource patterns in the project.",
         "details": "Inspect current weapon and passive implementations to see whether a Resource-based configuration system is already present. Extend or refactor as needed so Peck, Wing Slap, Feather Shot, Spiral Feathers, Ice Shard, Flame Wing, and all four passives are defined via data resources that the existing weapon manager can consume. Align upgrade levels, damage, cooldown, and debuff behaviors with the PRD while preserving current naming, folder structure, and script style.",
         "testStrategy": "Using a debug or test mode, quickly level a player to confirm all weapons and passives can be acquired and upgraded to their maximum level, and that debuff effects (e.g., slow from Ice Shard) are applied correctly. Check that no duplicate code paths for weapons exist and that all weapon definitions are loaded from the intended resource locations without runtime errors.",
         "priority": "medium",
         "dependencies": [
-          2,
-          3
+          "2",
+          "3"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 8,
+        "recommendedSubtasks": 7,
+        "expansionPrompt": "Break this task into: (1) Audit current weapon and passive implementations and any Resource-based configuration system; (2) Design or refine the data schema for weapon/passive resources (stats, levels, effects, debuffs); (3) Implement or refactor weapon and passive definitions (Peck, Wing Slap, etc.) into resources; (4) Ensure the weapon manager loads and uses these resources consistently without duplicate code paths; (5) Align behaviors and upgrade curves with the PRD while matching existing naming and folder structure; (6) Create or use a debug mode to rapidly acquire and upgrade all weapons and passives for testing; (7) Fix issues and add brief documentation for adding new weapons/passives via data resources."
       },
       {
-        "id": 7,
+        "id": "7",
         "title": "Validate level-up, pickup, shop, and save systems against PRD",
         "description": "Cross-check and adjust the existing progression-related systems to align with the PRD while respecting current implementations.",
         "details": "Review current XP/level-up UI and logic, pickup behavior, shop implementation, and save/load code. Compare these to the PRD’s XP curve, level-up choice rules, pickup magnet behavior, shop upgrade effects, and save data schema. Make targeted changes so behavior matches the design while preserving any established serialization formats, UI layouts, or data migration logic already in the project.",
         "testStrategy": "Perform runs that exercise: leveling multiple times, acquiring and upgrading weapons and passives, earning and spending gold in the shop, and exiting/relaunching the game to confirm persistence of gold, shop upgrades, unlocks, high scores, and settings. Validate that the XP curve and choice logic behave as expected without corrupting existing save files.",
         "priority": "medium",
         "dependencies": [
-          2,
-          3
+          "2",
+          "3"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 9,
+        "recommendedSubtasks": 8,
+        "expansionPrompt": "Break this task into: (1) Inventory existing XP/level-up logic, pickups, shop implementation, and save/load format; (2) Compare current behavior to the PRD (XP curve, level-up choices, pickup magnet rules, shop upgrades, save schema); (3) Plan targeted changes that preserve existing serialization and UI patterns; (4) Implement adjustments to XP, level-up selection, pickups, and shop effects; (5) Extend or adjust save/load code to cover all required progression data safely; (6) Create test scenarios or saves to quickly exercise leveling, shopping, and persistence; (7) Perform multiple runs to validate behavior and guard against save corruption; (8) Document any intentional deviations and remaining risks/tech-debt for progression systems."
       },
       {
-        "id": 8,
+        "id": "8",
         "title": "Ensure timer, win/lose conditions, modes, and scoring fit existing flow",
         "description": "Hook up or adjust game timer, Story/Endless mode behavior, win/lose conditions, and scoring within the project’s current state and scene flow management.",
         "details": "Examine how the game currently tracks time, transitions between gameplay and result screens, and distinguishes between different game modes. Align these with the PRD: Story Mode victory at 30:00 with dawn transition, Endless Mode unlocked after Story clear and with no win cap, and scoring rules based on kills and win bonus. Integrate mode selection into the existing main menu screen and result screens, reusing their current scene and navigation patterns.",
         "testStrategy": "Play separate runs in Story and Endless modes, verifying time display, correct triggering of victory and defeat flows, correct unlocking of Endless, accurate score computation and high score tracking per mode, and correct navigation back to menu or shop. Check for consistency in UI text and absence of runtime errors during scene changes.",
         "priority": "medium",
         "dependencies": [
-          2,
-          3,
-          7
+          "2",
+          "3",
+          "7"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 6,
+        "expansionPrompt": "Break this task into: (1) Analyze current game flow for time tracking, mode handling, and transitions between gameplay and results; (2) Implement or adjust Story and Endless modes, including unlock conditions for Endless; (3) Implement timer-based win/lose conditions, including Story victory at 30:00 and any special transitions; (4) Implement or refine scoring rules and high-score tracking per mode; (5) Integrate mode selection and results into existing menus and result screens; (6) Play through both modes to validate flows, unlocks, scoring, and navigation with no errors."
       },
       {
-        "id": 9,
+        "id": "9",
         "title": "Align UI screens and settings with current UI framework",
         "description": "Audit and complete the set of UI screens and settings described in the PRD using the project’s existing UI scenes, themes, and navigation patterns.",
         "details": "Review current implementations of the main menu, shop, settings, gameplay HUD, pause, level-up, victory/defeat, and any loading or tutorial screens. Identify missing elements (e.g., Endless button lock state, gold/high score display, weapon HUD, volume controls) and implement them in a way that matches the existing UI style, control scheme, and localization approach (e.g., use existing translation hooks or fonts). Avoid introducing a second UI framework or theme system.",
         "testStrategy": "Navigate through all screens using both keyboard and controller if supported, verifying that every screen described in the PRD exists, is reachable, and behaves correctly. Confirm that settings persist across sessions, that UI responds to different input devices as currently supported, and that no visual or layout regressions appear on the project’s target resolution.",
         "priority": "low",
         "dependencies": [
-          2,
-          3,
-          7,
-          8
+          "2",
+          "3",
+          "7",
+          "8"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 6,
+        "expansionPrompt": "Break this task into: (1) Audit existing UI scenes (menus, shop, settings, HUD, pause, level-up, victory/defeat, tutorials); (2) Identify gaps versus the PRD (missing screens, elements, or states such as Endless lock, gold display, weapon HUD); (3) Implement missing or adjusted UI elements using existing themes, controls, and localization hooks; (4) Wire UI elements to underlying systems (shop, scores, settings persistence) without introducing a new UI framework; (5) Test navigation and interaction across all screens with supported input devices; (6) Fix layout or interaction issues at target resolution and update any UI documentation or screenshots for the team."
       },
       {
-        "id": 10,
+        "id": "10",
         "title": "Refine performance, pooling, and code quality within existing architecture",
         "description": "Optimize and clean up performance-sensitive systems and shared code paths while preserving the project’s chosen patterns and structure.",
         "details": "Identify performance-critical areas such as enemy spawning and movement, projectiles, pickups, and particle effects. If object pooling or spatial partitioning systems already exist, extend and tune them rather than replacing them. Address any redundant or dead code revealed during the earlier feature-mapping work, and standardize patterns for managers, autoloads, and utility modules according to what the project already uses. Capture remaining technical debt or refactor candidates in a short backlog for post-MVP improvements.",
         "testStrategy": "Profile long runs (approaching or exceeding 30 minutes) on target hardware to measure frame rate, CPU/GPU usage, and memory behavior with high enemy counts. Confirm that any pooling or optimization changes do not break gameplay behavior and that no new errors or leaks are introduced. Run existing automated checks or linting configured in the project, if any, to ensure compliance with existing code quality standards.",
         "priority": "low",
         "dependencies": [
-          5,
-          6,
-          7,
-          8
+          "5",
+          "6",
+          "7",
+          "8"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 9,
+        "recommendedSubtasks": 8,
+        "expansionPrompt": "Break this task into: (1) Profile the game under late-game/high-load scenarios to identify performance bottlenecks; (2) Review and extend existing pooling or spatial partitioning systems for enemies, projectiles, pickups, and effects; (3) Optimize identified hotspots (spawning, AI, physics, rendering) while preserving behavior; (4) Remove or consolidate redundant and dead code uncovered during previous tasks; (5) Standardize patterns for managers, autoloads, and utility modules in line with current architecture; (6) Run any existing linting or static checks and address issues; (7) Re-profile to confirm performance goals are met without regressions; (8) Capture remaining tech debt and follow-up refactors in a short backlog document."
       }
     ],
     "metadata": {
-      "created": "2025-12-04T21:34:29.984Z",
-      "updated": "2025-12-04T21:34:29.984Z",
-      "description": "Tasks for master context"
+      "version": "1.0.0",
+      "lastModified": "2025-12-04T21:46:34.753Z",
+      "taskCount": 10,
+      "completedCount": 0,
+      "tags": [
+        "master"
+      ]
     }
   }
 }
