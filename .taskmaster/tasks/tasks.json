@@ -199,5 +199,266 @@
       "updated": "2025-12-04T05:56:20.743Z",
       "description": "Tasks for master context"
     }
+  },
+  "production": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Steamworks Account Setup and Verification Process",
+        "description": "Complete the Steam Direct fee payment and initiate Steamworks account verification including ID, tax, and bank details submission.",
+        "details": "1. Pay the $100 Steam Direct fee at partner.steamgames.com to activate the Steamworks developer account.\n2. Begin the Steamworks account verification process by submitting required documents: government-issued ID, tax information, and bank account details for payment processing.\n3. Set up a monitoring system (e.g., calendar reminders or automated status checks) to track the verification progress daily.\n4. If no progress is observed after 5 business days, follow up with Steam support to expedite verification.\n5. Ensure all submitted information complies with Steam's requirements to avoid delays.\n6. Document the verification status and any communications for project tracking.\n\nThis task is critical to complete before the January 5 Next Fest registration deadline, as verification can take 1-4 weeks.",
+        "testStrategy": "Verify that the $100 Steam Direct fee payment is confirmed via Steam partner dashboard.\nConfirm submission of all required verification documents in the Steamworks account.\nCheck daily for status updates in the Steamworks dashboard or via email notifications.\nAfter 5 business days without progress, confirm that a follow-up inquiry was sent to Steam support.\nMaintain a log of verification status updates and communications.\nEnsure readiness to proceed with Next Fest registration upon verification completion.",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Purchase and Integrate Essential Asset Packs for Week 1 Development",
+        "description": "Acquire necessary UI, tileset, and SFX asset packs from itch.io and Gamedev Market, and commission placeholder capsule art to unblock initial game development.",
+        "details": "1. Research and select a UI asset pack (~$10-15) from itch.io containing buttons, panels, and HP/XP bars suitable for the game's art style.\n2. Purchase a tileset asset pack (~$10-20) from itch.io including grass, dirt, trees, and fences to build the game environment.\n3. Acquire a Fantasy/RPG sound effects pack (~$15-30) from Gamedev Market to provide audio feedback for gameplay.\n4. Commission a placeholder capsule art image for the store page with a budget of $50-100, ensuring it fits the game's theme and resolution requirements.\n5. Document all purchases and licenses for asset usage compliance.\n6. Import purchased asset packs into the Unity project using the Package Manager or manual import, verifying compatibility with the current project structure.\n7. Integrate UI assets into existing UI components or create new prefabs as needed.\n8. Apply tileset assets to level design scenes, replacing placeholders.\n9. Add SFX assets to the audio manager or relevant scripts to enable sound playback.\n10. Store the commissioned capsule art in the appropriate project folder for future use on the store page.\n\nThis task depends on having the Steamworks account setup (Task 1) to ensure readiness for store page preparation and eventual publishing.",
+        "testStrategy": "- Verify all asset packs are purchased and licenses are documented.\n- Confirm asset packs are successfully imported into the Unity project without errors.\n- Check that UI elements (buttons, panels, HP/XP bars) appear correctly in the game scenes.\n- Validate that tileset assets replace placeholder environment elements visually and functionally.\n- Play sample SFX in the game to ensure correct audio integration.\n- Confirm the commissioned capsule art file is present and meets resolution and style requirements.\n- Review the project folder structure to ensure assets are organized according to existing conventions.\n- Coordinate with Task 1 completion to ensure store page assets are ready for publishing.",
+        "status": "pending",
+        "dependencies": [
+          1
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Steam Store Page Draft Creation and Submission",
+        "description": "Create and submit a 'Coming Soon' Steam store page draft including placeholder art, descriptions, screenshots, and tags by December 20 for review.",
+        "details": "1. Access the Steamworks dashboard after completing Steam Direct fee payment and account verification (Task 1).\n2. Create a new Steam app entry for the game and start the store page setup.\n3. Upload placeholder capsule art with the required resolution of 616x353 pixels as the main capsule image.\n4. Write a compelling Short Description highlighting the game's unique selling points, ensuring clarity and appeal.\n5. Compose the 'About This Game' section with detailed information about gameplay, features, and theme, aligning with the game's roguelite, action roguelike, bullet hell, pixel art, survivors, single player, and mythology aspects.\n6. Prepare and upload at least 5 placeholder screenshots showcasing different game elements or environments.\n7. Set appropriate Steam tags: Roguelite, Action Roguelike, Bullet Hell, Pixel Art, Survivors, Single Player, Mythology to improve discoverability.\n8. Review all entered content for completeness and accuracy.\n9. Submit the store page for Valve's review by December 20 to allow sufficient time before the holiday period.\n\nImplementation should follow Steamworks documentation and best practices for store page creation, including image format and size compliance. Use existing assets or commissioned placeholders from Task 2 where applicable. Maintain consistent style and tone with the game's branding and planned marketing strategy.",
+        "testStrategy": "- Verify that the Steam app entry is created and accessible in the Steamworks dashboard.\n- Confirm the placeholder capsule art is uploaded and displays correctly at 616x353 resolution.\n- Check that the Short Description and About This Game sections are complete, unique, and free of errors.\n- Ensure at least 5 screenshots are uploaded and visible in the store page preview.\n- Validate that all specified Steam tags are correctly applied.\n- Confirm submission of the store page for review before the December 20 deadline.\n- Monitor Steamworks dashboard or email for review status updates and address any requested changes promptly.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          2
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Next Fest Steam Store Page Finalization and Filipino Community Outreach",
+        "description": "Finalize and publish the Steam store page after review approval, update it with new screenshots, and prepare a targeted outreach list of Filipino gaming communities before the January 5, 2026 deadline for Steam Next Fest registration.",
+        "details": "1. After completing Task 3 (Steam Store Page Draft Creation and Submission), review feedback from the Steam team and implement any required changes to the store page content, including descriptions, tags, and capsule art.\n2. Update the store page with any new, high-quality screenshots showcasing recent game progress or features, ensuring they meet Steam's image specifications.\n3. Coordinate with the marketing or community team to compile a comprehensive list of Filipino gaming communities for targeted outreach. This list should include:\n   - Relevant Reddit communities such as r/Philippines and r/PHGamers\n   - Filipino gaming Discord servers\n   - Filipino Facebook gaming groups\n4. Prepare outreach materials tailored to these communities, highlighting the game's unique aspects and Steam Next Fest participation.\n5. Submit the finalized store page to Steam for approval and ensure it goes live promptly after approval.\n6. Register the game for Steam Next Fest February 2026 via the Steamworks dashboard before the January 5, 2026 deadline.\n7. Set reminders and monitor the registration status to confirm successful participation.\n\nThis task aligns with the existing Steamworks integration and store page setup processes established in Tasks 1 and 3, leveraging the Steamworks dashboard and store page management workflows.",
+        "testStrategy": "1. Verify that all feedback from the Steam review team has been addressed and changes are reflected on the store page.\n2. Confirm that new screenshots are uploaded correctly and display properly on the live store page.\n3. Validate that the store page is live and accessible after Steam approval.\n4. Check that the game is successfully registered for Steam Next Fest February 2026 within the Steamworks dashboard before the January 5 deadline.\n5. Review the compiled list of Filipino gaming communities for completeness and relevance.\n6. Ensure outreach materials are prepared and ready for distribution.\n7. Monitor Steam Next Fest registration status and store page visibility until the event starts.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          3
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Capsule Art Commission for Sarimanok Game",
+        "description": "Identify and commission a capsule art artist to create the main capsule art for the Sarimanok game store page, focusing on Filipino folklore aesthetics and dynamic compositions.",
+        "details": "1. Research and browse portfolios of 5-10 capsule art artists on platforms such as Fiverr, ArtStation, and Twitter, prioritizing those with previous game art experience and familiarity with Filipino or Southeast Asian art styles.\n2. Evaluate candidates based on portfolio quality, style relevance, and dynamic composition skills, especially in depicting heroic poses and folklore themes.\n3. Shortlist the top 3 artists and initiate contact to discuss the project scope, timeline, and budget.\n4. Provide the selected artists with reference images and a detailed commission brief describing Sarimanok in a heroic pose facing shadowy creatures at night, emphasizing the Filipino folklore aesthetic.\n5. Negotiate and finalize the commission with the winning artist within a budget range of $200-400.\n6. Ensure the commissioned capsule art meets the required resolution and style guidelines for the Steam store page.\n7. Coordinate delivery and integration of the final capsule art asset into the project repository for use in the Steam store page update (related to Task 4).",
+        "testStrategy": "- Verify that 5-10 candidate portfolios were reviewed and documented.\n- Confirm that the top 3 artists were contacted and communication records are available.\n- Ensure the commission brief and reference images were sent to the shortlisted artists.\n- Validate that the final commissioned capsule art meets the specified artistic and technical requirements.\n- Confirm the commissioned art file is delivered on time and integrated into the project assets.\n- Obtain approval from the project lead or art director on the final capsule art quality and relevance.",
+        "status": "pending",
+        "dependencies": [
+          4
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Create Sarimanok Player Character Sprites with Traditional Maranao Art Palette",
+        "description": "Design and implement three Sarimanok player character sprites with specified color palettes and animation frames based on traditional Maranao art.",
+        "details": "1. Research traditional Maranao art to extract appropriate color palettes for the Sarimanok Classic (rainbow/vibrant), Sarimanok Shadow (dark purple/blue), and Sarimanok Golden (gold/red/bronze) variants.\n2. Create pixel art sprites of size 32x32 pixels, each with 2 animation frames, for the three Sarimanok player characters:\n   - Sarimanok Classic: rainbow/vibrant colors, 2 frames.\n   - Sarimanok Shadow: dark purple/blue recolor, 2 frames.\n   - Sarimanok Golden: gold/red/bronze recolor, 2 frames.\n3. Follow existing sprite naming conventions and file structure used in the project (e.g., placing sprites in the appropriate assets/sprites directory).\n4. Integrate the new sprites into the Phaser 3 game framework by updating the preload and create methods to load and use these sprites, referencing existing player character implementation patterns (see Task 3 and codebase patterns for character sprite loading and animation).\n5. Ensure the sprites are compatible with the current animation system, which supports 2-frame animations, and can be selected dynamically if character selection is implemented.\n6. Document the color palette references and sprite frame details for future artists and developers.\n7. Allocate approximately 5-6 hours total for research, creation, and integration as per the original estimate.",
+        "testStrategy": "- Verify that each Sarimanok sprite (Classic, Shadow, Golden) is correctly sized at 32x32 pixels with exactly 2 animation frames.\n- Confirm that the color palettes match the traditional Maranao art references for each variant.\n- Load the sprites in the game and check that animations play smoothly with the 2 frames.\n- Test sprite visibility and appearance in different game scenes where player characters are used.\n- Validate that the sprites integrate without errors into the existing Phaser 3 animation and sprite loading system.\n- Review documentation for accuracy and completeness regarding color palettes and sprite usage.",
+        "status": "pending",
+        "dependencies": [
+          3
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Create Green Duwende, Red Duwende, and Santelmo Enemy Sprites with Animation Frames and Traditional Filipino Palette",
+        "description": "Design and implement pixel art sprites for three enemy types (Green Duwende, Red Duwende, and Santelmo) with 2 animation frames each, using traditional Filipino color palettes and folklore-inspired aesthetics.",
+        "details": "1. Research traditional Filipino folklore and art references for the Duwende and Santelmo characters to ensure authentic visual representation.\n2. Create a 32x32 pixel sprite for the Green Duwende with 2 animation frames, using a vibrant green palette inspired by Filipino forest spirits.\n3. Create a 32x32 pixel sprite for the Red Duwende with 2 animation frames, using a recolored red palette based on the Green Duwende sprite.\n4. Create a 32x32 pixel sprite for the Santelmo with 2 animation frames, depicting a floating fireball with subtle flame animation, using warm orange and yellow tones.\n5. Export all sprites in PNG format with transparency, ensuring consistent pixel art style and alignment with the existing Sarimanok player sprites (Task 6).\n6. Organize sprite files in the project's assets/enemies/ directory with clear naming conventions (e.g., green_duwende_01.png, red_duwende_01.png, santelmo_01.png).\n7. Update the sprite atlas or asset manifest to include the new enemy sprites for use in the game engine.",
+        "testStrategy": "1. Verify that each enemy sprite (Green Duwende, Red Duwende, Santelmo) is 32x32 pixels with exactly 2 animation frames.\n2. Confirm that the color palettes match traditional Filipino folklore references and are consistent with the game's art style.\n3. Load the sprites in the game and check that animations play smoothly and loop correctly.\n4. Ensure sprite files are properly named and organized in the assets/enemies/ directory.\n5. Validate that the sprites are included in the sprite atlas or asset manifest and can be referenced in the game code.",
+        "status": "pending",
+        "dependencies": [
+          6
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Create Manananggal Boss Sprite with Animation and Fallback Static Option",
+        "description": "Design and implement a 48x48 pixel Manananggal boss sprite featuring 4 animation frames depicting a flying torso with bat-like wings and a grotesque but readable silhouette, with a fallback static sprite option.",
+        "details": "1. Research Filipino folklore and existing game art to capture the Manananggal's distinctive flying torso with bat-like wings and grotesque but readable silhouette.\n2. Create a 48x48 pixel sprite sheet with 4 animation frames showing the Manananggal boss in flight, emphasizing smooth wing flapping and a clear silhouette.\n3. Use pixel art techniques consistent with existing enemy sprites (e.g., Green Duwende, Santelmo) to maintain visual coherence.\n4. Implement the sprite in the game using Phaser 3's animation system, referencing existing enemy sprite animation patterns from Task 7.\n5. Provide a fallback static 48x48 sprite with no animation to be used if time constraints prevent full animation, saving approximately 4-5 hours.\n6. Integrate the sprite assets into the game's asset loading pipeline, following the established project structure and naming conventions.\n7. Coordinate with the art and development teams to ensure the sprite fits gameplay and technical requirements.",
+        "testStrategy": "1. Verify the sprite sheet dimensions are exactly 48x48 pixels per frame with 4 frames for the animated version.\n2. Confirm the fallback static sprite is 48x48 pixels and visually represents the Manananggal boss clearly.\n3. Load the animated sprite in the game and observe the wing-flapping animation for smoothness and silhouette readability.\n4. Test the fallback static sprite loads correctly and displays without animation when selected.\n5. Ensure the sprite integrates seamlessly with existing enemy behaviors and does not cause rendering or performance issues.\n6. Review the sprite's visual style for consistency with other enemy sprites created in Task 7.",
+        "status": "pending",
+        "dependencies": [
+          7
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Create Ericka Weapon Icons and Effects Art Assets",
+        "description": "Design and produce pixel art weapon icons and effects for Ericka's weapons, including original and recolored variants, to complete essential Week 6 art assets.",
+        "details": "1. Create 16x16 pixel weapon icons for the following original weapons: Peck, Wing Slap, Feather Shot, and Spiral Feathers. Allocate approximately 30 minutes per icon, focusing on clarity and style consistent with existing game art (e.g., Sarimanok player sprites and enemy sprites).\n2. Design clone weapon icons by recoloring existing assets: Ice Shard (blue recolor) and Flame Wing (orange recolor), each at 16x16 pixels, allocating about 15 minutes per icon.\n3. Develop weapon effect sprites with specified sizes: Peck hit effect (32x32 pixels), Wing Slap circle effect (64x64 pixels), and Feather projectile (16x16 pixels). Ensure effects visually communicate impact and motion, matching the game's pixel art style.\n4. Follow the pixel art techniques and color palettes established in prior tasks (e.g., Tasks 6 and 7) to maintain visual coherence.\n5. Integrate the new assets into the game's asset pipeline, updating relevant asset manifests or loaders as needed (refer to existing asset loading patterns in source files such as scenes/level-1/index.ts).\n6. Coordinate with the animation and gameplay teams to confirm usage and implementation of these icons and effects in the game UI and combat systems.",
+        "testStrategy": "- Verify each weapon icon is exactly 16x16 pixels and visually distinct, matching the style of existing game sprites.\n- Confirm recolored clone icons accurately reflect the specified color schemes (blue for Ice Shard, orange for Flame Wing) and maintain clarity.\n- Check weapon effect sprites for correct dimensions (32x32 for Peck hit, 64x64 for Wing Slap circle, 16x16 for Feather projectile) and visual effectiveness.\n- Load all new assets in the game environment to ensure they render correctly without errors.\n- Review the visual consistency of new assets with existing sprites and effects in the game.\n- Obtain feedback from the art lead or project manager confirming that all essential Ericka art assets for Week 6 are complete and meet quality standards.",
+        "status": "pending",
+        "dependencies": [
+          6,
+          7
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Polish and Finalize Steam Store Page with Final Capsule Art and Gameplay Screenshots",
+        "description": "Receive the commissioned final capsule art, request revisions if necessary, create required capsule sizes, capture varied gameplay screenshots, and upload all final assets to the Steam store page replacing placeholders.",
+        "details": "1. Coordinate with the commissioned artist to receive the final capsule art for the Sarimanok game. Review the art for quality and alignment with the game's Filipino folklore aesthetic and request revisions if needed.\n2. Once approved, create the Small Capsule (231x87 pixels) and Header Capsule (460x215 pixels) from the main capsule art using image editing software, ensuring clarity and compliance with Steam's image requirements.\n3. Capture at least five varied gameplay screenshots at 1920x1080 resolution showcasing key moments: Sarimanok surrounded by enemies, level-up screen, Manananggal boss encounter, multiple weapons firing, and shop or character select screen.\n4. Edit screenshots for optimal visual quality and Steam compliance.\n5. Access the Steamworks dashboard and replace the placeholder capsule art and screenshots with the final versions.\n6. Verify that all uploaded images display correctly on the Steam store page and update any metadata if necessary.\n\nThis task builds upon the initial Steam store page draft creation (Task 3) and the capsule art commissioning process (Task 5), ensuring final polished presentation for the store page launch.",
+        "testStrategy": "- Confirm receipt of final capsule art from the artist and document any revision requests and approvals.\n- Verify that the Small Capsule and Header Capsule images are correctly sized (231x87 and 460x215 pixels respectively) and visually clear.\n- Check that at least five gameplay screenshots at 1920x1080 resolution are captured and represent the specified gameplay moments.\n- Upload all final capsule art and screenshots to the Steamworks dashboard and confirm successful upload without errors.\n- Review the live Steam store page to ensure all images display correctly and are free of visual artifacts.\n- Validate that the store page reflects the updated assets and that no placeholder images remain.",
+        "status": "pending",
+        "dependencies": [
+          3,
+          5
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Audio Sourcing and Integration for Sarimanok Game",
+        "description": "Source or create culturally authentic Filipino-inspired audio tracks and sound effects, then integrate them into the game with proper looping and triggering behavior.",
+        "details": "1. Source or compose the following audio assets with Filipino cultural authenticity and thematic relevance:\n   - Menu music track: 1-2 minute calm loop with Filipino-inspired melodies.\n   - Gameplay night music track: 1-2 minute tense action loop.\n   - Boss music track: intense, triggers at 20:00 gameplay time.\n   - Victory jingle: triumphant with Sarimanok crow motif.\n   - Critical Filipino-specific sounds: mystical Sarimanok crow, unique Manananggal screech, provincial night ambience (crickets, frogs), optional tiktik clicking sound.\n\n2. Prepare audio files in multiple formats (e.g., MP3, OGG) for browser compatibility.\n\n3. Integrate audio assets into the Phaser 3 game using the Sound Manager:\n   - Load audio files in preload scenes.\n   - Implement looping for menu and gameplay music.\n   - Trigger boss music at the 20-minute mark programmatically.\n   - Play victory jingle on game win event.\n   - Play ambient and special sounds contextually.\n\n4. Use Phaser's audio sprite technique if appropriate to optimize loading and playback.\n\n5. Ensure audio volume and mute controls are consistent with existing audio settings UI.\n\n6. Follow existing project audio patterns and code style, referencing current scene audio implementations.\n\n7. Document audio asset sources and licensing.\n\n8. Coordinate with art and gameplay teams to synchronize audio triggers with game events.",
+        "testStrategy": "- Verify all audio assets are culturally authentic and meet duration and thematic requirements.\n- Confirm audio files load correctly in all supported browsers and formats.\n- Test looping behavior for menu and gameplay music tracks.\n- Validate boss music triggers precisely at 20:00 gameplay time.\n- Confirm victory jingle plays on game win.\n- Check that Sarimanok crow, Manananggal screech, night ambience, and tiktik sounds play appropriately in context.\n- Test audio mute and volume controls for all new sounds.\n- Monitor for audio overlap or unintended multiple instances.\n- Review performance impact and loading times.\n- Ensure audio integration aligns with existing Phaser audio management patterns.",
+        "status": "pending",
+        "dependencies": [
+          6,
+          8
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Discord Server and Community Engagement Setup",
+        "description": "Set up a Discord server with specified channels, integrate the Discord invite link into the Steam store page, and initiate weekly community engagement on Reddit and Filipino gaming Discord servers.",
+        "details": "1. Create a new Discord server named appropriately for the Sarimanok game community.\n2. Configure the server with the following text channels: #general, #bug-reports, #feedback, and #announcements, ensuring proper channel order and visibility for new members.\n3. Enable Discord Community features including server rules, moderation settings, and verification to foster a healthy, non-toxic environment.\n4. Customize the server with branding elements consistent with the game's Filipino folklore theme, such as banners, emojis, and server icon.\n5. Generate a permanent invite link for the Discord server.\n6. Add the Discord invite link prominently on the Steam store page, coordinating with the team managing the Steam page assets and updates.\n7. Establish a schedule and process for posting weekly development updates to r/Philippines subreddit and gameplay clips to r/PHGamers subreddit, ensuring content aligns with community guidelines.\n8. Research and join existing Filipino gaming Discord servers to actively engage with the community, share updates, and gather feedback.\n9. Document server setup and community engagement procedures for ongoing maintenance and future team members.\n\nThis approach aligns with best practices for Discord server setup and community building as outlined in recent guides and videos, emphasizing clear channel structure, moderation, and active engagement.",
+        "testStrategy": "- Verify the Discord server is created with all specified channels (#general, #bug-reports, #feedback, #announcements) in correct order and accessible to new members.\n- Confirm Community features are enabled, including rules and moderation settings.\n- Check that the server branding (icon, banner, emojis) matches the game's theme.\n- Test the Discord invite link for permanence and accessibility.\n- Validate that the Discord invite link is correctly added and visible on the Steam store page.\n- Confirm weekly posts are made to r/Philippines and r/PHGamers subreddits with appropriate content and timing.\n- Verify membership and active participation in Filipino gaming Discord servers.\n- Collect feedback from community members to assess engagement quality and server health.",
+        "status": "pending",
+        "dependencies": [
+          3
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Trailer Production and Editing for Sarimanok Game",
+        "description": "Produce a polished game trailer featuring key gameplay moments and thematic elements, then upload it to the Steam primary trailer slot.",
+        "details": "1. Draft a storyboard with 5-7 key shots capturing: Sarimanok hero introduction, enemy swarms approaching, weapon variety showcase, Filipino creature spotlight, and victory/dawn sequence.\n2. Record gameplay footage ensuring the first 4-5 seconds show direct gameplay without logos or title cards, focusing on core mechanics rather than tutorials.\n3. Edit the trailer to be under 60 seconds, maintaining a dynamic pace that highlights gameplay and thematic elements.\n4. Add culturally appropriate music and sound effects consistent with the game's Filipino folklore theme, leveraging existing audio assets or newly sourced ones.\n5. Export the final trailer in a Steam-compatible format and upload it to the Steam store page's primary trailer slot.\n\nImplementation should align with the existing Phaser.js game architecture and asset pipeline, referencing current gameplay scenes and audio integration patterns from Tasks 6 and 11. Coordination with the Steam store page setup (Tasks 3 and 10) is essential to ensure proper trailer upload and presentation.",
+        "testStrategy": "1. Review the storyboard to confirm inclusion of all specified key shots.\n2. Verify the recorded footage starts with gameplay within the first 4-5 seconds and contains no logos or title cards at the start.\n3. Confirm the final trailer duration is under 60 seconds.\n4. Check that the trailer showcases core gameplay mechanics without tutorial content.\n5. Ensure music and sound effects are culturally authentic and synchronized with visuals.\n6. Upload the trailer to the Steam store page and verify it appears correctly in the primary trailer slot.\n7. Test playback on multiple devices and browsers to confirm video and audio quality.",
+        "status": "pending",
+        "dependencies": [
+          3,
+          6,
+          10,
+          11
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Prepare and Submit Sarimanok Game Demo for Next Fest 2026",
+        "description": "Finalize the Sarimanok game demo with polished art and gameplay, verify build constraints, capture final screenshots, and submit the demo for Next Fest review by February 9, 2026.",
+        "details": "1. Ensure all game features are fully implemented and integrated, achieving code complete status as per the milestone.\n2. Replace any placeholder art with final, real art assets consistent with the game's Filipino folklore theme, coordinating with the art team if needed.\n3. Build the demo with a strict 10-minute playtime limit, implementing a demo end screen that includes a clear call-to-action (CTA) for wishlist addition.\n4. Capture 5 to 10 high-quality final screenshots showcasing key gameplay moments and art, ensuring resolution and composition meet Steam and Next Fest standards.\n5. Thoroughly test the demo build on all target platforms to verify stability, performance, and that the time limit and end screen function correctly.\n6. Prepare the demo submission package according to Next Fest guidelines, including metadata, screenshots, and build files.\n7. Submit the demo via the official Next Fest submission portal before the February 9, 2026 deadline.\n\nThis task requires coordination with previous tasks that finalized the Steam store page, capsule art, and gameplay assets to ensure consistency and quality. The demo build process should follow the existing Phaser.js-based architecture and asset management patterns established in the project.",
+        "testStrategy": "1. Confirm all features are present and functional in the demo build, matching the code complete milestone criteria.\n2. Verify the demo build enforces a 10-minute playtime limit and transitions to the demo end screen automatically.\n3. Check that the demo end screen displays a wishlist CTA that is clickable and correctly linked.\n4. Review all final screenshots for quality, resolution, and thematic consistency; ensure 5-10 screenshots are captured.\n5. Perform cross-platform testing to ensure the demo runs without crashes or major bugs.\n6. Validate that the submission package meets all Next Fest requirements and that the submission is completed before the deadline.\n7. Document any issues encountered during testing and confirm their resolution before final submission.",
+        "status": "pending",
+        "dependencies": [
+          3,
+          4,
+          10,
+          13
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Playtesting Coordination and Press Kit Preparation",
+        "description": "Conduct a structured playtesting phase by distributing the game build to selected testers, collect and document their feedback via a custom form, and prepare a comprehensive press kit including visual and textual assets. Identify and engage relevant influencers with personalized outreach and distribute Steam keys ahead of Next Fest.",
+        "details": "1. Select 3-5 friends and family members as initial playtesters, ensuring a mix of familiarity and fresh perspectives to gather diverse feedback. 2. Create a detailed feedback form using Google Forms or a similar platform, including both quantitative rating scales and qualitative open-ended questions focused on gameplay mechanics, UI/UX, difficulty, and overall enjoyment, following best practices for effective playtesting feedback collection[1][2]. 3. Send the current game build to the selected testers with clear instructions and a deadline for feedback submission. 4. Collect all feedback responses and systematically document them, categorizing by theme and priority to identify common issues and suggestions. 5. Prepare a press kit folder containing: - High-resolution screenshots in PNG format showcasing key gameplay moments and art style. - A polished game trailer file or a reliable link to the hosted video. - The game logo with transparent background in PNG format. - Capsule art images consistent with Steam store requirements. - Both short and long-form game descriptions emphasizing unique features and cultural themes. - Developer biography and professional contact information for media inquiries. 6. Research and compile a list of 20-30 small to mid-sized YouTubers who focus on survivor games and 10-15 Twitch streamers specializing in roguelite games, prioritizing those with engaged audiences and relevant content. 7. Draft a personalized email template for influencer outreach that introduces the game, highlights its unique aspects, and invites them to play and share feedback. 8. Coordinate the distribution of Steam keys to the identified influencers ahead of the Steam Next Fest event to maximize exposure and gather early impressions. 9. Ensure all materials and communications align with the project's branding and cultural authenticity as established in prior tasks (e.g., Tasks 3, 10, 13).",
+        "testStrategy": "- Confirm the feedback form is comprehensive, accessible, and collects both qualitative and quantitative data effectively. - Verify that all selected testers receive the build and submit feedback within the specified timeframe. - Review collected feedback for completeness, relevance, and actionable insights, ensuring documentation is clear and categorized. - Check that the press kit folder contains all required assets in correct formats and resolutions, matching Steam and media standards. - Validate the influencer lists for relevance, audience size, and content alignment with the game genre. - Test the personalized email template for clarity, professionalism, and personalization placeholders. - Confirm that Steam keys are generated, functional, and successfully sent to influencers before the Next Fest deadline. - Coordinate with marketing or community leads to ensure outreach efforts are tracked and followed up appropriately.",
+        "status": "pending",
+        "dependencies": [
+          3,
+          10,
+          13
+        ],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 16,
+        "title": "Steam Final Preparation and Launch Coordination",
+        "description": "Complete all final preparations for the Steam launch including submitting the final build for review, finalizing the store page and community hub, setting the launch date, and preparing launch day marketing materials.",
+        "details": "1. Submit the final game build to Steam using the Steamworks SDK and ContentBuilder tool, ensuring the build is stable, polished, and meets all Steam technical requirements. 2. Finalize the Steam store page by updating descriptions, tags, capsule art, and screenshots to their final versions, ensuring compliance with Steam's content guidelines and visual standards. 3. Set up the Steam Community Hub with appropriate channels, rules, and branding consistent with the game's Filipino folklore theme. 4. Schedule and set the official launch date on Steam to approximately March 8, 2026, coordinating with marketing timelines. 5. Test the Steam store page and community hub to verify correct display and functionality across devices and browsers. 6. Prepare Day 1 patch notes detailing any last-minute fixes or updates planned for launch day. 7. Draft and schedule social media posts for launch day across all relevant channels, incorporating shareable GIF clips created from gameplay footage to maximize engagement. 8. Coordinate with the marketing and community teams to ensure all launch assets and announcements are aligned and ready for deployment.",
+        "testStrategy": "- Verify the final game build uploads successfully to Steam and passes Steam's review process without major issues. - Confirm the Steam store page displays the finalized descriptions, images, and tags correctly on desktop and mobile views. - Check that the Steam Community Hub is fully functional with all configured channels, rules, and branding elements visible and accessible. - Validate that the launch date is correctly set and reflected on the Steam store page. - Test all social media posts and GIF clips for proper formatting, links, and scheduling accuracy. - Review Day 1 patch notes for completeness and clarity, ensuring they are ready for publication on launch day. - Conduct cross-platform checks to ensure the store page and community hub render correctly on various browsers and devices.",
+        "status": "pending",
+        "dependencies": [
+          3,
+          10,
+          12,
+          13,
+          15
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 17,
+        "title": "Next Fest Demo Launch and Community Engagement Management",
+        "description": "Execute the Next Fest demo launch by setting the demo live, posting announcements, monitoring bugs and feedback, engaging with the community, and tracking wishlist growth during the event period.",
+        "details": "1. Schedule and deploy the Sarimanok game demo to go live at 10am PDT on February 23, ensuring the build is stable and accessible via Steam as per Task 14 and Task 16 preparations.\n2. Post coordinated announcements across all official channels including Steam, Discord (Task 12), Reddit (r/Philippines, r/PHGamers), Facebook, and Filipino gaming Discord servers daily during the event.\n3. Monitor the demo for immediate critical bugs on launch day and throughout the Next Fest period; prioritize and fix any critical issues promptly.\n4. Actively engage in Steam discussions and respond to player comments to foster community interaction and gather qualitative feedback.\n5. Track daily wishlist growth metrics via Steamworks dashboard to assess player interest and campaign effectiveness.\n6. Maintain a daily log of feedback and bug reports, coordinating with the development team for timely fixes.\n7. Post daily updates and thank players for their feedback to encourage continued participation and goodwill.\n\nImplementation should leverage existing community infrastructure (Discord server setup in Task 12), Steamworks integration (Tasks 14 and 16), and community outreach strategies established in prior tasks. Use event-driven state management patterns to handle live demo state transitions and feedback processing efficiently, referencing the state management approaches discussed in the codebase analysis.",
+        "testStrategy": "- Verify the demo is live and accessible on Steam at the scheduled time (10am PDT, Feb 23).\n- Confirm announcements are posted on all specified channels on launch day and daily during Next Fest.\n- Monitor bug tracking logs to ensure critical bugs are identified and fixed promptly.\n- Check Steam discussion boards and community channels for active engagement and timely developer responses.\n- Validate daily wishlist growth data is collected and reported accurately from Steamworks.\n- Review daily community posts for consistency and player appreciation messages.\n- Conduct post-event analysis to confirm all feedback was logged and addressed appropriately.",
+        "status": "pending",
+        "dependencies": [
+          12,
+          14,
+          16
+        ],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 18,
+        "title": "Early Access Launch and Post-Launch Community Management",
+        "description": "Execute the Sarimanok game's Early Access launch on Steam, including pressing the launch button, posting announcements across key channels, monitoring feedback and bugs, and planning subsequent updates.",
+        "details": "1. Coordinate with Steamworks to press the LAUNCH button for Sarimanok's Early Access release around March 8, 2026, ensuring all final build and store page preparations from Task 16 are complete.\n2. Post launch announcements simultaneously on r/Philippines, r/PHGamers, Filipino gaming communities, Twitter/X, and the official Discord server (established in Task 12), using consistent messaging and branding.\n3. Monitor Steam discussions and community hubs actively for bug reports and early reviews; triage issues to identify critical bugs.\n4. Implement a rapid hotfix process to address critical bugs immediately upon discovery, coordinating with the development team.\n5. Engage with player feedback constructively by responding on Steam forums, Discord, and social media to foster a positive community.\n6. Publicly thank early buyers and reviewers to build goodwill and encourage ongoing support.\n7. Collect and analyze launch feedback to plan Update 1, prioritizing fixes and improvements based on player input.\n8. Schedule a rest period for the team after launch, especially considering the personal milestone of the lead developer's upcoming baby arrival on March 21.\n9. Celebrate the successful Early Access launch with the team to maintain morale.\n\nThis task builds upon the Steam final preparations and launch coordination (Task 16) and community engagement setup (Task 12) to ensure a smooth Early Access launch and effective post-launch support.",
+        "testStrategy": "- Confirm the Steam Early Access launch occurs on or near March 8, 2026, with the game live and accessible to players.\n- Verify announcements are posted on all specified channels (r/Philippines, r/PHGamers, Filipino gaming communities, Twitter/X, Discord) within 24 hours of launch.\n- Monitor Steam discussion boards and Discord for bug reports and player feedback; log and categorize issues.\n- Validate that critical bugs identified post-launch are addressed with hotfixes within 24-48 hours.\n- Check responsiveness and tone of developer replies to player feedback across platforms.\n- Confirm public acknowledgments and thanks to early buyers and reviewers are posted.\n- Review the Update 1 plan to ensure it reflects prioritized launch feedback.\n- Ensure the team schedules and takes a rest period post-launch as planned.\n- Document a team celebration event or acknowledgment of launch success.",
+        "status": "pending",
+        "dependencies": [
+          12,
+          16
+        ],
+        "priority": "high",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-12-04T06:41:42.685Z",
+      "updated": "2025-12-04T07:06:26.074Z",
+      "description": "Non-coding tasks: Steam setup, art, audio, marketing, and launch"
+    }
   }
 }

@@ -1082,6 +1082,79 @@ Show results screen (same as win, different header)
 - [ ] Can retry, shop, or menu from results
 - [ ] No console errors
 
+### Dawn Transition Implementation
+
+**Technical Approach:** The night-to-day transition uses a **CanvasModulate** node to apply a color filter over all game elements. No duplicate tile art is needed—the same tiles are used for both night and day, with the filter creating the time-of-day effect.
+
+**Key Principle:** Ericka draws tiles in **normal/natural colors** (as if daytime). The CanvasModulate applies the night tint during gameplay. At victory, the tint fades to reveal the "dawn" version that was there all along.
+
+**Scene Structure:**
+
+```
+Main Scene
+├── ParallaxBackground (Sky Layer)
+│   ├── Sky (ColorRect or Sprite2D - gradient)
+│   ├── Moon (Sprite2D - SOURCED, not Ericka)
+│   └── Stars (Sprite2D or particles - SOURCED)
+│
+├── CanvasModulate (Night Filter - tints everything below)
+│
+├── Background (Bahay kubo, trees - gets tinted)
+├── TileMap (Ground/decorations - gets tinted)
+├── Player (gets tinted)
+├── Enemies (gets tinted)
+└── Camera2D
+```
+
+**Color Values:**
+
+| State            | CanvasModulate Color    | Effect                     |
+| ---------------- | ----------------------- | -------------------------- |
+| Night (gameplay) | `Color(0.6, 0.6, 0.8)`  | Slight blue/cool tint      |
+| Dawn (victory)   | `Color(1.0, 0.95, 0.9)` | Warm white, natural colors |
+
+**Sky Elements (SOURCED - Not Ericka's Task):**
+
+- **Moon:** Source from asset pack or free sprites (32x32 or 48x48)
+- **Stars:** Source from asset pack, or use simple white dots/particles
+- **Sky gradient:** Can be created in Godot using `GradientTexture2D` (no art file needed)
+
+**Transition Code Example:**
+
+```gdscript
+func trigger_dawn_transition():
+    var tween = create_tween()
+
+    # 1. Fade out moon and stars (2 seconds)
+    tween.tween_property($Moon, "modulate:a", 0.0, 2.0)
+    tween.parallel().tween_property($Stars, "modulate:a", 0.0, 2.0)
+
+    # 2. Shift sky gradient from night blue to warm dawn
+    tween.parallel().tween_property($Sky, "modulate", Color(1.0, 0.8, 0.6), 2.0)
+
+    # 3. Shift CanvasModulate from night tint to warm dawn
+    tween.parallel().tween_property($CanvasModulate, "color", Color(1.0, 0.95, 0.9), 2.0)
+
+    await tween.finished
+    # Continue to victory screen, play COCKADOODLEDOO, etc.
+```
+
+**Visual Timeline:**
+
+| Time               | Sky                   | Moon/Stars | CanvasModulate       |
+| ------------------ | --------------------- | ---------- | -------------------- |
+| 0:00-29:59         | Dark blue/purple      | Visible    | Night tint (blue)    |
+| 30:00 (transition) | Shifts to orange/pink | Fading out | Shifts to warm white |
+| 30:02+             | Warm dawn colors      | Gone       | Natural colors       |
+
+**Optional Polish (Nice-to-Have):**
+
+- Sun sprite that fades in and rises as moon fades out
+- Bird silhouettes flying across during dawn sequence
+- Clouds that drift and get tinted warm
+
+These are not required for MVP but can be added for extra polish if time permits.
+
 ---
 
 ## Feature 9: Endless Mode (SIMPLIFIED FOR EA)

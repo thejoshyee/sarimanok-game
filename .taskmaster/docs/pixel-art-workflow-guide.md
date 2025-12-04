@@ -213,19 +213,21 @@ Creates the Filipino provincial atmosphere. Player cannot reach this area.
 
 **Night Sky:**
 
-- Deep blue/purple gradient (created in Godot or as overlay image)
+- Deep blue/purple gradient (created in Godot using `GradientTexture2D`)
 - Darker at top, slightly lighter near horizon
 
-**Moon:**
+**Moon (SOURCED - Not Ericka's Task):**
 
 - Large, prominent moon for atmosphere
 - Positioned upper-right or upper-left
 - Provides the "night" lighting justification
+- Source from itch.io asset pack or free sprites
 
-**Stars:**
+**Stars (SOURCED - Not Ericka's Task):**
 
 - Scattered small white/yellow dots
-- Can be static or subtle twinkle animation
+- Can be static or use Godot particles for twinkle
+- Source from asset pack or create simple dots in Godot
 
 ### Technical Implementation in Godot
 
@@ -261,21 +263,22 @@ When player survives to dawn:
 - Moon fades out
 - Stars disappear
 - Bahay kubos become silhouettes against dawn sky
+- Game tiles/characters shift from cool night tint to warm dawn colors
 
-**Dawn Overlay:** `dawn_overlay.png` (640x360 gradient) - can be created in Aseprite or Godot
+**How the Transition Works (Code-Based):**
 
-**How to Create Dawn Overlay in Aseprite:**
+| Element                    | How It's Handled                             | Ericka's Task? |
+| -------------------------- | -------------------------------------------- | -------------- |
+| Night filter on everything | `CanvasModulate` node tints the scene blue   | NO - code only |
+| Dawn color shift           | Tween the `CanvasModulate` to warm white     | NO - code only |
+| Moon sprite                | **SOURCED** from asset pack (fades out)      | NO - buy/find  |
+| Stars                      | **SOURCED** or Godot particles (fade out)    | NO - buy/find  |
+| Sky gradient               | `GradientTexture2D` in Godot (shifts colors) | NO - code only |
+| Sun sprite (optional)      | **SOURCED** from asset pack (fades in)       | NO - buy/find  |
 
-1. File > New: 640x360 pixels, RGBA mode
-2. Select the Gradient tool (G)
-3. Set foreground color to warm orange/pink (#FF9966 or similar)
-4. Set background color to dark purple (#2D1B4E or similar)
-5. Draw vertical gradient from top (purple) to bottom (orange)
-6. Optional: Add a subtle yellow band near the horizon for sun glow
-7. Export as `dawn_overlay.png`
-8. In Godot, this overlays the game with reduced opacity during the dawn victory sequence
+> **Key Principle:** Ericka draws tiles in **normal/natural colors**. The `CanvasModulate` applies the night filter during gameplay. At victory, the filter fades to reveal the "dawn" colors that were there all along. No duplicate art needed!
 
-**Alternative:** Create in Godot using a ColorRect with a GradientTexture2D - no art file needed.
+**See PRD Feature 8 for full implementation details and code examples.**
 
 ---
 
@@ -1351,8 +1354,8 @@ sarimanok-game/
 │   │   │       ├── racing_legs_icon.png
 │   │   │       └── magnetic_aura_icon.png
 │   │   └── environment/
-│   │       ├── bahay_kubo_background.png
-│   │       └── dawn_overlay.png
+│   │       └── bahay_kubo_background.png
+│   │       # dawn_overlay NOT NEEDED - handled by GradientTexture2D in Godot
 │   ├── tilesets/
 │   │   ├── tileset_generic.png        # SOURCED
 │   │   ├── tileset_filipino.png       # Ericka creates
@@ -1766,7 +1769,7 @@ When Josh imports these sprite sheets:
 - [ ] bamboo_fence_middle.png (32x32) or in tileset
 - [ ] bamboo_fence_right.png (32x32) or in tileset
 - [ ] bahay_kubo_background.png (64x64 or 96x64)
-- [ ] dawn_overlay.png (640x360 gradient)
+- ~~dawn_overlay.png~~ — NOT NEEDED, handled by `GradientTexture2D` in Godot
 
 **OR export as single tileset:**
 

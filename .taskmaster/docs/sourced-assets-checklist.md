@@ -80,6 +80,20 @@ You won't have final art yet - that's okay! Launch with placeholders, upgrade la
 - [ ] Magnetic Aura icon (16x16)
 - **Sources:** [Game-icons.net](https://game-icons.net) or included in UI pack
 
+### Sky/Dawn Elements (for night-to-day transition)
+
+> **Note:** These are NOT Ericka's task. Source from asset packs or create in Godot.
+
+- [ ] Moon sprite (32x32 or 48x48) — Source from asset pack
+- [ ] Stars (small sprites or use Godot particles) — Source or code-generated
+- [ ] Sun sprite (32x32 or 48x48) — _Optional polish_, fades in during dawn
+- **Dawn sky gradient:** Created in Godot using `GradientTexture2D` — NO art file needed
+- **Night filter:** Handled by `CanvasModulate` node in code — NO art file needed
+- **Sources:**
+  - [itch.io](https://itch.io/game-assets) — search "moon pixel art", "stars pixel"
+  - [Kenney.nl](https://kenney.nl) — check space/nature packs
+  - [OpenGameArt](https://opengameart.org) — free options
+
 ---
 
 ## 🔊 Audio Assets
