@@ -1,0 +1,93 @@
+{
+	"meta": {
+		"generatedAt": "2025-12-04T21:35:36.535Z",
+		"tasksAnalyzed": 10,
+		"totalTasks": 10,
+		"analysisCount": 10,
+		"thresholdScore": 5,
+		"projectName": "Taskmaster",
+		"usedResearch": true
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 1,
+			"taskTitle": "Review existing Godot project structure and scenes",
+			"complexityScore": 5,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break this task into: (1) Open the project and identify Godot version, main scene entry point, and autoloads; (2) Map the filesystem/folder layout (players, enemies, UI, systems); (3) Catalog key scenes and their responsibilities (main, gameplay, menus, HUD, etc.); (4) Identify existing systems for saving, audio, input mapping, and other cross-cutting concerns; (5) Summarize MVP feature coverage (implemented/partial/missing) and share findings with the team in a short document.",
+			"reasoning": "Medium analysis effort with no major implementation, but requires systematic exploration, structured note-taking, and familiarity with Godot 4 scene and filesystem organization best practices [1][2]."
+		},
+		{
+			"taskId": 2,
+			"taskTitle": "Map PRD features to existing implementation",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break this task into: (1) Extract a flat list of MVP features from the PRD; (2) Design the feature matrix structure (columns, statuses, links to scenes/scripts); (3) Inspect the project to locate implementations for each feature and fill in the matrix; (4) Manually verify one concrete example per feature category in a running build; (5) Note deviations from the PRD (stats, unlock rules, UX) and any reusable technical foundations (pooling, data resources, managers); (6) Review the matrix with the team and adjust priorities/dependencies for follow-up tasks.",
+			"reasoning": "Requires careful cross-referencing between design spec and code, hands-on verification in-game, and structured documentation, which is more complex than a simple audit but still bounded in scope [1][9]."
+		},
+		{
+			"taskId": 3,
+			"taskTitle": "Confirm and document technology stack and patterns",
+			"complexityScore": 6,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break this task into: (1) Confirm engine version, scripting languages, and active addons/plugins from project metadata; (2) Inventory autoload singletons and manager scripts, noting their responsibilities; (3) Identify architectural patterns in use (data-driven Resources, pooling, partitioning, scene organization for menus/gameplay); (4) Verify key managers in-game (e.g., audio, input, game state) behave as documented; (5) Produce a concise architecture/tech-stack overview document in the repo.",
+			"reasoning": "Moderate complexity because it spans both configuration-level details and higher-level architecture patterns, and the output must be a coherent reference document aligned with Godot best practices [1][6]."
+		},
+		{
+			"taskId": 4,
+			"taskTitle": "Align player and character select features with codebase",
+			"complexityScore": 8,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Break this task into: (1) Analyze the existing player character scene and movement/combat implementation; (2) Define stats and configuration for the three Sarimanok variants following current conventions; (3) Implement or adjust the character scenes/resources to support variants; (4) Integrate variants into the character select UI within the current UI framework; (5) Wire unlock logic into the existing save/achievement or GameState system; (6) Playtest unlock and gameplay flows from a clean profile; (7) Fix any integration bugs and update documentation for character selection and unlocks.",
+			"reasoning": "High complexity due to integrating new variants across gameplay, UI, and persistence, and needing to respect and reuse existing movement, animation, and unlocking patterns without regressions [3][6]."
+		},
+		{
+			"taskId": 5,
+			"taskTitle": "Integrate enemy roster and spawn system with existing managers",
+			"complexityScore": 8,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Break this task into: (1) Review current enemy scenes, behaviors, and spawn manager architecture; (2) Specify stats and behaviors for Green Duwende, Red Duwende, Santelmo, and Manananggal in project terms; (3) Implement or adjust enemy scenes/scripts to fit existing physics, damage, and pooling systems; (4) Implement the time-based spawn timeline and scaling rules within the current spawn manager; (5) Hook enemy drops into existing XP and gold pickup systems; (6) Run timed test sessions to log spawn patterns, performance, and correctness; (7) Tune balance/performance and document the spawn timeline.",
+			"reasoning": "High complexity because it involves enemy content creation, integration with an existing spawn pipeline, performance constraints, and tuning over a long session length typical of horde-survival games [1][6]."
+		},
+		{
+			"taskId": 6,
+			"taskTitle": "Finalize weapon and passive systems using data-driven resources",
+			"complexityScore": 8,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Break this task into: (1) Audit current weapon and passive implementations and any Resource-based configuration system; (2) Design or refine the data schema for weapon/passive resources (stats, levels, effects, debuffs); (3) Implement or refactor weapon and passive definitions (Peck, Wing Slap, etc.) into resources; (4) Ensure the weapon manager loads and uses these resources consistently without duplicate code paths; (5) Align behaviors and upgrade curves with the PRD while matching existing naming and folder structure; (6) Create or use a debug mode to rapidly acquire and upgrade all weapons and passives for testing; (7) Fix issues and add brief documentation for adding new weapons/passives via data resources.",
+			"reasoning": "High complexity because it touches core combat systems, requires careful refactoring to a data-driven pattern, and must not fragment weapon logic, which is a common design concern in Godot action games [1][9]."
+		},
+		{
+			"taskId": 7,
+			"taskTitle": "Validate level-up, pickup, shop, and save systems against PRD",
+			"complexityScore": 9,
+			"recommendedSubtasks": 8,
+			"expansionPrompt": "Break this task into: (1) Inventory existing XP/level-up logic, pickups, shop implementation, and save/load format; (2) Compare current behavior to the PRD (XP curve, level-up choices, pickup magnet rules, shop upgrades, save schema); (3) Plan targeted changes that preserve existing serialization and UI patterns; (4) Implement adjustments to XP, level-up selection, pickups, and shop effects; (5) Extend or adjust save/load code to cover all required progression data safely; (6) Create test scenarios or saves to quickly exercise leveling, shopping, and persistence; (7) Perform multiple runs to validate behavior and guard against save corruption; (8) Document any intentional deviations and remaining risks/tech-debt for progression systems.",
+			"reasoning": "Very high complexity due to the number of interacting systems (progression, economy, persistence), the risk of corrupting saves, and the need to align with design while preserving existing formats and UI [2][9]."
+		},
+		{
+			"taskId": 8,
+			"taskTitle": "Ensure timer, win/lose conditions, modes, and scoring fit existing flow",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break this task into: (1) Analyze current game flow for time tracking, mode handling, and transitions between gameplay and results; (2) Implement or adjust Story and Endless modes, including unlock conditions for Endless; (3) Implement timer-based win/lose conditions, including Story victory at 30:00 and any special transitions; (4) Implement or refine scoring rules and high-score tracking per mode; (5) Integrate mode selection and results into existing menus and result screens; (6) Play through both modes to validate flows, unlocks, scoring, and navigation with no errors.",
+			"reasoning": "Moderately high complexity since it modifies core flow control and state management but builds on existing scene/navigation patterns, which constrains and guides the implementation [1][6]."
+		},
+		{
+			"taskId": 9,
+			"taskTitle": "Align UI screens and settings with current UI framework",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break this task into: (1) Audit existing UI scenes (menus, shop, settings, HUD, pause, level-up, victory/defeat, tutorials); (2) Identify gaps versus the PRD (missing screens, elements, or states such as Endless lock, gold display, weapon HUD); (3) Implement missing or adjusted UI elements using existing themes, controls, and localization hooks; (4) Wire UI elements to underlying systems (shop, scores, settings persistence) without introducing a new UI framework; (5) Test navigation and interaction across all screens with supported input devices; (6) Fix layout or interaction issues at target resolution and update any UI documentation or screenshots for the team.",
+			"reasoning": "Moderately high complexity because it spans many screens and must integrate cleanly with existing styles, navigation patterns, and persistence of settings, but is mostly additive rather than deep refactoring [2][5]."
+		},
+		{
+			"taskId": 10,
+			"taskTitle": "Refine performance, pooling, and code quality within existing architecture",
+			"complexityScore": 9,
+			"recommendedSubtasks": 8,
+			"expansionPrompt": "Break this task into: (1) Profile the game under late-game/high-load scenarios to identify performance bottlenecks; (2) Review and extend existing pooling or spatial partitioning systems for enemies, projectiles, pickups, and effects; (3) Optimize identified hotspots (spawning, AI, physics, rendering) while preserving behavior; (4) Remove or consolidate redundant and dead code uncovered during previous tasks; (5) Standardize patterns for managers, autoloads, and utility modules in line with current architecture; (6) Run any existing linting or static checks and address issues; (7) Re-profile to confirm performance goals are met without regressions; (8) Capture remaining tech debt and follow-up refactors in a short backlog document.",
+			"reasoning": "Very high complexity because it requires performance profiling, targeted optimization of multiple systems, careful refactoring within an established architecture, and regression-safe cleanup of shared code paths [1][9]."
+		}
+	]
+}
