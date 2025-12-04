@@ -19,12 +19,16 @@ sarimanok-art/
 |   |-- tiles/                 Filipino-themed tiles
 |   '-- palette.aseprite       MASTER COLOR PALETTE (load this first!)
 |
-'-- exports/                   <-- Finished PNGs ready for the game
-    |-- characters/
-    |-- enemies/
-    |-- weapons/
-    |-- icons/
-    '-- tiles/
+|-- exports/                   <-- Finished PNGs ready for the game
+|   |-- characters/
+|   |-- enemies/
+|   |-- weapons/
+|   |-- icons/
+|   '-- tiles/
+|
+'-- references/                <-- Inspiration and reference materials
+    |-- generic/               Downloaded assets to use as reference
+    '-- gen-ai/                ChatGPT/Midjourney mockups for art direction
 
 
 --------------------------------------------------------------------------------
