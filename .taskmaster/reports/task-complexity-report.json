@@ -1,0 +1,93 @@
+{
+	"meta": {
+		"generatedAt": "2025-12-04T23:08:25.058Z",
+		"tasksAnalyzed": 10,
+		"totalTasks": 10,
+		"analysisCount": 10,
+		"thresholdScore": 5,
+		"projectName": "Taskmaster",
+		"usedResearch": true
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 1,
+			"taskTitle": "Core architecture & project setup",
+			"complexityScore": 9,
+			"recommendedSubtasks": 10,
+			"expansionPrompt": "Break this into subtasks covering: (1) project configuration (viewport, stretch, input, audio buses, layers/groups), (2) base scene scaffolding for Main/Player/Enemy/Projectile/Pickup/UI, (3) GameState singleton design (state model, meta-progression schema, JSON versioning and backup policy), (4) save/load implementation and error handling, (5) object pooling utility API and integration patterns, (6) global balance data structure (constants, resources, or data files), (7) performance baseline and profiling checklist (including spawn/test scenes), (8) folder structure and naming conventions, (9) CI-friendly export/build sanity check, and (10) documentation tasks for onboarding a small team. Explain interfaces and responsibilities for each system, plus how they decouple to minimize future refactors.[1][5]",
+			"reasoning": "This spans engine configuration, core runtime architecture, global state, persistence, and performance, which are all cross-cutting and hard to change later; it also sets patterns other tasks must follow, so it benefits from fine-grained subtasks that lock in conventions and interfaces.[1][5]"
+		},
+		{
+			"taskId": 2,
+			"taskTitle": "Player controller & character variants",
+			"complexityScore": 8.5,
+			"recommendedSubtasks": 8,
+			"expansionPrompt": "Expand into subtasks for: (1) CharacterBody2D input and movement (8-directional, acceleration, smoothing), (2) visual presentation (sprite flip, minimal animation, feedback hooks), (3) stat model for base + per-variant modifiers wired into GameState, (4) damage pipeline, invincibility frames, death state, and feedback (flash, hitstop/knockback), (5) character select UI flow and data source, (6) unlock conditions implementation and persistence, (7) integration test scene to validate stats and unlocks, and (8) debugging utilities (overlays, time scaling, forced unlocks). Make explicit how stats are computed and where variant logic lives to keep later balancing straightforward.[1][5]",
+			"reasoning": "Player movement and survivability directly drive feel and balance, and variant logic touches meta-progression and UI; the work is conceptually cohesive but touches multiple systems, so several focused subtasks keep character logic testable and change-friendly.[1][5]"
+		},
+		{
+			"taskId": 3,
+			"taskTitle": "Enemy system, behaviors, and spawning",
+			"complexityScore": 9,
+			"recommendedSubtasks": 9,
+			"expansionPrompt": "Decompose into subtasks: (1) enemy base class API (health, damage, movement hooks, events), (2) data-driven enemy definitions (stats, drops, behavior flags), (3) simple chaser behavior for Green/Red Duwende, (4) Santelmo behavior plus projectile pattern, (5) Manananggal boss state machine (entrance, attack cycles, death), (6) difficulty scaling functions and tuning surfaces, (7) spawn manager (timelines, edge spawning, scaling, debug controls), (8) pooling integration for enemies and projectiles, and (9) performance and profiling tasks for 200+ instances. Clarify how enemy data and behavior scripts interact to support adding new enemies safely later.[1][5]",
+			"reasoning": "This combines AI behavior, data-driven stats, timeline-based spawning, and performance constraints, each of which is non-trivial; separating base infrastructure, individual behaviors, and scaling/spawn rules reduces coupling and eases tuning.[1][5]"
+		},
+		{
+			"taskId": 4,
+			"taskTitle": "Weapons, debuffs, and passives (data-driven)",
+			"complexityScore": 9.5,
+			"recommendedSubtasks": 10,
+			"expansionPrompt": "Split into subtasks: (1) Weapon base scene and lifecycle (cooldowns, targeting, firing hooks), (2) WeaponData resource schema and loading, (3) concrete implementations for each core weapon (Peck, Wing Slap, Feather Shot, Spiral Feathers), (4) clone weapon variations (Ice Shard, Flame Wing) using shared data patterns, (5) debuff framework (application, stacking rules, ticking, removal) with slow as first implementation, (6) passive system and stat-aggregation design tied into GameState, (7) upgrade tier logic and validation against caps and slot limits, (8) feedback layer (damage numbers, hit flashes) abstracted from weapon logic, (9) test harness scene for weapon and passive behavior, and (10) balancing/debug tools for inspecting final computed stats and DPS. Emphasize data-driven patterns so designers can tweak values without code changes.[1][5]",
+			"reasoning": "A generic auto-firing weapon framework plus debuffs and passives forms a dense network of interactions and data dependencies; robust data-driven design and clear separation between data, behavior, and feedback are critical and deserve multiple well-defined subtasks.[1][5]"
+		},
+		{
+			"taskId": 5,
+			"taskTitle": "XP, level-up, and choice system",
+			"complexityScore": 8,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Break into: (1) XP gem pickup → XP system wiring and level-curve implementation, (2) HUD elements for XP/HP/level progress, (3) level-up state management (pause, blocking input, resume), (4) upgrade pool logic (eligibility rules, slot caps, removal of maxed items), (5) level-up UI layout and interaction, (6) integration with weapons/passives/start loadout, and (7) visual/audio feedback for leveling and selection. Specify algorithms for choice generation and how they remain deterministic or debuggable when needed.[1][3]",
+			"reasoning": "The XP and level-up flow is simpler than core combat systems but still involves game economy rules, UI, and integration with weapons/passives; a moderate number of subtasks keeps business logic, presentation, and economy rules distinct.[1][3]"
+		},
+		{
+			"taskId": 6,
+			"taskTitle": "Pickups, magnet behavior, and HUD integration",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Expand into: (1) XP and Gold pickup scenes with detection, lifetime, and pooling hooks, (2) magnet behavior component that computes attraction forces based on pickup range, (3) integration of magnet range with player stats and passives, (4) HUD layout implementation for HP, XP, timer, score, and weapon slots, (5) wiring pickups to GameState XP and Gold counters plus HUD updates, and (6) audiovisual feedback hooks for attraction and collection. Clarify which systems own timer/score display to avoid duplication with other tasks.[1][5]",
+			"reasoning": "This work is mostly straightforward engineering with some tuning of magnet behavior and HUD layout; the main risk is cross-task overlap with other HUD/timer/score responsibilities, which clear subtask ownership can mitigate.[1][5]"
+		},
+		{
+			"taskId": 7,
+			"taskTitle": "Meta-progression: shop, save system, and modes",
+			"complexityScore": 8.5,
+			"recommendedSubtasks": 8,
+			"expansionPrompt": "Decompose into: (1) main menu scene and navigation flow, (2) shop UI and interaction logic, (3) permanent-upgrade data model and integration with GameState/stat calculations, (4) mode selection and unlock logic (Story vs Endless), (5) high-score and best-time tracking per mode, (6) persistence format for meta-progression with versioning and backup hooks, (7) corrupted/missing-save handling path and QA checklist, and (8) UX polish tasks (confirmation dialogs, feedback when purchases fail/unlock triggers). Define clear contracts between run-time session data and persistent meta data.[1][5]",
+			"reasoning": "Meta-progression touches UI, data persistence, and game rules about modes and unlocks; failures are player-hostile, so careful separation between menu flows, data models, and save error handling is valuable.[1][5]"
+		},
+		{
+			"taskId": 8,
+			"taskTitle": "Game timer, win/lose conditions, results, and dawn transition",
+			"complexityScore": 7.5,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Split into: (1) run timer service and display, (2) defeat detection and results flow including navigation options, (3) victory condition at 30:00 with unlock triggers, (4) score system linked to enemy types and bonuses, (5) dawn transition implementation using CanvasModulate and background elements, and (6) Gold payout and persistence at results confirmation. Specify how the timer and state transitions interact with pause, level-up screens, and demo-mode constraints.[1][3]",
+			"reasoning": "Timer and end-of-run logic are conceptually simple but must coordinate with multiple systems (meta-progression, scoring, visuals); a handful of dedicated subtasks keep state transitions and visual sequencing predictable and testable.[1][3]"
+		},
+		{
+			"taskId": 9,
+			"taskTitle": "Audio, feel, and accessibility polish",
+			"complexityScore": 7.5,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Break into: (1) audio manager with music/SFX routing and volume control, (2) screen shake and hitstop systems with central hooks, (3) settings options for shake, reduced motion, and volumes plus persistence, (4) implementation of colorblind-friendly cues for key enemies, (5) integration pass to wire events (hits, deaths, pickups, boss phases) to audio and feel systems, (6) sourcing and integrating non-infringing Filipino-flavored audio content, and (7) playtest and accessibility review tasks with adjustments. Document tuning parameters so designers can iterate without code changes.[1][5]",
+			"reasoning": "This is mostly integration and tuning work across audio, VFX, and accessibility, but it adds cross-cutting systems (shake, hitstop, settings) that should be centralized; moderate subtask granularity helps avoid ad-hoc one-off effects.[1][5]"
+		},
+		{
+			"taskId": 10,
+			"taskTitle": "Steam & release integration (non-art)",
+			"complexityScore": 8,
+			"recommendedSubtasks": 8,
+			"expansionPrompt": "Expand into: (1) platform integration layer design with Steam-aware and stub implementations, (2) achievement definitions and wiring to gameplay events, (3) demo-mode configuration (flags, content gating, 10-minute cutoff), (4) export/build preset configuration and documentation, (5) local analytics logging format and writer, (6) privacy and performance considerations for analytics, (7) shared-codebase configuration strategy (build-time or run-time flags), and (8) release checklist and smoke-test automation for full vs demo builds. Make sure the abstraction supports adding other PC storefronts later without major rewrites.[1][2]",
+			"reasoning": "Platform integration, demo constraints, and analytics involve external dependencies and build configuration; well-defined abstractions and checklists are needed to keep builds reproducible and prevent progression bugs between full and demo modes.[1][2]"
+		}
+	]
+}

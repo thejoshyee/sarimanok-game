@@ -1,0 +1,404 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Core architecture & project setup",
+        "description": "Set up the Godot 4 project, core scene tree, and foundational systems for a 2D survivor roguelite using best practices.",
+        "details": "- Configure project (viewport 640x360, stretch mode, input map, audio buses, layers, groups).\n- Create base scenes: Main (arena, camera, managers), Player, Enemy, Projectile, Pickup, UI root.\n- Implement GameState singleton handling run state, meta-progression, and save/load JSON with versioning and backup.\n- Establish object-pooling utility for enemies, projectiles, pickups, and particles.\n- Define global constants for balance data (enemy stats, XP curve, scoring, timer configuration).\n- Ensure 60 FPS target baseline with simple profiling and placeholder rectangles.\n- Document folder structure and coding conventions for the small team.",
+        "testStrategy": "- Smoke-test that the game boots into a basic arena with a moving placeholder player.\n- Verify input works with keyboard and a common controller.\n- Confirm save file is created, loaded, and backed up without errors.\n- Profile a scene with 100+ inert pooled enemies to ensure FPS remains ~60.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Project configuration baseline",
+            "description": "Configure core project settings for a 2D survivor roguelite: viewport 640x360, stretch mode, input map, audio buses, and collision layers/groups.",
+            "dependencies": [],
+            "details": "- Set display/window size to 640x360 and configure stretch mode/aspect for pixel-perfect scaling.\n- Define input actions for movement, aiming (if needed), confirm/cancel, pause, and debug shortcuts.\n- Create audio buses for Master, SFX, Music, UI, and optionally Voice/Ambience, with default volumes and mute controls.\n- Reserve collision layers/masks for Player, Enemies, Projectiles, Pickups, Environment, and UI-hit tests; document the intended matrix.\n- Define core node groups (\"player\", \"enemy\", \"projectile\", \"pickup\", \"manager\", \"ui_root\") used for loose coupling and global lookups.\nInterface & decoupling: Project settings expose only generic names for actions, layers, and groups; gameplay scripts depend on these symbolic identifiers, not hard-coded indices, to avoid future refactors.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 2,
+            "title": "Base scene scaffolding",
+            "description": "Create base scenes for Main, Player, Enemy, Projectile, Pickup, and UI root with minimal placeholder logic and clear responsibilities.",
+            "dependencies": [
+              1
+            ],
+            "details": "- Main scene: Node2D root with arena node, camera, and child manager nodes (spawn manager placeholder, pooling manager, UI root instance).\n- Player scene: CharacterBody2D with collision, sprite/placeholder shape, and basic movement script reading from input map only.\n- Enemy scene: Area2D or CharacterBody2D base with collision, placeholder sprite, and references for stats but no complex behavior yet.\n- Projectile scene: Area2D with velocity/ttl properties and simple collision handling hook.\n- Pickup scene: Area2D with value/type properties and collection signal.\n- UI root scene: Control root with basic HUD placeholders (HP bar, XP bar, timer, debug labels) wired via signals, not direct node paths into gameplay.\nInterface & decoupling: Each scene exposes signals (e.g., \"died\", \"hit\", \"collected\") and minimal public methods (e.g., `init(data)`, `reset()`) so managers interact via these contracts instead of node-tree assumptions.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 3,
+            "title": "GameState singleton design",
+            "description": "Design the GameState autoload’s responsibilities, state model, and meta-progression schema, including JSON versioning and backup policy.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "- Define GameState as the single source of truth for run state (current run data) and meta state (account-wide unlocks, currency, settings).\n- Specify data model: player profile, unlocked characters/weapons, meta-currency, difficulty flags, and persistent options.\n- Define run snapshot: seed, elapsed time, score, current character, selected upgrades, and last run summary for analytics.\n- Establish versioning field (`save_version`) and migration strategy per version number.\n- Define backup policy: primary file plus rotating or last-known-good backup; write temp file then atomic rename.\nInterface & decoupling: Expose high-level API like `start_run(config)`, `end_run(result)`, `add_meta_currency(amount)`, `unlock(id)`, `get_meta_value(key)`; forbid direct manipulation of internal dictionaries from external systems to minimize schema-coupled code.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 4,
+            "title": "Save/load implementation & error handling",
+            "description": "Implement JSON-based save/load for GameState with robust error handling, migration hooks, and backup usage.",
+            "dependencies": [
+              3
+            ],
+            "details": "- Implement serialization to a plain data dictionary stripped of runtime-only fields.\n- Implement `save_to_disk()` that writes to a temp file, validates, then replaces main save and updates backup.\n- Implement `load_from_disk()` that validates version, runs migrations if needed, and falls back to backup on corruption or parse failure.\n- Log and surface non-fatal load errors via a debug overlay or console, but avoid hard-crashing the game.\nInterface & decoupling: Only GameState knows file paths and JSON details; other systems call `save_to_disk()`/`load_from_disk()` and handle success/failure via return values or signals, avoiding any direct filesystem calls from gameplay code.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 5,
+            "title": "Object pooling utility design",
+            "description": "Define an engine-agnostic object pooling API and its responsibilities for enemies, projectiles, pickups, and particles.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "- Implement a PoolManager node or singleton that owns pools keyed by type identifier or PackedScene.\n- Define API: `prewarm(type, count)`, `acquire(type) -> Node`, `release(node)`, and optional `release_all(type)`.\n- Require pooled scenes to implement `on_pooled_spawn(data)` and `on_pooled_despawn()` or similar hooks, avoiding constructors with side effects.\n- Track pool metrics (active/inactive counts) for debug UI.\nInterface & decoupling: Spawners (enemy spawner, projectile factory, loot dropper) depend only on the pooling API and type IDs; they never call `instantiate()` directly, so swapping pooling strategy or scenes later requires minimal changes.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 6,
+            "title": "Pooling integration pass",
+            "description": "Integrate pooling into Main, enemy spawning, projectiles, pickups, and test scenes using the shared PoolManager API.",
+            "dependencies": [
+              5,
+              2
+            ],
+            "details": "- Update Main and any managers to request instances from PoolManager rather than instantiating scenes manually.\n- Ensure enemies, projectiles, pickups, and particles correctly reset their state when reused.\n- Add a lightweight test scene that stress-spawns pooled enemies and projectiles for performance checks.\nInterface & decoupling: Integration code references PoolManager via injected node reference, autoload, or group lookup; gameplay systems stay unaware of concrete pool internals and treat returned objects purely via their public component APIs.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 7,
+            "title": "Global balance data structures",
+            "description": "Define structures for global balance data (constants, resources, or data files) and their access patterns.",
+            "dependencies": [
+              3,
+              2
+            ],
+            "details": "- Choose representation: Scriptable resources, JSON/CSV loaded at startup, or GDScript singleton constants for core curves.\n- Structure data for enemy stats, XP curve, scoring rules, timer configuration, and drop tables under clear keys.\n- Implement a read-only BalanceData access layer that exposes helper methods like `get_enemy_stats(id, time)`, `get_xp_required(level)`, `get_score_for_event(event_type)`.\nInterface & decoupling: Consumers query BalanceData rather than embedding numbers; this keeps progression formulas and tuning centralized and swappable without refactoring all call sites.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 8,
+            "title": "Performance baseline & profiling setup",
+            "description": "Establish a 60 FPS performance baseline with profiling checklists and spawn/test scenes.",
+            "dependencies": [
+              2,
+              5,
+              6,
+              7
+            ],
+            "details": "- Create a dedicated performance test scene that spawns 100–300 inert pooled enemies and projectiles with minimal logic.\n- Configure engine FPS cap and vsync preferences for consistent profiling.\n- Document profiling steps: enabling built-in profiler/monitors, checking frame time, draw calls, and GC/allocation spikes.\n- Add simple debug UI to toggle stress tests (enemy count, projectile spam) at runtime.\nInterface & decoupling: Profiling utilities live in separate debug-only scripts/scenes that attach to the same PoolManager and GameState APIs, avoiding any profiling-specific code paths inside core gameplay classes.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 9,
+            "title": "Folder structure, naming, and CI-safe exports",
+            "description": "Define folder layout, naming conventions, and a minimal CI-friendly export/build sanity check.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              7
+            ],
+            "details": "- Establish top-level folders such as `scenes/`, `scripts/`, `assets/`, `autoloads/`, `data/`, `ui/`, and `addons/`.\n- Document naming rules: PascalCase for nodes, snake_case for files and scripts, clear prefixes/suffixes for scene types (e.g., `_scene.tscn`).\n- Configure export presets for at least Windows desktop and a headless/test preset if relevant to CI.\n- Add a simple script or command to perform a non-interactive export from a clean checkout to validate missing assets and script errors.\nInterface & decoupling: Paths used in code should rely on stable, documented folder structure; build/CI scripts operate via engine CLI and export presets, not bespoke tools, so project remains portable.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 10,
+            "title": "Onboarding and documentation tasks",
+            "description": "Produce concise documentation for architecture, conventions, and core system interfaces to support a small team.",
+            "dependencies": [
+              3,
+              4,
+              5,
+              7,
+              9
+            ],
+            "details": "- Write a short architecture overview describing Main, GameState, PoolManager, BalanceData, and how scenes interact via signals and APIs.\n- Document public interfaces for GameState, PoolManager, BalanceData, and any key managers, including example call patterns.\n- Capture coding standards (GDScript style, signals vs direct calls, when to use autoloads) and scene composition guidelines.\n- Provide a quickstart guide: how to run the game, run tests/perf scenes, and add a new enemy or pickup following existing patterns.\nInterface & decoupling: Documentation emphasizes using public APIs, signals, and data access layers, steering contributors away from reaching into internal state or hard-coded node paths, which reduces the risk of coupling-induced refactors.",
+            "status": "pending",
+            "testStrategy": null
+          }
+        ],
+        "updatedAt": "2025-12-04T23:07:32.309Z"
+      },
+      {
+        "id": 2,
+        "title": "Player controller & character variants",
+        "description": "Implement Sarimanok player controller, stats, variants, damage handling, and character select with unlock logic.",
+        "details": "- Implement CharacterBody2D-based movement with 8-directional input, sprite flipping, and 2-frame animation.\n- Define base stats (HP, speed, damage, pickup range) and modifiers per variant (Classic, Shadow, Golden).\n- Wire stats to GameState (including meta shop and passives) so run-time values are computed dynamically.\n- Implement damage, invincibility frames (0.5s), death handling, and hit feedback (flash, knockback or hitstop).\n- Build character select screen with lock states, requirement text, and integration with unlock flags.\n- Implement unlock conditions: Shadow on surviving 15:00 in Story; Golden on beating Story once.\n- Ensure the chosen variant is applied at run start and shown in UI.",
+        "testStrategy": "- Manually verify smooth 8-directional movement and sprite flip.\n- Use debug overlay to confirm stats per variant match the PRD values.\n- Simulate hits from a test enemy to confirm damage, i-frames, and death trigger.\n- Run to 15:00 and 30:00 via debug time scaling to confirm unlocks persist via save data.",
+        "priority": "high",
+        "dependencies": [
+          "1"
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement CharacterBody2D input and 8-directional movement",
+            "description": "Create the Sarimanok CharacterBody2D script that reads 8-directional input, applies acceleration/deceleration, and moves using move_and_slide.",
+            "dependencies": [],
+            "details": "- Add input actions (move_up, move_down, move_left, move_right) in the project settings.\n- In the Sarimanok CharacterBody2D script, compute a normalized input vector from the 4 directions.\n- Apply acceleration toward target velocity based on current speed stat and a configurable acceleration constant.\n- Apply smoothing/deceleration using move_toward for when input is released.\n- Ensure diagonal movement is clamped so max speed is consistent in all directions.\n- Expose acceleration/deceleration constants via exported variables for tuning.\n- Keep this script agnostic of variants; it should consume a current_speed value provided by the stat model.",
+            "status": "pending",
+            "testStrategy": "- In a test scene, use visible debug arrows or prints to confirm correct 8-direction input.\n- Verify that starting/stopping movement feels smooth and that diagonal speed matches cardinal speed.\n- Confirm that changing the injected speed value changes movement speed without code changes in this script."
+          },
+          {
+            "id": 2,
+            "title": "Set up visual presentation and animation hooks",
+            "description": "Wire sprite flipping, minimal 2-frame animation, and feedback hooks to the movement and damage systems.",
+            "dependencies": [
+              1
+            ],
+            "details": "- Add a Sprite2D or AnimatedSprite2D child to the Sarimanok CharacterBody2D.\n- Flip horizontally based on x-velocity sign, with a deadzone threshold to avoid jitter when nearly idle.\n- Implement 2-frame walk animation (idle, moving) driven by whether velocity length exceeds a small threshold.\n- Expose animation methods (play_hit_flash, set_dead_visual, play_spawn) as public functions callable from damage/death logic.\n- Add a simple shader/material or modulate-based flash effect for hits and plug it into play_hit_flash.\n- Keep visual logic in a separate script or sub-node where possible, to separate visuals from movement/stat logic.",
+            "status": "pending",
+            "testStrategy": "- Manually move the character and confirm sprite flip and movement animation trigger correctly.\n- Trigger the hit/flash method from a temporary debug key and confirm the visual feedback appears and resets.\n- Kill the character via a debug call to death and verify the dead visual state shows and stops movement animation."
+          },
+          {
+            "id": 3,
+            "title": "Design stat model and variant modifiers wired to GameState",
+            "description": "Create a data model for base Sarimanok stats and per-variant modifiers (Classic, Shadow, Golden), and integrate this with GameState for dynamic run-time values.",
+            "dependencies": [],
+            "details": "- Define a PlayerStats resource or data struct with fields: max_hp, move_speed, base_damage, pickup_range, plus optional hooks for future stats.\n- Define a Variant enum or identifier (Classic, Shadow, Golden).\n- Create per-variant modifier data (e.g., multipliers or flat offsets) stored in a VariantStats resource or table, not hard-coded in many places.\n- In GameState (or a central run-state singleton), store: selected_variant, base_player_stats, meta_shop_modifiers, passive_modifiers.\n- Implement a single stat computation function in GameState that, given a stat type, combines base stats, variant modifiers, meta shop upgrades, and passive effects to produce final values.\n- Ensure CharacterBody2D and weapon systems read stats only via this GameState API, not by duplicating calculations.\n- Document stat computation order (e.g., base -> variant -> meta -> passives -> temporary buffs) to keep balance changes straightforward.",
+            "status": "pending",
+            "testStrategy": "- Use an in-editor or debug-only function to print computed stats for each variant at run start.\n- Adjust meta shop and passive values and confirm the resulting stats match design tables.\n- Verify the character’s movement and HP in-game reflect the computed stats by tweaking a single source and observing the effect."
+          },
+          {
+            "id": 4,
+            "title": "Implement damage, invincibility frames, and death pipeline",
+            "description": "Create a robust damage-handling pipeline on the player with invincibility frames, death state, and feedback integration.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "- Add a health component or logic on the player that tracks current HP, max HP from the stat model, and alive/dead state.\n- Implement a public apply_damage(amount, source) method that:\n  - Early-exits if the player is currently invincible or dead.\n  - Subtracts HP, clamps at zero, and starts a 0.5s invincibility window timer.\n  - Triggers visual feedback (hit flash), optional knockback or hitstop via movement/animation hooks.\n- Implement knockback as a short, additive velocity impulse in the opposite direction of the source, decaying over time without disrupting base movement logic.\n- Implement hitstop as a brief local timescale or animation/movement pause, if chosen instead of knockback; keep it centralized and easy to tune.\n- On HP reaching zero, fire a PlayerDied signal, set a death flag, stop accepting input, and trigger death visuals.\n- Ensure GameState or a run manager listens to PlayerDied to transition to the lose/victory systems in other tasks.",
+            "status": "pending",
+            "testStrategy": "- Use a test enemy or debug key to call apply_damage repeatedly and confirm HP changes, i-frames, and that multiple hits during i-frames are ignored.\n- Validate that death triggers only once, stops movement, and raises the PlayerDied signal.\n- Check that knockback/hitstop do not permanently break movement and that their tuning values are easy to adjust."
+          },
+          {
+            "id": 5,
+            "title": "Build character select UI and data source",
+            "description": "Implement the Sarimanok character select screen that reads variant data, reflects lock state, and allows choosing a variant for the run.",
+            "dependencies": [
+              3
+            ],
+            "details": "- Create a CharacterSelect scene with UI elements for each variant (Classic, Shadow, Golden), including portrait, name, short description, and stat summary.\n- Drive UI from a data source (e.g., VariantConfig resources) rather than hard-coding values in scene scripts.\n- Show lock/unlock state for each variant based on flags in persistent data (e.g., GameState or a SaveData object).\n- Display requirement text for locked variants (e.g., \"Survive to 15:00 in Story\" or \"Clear Story once\"), sourced from the same config.\n- On selection, store the chosen variant in GameState so that the run uses the correct stat modifiers and art.\n- Ensure the selected variant is reflected in pre-run UI (e.g., preview panel) and passed into the run start logic.",
+            "status": "pending",
+            "testStrategy": "- Manually toggle unlock flags in debug and verify visual states (locked/unlocked) update correctly.\n- Confirm that selecting each variant updates the preview and persists into the gameplay scene via GameState.\n- Check that changes to variant config resources (stats, descriptions) automatically propagate to the UI without extra wiring."
+          },
+          {
+            "id": 6,
+            "title": "Implement unlock conditions and persistence",
+            "description": "Add logic to grant Shadow and Golden Sarimanok based on Story run milestones, and persist unlock flags between sessions.",
+            "dependencies": [
+              4,
+              5
+            ],
+            "details": "- Extend the persistent save data model to include boolean flags for ShadowUnlocked and GoldenUnlocked.\n- In the run results or game flow controller, evaluate Story run outcomes:\n  - When the player reaches or passes 15:00 in a Story run, set ShadowUnlocked.\n  - When the player completes Story (win condition), set GoldenUnlocked.\n- After setting flags, save to disk immediately to avoid losing unlocks on crash.\n- Ensure unlock logic only triggers once and can show an in-run or post-run notification when a new variant is unlocked.\n- On game start, load save data and apply unlock flags to GameState so that the character select UI reads correct values.\n- Keep unlock thresholds and mode checks configurable (e.g., constants or config resource) for later tuning or additional characters.",
+            "status": "pending",
+            "testStrategy": "- Use debug controls to fast-forward time or force victory and confirm unlock flags are set and saved.\n- Restart the game and confirm unlock states persist and are reflected in the character select UI.\n- Verify that unlocks only occur in the correct game mode (Story) and do not trigger from other modes."
+          },
+          {
+            "id": 7,
+            "title": "Create integration test scene for stats and unlocks",
+            "description": "Set up a lightweight scene to validate that stats, variants, damage, and unlocks work together as expected.",
+            "dependencies": [
+              1,
+              3,
+              4,
+              5,
+              6
+            ],
+            "details": "- Build a minimal test scene that loads GameState, spawns the player with the currently selected variant, and includes a simple enemy or damage source.\n- Add UI overlays showing current variant, max HP, current HP, move speed, damage, and pickup range as reported by GameState’s stat API.\n- Include buttons or hotkeys to cycle variants, reload GameState, and simulate unlock flags.\n- Add a controllable timer or time-skip to quickly simulate reaching 15:00 and 30:00 Story milestones to check unlock behavior in a safe environment.\n- Ensure this scene remains separate from production levels and can be launched quickly from the editor for regression checks.",
+            "status": "pending",
+            "testStrategy": "- Run through each variant, confirm overlay stats match design documents, and that movement/HP in-game feel consistent.\n- Simulate damage and death to verify that the PlayerDied signal, i-frames, and GameState transitions behave correctly.\n- Use the time-skip controls to validate unlock triggering and persistence end-to-end from run start to character select."
+          },
+          {
+            "id": 8,
+            "title": "Add debugging utilities for player and variants",
+            "description": "Implement debug overlays, time scaling, and forced unlocks to aid tuning and regression testing of Sarimanok and its variants.",
+            "dependencies": [
+              1,
+              3,
+              4,
+              6,
+              7
+            ],
+            "details": "- Implement a debug overlay toggle (e.g., via a debug key) that shows current player stats, variant, HP, i-frame status, and active modifiers.\n- Add runtime time-scaling controls (e.g., increase/decrease global time scale) to speed up or slow down runs for testing timers and unlocks.\n- Provide a debug panel or console commands for forcing all variants unlocked, resetting unlocks, and granting specific meta shop or passive upgrades.\n- Ensure debug utilities are clearly disabled or hidden in release builds (e.g., behind a build flag or config setting).\n- Log key state changes (unlock events, death, variant selection) in a concise debug log to help diagnose issues during development.",
+            "status": "pending",
+            "testStrategy": "- Use the debug overlay to cross-check stat computations while changing meta upgrades and passives.\n- Confirm that time scaling affects run timer and enemy behavior as expected without breaking movement or collision.\n- Test forced unlock and reset commands to ensure they only affect debug builds and correctly update save data and character select UI."
+          }
+        ],
+        "updatedAt": "2025-12-04T23:07:32.312Z"
+      },
+      {
+        "id": 3,
+        "title": "Enemy system, behaviors, and spawning",
+        "description": "Create scalable enemy system with data-driven definitions, behaviors, stat scaling, and spawn management for all four MVP enemies.",
+        "details": "- Implement lightweight Area2D-based enemy base class with movement toward player, HP, damage, and death events.\n- Add specific behaviors: Green/Red Duwende (simple chasers), Santelmo (floating plus projectile attack), Manananggal boss (dive attacks, entrance/death events).\n- Implement difficulty scaling functions for HP and damage over elapsed minutes as per PRD formulas.\n- Create spawn manager that uses timeline rules, edge spawning, and spawn-interval scaling over time.\n- Integrate object pooling for enemies and their projectiles (fireballs, etc.).\n- Implement enemy drop logic for XP and Gold values per type.\n- Ensure enemies ignore each other’s collision, respect arena bounds rules, and perform adequately with 200+ instances.",
+        "testStrategy": "- Use debug UI to spawn each enemy type individually and verify behavior.\n- Let the game run for 30 minutes at accelerated time to confirm spawn timeline and scaling.\n- Profile with 200+ active enemies to confirm FPS and memory stability.\n- Check drops (XP/Gold) per kill against the PRD table and ensure totals are reasonable for progression.",
+        "priority": "high",
+        "dependencies": [
+          "1",
+          "2"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "updatedAt": "2025-12-04T23:07:32.313Z"
+      },
+      {
+        "id": 4,
+        "title": "Weapons, debuffs, and passives (data-driven)",
+        "description": "Implement auto-firing weapon system, clone weapons, debuff framework, and passive stat modifiers using a data-driven architecture.",
+        "details": "- Design a Weapon base scene and script with cooldown handling and hooks for melee, AOE, projectile, and orbital behaviors.\n- Implement concrete weapons: Peck, Wing Slap, Feather Shot, Spiral Feathers plus clones Ice Shard and Flame Wing with their specific stats and effects.\n- Create WeaponData Resource type with fields for damage, cooldown, visuals, upgrade tiers, and optional debuff parameters.\n- Implement a debuff system supporting at least slowing effects with configurable duration and strength.\n- Implement passive system (Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura) with stacking levels and integration into GameState stat calculations.\n- Add floating damage numbers and enemy-hit flash for feedback.\n- Enforce weapon slot limit and upgrade cap per weapon/passive as defined in the PRD.",
+        "testStrategy": "- In a test scene, spawn dummies and cycle each weapon to verify attack pattern, range, and cooldowns.\n- Confirm upgrade tiers correctly change damage, counts, pierce, radius, or cooldown according to tables.\n- Apply Ice Shard slow debuff and verify speed reduction and duration via debug prints or visual markers.\n- Stack passives and shop upgrades and confirm effective stats via debug overlay and measured DPS on test enemies.",
+        "priority": "high",
+        "dependencies": [
+          "1",
+          "2",
+          "3"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "updatedAt": "2025-12-04T23:07:32.315Z"
+      },
+      {
+        "id": 5,
+        "title": "XP, level-up, and choice system",
+        "description": "Implement XP pickup collection, level curve, and level-up UI that offers valid, randomized upgrade choices each level.",
+        "details": "- Implement XP gem pickups that add to the XP bar and trigger level-ups based on the formula `5 + (level - 1) * 5`.\n- Build a responsive XP + HP HUD, with level and progress display.\n- Implement a pause-on-level-up flow that shows 3 upgrade cards from the valid pool of weapons/passives (respecting slot and level caps).\n- Ensure new weapons only appear while slots are free and maxed-out items are removed from the choice pool.\n- Integrate level-up selections with the weapon and passive systems, including initial starting weapon configuration.\n- Add juice: simple animations, sounds, and particles on level-up and selection.",
+        "testStrategy": "- Use a controlled test where enemies drop high XP to rapidly trigger multiple level-ups.\n- Verify that the XP required per level follows the intended curve and no levels are skipped.\n- Confirm that once a weapon or passive is maxed it no longer appears in choices.\n- Check that with full weapon slots, only upgrades for existing weapons/passives appear.",
+        "priority": "high",
+        "dependencies": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "updatedAt": "2025-12-04T23:07:32.317Z"
+      },
+      {
+        "id": 6,
+        "title": "Pickups, magnet behavior, and HUD integration",
+        "description": "Implement XP and Gold pickups with magnet behavior and integrate HUD elements for HP, XP, timer, score, and equipped weapons.",
+        "details": "- Implement Pickup scenes for XP gems and Gold coins, including Area2D detection and collection logic.\n- Add magnet behavior that pulls pickups toward the player within a configurable pickup range, influenced by Magnetic Aura.\n- Hook pickups to XP system and permanent Gold counters in GameState.\n- Implement core HUD layout: HP bar, XP bar, timer, score, and weapon slots with levels.\n- Add basic SFX and subtle visual feedback for pickup attraction and collection.",
+        "testStrategy": "- Kill test enemies and verify drops spawn at correct positions.\n- Approach pickups and confirm magnet trigger distance matches player pickup range.\n- Verify XP and Gold counters update accurately and reflect on HUD.\n- Confirm that weapon list on HUD updates as weapons are gained/leveled.",
+        "priority": "medium",
+        "dependencies": [
+          "1",
+          "2",
+          "3",
+          "5"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "updatedAt": "2025-12-04T23:07:32.320Z"
+      },
+      {
+        "id": 7,
+        "title": "Meta-progression: shop, save system, and modes",
+        "description": "Build main menu, shop with permanent upgrades, Story/Endless mode flow, and robust save/load for progression data.",
+        "details": "- Implement main menu with buttons for Story Mode, Endless Mode (locked initially), Shop, Settings, and Quit.\n- Build shop UI with three repeatable upgrades (Damage, Max HP, Move Speed) at fixed Gold costs; disable purchase when funds are insufficient.\n- Wire shop purchases into GameState and run-time stat calculations; persist cumulative values in save file.\n- Implement Story Mode and Endless Mode selection, with Endless unlocking after first Story win.\n- Add high score and best-time tracking for Story and Endless, surfaced in menu and results screens.\n- Ensure save versioning and backup strategy are in place to avoid progression loss.",
+        "testStrategy": "- Run multiple sessions purchasing upgrades, closing and reopening the game to ensure values persist.\n- Confirm mode unlock flows: Story available from start, Endless unlocks only after a verified Story win.\n- Verify separate high-score and best-time values for each mode.\n- Test corrupted or missing save scenarios to ensure graceful fallback without crashes.",
+        "priority": "high",
+        "dependencies": [
+          "1",
+          "2",
+          "5",
+          "6"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "updatedAt": "2025-12-04T23:07:32.322Z"
+      },
+      {
+        "id": 8,
+        "title": "Game timer, win/lose conditions, results, and dawn transition",
+        "description": "Implement timed 30-minute Story runs, victory/defeat logic, results screen, and the night-to-dawn visual transition.",
+        "details": "- Implement run timer that counts up in MM:SS, displayed top-center.\n- Trigger defeat when player HP reaches 0; show defeat results (time, kills, score, Gold earned) with options to Retry, Shop, or Menu.\n- Trigger Story victory at 30:00, freeze gameplay, play COCKADOODLEDOO, then show victory results and unlock Endless if first clear.\n- Implement score system that awards points per enemy type and victory bonus, with integration into high-score tracking.\n- Build CanvasModulate- and background-based dawn transition that interpolates night tint and sky elements to warm daylight before results.\n- Ensure Gold earned is added to total and saved after results are confirmed.",
+        "testStrategy": "- Use a debug time-scale or timer skip to simulate reaching 30:00 quickly and verify victory flow.\n- Intentionally die early to confirm defeat flow and that no unlock triggers.\n- Check that score tallies match enemy kills and bonuses from the PRD tables.\n- Visually validate the dawn transition sequence for timing, smoothness, and no flicker.",
+        "priority": "medium",
+        "dependencies": [
+          "1",
+          "2",
+          "3",
+          "5",
+          "6",
+          "7"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "updatedAt": "2025-12-04T23:07:32.324Z"
+      },
+      {
+        "id": 9,
+        "title": "Audio, feel, and accessibility polish",
+        "description": "Integrate music, SFX, screen shake, hitstop, and basic accessibility settings to make the game feel responsive and comfortable.",
+        "details": "- Implement audio manager that plays music tracks (menu, gameplay, boss, victory) and SFX through dedicated buses, respecting volume sliders.\n- Add pitch randomization for frequent sounds (hits, deaths, pickups) to reduce fatigue.\n- Implement screen shake, hitstop on significant hits, and configurable toggles for screen shake and reduced motion in the Settings menu.\n- Add basic colorblind-friendly cues for Green vs Red Duwende (shape or pattern differences) beyond color alone.\n- Ensure Settings menu allows adjustment of music/SFX volume, fullscreen/window modes, and persists choices in save data.\n- Add distinctive Filipino-flavored audio cues (Sarimanok crow, Manananggal screech, provincial night ambience) using non-infringing sources.",
+        "testStrategy": "- Play full runs and subjectively evaluate audio balance and feel at default settings.\n- Toggle screen shake and reduced motion to ensure they correctly affect camera effects and particles.\n- Verify volume sliders adjust audio in real time and persist between sessions.\n- Ask at least one external tester to confirm that Duwende variants are distinguishable without relying solely on color.",
+        "priority": "medium",
+        "dependencies": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "6",
+          "7",
+          "8"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "updatedAt": "2025-12-04T23:07:32.325Z"
+      },
+      {
+        "id": 10,
+        "title": "Steam & release integration (non-art)",
+        "description": "Prepare the game for Steam Early Access and Next Fest, including builds, achievements hooks, and demo configuration logic.",
+        "details": "- Implement a platform abstraction or integration point for Steam API (achievements, overlay check) that can be stubbed when not on Steam.\n- Define 5–8 achievements and wire unlock calls to existing gameplay events (first win, reaching 15:00, kill counts, etc.).\n- Implement demo mode configuration that enforces a 10-minute limit, disables shop/meta progression, and shows a custom end-of-demo screen with wishlist CTA.\n- Set up build/export presets for Windows (and ensure project can later extend to Mac/Linux).\n- Add basic analytics logging (local file) for run metrics such as time survived, death cause, build choices, and performance flags to inform post-launch tuning.\n- Validate that the full build and demo build share the same codebase with configuration flags only.",
+        "testStrategy": "- Build and run a Windows executable from a clean checkout to confirm no missing resources.\n- Trigger each achievement condition in a non-Steam environment via logging; later validate live with Steam tools.\n- Run the game in demo mode and verify the run hard-stops at 10:00 and never touches permanent progression data.\n- Inspect analytics logs after several runs to ensure entries are well-formed and do not grow unbounded.",
+        "priority": "medium",
+        "dependencies": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "7",
+          "8"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "updatedAt": "2025-12-04T23:07:32.327Z"
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "lastModified": "2025-12-04T23:07:32.327Z",
+      "taskCount": 10,
+      "completedCount": 0,
+      "tags": [
+        "master"
+      ],
+      "created": "2025-12-04T23:09:39.749Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
