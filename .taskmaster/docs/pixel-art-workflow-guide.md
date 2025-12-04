@@ -811,6 +811,12 @@ Frame 1 (Wings Up):     Frame 2 (Wings Mid):    Frame 3 (Wings Down):   Frame 4 
 - Export as horizontal strip: 192x48 (four 48x48 frames)
 - Filename: `manananggal.png`
 
+#### Step 7: Blood Trail (SOURCED - Not Ericka's Task)
+
+Per the PRD, the Manananggal "leaves blood trail visual effect" as it flies. This effect uses a particle sprite from the sourced particle pack (see Part 14).
+
+**Josh's task:** Find a blood drop/splatter sprite in the particle pack for code to spawn behind the Manananggal.
+
 ---
 
 ### Bahay Kubo Tile Creation Guide
@@ -1280,6 +1286,29 @@ For a faster workflow, you can install the **Godot 4 Aseprite Importer** plugin 
 
 **Note:** This is optional. The manual PNG workflow described above works perfectly well and doesn't require plugin setup.
 
+### Code-Handled Effects (DO NOT DRAW THESE)
+
+The following visual effects are handled in Godot via shaders and code. **Ericka does NOT need to create art for these:**
+
+| Effect                                  | How It's Done in Godot                          |
+| --------------------------------------- | ----------------------------------------------- |
+| Enemy damage flash (white flash on hit) | Shader modulate or `modulate = Color.WHITE`     |
+| Player invincibility flash              | Blinking animation or white modulate            |
+| Slow debuff visual (Ice Shard)          | Blue tint via `modulate = Color(0.5, 0.5, 1.0)` |
+| Pickup magnet glow                      | Shader or existing sparkle particles            |
+
+**Why not draw white frames?** Creating white versions of every enemy sprite is a waste of time. A single line of shader code applies the effect to any sprite dynamically. Same for tint effects.
+
+**Example (Josh implements this):**
+
+```gdscript
+# Flash white on hit, then return to normal
+func flash_damage():
+    modulate = Color.WHITE
+    await get_tree().create_timer(0.1).timeout
+    modulate = Color(1, 1, 1)  # Back to normal
+```
+
 ---
 
 ## Part 10: File Organization
@@ -1458,6 +1487,24 @@ Frame 1:           Frame 2:           Frame 3:           Frame 4:
 | Peck Hit           | 32x32 | 2-3    | Quick slash effect               |
 | Wing Slap Circle   | 64x64 | 2-3    | Expanding circle                 |
 | Flame Wing Circle  | 64x64 | 2-3    | Orange recolor of Wing Slap      |
+
+**IMPORTANT - Attack Effects Must Convey Motion:**
+
+Because the Sarimanok only has a 2-frame bob animation (no attack poses), the weapon effects must do the heavy lifting to communicate the attack:
+
+- **Peck Hit Effect:** Should look like a directional thrust/jab pointing outward from the Sarimanok, NOT a generic impact spark. Include motion lines or a sharp "stab" shape.
+- **Wing Slap Circle:** Should have visible sweep/whoosh lines radiating outward, suggesting a powerful wing sweep. Think "shockwave" not just "circle."
+- **Feather Projectile:** The feather sprite should clearly point in its direction of travel. Code handles rotation, but make sure it reads well at all angles.
+
+**Visual Reference:**
+
+```
+Peck (directional):       Wing Slap (radial):
+      ╱                        ╲ │ ╱
+   ──●─→                     ───●───
+      ╲                        ╱ │ ╲
+   (thrust outward)        (radiating lines)
+```
 
 ### Icons - 16x16
 
@@ -1737,6 +1784,19 @@ When Josh imports these sprite sheets:
 - [ ] pickup_xp.png (16x16, 1-2 frames)
 - [ ] pickup_gold.png (16x16, 1-2 frames)
 
+### Particle Sprites - SOURCED from itch.io
+
+Source a particle/VFX pack from itch.io (~$5-10 or free). Look for packs containing:
+
+- [ ] Blood/hit effect particles - for enemy death puffs
+- [ ] Sparkle/shine particles - for XP collection, level-up
+- [ ] Fire/flame particles - for Santelmo trail/death
+- [ ] Blood drop/trail - for Manananggal boss trail
+
+**Recommended search terms:** "pixel particle pack", "pixel VFX", "pixel effects"
+
+**Why source instead of draw?** Particles are generic effects that don't need Filipino cultural identity. Save Ericka's time for the characters and enemies that make the game unique.
+
 ### Generic Environment - SOURCED from asset pack
 
 - [ ] tileset_generic.png (grass, dirt, rocks, trees)
@@ -1747,6 +1807,18 @@ When Josh imports these sprite sheets:
 - [ ] XP bar sprites
 - [ ] Button sprites
 - [ ] Panel backgrounds
+
+### UI/Branding - FONT-BASED (No Custom Art Needed)
+
+The game title "SARIMANOK SURVIVOR" will use a sourced pixel font, not custom pixel art. This reduces scope while still looking great.
+
+**Font sources:**
+
+- [fonts.google.com](https://fonts.google.com) - filter by "Pixel" or "Display"
+- [itch.io](https://itch.io/game-assets/tag-fonts) - pixel font packs
+- [dafont.com](https://www.dafont.com/theme.php?cat=303) - free pixel fonts
+
+**Note:** All text in the game (title, damage numbers, victory text, UI labels) uses fonts handled by code - Ericka does not need to draw any text or numbers.
 
 ---
 
@@ -1761,16 +1833,19 @@ When Josh imports these sprite sheets:
 | Weapon Icons   | 6 icons (4 unique + 2 recolors)   | 2.5 hrs        |
 | Weapon Effects | 5 effects (3 unique + 2 recolors) | 3-4 hrs        |
 | Filipino Tiles | 8 tiles + background              | 1-2 hrs        |
-| **TOTAL**      | ~26 files                         | **~18-24 hrs** |
+| Shared         | 1 shadow sprite                   | 15 min         |
+| **TOTAL**      | ~28 files                         | **~19-25 hrs** |
 
-### Sourced from Asset Packs (~$30-50)
+### Sourced from Asset Packs (~$35-60)
 
-| Category        | Source                |
-| --------------- | --------------------- |
-| Generic tileset | Tileset pack ($10-20) |
-| UI elements     | UI pack ($10-15)      |
-| Pickups         | UI pack (included)    |
-| Passive icons   | Icon pack (included)  |
+| Category        | Source                     |
+| --------------- | -------------------------- |
+| Generic tileset | Tileset pack ($10-20)      |
+| UI elements     | UI pack ($10-15)           |
+| Pickups         | UI pack (included)         |
+| Passive icons   | Icon pack (included)       |
+| Particle/VFX    | Particle pack ($5-10/free) |
+| Pixel font      | Free (Google Fonts/itch)   |
 
 ---
 
@@ -1829,13 +1904,15 @@ If art runs behind, Josh can continue with colored rectangles. The game is shipp
 
 **Version History:**
 
+- v2.5: Scope reduction - Moved Particle Sprites to SOURCED (itch.io packs), changed title logo to font-based (no custom pixel art). Ericka focuses exclusively on Filipino folklore characters. Updated totals (~28 files, 19-25 hrs). Kept Code-Handled Effects note and attack motion guidance from v2.4.
+- v2.4: Gap analysis additions - Added Particle Sprites section, UI/Branding section, Code-Handled Effects note (white flash, tints handled by Godot shaders), attack effect motion guidance for Peck/Wing Slap, Manananggal blood trail step.
 - v2.3: Added character shadow guidance (Part 4) - shadows are a separate sprite handled in Godot, not baked into animation frames. Added shadow.png to asset checklist.
 - v2.2: Best practices update - Changed color mode recommendation from Indexed to RGBA for beginners (Part 1, 4, 7), added Godot 4.3+ integer scaling setting (Part 9), added seamless tile testing workflow (Part 7), added sprite pivot/origin discussion (Part 4), added dawn overlay creation steps (Part 2), added Aseprite importer plugin option (Part 9), added texture reimport troubleshooting (Part 9), added FPS setting location in Godot (Part 12)
 - v2.1: Added Learning Resources section (Part 0) with curated Aseprite tutorials, recommended watch order, and keyboard shortcuts reference
 - v2.0: Major update - Added Map/Arena design section, Asset Responsibilities section, detailed Filipino asset creation guides (Sarimanok, Duwende, Santelmo, Manananggal, Bahay Kubo, Rice Paddy), updated asset checklist for 6 weapons with clone recolors, clarified sourced vs created assets per PRD
 - v1.0: Initial guide
 
-**Total Ericka Sprites:** ~26 files  
-**Estimated Ericka Art Time:** 18-24 hours  
-**Asset Pack Budget:** ~$30-50  
+**Total Ericka Sprites:** ~28 files  
+**Estimated Ericka Art Time:** 19-25 hours  
+**Asset Pack Budget:** ~$35-60  
 **At 10 hrs/week:** 2-2.5 weeks (parallel to coding)
