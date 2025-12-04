@@ -8,6 +8,7 @@
 ## 🛒 Asset Packs to Purchase (Week 1)
 
 ### UI Asset Pack — $10-15
+
 - [ ] Purchase from itch.io or similar
 - **Must Include:**
   - [ ] HP Bar
@@ -22,6 +23,7 @@
   - [Kenney.nl](https://kenney.nl) — free, professional quality
 
 ### Tileset Asset Pack — $10-20
+
 - [ ] Purchase from itch.io or similar
 - **Must Include:**
   - [ ] Grass tiles (variations)
@@ -35,11 +37,13 @@
   - [Kenney.nl](https://kenney.nl)
 
 ### Pickup Sprites (often included in UI pack)
+
 - [ ] XP Gem (16x16)
 - [ ] Gold Coin (16x16)
 - **Note:** If not in UI pack, check [Game-icons.net](https://game-icons.net) (free, CC0)
 
 ### Passive Icons (can use asset pack)
+
 - [ ] Iron Beak icon (16x16)
 - [ ] Thick Plumage icon (16x16)
 - [ ] Racing Legs icon (16x16)
@@ -51,6 +55,7 @@
 ## 🔊 Audio Assets
 
 ### Sound Effects Pack — $15-30 (Week 1)
+
 - [ ] Purchase Fantasy/RPG SFX bundle
 - **Why buy a pack:** Cohesive sounds, saves HOURS of hunting individual sounds
 - **Must Cover:**
@@ -66,23 +71,24 @@
   - [Humble Bundle](https://humblebundle.com) — Periodic audio bundles
 
 ### Unique Filipino Sounds (Custom/Source)
+
 > ⚠️ These need special attention - don't use generic sounds!
 
-| Sound | Status | Notes |
-|-------|--------|-------|
-| [ ] Sarimanok crow | | NOT a generic rooster. Mystical bird cry. |
-| [ ] Manananggal screech | | Unique boss audio signature |
-| [ ] Tiktik clicking | | Aswang presence indicator from folklore |
-| [ ] Provincial night ambience | | Crickets, frogs, distant sounds |
+| Sound                         | Status | Notes                                     |
+| ----------------------------- | ------ | ----------------------------------------- |
+| [ ] Sarimanok crow            |        | NOT a generic rooster. Mystical bird cry. |
+| [ ] Manananggal screech       |        | Unique boss audio signature               |
+| [ ] Tiktik clicking           |        | Aswang presence indicator from folklore   |
+| [ ] Provincial night ambience |        | Crickets, frogs, distant sounds           |
 
 ### Music — Free or $50-150 (Browse Week 1-2, Finalize Week 9)
 
-| Track | Duration | Status | Notes |
-|-------|----------|--------|-------|
-| [ ] Menu theme | 1-2 min loop | | Calm, Filipino-inspired |
-| [ ] Night/Gameplay theme | 1-2 min loop | | Tense, action |
-| [ ] Boss theme | 1-2 min loop | | Intense, dramatic |
-| [ ] Victory jingle | 15-30 sec | | Triumphant, Sarimanok crow |
+| Track                    | Duration     | Status | Notes                      |
+| ------------------------ | ------------ | ------ | -------------------------- |
+| [ ] Menu theme           | 1-2 min loop |        | Calm, Filipino-inspired    |
+| [ ] Night/Gameplay theme | 1-2 min loop |        | Tense, action              |
+| [ ] Boss theme           | 1-2 min loop |        | Intense, dramatic          |
+| [ ] Victory jingle       | 15-30 sec    |        | Triumphant, Sarimanok crow |
 
 - **Free Sources:**
   - [Pixabay Music](https://pixabay.com/music/) — No attribution, large library
@@ -97,15 +103,16 @@
 ## 🎨 Steam Marketing Art (Week 6-8)
 
 ### Capsule Art — $200-400 (Commission)
+
 > ⚠️ CRITICAL for Next Fest visibility. Bad capsule = no clicks = no wishlists.
 
-| Asset | Size | Priority | Status |
-|-------|------|----------|--------|
-| [ ] Main Capsule | 616×353 | **CRITICAL** | |
-| [ ] Small Capsule | 231×87 | Required | |
-| [ ] Header Capsule | 460×215 | Required | |
-| [ ] Library Hero | 3840×1240 | Nice-to-have | |
-| [ ] Library Logo | 1280×720 | Nice-to-have | |
+| Asset              | Size      | Priority     | Status |
+| ------------------ | --------- | ------------ | ------ |
+| [ ] Main Capsule   | 616×353   | **CRITICAL** |        |
+| [ ] Small Capsule  | 231×87    | Required     |        |
+| [ ] Header Capsule | 460×215   | Required     |        |
+| [ ] Library Hero   | 3840×1240 | Nice-to-have |        |
+| [ ] Library Logo   | 1280×720  | Nice-to-have |        |
 
 - **Recommendation:** Do NOT use scaled pixel art. Commission professional illustration.
 - **Sources:**
@@ -116,6 +123,7 @@
   - [r/HungryArtists](https://reddit.com/r/HungryArtists)
 
 ### Commission Brief (Save for Week 6)
+
 ```
 PROJECT: Steam Capsule Art for "Sarimanok Survivor"
 SIZE: 616x353 pixels
@@ -149,14 +157,14 @@ BUDGET: $XXX (include 1 revision round)
 
 ## 📊 Budget Summary
 
-| Category | Est. Cost | Status |
-|----------|-----------|--------|
-| UI Asset Pack | $10-15 | [ ] |
-| Tileset Asset Pack | $10-20 | [ ] |
-| SFX Pack | $15-30 | [ ] |
-| Music (if commissioned) | $0-150 | [ ] |
-| Steam Capsule Art | $200-400 | [ ] |
-| **TOTAL** | **$235-615** | |
+| Category                | Est. Cost    | Status |
+| ----------------------- | ------------ | ------ |
+| UI Asset Pack           | $10-15       | [ ]    |
+| Tileset Asset Pack      | $10-20       | [ ]    |
+| SFX Pack                | $15-30       | [ ]    |
+| Music (if commissioned) | $0-150       | [ ]    |
+| Steam Capsule Art       | $200-400     | [ ]    |
+| **TOTAL**               | **$235-615** |        |
 
 > **Minimum viable:** $80-115 (asset packs + free music)  
 > **Recommended:** $280-365 (includes commissioned capsule art)
@@ -165,12 +173,11 @@ BUDGET: $XXX (include 1 revision round)
 
 ## ⏰ Sourcing Timeline
 
-| Week | Action |
-|------|--------|
-| Week 1 | Buy UI pack, Tileset pack, SFX pack |
-| Week 1-2 | Browse music options (Pixabay, OpenGameArt) |
-| Week 4-5 | Browse capsule art artists, save candidates |
-| Week 6 | Commission capsule art |
+| Week     | Action                                           |
+| -------- | ------------------------------------------------ |
+| Week 1   | Buy UI pack, Tileset pack, SFX pack              |
+| Week 1-2 | Browse music options (Pixabay, OpenGameArt)      |
+| Week 4-5 | Browse capsule art artists, save candidates      |
+| Week 6   | Commission capsule art                           |
 | Week 7-8 | Receive capsule art, request revisions if needed |
-| Week 9 | Finalize music selection/commission |
-
+| Week 9   | Finalize music selection/commission              |
