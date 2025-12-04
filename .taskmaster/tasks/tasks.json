@@ -29,10 +29,11 @@
             "dependencies": [
               1
             ],
-            "details": "A well-organized filesystem helps locate assets and scripts quickly. Common patterns include grouping by entity type (players, enemies) and system (UI, audio) [2][3][4].",
-            "status": "pending",
+            "details": "A well-organized filesystem helps locate assets and scripts quickly. Common patterns include grouping by entity type (players, enemies) and system (UI, audio) [2][3][4].\n<info added on 2025-12-04T22:11:20.324Z>\nMapped filesystem layout under `/Users/joshyee/Desktop/game-dev/sarimanok-game` shows a clean, entity-oriented structure that aligns with common Godot 4 organization guidance.[2][3] Top-level directories include `assets/` (with `audio/`, `fonts/`, `sprites/`), `autoloads/` (currently empty and suitable for adding a `GameState` singleton later), `resources/` (intended for data-driven resources such as `WeaponData` and `EnemyConfig`), `scenes/` (organized by entity type into `enemies/`, `levels/`, `player/`, `ui/`, `weapons/`), and `scripts/` for shared or utility GDScripts, plus root-level `main.tscn` (entry scene) and `project.godot` (project configuration).[2][3][4] Folder naming consistently uses lowercase snake_case, and the current layout has no conflicts with existing code, making it ready for MVP development without refactors to support players, enemies, UI, and core systems later.[3][4]\n</info added on 2025-12-04T22:11:20.324Z>",
+            "status": "done",
             "testStrategy": "Navigate the project directory and note the structure, taking screenshots or writing a brief outline of the layout.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-04T22:11:22.423Z"
           },
           {
             "id": 3,
@@ -80,7 +81,7 @@
         "complexity": 5,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break this task into: (1) Open the project and identify Godot version, main scene entry point, and autoloads; (2) Map the filesystem/folder layout (players, enemies, UI, systems); (3) Catalog key scenes and their responsibilities (main, gameplay, menus, HUD, etc.); (4) Identify existing systems for saving, audio, input mapping, and other cross-cutting concerns; (5) Summarize MVP feature coverage (implemented/partial/missing) and share findings with the team in a short document.",
-        "updatedAt": "2025-12-04T21:46:34.752Z"
+        "updatedAt": "2025-12-04T22:11:22.423Z"
       },
       {
         "id": "2",
@@ -241,7 +242,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-04T21:46:34.753Z",
+      "lastModified": "2025-12-04T22:11:22.423Z",
       "taskCount": 10,
       "completedCount": 0,
       "tags": [
