@@ -131,25 +131,25 @@ FOR JOSH - INTEGRATION WORKFLOW
 ABOUT THE PALETTE FILE
 --------------------------------------------------------------------------------
 
-source/palette.aseprite contains the Dawnbringer 32 color palette.
+source/palette.aseprite contains the Resurrect 64 color palette.
 
 WHY USE IT:
 - Keeps all our sprites visually consistent
-- 32 colors is plenty for pixel art
+- 64 colors gives flexibility for vibrant Sarimanok variants
 - Professional games use limited palettes
 
 HOW TO SET IT UP (one-time):
-1. Go to: lospec.com/palette-list/dawnbringer-32
+1. Go to: lospec.com/palette-list/resurrect-64
 2. Click "Download" and choose "GIMP GPL" format
-3. You'll get a file called dawnbringer-32.gpl
+3. You'll get a file called resurrect-64.gpl
 4. In Aseprite: Palette menu (bottom of screen) > Load Palette
-5. Select the dawnbringer-32.gpl file
+5. Select the resurrect-64.gpl file
 6. File > Save As > save to source/palette.aseprite
 
 LOADING IT FOR EACH NEW SPRITE:
 - Palette menu (bottom of screen) > Load Palette
 - Select source/palette.aseprite
-- Now all 32 colors are in your palette panel
+- Now all 64 colors are in your palette panel
 
 
 --------------------------------------------------------------------------------
