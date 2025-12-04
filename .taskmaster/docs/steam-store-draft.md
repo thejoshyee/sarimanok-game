@@ -82,21 +82,6 @@ Created by a Filipino-American husband and wife team, Sarimanok Survivor celebra
 
 ---
 
-## Tags (Suggested)
-
-- Action Roguelike
-- Bullet Hell
-- Roguelite
-- Top-Down
-- Survival
-- Indie
-- Pixel Graphics
-- Singleplayer
-- Controller Support
-- Casual
-
----
-
 ## System Requirements (Minimum)
 
 - **OS:** Windows 10
@@ -109,11 +94,27 @@ Created by a Filipino-American husband and wife team, Sarimanok Survivor celebra
 
 ## Notes for Store Page Setup
 
-1. **Capsule Art (616x353)** - Commission or create by Dec 20
-2. **Screenshots** - Take 5-10 from gameplay (can use placeholder/greybox initially)
-3. **Trailer** - Record 30-60 seconds of gameplay (Week 10)
-4. **Release Date** - Set to "Coming March 2026" or specific date after Next Fest
+### Two-Phase Approach
+
+| Phase       | When                 | What                                               |
+| ----------- | -------------------- | -------------------------------------------------- |
+| **Phase 1** | Week 4 (Dec 28-30)   | Launch with PLACEHOLDERS to register for Next Fest |
+| **Phase 2** | Week 8-10 (by Feb 9) | Update with FINAL art before Next Fest starts      |
+
+### Phase 1: Placeholder Launch (Week 4)
+
+1. **Capsule Art (616x353)** - PLACEHOLDER ($50-100 Fiverr rush or Canva DIY)
+2. **Screenshots** - 5+ greybox/placeholder gameplay screenshots
+3. **Trailer** - NOT needed yet (add in Phase 2)
+4. **Release Date** - Set to "Coming March 2026"
 5. **Price** - $2.99-4.99 USD
+
+### Phase 2: Polish (Week 8-10)
+
+1. **Capsule Art** - Replace with FINAL commissioned art ($200-400)
+2. **Screenshots** - Replace with 5+ final gameplay screenshots
+3. **Trailer** - Record 30-60 seconds of gameplay (Week 10)
+4. **Tags** - Review and finalize (see prioritized list below)
 
 ---
 
@@ -174,5 +175,5 @@ Created by a Filipino-American husband and wife team, Sarimanok Survivor celebra
 ---
 
 _Draft created: December 2025_
-_Updated: December 2025 (v2.4 - added screenshot strategy, trailer best practices, tags)_
+_Updated: December 2025 (v2.5 - added two-phase store page approach, consolidated tags section)_
 _Update with actual screenshots and trailer when available_

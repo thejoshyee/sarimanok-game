@@ -1,7 +1,37 @@
 # Sourced Assets Checklist
 
-> **Total Estimated Budget:** $80-200+  
+> **Total Estimated Budget:** $130-350+  
 > **Priority:** Buy asset packs in Week 1 (unblocks development)
+
+---
+
+## ⚠️ TWO-PHASE STORE PAGE STRATEGY
+
+Your store page needs to be **LIVE by Dec 28-30** for Next Fest registration (Jan 5 deadline).
+You won't have final art yet - that's okay! Launch with placeholders, upgrade later.
+
+### Phase 1: Placeholder Launch (Week 4 - Dec 28-30)
+
+| Asset                | Placeholder Option                        | Cost    |
+| -------------------- | ----------------------------------------- | ------- |
+| Main Capsule 616×353 | Simple design: Title + background         | $50-100 |
+| Small Capsule        | Scaled from main                          | $0      |
+| Header Capsule       | Scaled from main                          | $0      |
+| Screenshots (5+)     | Greybox/placeholder gameplay              | $0      |
+| Description          | Written text (see `steam-store-draft.md`) | $0      |
+
+**Phase 1 Goal:** Get store page LIVE so you can register for Next Fest.
+
+### Phase 2: Polish Before Next Fest (Week 8-10 - by Feb 9)
+
+| Asset            | Polished Version                       | Cost     |
+| ---------------- | -------------------------------------- | -------- |
+| Main Capsule     | Professional commissioned illustration | $200-400 |
+| All Capsules     | Matching professional set              | included |
+| Screenshots (5+) | Final gameplay with real art           | $0       |
+| Trailer          | 30-60 sec gameplay video               | $0       |
+
+**Phase 2 Goal:** Make store page shine before Next Fest begins (Feb 23).
 
 ---
 
@@ -137,9 +167,43 @@
 
 ---
 
-## 🎨 Steam Marketing Art (Week 6-8)
+## 🎨 Steam Marketing Art
 
-### Capsule Art — $200-400 (Commission)
+### Phase 1: Placeholder Capsule Art — $50-100 (Week 1)
+
+> 🎯 Goal: Get SOMETHING professional-looking for store page launch (Dec 28-30)
+
+| Asset              | Size    | Status | Notes                   |
+| ------------------ | ------- | ------ | ----------------------- |
+| [ ] Main Capsule   | 616×353 |        | Simple but clean design |
+| [ ] Small Capsule  | 231×87  |        | Scaled from main        |
+| [ ] Header Capsule | 460×215 |        | Scaled from main        |
+
+**Placeholder Options:**
+
+- **Fiverr Rush ($50-100):** Search "Steam capsule art" - 3-5 day delivery
+- **Canva DIY ($0):** Title text + simple background - functional but basic
+- **99designs Contest ($99+):** Multiple concepts to choose from
+
+**Placeholder Brief:**
+
+```
+RUSH ORDER - Steam Capsule Art Placeholder
+SIZE: 616x353 pixels
+STYLE: Clean, professional (can be simple)
+DEADLINE: 5 days
+
+MUST INCLUDE:
+- "Sarimanok Survivor" title (readable at small size)
+- Dark/night background
+- Simple but eye-catching design
+- Space for future iteration
+
+NOTE: This is a placeholder. We'll commission full art later.
+BUDGET: $50-100
+```
+
+### Phase 2: Final Capsule Art — $200-400 (Week 6-8)
 
 > ⚠️ CRITICAL for Next Fest visibility. Bad capsule = no clicks = no wishlists.
 
@@ -159,7 +223,7 @@
   - [r/gameDevClassifieds](https://reddit.com/r/gameDevClassifieds)
   - [r/HungryArtists](https://reddit.com/r/HungryArtists)
 
-### Commission Brief (Save for Week 6)
+### Final Commission Brief (Week 6)
 
 ```
 PROJECT: Steam Capsule Art for "Sarimanok Survivor"
@@ -194,17 +258,18 @@ BUDGET: $XXX (include 1 revision round)
 
 ## 📊 Budget Summary
 
-| Category                | Est. Cost    | Status |
-| ----------------------- | ------------ | ------ |
-| UI Asset Pack           | $10-15       | [ ]    |
-| Tileset Asset Pack      | $10-20       | [ ]    |
-| SFX Pack                | $15-30       | [ ]    |
-| Music (if commissioned) | $0-150       | [ ]    |
-| Steam Capsule Art       | $200-400     | [ ]    |
-| **TOTAL**               | **$235-615** |        |
+| Category                    | Est. Cost    | Status | When   |
+| --------------------------- | ------------ | ------ | ------ |
+| UI Asset Pack               | $10-15       | [ ]    | Week 1 |
+| Tileset Asset Pack          | $10-20       | [ ]    | Week 1 |
+| SFX Pack                    | $15-30       | [ ]    | Week 1 |
+| **Placeholder Capsule Art** | $50-100      | [ ]    | Week 1 |
+| Music (if commissioned)     | $0-150       | [ ]    | Week 9 |
+| **Final Capsule Art**       | $200-400     | [ ]    | Week 6 |
+| **TOTAL**                   | **$285-715** |        |        |
 
-> **Minimum viable:** $80-115 (asset packs + free music)  
-> **Recommended:** $280-365 (includes commissioned capsule art)
+> **Minimum viable (to launch store page):** $85-165 (asset packs + placeholder capsule)  
+> **Recommended (for Next Fest):** $335-565 (includes final commissioned capsule art)
 
 ---
 
@@ -227,16 +292,21 @@ BUDGET: $XXX (include 1 revision round)
 
 ## ⏰ Sourcing Timeline
 
-| Week     | Action                                           |
-| -------- | ------------------------------------------------ |
-| Week 1   | Buy UI pack, Tileset pack, SFX pack              |
-| Week 1   | Attend Steam Q&A session Dec 16 (or watch later) |
-| Week 1-2 | Browse music options (Pixabay, OpenGameArt)      |
-| Week 4   | Set up Steam tags, write descriptions            |
-| Week 4-5 | Browse capsule art artists, save candidates      |
-| Week 6   | Commission capsule art                           |
-| Week 7-8 | Receive capsule art, request revisions if needed |
-| Week 8   | Capture final gameplay screenshots (5+)          |
-| Week 9   | Finalize music selection/commission              |
-| Week 10  | Record trailer (gameplay in first 5 sec!)        |
-| Feb 9    | Submit demo for Next Fest review                 |
+| Week     | Action                                                     |
+| -------- | ---------------------------------------------------------- |
+| Week 1   | Buy UI pack, Tileset pack, SFX pack                        |
+| Week 1   | **Commission PLACEHOLDER capsule art ($50-100)**           |
+| Week 1   | Attend Steam Q&A session Dec 16 (or watch later)           |
+| Week 1-2 | Browse music options (Pixabay, OpenGameArt)                |
+| Week 4   | **Store page LIVE with placeholder capsule + screenshots** |
+| Week 4   | Set up Steam tags, write descriptions                      |
+| Week 5   | **Register for Next Fest (deadline Jan 5)**                |
+| Week 5-6 | Browse final capsule art artists, save candidates          |
+| Week 6   | **Commission FINAL capsule art ($200-400)**                |
+| Week 7-8 | Receive final capsule art, request revisions if needed     |
+| Week 8   | **Update store page with final capsule art**               |
+| Week 8   | Capture final gameplay screenshots (5+)                    |
+| Week 9   | Finalize music selection/commission                        |
+| Week 10  | Record trailer (gameplay in first 5 sec!)                  |
+| Week 10  | **Update store page with final screenshots + trailer**     |
+| Feb 9    | Submit demo for Next Fest review                           |

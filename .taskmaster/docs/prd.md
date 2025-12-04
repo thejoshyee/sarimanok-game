@@ -2630,11 +2630,15 @@ Builds on Week 3, adds:
 
 **CRITICAL PARALLEL TASKS (Steam Store Page - SUBMIT BY DEC 20!):**
 
+> ⚠️ **Launching with PLACEHOLDERS is fine!** You can update assets after page is live.
+> Goal: Get page LIVE for Next Fest registration. Polish comes in Week 8-10.
+
 - [ ] **STEAM:** Steamworks verification should be complete by now
 - [ ] **STEAM:** Create "Coming Soon" store page draft
+- [ ] **STEAM:** Upload PLACEHOLDER capsule art (commissioned in Week 1 for $50-100)
 - [ ] **STEAM:** Write Short Description (compelling, unique selling points, end with tagline)
 - [ ] **STEAM:** Write "About This Game" section (repeat 3-4 core gameplay themes)
-- [ ] **STEAM:** Prepare 5+ placeholder screenshots (can be from dev build - will replace later)
+- [ ] **STEAM:** Prepare 5+ placeholder screenshots (greybox gameplay is fine - will replace in Week 10!)
 - [ ] **STEAM:** Set up initial Steam tags in Steamworks (see Steam Store Page Optimization section)
 - [ ] **STEAM:** Submit store page for review **BY DECEMBER 20** (allows 2-5 business day review + holiday buffer)
 - [ ] **STEAM:** Target store page LIVE by Dec 28-30 (before Jan 5 Next Fest deadline)
@@ -2704,7 +2708,14 @@ Builds on Week 5, adds:
 - High score tracking for Story Mode
 - Simplified Endless Mode (unlocks after beating Story Mode)
 
-**PARALLEL TASK: Submit Steam store page for review (verification should be done by now)**
+**CRITICAL PARALLEL TASKS (Commission Final Art!):**
+
+> 🎨 **Store page is LIVE with placeholders. Now commission the FINAL capsule art!**
+> Allow 2-3 weeks for delivery + revisions (ready by Week 8).
+
+- [ ] **STEAM ART:** Find capsule art artist on Fiverr/ArtStation/Twitter ($200-400)
+- [ ] **STEAM ART:** Send commission brief (see `sourced-assets-checklist.md`)
+- [ ] **STEAM ART:** Expect delivery in Week 7-8, update store page in Week 8
 
 **Tasks:**
 
@@ -2841,16 +2852,20 @@ This week focuses on swapping placeholders for real sprites:
 - [ ] Adjust hitboxes if sprite shapes differ from placeholders
 - [ ] Test all animations work correctly
 
-**Steam Store Page Screenshots (Update with real art!):**
+**CRITICAL PARALLEL TASKS (Store Page Polish - Replace Placeholders!):**
 
-- [ ] **Capture 5+ varied gameplay screenshots at 1920×1080**
-- [ ] **Ensure first 4 screenshots show different gameplay aspects:**
+> ⚠️ **Your store page launched with placeholders in Week 4. Time to upgrade!**
+
+- [ ] **STEAM ART:** Receive commissioned FINAL capsule art (should be ready by now if commissioned in Week 6)
+- [ ] **STEAM:** Upload FINAL capsule art to Steam (replace placeholder!)
+- [ ] **STEAM:** Capture 5+ varied gameplay screenshots at 1920×1080
+- [ ] **STEAM:** Ensure first 4 screenshots show different gameplay aspects:
   - Screenshot 1: Sarimanok surrounded by enemies (core gameplay)
   - Screenshot 2: Level-up screen with weapon choices (progression)
   - Screenshot 3: Manananggal boss encounter (excitement/stakes)
   - Screenshot 4: Multiple weapons firing at once (power fantasy)
-- [ ] **Take extra screenshots for social media use**
-- [ ] **Upload updated screenshots to Steam store page**
+- [ ] **STEAM:** Take extra screenshots for social media use
+- [ ] **STEAM:** Upload updated screenshots to Steam store page (replace placeholders!)
 
 **Note:** Black Duwende sprite deferred to Update 1.
 

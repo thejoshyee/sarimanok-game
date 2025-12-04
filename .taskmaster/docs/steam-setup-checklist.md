@@ -32,25 +32,52 @@
 
 ---
 
-## Phase 2: Store Page Setup (Week 4 - by Dec 20)
+## Phase 2: Store Page Setup WITH PLACEHOLDERS (Week 4 - by Dec 20)
+
+> ⚠️ **Don't have final art yet? That's okay!** Launch with placeholders, upgrade later.
 
 ### Prerequisites
 
 - [ ] Steamworks verification COMPLETE
-- [ ] Capsule art ready (616x353 minimum)
-- [ ] Game description written (use steam-store-draft.md)
+- [ ] **PLACEHOLDER** capsule art ready (see options below)
+- [ ] Game description written (use `steam-store-draft.md`)
+
+### Placeholder Capsule Art Options ($0-100)
+
+| Option            | Cost    | Time     | Quality  |
+| ----------------- | ------- | -------- | -------- |
+| Fiverr Rush Order | $50-100 | 3-5 days | Good     |
+| Canva DIY         | $0      | 1 day    | Basic    |
+| 99designs Contest | $99+    | 5-7 days | Multiple |
+
+**Placeholder Brief (for Fiverr/99designs):**
+
+```
+RUSH ORDER - Steam Capsule Art Placeholder
+SIZE: 616x353 pixels
+STYLE: Clean, professional (can be simple)
+DEADLINE: 5 days
+
+MUST INCLUDE:
+- "Sarimanok Survivor" title (readable at small size)
+- Dark/night background
+- Simple but eye-catching design
+
+NOTE: This is a placeholder. Final art commissioned later.
+BUDGET: $50-100
+```
 
 ### Create Store Page
 
 - [ ] Log into Steamworks
 - [ ] Create new app
-- [ ] Upload capsule images:
+- [ ] Upload **PLACEHOLDER** capsule images:
   - [ ] Main Capsule (616x353) - REQUIRED
   - [ ] Small Capsule (231x87) - REQUIRED
   - [ ] Header Capsule (460x215) - REQUIRED
-- [ ] Write store description (copy from steam-store-draft.md)
+- [ ] Write store description (copy from `steam-store-draft.md`)
 - [ ] Set tags/categories
-- [ ] Add placeholder screenshots (can update later)
+- [ ] Add **placeholder screenshots** (greybox gameplay is fine!)
 - [ ] Set release date to "Coming March 2026"
 - [ ] Set price ($2.99-4.99)
 
@@ -68,6 +95,29 @@
 - [ ] Verify "Coming Soon" page is visible publicly
 - [ ] Test wishlist button works
 - [ ] Share link with friends to verify
+
+> 📝 **Note:** Page is live with placeholders. That's enough for Next Fest registration!
+
+---
+
+## Phase 3.5: Store Page POLISH (Week 8-10 - by Feb 9)
+
+> Upgrade your placeholder assets BEFORE Next Fest starts (Feb 23)
+
+### Commission Final Capsule Art (Week 6)
+
+- [ ] Find artist on Fiverr/ArtStation/Twitter ($200-400)
+- [ ] Send final commission brief (see `sourced-assets-checklist.md`)
+- [ ] Budget 2-3 weeks for delivery + revisions
+
+### Update Store Page (Week 8-10)
+
+- [ ] Upload **FINAL** capsule art (replace placeholders)
+- [ ] Upload **FINAL** screenshots with real art (5+)
+- [ ] Upload trailer (30-60 sec, gameplay in first 5 seconds)
+- [ ] Review and update description if needed
+
+> 🎯 **Goal:** Store page polished before Next Fest begins (Feb 23)
 
 ---
 

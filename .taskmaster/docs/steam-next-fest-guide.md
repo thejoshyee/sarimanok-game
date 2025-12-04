@@ -84,9 +84,46 @@ Your store page must be **LIVE** (publicly visible) to register. This means:
 - [ ] Store page **approved and public**
 - [ ] "Coming Soon" or "Wishlist" button visible to public
 
-### Capsule Art (CRITICAL)
+---
 
-> ⚠️ Bad capsule = no clicks = no wishlists. This is your most important visual asset.
+## ⚠️ TWO-PHASE STORE PAGE STRATEGY
+
+> **Problem:** You need the store page LIVE by Dec 28-30 for Next Fest registration, but you won't have final art yet.
+>
+> **Solution:** Launch with placeholder assets, then upgrade before Next Fest starts.
+
+### Phase 1: Placeholder Launch (Week 4 - Dec 28-30)
+
+**Goal:** Get store page LIVE so you can register for Next Fest by Jan 5.
+
+| Asset            | Placeholder Option                               | Cost    |
+| ---------------- | ------------------------------------------------ | ------- |
+| Main Capsule     | Simple design: Title + dark background           | $50-100 |
+| Small Capsule    | Scaled from main                                 | $0      |
+| Header Capsule   | Scaled from main                                 | $0      |
+| Screenshots (5+) | Greybox/placeholder gameplay captures            | $0      |
+| Description      | Written text (already in `steam-store-draft.md`) | $0      |
+
+**Placeholder Capsule Options:**
+
+- **Fiverr Rush ($50-100):** Search "Steam capsule art" - 3-5 day delivery
+- **Canva DIY ($0):** Title text + simple background - functional but basic
+- **99designs Contest ($99+):** Multiple concepts to choose from
+
+### Phase 2: Polish Before Next Fest (Week 8-10 - by Feb 9)
+
+**Goal:** Make store page shine before Next Fest begins (Feb 23).
+
+| Asset            | Polished Version                       | Cost     |
+| ---------------- | -------------------------------------- | -------- |
+| Main Capsule     | Professional commissioned illustration | $200-400 |
+| All Capsules     | Matching professional set              | included |
+| Screenshots (5+) | Final gameplay with real art           | $0       |
+| Trailer          | 30-60 sec gameplay video               | $0       |
+
+---
+
+### Capsule Art Dimensions
 
 | Asset          | Size         | Priority     | Notes                                |
 | -------------- | ------------ | ------------ | ------------------------------------ |
@@ -102,7 +139,7 @@ Your store page must be **LIVE** (publicly visible) to register. This means:
 - High contrast, readable text
 - Professional illustration (NOT scaled pixel art)
 - Clear game identity visible at thumbnail size
-- Budget: $200-400 for commission
+- Budget: $50-100 for placeholder, $200-400 for final
 
 ### Screenshots (5+ Required)
 
