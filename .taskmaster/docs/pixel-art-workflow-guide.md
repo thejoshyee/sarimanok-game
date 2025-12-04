@@ -91,10 +91,10 @@ These are the shortcuts you'll use constantly. Learn them as you work:
 
 For your game with 3 characters, 4 enemies (5 total with Update 1), 6 weapons, pickups, and a tileset:
 
-- **32-color palette** is the sweet spot (Dawnbringer 32)
+- **64-color palette** is the sweet spot (Resurrect 64)
 - **64-color palette** gives more flexibility if you want richer visuals (Resurrect 64)
 
-**Recommendation:** Start with **Dawnbringer 32**. It's a proven palette used in many indie games, has excellent color ramps for shading, and 32 colors is enough for your scope. You can always expand later.
+**Recommendation:** Use **Resurrect 64**. It's a proven palette with excellent color ramps, and 64 colors gives you the flexibility needed for the vibrant rainbow Sarimanok, multiple color variants, and diverse enemy types.
 
 If you find yourself running out of colors for all the vibrant Sarimanok variants, upgrade to Resurrect 64.
 
@@ -1371,7 +1371,7 @@ sarimanok-game/
     ├── tiles/
     │   ├── tileset_filipino.aseprite
     │   └── bahay_kubo.aseprite
-    └── palette_dawnbringer32.aseprite  # Master palette reference
+    └── palette_resurrect64.aseprite  # Master palette reference
 ```
 
 **Important:** Keep `.aseprite` source files OUTSIDE the Godot project folder but in your repo. Godot doesn't need them, but you need them for edits.
@@ -1853,7 +1853,7 @@ The game title "SARIMANOK SURVIVOR" will use a sourced pixel font, not custom pi
 
 ### Before Starting Any Sprite:
 
-- [ ] Download and load your palette (Dawnbringer 32 or Resurrect 64)
+- [ ] Download and load your palette (Resurrect 64)
 - [ ] Set Color Mode to RGBA
 - [ ] Set canvas size (32x32 for most, 48x48 for boss, 16x16 for icons)
 
