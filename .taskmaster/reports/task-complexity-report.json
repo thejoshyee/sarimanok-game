@@ -1,6 +1,6 @@
 {
 	"meta": {
-		"generatedAt": "2025-12-04T06:10:08.826Z",
+		"generatedAt": "2025-12-04T07:31:35.292Z",
 		"tasksAnalyzed": 10,
 		"totalTasks": 10,
 		"analysisCount": 10,
@@ -11,83 +11,83 @@
 	"complexityAnalysis": [
 		{
 			"taskId": 1,
-			"taskTitle": "Project Setup and Core Player Movement",
+			"taskTitle": "Project Setup and Core Architecture Initialization",
 			"complexityScore": 6,
 			"recommendedSubtasks": 5,
-			"expansionPrompt": "Break down project setup, input mapping, player node creation, movement implementation, and animation handling into subtasks.",
-			"reasoning": "This task involves foundational setup including project configuration, input mapping, player character creation with 8-directional movement, sprite flipping, simple animation, and invincibility frames. While conceptually straightforward, it requires careful integration of multiple systems and adherence to Godot best practices for input and animation, making it moderately complex."
+			"expansionPrompt": "Break down project setup into configuring project settings, input mappings, scene structure, object pooling, audio setup, and localization initialization.",
+			"reasoning": "This task involves foundational setup of the Godot 4 project including multiple subsystems: viewport and stretch settings, input mapping, scene creation with TileMaps and Camera2D limits, object pooling initialization, audio bus configuration, and localization system setup. Each subsystem requires careful configuration and testing to ensure a stable base for the game. While individually straightforward, the combined scope and dependencies on engine features and best practices raise complexity to moderate-high."
 		},
 		{
 			"taskId": 2,
-			"taskTitle": "Enemy System Implementation",
-			"complexityScore": 8,
-			"recommendedSubtasks": 7,
-			"expansionPrompt": "Decompose enemy scene creation, individual enemy behaviors, spawn manager, object pooling, damage and death handling, and performance testing into subtasks.",
-			"reasoning": "Implementing four distinct enemy types with unique behaviors (walking, floating with sine wave, shooting, dive attacks), spawn timing and scaling, object pooling for performance, and death effects is complex. It requires AI behavior coding, performance optimization, and integration with player interactions, increasing complexity significantly."
+			"taskTitle": "Implement Player Characters and Movement System",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Divide player implementation into character node setup, animation and sprite flipping, movement input handling, damage and invincibility logic, death handling, and character selection UI with unlock conditions.",
+			"reasoning": "Implementing multiple player variants with distinct stats and animations, smooth 8-directional movement supporting analog input, damage and invincibility frames, death logic, and a character select screen with unlock conditions involves multiple interacting systems. Handling input responsiveness, animation timing, and UI integration adds technical challenges. The need to support multiple variants and unlock logic increases complexity beyond basic movement implementation."
 		},
 		{
 			"taskId": 3,
-			"taskTitle": "Weapon System with Data-Driven Architecture",
+			"taskTitle": "Enemy System Implementation with Spawn Manager and Scaling",
 			"complexityScore": 8,
-			"recommendedSubtasks": 6,
-			"expansionPrompt": "Divide tasks into base weapon class creation, weapon type extensions, cooldown and auto-fire logic, debuff system, data-driven WeaponData resource setup, and UI feedback implementation.",
-			"reasoning": "Creating a flexible weapon system with multiple weapon types, cooldowns, upgrades, debuffs, and data-driven design demands careful architecture to ensure extensibility and maintainability. Implementing visual and damage feedback adds to complexity, requiring solid design patterns and testing."
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Expand enemy system into creating enemy scenes, implementing behaviors per enemy type, spawn manager with timeline and scaling, stat scaling functions, object pooling, death effects and drops, and boss-specific logic.",
+			"reasoning": "This task requires implementing four enemy types with distinct behaviors including projectile attacks and a boss with special entrance and attack patterns. The spawn manager must handle timed spawns and scaling difficulty, while ensuring performance with object pooling and supporting 100+ enemies simultaneously. Coordinating enemy interactions, damage, death effects, and scaling over time adds significant complexity and performance considerations."
 		},
 		{
 			"taskId": 4,
-			"taskTitle": "Passive System Implementation",
-			"complexityScore": 5,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Split into passive manager creation, stat modifier application, integration with level-up system, and dynamic stat updates with shop upgrades.",
-			"reasoning": "The passive system involves tracking multiple passives, applying additive stat modifiers, integrating with level-up choices, and updating player stats dynamically. While less complex than AI or weapon systems, it requires careful state management and integration with other systems."
+			"taskTitle": "Weapon System with Data-Driven Architecture and Clone Weapons",
+			"complexityScore": 8,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Detail weapon system subtasks including base weapon class with cooldown and auto-fire, weapon type implementations, data-driven WeaponData resource creation, debuff system, weapon equip limits, upgrade mechanics, visual effects, and clone weapon adaptations.",
+			"reasoning": "Developing a flexible weapon system with multiple weapon types, automatic firing, cooldown management, upgrades, and debuff effects requires careful design. Using Godot Resource files for data-driven definitions adds architectural complexity to support easy balancing and extension. Clone weapons reuse base logic with modifications, increasing the need for clean inheritance or composition patterns. Visual and damage feedback integration further adds to implementation effort."
 		},
 		{
 			"taskId": 5,
-			"taskTitle": "Level-Up System with Upgrade Choices",
-			"complexityScore": 7,
-			"recommendedSubtasks": 5,
-			"expansionPrompt": "Outline subtasks for XP collection and bar UI, level-up trigger logic, random upgrade choice generation respecting constraints, upgrade application, and game pause/resume handling.",
-			"reasoning": "This system requires managing XP accumulation, UI updates, pausing gameplay, generating valid upgrade choices dynamically, and applying upgrades correctly. It involves coordination between multiple systems (weapons, passives) and UI, making it moderately complex."
+			"taskTitle": "Passive System Implementation with Stat Boosts",
+			"complexityScore": 5,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Split passive system into passive manager implementation, stat modifier application, integration into level-up choices, and UI display of passives.",
+			"reasoning": "Implementing passives that provide stacking stat boosts and integrate into level-up choices is moderately complex. The main challenges are correctly applying additive stat modifiers, ensuring compatibility with weapon upgrades and shop bonuses, and UI integration. Compared to active systems, passives are less complex but require careful state management and UI feedback."
 		},
 		{
 			"taskId": 6,
-			"taskTitle": "Pickup System for XP and Gold",
-			"complexityScore": 5,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Break down pickup scene creation, spawn logic on enemy death, magnetic drift behavior with passive influence, and collection effects with UI updates.",
-			"reasoning": "Implementing pickups with spawning, delayed magnetic attraction influenced by passives, and collection feedback is moderately complex. It requires physics or movement logic and integration with player stats but is less complex than AI or weapon systems."
+			"taskTitle": "Level-Up System with Random Upgrade Choices",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down level-up system into XP collection and UI, level-up trigger and game pause, random upgrade choice generation respecting constraints, upgrade application, and localization support.",
+			"reasoning": "This task involves integrating XP collection with UI feedback, pausing gameplay on level-up, generating constrained random upgrade choices from weapons and passives, applying upgrades, and resuming gameplay. Coordination with weapon and passive systems and ensuring localization support add complexity. The random choice logic with constraints and smooth UX require careful implementation."
 		},
 		{
 			"taskId": 7,
-			"taskTitle": "Shop System for Permanent Upgrades",
-			"complexityScore": 6,
+			"taskTitle": "Pickup System for XP Gems and Gold Coins",
+			"complexityScore": 5,
 			"recommendedSubtasks": 4,
-			"expansionPrompt": "Divide into shop UI creation, gold and upgrade cost management, purchase logic with validation, and persistent save/load implementation.",
-			"reasoning": "The shop system involves UI design, resource management, applying permanent upgrades affecting future runs, and reliable persistence with save/load and backup. While straightforward conceptually, persistence and UI state management add complexity."
+			"expansionPrompt": "Divide pickup system into pickup scene creation, spawn logic on enemy death, magnetic drift behavior with passive range influence, and collection effects with sound and UI feedback.",
+			"reasoning": "Implementing pickups that spawn on enemy death, drift magnetically toward the player, and provide XP or gold with visual and audio feedback is moderately straightforward. Object pooling and integration with passive stat effects add some complexity, but overall this is a common game mechanic with well-known implementation patterns."
 		},
 		{
 			"taskId": 8,
-			"taskTitle": "Game Timer, Win and Lose Conditions",
+			"taskTitle": "Shop System for Permanent Upgrades Between Runs",
 			"complexityScore": 6,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Separate timer display implementation, victory condition handling with effects, defeat condition with animation, and results screen with stats and navigation.",
-			"reasoning": "Implementing a game timer with win/lose triggers, visual and audio effects, and a results screen involves UI, state management, and animation coordination. It is moderately complex but well-scoped."
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Expand shop system into UI creation, purchase logic with gold deduction and button state management, save/load persistent upgrade data, application of bonuses at run start, and localization integration.",
+			"reasoning": "The shop system requires UI design, transactional logic for purchases with gold validation, persistent data management across runs, and integration with player stats. Ensuring smooth UX with button state updates and localization adds to complexity. While not highly complex, persistence and integration with game state require careful handling."
 		},
 		{
 			"taskId": 9,
-			"taskTitle": "Character Select Screen and Unlock System",
-			"complexityScore": 5,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Outline subtasks for character select UI, unlock condition tracking and display, selection validation, and gameplay stat application.",
-			"reasoning": "This task requires UI for character selection with unlock conditions based on gameplay achievements, state tracking, and applying selected character stats. It is moderately complex due to integration with game state and UI but limited in scope."
+			"taskTitle": "Game Timer, Win/Lose Conditions, and Results Screen",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Detail subtasks including timer display and counting, victory condition with visual/audio effects and transitions, defeat condition handling, results screen UI with stats and navigation buttons, gold update logic, and localization support.",
+			"reasoning": "Implementing a game timer with a 30-minute countdown, triggering victory and defeat states with corresponding visual and audio effects, and displaying a results screen with multiple stats and navigation options involves multiple UI and game state transitions. The dawn transition effect and integration with audio and UI systems add technical challenges, making this moderately complex."
 		},
 		{
 			"taskId": 10,
-			"taskTitle": "Endless Mode Implementation and Unlock",
-			"complexityScore": 5,
-			"recommendedSubtasks": 3,
-			"expansionPrompt": "Break down menu button implementation with lock/unlock, endless mode timer and scaling logic, and best time tracking and display.",
-			"reasoning": "Adding an endless mode variant with unlock conditions, continuous timer without win condition, scaling beyond story mode, and best time tracking is moderately complex but mostly reuses existing systems with some additional state management."
+			"taskTitle": "Endless Mode Unlock and Gameplay Integration",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down Endless Mode implementation into menu button locking/unlocking logic, removal of win condition and infinite timer, continuous spawn and stat scaling, best time tracking and display, and performance validation.",
+			"reasoning": "Adding an Endless Mode with unlock conditions, infinite timer, continuous scaling, and best time tracking requires modifying existing game flow and UI. While conceptually straightforward, ensuring stable performance and correct state persistence adds moderate complexity."
 		}
 	]
 }

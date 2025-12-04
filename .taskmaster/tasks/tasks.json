@@ -3,76 +3,76 @@
     "tasks": [
       {
         "id": 1,
-        "title": "Project Setup and Core Player Movement",
-        "description": "Set up the Godot 4.x project with correct viewport and input mappings. Implement the Sarimanok player character with 8-directional movement, sprite flipping, and 2-frame animation using placeholder sprites.",
-        "details": "Configure project settings for 640x360 viewport with canvas_items stretch mode. Map input actions for movement (WASD/Arrow keys) and pause. Create CharacterBody2D player node with collision shape. Implement movement using Input.get_action_strength() for analog support. Add sprite child node with placeholder ColorRect. Implement horizontal sprite flipping based on velocity.x. Animate between 2 frames every 0.2 seconds while moving. Include invincibility frames after damage (0.5s).",
-        "testStrategy": "Verify player moves smoothly in all 8 directions with correct speed per variant stats. Confirm sprite flips horizontally when moving left/right. Check 2-frame animation cycles while moving and stops when idle. Test invincibility frames prevent damage for 0.5s after hit. Ensure no console errors.",
+        "title": "Project Setup and Core Architecture Initialization",
+        "description": "Set up the Godot 4.x project with required settings, input mappings, and basic scene structure to support Sarimanok Survivor development.",
+        "details": "- Configure project settings: viewport 640x360, stretch mode canvas_items, stretch aspect keep.\n- Set up Input Map with actions: move_up, move_down, move_left, move_right, pause, ui_accept, ui_cancel.\n- Create main scene with TileMap layers (ground and decorations), Camera2D with limits (0,0 to 1920,1088), and invisible boundary collisions using StaticBody2D.\n- Initialize object pools for enemies, projectiles, pickups, and particles.\n- Set up Audio buses: Master, Music, SFX.\n- Prepare localization system with tr() usage and initial translations CSV file.",
+        "testStrategy": "Verify project settings are correctly applied.\nTest input actions respond to keyboard and controller.\nConfirm camera limits and boundary collisions prevent player from leaving arena.\nCheck object pools are pre-allocated and reusable.\nEnsure audio buses exist and can play test sounds.\nValidate localization strings appear correctly in UI.",
         "priority": "high",
         "dependencies": [],
         "status": "pending",
         "subtasks": [
           {
             "id": 1,
-            "title": "Configure Project Viewport and Window Settings",
-            "description": "Set up the Godot 4.x project viewport to 640x360 resolution with canvas_items stretch mode enabled.",
+            "title": "Configure Project Settings",
+            "description": "Set up the Godot project settings including viewport size, stretch mode, and stretch aspect to match the required 640x360 resolution with canvas_items stretch and keep aspect ratio.",
             "dependencies": [],
-            "details": "Open Project Settings, navigate to Display -> Window, set Viewport Width to 640 and Viewport Height to 360. Enable canvas_items stretch mode to ensure proper scaling. Verify settings apply correctly on project start.",
+            "details": "In the Project Settings, set display/window/size/viewport_width to 640 and viewport_height to 360. Configure stretch mode to 'canvas_items' and stretch aspect to 'keep' to maintain aspect ratio during scaling. Verify these settings apply correctly on project start.",
             "status": "pending",
-            "testStrategy": "Launch the project and confirm the viewport size is 640x360 and the window scales correctly without distortion."
+            "testStrategy": "Launch the project and verify the viewport size is 640x360 and the stretch mode and aspect behave as expected on window resize."
           },
           {
             "id": 2,
-            "title": "Map Input Actions for Movement and Pause",
-            "description": "Define input mappings for player movement using WASD and arrow keys, plus a pause action.",
+            "title": "Set Up Input Map Actions",
+            "description": "Define input actions in the Input Map for player movement and UI controls including move_up, move_down, move_left, move_right, pause, ui_accept, and ui_cancel.",
             "dependencies": [
               1
             ],
-            "details": "In Project Settings under Input Map, add actions for 'move_up', 'move_down', 'move_left', 'move_right' mapped to W, S, A, D and arrow keys respectively. Add a 'pause' action mapped to the Escape key. Ensure analog input support by using Input.get_action_strength() in code.",
+            "details": "In the Input Map section of Project Settings, add actions: move_up, move_down, move_left, move_right, pause, ui_accept, and ui_cancel. Assign appropriate keyboard keys and controller buttons to each action to support player input and UI navigation.",
             "status": "pending",
-            "testStrategy": "Test input actions in the editor by printing action strengths and verifying pause toggles correctly."
+            "testStrategy": "Test each input action by detecting input events in a test scene or script to confirm correct mapping and responsiveness."
           },
           {
             "id": 3,
-            "title": "Create Player Character Node with Collision",
-            "description": "Create a CharacterBody2D node named Sarimanok with a collision shape for player physics.",
+            "title": "Create Main Scene Structure",
+            "description": "Build the main scene with TileMap layers for ground and decorations, add a Camera2D node with limits set from (0,0) to (1920,1088), and implement invisible boundary collisions using StaticBody2D nodes.",
             "dependencies": [
               1,
               2
             ],
-            "details": "Add a CharacterBody2D node as the player root. Attach a CollisionShape2D child with an appropriate shape (e.g., RectangleShape2D) matching the player size. This node will handle movement and collision detection.",
+            "details": "Create a new scene with TileMap nodes for ground and decorations layers. Add a Camera2D node configured with limit_left=0, limit_top=0, limit_right=1920, limit_bottom=1088 to restrict camera movement. Place StaticBody2D nodes with CollisionShape2D to form invisible boundaries preventing player from leaving the playable area.",
             "status": "pending",
-            "testStrategy": "Run the scene and verify the player collides properly with environment boundaries and does not pass through obstacles."
+            "testStrategy": "Run the scene and verify the camera respects limits and the player cannot move beyond the invisible boundaries."
           },
           {
             "id": 4,
-            "title": "Implement 8-Directional Movement and Horizontal Sprite Flipping",
-            "description": "Program player movement in 8 directions using Input.get_action_strength(), and flip the sprite horizontally based on movement direction.",
+            "title": "Initialize Object Pools for Game Entities",
+            "description": "Set up object pooling systems for enemies, projectiles, pickups, and particles to optimize performance by reusing instances instead of creating/destroying frequently.",
             "dependencies": [
               3
             ],
-            "details": "Use Input.get_action_strength() for each direction to calculate velocity vector. Normalize and apply movement speed. Add a Sprite2D child node with a placeholder ColorRect texture. Flip the sprite horizontally when velocity.x is negative, unflip when positive.",
+            "details": "Implement object pool scripts or singleton managers that pre-allocate a fixed number of instances for enemies, projectiles, pickups, and particles. Provide methods to request and release objects from the pool during gameplay to minimize runtime instantiation overhead.",
             "status": "pending",
-            "testStrategy": "Verify player moves smoothly in all 8 directions and sprite flips correctly when moving left or right."
+            "testStrategy": "Simulate spawning and despawning of pooled objects and verify that objects are reused correctly without creating new instances unnecessarily."
           },
           {
             "id": 5,
-            "title": "Add 2-Frame Animation and Invincibility Frames",
-            "description": "Animate the player sprite cycling between 2 frames every 0.2 seconds while moving, and implement 0.5 second invincibility frames after damage.",
+            "title": "Configure Audio Buses and Localization System",
+            "description": "Set up audio buses for Master, Music, and SFX channels and prepare the localization system using tr() calls and an initial translations CSV file.",
             "dependencies": [
-              4
+              1
             ],
-            "details": "Create an animation timer to switch between two placeholder frames on the sprite while the player is moving. When the player takes damage, trigger invincibility state lasting 0.5 seconds during which damage is ignored and optionally show visual feedback.",
+            "details": "In the Audio section of Project Settings, create audio buses named Master, Music, and SFX with appropriate volume and routing. Implement localization by integrating tr() function calls in scripts and UI, and prepare a CSV file containing initial translations for supported languages to enable multi-language support.",
             "status": "pending",
-            "testStrategy": "Confirm the sprite animates only when moving, stops when idle, and that the player cannot take damage during invincibility frames after being hit."
+            "testStrategy": "Play test sounds routed through each audio bus to confirm correct setup. Switch localization languages and verify that UI text updates accordingly using the translations CSV."
           }
         ]
       },
       {
         "id": 2,
-        "title": "Enemy System Implementation",
-        "description": "Implement all 4 enemy types (Green Duwende, Red Duwende, Santelmo, Manananggal boss) with behaviors, spawning at screen edges, damage on contact, and death drops of XP and Gold.",
-        "details": "Create enemy scenes using Area2D for performance. Implement movement toward player with simple vector math. Green and Red Duwendes walk toward player; Santelmo floats with sine wave and shoots fireballs every 2 seconds; Manananggal flies and performs dive attacks with telegraph. Implement spawn manager tracking elapsed time to spawn enemies per timeline and spawn rate scaling. Use object pooling for enemies and projectiles. On death, play particle effect, drop XP gem and Gold coin, and return enemy to pool.",
-        "testStrategy": "Spawn enemies at correct times and rates. Confirm enemies move toward player and damage on contact. Verify Santelmo shoots fireballs with correct specs. Check Manananggal boss spawns at 20:00 with dive attacks and blood trail. Confirm enemies drop correct XP and Gold amounts. Test performance with 100+ enemies on screen. No console errors.",
+        "title": "Implement Player Characters and Movement System",
+        "description": "Develop the Sarimanok player character variants with 8-directional movement, animations, damage handling, and unlock conditions.",
+        "details": "- Create CharacterBody2D player node with 2-frame animation and sprite flipping based on velocity.x.\n- Implement 3 Sarimanok variants (Classic, Shadow, Golden) with distinct stats and color schemes.\n- Support WASD/arrow keys movement using Input.get_action_strength() for analog support.\n- Add collision shape for enemy damage detection.\n- Implement invincibility frames (0.5s) after taking damage.\n- Implement death logic when HP reaches 0.\n- Create character select screen showing locked/unlocked characters with unlock conditions (Shadow unlock at 15:00 survival, Golden unlock after beating Story Mode).\n- Ensure smooth 8-directional movement and correct speed per variant.",
+        "testStrategy": "Test movement responsiveness and smoothness in all directions.\nVerify sprite flips correctly when moving left/right.\nConfirm animation frames toggle every 0.2s while moving.\nTest damage application and invincibility frames.\nValidate death triggers at 0 HP.\nTest character select screen unlock logic and UI display.\nCheck no console errors during gameplay.",
         "priority": "high",
         "dependencies": [
           1
@@ -82,10 +82,10 @@
       },
       {
         "id": 3,
-        "title": "Weapon System with Data-Driven Architecture",
-        "description": "Implement 6 weapons (Peck, Wing Slap, Feather Shot, Spiral Feathers, Ice Shard, Flame Wing) with auto-fire, cooldowns, upgrades, and debuff system using WeaponData Resource for data-driven definitions.",
-        "details": "Create base Weapon class with cooldown timer and firing logic. Extend for melee, AOE, projectile, and orbital types. Implement debuff system for slow effect (used by Ice Shard). Use WeaponData Resource files to define weapon stats, visuals, and upgrade paths. Enforce max 4 weapons equipped. Clone weapons reuse base logic with different data. Show damage numbers on enemy hit and enemy flash on damage. Visual effects for weapon attacks.",
-        "testStrategy": "Verify each weapon auto-fires on cooldown with correct behavior. Confirm upgrades increase damage and effects per level. Test debuff slow applies correctly for Ice Shard. Check damage numbers appear on enemy hits. Ensure max weapon limit enforced. No console errors.",
+        "title": "Enemy System Implementation with Spawn Manager and Scaling",
+        "description": "Implement all 4 enemy types with behaviors, spawning at screen edges, damage on contact, death effects, and stat scaling over time.",
+        "details": "- Create Enemy scenes using Area2D for performance.\n- Implement Green Duwende, Red Duwende, Santelmo (with fireball projectile), and Manananggal boss with specified stats and behaviors.\n- Implement spawn manager tracking elapsed time to spawn enemies according to timeline and spawn rate scaling.\n- Implement enemy stat scaling functions for HP and damage based on elapsed minutes.\n- Use object pooling for enemies and projectiles.\n- Implement enemy death logic with particle effects and XP/Gold drops.\n- Ensure Manananggal boss spawns at 20:00 with entrance effects and dive attack behavior.\n- Enemies pass through each other but collide with player.\n- Optimize for 100+ enemies without lag.",
+        "testStrategy": "Verify enemies spawn at correct times and locations.\nTest enemy movement toward player and damage on contact.\nConfirm enemy death triggers particle effects and drops pickups.\nValidate stat scaling over time.\nTest Manananggal boss behaviors and dive attack timings.\nStress test with 100+ enemies for stable 60 FPS.\nCheck no console errors or performance issues.",
         "priority": "high",
         "dependencies": [
           1,
@@ -96,13 +96,13 @@
       },
       {
         "id": 4,
-        "title": "Passive System Implementation",
-        "description": "Implement 4 passives (Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura) that stack additively and affect player stats. Integrate passives into level-up choices and player stat calculations.",
-        "details": "Create Passive manager tracking levels per passive. Apply stat modifiers to player damage, max HP, move speed, and pickup range. Passives appear in level-up pool and can be upgraded to level 5. Update player stats dynamically based on passives and shop upgrades. No visual effects needed, only stat changes.",
-        "testStrategy": "Confirm each passive increases correct stat per level. Verify passives stack additively with shop bonuses. Check passives appear in level-up choices and upgrade correctly. No console errors.",
-        "priority": "medium",
+        "title": "Weapon System with Data-Driven Architecture and Clone Weapons",
+        "description": "Develop the weapon system with automatic attacks, cooldowns, upgrades, and data-driven WeaponData resources including clone weapons Ice Shard and Flame Wing.",
+        "details": "- Implement base Weapon class with cooldown timer and auto-fire logic.\n- Create weapon types: melee (Peck), AOE (Wing Slap, Flame Wing), projectile (Feather Shot, Ice Shard), orbital (Spiral Feathers).\n- Use Godot Resource (WeaponData) for weapon definitions to allow easy addition and balancing.\n- Implement debuff system for slow effect used by Ice Shard.\n- Enforce max 6 weapons equipped.\n- Implement weapon upgrades to level 5 with specified damage and effect changes.\n- Visual effects for weapon attacks and damage numbers on enemy hits.\n- Clone weapons reuse base weapon logic with modified stats and visuals.\n- Ensure all weapons auto-fire correctly and upgrades apply properly.",
+        "testStrategy": "Test each weapon fires automatically on cooldown.\nVerify weapon behaviors match specifications.\nConfirm upgrades increase damage and effects as expected.\nCheck debuff slow effect applies and expires correctly.\nValidate clone weapons behave as intended.\nObserve damage numbers appear on enemy hits.\nEnsure no console errors during weapon usage.",
+        "priority": "high",
         "dependencies": [
-          1,
+          2,
           3
         ],
         "status": "pending",
@@ -110,14 +110,13 @@
       },
       {
         "id": 5,
-        "title": "Level-Up System with Upgrade Choices",
-        "description": "Implement XP collection, XP bar UI, level-up triggers, and level-up screen presenting 3 random upgrade choices (weapons or passives). Pause game during level-up and apply chosen upgrade.",
-        "details": "Collect XP from pickups to fill XP bar. When XP threshold reached, pause game and show level-up UI with 3 random valid choices respecting max levels and weapon slot limits. On choice selection, apply upgrade (add new weapon or upgrade existing weapon/passive) and resume game. Update XP thresholds per level using formula.",
-        "testStrategy": "Verify XP bar fills on XP pickup. Confirm level-up triggers at correct XP amounts. Check game pauses and resumes correctly. Validate 3 random choices respect max levels and weapon slots. Confirm upgrades apply correctly. No console errors.",
-        "priority": "high",
+        "title": "Passive System Implementation with Stat Boosts",
+        "description": "Implement passive abilities that provide stacking stat boosts, appear in level-up choices, and apply correctly to player stats.",
+        "details": "- Implement passive manager tracking levels of Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura.\n- Apply passive stat modifiers additively to player damage, max HP, move speed, and pickup range.\n- Integrate passives into level-up choice pool.\n- Allow passives to be upgraded to level 5.\n- Display passive icons in UI during level-up.\n- Ensure passives stack correctly with weapon upgrades and shop bonuses.",
+        "testStrategy": "Verify passive upgrades increase player stats as specified.\nTest stacking of multiple passive levels.\nConfirm passives appear in level-up choices and can be selected.\nCheck no console errors related to passives.",
+        "priority": "medium",
         "dependencies": [
-          1,
-          3,
+          2,
           4
         ],
         "status": "pending",
@@ -125,55 +124,56 @@
       },
       {
         "id": 6,
-        "title": "Pickup System for XP and Gold",
-        "description": "Implement XP gem and Gold coin pickups that spawn on enemy death, drift magnetically toward player when close, and add to XP bar or permanent gold counter on collection.",
-        "details": "Create pickup scenes with Area2D and sprites. Spawn pickups at enemy death location. After 0.5s pause, pickups drift toward player within pickup range using magnet effect. On overlap with player, add XP or gold accordingly, play collect sound, and show floating '+1' text. Pickup range affected by Magnetic Aura passive.",
-        "testStrategy": "Confirm pickups spawn correctly on enemy death. Verify pickups pause then drift toward player when in range. Check XP and gold counters update on collection. Play collection sounds and floating text appear. No console errors.",
-        "priority": "medium",
+        "title": "Level-Up System with Random Upgrade Choices",
+        "description": "Implement XP collection, leveling up, pausing gameplay, and presenting 3 random upgrade choices from weapons and passives respecting max levels and slot limits.",
+        "details": "- Implement XP bar UI that fills when collecting XP gems.\n- Trigger level-up when XP threshold reached, pause game, and show level-up screen.\n- Generate 3 random upgrade choices from pool of weapons (new or upgrade) and passives.\n- Enforce max weapon slots and max levels in choice pool.\n- Apply selected upgrade and resume gameplay.\n- Integrate with weapon and passive systems for upgrades.\n- Use tr() for all UI text for localization support.",
+        "testStrategy": "Collect XP and verify XP bar fills correctly.\nTrigger level-up at correct XP amounts.\nConfirm game pauses and level-up UI appears.\nVerify 3 random choices respect max levels and slots.\nSelect choice and confirm upgrade applies.\nGame resumes after selection.\nNo console errors during level-up process.",
+        "priority": "high",
         "dependencies": [
-          2,
-          4
+          4,
+          5
         ],
         "status": "pending",
         "subtasks": []
       },
       {
         "id": 7,
-        "title": "Shop System for Permanent Upgrades",
-        "description": "Implement shop UI accessible from main menu to spend gold on permanent upgrades (Damage, Max HP, Move Speed). Upgrades apply to all future runs and persist in save file.",
-        "details": "Create shop screen UI showing current gold and upgrade options with costs. Disable buy button if insufficient gold. Deduct gold on purchase and update shop upgrade counters. Apply shop bonuses to player stats at run start. Save and load shop data from user://save_data.json with backup. Reflect current bonuses in UI.",
-        "testStrategy": "Verify shop displays correct gold and upgrade info. Confirm buying upgrades deducts gold and applies bonuses. Check upgrades persist after game restart. Disable buy button when broke. No console errors.",
+        "title": "Pickup System for XP Gems and Gold Coins",
+        "description": "Implement pickups that spawn on enemy death, drift magnetically toward player, and add XP or gold upon collection with sound and visual feedback.",
+        "details": "- Create Pickup scenes (Area2D) for XP gems and Gold coins with specified visuals.\n- Spawn pickups at enemy death locations.\n- Implement 0.5s pause then magnetic drift toward player within pickup range.\n- Collect pickups on player overlap, add XP or gold accordingly.\n- Play collection sounds and show floating '+1' text.\n- Increase pickup range by Magnetic Aura passive.\n- Use object pooling for pickups.\n- Ensure no console errors during pickup interactions.",
+        "testStrategy": "Kill enemies and verify pickups spawn correctly.\nObserve pickups pause then drift toward player.\nCollect pickups and confirm XP or gold increases.\nCheck collection sounds and floating text appear.\nTest pickup range increases with passive.\nNo console errors during pickup lifecycle.",
         "priority": "medium",
         "dependencies": [
-          6
+          3,
+          5
         ],
         "status": "pending",
         "subtasks": []
       },
       {
         "id": 8,
-        "title": "Game Timer, Win and Lose Conditions",
-        "description": "Implement 30-minute timer counting up, victory condition at 30:00 with dawn effect and crow sound, defeat condition at 0 HP with death animation, and results screen showing stats and options.",
-        "details": "Display timer at top center in MM:SS format. When timer reaches 30:00, freeze gameplay, play dawn visual effect, show 'COCKADOODLEDOO!' text and sound, then results screen with stats (time, kills, score, gold). On player HP 0, play death animation and defeat results screen. Results screen allows retry, shop, or menu.",
-        "testStrategy": "Confirm timer counts up correctly. Verify victory triggers at 30:00 with effects and sound. Check defeat triggers at 0 HP with animation. Results screen shows correct stats and buttons work. No console errors.",
+        "title": "Shop System for Permanent Upgrades Between Runs",
+        "description": "Implement shop UI allowing players to spend gold on permanent damage, HP, and speed upgrades that persist and apply to future runs.",
+        "details": "- Create Shop screen UI displaying current gold and upgrade options with costs.\n- Implement purchase logic deducting gold and increasing upgrade counters.\n- Disable BUY buttons when insufficient gold.\n- Save shop upgrade data to save file.\n- Apply shop bonuses at run start affecting player stats.\n- Load shop data on game start.\n- Integrate with GameState singleton for persistent data.\n- Use tr() for UI localization.\n- Ensure no console errors during shop interactions.",
+        "testStrategy": "Open shop and verify gold display.\nPurchase upgrades and confirm gold deduction.\nCheck upgrades apply to next run stats.\nVerify BUY buttons disable when broke.\nSave and load shop data correctly.\nNo console errors during shop usage.",
         "priority": "high",
         "dependencies": [
-          1,
-          2,
-          6
+          7
         ],
         "status": "pending",
         "subtasks": []
       },
       {
         "id": 9,
-        "title": "Character Select Screen and Unlock System",
-        "description": "Implement character select screen before run with 3 Sarimanok variants (Classic, Shadow, Golden), showing unlock requirements and unlocking Shadow at 15:00 survived and Golden after beating Story Mode.",
-        "details": "Create character select UI showing all 3 variants with stats and color differences. Lock Shadow until player survives 15:00 in Story Mode, lock Golden until Story Mode beaten (30:00). Update unlock flags in GameState. Allow selection of unlocked characters only. Reflect character stats in gameplay.",
-        "testStrategy": "Verify character select screen displays all variants with correct info. Confirm locked characters show requirements. Test unlocking Shadow after 15:00 survival and Golden after Story Mode win. Selected character stats apply in run. No console errors.",
-        "priority": "medium",
+        "title": "Game Timer, Win/Lose Conditions, and Results Screen",
+        "description": "Implement 30-minute timer counting up, victory at dawn with visual/audio effects, defeat on HP zero, and results screen showing stats and options.",
+        "details": "- Display timer at top center in MM:SS format counting up from 0:00.\n- Trigger victory at 30:00: pause game, fade CanvasModulate from night tint to dawn colors, fade out moon/stars, play Sarimanok crow sound, show victory text.\n- Trigger defeat when player HP reaches 0: pause game, play death animation, show defeat text.\n- Show results screen with time survived, enemies killed, score, gold earned.\n- Provide buttons for Shop, Retry, and Menu.\n- Add gold earned to total on run end.\n- Implement dawn transition using CanvasModulate and tweening.\n- Use tr() for all UI text.\n- Ensure no console errors during transitions.",
+        "testStrategy": "Verify timer counts correctly.\nTest victory triggers at 30:00 with correct effects.\nTest defeat triggers at 0 HP with correct effects.\nConfirm results screen displays accurate stats.\nTest buttons navigate correctly.\nCheck gold updates after run.\nNo console errors during timer and transitions.",
+        "priority": "high",
         "dependencies": [
-          1,
+          2,
+          3,
+          7,
           8
         ],
         "status": "pending",
@@ -181,13 +181,12 @@
       },
       {
         "id": 10,
-        "title": "Endless Mode Implementation and Unlock",
-        "description": "Implement simplified Endless Mode unlocked after beating Story Mode. Endless Mode has no 30:00 win condition, same scaling as Story Mode, and tracks best time.",
-        "details": "Add Endless Mode button locked initially on main menu. Unlock after Story Mode victory. In Endless Mode, timer counts up indefinitely, no victory condition. Use same spawn rate and enemy stat scaling as Story Mode continuing past 30:00. Save best time survived. Display best time on menu.",
-        "testStrategy": "Confirm Endless Mode locked initially. Verify unlock after Story Mode win. Check timer counts up with no win condition. Confirm scaling continues past 30:00. Best time updates and displays correctly. No console errors.",
+        "title": "Endless Mode Unlock and Gameplay Integration",
+        "description": "Implement Endless Mode locked initially, unlock after beating Story Mode, with no win condition and continuous scaling past 30 minutes.",
+        "details": "- Add Endless Mode button locked on main menu until Story Mode beaten.\n- Unlock Endless Mode after surviving 30:00 in Story Mode.\n- Remove 30:00 win condition in Endless Mode; timer counts up indefinitely.\n- Continue spawn rate and enemy stat scaling past 30:00.\n- Track and save best time survived in Endless Mode.\n- Display best time on main menu and results screen.\n- Ensure no console errors and stable performance in Endless Mode.",
+        "testStrategy": "Verify Endless Mode button locked initially.\nBeat Story Mode and confirm Endless Mode unlocks.\nPlay Endless Mode and confirm no victory at 30:00.\nCheck scaling continues past 30:00.\nVerify best time saves and displays correctly.\nNo console errors during Endless Mode play.",
         "priority": "medium",
         "dependencies": [
-          8,
           9
         ],
         "status": "pending",
@@ -196,7 +195,7 @@
     ],
     "metadata": {
       "created": "2025-12-04T05:56:20.743Z",
-      "updated": "2025-12-04T05:56:20.743Z",
+      "updated": "2025-12-04T07:15:07.956Z",
       "description": "Tasks for master context"
     }
   },
