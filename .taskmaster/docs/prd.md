@@ -2,7 +2,7 @@
 
 ## Product Requirements Document - MVP (Early Access)
 
-**Version:** 2.3  
+**Version:** 2.4  
 **Platform:** Windows via Steam Early Access (Mac/Linux in future update)  
 **Engine:** Godot 4.x  
 **Art Style:** Top-down pixel art (32x32 sprites, 48x48 boss)  
@@ -1846,6 +1846,92 @@ If commission falls through or quality is poor:
 
 ---
 
+## Steam Store Page Optimization
+
+> **Critical Insight:** Your Steam store page is a sales funnel. Players see your capsule → click through → scan screenshots → watch trailer → read description → check tags → wishlist/buy. Each element must reinforce your game's identity and convert browsers into buyers.
+
+### Store Page Assets Checklist
+
+**Capsule Art Dimensions (required):**
+
+| Asset          | Size         | Priority     | Notes                                |
+| -------------- | ------------ | ------------ | ------------------------------------ |
+| Main Capsule   | 616×353 px   | **CRITICAL** | Appears in search, browse, Next Fest |
+| Small Capsule  | 231×87 px    | Required     | Shows in wishlists, library          |
+| Header Capsule | 460×215 px   | Required     | Shows on store page header           |
+| Library Hero   | 3840×1240 px | Nice-to-have | Shows in Steam library (big mode)    |
+| Library Logo   | 1280×720 px  | Nice-to-have | Shows in Steam library               |
+
+**Screenshot Requirements:**
+
+| Requirement             | Details                                                   |
+| ----------------------- | --------------------------------------------------------- |
+| Minimum count           | 5 screenshots (Steam requirement)                         |
+| First 4 are critical    | These appear in hover preview - make them count!          |
+| Show varied gameplay    | Combat, exploration, UI, different environments           |
+| No repetitive shots     | Each screenshot should reveal something new               |
+| Include UI if important | Show map system, level-up screen, HUD if they're features |
+| Resolution              | Capture at 1920×1080 minimum                              |
+
+**Screenshot Strategy for Sarimanok Survivor:**
+
+1. **Screenshot 1:** Sarimanok surrounded by enemies (shows core gameplay)
+2. **Screenshot 2:** Level-up screen with weapon choices (shows progression)
+3. **Screenshot 3:** Manananggal boss encounter (shows stakes/excitement)
+4. **Screenshot 4:** Multiple weapons firing at once (shows power fantasy)
+5. **Screenshot 5:** Shop screen or character select (shows depth)
+
+**Trailer Best Practices:**
+
+| Rule                          | Why It Matters                                      |
+| ----------------------------- | --------------------------------------------------- |
+| Gameplay in first 4-5 sec     | First trailer is used for hover-over clips          |
+| NO logos/title cards at start | Wastes precious seconds - show gameplay immediately |
+| Under 60 seconds total        | Attention spans are short - be punchy               |
+| ONE trailer in primary slot   | Multiple trailers split attention and add noise     |
+| Show core mechanics           | Demonstrate how the game is played, not tutorials   |
+
+**Game Description Best Practices:**
+
+| Section           | Strategy                                                      |
+| ----------------- | ------------------------------------------------------------- |
+| Short Description | Start strong, include unique selling points, end with tagline |
+| About This Game   | Repeat 3-4 core gameplay themes consistently                  |
+| Key Features      | Bullet points of what makes your game unique                  |
+| Don't oversell    | Stick to what the game actually delivers                      |
+
+### Steam Tags Strategy
+
+> **Why Tags Matter:** Tags are how Steam's algorithm matches your game with players. Poor tags = wrong audience = low conversion.
+
+**Priority Rules:**
+
+- Top 5 tags carry the most algorithmic weight
+- Be specific: "Roguelite," "Bullet Hell," "Pixel Art" over generic "Indie"
+- Set tags in Steamworks (developer-assigned tags weighted higher than user tags)
+- Research competitor games' tags for benchmarks
+
+**Recommended Tags for Sarimanok Survivor (in priority order):**
+
+| Priority | Tag              | Why                                    |
+| -------- | ---------------- | -------------------------------------- |
+| 1        | Roguelite        | Core genre - players search for this   |
+| 2        | Action Roguelike | Secondary genre term                   |
+| 3        | Bullet Hell      | Describes the gameplay style           |
+| 4        | Pixel Art        | Visual style - attracts pixel art fans |
+| 5        | Survivors        | Sub-genre (if available as tag)        |
+| 6        | Single Player    | Important for filtering                |
+| 7        | Mythology        | Cultural hook - differentiator         |
+| 8        | Indie            | Lower priority - too generic           |
+
+**Tag Maintenance:**
+
+- After launch, audit user-submitted tags in Steamworks
+- Flag irrelevant or misleading tags
+- Monitor which tags drive the most relevant traffic
+
+---
+
 # Audio Requirements
 
 ## Music (4 tracks)
@@ -2425,6 +2511,7 @@ What's playable at end of week:
 - [ ] **ASSETS:** Buy UI asset pack (buttons, panels, HP/XP bars) - ~$10-15
 - [ ] **ASSETS:** Buy tileset asset pack (grass, dirt, trees, fences) - ~$10-20
 - [ ] **AUDIO:** Buy Fantasy/RPG SFX pack (~$15-30) - Don't hunt individual sounds!
+- [ ] **ATTEND:** Steam Q&A session Dec 16 (10am-11am PDT) or watch recording later
 
 **Tasks:**
 
@@ -2544,7 +2631,11 @@ Builds on Week 3, adds:
 **CRITICAL PARALLEL TASKS (Steam Store Page - SUBMIT BY DEC 20!):**
 
 - [ ] **STEAM:** Steamworks verification should be complete by now
-- [ ] **STEAM:** Create "Coming Soon" store page draft (description, placeholder screenshots)
+- [ ] **STEAM:** Create "Coming Soon" store page draft
+- [ ] **STEAM:** Write Short Description (compelling, unique selling points, end with tagline)
+- [ ] **STEAM:** Write "About This Game" section (repeat 3-4 core gameplay themes)
+- [ ] **STEAM:** Prepare 5+ placeholder screenshots (can be from dev build - will replace later)
+- [ ] **STEAM:** Set up initial Steam tags in Steamworks (see Steam Store Page Optimization section)
 - [ ] **STEAM:** Submit store page for review **BY DECEMBER 20** (allows 2-5 business day review + holiday buffer)
 - [ ] **STEAM:** Target store page LIVE by Dec 28-30 (before Jan 5 Next Fest deadline)
 
@@ -2750,6 +2841,17 @@ This week focuses on swapping placeholders for real sprites:
 - [ ] Adjust hitboxes if sprite shapes differ from placeholders
 - [ ] Test all animations work correctly
 
+**Steam Store Page Screenshots (Update with real art!):**
+
+- [ ] **Capture 5+ varied gameplay screenshots at 1920×1080**
+- [ ] **Ensure first 4 screenshots show different gameplay aspects:**
+  - Screenshot 1: Sarimanok surrounded by enemies (core gameplay)
+  - Screenshot 2: Level-up screen with weapon choices (progression)
+  - Screenshot 3: Manananggal boss encounter (excitement/stakes)
+  - Screenshot 4: Multiple weapons firing at once (power fantasy)
+- [ ] **Take extra screenshots for social media use**
+- [ ] **Upload updated screenshots to Steam store page**
+
 **Note:** Black Duwende sprite deferred to Update 1.
 
 **Fallback:** If art not ready, continue with refined placeholders + asset packs. Game is still SHIPPABLE.
@@ -2832,6 +2934,14 @@ Adds:
 
 **CRITICAL: Next Fest Demo Deadline is February 9!**
 
+**IMPORTANT - Demo Launch Strategy:**
+
+> Launch demo by Feb 9 (2 weeks before Next Fest) to:
+>
+> - Allow time for bug fixes from player feedback
+> - Enable content creators to stream before the event
+> - Build wishlist velocity for better Next Fest visibility
+
 **Tasks:**
 
 - [ ] Export Windows build
@@ -2840,10 +2950,21 @@ Adds:
 - [ ] **Demo has no shop access (removes meta-progression hook)**
 - [ ] **Submit demo for Next Fest review by February 9 deadline**
 - [ ] Test Windows build on different machine (if available)
-- [ ] Record 30-60 second trailer footage
-- [ ] Take 5-10 screenshots for store page
-- [ ] Upload screenshots to Steam page
+
+**Trailer Recording (Critical Best Practices!):**
+
+- [ ] **Record trailer with gameplay in first 4-5 seconds (NO logos/title cards at start!)**
+- [ ] **Keep trailer under 60 seconds total**
+- [ ] **Show core mechanics, not tutorials**
+- [ ] **Upload only ONE trailer to primary position**
 - [ ] Upload trailer to Steam page
+
+**Steam Store Page Final Updates:**
+
+- [ ] Take 5-10 final screenshots with real art
+- [ ] Upload final screenshots to Steam page
+- [ ] **Review and finalize Steam tags (see Steam Store Page Optimization section)**
+- [ ] **Verify top 5 tags are set correctly: Roguelite, Action Roguelike, Bullet Hell, Pixel Art, Survivors**
 - [ ] **GodotSteam Integration (2-4 hrs - easier than expected!):**
   - [ ] Install GodotSteam GDExtension from Godot Asset Library (2-3 min)
   - [ ] Create Steam autoload with initialization code (15-30 min)
@@ -3182,10 +3303,13 @@ Steam Next Fest is a week-long event where players try demos of upcoming games. 
 
 | Date       | Deadline                            | Action Required                                 |
 | ---------- | ----------------------------------- | ----------------------------------------------- |
+| Dec 16     | Q&A Session on Zoom                 | Optional - attend for tips (or watch recording) |
 | **Jan 5**  | Registration deadline               | Register with live "Coming Soon" store page     |
+| Jan 6      | Trailer selection notification      | Steam notifies if selected for official trailer |
 | Jan 11     | Trailer pull for official marketing | SKIP - won't have polished trailer by then      |
 | Jan 26     | Press Preview demo deadline         | SKIP - too tight, not critical                  |
 | **Feb 9**  | Final submission deadline           | Demo + store page must be ready for review      |
+| Feb 12     | Opt OUT of trailer deadline         | Only if you opted in and changed your mind      |
 | Feb 12     | Press Preview starts                | (We won't be in it - that's fine)               |
 | **Feb 23** | Next Fest begins                    | Set demo LIVE at 10am PDT                       |
 | Mar 2      | Next Fest ends                      | Wrap-up featuring most-played demos             |
@@ -3601,13 +3725,14 @@ This PRD defines a **30-minute action roguelite** that combines:
 
 ---
 
-**Version:** 2.2  
+**Version:** 2.4  
 **Created:** December 2025  
 **Authors:** Josh & Ericka  
 **Cultural Consultant:** Ericka
 
 **Version History:**
 
+- v2.4: Next Fest 2026 comprehensive update - ADDED: Missing dates to Critical Deadlines (Dec 16 Q&A, Jan 6 trailer notification, Feb 12 opt-out deadline), Steam Store Page Optimization section (screenshot requirements, trailer best practices, Steam tags strategy, game description guidelines), demo launch timing strategy (2 weeks before Next Fest for wishlist velocity). UPDATED: Week 1 tasks (Q&A session), Week 4 tasks (expanded store page prep with descriptions and tags), Week 8 tasks (screenshot capture checklist), Week 10 tasks (trailer best practices, final tags review), Quick Reference Card with store page requirements.
 - v2.3: Gap Analysis Additions - ADDED: Localization CSV setup to Week 1 (enables community translations), SFX pack purchase to Week 1 Critical Tasks, Discord server setup to Week 9, Trailer storyboard planning to Week 9, Analytics logging moved from Week 11 to Week 10 (critical for Update 1 balance), Steam Deck testing to Week 11, Filipino Audio Identity section (Sarimanok crow, tiktik sounds, Manananggal screech - don't use generic sounds).
 - v2.2: Critical Production Fixes - Explicit "Pay Steam Fee Today" step, moved Controller Input Map to Week 1 (free support), added Capsule Art commission to Week 1 to unblock Store Page.
 - v2.1: Gap fixes from scope analysis - ADDED: Audio bus setup to Week 1 tasks (5 min, prevents headaches), Window mode toggle (Fullscreen/Windowed/Borderless) to Week 7 Settings, Resolution dropdown to Week 7 Settings, Impact frames/hitstop to Week 7 juice, XP gem magnetism visual feedback to Week 7. UPDATED: Week 4 store page deadline explicit (submit by Dec 20, live by Dec 28-30), Quick Reference Card store page timing.
@@ -3652,6 +3777,7 @@ This PRD defines a **30-minute action roguelite** that combines:
 │ PRICE: $2.99-4.99                               │
 ├─────────────────────────────────────────────────┤
 │ ⚠️ STEAM SETUP: DO TODAY (not Week 1!)          │
+│ Q&A SESSION: Dec 16 (optional but helpful)      │
 │ STORE PAGE: Submit by Dec 20, live by Dec 28-30 │
 │ NEXT FEST REG: Jan 5 deadline (Week 5)          │
 │ WISHLIST TARGET: 7,000+ before Feb 23           │
@@ -3659,5 +3785,11 @@ This PRD defines a **30-minute action roguelite** that combines:
 │ MINIMUM SHIPPABLE: Week 6 (MVP checkpoint)      │
 │ CODE COMPLETE: Week 10 (Feb 2-8, 2026)          │
 │ DEMO SUBMIT: Feb 9 deadline (end of Week 10)    │
+├─────────────────────────────────────────────────┤
+│ STORE PAGE REQUIREMENTS:                        │
+│ SCREENSHOTS: 5+ minimum, first 4 critical       │
+│ TRAILER: Gameplay in first 5 sec, under 60s     │
+│ TAGS: Set top 5 in Steamworks (not generic)     │
+│ DEMO LIVE: By Feb 9 (2 wks before Next Fest)    │
 └─────────────────────────────────────────────────┘
 ```

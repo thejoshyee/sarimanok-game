@@ -117,5 +117,62 @@ Created by a Filipino-American husband and wife team, Sarimanok Survivor celebra
 
 ---
 
+## Screenshot Strategy (5+ Required)
+
+> **Critical:** First 4 screenshots appear in hover preview - make them count!
+
+| Order | Content                              | Purpose                  |
+| ----- | ------------------------------------ | ------------------------ |
+| 1     | Sarimanok surrounded by enemies      | Shows core gameplay      |
+| 2     | Level-up screen with weapon choices  | Shows progression system |
+| 3     | Manananggal boss encounter           | Shows excitement/stakes  |
+| 4     | Multiple weapons firing at once      | Shows power fantasy      |
+| 5+    | Shop, character select, environments | Shows depth and variety  |
+
+**Requirements:**
+
+- Minimum 5 screenshots (Steam requirement)
+- Capture at 1920×1080 minimum resolution
+- Show varied gameplay - no repetitive shots
+- Include UI elements if they're important features
+
+---
+
+## Trailer Best Practices
+
+| Rule                          | Why It Matters                                      |
+| ----------------------------- | --------------------------------------------------- |
+| Gameplay in first 4-5 sec     | First trailer is used for hover-over clips          |
+| NO logos/title cards at start | Wastes precious seconds - show gameplay immediately |
+| Under 60 seconds total        | Attention spans are short - be punchy               |
+| ONE trailer in primary slot   | Multiple trailers split attention and add noise     |
+| Show core mechanics           | Demonstrate how the game is played, not tutorials   |
+
+---
+
+## Steam Tags (Set in Steamworks)
+
+> **Important:** Top 5 tags carry the most algorithmic weight. Be specific!
+
+| Priority | Tag              | Why                                    |
+| -------- | ---------------- | -------------------------------------- |
+| 1        | Roguelite        | Core genre - players search for this   |
+| 2        | Action Roguelike | Secondary genre term                   |
+| 3        | Bullet Hell      | Describes the gameplay style           |
+| 4        | Pixel Art        | Visual style - attracts pixel art fans |
+| 5        | Survivors        | Sub-genre (if available as tag)        |
+| 6        | Single Player    | Important for filtering                |
+| 7        | Mythology        | Cultural hook - differentiator         |
+| 8        | Indie            | Lower priority - too generic           |
+
+**Tag Maintenance:**
+
+- After launch, audit user-submitted tags in Steamworks
+- Flag irrelevant or misleading tags
+- Monitor which tags drive the most relevant traffic
+
+---
+
 _Draft created: December 2025_
+_Updated: December 2025 (v2.4 - added screenshot strategy, trailer best practices, tags)_
 _Update with actual screenshots and trailer when available_

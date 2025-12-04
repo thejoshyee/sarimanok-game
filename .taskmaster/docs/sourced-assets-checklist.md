@@ -100,6 +100,43 @@
 
 ---
 
+## 📸 Steam Store Screenshots (Week 8)
+
+> **Critical:** First 4 screenshots appear in hover preview - make them count!
+
+### Screenshot Checklist (5+ Required)
+
+| Order | Content                             | Status | Purpose                  |
+| ----- | ----------------------------------- | ------ | ------------------------ |
+| 1     | [ ] Sarimanok surrounded by enemies |        | Shows core gameplay      |
+| 2     | [ ] Level-up screen with choices    |        | Shows progression system |
+| 3     | [ ] Manananggal boss encounter      |        | Shows excitement/stakes  |
+| 4     | [ ] Multiple weapons firing at once |        | Shows power fantasy      |
+| 5+    | [ ] Shop, character select, etc.    |        | Shows depth and variety  |
+
+**Requirements:**
+
+- [ ] All screenshots at 1920×1080 minimum
+- [ ] First 4 show different gameplay aspects
+- [ ] No repetitive shots from different angles
+- [ ] Include UI elements if they're features
+- [ ] Take extra for social media use
+
+---
+
+## 🎬 Trailer (Week 10)
+
+### Trailer Best Practices
+
+| Rule                          | Status | Notes                             |
+| ----------------------------- | ------ | --------------------------------- |
+| [ ] Gameplay in first 4-5 sec |        | NO logos/title cards at start!    |
+| [ ] Under 60 seconds total    |        | Attention spans are short         |
+| [ ] Shows core mechanics      |        | Not tutorials - actual gameplay   |
+| [ ] ONE trailer only          |        | Multiple trailers split attention |
+
+---
+
 ## 🎨 Steam Marketing Art (Week 6-8)
 
 ### Capsule Art — $200-400 (Commission)
@@ -171,13 +208,35 @@ BUDGET: $XXX (include 1 revision round)
 
 ---
 
+## 🏷️ Steam Tags (Set in Week 4)
+
+> **Important:** Top 5 tags carry the most algorithmic weight. Set in Steamworks!
+
+| Priority | Tag                  | Status |
+| -------- | -------------------- | ------ |
+| 1        | [ ] Roguelite        |        |
+| 2        | [ ] Action Roguelike |        |
+| 3        | [ ] Bullet Hell      |        |
+| 4        | [ ] Pixel Art        |        |
+| 5        | [ ] Survivors        |        |
+| 6        | [ ] Single Player    |        |
+| 7        | [ ] Mythology        |        |
+| 8        | [ ] Indie            |        |
+
+---
+
 ## ⏰ Sourcing Timeline
 
 | Week     | Action                                           |
 | -------- | ------------------------------------------------ |
 | Week 1   | Buy UI pack, Tileset pack, SFX pack              |
+| Week 1   | Attend Steam Q&A session Dec 16 (or watch later) |
 | Week 1-2 | Browse music options (Pixabay, OpenGameArt)      |
+| Week 4   | Set up Steam tags, write descriptions            |
 | Week 4-5 | Browse capsule art artists, save candidates      |
 | Week 6   | Commission capsule art                           |
 | Week 7-8 | Receive capsule art, request revisions if needed |
+| Week 8   | Capture final gameplay screenshots (5+)          |
 | Week 9   | Finalize music selection/commission              |
+| Week 10  | Record trailer (gameplay in first 5 sec!)        |
+| Feb 9    | Submit demo for Next Fest review                 |

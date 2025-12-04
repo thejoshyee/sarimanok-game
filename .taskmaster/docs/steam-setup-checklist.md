@@ -95,14 +95,21 @@
 
 ## Key Deadlines Summary
 
-| Date      | Deadline          | Action                                   |
-| --------- | ----------------- | ---------------------------------------- |
-| Dec 3     | TODAY             | Pay Steam Direct fee, start verification |
-| Dec 20    | Store page submit | Submit for review before holidays        |
-| Dec 28-30 | Store page live   | Should be approved and public            |
-| **Jan 5** | **NEXT FEST REG** | Register with live store page            |
-| Feb 9     | Demo submit       | Submit demo for Next Fest review         |
-| Feb 23    | Next Fest starts  | Demo goes live                           |
+| Date      | Deadline             | Action                                     |
+| --------- | -------------------- | ------------------------------------------ |
+| Dec 3     | TODAY                | Pay Steam Direct fee, start verification   |
+| Dec 16    | Q&A Session (Zoom)   | Optional - attend for tips or watch later  |
+| Dec 20    | Store page submit    | Submit for review before holidays          |
+| Dec 28-30 | Store page live      | Should be approved and public              |
+| **Jan 5** | **NEXT FEST REG**    | Register with live store page              |
+| Jan 6     | Trailer notification | Steam notifies if selected for trailer     |
+| Jan 11    | Trailer pull         | SKIP - won't have polished trailer by then |
+| Jan 26    | Press Preview demo   | SKIP - too tight, not critical             |
+| Feb 9     | Demo submit          | Submit demo for Next Fest review           |
+| Feb 12    | Opt OUT deadline     | Only if you opted in and changed your mind |
+| Feb 12    | Press Preview starts | We won't be in it - that's fine            |
+| Feb 23    | Next Fest starts     | Demo goes live at 10am PDT                 |
+| Mar 2     | Next Fest ends       | Wrap-up featuring most-played demos        |
 
 ---
 
@@ -125,6 +132,45 @@ If no progress after 5 business days:
 
 ---
 
+---
+
+## Store Page Requirements Checklist
+
+Before submitting your store page, ensure you have:
+
+### Screenshots (5+ required)
+
+- [ ] Screenshot 1: Sarimanok surrounded by enemies (core gameplay)
+- [ ] Screenshot 2: Level-up screen with weapon choices (progression)
+- [ ] Screenshot 3: Manananggal boss encounter (excitement/stakes)
+- [ ] Screenshot 4: Multiple weapons firing at once (power fantasy)
+- [ ] Screenshot 5+: Shop screen, character select, or varied environments
+- [ ] All screenshots at 1920×1080 minimum resolution
+- [ ] First 4 screenshots show different gameplay aspects (appear in hover preview!)
+
+### Trailer
+
+- [ ] Gameplay visible in first 4-5 seconds (NO logos/title cards at start!)
+- [ ] Under 60 seconds total length
+- [ ] Shows core mechanics (not tutorials)
+- [ ] Only ONE trailer in primary position
+
+### Tags (Set in Steamworks)
+
+Priority order:
+
+1. Roguelite
+2. Action Roguelike
+3. Bullet Hell
+4. Pixel Art
+5. Survivors (if available)
+6. Single Player
+7. Mythology
+8. Indie (lower priority - too generic)
+
+---
+
 _Checklist created: December 2025_
+_Updated: December 2025 (v2.4 - added complete Next Fest dates and store page requirements)_
 _Next Fest: February 23 - March 2, 2026_
 _EA Launch Target: ~March 8, 2026_
