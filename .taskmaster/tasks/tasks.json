@@ -205,12 +205,13 @@
         "id": 1,
         "title": "Steamworks Account Setup and Verification Process",
         "description": "Complete the Steam Direct fee payment and initiate Steamworks account verification including ID, tax, and bank details submission.",
-        "details": "1. Pay the $100 Steam Direct fee at partner.steamgames.com to activate the Steamworks developer account.\n2. Begin the Steamworks account verification process by submitting required documents: government-issued ID, tax information, and bank account details for payment processing.\n3. Set up a monitoring system (e.g., calendar reminders or automated status checks) to track the verification progress daily.\n4. If no progress is observed after 5 business days, follow up with Steam support to expedite verification.\n5. Ensure all submitted information complies with Steam's requirements to avoid delays.\n6. Document the verification status and any communications for project tracking.\n\nThis task is critical to complete before the January 5 Next Fest registration deadline, as verification can take 1-4 weeks.",
+        "details": "1. Pay the $100 Steam Direct fee at partner.steamgames.com to activate the Steamworks developer account.\n2. Begin the Steamworks account verification process by submitting required documents: government-issued ID, tax information, and bank account details for payment processing.\n3. Set up a monitoring system (e.g., calendar reminders or automated status checks) to track the verification progress daily.\n4. If no progress is observed after 5 business days, follow up with Steam support to expedite verification.\n5. Ensure all submitted information complies with Steam's requirements to avoid delays.\n6. Document the verification status and any communications for project tracking.\n\nThis task is critical to complete before the January 5 Next Fest registration deadline, as verification can take 1-4 weeks.\n<info added on 2025-12-04T16:06:00.845Z>\nPayment of $100 Steam Direct fee confirmed and processed successfully. All required verification documents submitted to Steamworks: government-issued ID, tax information, and bank account details. Current verification status shows \"Identity Verification Pending\" with Steam's estimated timeline of 2-7 business days for third-party verification completion. Daily monitoring of Steamworks dashboard and email notifications initiated to track verification progress. Follow-up with Steam support scheduled if no verification progress observed after 5 business days from submission date (December 4, 2025). Verification completion is critical path item for January 5 Next Fest registration deadline.\n</info added on 2025-12-04T16:06:00.845Z>",
         "testStrategy": "Verify that the $100 Steam Direct fee payment is confirmed via Steam partner dashboard.\nConfirm submission of all required verification documents in the Steamworks account.\nCheck daily for status updates in the Steamworks dashboard or via email notifications.\nAfter 5 business days without progress, confirm that a follow-up inquiry was sent to Steam support.\nMaintain a log of verification status updates and communications.\nEnsure readiness to proceed with Next Fest registration upon verification completion.",
-        "status": "pending",
+        "status": "in-progress",
         "dependencies": [],
         "priority": "high",
-        "subtasks": []
+        "subtasks": [],
+        "updatedAt": "2025-12-04T16:05:34.237Z"
       },
       {
         "id": 2,
@@ -220,7 +221,7 @@
         "testStrategy": "- Verify all asset packs are purchased and licenses are documented.\n- Confirm asset packs are successfully imported into the Unity project without errors.\n- Check that UI elements (buttons, panels, HP/XP bars) appear correctly in the game scenes.\n- Validate that tileset assets replace placeholder environment elements visually and functionally.\n- Play sample SFX in the game to ensure correct audio integration.\n- Confirm the commissioned capsule art file is present and meets resolution and style requirements.\n- Review the project folder structure to ensure assets are organized according to existing conventions.\n- Coordinate with Task 1 completion to ensure store page assets are ready for publishing.",
         "status": "pending",
         "dependencies": [
-          1
+          "1"
         ],
         "priority": "high",
         "subtasks": []
@@ -233,8 +234,8 @@
         "testStrategy": "- Verify that the Steam app entry is created and accessible in the Steamworks dashboard.\n- Confirm the placeholder capsule art is uploaded and displays correctly at 616x353 resolution.\n- Check that the Short Description and About This Game sections are complete, unique, and free of errors.\n- Ensure at least 5 screenshots are uploaded and visible in the store page preview.\n- Validate that all specified Steam tags are correctly applied.\n- Confirm submission of the store page for review before the December 20 deadline.\n- Monitor Steamworks dashboard or email for review status updates and address any requested changes promptly.",
         "status": "pending",
         "dependencies": [
-          1,
-          2
+          "1",
+          "2"
         ],
         "priority": "high",
         "subtasks": []
@@ -247,8 +248,8 @@
         "testStrategy": "1. Verify that all feedback from the Steam review team has been addressed and changes are reflected on the store page.\n2. Confirm that new screenshots are uploaded correctly and display properly on the live store page.\n3. Validate that the store page is live and accessible after Steam approval.\n4. Check that the game is successfully registered for Steam Next Fest February 2026 within the Steamworks dashboard before the January 5 deadline.\n5. Review the compiled list of Filipino gaming communities for completeness and relevance.\n6. Ensure outreach materials are prepared and ready for distribution.\n7. Monitor Steam Next Fest registration status and store page visibility until the event starts.",
         "status": "pending",
         "dependencies": [
-          1,
-          3
+          "1",
+          "3"
         ],
         "priority": "high",
         "subtasks": []
@@ -261,7 +262,7 @@
         "testStrategy": "- Verify that 5-10 candidate portfolios were reviewed and documented.\n- Confirm that the top 3 artists were contacted and communication records are available.\n- Ensure the commission brief and reference images were sent to the shortlisted artists.\n- Validate that the final commissioned capsule art meets the specified artistic and technical requirements.\n- Confirm the commissioned art file is delivered on time and integrated into the project assets.\n- Obtain approval from the project lead or art director on the final capsule art quality and relevance.",
         "status": "pending",
         "dependencies": [
-          4
+          "4"
         ],
         "priority": "medium",
         "subtasks": []
@@ -274,7 +275,7 @@
         "testStrategy": "- Verify that each Sarimanok sprite (Classic, Shadow, Golden) is correctly sized at 32x32 pixels with exactly 2 animation frames.\n- Confirm that the color palettes match the traditional Maranao art references for each variant.\n- Load the sprites in the game and check that animations play smoothly with the 2 frames.\n- Test sprite visibility and appearance in different game scenes where player characters are used.\n- Validate that the sprites integrate without errors into the existing Phaser 3 animation and sprite loading system.\n- Review documentation for accuracy and completeness regarding color palettes and sprite usage.",
         "status": "pending",
         "dependencies": [
-          3
+          "3"
         ],
         "priority": "high",
         "subtasks": []
@@ -287,7 +288,7 @@
         "testStrategy": "1. Verify that each enemy sprite (Green Duwende, Red Duwende, Santelmo) is 32x32 pixels with exactly 2 animation frames.\n2. Confirm that the color palettes match traditional Filipino folklore references and are consistent with the game's art style.\n3. Load the sprites in the game and check that animations play smoothly and loop correctly.\n4. Ensure sprite files are properly named and organized in the assets/enemies/ directory.\n5. Validate that the sprites are included in the sprite atlas or asset manifest and can be referenced in the game code.",
         "status": "pending",
         "dependencies": [
-          6
+          "6"
         ],
         "priority": "high",
         "subtasks": []
@@ -300,7 +301,7 @@
         "testStrategy": "1. Verify the sprite sheet dimensions are exactly 48x48 pixels per frame with 4 frames for the animated version.\n2. Confirm the fallback static sprite is 48x48 pixels and visually represents the Manananggal boss clearly.\n3. Load the animated sprite in the game and observe the wing-flapping animation for smoothness and silhouette readability.\n4. Test the fallback static sprite loads correctly and displays without animation when selected.\n5. Ensure the sprite integrates seamlessly with existing enemy behaviors and does not cause rendering or performance issues.\n6. Review the sprite's visual style for consistency with other enemy sprites created in Task 7.",
         "status": "pending",
         "dependencies": [
-          7
+          "7"
         ],
         "priority": "high",
         "subtasks": []
@@ -313,8 +314,8 @@
         "testStrategy": "- Verify each weapon icon is exactly 16x16 pixels and visually distinct, matching the style of existing game sprites.\n- Confirm recolored clone icons accurately reflect the specified color schemes (blue for Ice Shard, orange for Flame Wing) and maintain clarity.\n- Check weapon effect sprites for correct dimensions (32x32 for Peck hit, 64x64 for Wing Slap circle, 16x16 for Feather projectile) and visual effectiveness.\n- Load all new assets in the game environment to ensure they render correctly without errors.\n- Review the visual consistency of new assets with existing sprites and effects in the game.\n- Obtain feedback from the art lead or project manager confirming that all essential Ericka art assets for Week 6 are complete and meet quality standards.",
         "status": "pending",
         "dependencies": [
-          6,
-          7
+          "6",
+          "7"
         ],
         "priority": "high",
         "subtasks": []
@@ -327,8 +328,8 @@
         "testStrategy": "- Confirm receipt of final capsule art from the artist and document any revision requests and approvals.\n- Verify that the Small Capsule and Header Capsule images are correctly sized (231x87 and 460x215 pixels respectively) and visually clear.\n- Check that at least five gameplay screenshots at 1920x1080 resolution are captured and represent the specified gameplay moments.\n- Upload all final capsule art and screenshots to the Steamworks dashboard and confirm successful upload without errors.\n- Review the live Steam store page to ensure all images display correctly and are free of visual artifacts.\n- Validate that the store page reflects the updated assets and that no placeholder images remain.",
         "status": "pending",
         "dependencies": [
-          3,
-          5
+          "3",
+          "5"
         ],
         "priority": "medium",
         "subtasks": []
@@ -341,8 +342,8 @@
         "testStrategy": "- Verify all audio assets are culturally authentic and meet duration and thematic requirements.\n- Confirm audio files load correctly in all supported browsers and formats.\n- Test looping behavior for menu and gameplay music tracks.\n- Validate boss music triggers precisely at 20:00 gameplay time.\n- Confirm victory jingle plays on game win.\n- Check that Sarimanok crow, Manananggal screech, night ambience, and tiktik sounds play appropriately in context.\n- Test audio mute and volume controls for all new sounds.\n- Monitor for audio overlap or unintended multiple instances.\n- Review performance impact and loading times.\n- Ensure audio integration aligns with existing Phaser audio management patterns.",
         "status": "pending",
         "dependencies": [
-          6,
-          8
+          "6",
+          "8"
         ],
         "priority": "medium",
         "subtasks": []
@@ -355,7 +356,7 @@
         "testStrategy": "- Verify the Discord server is created with all specified channels (#general, #bug-reports, #feedback, #announcements) in correct order and accessible to new members.\n- Confirm Community features are enabled, including rules and moderation settings.\n- Check that the server branding (icon, banner, emojis) matches the game's theme.\n- Test the Discord invite link for permanence and accessibility.\n- Validate that the Discord invite link is correctly added and visible on the Steam store page.\n- Confirm weekly posts are made to r/Philippines and r/PHGamers subreddits with appropriate content and timing.\n- Verify membership and active participation in Filipino gaming Discord servers.\n- Collect feedback from community members to assess engagement quality and server health.",
         "status": "pending",
         "dependencies": [
-          3
+          "3"
         ],
         "priority": "medium",
         "subtasks": []
@@ -368,10 +369,10 @@
         "testStrategy": "1. Review the storyboard to confirm inclusion of all specified key shots.\n2. Verify the recorded footage starts with gameplay within the first 4-5 seconds and contains no logos or title cards at the start.\n3. Confirm the final trailer duration is under 60 seconds.\n4. Check that the trailer showcases core gameplay mechanics without tutorial content.\n5. Ensure music and sound effects are culturally authentic and synchronized with visuals.\n6. Upload the trailer to the Steam store page and verify it appears correctly in the primary trailer slot.\n7. Test playback on multiple devices and browsers to confirm video and audio quality.",
         "status": "pending",
         "dependencies": [
-          3,
-          6,
-          10,
-          11
+          "3",
+          "6",
+          "10",
+          "11"
         ],
         "priority": "high",
         "subtasks": []
@@ -384,10 +385,10 @@
         "testStrategy": "1. Confirm all features are present and functional in the demo build, matching the code complete milestone criteria.\n2. Verify the demo build enforces a 10-minute playtime limit and transitions to the demo end screen automatically.\n3. Check that the demo end screen displays a wishlist CTA that is clickable and correctly linked.\n4. Review all final screenshots for quality, resolution, and thematic consistency; ensure 5-10 screenshots are captured.\n5. Perform cross-platform testing to ensure the demo runs without crashes or major bugs.\n6. Validate that the submission package meets all Next Fest requirements and that the submission is completed before the deadline.\n7. Document any issues encountered during testing and confirm their resolution before final submission.",
         "status": "pending",
         "dependencies": [
-          3,
-          4,
-          10,
-          13
+          "3",
+          "4",
+          "10",
+          "13"
         ],
         "priority": "high",
         "subtasks": []
@@ -400,9 +401,9 @@
         "testStrategy": "- Confirm the feedback form is comprehensive, accessible, and collects both qualitative and quantitative data effectively. - Verify that all selected testers receive the build and submit feedback within the specified timeframe. - Review collected feedback for completeness, relevance, and actionable insights, ensuring documentation is clear and categorized. - Check that the press kit folder contains all required assets in correct formats and resolutions, matching Steam and media standards. - Validate the influencer lists for relevance, audience size, and content alignment with the game genre. - Test the personalized email template for clarity, professionalism, and personalization placeholders. - Confirm that Steam keys are generated, functional, and successfully sent to influencers before the Next Fest deadline. - Coordinate with marketing or community leads to ensure outreach efforts are tracked and followed up appropriately.",
         "status": "pending",
         "dependencies": [
-          3,
-          10,
-          13
+          "3",
+          "10",
+          "13"
         ],
         "priority": "medium",
         "subtasks": []
@@ -415,11 +416,11 @@
         "testStrategy": "- Verify the final game build uploads successfully to Steam and passes Steam's review process without major issues. - Confirm the Steam store page displays the finalized descriptions, images, and tags correctly on desktop and mobile views. - Check that the Steam Community Hub is fully functional with all configured channels, rules, and branding elements visible and accessible. - Validate that the launch date is correctly set and reflected on the Steam store page. - Test all social media posts and GIF clips for proper formatting, links, and scheduling accuracy. - Review Day 1 patch notes for completeness and clarity, ensuring they are ready for publication on launch day. - Conduct cross-platform checks to ensure the store page and community hub render correctly on various browsers and devices.",
         "status": "pending",
         "dependencies": [
-          3,
-          10,
-          12,
-          13,
-          15
+          "3",
+          "10",
+          "12",
+          "13",
+          "15"
         ],
         "priority": "high",
         "subtasks": []
@@ -432,9 +433,9 @@
         "testStrategy": "- Verify the demo is live and accessible on Steam at the scheduled time (10am PDT, Feb 23).\n- Confirm announcements are posted on all specified channels on launch day and daily during Next Fest.\n- Monitor bug tracking logs to ensure critical bugs are identified and fixed promptly.\n- Check Steam discussion boards and community channels for active engagement and timely developer responses.\n- Validate daily wishlist growth data is collected and reported accurately from Steamworks.\n- Review daily community posts for consistency and player appreciation messages.\n- Conduct post-event analysis to confirm all feedback was logged and addressed appropriately.",
         "status": "pending",
         "dependencies": [
-          12,
-          14,
-          16
+          "12",
+          "14",
+          "16"
         ],
         "priority": "high",
         "subtasks": []
@@ -447,17 +448,23 @@
         "testStrategy": "- Confirm the Steam Early Access launch occurs on or near March 8, 2026, with the game live and accessible to players.\n- Verify announcements are posted on all specified channels (r/Philippines, r/PHGamers, Filipino gaming communities, Twitter/X, Discord) within 24 hours of launch.\n- Monitor Steam discussion boards and Discord for bug reports and player feedback; log and categorize issues.\n- Validate that critical bugs identified post-launch are addressed with hotfixes within 24-48 hours.\n- Check responsiveness and tone of developer replies to player feedback across platforms.\n- Confirm public acknowledgments and thanks to early buyers and reviewers are posted.\n- Review the Update 1 plan to ensure it reflects prioritized launch feedback.\n- Ensure the team schedules and takes a rest period post-launch as planned.\n- Document a team celebration event or acknowledgment of launch success.",
         "status": "pending",
         "dependencies": [
-          12,
-          16
+          "12",
+          "16"
         ],
         "priority": "high",
         "subtasks": []
       }
     ],
     "metadata": {
-      "created": "2025-12-04T06:41:42.685Z",
-      "updated": "2025-12-04T07:06:26.074Z",
-      "description": "Non-coding tasks: Steam setup, art, audio, marketing, and launch"
+      "version": "1.0.0",
+      "lastModified": "2025-12-04T16:05:34.238Z",
+      "taskCount": 18,
+      "completedCount": 0,
+      "tags": [
+        "production"
+      ],
+      "created": "2025-12-04T16:05:50.929Z",
+      "description": "Tasks for production context"
     }
   }
 }
