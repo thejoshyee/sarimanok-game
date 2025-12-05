@@ -94,7 +94,7 @@
         "dependencies": [
           "1"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -129,15 +129,16 @@
               2
             ],
             "details": "1. In the editor, use the run settings or multiple editor play windows to simulate common resolutions:\n   - 1920×1080 (1080p, 16:9).\n   - 2560×1440 (1440p, 16:9).\n   - At least one non-16:9 resolution (e.g., 1280×1024 or 1920×1200) to test letterboxing/pillarboxing.\n2. For each resolution:\n   - Run the game and visually confirm that the logical viewport remains 640×360 and scales uniformly (no stretching) due to Stretch Mode = `canvas_items` and Stretch Aspect = `keep`.\n   - On 1080p, confirm the viewport appears as an exact 3× scale of 640×360 with crisp pixels and even letterboxing (if any).\n   - On 1440p, confirm the viewport appears as an exact 4× scale of 640×360 with the same characteristics.\n3. Move the player and camera across the arena while watching tile edges, UI, and any debug grid/overlays to ensure there is no subpixel jitter, distortion, or uneven scaling at different resolutions.\n4. Toggle fullscreen and windowed modes (if supported by the project) and verify that scaling behavior remains consistent and that the window resizes do not change the logical viewport size.\n5. Capture screenshots or short clips for each tested resolution and annotate any issues (e.g., unexpected extra letterboxing, cropping, or blurry scaling) for follow-up fixes.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-05T20:47:20.983Z"
           }
         ],
         "complexity": 3,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Split this into subtasks for (1) configuring display and stretch settings in the project configuration, (2) verifying arena, tileset, and camera alignment with the chosen viewport, and (3) testing behavior across common resolutions and aspect ratios (including simulated displays). For each subtask, outline exact settings to change, scenes to open, and visual checks or debug overlays to confirm correct scaling and framing.",
-        "updatedAt": "2025-12-05T14:21:21.326Z"
+        "updatedAt": "2025-12-05T20:47:20.983Z"
       },
       {
         "id": "3",
@@ -279,9 +280,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-05T14:21:21.326Z",
+      "lastModified": "2025-12-05T20:47:20.989Z",
       "taskCount": 10,
-      "completedCount": 1,
+      "completedCount": 2,
       "tags": [
         "master"
       ]

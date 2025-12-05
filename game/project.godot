@@ -19,3 +19,7 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/stretch/mode="canvas_items"
+
+[editor]
+
+run/main_run_args="--resolution 1920x1080"
