@@ -167,3 +167,4 @@ Your Steam store page is a sales funnel: capsule → screenshots → trailer →
 **Related Files:**
 - **Next:** [Launch Execution](prd-launch-execute.md) - Weeks 13-14 (Next Fest & Launch)
 
+
