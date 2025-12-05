@@ -94,7 +94,7 @@
         "dependencies": [
           "1"
         ],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
@@ -102,9 +102,10 @@
             "description": "Set the base viewport resolution and stretch behavior in the project settings to match the 640×360 PRD target.",
             "dependencies": [],
             "details": "1. Open the Godot project and go to Project Settings → Display → Window.\n2. Under the Viewport section, set Width = 640 and Height = 360 to define the base logical resolution.\n3. In the same section, set Stretch Mode to `canvas_items` and Stretch Aspect to `keep` to preserve aspect ratio while scaling.\n4. Confirm that any other resolution-related overrides (e.g., in Feature Overrides or per-platform settings) are disabled or consistent with 640×360.\n5. Open the main game scene (the one used as the startup scene) and run the game in the editor to visually confirm that the viewport appears at 640×360 when using the editor’s default window size.\n6. Enable the debug display of the viewport size (e.g., by adding a small temporary `Label` or debug script that prints `get_viewport().get_visible_rect().size`) to double-check that the engine reports 640×360 as the logical size.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-05T13:50:32.467Z"
           },
           {
             "id": 2,
@@ -134,7 +135,8 @@
         ],
         "complexity": 3,
         "recommendedSubtasks": 3,
-        "expansionPrompt": "Split this into subtasks for (1) configuring display and stretch settings in the project configuration, (2) verifying arena, tileset, and camera alignment with the chosen viewport, and (3) testing behavior across common resolutions and aspect ratios (including simulated displays). For each subtask, outline exact settings to change, scenes to open, and visual checks or debug overlays to confirm correct scaling and framing."
+        "expansionPrompt": "Split this into subtasks for (1) configuring display and stretch settings in the project configuration, (2) verifying arena, tileset, and camera alignment with the chosen viewport, and (3) testing behavior across common resolutions and aspect ratios (including simulated displays). For each subtask, outline exact settings to change, scenes to open, and visual checks or debug overlays to confirm correct scaling and framing.",
+        "updatedAt": "2025-12-05T13:50:32.467Z"
       },
       {
         "id": "3",
@@ -276,7 +278,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-05T13:31:38.641Z",
+      "lastModified": "2025-12-05T13:50:32.467Z",
       "taskCount": 10,
       "completedCount": 1,
       "tags": [
