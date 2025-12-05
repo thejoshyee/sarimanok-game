@@ -1,6 +1,7 @@
 # Sarimanok Survivor - Launch Preparation (Weeks 12-14)
 
 ## Project Context
+
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
@@ -12,6 +13,7 @@ After Week 11, the game is **code complete, balanced, and bug-fixed**. Weeks 12-
 ## Dependencies
 
 **Must be completed from Weeks 1-11:**
+
 - Code complete (all features implemented, tested, balanced)
 - All art integrated (or refined placeholders if art delayed)
 - All audio integrated (music + final SFX)
@@ -29,13 +31,13 @@ After Week 11, the game is **code complete, balanced, and bug-fixed**. Weeks 12-
 
 ## Critical Deadlines
 
-| Date       | Deadline                            | Action Required                                 |
-| ---------- | ----------------------------------- | ----------------------------------------------- |
-| **Jan 5**  | Registration deadline               | Register with live "Coming Soon" store page     |
-| **Feb 9**  | Final submission deadline           | Demo + store page must be ready for review      |
-| **Feb 23** | Next Fest begins                    | Set demo LIVE at 10am PDT                       |
-| Mar 2      | Next Fest ends                      | Wrap-up featuring most-played demos             |
-| **~Mar 8** | EA Launch                           | Right after Next Fest - ride the wishlist wave! |
+| Date       | Deadline                  | Action Required                                 |
+| ---------- | ------------------------- | ----------------------------------------------- |
+| **Jan 5**  | Registration deadline     | Register with live "Coming Soon" store page     |
+| **Feb 9**  | Final submission deadline | Demo + store page must be ready for review      |
+| **Feb 23** | Next Fest begins          | Set demo LIVE at 10am PDT                       |
+| Mar 2      | Next Fest ends            | Wrap-up featuring most-played demos             |
+| **~Mar 8** | EA Launch                 | Right after Next Fest - ride the wishlist wave! |
 
 ## Why This Timing is Perfect
 
@@ -64,6 +66,7 @@ Your Steam store page is a sales funnel: capsule → screenshots → trailer →
 | Library Logo   | 1280×720 px  | Nice-to-have | Shows in Steam library               |
 
 **Capsule Art Recommendation:**
+
 - **Commission professional illustration** (~$200-400 from Fiverr/ArtStation) - RECOMMENDED
 - Do NOT use scaled pixel art (looks amateur at Steam's display sizes)
 - Feature Sarimanok prominently, night atmosphere, action/energy feel
@@ -108,19 +111,23 @@ Your Steam store page is a sales funnel: capsule → screenshots → trailer →
 ## Store Page Description
 
 **Short Description (appears in search results):**
+
 - Start strong with unique selling point
 - Include core gameplay loop
 - End with compelling tagline
 
 **Example Short Description:**
+
 > "Defend the land as the legendary Sarimanok in this Filipino folklore survivor roguelite. Auto-attacking weapons, relentless mythological creatures, and 30 minutes until dawn. Survive the night, or die trying—and come back stronger with permanent upgrades."
 
 **About This Game:**
+
 - Repeat 3-4 core gameplay themes
 - Bullet points for key features
 - Don't oversell - stick to what the game delivers
 
 **Key Features (Bullet Points):**
+
 - Authentic Filipino mythology (Sarimanok, Duwendes, Aswang, Manananggal)
 - 3 playable Sarimanok variants with unique stats
 - 6 auto-attacking weapons with upgrade paths
@@ -234,11 +241,11 @@ Title: [Released] Sarimanok Survivor - Filipino Folklore Survivor Roguelite
 Body:
 Kumusta! 👋
 
-After 14 weeks of development, I'm excited to share **Sarimanok Survivor** 
+After 14 weeks of development, I'm excited to share **Sarimanok Survivor**
 - a Filipino mythology-themed survivor roguelite!
 
-Play as the legendary Sarimanok defending the land from Filipino 
-mythological creatures: Duwendes, Santelmo, and the terrifying Manananggal. 
+Play as the legendary Sarimanok defending the land from Filipino
+mythological creatures: Duwendes, Santelmo, and the terrifying Manananggal.
 Auto-attacking weapons, permanent upgrades, and a clear goal: survive until dawn.
 
 🎮 **Steam:** [LINK]
@@ -258,11 +265,13 @@ Salamat for the support! 🇵🇭
 ## Post-Launch (First Week)
 
 **Day 1-3:**
+
 - Monitor hourly for critical bugs
 - Respond to all Steam discussion threads
 - Hotfix game-breaking issues immediately
 
 **Day 4-7:**
+
 - Daily check-ins for bugs and feedback
 - Compile feedback for Update 1 roadmap
 - Thank reviewers and players
@@ -271,12 +280,14 @@ Salamat for the support! 🇵🇭
 ## Launch Metrics to Track
 
 **Success Indicators (First 2 Weeks):**
+
 - 500+ copies sold
 - 70%+ positive reviews
 - 50%+ of players reach 10:00 mark (from analytics)
 - 20%+ of players beat Story Mode (from achievements)
 
 **Data Sources:**
+
 - Steam sales dashboard
 - Steam achievements (unlock percentages)
 - Analytics logs (run length, death times, weapon picks)
@@ -289,12 +300,14 @@ Salamat for the support! 🇵🇭
 **Purpose:** Rest and handle emergencies before baby arrives (due March 21)
 
 **Use this time for:**
+
 - Critical bug fixes only
 - Responding to player feedback
 - Planning Update 1 (Black Duwende, enhanced Endless Mode scaling)
 - **REST!** You deserve it after 14 weeks of development
 
 **Do NOT use for:**
+
 - Major features (save for Update 1)
 - Perfectionism (game is shippable as-is)
 - Burnout (baby is coming - conserve energy!)
@@ -306,6 +319,7 @@ Salamat for the support! 🇵🇭
 ## Update 1: Expand the Experience
 
 Features deferred from EA launch:
+
 - Black Duwende (5th enemy - HP 50, Damage 15, Speed 120, spawns 16:00+)
 - Enhanced Endless Mode scaling (accelerated difficulty after 30:00)
 - Additional achievements (expand from 8 to 15+)
@@ -329,6 +343,7 @@ Features deferred from EA launch:
 # Definition of Done (Weeks 12-14)
 
 ## Week 12 (Final Prep)
+
 - [ ] All bugs from Week 11 fixed
 - [ ] Final build submitted to Steam for review
 - [ ] Store description written (short + about + features)
@@ -343,6 +358,7 @@ Features deferred from EA launch:
 - [ ] Store page looks correct (tested as customer)
 
 ## Week 13 (Next Fest)
+
 - [ ] Demo goes LIVE on Feb 23
 - [ ] Demo works for thousands of players
 - [ ] Engaged in Steam discussions
@@ -352,6 +368,7 @@ Features deferred from EA launch:
 - [ ] EA launch announcement finalized
 
 ## Week 14 (Launch)
+
 - [ ] Game launches on Steam (~March 8)
 - [ ] Launch announcement posted to communities
 - [ ] Monitoring Steam discussions for bugs
@@ -365,6 +382,7 @@ Features deferred from EA launch:
 # Launch Week Survival Guide
 
 **Do's:**
+
 - ✅ Respond to legitimate bug reports professionally
 - ✅ Thank positive reviewers
 - ✅ Fix game-breaking bugs immediately
@@ -372,6 +390,7 @@ Features deferred from EA launch:
 - ✅ Celebrate with your partner!
 
 **Don'ts:**
+
 - ❌ Argue with negative reviews
 - ❌ Over-promise features not in the game
 - ❌ Panic over small issues
@@ -383,4 +402,3 @@ Features deferred from EA launch:
 ---
 
 **Congratulations on completing Sarimanok Survivor! 🐓**
-
