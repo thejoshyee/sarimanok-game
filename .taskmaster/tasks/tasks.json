@@ -114,10 +114,11 @@
             "dependencies": [
               1
             ],
-            "details": "1. Open the main gameplay/arena scene that contains the tilemap and camera.\n2. Select the TileMap node used for the arena and verify that:\n   - The tile size is set to 32×32 in the TileSet/TileMap settings.\n   - The arena dimensions correspond to 1920×1088 (e.g., 60 tiles wide and 34 tiles high if built entirely from 32×32 tiles).\n3. Check that the TileSet resource used in this TileMap also defines tiles at 32×32 pixels so there is a 1:1 mapping between texture tiles and world tiles.\n4. Select the main Camera2D (or equivalent) used during gameplay and verify:\n   - It is the current camera for the scene.\n   - Its zoom is (1, 1), so it views the world at native pixel scale.\n   - Any limits or drag margins align with the arena bounds (e.g., camera limits set to match the 1920×1088 world rectangle).\n5. With the game running, enable Godot’s Debug → Visible Collision Shapes (and, if available, a grid overlay) to visually confirm that:\n   - The camera view shows a clean tile grid with no partial or cut-off tiles at the edges.\n   - Player and other entities align to tile boundaries as expected when moving.\n6. Optionally add a temporary debug overlay (e.g., a `ColorRect` frame or a grid drawn via a script) at the viewport edges to confirm that the 640×360 view always contains an integer number of 32×32 tiles and that the arena is framed as intended when the camera is centered or clamped.",
-            "status": "pending",
+            "details": "1. Open the main gameplay/arena scene that contains the tilemap and camera.\n2. Select the TileMap node used for the arena and verify that:\n   - The tile size is set to 32×32 in the TileSet/TileMap settings.\n   - The arena dimensions correspond to 1920×1088 (e.g., 60 tiles wide and 34 tiles high if built entirely from 32×32 tiles).\n3. Check that the TileSet resource used in this TileMap also defines tiles at 32×32 pixels so there is a 1:1 mapping between texture tiles and world tiles.\n4. Select the main Camera2D (or equivalent) used during gameplay and verify:\n   - It is the current camera for the scene.\n   - Its zoom is (1, 1), so it views the world at native pixel scale.\n   - Any limits or drag margins align with the arena bounds (e.g., camera limits set to match the 1920×1088 world rectangle).\n5. With the game running, enable Godot’s Debug → Visible Collision Shapes (and, if available, a grid overlay) to visually confirm that:\n   - The camera view shows a clean tile grid with no partial or cut-off tiles at the edges.\n   - Player and other entities align to tile boundaries as expected when moving.\n6. Optionally add a temporary debug overlay (e.g., a `ColorRect` frame or a grid drawn via a script) at the viewport edges to confirm that the 640×360 view always contains an integer number of 32×32 tiles and that the arena is framed as intended when the camera is centered or clamped.\n<info added on 2025-12-05T14:21:02.877Z>\nVerified in `main.tscn` that the TileMap uses a 32×32 TileSet and that the arena is laid out as a 60×34 grid (1920×1088), with Camera2D zoom set to (1, 1) and limits configured to Left=0, Top=0, Right=1920, Bottom=1088 to match the arena bounds. Additionally, confirmed at runtime that the 640×360 viewport shows a stable pixel-perfect view of the world with no subpixel jitter, using a debug grid overlay (yellow 32 px lines) and a red arena boundary drawn via `main.gd` to validate that tile edges, entity movement, and camera clamping all align cleanly at the arena limits.\n</info added on 2025-12-05T14:21:02.877Z>",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-05T14:21:21.326Z"
           },
           {
             "id": 3,
@@ -136,7 +137,7 @@
         "complexity": 3,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Split this into subtasks for (1) configuring display and stretch settings in the project configuration, (2) verifying arena, tileset, and camera alignment with the chosen viewport, and (3) testing behavior across common resolutions and aspect ratios (including simulated displays). For each subtask, outline exact settings to change, scenes to open, and visual checks or debug overlays to confirm correct scaling and framing.",
-        "updatedAt": "2025-12-05T13:50:32.467Z"
+        "updatedAt": "2025-12-05T14:21:21.326Z"
       },
       {
         "id": "3",
@@ -278,7 +279,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-05T13:50:32.467Z",
+      "lastModified": "2025-12-05T14:21:21.326Z",
       "taskCount": 10,
       "completedCount": 1,
       "tags": [
