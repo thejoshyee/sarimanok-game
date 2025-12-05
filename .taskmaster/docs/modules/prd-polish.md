@@ -1,6 +1,7 @@
 # Sarimanok Survivor - Polish & Balance (Weeks 7-11)
 
 ## Project Context
+
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
@@ -12,6 +13,7 @@ After Week 6, you have a functionally complete, shippable MVP. Weeks 7-11 focus 
 ## Dependencies
 
 **Must be completed from Weeks 1-6:**
+
 - Complete Story Mode with win condition (30:00 dawn)
 - All 3 characters (Classic, Shadow, Golden Sarimanok)
 - All 4 enemies (Green/Red Duwende, Santelmo, Manananggal)
@@ -24,6 +26,7 @@ After Week 6, you have a functionally complete, shippable MVP. Weeks 7-11 focus 
 - Damage numbers and enemy flash from Week 3
 
 ## Weeks 7-11 Goals
+
 - **Week 7:** Settings menu, accessibility, controller UX, juice (screen shake, particles)
 - **Week 8:** Art integration (swap placeholders → real sprites)
 - **Week 9:** Audio polish (music tracks, final SFX)
@@ -40,15 +43,15 @@ After Week 6, you have a functionally complete, shippable MVP. Weeks 7-11 focus 
 
 ### Required Settings
 
-| Setting               | Purpose                                    | Default |
-| --------------------- | ------------------------------------------ | ------- |
-| Music Volume          | Control background music loudness          | 80%     |
-| SFX Volume            | Control sound effects loudness             | 100%    |
-| Fullscreen Toggle     | Switch between fullscreen and windowed     | On      |
-| Window Mode           | Fullscreen / Windowed / Borderless         | Fullscreen|
-| Resolution            | For non-16:9 monitors                      | Native  |
-| Screen Shake Toggle   | Accessibility (some players get motion sick)| On     |
-| Reduced Motion Option | Disable particles for motion sensitivity   | Off     |
+| Setting               | Purpose                                      | Default    |
+| --------------------- | -------------------------------------------- | ---------- |
+| Music Volume          | Control background music loudness            | 80%        |
+| SFX Volume            | Control sound effects loudness               | 100%       |
+| Fullscreen Toggle     | Switch between fullscreen and windowed       | On         |
+| Window Mode           | Fullscreen / Windowed / Borderless           | Fullscreen |
+| Resolution            | For non-16:9 monitors                        | Native     |
+| Screen Shake Toggle   | Accessibility (some players get motion sick) | On         |
+| Reduced Motion Option | Disable particles for motion sensitivity     | Off        |
 
 ### Settings Persistence
 
@@ -60,7 +63,7 @@ Settings save to file:
     "music_volume": 0.8,
     "sfx_volume": 1.0,
     "fullscreen": true,
-    "window_mode": "fullscreen",  // "fullscreen", "windowed", "borderless"
+    "window_mode": "fullscreen", // "fullscreen", "windowed", "borderless"
     "screen_shake_enabled": true,
     "reduced_motion": false
   }
@@ -78,15 +81,18 @@ Settings save to file:
 ## Accessibility Features
 
 **Colorblind Mode Consideration:**
+
 - Green/Red Duwende must be distinguishable without color
 - Solution: Add size or shape difference (Red slightly larger, or different silhouette)
 
 **Reduced Motion:**
+
 - Disable particle effects when enabled
 - Reduce or eliminate screen shake
 - Keep gameplay identical (enemy movement, weapons still work)
 
 **Steam Deck Support:**
+
 - Test text legibility at 1280x720 resolution
 - Verify controller support works (from Week 1)
 - Test performance at lower resolution
@@ -101,21 +107,22 @@ Implement subtle camera shake on impactful events:
 func camera_shake(intensity: float, duration: float):
     if not GameState.settings.screen_shake_enabled:
         return
-    
+
     var tween = create_tween()
     var original_offset = camera.offset
-    
+
     for i in range(int(duration * 60)):  # 60 FPS
         var shake_offset = Vector2(
             randf_range(-intensity, intensity),
             randf_range(-intensity, intensity)
         )
         tween.tween_property(camera, "offset", original_offset + shake_offset, 0.016)
-    
+
     tween.tween_property(camera, "offset", original_offset, 0.1)
 ```
 
 **Shake triggers:**
+
 - Player takes damage: intensity 5, duration 0.2s
 - Boss spawns: intensity 10, duration 0.5s
 - Boss dies: intensity 8, duration 0.4s
@@ -132,6 +139,7 @@ func hitstop(duration: float = 0.05):
 ```
 
 **Hitstop triggers:**
+
 - Boss takes damage
 - Player kills multiple enemies at once (3+)
 - Player levels up
@@ -180,6 +188,7 @@ func _input(event):
 ```
 
 **UI updates:**
+
 - Show "Press SPACE" vs "Press A"
 - Show keyboard icons vs controller icons
 - Update immediately when device switches mid-game
@@ -187,6 +196,7 @@ func _input(event):
 ### Dead Zone & Sensitivity
 
 Test and adjust:
+
 - Left stick dead zone: 0.15 (default)
 - Movement sensitivity: Feels responsive but not twitchy
 - Menu navigation: Slightly lower sensitivity to prevent accidental selections
@@ -194,16 +204,78 @@ Test and adjust:
 ## Tutorial (Level Design, NOT Overlays)
 
 **Design Principles:**
+
 - No text overlays blocking gameplay
 - Learn by doing, not by reading
 - First 30 seconds teach movement and combat naturally
 
 **Implementation:**
+
 - First 30 seconds: Slow spawn pattern forces player to discover WASD movement
 - Peck auto-attacks immediately (player sees damage numbers, understands combat)
 - Brief "Survive until dawn" text at run start (fades after 3s)
 - First level-up choice is semi-scripted (only show weapon options to teach system)
 - Icon-based learning where possible (no paragraphs of text)
+
+## Integration Test (Week 7)
+
+**Critical: Polish must enhance the existing game, not break it!**
+
+1. **Full Controller Playthrough:**
+
+   - Play entire run (0:00 → 30:00) using ONLY controller
+   - Navigate main menu with D-pad/stick (no mouse)
+   - Start run, level up 10+ times, verify all UI navigable
+   - Pause mid-game, adjust settings, resume (all with controller)
+   - Beat game, navigate results screen, return to menu (no mouse)
+   - **Pass if:** Never need to touch keyboard/mouse
+
+2. **Input Device Switching Test:**
+
+   - Start run with controller (see controller button prompts)
+   - Mid-run, switch to keyboard (prompts change to keyboard keys)
+   - Switch back to controller (prompts revert to controller buttons)
+   - Verify switching is seamless (no lag, no broken prompts)
+
+3. **Settings Integration Test:**
+
+   - Adjust ALL settings in menu
+   - Start run and verify each setting works:
+     - Music volume at 50% (quieter than default)
+     - SFX volume at 50% (quieter than default)
+     - Screen shake OFF (no shake on hits)
+     - Reduced motion ON (fewer particles)
+   - Quit to menu, restart game
+   - Verify settings persisted (still at 50% volume, shake off, etc.)
+
+4. **Game Feel Test (Juice Validation):**
+
+   - Start run and pay attention to visual/tactile feedback:
+     - Screen shake on enemy hits (if enabled) - feels impactful?
+     - Enemy death particles appear and fade
+     - Pickup magnet shows visual feedback (gems drift toward player)
+     - Level-up particle burst feels celebratory
+     - Impact frames on big hits feel satisfying
+   - **Pass if:** Combat feels "juicy" and satisfying, not flat
+
+5. **Tutorial Test (New Player Simulation):**
+
+   - Fresh run as if you've never played before
+   - Do NOT read any external documentation
+   - Can you figure out movement in first 30 seconds? (no text tells you)
+   - Do you understand weapons auto-attack? (damage numbers appear)
+   - Do you understand level-up system? (first choice is clear)
+   - **Pass if:** First-time player can survive 5+ minutes without reading docs
+
+6. **Accessibility Test:**
+   - Enable colorblind mode
+   - Can you still distinguish Green vs Red Duwende? (size/shape difference)
+   - Enable reduced motion
+   - Does game still feel responsive without particles?
+   - Test at 1280x720 resolution (Steam Deck)
+   - Is all text still readable?
+
+**Pass Criteria:** Complete 30:00 victory run with controller, all settings work and persist, game feels polished and satisfying, tutorial teaches naturally without text overlays.
 
 ---
 
@@ -224,15 +296,15 @@ This week swaps placeholder ColorRect sprites with real pixel art (either from E
 
 ## Art Sources
 
-| Asset Type               | Source                    | Notes                                   |
-| ------------------------ | ------------------------- | --------------------------------------- |
-| Sarimanok (all variants) | Ericka creates            | Cultural identity - MUST be authentic   |
-| Enemies (all 4)          | Ericka creates            | Filipino creatures - cultural hook      |
-| Weapon icons             | Ericka creates            | Bird-themed                             |
-| Passive icons            | Asset pack                | Generic stat icons acceptable           |
-| Pickups (XP, gold)       | Asset pack                | Generic gems/coins acceptable           |
-| Tileset (farm arena)     | Asset pack (~$10-20)      | Generic farm tiles acceptable           |
-| UI elements              | Asset pack (~$10-15)      | Buttons, panels, HP/XP bars             |
+| Asset Type               | Source               | Notes                                 |
+| ------------------------ | -------------------- | ------------------------------------- |
+| Sarimanok (all variants) | Ericka creates       | Cultural identity - MUST be authentic |
+| Enemies (all 4)          | Ericka creates       | Filipino creatures - cultural hook    |
+| Weapon icons             | Ericka creates       | Bird-themed                           |
+| Passive icons            | Asset pack           | Generic stat icons acceptable         |
+| Pickups (XP, gold)       | Asset pack           | Generic gems/coins acceptable         |
+| Tileset (farm arena)     | Asset pack (~$10-20) | Generic farm tiles acceptable         |
+| UI elements              | Asset pack (~$10-15) | Buttons, panels, HP/XP bars           |
 
 ## Sprite Specifications
 
@@ -256,11 +328,45 @@ This week swaps placeholder ColorRect sprites with real pixel art (either from E
 ## Art Fallback Plan
 
 If custom art isn't ready:
+
 - Continue with refined ColorRect placeholders
 - Use purchased asset packs for generic elements (tiles, UI, pickups)
 - Game is still SHIPPABLE with placeholders for EA launch
 
 **Ericka's Art Priority:** Focus on Sarimanok and enemies (cultural identity). Everything else can use asset packs.
+
+## Integration Test (Week 8)
+
+**Critical: Art swap must not break gameplay!**
+
+1. **Full Playthrough Test:**
+
+   - Start new run with Classic Sarimanok (real sprite)
+   - Survive 10:00 (encounter all enemy types with new sprites)
+   - Level up 5+ times (test weapon/passive icons display)
+   - Verify hitboxes match visuals (enemies take damage where expected)
+   - Die intentionally - death animation plays correctly
+
+2. **Character Comparison Test:**
+
+   - Play 5 minutes as Classic, Shadow, Golden (all sprites work)
+   - Verify each character's sprite is visually distinct
+   - Check sprite flips correctly when moving left/right
+
+3. **Visual Consistency Check:**
+
+   - All sprites using correct size (32x32 for characters/enemies, 48x48 for boss)
+   - No sprites appear stretched or distorted
+   - Animations play at correct speed (0.2s per frame)
+   - Pickup sprites visible and collect correctly
+
+4. **Arena Integration:**
+   - Tileset imported and painted correctly
+   - Player collision works with new tiles
+   - Camera bounds still correct (doesn't show edges)
+   - Background doesn't cause performance drops
+
+**Pass Criteria:** Complete 30:00 victory run with all new art, no visual glitches, hitboxes accurate, 60 FPS maintained.
 
 ---
 
@@ -272,16 +378,17 @@ If custom art isn't ready:
 
 ## Music Tracks (4 Total)
 
-| Track          | Purpose                 | Length    | Notes                           |
-| -------------- | ----------------------- | --------- | ------------------------------- |
-| Menu theme     | Main menu               | 1-2 min   | Calm, Filipino-inspired         |
-| Night theme    | Main gameplay           | 1-2 min   | Tense, action                   |
-| Boss theme     | When Manananggal spawns | 1-2 min   | Intense, dramatic               |
-| Victory jingle | Dawn/win                | 10-20 sec | Triumphant, Sarimanok crow      |
+| Track          | Purpose                 | Length    | Notes                      |
+| -------------- | ----------------------- | --------- | -------------------------- |
+| Menu theme     | Main menu               | 1-2 min   | Calm, Filipino-inspired    |
+| Night theme    | Main gameplay           | 1-2 min   | Tense, action              |
+| Boss theme     | When Manananggal spawns | 1-2 min   | Intense, dramatic          |
+| Victory jingle | Dawn/win                | 10-20 sec | Triumphant, Sarimanok crow |
 
 ## Sound Effects (Replace Placeholders)
 
 **Placeholder SFX from Weeks 2-3:**
+
 - Peck attack
 - Wing Slap
 - Feather Shot
@@ -292,6 +399,7 @@ If custom art isn't ready:
 - Gold pickup
 
 **New SFX for Week 9:**
+
 - Player hurt
 - Level up
 - Menu click
@@ -320,10 +428,12 @@ func play_sfx(sound_name: String, pitch_variance: float = 0.1):
 ## Audio Sources
 
 **Music:**
+
 - Free: Pixabay Music, OpenGameArt (game-focused)
 - Paid: Epidemic Sound ($15/month), Fiverr commission ($50-150 for 4 tracks)
 
 **Sound Effects:**
+
 - Free: freesound.org (CC0), BFXR (generate retro SFX)
 - Paid: Fantasy/RPG SFX pack ($15-30) - RECOMMENDED to avoid hunting individual sounds
 
@@ -348,15 +458,61 @@ func _on_victory():
 ## Audio Specifications
 
 **Music:**
+
 - Format: OGG Vorbis (smaller than WAV)
 - Loop length: 1-2 minutes
 - Crossfade duration: 0.5 seconds
 - Volume default: 80% (leave headroom for SFX)
 
 **SFX:**
+
 - Format: WAV (16-bit, 44.1kHz)
 - Max simultaneous: 8 sounds at once
 - Priority (highest to lowest): Player hurt > Pickup > Level up > Weapon > Enemy
+
+## Integration Test (Week 9)
+
+**Critical: Audio must enhance gameplay, not distract from it!**
+
+1. **Eyes Closed Test (Audio-Only Gameplay):**
+
+   - Play 5-minute run with eyes closed
+   - Can you tell when you're taking damage? (player hurt sound)
+   - Can you tell when enemies die? (death sound + pickup chime)
+   - Can you tell when you level up? (level up sound + music pause)
+   - Can you distinguish different weapon sounds? (Peck vs Wing Slap vs Feather Shot)
+   - **Pass if:** All major gameplay events are recognizable by audio alone
+
+2. **Full Run Audio Test:**
+
+   - Start from main menu (menu music plays)
+   - Start run (crossfade to night theme)
+   - Survive to 20:00 (boss theme triggers)
+   - Win at 30:00 (COCKADOODLEDOO + victory jingle)
+   - Verify no audio glitches, clicks, or pops during transitions
+
+3. **Repetition Fatigue Test:**
+
+   - Play 15-minute run focusing only on audio
+   - Kill 200+ enemies (enemy hit sound plays hundreds of times)
+   - Collect 100+ pickups (pickup sounds repeat constantly)
+   - **Check:** Does pitch randomization prevent ear fatigue?
+   - **Check:** Do sounds become annoying or grating?
+
+4. **Settings Compliance Test:**
+
+   - Set music volume to 0% (music mutes, SFX still audible)
+   - Set SFX volume to 0% (SFX mutes, music still audible)
+   - Set both to 50% (both audible at half volume)
+   - Verify settings persist after game restart
+
+5. **Music Progression Test:**
+   - Verify music crossfades smoothly (no abrupt cuts)
+   - Boss music intensity increases tension
+   - Victory jingle feels triumphant (ends run on high note)
+   - Menu music loops seamlessly (no noticeable seam)
+
+**Pass Criteria:** Complete 30:00 victory run, all audio triggers correctly, no ear fatigue from repetitive sounds, audio enhances immersion rather than distracting from gameplay.
 
 ---
 
@@ -367,6 +523,7 @@ func _on_victory():
 **🎯 CODE COMPLETE MILESTONE (February 2-8, 2026)**
 
 This is feature freeze. By end of Week 10:
+
 - All features implemented and working
 - All art integrated (or refined placeholders)
 - Demo submitted for Next Fest review (Feb 9 deadline)
@@ -376,13 +533,13 @@ This is feature freeze. By end of Week 10:
 
 **Type:** Time-limited demo (same build with timer check)
 
-| Setting          | Value                                         |
-| ---------------- | --------------------------------------------- |
-| Time Limit       | 10 minutes                                    |
-| Cut-off Point    | Before Santelmo (10:00) and before boss (20:00)|
-| Shop Access      | DISABLED (removes meta-progression hook)      |
-| Character Select | Classic Sarimanok only                        |
-| Save Data        | Does not persist                              |
+| Setting          | Value                                           |
+| ---------------- | ----------------------------------------------- |
+| Time Limit       | 10 minutes                                      |
+| Cut-off Point    | Before Santelmo (10:00) and before boss (20:00) |
+| Shop Access      | DISABLED (removes meta-progression hook)        |
+| Character Select | Classic Sarimanok only                          |
+| Save Data        | Does not persist                                |
 
 **Demo End Screen:**
 
@@ -463,7 +620,7 @@ func log_run_data():
         "cause_of_death": last_damage_source,
         "timestamp": Time.get_unix_time_from_system()
     }
-    
+
     var file = FileAccess.open("user://analytics.log", FileAccess.READ_WRITE)
     file.seek_end()
     file.store_line(JSON.stringify(run_data))
@@ -480,6 +637,7 @@ func log_run_data():
 ## Playtesting Focus
 
 **Run 10+ full runs and track:**
+
 - Average survival time for new players (target: 8-12 minutes)
 - Win rate after 5 attempts (target: 20-30%)
 - Most popular weapon choices (should be varied)
@@ -489,17 +647,20 @@ func log_run_data():
 ## Balance Adjustments
 
 **Enemy Stats:**
+
 - If players survive past 30:00 easily: Increase stat scaling rate
 - If players die before 10:00 consistently: Reduce early spawn rate
 - If boss is trivial: Increase HP or dive attack frequency
 - If boss is impossible: Reduce HP or telegraph dive attack longer
 
 **Weapon Balance:**
+
 - If one weapon dominates: Nerf slightly, buff alternatives
 - If weapon feels weak: Increase damage or reduce cooldown
 - If max level feels underwhelming: Increase final upgrade power
 
 **XP Curve:**
+
 - If leveling too fast: Increase XP requirements
 - If leveling too slow: Decrease XP requirements or increase enemy XP drops
 
@@ -521,6 +682,7 @@ func log_run_data():
 ## External Feedback
 
 Send build to 3-5 friends/family:
+
 - Can they beat Story Mode in 3-5 attempts?
 - What feels unfair or frustrating?
 - What feels satisfying and fun?
@@ -545,6 +707,7 @@ func save_game():
 # Definition of Done (Weeks 7-11)
 
 ## Week 7 (Settings & Feel)
+
 - [ ] Settings menu works from main menu and pause
 - [ ] Volume controls work (music, SFX)
 - [ ] Fullscreen/windowed toggle works
@@ -559,8 +722,10 @@ func save_game():
 - [ ] Pickup magnet visual feedback
 - [ ] Level-up particle burst
 - [ ] Tutorial teaches through level design (no overlays)
+- [ ] In-game bug report button (links to Google Form or Discord)
 
 ## Week 8 (Art)
+
 - [ ] Sarimanok Classic sprite imported and working
 - [ ] Sarimanok Shadow sprite imported and working
 - [ ] Sarimanok Golden sprite imported and working
@@ -573,6 +738,7 @@ func save_game():
 - [ ] No visual glitches
 
 ## Week 9 (Audio)
+
 - [ ] Menu music plays
 - [ ] Gameplay music plays
 - [ ] Boss music triggers at 20:00
@@ -585,6 +751,7 @@ func save_game():
 - [ ] Music crossfades smoothly
 
 ## Week 10 (Steam Build)
+
 - [ ] Windows build exports correctly
 - [ ] Demo build with 10-minute timer works
 - [ ] Demo end screen displays with wishlist CTA
@@ -592,11 +759,13 @@ func save_game():
 - [ ] Steam overlay works (Shift+Tab)
 - [ ] 5-8 achievements implemented and tested
 - [ ] Analytics logging to local file
+- [ ] Error logging/crash reporting to file for player bug reports
 - [ ] Demo submitted for Next Fest review by Feb 9
 - [ ] Trailer recorded (gameplay in first 5 seconds)
 - [ ] Final screenshots taken
 
 ## Week 11 (Balance & Bugs)
+
 - [ ] 10+ full playtests completed
 - [ ] All game-breaking bugs fixed
 - [ ] All critical bugs fixed
@@ -612,4 +781,3 @@ func save_game():
 ---
 
 **Next Milestone:** Weeks 12-14 (Launch Prep) - See `prd-launch.md`
-
