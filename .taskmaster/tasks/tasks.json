@@ -1,0 +1,287 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": "1",
+        "title": "Audit existing Godot project setup",
+        "description": "Inspect the current Godot 4 project to understand scenes, scripts, and configuration already in place.",
+        "details": "Review the Godot project structure, main scene, autoloads (singletons), and any existing player, enemy, weapon, or progression scripts to avoid duplicating work.[1] Document what systems already exist (e.g., movement, input actions, basic UI, pooling helpers) and how they are organized (folders, naming conventions, node hierarchies).",
+        "testStrategy": "Open the project in Godot, load the main scene, and verify that it runs without errors. Confirm that all referenced scripts and resources exist and that there are no missing dependencies reported in the editor.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Catalog scene and node hierarchy",
+            "description": "Inspect and document the main scenes and their node structures in the existing Godot 4 project.",
+            "dependencies": [],
+            "details": "Concrete inspection steps:\n- Open the project and identify the main entry scene from Project Settings → Run or any bootstrapping script.\n- For the main scene and any key gameplay scenes (e.g., level, player, enemy, UI), expand the node tree and record top-level nodes and important child nodes (player, enemies, spawners, UI roots, cameras, tilemaps, game manager, etc.).\n- Note custom node types, groups, and signals used for communication between nodes.\n- Capture how scenes are composed (instanced scenes, inherited scenes, prefabs for enemies/weapons/projectiles, etc.).\n\nExpected artifacts:\n- Hierarchy notes (e.g., a text outline of each important scene’s node tree).\n- One or more simple diagrams (e.g., boxes and arrows) showing relationships between main gameplay scenes and key nodes.\n- A short summary listing which scenes are responsible for core flows (boot, gameplay, menus).\n\nCompletion criteria:\n- Main and core gameplay scenes are identified and their high-level node hierarchies are documented.\n- All major gameplay-relevant nodes (player, enemies, projectiles, spawners, UI root, camera, game manager) are listed with their roles.\n- Any use of scene inheritance or composition patterns is noted clearly enough to onboard a new developer.\n<info added on 2025-12-05T13:26:40.268Z>\nMain scene `game/main.tscn` is a minimal placeholder with a `Node2D` root and a `ColorRect` sized to 640×360, and there are no additional nodes, scripts, or logic present. All organizational folders for future gameplay content exist (`scenes/player`, `scenes/enemies`, `scenes/ui`, `scenes/weapons`, `scenes/levels`, `scripts`, `autoloads`) but are currently empty, confirming that there are no autoloads or global singletons defined yet and that the project is effectively a clean slate ready for new systems.\n</info added on 2025-12-05T13:26:40.268Z>",
+            "status": "done",
+            "testStrategy": null,
+            "updatedAt": "2025-12-05T13:26:47.206Z",
+            "parentId": "undefined"
+          },
+          {
+            "id": 2,
+            "title": "Inventory autoloads and global singletons",
+            "description": "Review and document all autoloads (singletons) and other global access patterns in the project.",
+            "dependencies": [
+              1
+            ],
+            "details": "Concrete inspection steps:\n- Open Project Settings → Autoload and list all configured autoload scripts/scenes, including their node names and paths.\n- Open each autoload script to identify its responsibilities (e.g., game state, config, audio manager, save system, object pools, progression data).\n- Search the codebase for get_singleton-like access patterns (e.g., references via global variables, static classes, or hardcoded node paths from root) and note any de facto globals.\n\nExpected artifacts:\n- A table or checklist of all autoloads with fields: name, path, type (script/scene), main responsibilities, and where they are used.\n- Notes on any additional global-style access (e.g., using /root paths, static helpers) that function like singletons.\n\nCompletion criteria:\n- Every entry in the Autoload settings is accounted for and described at a high level.\n- All major global systems are mapped and their intended usage is understandable.\n- Potential overlaps or redundant global responsibilities (e.g., multiple game-state managers) are identified, even if not yet resolved.\n<info added on 2025-12-05T13:28:29.596Z>\nAutoload/Singleton audit: Project Settings → Autoload tab is currently empty, and the `autoloads/` folder contains no scripts or scenes, so there are no configured global singletons or de facto global systems yet. This matches the empty/global-less state observed in the earlier scene and folder catalog, and implies that upcoming work will need to introduce new autoloads for core systems such as the PRD-defined `GameState` singleton, a save/load manager, an object pooling manager, and any other cross-scene utilities required for gameplay and progression.\n</info added on 2025-12-05T13:28:29.596Z>",
+            "status": "done",
+            "testStrategy": null,
+            "parentId": "undefined",
+            "updatedAt": "2025-12-05T13:28:57.447Z"
+          },
+          {
+            "id": 3,
+            "title": "Review existing gameplay systems",
+            "description": "Analyze and document current implementations of movement, combat, progression, and UI systems.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Concrete inspection steps:\n- Locate and open scripts for the player, enemies, and any weapons or projectiles to understand movement, input handling, and combat logic (damage, health, attacks, cooldowns, etc.).\n- Identify any existing progression-related scripts (XP, level, stats, upgrades) and note their data structures and integration points with gameplay.\n- Review UI scenes and scripts for HUD, pause menu, inventory/upgrade screens, and any existing bindings to gameplay data (signals, direct node references, autoloads).\n- Note use of groups, signals, and helper utilities (e.g., pooling, timers, spawn managers) that support gameplay.\n\nExpected artifacts:\n- Short system summaries for: movement, combat, progression, and UI, each listing key scripts, scenes, and how they interact.\n- A checklist indicating which systems already exist, which are partially implemented, and which appear missing or placeholder.\n- Optional sequence notes describing main gameplay flow (e.g., player input → movement → enemy spawn → damage → XP gain → UI update).\n\nCompletion criteria:\n- For each domain (movement, combat, progression, UI), there is a clear written description of what is implemented, where it lives, and how stable/complete it appears.\n- Existing systems that can be reused or extended (instead of rewritten) are explicitly identified.\n- Gaps or inconsistencies relevant to future tasks (e.g., planned progression loop, performance test scene) are noted.\n<info added on 2025-12-05T13:29:18.124Z>\nGameplay systems audit confirms that there are currently no implemented gameplay-related scripts or scenes in the project (movement, combat, progression, UI, or helper utilities), and all of these domains will need to be created from scratch in the existing empty-but-organized folder structure.\n</info added on 2025-12-05T13:29:18.124Z>",
+            "status": "done",
+            "testStrategy": null,
+            "parentId": "undefined",
+            "updatedAt": "2025-12-05T13:29:24.841Z"
+          },
+          {
+            "id": 4,
+            "title": "Document coding conventions and organization",
+            "description": "Identify and record the project’s coding style, folder layout, and naming conventions.",
+            "dependencies": [
+              1
+            ],
+            "details": "Concrete inspection steps:\n- Review the top-level folder structure (e.g., scenes, assets, scripts, addons, autoloads) and note how files are grouped by feature, type, or layer.\n- Sample a representative set of scripts to observe style: naming of classes, methods, signals, exported variables, use of type hints, and file naming patterns (snake_case, PascalCase, etc.).\n- Check node naming patterns in scenes (e.g., PascalCase or camelCase, suffixes like _Root, _UI, _Manager) and how they align with Godot 4 best practices.\n- Note any use of script organization helpers (e.g., script templates, common base classes, utils folders).\n\nExpected artifacts:\n- A concise style and organization note (1–2 pages) describing folder layout, naming conventions, and typical script patterns.\n- A brief checklist mapping current practices against Godot 4 organization recommendations (e.g., consistent file casing, keeping related assets near scenes).\n\nCompletion criteria:\n- Folder and naming conventions are documented well enough for new work to align without guesswork.\n- Any major deviations from common Godot 4 organization best practices are called out for later cleanup decisions.\n- There is a written recommendation on whether to adopt the existing style as-is or plan gradual refactors.\n<info added on 2025-12-05T13:30:24.329Z>\nSince the project is currently empty, document that this subtask will establish baseline Godot 4 conventions rather than auditing existing patterns. Add the following to the subtask details:\n\n\"Since the current Godot project is effectively empty, this subtask will define and document the initial coding conventions and organization rather than surveying existing implementations. Adopt the following Godot 4–aligned standards for all new work:\n\n- Folder layout:\n  - `scenes/` organized by feature or entity (player, enemies, ui, weapons, levels).\n  - `scripts/` for standalone or shared scripts not tightly bound to a single scene.\n  - `autoloads/` for singleton systems configured in Project Settings → Autoload.\n  - `assets/` organized by type (sprites, audio, fonts, etc.), with a strong preference to keep assets close to their consuming scenes where practical.\n  - `resources/` for custom `Resource` types and data-driven configs.\n\n- Naming conventions:\n  - Files: snake_case (e.g., `player_controller.gd`, `main_menu.tscn`).\n  - Scene files: named to match their main node’s role or type (e.g., `player.tscn` for the Player scene).\n  - Classes: PascalCase using `class_name` where reusable (e.g., `class_name PlayerController`).\n  - Variables and functions: snake_case (e.g., `move_speed`, `_on_hit`).\n  - Constants: UPPER_SNAKE_CASE (e.g., `MAX_ENEMIES`).\n  - Signals: snake_case (e.g., `health_changed`, `enemy_died`).\n  - Private/helper functions: prefixed with an underscore (e.g., `_update_velocity`).\n\n- Node and scene patterns:\n  - Node names in scenes use PascalCase and are descriptive (e.g., `Player`, `HealthBar`, `SpawnTimer` rather than generic `Node2D`).\n  - Prefer one main script per scene; factor complex behaviors into helper or component scripts under `scripts/` or feature-specific subfolders.\n  - Use `@onready` for node references, and use exported variables for inspector configuration.\n  - Apply type hints consistently (e.g., `var speed: float = 200.0`) and define signals for communication instead of tightly coupled node references.\n  - Use custom `Resource` types for data such as enemy stats, weapon configs, and other tunable parameters.\n\n- Style and design guidelines:\n  - Use 4-space indentation (Godot default).\n  - Keep functions small and focused (target range ~5–15 lines where reasonable).\n  - Write brief comments that explain intent/“why” rather than restating obvious behavior.\n  - Prefer composition over inheritance for extensibility and maintainability.\n\nRecommendation: Treat these conventions as the project’s baseline standard going forward. New scenes, scripts, and systems for other tasks (e.g., player controller, input setup, pooling infrastructure) should be implemented under this structure so that future contributors can align with the documented patterns without guesswork. Any future deviations should be deliberate and documented for later cleanup or refactor planning.\"\n</info added on 2025-12-05T13:30:24.329Z>",
+            "status": "done",
+            "testStrategy": null,
+            "parentId": "undefined",
+            "updatedAt": "2025-12-05T13:30:31.102Z"
+          },
+          {
+            "id": 5,
+            "title": "Validate project health and integrity",
+            "description": "Assess the project for missing resources, errors, warnings, and general editor health, and document findings.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Concrete inspection steps:\n- Open the project, run the main scene, and observe the Output and Debugger panels for errors or warnings at startup and during basic interaction.\n- Use the Godot 4 debugger and Profiler panels to look for recurring script or node issues (e.g., invalid call targets, failed resource loads).\n- Scan the FileSystem dock for broken resource icons and open key scenes to check for missing or broken references (e.g., empty script slots, missing textures, invalid audio paths).\n- Optionally run the built-in project validator (if available) or use a simple manual checklist to confirm there are no obvious import or path issues.\n\nExpected artifacts:\n- A health report listing current errors, warnings, and broken references, each with scene/script location and a short description.\n- A prioritized checklist of recommended fixes (critical, important, cosmetic) to stabilize the foundation for upcoming tasks.\n\nCompletion criteria:\n- Main scene runs without uninvestigated errors or critical warnings, or any remaining issues are clearly documented with rationale for deferring fixes.\n- No known missing scripts or resources in core gameplay and UI scenes, or all such issues are logged.\n- There is a clear go/no-go statement for proceeding with dependent tasks (resolution setup, input configuration, progression and performance work) based on project health.\n<info added on 2025-12-05T13:31:32.502Z>\nProject health validation complete. Main scene runs cleanly in Godot 4.5.1 with no errors, warnings, missing resources, or broken references during startup or basic interaction, and the editor shows no broken resource icons, missing scripts, or import issues. Status: GO for all dependent tasks (resolution setup, input configuration, gameplay systems, and later performance validation), with the project considered a clean, well-organized starting point and no technical debt or stabilization work required before proceeding.\n</info added on 2025-12-05T13:31:32.502Z>",
+            "status": "done",
+            "testStrategy": null,
+            "parentId": "undefined",
+            "updatedAt": "2025-12-05T13:31:38.640Z"
+          }
+        ],
+        "complexity": 5,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Break this task into subtasks that (1) catalog the current scene and node hierarchy, (2) inventory autoloads and global singletons, (3) review existing gameplay systems (movement, combat, progression, UI), (4) document coding conventions and folder/naming patterns, and (5) validate project health (missing resources, errors, warnings). For each subtask, specify concrete inspection steps, expected artifacts (notes, diagrams, checklists), and clear completion criteria aligned with Godot 4 project organization best practices.",
+        "updatedAt": "2025-12-05T13:31:38.640Z"
+      },
+      {
+        "id": "2",
+        "title": "Configure project resolution and window settings",
+        "description": "Set up viewport, stretch, and window scaling to match the PRD specifications.",
+        "details": "In Project Settings → Display → Window, configure Viewport Width = 640 and Viewport Height = 360, set Stretch Mode to canvas_items, and Stretch Aspect to keep, to achieve the desired 640×360 viewport and proper scaling on different monitor resolutions.[1] Verify that the arena (1920×1088) and tile size (32×32) are consistent with tileset and camera configuration in the current scenes.",
+        "testStrategy": "Run the game on a 1080p and 1440p display (or simulate different resolutions) and confirm that the viewport scales cleanly (3× on 1080p, 4× on 1440p) without distortion or letterboxing beyond what is intended.[2]",
+        "priority": "high",
+        "dependencies": [
+          "1"
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Configure project display and stretch settings",
+            "description": "Set the base viewport resolution and stretch behavior in the project settings to match the 640×360 PRD target.",
+            "dependencies": [],
+            "details": "1. Open the Godot project and go to Project Settings → Display → Window.\n2. Under the Viewport section, set Width = 640 and Height = 360 to define the base logical resolution.\n3. In the same section, set Stretch Mode to `canvas_items` and Stretch Aspect to `keep` to preserve aspect ratio while scaling.\n4. Confirm that any other resolution-related overrides (e.g., in Feature Overrides or per-platform settings) are disabled or consistent with 640×360.\n5. Open the main game scene (the one used as the startup scene) and run the game in the editor to visually confirm that the viewport appears at 640×360 when using the editor’s default window size.\n6. Enable the debug display of the viewport size (e.g., by adding a small temporary `Label` or debug script that prints `get_viewport().get_visible_rect().size`) to double-check that the engine reports 640×360 as the logical size.",
+            "status": "pending",
+            "testStrategy": null,
+            "parentId": "undefined"
+          },
+          {
+            "id": 2,
+            "title": "Verify arena, tileset, and camera alignment",
+            "description": "Confirm that the 1920×1088 arena and 32×32 tiles align perfectly with the 640×360 viewport and that the camera framing is correct.",
+            "dependencies": [
+              1
+            ],
+            "details": "1. Open the main gameplay/arena scene that contains the tilemap and camera.\n2. Select the TileMap node used for the arena and verify that:\n   - The tile size is set to 32×32 in the TileSet/TileMap settings.\n   - The arena dimensions correspond to 1920×1088 (e.g., 60 tiles wide and 34 tiles high if built entirely from 32×32 tiles).\n3. Check that the TileSet resource used in this TileMap also defines tiles at 32×32 pixels so there is a 1:1 mapping between texture tiles and world tiles.\n4. Select the main Camera2D (or equivalent) used during gameplay and verify:\n   - It is the current camera for the scene.\n   - Its zoom is (1, 1), so it views the world at native pixel scale.\n   - Any limits or drag margins align with the arena bounds (e.g., camera limits set to match the 1920×1088 world rectangle).\n5. With the game running, enable Godot’s Debug → Visible Collision Shapes (and, if available, a grid overlay) to visually confirm that:\n   - The camera view shows a clean tile grid with no partial or cut-off tiles at the edges.\n   - Player and other entities align to tile boundaries as expected when moving.\n6. Optionally add a temporary debug overlay (e.g., a `ColorRect` frame or a grid drawn via a script) at the viewport edges to confirm that the 640×360 view always contains an integer number of 32×32 tiles and that the arena is framed as intended when the camera is centered or clamped.",
+            "status": "pending",
+            "testStrategy": null,
+            "parentId": "undefined"
+          },
+          {
+            "id": 3,
+            "title": "Test scaling across resolutions and aspect ratios",
+            "description": "Run and validate the game at multiple display resolutions and aspect ratios, including simulated displays, to ensure correct scaling and intended letterboxing.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "1. In the editor, use the run settings or multiple editor play windows to simulate common resolutions:\n   - 1920×1080 (1080p, 16:9).\n   - 2560×1440 (1440p, 16:9).\n   - At least one non-16:9 resolution (e.g., 1280×1024 or 1920×1200) to test letterboxing/pillarboxing.\n2. For each resolution:\n   - Run the game and visually confirm that the logical viewport remains 640×360 and scales uniformly (no stretching) due to Stretch Mode = `canvas_items` and Stretch Aspect = `keep`.\n   - On 1080p, confirm the viewport appears as an exact 3× scale of 640×360 with crisp pixels and even letterboxing (if any).\n   - On 1440p, confirm the viewport appears as an exact 4× scale of 640×360 with the same characteristics.\n3. Move the player and camera across the arena while watching tile edges, UI, and any debug grid/overlays to ensure there is no subpixel jitter, distortion, or uneven scaling at different resolutions.\n4. Toggle fullscreen and windowed modes (if supported by the project) and verify that scaling behavior remains consistent and that the window resizes do not change the logical viewport size.\n5. Capture screenshots or short clips for each tested resolution and annotate any issues (e.g., unexpected extra letterboxing, cropping, or blurry scaling) for follow-up fixes.",
+            "status": "pending",
+            "testStrategy": null,
+            "parentId": "undefined"
+          }
+        ],
+        "complexity": 3,
+        "recommendedSubtasks": 3,
+        "expansionPrompt": "Split this into subtasks for (1) configuring display and stretch settings in the project configuration, (2) verifying arena, tileset, and camera alignment with the chosen viewport, and (3) testing behavior across common resolutions and aspect ratios (including simulated displays). For each subtask, outline exact settings to change, scenes to open, and visual checks or debug overlays to confirm correct scaling and framing."
+      },
+      {
+        "id": "3",
+        "title": "Define input actions and controls",
+        "description": "Set up and/or validate the Godot Input Map for movement, pause, and UI actions as specified.",
+        "details": "In Project Settings → Input Map, ensure the following actions exist with correct bindings: move_up (W, Up Arrow, D-pad Up, Left Stick Up), move_down (S, Down Arrow, D-pad Down, Left Stick Down), move_left (A, Left Arrow, D-pad Left, Left Stick Left), move_right (D, Right Arrow, D-pad Right, Left Stick Right), pause (Esc, Start), ui_accept (Enter, Space, A/X button), ui_cancel (Esc, B/O button).[1] Confirm existing code uses get_action_strength for movement vectors to support analog sticks and update scripts if they currently rely on is_action_pressed for basic movement axes.[3]",
+        "testStrategy": "From the running game, verify that keyboard and controller inputs move the player correctly in 8 directions, that Escape opens the pause menu, and that ui_accept and ui_cancel operate as expected in any existing menus.",
+        "priority": "high",
+        "dependencies": [
+          "1"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "complexity": 4,
+        "recommendedSubtasks": 4,
+        "expansionPrompt": "Decompose into subtasks that (1) configure or validate all required actions in the input map, (2) update movement code to use action strengths and support analog input, (3) wire pause and UI actions into existing menus and game state, and (4) run in-editor and device tests (keyboard + controller) to verify mappings. For each subtask, define which scripts to touch, what bindings to set, and how to test behavior in both gameplay and UI contexts."
+      },
+      {
+        "id": "4",
+        "title": "Implement or align Classic Sarimanok player controller",
+        "description": "Create or adapt the CharacterBody2D-based Sarimanok player with correct movement, stats, and damage handling.",
+        "details": "Ensure the player is implemented as a CharacterBody2D with movement driven by an input_vector built from move_* actions, normalized and multiplied by move_speed, then applied via move_and_slide.[1] Implement base stats (Max HP 100, Move Speed 200 px/s, Damage 100%, Attack Speed 100%, Pickup Range 50) as exported variables or in a dedicated stats/resource object consistent with current code patterns. Add a collision shape for enemy damage, a hit/health component if one already exists, and invincibility frames of 0.5s after taking damage, reusing existing damage/health systems if present.[2]",
+        "testStrategy": "In a test scene, move the player in 8 directions and verify movement speed is consistent; confirm that taking damage reduces HP and triggers invincibility (no additional damage within 0.5s). Use Godot’s Debug > Visible Collision Shapes to verify collision shapes are correct.",
+        "priority": "high",
+        "dependencies": [
+          "1",
+          "3"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 6,
+        "expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns."
+      },
+      {
+        "id": "5",
+        "title": "Set up placeholder Sarimanok visuals and animation",
+        "description": "Create the temporary visual representation and simple 2-frame animation for the player.",
+        "details": "Use a 32×32 ColorRect or equivalent simple node as the placeholder Classic Sarimanok, with a multicolor or rainbow palette approximating the intended art direction.[2] Configure a 2-frame idle/walk bob animation that flips between frames every 0.2 seconds when the player is moving, and flip the sprite horizontally based on velocity.x in the existing animation/visual script or a new dedicated script following current project conventions.[1]",
+        "testStrategy": "Run the game and verify that when the player is stationary, the animation stays on a default frame, and when moving, it alternates frames every 0.2 seconds and flips horizontally when changing horizontal direction.",
+        "priority": "medium",
+        "dependencies": [
+          "4"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "complexity": 3,
+        "recommendedSubtasks": 3,
+        "expansionPrompt": "Structure this as subtasks for (1) creating the placeholder visual node setup (sprite/ColorRect hierarchy, pivot, and layering), (2) configuring the 2-frame animation and movement-driven state transitions within the project’s animation system, and (3) implementing sprite flipping and idle/move logic tied to the player’s velocity. For each subtask, describe how to integrate with any shared animation controller patterns and how to verify timing and orientation in a test scene."
+      },
+      {
+        "id": "6",
+        "title": "Establish object pooling infrastructure",
+        "description": "Implement or extend a reusable pooling system for enemies, projectiles, pickups, and particles.",
+        "details": "Create a central pooling manager or per-type pool scenes that pre-allocate arrays for enemies (300), projectiles (200), pickups (500), and particles (100 per type) at game start, reusing any existing pooling utilities if they are already present.[3] Ensure that gameplay code does not call queue_free or instantiate during active gameplay, but instead marks instances inactive and returns them to their pool, with pools pre-warmed in the main scene’s _ready method.[1]",
+        "testStrategy": "Use Godot’s debugger to confirm that no new enemy/projectile/pickup nodes are created during gameplay and that freed items are reused from the pool. Stress test by spawning many entities and monitoring frame time and memory usage to ensure stability.",
+        "priority": "high",
+        "dependencies": [
+          "1",
+          "2"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "complexity": 8,
+        "recommendedSubtasks": 7,
+        "expansionPrompt": "Break this into subtasks that (1) analyze any existing pooling utilities or patterns, (2) design the pool API (central manager vs per-type pools, lifecycle methods, and configuration), (3) implement pooling for enemies, projectiles, pickups, and particles with pre-allocation, (4) refactor spawning/despawning call sites to use the pool instead of direct instantiation and queue_free, (5) add tooling or debug views to track pool usage and leaks, (6) integrate initialization and pre-warming into the main scene startup flow, and (7) create stress-test scenes to validate performance and correctness. For each subtask, capture expected interfaces, configuration options, and migration steps from existing code."
+      },
+      {
+        "id": "7",
+        "title": "Implement grid-based spatial partitioning for enemies",
+        "description": "Add spatial hashing to optimize collision and proximity checks with many enemies.",
+        "details": "Create a spatial grid system that maps grid cells (64×64 pixels) to arrays of enemy references, updating an enemy’s cell assignment only when it crosses a cell boundary.[1] Provide helper functions such as get_cell and get_nearby_enemies that return enemies in the same or adjacent cells, and refactor any existing naive O(n²) collision or proximity checks to use this system while retaining compatibility with current enemy and weapon code.[3]",
+        "testStrategy": "Bench test with 100+ enemies active and verify that FPS remains at or near 60. Log the number of checks performed per frame before and after integration (if previous implementation exists) to validate performance improvements.",
+        "priority": "medium",
+        "dependencies": [
+          "6"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 6,
+        "expansionPrompt": "Expand into subtasks for (1) designing the grid data structures and cell size configuration, (2) implementing enemy registration and movement updates that adjust cell membership efficiently, (3) exposing helper queries such as get_cell and get_nearby_enemies, (4) refactoring collision and proximity logic to use the grid while staying compatible with current enemy/weapon systems, (5) adding profiling and debug visualization for grid occupancy, and (6) benchmarking and tuning under various enemy counts. For each subtask, define performance goals and integration points with existing gameplay code."
+      },
+      {
+        "id": "8",
+        "title": "Integrate auto-attack hooks for weapons",
+        "description": "Prepare the player and game loop for automatic weapon firing compatible with the planned weapon system.",
+        "details": "Add generic weapon slots or a weapon manager component to the player that tracks equipped weapons and their cooldowns, following any existing weapon or skill architecture in the project.[2] Ensure that weapons auto-attack based on their cooldowns without player input, exposing hooks for six planned weapons in later tasks and using the player’s Damage and Attack Speed multipliers to modify weapon behavior.[1]",
+        "testStrategy": "Attach a simple test weapon (e.g., periodically spawning a debug projectile) and confirm that it fires automatically at the correct rate and responds to stat changes from the player component or progression systems.",
+        "priority": "medium",
+        "dependencies": [
+          "4",
+          "6",
+          "7"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "complexity": 6,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Decompose into subtasks that (1) design or align the weapon management interface on the player (slots, cooldown tracking, stat modifiers), (2) implement a weapon manager or component that updates cooldowns and triggers attacks, (3) define a minimal weapon interface or base class that concrete weapons can implement, (4) integrate with pooling and spatial systems for spawning projectiles or effects, and (5) build a simple test weapon plus diagnostic scene to validate automatic firing and stat scaling. For each subtask, specify how to keep the design extensible for future weapons and passives."
+      },
+      {
+        "id": "9",
+        "title": "Implement basic progression loop scaffolding",
+        "description": "Lay down the core systems for XP collection, leveling, and stat upgrades without full content.",
+        "details": "Create a pickup type representing XP gems that the player collects within a Pickup Range of 50 pixels, ideally reusing the pooling system for pickups.[1] Implement a simple XP curve, level tracking, and a placeholder level-up UI that can present upgrade choices for weapons and passives later, aligning with any existing UI and progression frameworks already in the codebase.[2]",
+        "testStrategy": "Spawn XP pickups in a test scene, collect them, and verify that player XP and level increase correctly, that a level-up screen appears at thresholds, and that choosing an option successfully applies a stat change or logs a placeholder effect.",
+        "priority": "medium",
+        "dependencies": [
+          "4",
+          "6"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 6,
+        "expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project."
+      },
+      {
+        "id": "10",
+        "title": "Performance validation for Week 3 target",
+        "description": "Verify that the foundation meets the Week 3 performance and stability goals.",
+        "details": "Create a dedicated performance test scene or mode that can spawn at least 100 active enemies using the pooling and spatial partitioning systems while the player moves and auto-attacks.[3] Measure FPS and frame time using Godot’s profiler to confirm stable 60 FPS under this load, and document any bottlenecks or further optimizations needed to reach the eventual 200+ enemy target.[1]",
+        "testStrategy": "Run the performance scene on representative hardware, record FPS and profiler metrics, and ensure there are no major spikes in physics or script time. Adjust enemy update frequency or partitioning parameters if needed to maintain targets.",
+        "priority": "high",
+        "dependencies": [
+          "4",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "status": "pending",
+        "subtasks": [],
+        "complexity": 6,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Organize into subtasks that (1) define the performance test scene or mode (enemy compositions, player setup, weapon behavior), (2) script automated or semi-automated load generation for enemies and attacks using existing pooling and spatial systems, (3) set up profiling procedures and metrics capture (FPS, frame time, script/physics cost), (4) document and triage any bottlenecks with proposed optimization tasks, and (5) create a repeatable checklist or script for rerunning the benchmark in future iterations. For each subtask, clarify target hardware assumptions and pass/fail thresholds tied to design goals."
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "lastModified": "2025-12-05T13:31:38.641Z",
+      "taskCount": 10,
+      "completedCount": 1,
+      "tags": [
+        "master"
+      ]
+    }
+  }
+}
