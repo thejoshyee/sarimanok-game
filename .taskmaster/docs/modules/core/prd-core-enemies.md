@@ -12,7 +12,7 @@
 # Feature 2: Enemy System
 
 **What It Does:**
-Enemies spawn at screen edges, walk toward the player, and deal damage on contact. Killing enemies drops XP and Gold.
+Enemies spawn in a ring around the player (just outside viewport), walk toward the player, and deal damage on contact. Killing enemies drops XP and Gold.
 
 ## Enemy Roster (2 for Weeks 1-3)
 
@@ -78,7 +78,15 @@ On contact with player:
 
 ## Spawn System
 
-**Spawn Location:** Random point on screen edge (just outside visible area)
+**Spawn Location:** Random point in a ring around the player's viewport (just outside visible area, ~400-500 pixels from player center)
+
+**Implementation:**
+
+- Calculate spawn distance based on viewport diagonal (~730px for 640×360) plus padding
+- Spawn enemies at `viewport_diagonal / 2 + 100` pixels from player (~465px)
+- Use polar coordinates: random angle, fixed distance from player position
+- Clamp spawn positions to stay within map bounds (0-1920, 0-1088) for bounded maps
+- This approach works for both bounded and future infinite maps
 
 **Spawn Timeline (Weeks 1-3):**
 | Time | Enemies Spawning | Spawn Rate |
