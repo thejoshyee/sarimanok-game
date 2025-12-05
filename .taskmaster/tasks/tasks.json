@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": "1",
+        "id": 1,
         "title": "Audit existing Godot project setup",
         "description": "Inspect the current Godot 4 project to understand scenes, scripts, and configuration already in place.",
         "details": "Review the Godot project structure, main scene, autoloads (singletons), and any existing player, enemy, weapon, or progression scripts to avoid duplicating work.[1] Document what systems already exist (e.g., movement, input actions, basic UI, pooling helpers) and how they are organized (folders, naming conventions, node hierarchies).",
@@ -85,7 +85,7 @@
         "updatedAt": "2025-12-05T13:31:38.640Z"
       },
       {
-        "id": "2",
+        "id": 2,
         "title": "Configure project resolution and window settings",
         "description": "Set up viewport, stretch, and window scaling to match the PRD specifications.",
         "details": "In Project Settings → Display → Window, configure Viewport Width = 640 and Viewport Height = 360, set Stretch Mode to canvas_items, and Stretch Aspect to keep, to achieve the desired 640×360 viewport and proper scaling on different monitor resolutions.[1] Verify that the arena (1920×1088) and tile size (32×32) are consistent with tileset and camera configuration in the current scenes.",
@@ -141,7 +141,7 @@
         "updatedAt": "2025-12-05T20:47:20.983Z"
       },
       {
-        "id": "3",
+        "id": 3,
         "title": "Define input actions and controls",
         "description": "Set up and/or validate the Godot Input Map for movement, pause, and UI actions as specified.",
         "details": "In Project Settings → Input Map, ensure the following actions exist with correct bindings: move_up (W, Up Arrow, D-pad Up, Left Stick Up), move_down (S, Down Arrow, D-pad Down, Left Stick Down), move_left (A, Left Arrow, D-pad Left, Left Stick Left), move_right (D, Right Arrow, D-pad Right, Left Stick Right), pause (Esc, Start), ui_accept (Enter, Space, A/X button), ui_cancel (Esc, B/O button).[1] Confirm existing code uses get_action_strength for movement vectors to support analog sticks and update scripts if they currently rely on is_action_pressed for basic movement axes.[3]",
@@ -151,13 +151,59 @@
           "1"
         ],
         "status": "pending",
-        "subtasks": [],
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Configure and validate Input Map actions",
+            "description": "Create or verify all required input actions and bindings in Project Settings → Input Map for movement, pause, and UI actions.",
+            "dependencies": [],
+            "details": "In Project Settings → Input Map, ensure these actions exist:\n- move_up\n- move_down\n- move_left\n- move_right\n- pause\n- ui_accept\n- ui_cancel\n\nFor each action, configure bindings:\n- move_up: Keyboard W, Up Arrow; gamepad D-pad Up; left stick up (negative Y axis on primary stick with suitable deadzone).\n- move_down: Keyboard S, Down Arrow; gamepad D-pad Down; left stick down (positive Y axis).\n- move_left: Keyboard A, Left Arrow; gamepad D-pad Left; left stick left (negative X axis).\n- move_right: Keyboard D, Right Arrow; gamepad D-pad Right; left stick right (positive X axis).\n- pause: Keyboard Esc; gamepad Start/Options.\n- ui_accept: Keyboard Enter/Return, Space; gamepad South button (A on Xbox, X on PlayStation profiles).\n- ui_cancel: Keyboard Esc; gamepad East button (B on Xbox, O on PlayStation profiles).\n\nSet appropriate deadzones for stick axes (for example 0.2) so slight stick noise does not trigger movement. Document all actions and bindings in a short markdown file in the repo (e.g., docs/input_map.md) so other tasks (progression UI, performance scene, etc.) can rely on a consistent scheme.",
+            "status": "pending",
+            "testStrategy": "In the editor, open Project Settings → Input Map and confirm that all actions and bindings are listed and respond visually when pressing keys or gamepad controls. Run the game with the player scene loaded and use the built-in input debugger (or temporary debug prints) to confirm that each action is triggered when its bound key/button or axis is used, including both keyboard and controller. Verify that no unintended actions trigger when using unrelated keys or buttons."
+          },
+          {
+            "id": 2,
+            "title": "Update movement scripts to use action strengths and analog input",
+            "description": "Refactor player movement code to use Input.get_action_strength with the new move_* actions, supporting keyboard and gamepad analog sticks.",
+            "dependencies": [
+              1
+            ],
+            "details": "Identify all scripts responsible for player and movement logic, for example:\n- Player.gd or PlayerController.gd attached to the player character.\n- Any separate movement component scripts (e.g., CharacterMovement.gd) or state machine states handling movement.\n\nRefactor horizontal and vertical input calculation to use action strengths instead of direct key checks, for example:\n- horizontal = Input.get_action_strength(\"move_right\") - Input.get_action_strength(\"move_left\")\n- vertical = Input.get_action_strength(\"move_down\") - Input.get_action_strength(\"move_up\")\nThen build a normalized movement vector from these values and feed it into CharacterBody2D.velocity, CharacterBody3D.velocity, or the project’s custom movement system.\n\nRemove or update any remaining uses of is_action_pressed or hardcoded keycodes for basic movement axes so that all core movement paths depend on the move_* actions. Ensure diagonal movement speed is clamped or normalized according to the project’s conventions. If there is separate aim or dash logic tied to movement input, update those to use the same action strengths so analog sticks work consistently.",
+            "status": "pending",
+            "testStrategy": "Run the main gameplay scene. With keyboard, verify that W/A/S/D and arrow keys move the player smoothly in 4 and 8 directions, with consistent speed when moving diagonally. With a gamepad, move the left stick slowly and confirm walk/creep behavior when barely tilted and full-speed movement when fully tilted; confirm direction changes and diagonals respond accurately. Check logs or on-screen debug vectors to confirm that movement axes come from get_action_strength-based vectors and that there are no remaining keycode-specific branches for movement."
+          },
+          {
+            "id": 3,
+            "title": "Integrate pause and UI actions with menus and game state",
+            "description": "Connect the pause and UI actions to the pause menu, in-game menus, and any existing UI navigation systems.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "Identify scripts that manage pause and menus, for example:\n- GameManager.gd or Main.gd handling pause state.\n- PauseMenu.gd attached to the pause menu scene.\n- Global UI navigation or menu controller scripts using ui_accept/ui_cancel.\n\nImplement or confirm pause handling so that pressing the pause action toggles game pause, e.g., setting get_tree().paused and showing/hiding the pause menu scene. Ensure this works with both Esc on keyboard and the Start/Options button on gamepads.\n\nWire ui_accept and ui_cancel into UI navigation by ensuring the project’s input handling or focus-based UI uses these actions for:\n- Confirming menu selections, starting the game, confirming upgrades, etc. (ui_accept).\n- Backing out of menus, closing pause, or cancelling selections (ui_cancel).\nAvoid duplicating logic by using a central handler (e.g., in a UIManager.gd) if one exists, and ensure that gameplay input is ignored or routed differently while menus are open.",
+            "status": "pending",
+            "testStrategy": "Run the main game scene. In gameplay, press Esc and confirm the game pauses, time-based elements stop, and the pause menu appears; press Esc or the gamepad Start button again to unpause. In all relevant menus (main menu, pause menu, any existing level-up or settings UI), verify that ui_accept (Enter, Space, A/X button) activates focused buttons and confirms selections, and ui_cancel (Esc, B/O button) closes submenus or navigates back without triggering unwanted actions. Test that pause and UI controls work correctly for both keyboard and controller and that gameplay cannot be controlled while a blocking menu is open."
+          },
+          {
+            "id": 4,
+            "title": "Run in-editor and device tests for all input mappings",
+            "description": "Execute and document comprehensive input tests for movement, pause, and UI actions using both keyboard and controller.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Prepare a simple test checklist covering:\n- Movement controls in normal gameplay.\n- Pause toggling and resume behavior.\n- UI navigation and confirmation/cancel flows across all implemented menus.\n\nUsing at least one keyboard and one supported gamepad (e.g., Xbox-style controller), perform tests in the main gameplay scene and any key UI scenes:\n- Verify 8-direction movement, analog sensitivity, and lack of drift when inputs are released.\n- Confirm that all configured bindings trigger only their intended actions.\n- Ensure pause and UI actions behave consistently regardless of whether input comes from keyboard or controller.\n\nRecord any issues (e.g., missing bindings, inverted axes, inconsistent behavior between keyboard and controller) in the project’s issue tracker or task system and, where feasible, fix them immediately or open follow-up tasks. Optionally, add a lightweight in-game input diagnostics overlay that can display the current values of movement axes and the state of pause/ui actions to speed up future debugging.",
+            "status": "pending",
+            "testStrategy": "Run the game from the editor and perform the full checklist twice: once using only keyboard, and once using only a gamepad. For each device, verify that movement, pause toggle, and UI navigation all function exactly as specified, including analog behavior for sticks. Document the results (pass/fail and notes) in a short markdown file (e.g., test_reports/input_controls.md) or the project’s tracking system, and confirm that no blocking issues remain before marking the parent task as complete."
+          }
+        ],
         "complexity": 4,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Decompose into subtasks that (1) configure or validate all required actions in the input map, (2) update movement code to use action strengths and support analog input, (3) wire pause and UI actions into existing menus and game state, and (4) run in-editor and device tests (keyboard + controller) to verify mappings. For each subtask, define which scripts to touch, what bindings to set, and how to test behavior in both gameplay and UI contexts."
       },
       {
-        "id": "4",
+        "id": 4,
         "title": "Implement or align Classic Sarimanok player controller",
         "description": "Create or adapt the CharacterBody2D-based Sarimanok player with correct movement, stats, and damage handling.",
         "details": "Ensure the player is implemented as a CharacterBody2D with movement driven by an input_vector built from move_* actions, normalized and multiplied by move_speed, then applied via move_and_slide.[1] Implement base stats (Max HP 100, Move Speed 200 px/s, Damage 100%, Attack Speed 100%, Pickup Range 50) as exported variables or in a dedicated stats/resource object consistent with current code patterns. Add a collision shape for enemy damage, a hit/health component if one already exists, and invincibility frames of 0.5s after taking damage, reusing existing damage/health systems if present.[2]",
@@ -168,13 +214,84 @@
           "3"
         ],
         "status": "pending",
-        "subtasks": [],
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define Sarimanok CharacterBody2D scene and hierarchy",
+            "description": "Create or refactor the Sarimanok player scene rooted at CharacterBody2D with a clean, reusable hierarchy.",
+            "dependencies": [],
+            "details": "- Root node: CharacterBody2D named `SarimanokPlayer` (or aligned with existing player naming).\n- Child nodes (reuse existing components where present):\n  - Visuals: Sprite2D/AnimatedSprite2D/AnimationTree matching current art pipeline.\n  - CollisionShape2D for body collisions, matching existing player/enemy sizing conventions.\n  - Separate CollisionShape2D (or Area2D child with shape) dedicated to receiving enemy damage, using the same group/layer masks and node naming used by other damage receivers.\n  - Optional child nodes for cross-cutting components already in the project (e.g., `Health`, `HitFlash`, `Damageable`, `StateMachine`) instead of new ad‑hoc scripts.\n- Ensure node names, folder placement, and script locations match patterns discovered in the project audit (e.g., `actors/player`, `characters/sarimanok`).\n- If a generic `BasePlayer` or `CharacterBody2D` template exists, inherit from it rather than creating a new standalone scene, only overriding what is Sarimanok‑specific.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 2,
+            "title": "Implement input-vector-based movement with move_and_slide",
+            "description": "Implement top‑down movement using an input vector and move_and_slide that matches existing control conventions.",
+            "dependencies": [
+              1
+            ],
+            "details": "- In the Sarimanok player script (or inherited base), implement movement in `_physics_process` using:\n  - `input_vector` built from the existing `move_up`, `move_down`, `move_left`, and `move_right` actions via the project’s preferred input helper (e.g., shared InputUtils or a common pattern used in other controllers).\n  - Normalize `input_vector` when non‑zero, multiply by `move_speed`, and assign to `velocity` or the project’s standard motion property.\n  - Call `move_and_slide()` (or the project’s wrapper, if one exists) as the final step in physics each frame.\n- Match any existing patterns for:\n  - Axis deadzones, diagonal speed, and friction/acceleration vs. instant velocity changes.\n  - Directional facing (e.g., flipping sprite or setting an `aim_direction` used by weapons).\n- Avoid custom input mappings or bespoke helpers if a shared movement or input module is already present; adapt the Sarimanok controller to that module instead of diverging.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 3,
+            "title": "Implement player stats model for HP, speed, damage, and related values",
+            "description": "Create or reuse a stats container for Sarimanok’s core properties and initialize base values.",
+            "dependencies": [
+              1
+            ],
+            "details": "- Prefer existing stats/resource patterns:\n  - If there is a `Stats`, `CharacterStats`, or `PlayerStats` Resource or component script, instantiate or reference it instead of adding new ad‑hoc exported fields.\n  - Otherwise, create a `SarimanokStats` (or generic `PlayerStats`) Resource or component with exported fields: Max HP 100, Move Speed 200 px/s, Damage 1.0 (100%), Attack Speed 1.0 (100%), Pickup Range 50.\n- Wire the stats object into the controller:\n  - Read `move_speed` from stats instead of hardcoding.\n  - Expose current HP and max HP consistently with other actors (e.g., via `Health` component or shared `Damageable` interface).\n- Ensure naming, types, and units (e.g., px/s, multipliers vs flat values) match other systems such as weapons and progression, so Sarimanok can plug into future stat upgrades without special‑case code.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 4,
+            "title": "Integrate damage, collision, health, and invincibility logic",
+            "description": "Hook the Sarimanok player into the shared combat/damage systems with proper invincibility frames.",
+            "dependencies": [
+              1,
+              3
+            ],
+            "details": "- Attach existing reusable combat components if available:\n  - Prefer an existing `Health`/`HitPoints`/`Damageable` component for HP tracking and damage application.\n  - Use existing hit flash, knockback, and status effect components rather than re‑implementing them.\n- Configure the damage collision:\n  - Ensure the damage hitbox/Area2D uses the same collision layers/masks and groups as other damageable entities.\n  - Connect to shared damage signals or callbacks (e.g., `hit(damage_info)`) following project conventions.\n- Implement 0.5 s invincibility after taking damage:\n  - Use the shared invincibility/timer mechanism if one exists (e.g., a `Hurtbox` component with i‑frames), otherwise add a small, localized timer and flag that gates further damage.\n  - Ensure visual feedback (blink, shader, or UI) leverages existing VFX utilities instead of new bespoke effects.\n- Confirm that damage application, death, and respawn/deactivation all follow the same flow as other characters to avoid branching logic in combat systems.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 5,
+            "title": "Wire Sarimanok controller into main game loop, camera, and UX",
+            "description": "Connect the player controller to the main scene, camera, input, and UI in line with existing patterns.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "- Instantiate or reference the Sarimanok player from the main gameplay scene using the same mechanism used for any prior player (autoload, scene instancing, or pool), avoiding a new custom spawning path.\n- Hook up the camera:\n  - Use the existing camera controller or follow‑target mechanism to follow Sarimanok; avoid embedding new Camera2D logic directly in the player if the project already centralizes camera logic.\n- Ensure UX integration:\n  - Connect to existing UI/UX systems for HP bars, damage indicators, and any player status displays via existing signals or event buses.\n  - Respect project‑wide pause, input capture, and state systems, so the player disables input when menus or cutscenes are active.\n- Verify that other systems (weapons, pickups, progression) reference the new player via established global or node‑path conventions, rather than adding player‑specific globals.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 6,
+            "title": "Create test scenes and fixtures for movement and damage",
+            "description": "Build focused test scenes to validate Sarimanok movement and damage behavior without full game context.",
+            "dependencies": [
+              2,
+              4,
+              5
+            ],
+            "details": "- Create a minimal `PlayerMovementTest` scene:\n  - Contains the Sarimanok player, a simple environment, and visible grid/markers to measure movement speed.\n  - Use Godot’s visible collision debug tools to verify collision shapes and ensure 8‑direction movement is consistent with the 200 px/s speed target.\n- Create a `PlayerDamageTest` scene:\n  - Includes Sarimanok and one or more enemy or damage sources configured via the shared combat system.\n  - Verify that taking damage reduces HP via the shared health component and that invincibility prevents further hits within 0.5 s.\n- Reuse any existing automated or semi‑automated testing harnesses (debug menus, test loaders, or QA scenes) instead of introducing a new testing pattern, and document how to launch these tests for future contributors.",
+            "status": "pending",
+            "testStrategy": null
+          }
+        ],
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns."
       },
       {
-        "id": "5",
+        "id": 5,
         "title": "Set up placeholder Sarimanok visuals and animation",
         "description": "Create the temporary visual representation and simple 2-frame animation for the player.",
         "details": "Use a 32×32 ColorRect or equivalent simple node as the placeholder Classic Sarimanok, with a multicolor or rainbow palette approximating the intended art direction.[2] Configure a 2-frame idle/walk bob animation that flips between frames every 0.2 seconds when the player is moving, and flip the sprite horizontally based on velocity.x in the existing animation/visual script or a new dedicated script following current project conventions.[1]",
@@ -190,7 +307,7 @@
         "expansionPrompt": "Structure this as subtasks for (1) creating the placeholder visual node setup (sprite/ColorRect hierarchy, pivot, and layering), (2) configuring the 2-frame animation and movement-driven state transitions within the project’s animation system, and (3) implementing sprite flipping and idle/move logic tied to the player’s velocity. For each subtask, describe how to integrate with any shared animation controller patterns and how to verify timing and orientation in a test scene."
       },
       {
-        "id": "6",
+        "id": 6,
         "title": "Establish object pooling infrastructure",
         "description": "Implement or extend a reusable pooling system for enemies, projectiles, pickups, and particles.",
         "details": "Create a central pooling manager or per-type pool scenes that pre-allocate arrays for enemies (300), projectiles (200), pickups (500), and particles (100 per type) at game start, reusing any existing pooling utilities if they are already present.[3] Ensure that gameplay code does not call queue_free or instantiate during active gameplay, but instead marks instances inactive and returns them to their pool, with pools pre-warmed in the main scene’s _ready method.[1]",
@@ -207,7 +324,7 @@
         "expansionPrompt": "Break this into subtasks that (1) analyze any existing pooling utilities or patterns, (2) design the pool API (central manager vs per-type pools, lifecycle methods, and configuration), (3) implement pooling for enemies, projectiles, pickups, and particles with pre-allocation, (4) refactor spawning/despawning call sites to use the pool instead of direct instantiation and queue_free, (5) add tooling or debug views to track pool usage and leaks, (6) integrate initialization and pre-warming into the main scene startup flow, and (7) create stress-test scenes to validate performance and correctness. For each subtask, capture expected interfaces, configuration options, and migration steps from existing code."
       },
       {
-        "id": "7",
+        "id": 7,
         "title": "Implement grid-based spatial partitioning for enemies",
         "description": "Add spatial hashing to optimize collision and proximity checks with many enemies.",
         "details": "Create a spatial grid system that maps grid cells (64×64 pixels) to arrays of enemy references, updating an enemy’s cell assignment only when it crosses a cell boundary.[1] Provide helper functions such as get_cell and get_nearby_enemies that return enemies in the same or adjacent cells, and refactor any existing naive O(n²) collision or proximity checks to use this system while retaining compatibility with current enemy and weapon code.[3]",
@@ -223,7 +340,7 @@
         "expansionPrompt": "Expand into subtasks for (1) designing the grid data structures and cell size configuration, (2) implementing enemy registration and movement updates that adjust cell membership efficiently, (3) exposing helper queries such as get_cell and get_nearby_enemies, (4) refactoring collision and proximity logic to use the grid while staying compatible with current enemy/weapon systems, (5) adding profiling and debug visualization for grid occupancy, and (6) benchmarking and tuning under various enemy counts. For each subtask, define performance goals and integration points with existing gameplay code."
       },
       {
-        "id": "8",
+        "id": 8,
         "title": "Integrate auto-attack hooks for weapons",
         "description": "Prepare the player and game loop for automatic weapon firing compatible with the planned weapon system.",
         "details": "Add generic weapon slots or a weapon manager component to the player that tracks equipped weapons and their cooldowns, following any existing weapon or skill architecture in the project.[2] Ensure that weapons auto-attack based on their cooldowns without player input, exposing hooks for six planned weapons in later tasks and using the player’s Damage and Attack Speed multipliers to modify weapon behavior.[1]",
@@ -241,7 +358,7 @@
         "expansionPrompt": "Decompose into subtasks that (1) design or align the weapon management interface on the player (slots, cooldown tracking, stat modifiers), (2) implement a weapon manager or component that updates cooldowns and triggers attacks, (3) define a minimal weapon interface or base class that concrete weapons can implement, (4) integrate with pooling and spatial systems for spawning projectiles or effects, and (5) build a simple test weapon plus diagnostic scene to validate automatic firing and stat scaling. For each subtask, specify how to keep the design extensible for future weapons and passives."
       },
       {
-        "id": "9",
+        "id": 9,
         "title": "Implement basic progression loop scaffolding",
         "description": "Lay down the core systems for XP collection, leveling, and stat upgrades without full content.",
         "details": "Create a pickup type representing XP gems that the player collects within a Pickup Range of 50 pixels, ideally reusing the pooling system for pickups.[1] Implement a simple XP curve, level tracking, and a placeholder level-up UI that can present upgrade choices for weapons and passives later, aligning with any existing UI and progression frameworks already in the codebase.[2]",
@@ -258,7 +375,7 @@
         "expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project."
       },
       {
-        "id": "10",
+        "id": 10,
         "title": "Performance validation for Week 3 target",
         "description": "Verify that the foundation meets the Week 3 performance and stability goals.",
         "details": "Create a dedicated performance test scene or mode that can spawn at least 100 active enemies using the pooling and spatial partitioning systems while the player moves and auto-attacks.[3] Measure FPS and frame time using Godot’s profiler to confirm stable 60 FPS under this load, and document any bottlenecks or further optimizations needed to reach the eventual 200+ enemy target.[1]",
@@ -285,7 +402,9 @@
       "completedCount": 2,
       "tags": [
         "master"
-      ]
+      ],
+      "created": "2025-12-05T20:50:25.675Z",
+      "description": "Tasks for master context"
     }
   }
 }
