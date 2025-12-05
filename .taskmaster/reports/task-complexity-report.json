@@ -1,0 +1,93 @@
+{
+	"meta": {
+		"generatedAt": "2025-12-05T07:15:14.546Z",
+		"tasksAnalyzed": 10,
+		"totalTasks": 10,
+		"analysisCount": 10,
+		"thresholdScore": 5,
+		"projectName": "Taskmaster",
+		"usedResearch": true
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 1,
+			"taskTitle": "Audit existing Godot project setup",
+			"complexityScore": 5,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break this task into subtasks that (1) catalog the current scene and node hierarchy, (2) inventory autoloads and global singletons, (3) review existing gameplay systems (movement, combat, progression, UI), (4) document coding conventions and folder/naming patterns, and (5) validate project health (missing resources, errors, warnings). For each subtask, specify concrete inspection steps, expected artifacts (notes, diagrams, checklists), and clear completion criteria aligned with Godot 4 project organization best practices.",
+			"reasoning": "Moderate complexity because it is exploratory and touches many systems, but it is read-heavy and non-invasive. It benefits from structured documentation and checklists more than deep engineering work."
+		},
+		{
+			"taskId": 2,
+			"taskTitle": "Configure project resolution and window settings",
+			"complexityScore": 3,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Split this into subtasks for (1) configuring display and stretch settings in the project configuration, (2) verifying arena, tileset, and camera alignment with the chosen viewport, and (3) testing behavior across common resolutions and aspect ratios (including simulated displays). For each subtask, outline exact settings to change, scenes to open, and visual checks or debug overlays to confirm correct scaling and framing.",
+			"reasoning": "Low to moderate complexity because it is mostly editor configuration and visual verification, but it requires careful testing on multiple resolutions and consistency with level and camera setup."
+		},
+		{
+			"taskId": 3,
+			"taskTitle": "Define input actions and controls",
+			"complexityScore": 4,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Decompose into subtasks that (1) configure or validate all required actions in the input map, (2) update movement code to use action strengths and support analog input, (3) wire pause and UI actions into existing menus and game state, and (4) run in-editor and device tests (keyboard + controller) to verify mappings. For each subtask, define which scripts to touch, what bindings to set, and how to test behavior in both gameplay and UI contexts.",
+			"reasoning": "Moderate complexity because it spans editor settings, input handling code, and UI/pause integration, but patterns are standard and localized."
+		},
+		{
+			"taskId": 4,
+			"taskTitle": "Implement or align Classic Sarimanok player controller",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns.",
+			"reasoning": "High complexity because it is a central gameplay system that must align with existing architecture, handle movement, stats, and damage, and interoperate with multiple other systems."
+		},
+		{
+			"taskId": 5,
+			"taskTitle": "Set up placeholder Sarimanok visuals and animation",
+			"complexityScore": 3,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Structure this as subtasks for (1) creating the placeholder visual node setup (sprite/ColorRect hierarchy, pivot, and layering), (2) configuring the 2-frame animation and movement-driven state transitions within the project’s animation system, and (3) implementing sprite flipping and idle/move logic tied to the player’s velocity. For each subtask, describe how to integrate with any shared animation controller patterns and how to verify timing and orientation in a test scene.",
+			"reasoning": "Low to moderate complexity because it focuses on simple placeholder art and basic animation logic, but it must hook correctly into the controller and follow project animation conventions."
+		},
+		{
+			"taskId": 6,
+			"taskTitle": "Establish object pooling infrastructure",
+			"complexityScore": 8,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Break this into subtasks that (1) analyze any existing pooling utilities or patterns, (2) design the pool API (central manager vs per-type pools, lifecycle methods, and configuration), (3) implement pooling for enemies, projectiles, pickups, and particles with pre-allocation, (4) refactor spawning/despawning call sites to use the pool instead of direct instantiation and queue_free, (5) add tooling or debug views to track pool usage and leaks, (6) integrate initialization and pre-warming into the main scene startup flow, and (7) create stress-test scenes to validate performance and correctness. For each subtask, capture expected interfaces, configuration options, and migration steps from existing code.",
+			"reasoning": "High complexity due to cross-cutting impact, the need for a solid API design, refactoring of existing code paths, and performance/stability implications under load."
+		},
+		{
+			"taskId": 7,
+			"taskTitle": "Implement grid-based spatial partitioning for enemies",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Expand into subtasks for (1) designing the grid data structures and cell size configuration, (2) implementing enemy registration and movement updates that adjust cell membership efficiently, (3) exposing helper queries such as get_cell and get_nearby_enemies, (4) refactoring collision and proximity logic to use the grid while staying compatible with current enemy/weapon systems, (5) adding profiling and debug visualization for grid occupancy, and (6) benchmarking and tuning under various enemy counts. For each subtask, define performance goals and integration points with existing gameplay code.",
+			"reasoning": "High complexity because it introduces a core performance optimization layer, requires careful integration with movement and combat, and must be validated through profiling and tuning."
+		},
+		{
+			"taskId": 8,
+			"taskTitle": "Integrate auto-attack hooks for weapons",
+			"complexityScore": 6,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Decompose into subtasks that (1) design or align the weapon management interface on the player (slots, cooldown tracking, stat modifiers), (2) implement a weapon manager or component that updates cooldowns and triggers attacks, (3) define a minimal weapon interface or base class that concrete weapons can implement, (4) integrate with pooling and spatial systems for spawning projectiles or effects, and (5) build a simple test weapon plus diagnostic scene to validate automatic firing and stat scaling. For each subtask, specify how to keep the design extensible for future weapons and passives.",
+			"reasoning": "Moderately high complexity because it introduces a reusable weapon framework that must work smoothly with stats, pooling, and future content, but scope can be constrained for initial scaffolding."
+		},
+		{
+			"taskId": 9,
+			"taskTitle": "Implement basic progression loop scaffolding",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project.",
+			"reasoning": "High complexity because it spans multiple systems (pickups, stats, UI, game loop flow) and establishes patterns that later content will build upon, even if feature depth is intentionally limited at this stage."
+		},
+		{
+			"taskId": 10,
+			"taskTitle": "Performance validation for Week 3 target",
+			"complexityScore": 6,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Organize into subtasks that (1) define the performance test scene or mode (enemy compositions, player setup, weapon behavior), (2) script automated or semi-automated load generation for enemies and attacks using existing pooling and spatial systems, (3) set up profiling procedures and metrics capture (FPS, frame time, script/physics cost), (4) document and triage any bottlenecks with proposed optimization tasks, and (5) create a repeatable checklist or script for rerunning the benchmark in future iterations. For each subtask, clarify target hardware assumptions and pass/fail thresholds tied to design goals.",
+			"reasoning": "Moderately high complexity due to the need for a robust test harness, profiling discipline, and meaningful interpretation of results, but it builds primarily on systems implemented in earlier tasks rather than introducing new architectures."
+		}
+	]
+}
