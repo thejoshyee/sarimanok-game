@@ -185,9 +185,10 @@
               2
             ],
             "details": "Identify scripts that manage pause and menus, for example:\n- GameManager.gd or Main.gd handling pause state.\n- PauseMenu.gd attached to the pause menu scene.\n- Global UI navigation or menu controller scripts using ui_accept/ui_cancel.\n\nImplement or confirm pause handling so that pressing the pause action toggles game pause, e.g., setting get_tree().paused and showing/hiding the pause menu scene. Ensure this works with both Esc on keyboard and the Start/Options button on gamepads.\n\nWire ui_accept and ui_cancel into UI navigation by ensuring the project’s input handling or focus-based UI uses these actions for:\n- Confirming menu selections, starting the game, confirming upgrades, etc. (ui_accept).\n- Backing out of menus, closing pause, or cancelling selections (ui_cancel).\nAvoid duplicating logic by using a central handler (e.g., in a UIManager.gd) if one exists, and ensure that gameplay input is ignored or routed differently while menus are open.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the main game scene. In gameplay, press Esc and confirm the game pauses, time-based elements stop, and the pause menu appears; press Esc or the gamepad Start button again to unpause. In all relevant menus (main menu, pause menu, any existing level-up or settings UI), verify that ui_accept (Enter, Space, A/X button) activates focused buttons and confirms selections, and ui_cancel (Esc, B/O button) closes submenus or navigates back without triggering unwanted actions. Test that pause and UI controls work correctly for both keyboard and controller and that gameplay cannot be controlled while a blocking menu is open.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-06T05:26:16.618Z"
           },
           {
             "id": 4,
@@ -207,7 +208,7 @@
         "complexity": 4,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Decompose into subtasks that (1) configure or validate all required actions in the input map, (2) update movement code to use action strengths and support analog input, (3) wire pause and UI actions into existing menus and game state, and (4) run in-editor and device tests (keyboard + controller) to verify mappings. For each subtask, define which scripts to touch, what bindings to set, and how to test behavior in both gameplay and UI contexts.",
-        "updatedAt": "2025-12-06T03:50:42.910Z"
+        "updatedAt": "2025-12-06T05:26:16.618Z"
       },
       {
         "id": "4",
@@ -410,7 +411,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-06T03:50:42.910Z",
+      "lastModified": "2025-12-06T05:26:16.621Z",
       "taskCount": 10,
       "completedCount": 2,
       "tags": [
