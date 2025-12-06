@@ -170,10 +170,11 @@
             "dependencies": [
               1
             ],
-            "details": "Identify all scripts responsible for player and movement logic, for example:\n- Player.gd or PlayerController.gd attached to the player character.\n- Any separate movement component scripts (e.g., CharacterMovement.gd) or state machine states handling movement.\n\nRefactor horizontal and vertical input calculation to use action strengths instead of direct key checks, for example:\n- horizontal = Input.get_action_strength(\"move_right\") - Input.get_action_strength(\"move_left\")\n- vertical = Input.get_action_strength(\"move_down\") - Input.get_action_strength(\"move_up\")\nThen build a normalized movement vector from these values and feed it into CharacterBody2D.velocity, CharacterBody3D.velocity, or the project’s custom movement system.\n\nRemove or update any remaining uses of is_action_pressed or hardcoded keycodes for basic movement axes so that all core movement paths depend on the move_* actions. Ensure diagonal movement speed is clamped or normalized according to the project’s conventions. If there is separate aim or dash logic tied to movement input, update those to use the same action strengths so analog sticks work consistently.",
-            "status": "pending",
+            "details": "Identify all scripts responsible for player and movement logic, for example:\n- Player.gd or PlayerController.gd attached to the player character.\n- Any separate movement component scripts (e.g., CharacterMovement.gd) or state machine states handling movement.\n\nRefactor horizontal and vertical input calculation to use action strengths instead of direct key checks, for example:\n- horizontal = Input.get_action_strength(\"move_right\") - Input.get_action_strength(\"move_left\")\n- vertical = Input.get_action_strength(\"move_down\") - Input.get_action_strength(\"move_up\")\nThen build a normalized movement vector from these values and feed it into CharacterBody2D.velocity, CharacterBody3D.velocity, or the project’s custom movement system.\n\nRemove or update any remaining uses of is_action_pressed or hardcoded keycodes for basic movement axes so that all core movement paths depend on the move_* actions. Ensure diagonal movement speed is clamped or normalized according to the project’s conventions. If there is separate aim or dash logic tied to movement input, update those to use the same action strengths so analog sticks work consistently.\n<info added on 2025-12-06T03:50:30.984Z>\nCreated new player scene at game/scenes/player/player.tscn with a CharacterBody2D root, a 32x32 red ColorRect placeholder visual, and a matching 32x32 rectangular CollisionShape2D. Added game/scenes/player/player.gd to drive movement using Input.get_action_strength() for move_up, move_down, move_left, and move_right, building a normalized Vector2 input_vector that is multiplied by speed and applied to velocity before calling move_and_slide(), ensuring consistent 4- and 8-direction movement and clamped diagonal speed. Updated main.gd to instance and use the new player scene as the controlled character, removed the old is_action_pressed-based camera test logic, and wired the main camera to smoothly follow the player’s position, with all movement axes now free of hardcoded keycodes and ready for future gamepad analog stick validation.\n</info added on 2025-12-06T03:50:30.984Z>",
+            "status": "done",
             "testStrategy": "Run the main gameplay scene. With keyboard, verify that W/A/S/D and arrow keys move the player smoothly in 4 and 8 directions, with consistent speed when moving diagonally. With a gamepad, move the left stick slowly and confirm walk/creep behavior when barely tilted and full-speed movement when fully tilted; confirm direction changes and diagonals respond accurately. Check logs or on-screen debug vectors to confirm that movement axes come from get_action_strength-based vectors and that there are no remaining keycode-specific branches for movement.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-06T03:50:42.910Z"
           },
           {
             "id": 3,
@@ -206,7 +207,7 @@
         "complexity": 4,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Decompose into subtasks that (1) configure or validate all required actions in the input map, (2) update movement code to use action strengths and support analog input, (3) wire pause and UI actions into existing menus and game state, and (4) run in-editor and device tests (keyboard + controller) to verify mappings. For each subtask, define which scripts to touch, what bindings to set, and how to test behavior in both gameplay and UI contexts.",
-        "updatedAt": "2025-12-05T21:16:34.210Z"
+        "updatedAt": "2025-12-06T03:50:42.910Z"
       },
       {
         "id": "4",
@@ -409,7 +410,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-05T21:16:34.210Z",
+      "lastModified": "2025-12-06T03:50:42.910Z",
       "taskCount": 10,
       "completedCount": 2,
       "tags": [

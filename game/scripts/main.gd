@@ -33,15 +33,7 @@ func _draw():
 	draw_rect(Rect2(0, 0, 1920, 1088), Color.RED, false, 2)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Camera follows the player
 func _process(delta):
-	# Move camera with arrow keys for testing
-	var move_speed = 300 * delta
-	if Input.is_action_pressed("ui_right"):
-		$Camera2D.position.x += move_speed
-	if Input.is_action_pressed("ui_left"):
-		$Camera2D.position.x -= move_speed
-	if Input.is_action_pressed("ui_down"):
-		$Camera2D.position.y += move_speed
-	if Input.is_action_pressed("ui_up"):
-		$Camera2D.position.y -= move_speed
+	if has_node("Player"):
+		$Camera2D.position = $Player.position

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxqxr03wo51p8"]
+[gd_scene load_steps=4 format=3 uid="uid://cxqxr03wo51p8"]
 
 [ext_resource type="Script" uid="uid://bknm7mckcoe48" path="res://scripts/main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_0xm2m"]
 
 [sub_resource type="TileSet" id="TileSet_ig7tw"]
 tile_size = Vector2i(32, 32)
@@ -23,3 +24,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 1920
 limit_bottom = 1088
+
+[node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+position = Vector2(320, 180)
