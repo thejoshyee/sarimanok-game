@@ -11,6 +11,7 @@
 ### Keyboard Tests
 
 #### Movement Controls
+
 - [x] W key moves player up
 - [x] A key moves player left
 - [x] S key moves player down
@@ -23,12 +24,14 @@
 - [x] Releasing keys stops movement immediately (no drift)
 
 #### Pause Controls
+
 - [x] Esc key opens pause menu
 - [x] Game pauses (time stops, player can't move)
 - [x] Esc key resumes from pause menu
 - [x] Game unpauses correctly
 
 #### UI Navigation
+
 - [x] Enter confirms selections in menus
 - [x] Space confirms selections in menus
 - [x] Esc closes/backs out of menus
@@ -38,6 +41,7 @@
 ### Gamepad Tests (Xbox-style controller)
 
 #### Movement Controls
+
 - [x] D-pad Up moves player up
 - [x] D-pad Left moves player left
 - [x] D-pad Down moves player down
@@ -52,12 +56,14 @@
 - [x] Releasing stick stops movement immediately (no drift)
 
 #### Pause Controls
+
 - [x] Start/Options button opens pause menu
 - [x] Game pauses (time stops, player can't move)
 - [x] Start/Options button resumes from pause menu
 - [x] Game unpauses correctly
 
 #### UI Navigation
+
 - [x] A button (South) confirms selections in menus
 - [x] B button (East) closes/backs out of menus
 
@@ -87,4 +93,3 @@ No issues found. All input controls function as expected.
 - Pause functionality works consistently across both input methods
 - UI navigation (accept/cancel) responds correctly to all configured inputs
 - Deadzone on analog stick prevents unwanted movement from stick noise
-

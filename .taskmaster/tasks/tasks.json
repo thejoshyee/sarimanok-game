@@ -150,7 +150,7 @@
         "dependencies": [
           "1"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -200,15 +200,16 @@
               3
             ],
             "details": "Prepare a simple test checklist covering:\n- Movement controls in normal gameplay.\n- Pause toggling and resume behavior.\n- UI navigation and confirmation/cancel flows across all implemented menus.\n\nUsing at least one keyboard and one supported gamepad (e.g., Xbox-style controller), perform tests in the main gameplay scene and any key UI scenes:\n- Verify 8-direction movement, analog sensitivity, and lack of drift when inputs are released.\n- Confirm that all configured bindings trigger only their intended actions.\n- Ensure pause and UI actions behave consistently regardless of whether input comes from keyboard or controller.\n\nRecord any issues (e.g., missing bindings, inverted axes, inconsistent behavior between keyboard and controller) in the project’s issue tracker or task system and, where feasible, fix them immediately or open follow-up tasks. Optionally, add a lightweight in-game input diagnostics overlay that can display the current values of movement axes and the state of pause/ui actions to speed up future debugging.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the game from the editor and perform the full checklist twice: once using only keyboard, and once using only a gamepad. For each device, verify that movement, pause toggle, and UI navigation all function exactly as specified, including analog behavior for sticks. Document the results (pass/fail and notes) in a short markdown file (e.g., test_reports/input_controls.md) or the project’s tracking system, and confirm that no blocking issues remain before marking the parent task as complete.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-06T14:22:16.532Z"
           }
         ],
         "complexity": 4,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Decompose into subtasks that (1) configure or validate all required actions in the input map, (2) update movement code to use action strengths and support analog input, (3) wire pause and UI actions into existing menus and game state, and (4) run in-editor and device tests (keyboard + controller) to verify mappings. For each subtask, define which scripts to touch, what bindings to set, and how to test behavior in both gameplay and UI contexts.",
-        "updatedAt": "2025-12-06T05:26:16.618Z"
+        "updatedAt": "2025-12-06T14:22:16.532Z"
       },
       {
         "id": "4",
@@ -411,9 +412,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-06T05:26:16.621Z",
+      "lastModified": "2025-12-06T14:22:16.533Z",
       "taskCount": 10,
-      "completedCount": 2,
+      "completedCount": 3,
       "tags": [
         "master"
       ]
