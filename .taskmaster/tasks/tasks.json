@@ -222,7 +222,7 @@
           "1",
           "3"
         ],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
@@ -230,9 +230,10 @@
             "description": "Create or refactor the Sarimanok player scene rooted at CharacterBody2D with a clean, reusable hierarchy.",
             "dependencies": [],
             "details": "- Root node: CharacterBody2D named `SarimanokPlayer` (or aligned with existing player naming).\n- Child nodes (reuse existing components where present):\n  - Visuals: Sprite2D/AnimatedSprite2D/AnimationTree matching current art pipeline.\n  - CollisionShape2D for body collisions, matching existing player/enemy sizing conventions.\n  - Separate CollisionShape2D (or Area2D child with shape) dedicated to receiving enemy damage, using the same group/layer masks and node naming used by other damage receivers.\n  - Optional child nodes for cross-cutting components already in the project (e.g., `Health`, `HitFlash`, `Damageable`, `StateMachine`) instead of new ad‑hoc scripts.\n- Ensure node names, folder placement, and script locations match patterns discovered in the project audit (e.g., `actors/player`, `characters/sarimanok`).\n- If a generic `BasePlayer` or `CharacterBody2D` template exists, inherit from it rather than creating a new standalone scene, only overriding what is Sarimanok‑specific.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-06T20:35:02.012Z"
           },
           {
             "id": 2,
@@ -303,7 +304,8 @@
         ],
         "complexity": 7,
         "recommendedSubtasks": 6,
-        "expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns."
+        "expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns.",
+        "updatedAt": "2025-12-06T20:35:02.012Z"
       },
       {
         "id": "5",
@@ -412,7 +414,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-06T14:22:16.533Z",
+      "lastModified": "2025-12-06T20:35:02.015Z",
       "taskCount": 10,
       "completedCount": 3,
       "tags": [
