@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": "1",
+        "id": 1,
         "title": "Audit existing Godot project setup",
         "description": "Inspect the current Godot 4 project to understand scenes, scripts, and configuration already in place.",
         "details": "Review the Godot project structure, main scene, autoloads (singletons), and any existing player, enemy, weapon, or progression scripts to avoid duplicating work.[1] Document what systems already exist (e.g., movement, input actions, basic UI, pooling helpers) and how they are organized (folders, naming conventions, node hierarchies).",
@@ -85,7 +85,7 @@
         "updatedAt": "2025-12-05T13:31:38.640Z"
       },
       {
-        "id": "2",
+        "id": 2,
         "title": "Configure project resolution and window settings",
         "description": "Set up viewport, stretch, and window scaling to match the PRD specifications.",
         "details": "In Project Settings → Display → Window, configure Viewport Width = 640 and Viewport Height = 360, set Stretch Mode to canvas_items, and Stretch Aspect to keep, to achieve the desired 640×360 viewport and proper scaling on different monitor resolutions.[1] Verify that the arena (1920×1088) and tile size (32×32) are consistent with tileset and camera configuration in the current scenes.",
@@ -141,7 +141,7 @@
         "updatedAt": "2025-12-05T20:47:20.983Z"
       },
       {
-        "id": "3",
+        "id": 3,
         "title": "Define input actions and controls",
         "description": "Set up and/or validate the Godot Input Map for movement, pause, and UI actions as specified.",
         "details": "In Project Settings → Input Map, ensure the following actions exist with correct bindings: move_up (W, Up Arrow, D-pad Up, Left Stick Up), move_down (S, Down Arrow, D-pad Down, Left Stick Down), move_left (A, Left Arrow, D-pad Left, Left Stick Left), move_right (D, Right Arrow, D-pad Right, Left Stick Right), pause (Esc, Start), ui_accept (Enter, Space, A/X button), ui_cancel (Esc, B/O button).[1] Confirm existing code uses get_action_strength for movement vectors to support analog sticks and update scripts if they currently rely on is_action_pressed for basic movement axes.[3]",
@@ -212,7 +212,7 @@
         "updatedAt": "2025-12-06T14:22:16.532Z"
       },
       {
-        "id": "4",
+        "id": 4,
         "title": "Implement or align Classic Sarimanok player controller",
         "description": "Create or adapt the CharacterBody2D-based Sarimanok player with correct movement, stats, and damage handling.",
         "details": "Ensure the player is implemented as a CharacterBody2D with movement driven by an input_vector built from move_* actions, normalized and multiplied by move_speed, then applied via move_and_slide.[1] Implement base stats (Max HP 100, Move Speed 200 px/s, Damage 100%, Attack Speed 100%, Pickup Range 50) as exported variables or in a dedicated stats/resource object consistent with current code patterns. Add a collision shape for enemy damage, a hit/health component if one already exists, and invincibility frames of 0.5s after taking damage, reusing existing damage/health systems if present.[2]",
@@ -313,7 +313,7 @@
         "updatedAt": "2025-12-07T18:12:13.329Z"
       },
       {
-        "id": "5",
+        "id": 5,
         "title": "Set up placeholder Sarimanok visuals and animation",
         "description": "Create the temporary visual representation and simple 2-frame animation for the player.",
         "details": "Use a 32×32 ColorRect or equivalent simple node as the placeholder Classic Sarimanok, with a multicolor or rainbow palette approximating the intended art direction.[2] Configure a 2-frame idle/walk bob animation that flips between frames every 0.2 seconds when the player is moving, and flip the sprite horizontally based on velocity.x in the existing animation/visual script or a new dedicated script following current project conventions.[1]",
@@ -323,13 +323,46 @@
           "4"
         ],
         "status": "pending",
-        "subtasks": [],
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create placeholder Sarimanok visual node hierarchy and layering",
+            "description": "Set up the 32×32 placeholder visual node (ColorRect or equivalent) for the Classic Sarimanok, including proper hierarchy under the player, pivot/origin alignment, and render layering consistent with existing project conventions.",
+            "dependencies": [],
+            "details": "Add a dedicated child node to the player (e.g., Sprite2D or ColorRect) sized to 32×32 pixels and position it so the pivot aligns with the player’s logical feet/center used elsewhere in the project. Apply a multicolor or rainbow-style fill or simple texture approximating the Sarimanok’s intended art direction. Ensure the node is placed in the same visual group/layer as other character visuals (e.g., correct CanvasLayer, Z-index, and Y-sorted settings) and wired into any shared animation controller or visual root node pattern already used by the player controller. Expose the visual node via a clear onready variable or exported NodePath so other scripts (animation/state logic) can reference it consistently. Prepare a minimal test scene with just the player, camera, and background, and verify in the editor and at runtime that the placeholder appears at the correct size, position, and draw order relative to other objects.",
+            "status": "pending",
+            "testStrategy": "Open the dedicated test scene and run the game. Confirm the placeholder node is visible, aligned with the character’s collision/feet, and rendered in front of the background but behind any intended foreground elements. Use the Godot remote scene tree to verify node hierarchy, pivot/origin, and Z-index or Y-sort settings match existing character visual patterns."
+          },
+          {
+            "id": 2,
+            "title": "Configure 2-frame idle/walk bob animation within the project’s animation system",
+            "description": "Define and integrate a 2-frame animation for the Sarimanok placeholder that stays on a default frame when idle and alternates frames every 0.2 seconds while moving, respecting the project’s shared animation controller or state machine conventions.",
+            "dependencies": [
+              1
+            ],
+            "details": "Using the project’s existing animation system (AnimationPlayer, AnimationTree, or custom controller), create two visual frames for the placeholder (e.g., via two keyframed positions/scales, two sprites, or a Sprite2D frame index). Author a `walk` or `move` animation that flips between the two frames every 0.2 seconds (i.e., 5 FPS) to create a bobbing effect and define an `idle` animation that holds the default frame. If an AnimationTree or state machine is used, add or hook into `idle` and `move` states following the existing naming and transition conventions, driving a blend parameter or state flag from the player controller. If the project uses a shared animation controller script, register the new animations there and expose methods or parameters (e.g., `set_is_moving(bool)`) so movement code can trigger transitions. In the test scene, wire the player’s movement or a debug input to toggle between idle and move states, ensuring the visual node from subtask 1 is the animated target.",
+            "status": "pending",
+            "testStrategy": "Run the test scene and watch the Sarimanok placeholder: when the player is stationary, verify it remains on the default idle frame; when moving, confirm the visual alternates between the two frames with a period of approximately 0.4 seconds (0.2 seconds per frame). Use Godot’s animation editor playback and the remote inspector to validate that the correct animation states or blend parameters are active and that they comply with the shared animation controller pattern."
+          },
+          {
+            "id": 3,
+            "title": "Implement velocity-driven idle/move logic and horizontal sprite flipping",
+            "description": "Add logic that reads the player’s velocity to switch between idle and move animation states and flips the Sarimanok placeholder horizontally based on the sign of velocity.x, using either the existing animation/visual script or a new dedicated script consistent with project style.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "In the player or dedicated visual/animation script, access the player’s velocity each physics frame. When the magnitude of velocity exceeds a small threshold, set the animation system to the `move`/`walk` state; otherwise, switch to `idle`. Implement horizontal flipping by setting the placeholder visual’s `flip_h` or `scale.x` property based on `sign(velocity.x)` (e.g., facing right for positive, left for negative) and avoid flipping when velocity.x is zero to preserve the last facing direction. Integrate this logic with the shared animation controller interface created or used in subtask 2, invoking methods/parameters instead of directly manipulating animations where required by project conventions. Ensure the script is attached to the correct node (player root or visual root) and that references to the visual node are robust (onready variables or exported NodePaths).",
+            "status": "pending",
+            "testStrategy": "In the test scene, move the player left and right and observe that the Sarimanok placeholder faces the correct direction as horizontal velocity changes, with no jitter or unintended flipping at rest. Verify that stopping movement returns the animation to the idle frame while preserving the last facing direction. Use Godot’s debugger and remote inspector to confirm velocity values, facing flags, and active animation states update as expected during gameplay."
+          }
+        ],
         "complexity": 3,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Structure this as subtasks for (1) creating the placeholder visual node setup (sprite/ColorRect hierarchy, pivot, and layering), (2) configuring the 2-frame animation and movement-driven state transitions within the project’s animation system, and (3) implementing sprite flipping and idle/move logic tied to the player’s velocity. For each subtask, describe how to integrate with any shared animation controller patterns and how to verify timing and orientation in a test scene."
       },
       {
-        "id": "6",
+        "id": 6,
         "title": "Establish object pooling infrastructure",
         "description": "Implement or extend a reusable pooling system for enemies, projectiles, pickups, and particles.",
         "details": "Create a central pooling manager or per-type pool scenes that pre-allocate arrays for enemies (300), projectiles (200), pickups (500), and particles (100 per type) at game start, reusing any existing pooling utilities if they are already present.[3] Ensure that gameplay code does not call queue_free or instantiate during active gameplay, but instead marks instances inactive and returns them to their pool, with pools pre-warmed in the main scene’s _ready method.[1]",
@@ -346,7 +379,7 @@
         "expansionPrompt": "Break this into subtasks that (1) analyze any existing pooling utilities or patterns, (2) design the pool API (central manager vs per-type pools, lifecycle methods, and configuration), (3) implement pooling for enemies, projectiles, pickups, and particles with pre-allocation, (4) refactor spawning/despawning call sites to use the pool instead of direct instantiation and queue_free, (5) add tooling or debug views to track pool usage and leaks, (6) integrate initialization and pre-warming into the main scene startup flow, and (7) create stress-test scenes to validate performance and correctness. For each subtask, capture expected interfaces, configuration options, and migration steps from existing code."
       },
       {
-        "id": "7",
+        "id": 7,
         "title": "Implement grid-based spatial partitioning for enemies",
         "description": "Add spatial hashing to optimize collision and proximity checks with many enemies.",
         "details": "Create a spatial grid system that maps grid cells (64×64 pixels) to arrays of enemy references, updating an enemy’s cell assignment only when it crosses a cell boundary.[1] Provide helper functions such as get_cell and get_nearby_enemies that return enemies in the same or adjacent cells, and refactor any existing naive O(n²) collision or proximity checks to use this system while retaining compatibility with current enemy and weapon code.[3]",
@@ -362,7 +395,7 @@
         "expansionPrompt": "Expand into subtasks for (1) designing the grid data structures and cell size configuration, (2) implementing enemy registration and movement updates that adjust cell membership efficiently, (3) exposing helper queries such as get_cell and get_nearby_enemies, (4) refactoring collision and proximity logic to use the grid while staying compatible with current enemy/weapon systems, (5) adding profiling and debug visualization for grid occupancy, and (6) benchmarking and tuning under various enemy counts. For each subtask, define performance goals and integration points with existing gameplay code."
       },
       {
-        "id": "8",
+        "id": 8,
         "title": "Integrate auto-attack hooks for weapons",
         "description": "Prepare the player and game loop for automatic weapon firing compatible with the planned weapon system.",
         "details": "Add generic weapon slots or a weapon manager component to the player that tracks equipped weapons and their cooldowns, following any existing weapon or skill architecture in the project.[2] Ensure that weapons auto-attack based on their cooldowns without player input, exposing hooks for six planned weapons in later tasks and using the player’s Damage and Attack Speed multipliers to modify weapon behavior.[1]",
@@ -380,7 +413,7 @@
         "expansionPrompt": "Decompose into subtasks that (1) design or align the weapon management interface on the player (slots, cooldown tracking, stat modifiers), (2) implement a weapon manager or component that updates cooldowns and triggers attacks, (3) define a minimal weapon interface or base class that concrete weapons can implement, (4) integrate with pooling and spatial systems for spawning projectiles or effects, and (5) build a simple test weapon plus diagnostic scene to validate automatic firing and stat scaling. For each subtask, specify how to keep the design extensible for future weapons and passives."
       },
       {
-        "id": "9",
+        "id": 9,
         "title": "Implement basic progression loop scaffolding",
         "description": "Lay down the core systems for XP collection, leveling, and stat upgrades without full content.",
         "details": "Create a pickup type representing XP gems that the player collects within a Pickup Range of 50 pixels, ideally reusing the pooling system for pickups.[1] Implement a simple XP curve, level tracking, and a placeholder level-up UI that can present upgrade choices for weapons and passives later, aligning with any existing UI and progression frameworks already in the codebase.[2]",
@@ -397,7 +430,7 @@
         "expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project."
       },
       {
-        "id": "10",
+        "id": 10,
         "title": "Performance validation for Week 3 target",
         "description": "Verify that the foundation meets the Week 3 performance and stability goals.",
         "details": "Create a dedicated performance test scene or mode that can spawn at least 100 active enemies using the pooling and spatial partitioning systems while the player moves and auto-attacks.[3] Measure FPS and frame time using Godot’s profiler to confirm stable 60 FPS under this load, and document any bottlenecks or further optimizations needed to reach the eventual 200+ enemy target.[1]",
@@ -424,7 +457,9 @@
       "completedCount": 4,
       "tags": [
         "master"
-      ]
+      ],
+      "created": "2025-12-07T21:30:44.958Z",
+      "description": "Tasks for master context"
     }
   }
 }
