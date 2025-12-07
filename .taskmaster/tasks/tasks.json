@@ -285,10 +285,11 @@
               3,
               4
             ],
-            "details": "- Instantiate or reference the Sarimanok player from the main gameplay scene using the same mechanism used for any prior player (autoload, scene instancing, or pool), avoiding a new custom spawning path.\n- Hook up the camera:\n  - Use the existing camera controller or follow‑target mechanism to follow Sarimanok; avoid embedding new Camera2D logic directly in the player if the project already centralizes camera logic.\n- Ensure UX integration:\n  - Connect to existing UI/UX systems for HP bars, damage indicators, and any player status displays via existing signals or event buses.\n  - Respect project‑wide pause, input capture, and state systems, so the player disables input when menus or cutscenes are active.\n- Verify that other systems (weapons, pickups, progression) reference the new player via established global or node‑path conventions, rather than adding player‑specific globals.",
-            "status": "pending",
+            "details": "- Instantiate or reference the Sarimanok player from the main gameplay scene using the same mechanism used for any prior player (autoload, scene instancing, or pool), avoiding a new custom spawning path.\n- Hook up the camera:\n  - Use the existing camera controller or follow‑target mechanism to follow Sarimanok; avoid embedding new Camera2D logic directly in the player if the project already centralizes camera logic.\n- Ensure UX integration:\n  - Connect to existing UI/UX systems for HP bars, damage indicators, and any player status displays via existing signals or event buses.\n  - Respect project‑wide pause, input capture, and state systems, so the player disables input when menus or cutscenes are active.\n- Verify that other systems (weapons, pickups, progression) reference the new player via established global or node‑path conventions, rather than adding player‑specific globals.\n<info added on 2025-12-07T16:13:59.773Z>\nImplementation notes:\n- Added a HUD CanvasLayer with an HPLabel node in main.tscn, parented under the main scene so it renders above gameplay.\n- Created hud.gd, attached to the HUD node in main.tscn; in _ready it locates the player via the \"player\" group and in _process it reads the player’s HP and updates HPLabel.text every frame.\n- Confirmed the existing camera-follow logic in main.gd correctly tracks the Sarimanok CharacterBody2D without additional Camera2D code on the player.\n- Verified pause integration: when get_tree().paused is true, the CharacterBody2D-based player (and its movement/damage processing) halts automatically in line with the current project setup.\n- Ensured the player scene is added to the \"player\" group so other systems (weapons, pickups, progression) can access it consistently via group lookups instead of new globals.\n- Manually tested in the main scene: movement responsiveness, damage application, invincibility blink, HP label updates, and pause/unpause behavior all function as expected.\n</info added on 2025-12-07T16:13:59.773Z>",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-07T16:14:05.429Z"
           },
           {
             "id": 6,
@@ -308,7 +309,7 @@
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns.",
-        "updatedAt": "2025-12-07T14:53:39.579Z"
+        "updatedAt": "2025-12-07T16:14:05.429Z"
       },
       {
         "id": "5",
@@ -417,7 +418,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-07T14:53:39.582Z",
+      "lastModified": "2025-12-07T16:14:05.430Z",
       "taskCount": 10,
       "completedCount": 3,
       "tags": [
