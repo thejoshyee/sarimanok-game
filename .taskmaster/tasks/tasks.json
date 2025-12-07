@@ -222,7 +222,7 @@
           "1",
           "3"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -300,16 +300,17 @@
               4,
               5
             ],
-            "details": "- Create a minimal `PlayerMovementTest` scene:\n  - Contains the Sarimanok player, a simple environment, and visible grid/markers to measure movement speed.\n  - Use Godot’s visible collision debug tools to verify collision shapes and ensure 8‑direction movement is consistent with the 200 px/s speed target.\n- Create a `PlayerDamageTest` scene:\n  - Includes Sarimanok and one or more enemy or damage sources configured via the shared combat system.\n  - Verify that taking damage reduces HP via the shared health component and that invincibility prevents further hits within 0.5 s.\n- Reuse any existing automated or semi‑automated testing harnesses (debug menus, test loaders, or QA scenes) instead of introducing a new testing pattern, and document how to launch these tests for future contributors.",
-            "status": "pending",
+            "details": "- Create a minimal `PlayerMovementTest` scene:\n  - Contains the Sarimanok player, a simple environment, and visible grid/markers to measure movement speed.\n  - Use Godot’s visible collision debug tools to verify collision shapes and ensure 8‑direction movement is consistent with the 200 px/s speed target.\n- Create a `PlayerDamageTest` scene:\n  - Includes Sarimanok and one or more enemy or damage sources configured via the shared combat system.\n  - Verify that taking damage reduces HP via the shared health component and that invincibility prevents further hits within 0.5 s.\n- Reuse any existing automated or semi‑automated testing harnesses (debug menus, test loaders, or QA scenes) instead of introducing a new testing pattern, and document how to launch these tests for future contributors.\n<info added on 2025-12-07T18:12:06.848Z>\nTest scenes completed and verified:\n\n- Created `PlayerMovementTest.tscn` with a 100px grid overlay for visual speed verification; scene saved in `game/scenes/tests/`.\n- Created `PlayerDamageTest.tscn` with Sarimanok and enemy setup using the shared combat system; scene saved in `game/scenes/tests/`.\n- Verified 8-direction movement at a consistent 200 px/s speed using the grid and Godot’s visible collision debug tools.\n- Verified that taking damage reduces HP correctly (10 damage per hit) via the shared health component.\n- Verified 0.5s invincibility frames with the visual blink effect working as expected.\n- Confirmed collision shapes are 32x32 for both player body and damage area.\n- Both test scenes use minimal setup (player, enemy, camera) to keep testing focused and isolated.\n</info added on 2025-12-07T18:12:06.848Z>",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-07T18:12:13.329Z"
           }
         ],
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns.",
-        "updatedAt": "2025-12-07T16:14:05.429Z"
+        "updatedAt": "2025-12-07T18:12:13.329Z"
       },
       {
         "id": "5",
@@ -418,9 +419,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-07T16:14:05.430Z",
+      "lastModified": "2025-12-07T18:12:13.329Z",
       "taskCount": 10,
-      "completedCount": 3,
+      "completedCount": 4,
       "tags": [
         "master"
       ]

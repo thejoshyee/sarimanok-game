@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqxr1ilpre35n"]
+
+[ext_resource type="Script" uid="uid://jhii7jvo0gy4" path="res://scripts/player_movement_test.gd" id="1_im04l"]
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="1_qq6o2"]
+
+[node name="PlayerMovementTest" type="Node2D"]
+script = ExtResource("1_im04l")
+
+[node name="SarimanokPlayer" parent="." instance=ExtResource("1_qq6o2")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
