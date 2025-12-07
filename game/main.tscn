@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxqxr03wo51p8"]
+[gd_scene load_steps=6 format=3 uid="uid://cxqxr03wo51p8"]
 
 [ext_resource type="Script" uid="uid://bknm7mckcoe48" path="res://scripts/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cg2j7pspt52yr" path="res://scenes/ui/pause_menu.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://coqhlglw7m7ay" path="res://scenes/enemies/test_enemy.tscn" id="4_1bvp3"]
 
 [sub_resource type="TileSet" id="TileSet_ig7tw"]
 tile_size = Vector2i(32, 32)
@@ -32,3 +33,6 @@ position = Vector2(320, 180)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_h2yge")]
 process_mode = 3
+
+[node name="TestEnemy" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(200, 200)

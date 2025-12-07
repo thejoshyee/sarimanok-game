@@ -270,9 +270,10 @@
               3
             ],
             "details": "- Attach existing reusable combat components if available:\n  - Prefer an existing `Health`/`HitPoints`/`Damageable` component for HP tracking and damage application.\n  - Use existing hit flash, knockback, and status effect components rather than re‑implementing them.\n- Configure the damage collision:\n  - Ensure the damage hitbox/Area2D uses the same collision layers/masks and groups as other damageable entities.\n  - Connect to shared damage signals or callbacks (e.g., `hit(damage_info)`) following project conventions.\n- Implement 0.5 s invincibility after taking damage:\n  - Use the shared invincibility/timer mechanism if one exists (e.g., a `Hurtbox` component with i‑frames), otherwise add a small, localized timer and flag that gates further damage.\n  - Ensure visual feedback (blink, shader, or UI) leverages existing VFX utilities instead of new bespoke effects.\n- Confirm that damage application, death, and respawn/deactivation all follow the same flow as other characters to avoid branching logic in combat systems.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-07T14:53:39.579Z"
           },
           {
             "id": 5,
@@ -307,7 +308,7 @@
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns.",
-        "updatedAt": "2025-12-07T04:35:26.972Z"
+        "updatedAt": "2025-12-07T14:53:39.579Z"
       },
       {
         "id": "5",
@@ -416,7 +417,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-07T04:35:26.975Z",
+      "lastModified": "2025-12-07T14:53:39.582Z",
       "taskCount": 10,
       "completedCount": 3,
       "tags": [

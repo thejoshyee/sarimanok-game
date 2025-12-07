@@ -59,3 +59,4 @@ func _input(event):
 - All movement actions support both digital (keyboard/D-pad) and analog (stick) input
 - The `pause` action shares the Escape key with `ui_cancel` - handle context appropriately
 
+
