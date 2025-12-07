@@ -3,11 +3,14 @@ extends CharacterBody2D
 @export var stats: PlayerStats
 
 @onready var damage_area: Area2D = $DamageArea
+@onready var sprite: ColorRect = $ColorRect
 
 # Runtime State
 var current_hp: float
 var is_invincible: bool = false
 var invincibility_duration: float = 0.5
+
+signal player_died
 
 func _physics_process(_delta: float) -> void:
 	# Get input as floats (0.0 to 1.0) - works for both keyboard and analog sticks
@@ -34,12 +37,35 @@ func take_damage(amount: float) -> void:
 	current_hp -= amount
 	print("Player took ", amount, " damage. HP: ", current_hp, "/", stats.max_hp)
 
-	# start invincibility frames
+	# check for death
+	if current_hp <= 0:
+		die()
+		return
+
+	# start invincibility frames with visual feedback
 	is_invincible = true
+	start_invincibility_blink()
 	await get_tree().create_timer(invincibility_duration).timeout
 	is_invincible = false
+	sprite.modulate.a = 1.0 # make sure to be visible again
+
+func start_invincibility_blink() -> void:
+	# blink 5 times during invincibility (0.5s / 0.1s per blink)
+	for i in range(5):
+		sprite.modulate.a = 0.3 # semi-transparent
+		await get_tree().create_timer(0.05).timeout
+		sprite.modulate.a = 1.0 # full visible
+		await get_tree().create_timer(0.05).timeout
+
+func die() -> void:
+	player_died.emit()
+	print("Player died")
+	# for now restart the scene
+	get_tree().reload_current_scene()
+	
 
 func _ready() -> void:
+	add_to_group("player")
 	current_hp = stats.max_hp # start at full health 
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
 
@@ -47,3 +73,4 @@ func _on_damage_area_body_entered(body: Node2D) -> void:
 	# check if the body that hits us is an enemy
 	if body.is_in_group("enemies"):
 		take_damage(10.0) # placeholder damage
+	# dont take damage if invincible
