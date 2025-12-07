@@ -34,6 +34,6 @@ func _draw():
 
 
 # Camera follows the player
-func _process(delta):
+func _process(_delta):
 	if has_node("Player"):
 		$Camera2D.position = $Player.position

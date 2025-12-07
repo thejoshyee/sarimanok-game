@@ -243,9 +243,10 @@
               1
             ],
             "details": "- In the Sarimanok player script (or inherited base), implement movement in `_physics_process` using:\n  - `input_vector` built from the existing `move_up`, `move_down`, `move_left`, and `move_right` actions via the project’s preferred input helper (e.g., shared InputUtils or a common pattern used in other controllers).\n  - Normalize `input_vector` when non‑zero, multiply by `move_speed`, and assign to `velocity` or the project’s standard motion property.\n  - Call `move_and_slide()` (or the project’s wrapper, if one exists) as the final step in physics each frame.\n- Match any existing patterns for:\n  - Axis deadzones, diagonal speed, and friction/acceleration vs. instant velocity changes.\n  - Directional facing (e.g., flipping sprite or setting an `aim_direction` used by weapons).\n- Avoid custom input mappings or bespoke helpers if a shared movement or input module is already present; adapt the Sarimanok controller to that module instead of diverging.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-07T03:42:21.135Z"
           },
           {
             "id": 3,
@@ -255,9 +256,10 @@
               1
             ],
             "details": "- Prefer existing stats/resource patterns:\n  - If there is a `Stats`, `CharacterStats`, or `PlayerStats` Resource or component script, instantiate or reference it instead of adding new ad‑hoc exported fields.\n  - Otherwise, create a `SarimanokStats` (or generic `PlayerStats`) Resource or component with exported fields: Max HP 100, Move Speed 200 px/s, Damage 1.0 (100%), Attack Speed 1.0 (100%), Pickup Range 50.\n- Wire the stats object into the controller:\n  - Read `move_speed` from stats instead of hardcoding.\n  - Expose current HP and max HP consistently with other actors (e.g., via `Health` component or shared `Damageable` interface).\n- Ensure naming, types, and units (e.g., px/s, multipliers vs flat values) match other systems such as weapons and progression, so Sarimanok can plug into future stat upgrades without special‑case code.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-07T04:35:26.972Z"
           },
           {
             "id": 4,
@@ -305,7 +307,7 @@
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Expand this task into subtasks for (1) defining or refactoring the player CharacterBody2D scene and hierarchy, (2) implementing movement using an input vector and move_and_slide according to project conventions, (3) implementing a stats model (exported fields or resource-based) for HP, speed, damage, and related values, (4) integrating damage, collision shapes, and health/invincibility logic with any shared combat systems, (5) wiring the controller into existing game loops and camera/UX expectations, and (6) creating targeted test scenes or fixtures to validate movement and damage behavior. For each subtask, state which reusable components to prefer and how to avoid diverging from established patterns.",
-        "updatedAt": "2025-12-06T20:35:02.012Z"
+        "updatedAt": "2025-12-07T04:35:26.972Z"
       },
       {
         "id": "5",
@@ -414,7 +416,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-06T20:35:02.015Z",
+      "lastModified": "2025-12-07T04:35:26.975Z",
       "taskCount": 10,
       "completedCount": 3,
       "tags": [
