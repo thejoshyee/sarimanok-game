@@ -322,7 +322,7 @@
         "dependencies": [
           "4"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -343,9 +343,10 @@
               1
             ],
             "details": "Using the project’s existing animation system (AnimationPlayer, AnimationTree, or custom controller), create two visual frames for the placeholder (e.g., via two keyframed positions/scales, two sprites, or a Sprite2D frame index). Author a `walk` or `move` animation that flips between the two frames every 0.2 seconds (i.e., 5 FPS) to create a bobbing effect and define an `idle` animation that holds the default frame. If an AnimationTree or state machine is used, add or hook into `idle` and `move` states following the existing naming and transition conventions, driving a blend parameter or state flag from the player controller. If the project uses a shared animation controller script, register the new animations there and expose methods or parameters (e.g., `set_is_moving(bool)`) so movement code can trigger transitions. In the test scene, wire the player’s movement or a debug input to toggle between idle and move states, ensuring the visual node from subtask 1 is the animated target.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the test scene and watch the Sarimanok placeholder: when the player is stationary, verify it remains on the default idle frame; when moving, confirm the visual alternates between the two frames with a period of approximately 0.4 seconds (0.2 seconds per frame). Use Godot’s animation editor playback and the remote inspector to validate that the correct animation states or blend parameters are active and that they comply with the shared animation controller pattern.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-09T14:46:25.701Z"
           },
           {
             "id": 3,
@@ -356,15 +357,16 @@
               2
             ],
             "details": "In the player or dedicated visual/animation script, access the player’s velocity each physics frame. When the magnitude of velocity exceeds a small threshold, set the animation system to the `move`/`walk` state; otherwise, switch to `idle`. Implement horizontal flipping by setting the placeholder visual’s `flip_h` or `scale.x` property based on `sign(velocity.x)` (e.g., facing right for positive, left for negative) and avoid flipping when velocity.x is zero to preserve the last facing direction. Integrate this logic with the shared animation controller interface created or used in subtask 2, invoking methods/parameters instead of directly manipulating animations where required by project conventions. Ensure the script is attached to the correct node (player root or visual root) and that references to the visual node are robust (onready variables or exported NodePaths).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "In the test scene, move the player left and right and observe that the Sarimanok placeholder faces the correct direction as horizontal velocity changes, with no jitter or unintended flipping at rest. Verify that stopping movement returns the animation to the idle frame while preserving the last facing direction. Use Godot’s debugger and remote inspector to confirm velocity values, facing flags, and active animation states update as expected during gameplay.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-09T14:46:25.714Z"
           }
         ],
         "complexity": 3,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Structure this as subtasks for (1) creating the placeholder visual node setup (sprite/ColorRect hierarchy, pivot, and layering), (2) configuring the 2-frame animation and movement-driven state transitions within the project’s animation system, and (3) implementing sprite flipping and idle/move logic tied to the player’s velocity. For each subtask, describe how to integrate with any shared animation controller patterns and how to verify timing and orientation in a test scene.",
-        "updatedAt": "2025-12-09T01:29:17.332Z"
+        "updatedAt": "2025-12-09T14:46:25.714Z"
       },
       {
         "id": "6",
@@ -457,9 +459,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-09T01:29:17.337Z",
+      "lastModified": "2025-12-09T14:46:25.731Z",
       "taskCount": 10,
-      "completedCount": 4,
+      "completedCount": 5,
       "tags": [
         "master"
       ]

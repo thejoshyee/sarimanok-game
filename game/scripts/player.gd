@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var damage_area: Area2D = $DamageArea
 @onready var sprite: ColorRect = $VisualSprite
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # Runtime State
 var current_hp: float
@@ -27,6 +28,15 @@ func _physics_process(_delta: float) -> void:
 	# apply movement
 	velocity = input_vector * stats.move_speed
 	move_and_slide()
+
+	# handle animation and sprite flipping
+	if velocity.length() > 0:
+		animation_player.play("walk")
+		# flip sprite based on horizontal movement
+		if velocity.x != 0:
+			sprite.scale.x = -1 if velocity.x > 0 else 1
+	else:
+		animation_player.play("idle")
 
 func take_damage(amount: float) -> void:
 	# dont take damage if invincible
