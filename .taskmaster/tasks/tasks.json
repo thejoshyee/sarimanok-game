@@ -400,9 +400,10 @@
               1
             ],
             "details": "Based on the audit, draft a pool API that covers acquisition, release, initialization/reset, and optional callbacks (e.g., on_spawn, on_despawn). Decide whether there will be a single PoolManager responsible for all types, type-specific pool scenes/resources, or both (e.g., PoolManager routing to per-type pools). Specify configuration options such as initial size, max size or fixed size, preload scene paths, node parent containers, and whether pools can grow under stress. Document expected interfaces, e.g., get_from_pool(type_id or enum), return_to_pool(node), and any required methods on pooled objects (reset_state(), set_active(bool)). Produce a migration plan describing how existing spawn/despawn code will be redirected to this API, including deprecation of old helpers if present.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-09T20:09:48.522Z"
           },
           {
             "id": 3,
@@ -470,7 +471,7 @@
         "complexity": 8,
         "recommendedSubtasks": 7,
         "expansionPrompt": "Break this into subtasks that (1) analyze any existing pooling utilities or patterns, (2) design the pool API (central manager vs per-type pools, lifecycle methods, and configuration), (3) implement pooling for enemies, projectiles, pickups, and particles with pre-allocation, (4) refactor spawning/despawning call sites to use the pool instead of direct instantiation and queue_free, (5) add tooling or debug views to track pool usage and leaks, (6) integrate initialization and pre-warming into the main scene startup flow, and (7) create stress-test scenes to validate performance and correctness. For each subtask, capture expected interfaces, configuration options, and migration steps from existing code.",
-        "updatedAt": "2025-12-09T16:52:42.768Z"
+        "updatedAt": "2025-12-09T20:09:48.522Z"
       },
       {
         "id": "7",
@@ -546,7 +547,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-09T16:52:42.770Z",
+      "lastModified": "2025-12-09T20:09:48.525Z",
       "taskCount": 10,
       "completedCount": 5,
       "tags": [
