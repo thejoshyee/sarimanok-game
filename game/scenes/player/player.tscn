@@ -13,12 +13,12 @@ size = Vector2(32, 32)
 script = ExtResource("1_8afob")
 stats = ExtResource("2_dovo2")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="VisualSprite" type="ColorRect" parent="."]
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
-color = Color(0.627451, 0, 0, 1)
+color = Color(1.353256, 0.6651851, 1.2282239, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dovo2")

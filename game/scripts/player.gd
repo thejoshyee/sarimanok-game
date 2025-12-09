@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var stats: PlayerStats
 
 @onready var damage_area: Area2D = $DamageArea
-@onready var sprite: ColorRect = $ColorRect
+@onready var sprite: ColorRect = $VisualSprite
 
 # Runtime State
 var current_hp: float
