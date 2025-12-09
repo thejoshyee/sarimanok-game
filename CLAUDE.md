@@ -326,31 +326,59 @@ Josh is simultaneously learning:
 
 ## Response Format for Implementation Tasks
 
-**CRITICAL: Give ONE step at a time. Wait for Josh to complete it and say "done" or "next" before giving the next step.**
-
 ### Structure:
 
 1. **Brief explanation** (1-2 sentences): What and why
-2. **First step ONLY**: One actionable step with code if needed
+2. **Next step(s)**: One or more actionable steps (see batching strategy below)
 3. **Wait for completion**: Let Josh do it and report back
-4. **Then next step**: Only after Josh confirms
+4. **Then next step(s)**: Continue based on complexity
 
-### Example:
+### Step Batching Strategy
+
+**The goal of step-by-step**: Allow Josh to ask questions on complex topics, not to spell out every simple action.
+
+**Give 2-3 steps together for:**
+
+- Simple mechanical tasks (open file, click button, navigate menus)
+- UI navigation (add node → rename it → position it)
+- Repetitive patterns Josh has done before
+- File setup steps (create file → save as → attach script)
+
+**Give 1-2 steps at a time for:**
+
+- Actual coding or logic implementation
+- Changing parameters in the Inspector (explain what each does)
+- New concepts Josh hasn't seen before
+- Debugging or when Josh is stuck
+- Complex multi-part implementations
+
+**Josh will signal what he needs:**
+
+- "one step" or "step by step" = one at a time
+- "give me a few" or "batch them" = 2-3 together
+- Default: Batch simple mechanical steps, separate complex coding steps
+
+### Example - Good Batching:
 
 ```markdown
 We'll set up the enemy spawner with a Timer. Timers handle cooldowns without manual delta tracking.
 
-**Step 1:** Add a Timer node as a child of your spawner and name it "SpawnTimer"
+**Steps 1-2:**
 
-Let me know when you've added it.
+1. Add a Timer node as a child of your spawner
+2. Name it "SpawnTimer" in the Scene dock
+
+Done?
 ```
+
+(These are simple UI actions, so batching is fine)
 
 **After Josh says "done":**
 
 ````markdown
 Good!
 
-**Step 2:** Connect the timer's timeout signal:
+**Step 3:** Connect the timer's timeout signal:
 
 ```gdscript
 func _ready():
@@ -359,23 +387,15 @@ func _ready():
 ```
 ````
 
-Done?
+This connects the signal and starts the timer running immediately.
+
+Test it with F6 - does the timer fire?
 
 ````
 
-**DO NOT give all steps at once.** Josh will say "next" when ready.
+(Actual coding gets its own step with explanation)
 
-## Step Batching Strategy
-
-**Give ONE step at a time for:**
-- New concepts Josh hasn't seen before
-- Complex multi-part implementations
-- Debugging or when Josh is stuck
-
-**Give 2-3 steps together for:**
-- Simple mechanical tasks Josh has done before
-- Repetitive patterns (add node → set property → test)
-- When Josh explicitly asks for "next few steps" or "batch them"
+**This prevents overwhelming Josh with too much at once while respecting that simple UI actions don't need hand-holding.**
 
 ## Code Implementation Rules
 

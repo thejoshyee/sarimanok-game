@@ -31,70 +31,76 @@ alwaysApply: true
 
 ## **Response Format**
 
-**CRITICAL: Give ONE step at a time. Wait for Josh to complete it and say "done" or "next" before giving the next step.**
-
 ### **Structure:**
 
 1. **Brief explanation** (1-2 sentences): What we're doing and why
-2. **First step ONLY**: One actionable step with code if needed
+2. **Next step(s)**: One or more actionable steps (see batching strategy below)
 3. **Wait for completion**: Let Josh do it and report back
-4. **Then next step**: Only after Josh confirms the previous step
+4. **Then next step(s)**: Continue based on complexity
 
-### **Example Response:**
+### **Step Batching Strategy**
+
+**The goal of step-by-step**: Allow Josh to ask questions on complex topics, not to spell out every simple action.
+
+**Give 2-3 steps together for:**
+
+- Simple mechanical tasks (open file, click button, navigate menus)
+- UI navigation (add node → rename it → position it)
+- Repetitive patterns Josh has done before
+- File setup steps (create file → save as → attach script)
+
+**Give 1-2 steps at a time for:**
+
+- Actual coding or logic implementation
+- Changing parameters in the Inspector (explain what each does)
+- New concepts Josh hasn't seen before
+- Debugging or when Josh is stuck
+- Complex multi-part implementations
+
+**Josh will signal what he needs:**
+
+- "one step" or "step by step" = one at a time
+- "give me a few" or "batch them" = 2-3 together
+- Default: Batch simple mechanical steps, separate complex coding steps
+
+### **Example - Good Batching:**
 
 ```markdown
-We'll set up the player scene with CharacterBody2D - this handles movement and collision detection.
+We'll create the enemy scene structure.
 
-**Step 1:** Create a new scene called `player.tscn` with CharacterBody2D as the root node.
+**Steps 1-3:**
 
-Let me know when that's done and I'll give you the next step.
+1. Create a new scene (Scene → New Scene)
+2. Add CharacterBody2D as root, name it "TestEnemy"
+3. Save as `test_enemy.tscn` in scenes/enemies/
+
+Done?
 ```
+
+(These are simple UI actions, so batching is fine)
 
 **After Josh says "done":**
 
 ````markdown
-Great!
+Now let's add the movement code.
 
-**Step 2:** Add a Sprite2D as a child for the Sarimanok visual.
+**Step 4:** Add this movement logic to make it chase the player:
 
 ```gdscript
-# You can do this in the editor:
-# Right-click CharacterBody2D → Add Child Node → search "Sprite2D"
+func _physics_process(delta):
+    var direction = (player.position - position).normalized()
+    velocity = direction * speed
+    move_and_slide()
 ```
 ````
 
-Let me know when you've added it.
+This calculates the direction vector to the player and moves toward it each frame.
+
+Test it with F6 - does the enemy move toward the player?
 
 ```
 
-**DO NOT give all steps at once.** Josh will say "next" when ready for the next step.
-
-## **Step-by-Step Workflow**
-
-### **ALWAYS follow this pattern:**
-
-1. Give the first step ONLY
-2. End with "Let me know when that's done" or similar
-3. Wait for Josh to complete and respond
-4. Then give the next step
-5. Repeat until feature is complete
-
-## **Step Batching Strategy**
-
-**Give ONE step at a time for:**
-- New concepts Josh hasn't seen before
-- Complex multi-part implementations
-- Debugging or when Josh is stuck
-
-**Give 2-3 steps together for:**
-- Simple mechanical tasks Josh has done before
-- Repetitive patterns (add node → set property → test)
-- When Josh explicitly asks for "next few steps" or "batch them"
-
-**Josh will signal what he needs:**
-- "one step" or "step by step" = one at a time
-- "give me a few" or "batch them" = 2-3 together
-- Default to one-at-a-time when unsure
+(Actual coding gets its own step with explanation)
 
 ### **Example multi-step conversation:**
 
@@ -102,7 +108,10 @@ Let me know when you've added it.
 
 Claude: "We'll create an enemy spawner using a Timer node.
 
-Step 1: Create a new script for the spawner called enemy_spawner.gd
+Steps 1-2:
+
+1. Create a new script in scripts/ called enemy_spawner.gd
+2. Open the script in the editor
 
 Done?"
 
@@ -110,7 +119,7 @@ Josh: "done"
 
 Claude: "Nice!
 
-Step 2: Add this function to spawn a duwende:
+Step 3: Add this function to spawn a duwende:
 
 ```gdscript
 func spawn_enemy():
@@ -119,13 +128,15 @@ func spawn_enemy():
     add_child(enemy)
 ```
 
+This instantiates the enemy scene and adds it as a child at a random position.
+
 Let me know when you've added it."
 
 Josh: "added it"
 
 Claude: "Great!
 
-Step 3: Connect the Timer's timeout signal to call spawn_enemy():
+Step 4: Connect the Timer's timeout signal:
 
 ```gdscript
 func _ready():
@@ -139,13 +150,13 @@ Josh: "yes they spawn"
 
 Claude: "Perfect! The spawner works.
 
-Step 4: Now let's make them walk toward the player. We'll add that logic next.
+Step 5: Now let's make them walk toward the player. We'll add that logic next.
 
 Done?"
 
 ````
 
-**This prevents overwhelming Josh with too much at once and avoids scrolling.**
+**This prevents overwhelming Josh with too much at once while respecting that simple UI actions don't need hand-holding.**
 
 ## **Key Godot Concepts**
 
