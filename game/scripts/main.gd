@@ -1,8 +1,24 @@
 extends Node2D
 
+# Pool configurations to initialize at startup
+@export var pool_configs: Array[PoolConfig] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# INITIALIZATION ORDER:
+		# 1. Register all pools from pool_configs array (configured in Inspector)
+		# 2. Pre-warm all pools (allocates instances before gameplay)
+		# 3. Rest of scene initialization (camera, viewport, etc.)
+		#
+		# Other systems should use PoolManager.spawn() and PoolManager.despawn()
+		# instead of instantiate() and queue_free() during gameplay
+
+	# initialize pools before any gameplay systems start
+	for config in pool_configs:
+		PoolManager.register_pool(config)
+	PoolManager.preload_all()
+	print("Enemy pool stats: ", PoolManager.get_pool_stats("enemy_test"))
+	
 	# Print viewport size to confirm 640×360
 	var viewport_size = get_viewport().get_visible_rect().size
 	print("Viewport size: ", viewport_size)
