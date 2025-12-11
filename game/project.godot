@@ -14,6 +14,10 @@ config/name="sari-manok"
 run/main_scene="uid://cxqxr03wo51p8"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
+[autoload]
+
+PoolManager="*res://autoloads/pool_manager.gd"
+
 [display]
 
 window/size/viewport_width=640

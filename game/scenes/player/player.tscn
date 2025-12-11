@@ -9,6 +9,21 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8afob"]
 size = Vector2(32, 32)
 
+[sub_resource type="Animation" id="Animation_lvxji"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_dovo2"]
 resource_name = "idle"
 length = 0.1
@@ -30,21 +45,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_lvxji"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VisualSprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lvxji"]
 _data = {
 &"RESET": SubResource("Animation_lvxji"),
@@ -57,10 +57,8 @@ script = ExtResource("1_8afob")
 stats = ExtResource("2_dovo2")
 
 [node name="VisualSprite" type="ColorRect" parent="."]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_right = 32.0
+offset_bottom = 32.0
 color = Color(1.353256, 0.6651851, 1.2282239, 1)
 
 [node name="Label" type="Label" parent="VisualSprite"]
