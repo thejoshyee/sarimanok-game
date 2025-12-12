@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxqxr03wo51p8"]
+[gd_scene load_steps=10 format=3 uid="uid://cxqxr03wo51p8"]
 
 [ext_resource type="Script" uid="uid://bknm7mckcoe48" path="res://scripts/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_0xm2m"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cg2j7pspt52yr" path="res://scenes/ui/pause_menu.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://coqhlglw7m7ay" path="res://scenes/enemies/test_enemy.tscn" id="4_1bvp3"]
 [ext_resource type="Script" uid="uid://dmuri4ffvpoe1" path="res://scripts/hud.gd" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://bib7nigil0j4a" path="res://scenes/ui/pool_debug_overlay.tscn" id="8_5vw27"]
 
 [sub_resource type="TileSet" id="TileSet_ig7tw"]
 tile_size = Vector2i(32, 32)
@@ -51,3 +52,5 @@ offset_right = 102.0
 offset_bottom = 33.0
 theme_override_font_sizes/font_size = 24
 text = "HP: 100/100"
+
+[node name="PoolDebugOverlay" parent="." instance=ExtResource("8_5vw27")]

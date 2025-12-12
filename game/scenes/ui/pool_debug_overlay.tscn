@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bib7nigil0j4a"]
+
+[ext_resource type="Script" uid="uid://bodhs6j6834vy" path="res://scripts/pool_debug_overlay.gd" id="1_nsj36"]
+
+[node name="PoolDebugOverlay" type="Control"]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 400.0
+grow_horizontal = 0
+script = ExtResource("1_nsj36")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+custom_minimum_size = Vector2(300, 400)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_bottom = 400.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
