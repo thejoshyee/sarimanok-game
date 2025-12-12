@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cbn08624truy5"]
+
+[node name="PoolStressTest" type="Node2D"]
