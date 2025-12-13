@@ -7,3 +7,4 @@
 script = ExtResource("1_h8lil")
 
 [node name="PoolDebugOverlay" parent="." instance=ExtResource("2_p25n2")]
+metadata/_edit_use_anchors_ = true

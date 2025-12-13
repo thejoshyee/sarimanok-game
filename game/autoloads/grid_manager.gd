@@ -1,0 +1,34 @@
+extends Node
+
+# grid config
+@export var cell_size: int = 64
+@export var world_bounds: Rect2 = Rect2(0, 0, 1920, 1088)
+
+# grid storage: cell_id -> array of enemies in that cell
+var _grid: Dictionary = {}
+
+func _ready():
+    pass
+
+# convert world position to unique cell ID
+# uses a simple hash: (x << 16) | y where x and y are cell coordinates
+func get_cell_id(position: Vector2) -> int:
+    var cell_x = int(floor(position.x / cell_size))
+    var cell_y = int(floor(position.y / cell_size))
+    # combine x and y into a single integer id
+    return (cell_x << 16) | (cell_y & 0xFFFF)
+
+
+# add an enemy to the grid at its current position
+func register_enemy(enemy: Node2D) -> void:
+    var cell_id = get_cell_id(enemy.global_position)
+    if not _grid.has(cell_id):
+        _grid[cell_id] = []
+    _grid[cell_id].append(enemy)
+
+# remove an enemy from a specific cell
+func unregister_enemy(enemy: Node2D, cell_id: int) -> void:
+    if _grid.has(cell_id):
+        _grid[cell_id].erase(enemy)
+        if _grid[cell_id].is_empty():
+            _grid.erase(cell_id)

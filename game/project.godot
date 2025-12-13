@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 [autoload]
 
 PoolManager="*res://autoloads/pool_manager.gd"
+GridManager="*res://autoloads/grid_manager.gd"
 
 [display]
 
