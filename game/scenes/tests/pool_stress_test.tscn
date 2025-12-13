@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://cbn08624truy5"]
+[gd_scene load_steps=3 format=3 uid="uid://cbn08624truy5"]
+
+[ext_resource type="Script" uid="uid://b66rilure3ckx" path="res://scripts/pool_stress_test.gd" id="1_h8lil"]
+[ext_resource type="PackedScene" uid="uid://bib7nigil0j4a" path="res://scenes/ui/pool_debug_overlay.tscn" id="2_p25n2"]
 
 [node name="PoolStressTest" type="Node2D"]
+script = ExtResource("1_h8lil")
+
+[node name="PoolDebugOverlay" parent="." instance=ExtResource("2_p25n2")]
