@@ -1,0 +1,16 @@
+{
+  "godotTools.editorPath.godot4": "/Applications/Godot.app",
+
+  // Prevent Markdown/docs from accumulating blank lines at EOF.
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+
+  // Keep explicit trailing spaces (sometimes used intentionally in Markdown).
+  "files.trimTrailingWhitespace": false,
+
+  // Extra safety: don't auto-format Markdown on save.
+  "[markdown]": {
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": null
+  }
+}

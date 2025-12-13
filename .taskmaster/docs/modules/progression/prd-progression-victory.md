@@ -252,13 +252,3 @@ On death:
 **Related Files:**
 - [Shop System & Score](prd-progression-meta.md) - Features 9-10
 - [Save System & GameState](prd-progression-state.md) - Week 4-5 tasks & Definition of Done
-
-
-
-
-
-
-
-
-
-

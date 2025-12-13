@@ -250,13 +250,3 @@ Features deferred from EA launch:
 **Related Files:**
 - [Launch Preparation](prd-launch-prep.md) - Week 12
 - **Congratulations on completing Sarimanok Survivor! 🐓**
-
-
-
-
-
-
-
-
-
-

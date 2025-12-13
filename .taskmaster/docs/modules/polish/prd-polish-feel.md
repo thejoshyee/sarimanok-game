@@ -273,13 +273,3 @@ Test and adjust:
 **Related Files:**
 - [Art Integration & Audio Polish](prd-polish-content.md) - Weeks 8-9
 - [Steam Build & Balance](prd-polish-release.md) - Weeks 10-11
-
-
-
-
-
-
-
-
-
-

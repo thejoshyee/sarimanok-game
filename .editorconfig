@@ -1,0 +1,14 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+# Trailing whitespace in Markdown can be meaningful (hard line breaks),
+# so don't trim it automatically for .md files.
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{gd,tscn,tres}]
+trim_trailing_whitespace = true

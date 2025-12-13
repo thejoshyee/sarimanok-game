@@ -164,12 +164,3 @@ func check_golden_unlock():
 **Related Files:**
 
 - [Endless Mode](prd-characters-endless.md) - Feature 12, Week 6 tasks & MVP Checkpoint
-
-
-
-
-
-
-
-
-

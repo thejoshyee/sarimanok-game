@@ -249,13 +249,3 @@ func _on_victory():
 **Related Files:**
 - [Settings & Game Feel](prd-polish-feel.md) - Week 7
 - [Steam Build & Balance](prd-polish-release.md) - Weeks 10-11
-
-
-
-
-
-
-
-
-
-
