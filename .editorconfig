@@ -12,3 +12,4 @@ trim_trailing_whitespace = false
 
 [*.{gd,tscn,tres}]
 trim_trailing_whitespace = true
+
