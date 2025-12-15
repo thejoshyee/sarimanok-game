@@ -6,6 +6,9 @@ var _current_cell_id: int = -1 # track which grid cell this enemy is in
 
 func _ready():
 	add_to_group("enemies")  # Enemy joins "enemies" group, not "player"
+	# Register with grid if not spawned from pool (non-pooled enemies)
+	if _current_cell_id == -1:
+		on_spawn()
 
 func _physics_process(_delta: float) -> void:
 	# Get reference to player and move toward them

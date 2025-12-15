@@ -86,6 +86,7 @@ func reset_stats() -> void:
     query_count = 0
     grid_update_count = 0
 
+
 # get current frame stats
 func get_stats() -> Dictionary:
     var total_cells_used = _grid.size()
@@ -103,3 +104,13 @@ func get_stats() -> Dictionary:
         "grid_update_count": grid_update_count,
         "query_count": query_count
     }
+
+
+# get number of active cells (cells with at least one enemy)
+func get_active_cell_count() -> int:
+    return _grid.size()
+
+
+# clear all enemies from the grid (useful for benchmarks/testing)
+func clear() -> void:
+    _grid.clear()

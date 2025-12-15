@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bge5ex2o7yijb"]
+
+[ext_resource type="Script" uid="uid://b1uf6nmks60vr" path="res://scripts/grid_benchmark.gd" id="1_pbj6u"]
+
+[node name="GridBenchmark" type="Node2D"]
+script = ExtResource("1_pbj6u")
