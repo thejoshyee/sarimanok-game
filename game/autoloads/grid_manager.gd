@@ -4,11 +4,18 @@ extends Node
 @export var cell_size: int = 64
 @export var world_bounds: Rect2 = Rect2(0, 0, 1920, 1088)
 
+# debug stats
+var query_count: int = 0
+var grid_update_count: int = 0
+
 # grid storage: cell_id -> array of enemies in that cell
 var _grid: Dictionary = {}
 
 func _ready():
     pass
+
+func _process(_delta: float) -> void:
+    reset_stats()
 
 # convert world position to unique cell ID
 # uses a simple hash: (x << 16) | y where x and y are cell coordinates
@@ -34,6 +41,14 @@ func unregister_enemy(enemy: Node2D, cell_id: int) -> void:
             _grid.erase(cell_id)
 
 
+func move_enemy(enemy: Node2D, old_cell_id: int, new_cell_id: int) -> void:
+    unregister_enemy(enemy, old_cell_id)
+    if not _grid.has(new_cell_id):
+        _grid[new_cell_id] = []
+    _grid[new_cell_id].append(enemy)
+    grid_update_count += 1
+
+
 # Retreieve all enemies in a specific cell
 func get_cell(cell_id: int) -> Array:
     if _grid.has(cell_id):
@@ -43,6 +58,7 @@ func get_cell(cell_id: int) -> Array:
 
 # retrieve all enemies near a position (checks center cell + 8 neighbors)
 func get_nearby_enemies(pos: Vector2, _radius: float = 128.0) -> Array:
+    query_count += 1
     var enemies: Array = []
     var seen = {} # track enemies we've already added to avoid duplicates
     
@@ -63,3 +79,27 @@ func get_nearby_enemies(pos: Vector2, _radius: float = 128.0) -> Array:
                     enemies.append(enemy)
                     seen[enemy] = true
     return enemies
+
+
+# reset debug stats (called each frame)
+func reset_stats() -> void:
+    query_count = 0
+    grid_update_count = 0
+
+# get current frame stats
+func get_stats() -> Dictionary:
+    var total_cells_used = _grid.size()
+    var total_enemies = 0
+    for enemies in _grid.values():
+        total_enemies += enemies.size()
+
+    var avg_enemies_per_active_cell = 0.0
+    if total_cells_used > 0:
+        avg_enemies_per_active_cell = float(total_enemies) / float(total_cells_used)
+    
+    return {
+        "total_cells_used": total_cells_used,
+        "avg_enemies_per_active_cell": avg_enemies_per_active_cell,
+        "grid_update_count": grid_update_count,
+        "query_count": query_count
+    }

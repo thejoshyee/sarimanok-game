@@ -58,10 +58,18 @@ func spawn_enemy():
 	var enemy = PoolManager.spawn(pool_type)
 	if enemy:
 		# Random position on screen
-		enemy.position = Vector2(
+		var new_pos = Vector2(
 			randf_range(0, 640),
 			randf_range(0, 360)
 		)
+		enemy.position = new_pos
+		
+		# Force grid update with new position
+		var new_cell = GridManager.get_cell_id(enemy.global_position)
+		if enemy._current_cell_id != -1 and new_cell != enemy._current_cell_id:
+			GridManager.move_enemy(enemy, enemy._current_cell_id, new_cell)
+			enemy._current_cell_id = new_cell
+		
 		# Track this enemy with its spawn time
 		active_enemies.append({
 			"node": enemy,

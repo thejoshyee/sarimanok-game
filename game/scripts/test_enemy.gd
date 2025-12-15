@@ -16,12 +16,9 @@ func _physics_process(_delta: float) -> void:
 		move_and_slide()
 
 		var new_cell_id = GridManager.get_cell_id(global_position)
-		if new_cell_id != _current_cell_id:
-			# remove from old cell, add to new cell
-			if _current_cell_id != -1:
-				GridManager.unregister_enemy(self, _current_cell_id)
-			GridManager.register_enemy(self)
-			_current_cell_id = new_cell_id
+		if new_cell_id != _current_cell_id and _current_cell_id != -1:
+					GridManager.move_enemy(self, _current_cell_id, new_cell_id)
+					_current_cell_id = new_cell_id
 
 
 func reset_state() -> void:
