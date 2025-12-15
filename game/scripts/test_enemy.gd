@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @export var speed: float = 50.0
+var _current_cell_id: int = -1 # track which grid cell this enemy is in
+
 
 func _ready():
 	add_to_group("enemies")  # Enemy joins "enemies" group, not "player"
@@ -20,7 +22,15 @@ func reset_state() -> void:
 func on_spawn() -> void:
 	visible = true
 	set_physics_process(true)
+	# register with grid system
+	GridManager.register_enemy(self)
+	_current_cell_id = GridManager.get_cell_id(global_position)
+
 
 func on_despawn() -> void:
 	visible = false
 	set_physics_process(false)
+	# unregister from grid system
+	if _current_cell_id != -1:
+		GridManager.unregister_enemy(self, _current_cell_id)
+		_current_cell_id = -1

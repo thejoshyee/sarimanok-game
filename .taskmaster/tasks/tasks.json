@@ -509,9 +509,10 @@
               1
             ],
             "details": "Add _enter_tree() registration to compute initial cell and add to grid[cell_id]. Track previous_cell_id per enemy. In _physics_process(), check if new_cell != previous_cell; if changed, remove from old cell, add to new cell. Use enemy.global_position for calculations.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Move enemy across 3+ cell boundaries; verify it appears only in correct current cell via debug logs. Performance goal: <5% enemies update cells per frame at 200px/s speed.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-14T23:40:39.052Z"
           },
           {
             "id": 3,
@@ -567,7 +568,7 @@
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Expand into subtasks for (1) designing the grid data structures and cell size configuration, (2) implementing enemy registration and movement updates that adjust cell membership efficiently, (3) exposing helper queries such as get_cell and get_nearby_enemies, (4) refactoring collision and proximity logic to use the grid while staying compatible with current enemy/weapon systems, (5) adding profiling and debug visualization for grid occupancy, and (6) benchmarking and tuning under various enemy counts. For each subtask, define performance goals and integration points with existing gameplay code.",
-        "updatedAt": "2025-12-14T16:19:12.903Z"
+        "updatedAt": "2025-12-14T23:40:39.052Z"
       },
       {
         "id": "8",
@@ -627,7 +628,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-14T16:19:12.904Z",
+      "lastModified": "2025-12-14T23:40:39.055Z",
       "taskCount": 10,
       "completedCount": 6,
       "tags": [
