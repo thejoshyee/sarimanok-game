@@ -32,3 +32,34 @@ func unregister_enemy(enemy: Node2D, cell_id: int) -> void:
         _grid[cell_id].erase(enemy)
         if _grid[cell_id].is_empty():
             _grid.erase(cell_id)
+
+
+# Retreieve all enemies in a specific cell
+func get_cell(cell_id: int) -> Array:
+    if _grid.has(cell_id):
+        return _grid[cell_id]
+    return []
+
+
+# retrieve all enemies near a position (checks center cell + 8 neighbors)
+func get_nearby_enemies(pos: Vector2, _radius: float = 128.0) -> Array:
+    var enemies: Array = []
+    var seen = {} # track enemies we've already added to avoid duplicates
+    
+    # get center cell coordinates
+    var center_x = int(floor(pos.x / cell_size))
+    var center_y = int(floor(pos.y / cell_size))
+
+    # check 3x3 grid (center + 8 neighbors)
+    for x_offset in [-1, 0, 1]:
+        for y_offset in [-1, 0, 1]:
+            var cell_x = center_x + x_offset
+            var cell_y = center_y + y_offset
+            var cell_id = (cell_x << 16) | (cell_y & 0xFFFF)
+
+            var cell_enemies = get_cell(cell_id)
+            for enemy in cell_enemies:
+                if not seen.has(enemy):
+                    enemies.append(enemy)
+                    seen[enemy] = true
+    return enemies
