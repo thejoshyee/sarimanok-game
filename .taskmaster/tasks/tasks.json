@@ -536,9 +536,10 @@
               3
             ],
             "details": "Identify all existing collision checks (enemy vs weapon/projectile, enemy proximity for AI). Replace full enemy list iteration with get_nearby_enemies(weapon.global_position, weapon.range + enemy_radius). Preserve exact distance checks within candidates. Maintain identical behavior via same collision response code.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run before/after comparison with identical enemy/weapon spawns; verify identical collision outcomes. Integration point: All Weapon/Projectile _physics_process() and Enemy AI update().",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-15T19:03:27.077Z"
           },
           {
             "id": 5,
@@ -569,7 +570,7 @@
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Expand into subtasks for (1) designing the grid data structures and cell size configuration, (2) implementing enemy registration and movement updates that adjust cell membership efficiently, (3) exposing helper queries such as get_cell and get_nearby_enemies, (4) refactoring collision and proximity logic to use the grid while staying compatible with current enemy/weapon systems, (5) adding profiling and debug visualization for grid occupancy, and (6) benchmarking and tuning under various enemy counts. For each subtask, define performance goals and integration points with existing gameplay code.",
-        "updatedAt": "2025-12-15T18:47:54.609Z"
+        "updatedAt": "2025-12-15T19:03:27.077Z"
       },
       {
         "id": "8",
@@ -629,7 +630,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-15T18:47:54.612Z",
+      "lastModified": "2025-12-15T19:03:27.077Z",
       "taskCount": 10,
       "completedCount": 6,
       "tags": [
