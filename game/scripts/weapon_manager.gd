@@ -33,6 +33,25 @@ func _process(delta: float) -> void:
 			if cooldowns[slot_index] < 0:
 				cooldowns[slot_index] = 0.0
 
+	# auto-attack loop: check each slot for ready weapons
+	for slot_index in range(6):
+		var weapon = weapon_slots[slot_index]
+
+		# skip empty slots
+		if weapon == null:
+			continue
+
+		# check if this weapon is ready to attack
+		if is_ready(slot_index):
+			print("Slot %d ready to attack, cooldown: %.2f" % [slot_index, get_cooldown(slot_index)])
+
+			# check if the weapon has an attack method
+			if weapon.has_method("attack"):
+				weapon_attack_started.emit(slot_index, weapon)
+				weapon.attack()
+				weapon_attack_completed.emit(slot_index, weapon)
+
+
 # Get player's damage multiplier for weapon calculations
 func get_damage_multiplier() -> float:
 	return player.stats.damage_multiplier if player else 1.0
@@ -51,3 +70,16 @@ func is_ready(slot_index: int) -> bool:
 func set_cooldown(slot_index: int, duration: float) -> void:
 	if slot_index >= 0 and slot_index < 6:
 		cooldowns[slot_index] = duration
+
+
+# equip a weapon to a specific slot
+func equip(slot_index: int, weapon: Variant) -> void:
+	if slot_index >= 0 and slot_index < 6:
+		weapon_slots[slot_index] = weapon
+		cooldowns[slot_index] = 0.0 # Reset cooldown when equipping a new weapon
+
+# Get the current cooldown remaining for a specific slot
+func get_cooldown(slot_index: int) -> float:
+	if slot_index >= 0 and slot_index < 6:
+		return cooldowns[slot_index]
+	return 0.0

@@ -606,10 +606,11 @@
             "dependencies": [
               1
             ],
-            "details": "In WeaponManager._process, iterate slots, decrement cooldowns delta-multiplied by attack speed, and call attack() on ready weapons targeting nearest enemy or forward direction. Expose equip(slot_id, weapon) and get_cooldown(slot_id) for future use.",
-            "status": "pending",
+            "details": "In WeaponManager._process, iterate slots, decrement cooldowns delta-multiplied by attack speed, and call attack() on ready weapons targeting nearest enemy or forward direction. Expose equip(slot_id, weapon) and get_cooldown(slot_id) for future use.\n<info added on 2025-12-17T20:15:52.874Z>\nImplementation complete:\n\n- equip(slot_index, weapon) assigns the weapon to the internal slots array, clamps/validates slot_index to 0–5, and resets the corresponding slot cooldown to 0 so the weapon is immediately eligible to fire on the next ready check.\n- get_cooldown(slot_index) returns the current cooldown value for the given slot, with the same 0–5 index validation used by equip.\n- _process(delta) now runs the auto-attack loop each frame, iterating all 6 slots, skipping null entries, decrementing each active cooldown by delta * attack_speed_multiplier pulled from the owning player’s stats component, and clamping at 0.\n- When a slot’s cooldown reaches 0, the manager:\n  - Logs a debug message including the slot index, current cooldown, and computed attack_speed_multiplier.\n  - Confirms readiness via is_ready(slot_index) before firing.\n  - Emits weapon_attack_started with the slot index and weapon reference.\n  - Calls weapon.attack() safely only if the weapon implements that method.\n  - Emits weapon_attack_completed after the attack call.\n- Auto-attacks are fully independent per slot; no input actions or player controller state are consulted in WeaponManager._process, so multiple equipped weapons can fire on their own schedules.\n- Weapons are required to call set_cooldown(new_value) on the manager (or their assigned slot) after attacking; WeaponManager does not impose cooldown durations itself, only decrements and readiness checks.\n- Signal wiring (weapon_attack_started / weapon_attack_completed) is in place for later integration with passives or VFX, and current logging confirms the emission order around each attack.\n- Basic tests confirm:\n  - Cooldowns decrement correctly at different attack_speed_multiplier values from the player stats.\n  - Debug prints show per-slot readiness and cooldown values over time.\n  - equip() and get_cooldown() correctly handle valid indices (0–5) and guard against out-of-range values.\n- Subtask is ready for Task 8.3 to introduce a shared weapon base class that will standardize attack() and cooldown behavior across all weapon types.\n</info added on 2025-12-17T20:15:52.874Z>",
+            "status": "done",
             "testStrategy": "Log attack triggers and cooldown states; confirm no overlaps and correct firing rates independent of player input.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-17T20:16:00.108Z"
           },
           {
             "id": 3,
@@ -652,7 +653,7 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Decompose into subtasks that (1) design or align the weapon management interface on the player (slots, cooldown tracking, stat modifiers), (2) implement a weapon manager or component that updates cooldowns and triggers attacks, (3) define a minimal weapon interface or base class that concrete weapons can implement, (4) integrate with pooling and spatial systems for spawning projectiles or effects, and (5) build a simple test weapon plus diagnostic scene to validate automatic firing and stat scaling. For each subtask, specify how to keep the design extensible for future weapons and passives.",
-        "updatedAt": "2025-12-16T21:57:34.629Z"
+        "updatedAt": "2025-12-17T20:16:00.108Z"
       },
       {
         "id": "9",
@@ -694,7 +695,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-16T21:57:34.630Z",
+      "lastModified": "2025-12-17T20:16:00.109Z",
       "taskCount": 10,
       "completedCount": 7,
       "tags": [
