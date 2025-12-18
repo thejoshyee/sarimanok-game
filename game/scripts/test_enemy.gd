@@ -5,10 +5,8 @@ var _current_cell_id: int = -1 # track which grid cell this enemy is in
 
 
 func _ready():
-	add_to_group("enemies")  # Enemy joins "enemies" group, not "player"
-	# Register with grid if not spawned from pool (non-pooled enemies)
-	if _current_cell_id == -1:
-		on_spawn()
+	# Don't add to group here - on_spawn() handles it when active
+	pass
 
 func _physics_process(_delta: float) -> void:
 	# Get reference to player and move toward them
@@ -31,6 +29,8 @@ func reset_state() -> void:
 func on_spawn() -> void:
 	visible = true
 	set_physics_process(true)
+	z_index = 10  # Pooled enemies need higher z_index to render above main scene
+	add_to_group("enemies")  # Only in group when active
 	# register with grid system
 	GridManager.register_enemy(self)
 	_current_cell_id = GridManager.get_cell_id(global_position)
@@ -39,6 +39,7 @@ func on_spawn() -> void:
 func on_despawn() -> void:
 	visible = false
 	set_physics_process(false)
+	remove_from_group("enemies") # remove when inactive
 	# unregister from grid system
 	if _current_cell_id != -1:
 		GridManager.unregister_enemy(self, _current_cell_id)
@@ -46,5 +47,5 @@ func on_despawn() -> void:
 
 func take_damage(amount: float) -> void:
 	print("Enemy took ", amount, " damage")
-	# For now, just despawn the enemy when hit
-	queue_free()
+	# Return to pool instead of freeing
+	PoolManager.despawn(self)

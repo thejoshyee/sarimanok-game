@@ -37,11 +37,14 @@ func reset(start_pos: Vector2, target_direction: Vector2, projectile_damage: flo
 func on_spawn() -> void:
 	visible = true
 	set_physics_process(true)
+	set_deferred("monitoring", true)  # Enable collision detection
+
 
 # Called when returned to pool
 func on_despawn() -> void:
 	visible = false
 	set_physics_process(false)
+	set_deferred("monitoring", false)  # Disable collision detection
 
 # return projectile to pool instead of freeing it
 func despawn() -> void:

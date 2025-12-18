@@ -17,7 +17,7 @@ func attack() -> void:
     reset_cooldown()
 
 func get_base_cooldown() -> float:
-    return 1.0 # fire once per second
+    return 2.0 # fire every 2 seconds
 
 func get_base_damage() -> float:
     return 10.0 # 10 damage per shot

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmf2r32mowlp1"]
+
+[ext_resource type="Script" uid="uid://dmuri4ffvpoe1" path="res://scripts/hud.gd" id="1_0mwgc"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_0mwgc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CooldownLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
