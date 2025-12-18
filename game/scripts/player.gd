@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var damage_area: Area2D = $DamageArea
 @onready var sprite: ColorRect = $VisualSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var weapon_manager = $WeaponManager
 
 # Runtime State
 var current_hp: float
@@ -86,28 +87,9 @@ func _ready() -> void:
 	# connect WeaponManager to this player
 	$WeaponManager.player = self
 
-	# test WeaponManager
-	# _test_weapon_manager()
-
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	# check if the body that hits us is an enemy
 	if body.is_in_group("enemies"):
 		take_damage(10.0) # placeholder damage
 	# dont take damage if invincible
-
-
-# TEMP: Test WeaponManager setup
-# func _test_weapon_manager() -> void:
-# 	print("=== WeaponManager Test ===")
-# 	print("Weapon slots: ", $WeaponManager.weapon_slots.size())
-# 	print("Damage multiplier: ", $WeaponManager.get_damage_multiplier())
-# 	print("Attack speed multiplier: ", $WeaponManager.get_attack_speed_multiplier())
-	
-# 	# Test cooldown
-# 	$WeaponManager.set_cooldown(0, 2.0)
-# 	print("Slot 0 cooldown set to 2.0")
-# 	print("Slot 0 is ready: ", $WeaponManager.is_ready(0))
-	
-# 	await get_tree().create_timer(2.5).timeout
-# 	print("After 2.5 seconds, Slot 0 is ready: ", $WeaponManager.is_ready(0))

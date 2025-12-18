@@ -73,10 +73,16 @@ func set_cooldown(slot_index: int, duration: float) -> void:
 
 
 # equip a weapon to a specific slot
-func equip(slot_index: int, weapon: Variant) -> void:
+func equip(slot_index: int, weapon: BaseWeapon) -> void:
 	if slot_index >= 0 and slot_index < 6:
 		weapon_slots[slot_index] = weapon
 		cooldowns[slot_index] = 0.0 # Reset cooldown when equipping a new weapon
+
+		# Initialize weapon references
+		weapon.weapon_manager = self
+		weapon.player = player
+		weapon.slot_index = slot_index
+		weapon.on_equip() # call weapon's on_equip() method
 
 # Get the current cooldown remaining for a specific slot
 func get_cooldown(slot_index: int) -> float:

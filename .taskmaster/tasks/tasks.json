@@ -619,10 +619,11 @@
             "dependencies": [
               1
             ],
-            "details": "Script with abstract attack(), get_base_cooldown(), get_base_damage() methods, plus virtual on_equip/passive_modifier hooks. Design for polymorphism so future weapons override behavior while sharing manager logic; integrate player stats via passed references.",
-            "status": "pending",
+            "details": "Script with abstract attack(), get_base_cooldown(), get_base_damage() methods, plus virtual on_equip/passive_modifier hooks. Design for polymorphism so future weapons override behavior while sharing manager logic; integrate player stats via passed references.\n<info added on 2025-12-18T14:11:46.079Z>\nImplemented BaseWeapon script at res://scripts/weapons/base_weapon.gd with abstract attack(), get_base_cooldown(), and get_base_damage() methods, virtual on_equip(), on_unequip(), and apply_passive_modifier() hooks, plus helper methods get_final_damage(), get_final_cooldown(), and reset_cooldown(), and member references weapon_manager: WeaponManager, player: CharacterBody2D, and slot_index: int. Updated res://scripts/weapons/weapon_manager.gd equip() to accept a typed BaseWeapon, assign weapon_manager, player, and slot_index on the weapon, and invoke weapon.on_equip(), ensuring the manager’s _process() auto-attack loop calls weapon.attack() while preventing direct use of the abstract base via an assert on the unoverridden attack().\n</info added on 2025-12-18T14:11:46.079Z>",
+            "status": "done",
             "testStrategy": "Instantiate base class, mock attack() to print stats, confirm it integrates with manager without errors.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-18T14:11:56.044Z"
           },
           {
             "id": 4,
@@ -653,7 +654,7 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Decompose into subtasks that (1) design or align the weapon management interface on the player (slots, cooldown tracking, stat modifiers), (2) implement a weapon manager or component that updates cooldowns and triggers attacks, (3) define a minimal weapon interface or base class that concrete weapons can implement, (4) integrate with pooling and spatial systems for spawning projectiles or effects, and (5) build a simple test weapon plus diagnostic scene to validate automatic firing and stat scaling. For each subtask, specify how to keep the design extensible for future weapons and passives.",
-        "updatedAt": "2025-12-17T20:16:00.108Z"
+        "updatedAt": "2025-12-18T14:11:56.044Z"
       },
       {
         "id": "9",
@@ -695,7 +696,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-17T20:16:00.109Z",
+      "lastModified": "2025-12-18T14:11:56.044Z",
       "taskCount": 10,
       "completedCount": 7,
       "tags": [
