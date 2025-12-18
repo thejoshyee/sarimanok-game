@@ -43,3 +43,8 @@ func on_despawn() -> void:
 	if _current_cell_id != -1:
 		GridManager.unregister_enemy(self, _current_cell_id)
 		_current_cell_id = -1
+
+func take_damage(amount: float) -> void:
+	print("Enemy took ", amount, " damage")
+	# For now, just despawn the enemy when hit
+	queue_free()

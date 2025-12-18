@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnbc0"]
 size = Vector2(32, 32)
 
-[node name="TestEnemy" type="CharacterBody2D"]
+[node name="TestEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 2
 script = ExtResource("1_pnhpx")
 

@@ -55,3 +55,43 @@ func get_final_cooldown() -> float:
 func reset_cooldown() -> void:
 	if weapon_manager:
 		weapon_manager.set_cooldown(slot_index, get_final_cooldown())
+
+# Find the nearest enemy to the player using spatial queries
+func find_nearest_enemy() -> Node2D:
+	if not player:
+		return null
+	
+	# get all enemies in the "enemies" group
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	if enemies.is_empty():
+		return null
+	
+	# find closest enemy
+	var nearest_enemy = null
+	var nearest_distance = INF
+	
+	for enemy in enemies:
+		var distance = player.global_position.distance_to(enemy.global_position)
+		if distance < nearest_distance:
+			nearest_distance = distance
+			nearest_enemy = enemy
+	return nearest_enemy
+
+# spawn a projectile from the pool toward the target
+func spawn_projectile(target_pos: Vector2) -> void:
+	if not player:
+		return
+	
+	# get projectile from pool
+	var projectile = PoolManager.spawn("projectile_base", player.global_position)
+	if not projectile:
+		push_warning("Failed to spawn projectile")
+		return
+
+	print("Spawned projectile: ", projectile, " at ", player.global_position)
+	
+	# Calc direction to target
+	var direction = (target_pos - player.global_position).normalized()
+
+	# initialize the projectile
+	projectile.reset(player.global_position, direction, get_final_damage())

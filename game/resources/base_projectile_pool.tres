@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PoolConfig" load_steps=2 format=3 uid="uid://3binpwgvdws0"]
+
+[ext_resource type="Script" uid="uid://dnolhjriaskgh" path="res://resources/pool_config.gd" id="1_fvgik"]
+
+[resource]
+script = ExtResource("1_fvgik")
+pool_id = "projectile_base"
+scene_path = "res://scenes/weapons/base_projectile.tscn"
+initial_size = 20
+max_size = 100
+metadata/_custom_type_script = "uid://dnolhjriaskgh"

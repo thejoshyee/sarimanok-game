@@ -11,5 +11,6 @@ insert_final_newline = true
 trim_trailing_whitespace = false
 
 [*.{gd,tscn,tres}]
+indent_style = tab
+indent_size = 4
 trim_trailing_whitespace = true
-

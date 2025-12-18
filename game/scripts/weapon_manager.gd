@@ -83,6 +83,9 @@ func equip(slot_index: int, weapon: BaseWeapon) -> void:
 		weapon.player = player
 		weapon.slot_index = slot_index
 		weapon.on_equip() # call weapon's on_equip() method
+		
+		# add weapon to scene tree
+		add_child(weapon)
 
 # Get the current cooldown remaining for a specific slot
 func get_cooldown(slot_index: int) -> float:

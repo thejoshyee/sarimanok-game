@@ -87,6 +87,11 @@ func _ready() -> void:
 	# connect WeaponManager to this player
 	$WeaponManager.player = self
 
+	# Test: Equip test gun to slot 0
+	var test_gun = TestGun.new()
+	weapon_manager.equip(0, test_gun)
+	print("Test gun equipped to slot 0")
+
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	# check if the body that hits us is an enemy

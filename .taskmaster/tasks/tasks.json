@@ -634,9 +634,10 @@
               3
             ],
             "details": "In weapon attack(), query nearest enemy via SpaceState2D (from Tasks 6/7), spawn pooled projectile from global pooler with direction/position from player, apply damage/scaling. Use signals for VFX/SFX; keep generic for non-projectile weapons later.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn debug projectiles, verify pooling reuse, spatial targeting picks correct enemy, and effects trigger.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-18T16:24:35.515Z"
           },
           {
             "id": 5,
@@ -654,7 +655,7 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Decompose into subtasks that (1) design or align the weapon management interface on the player (slots, cooldown tracking, stat modifiers), (2) implement a weapon manager or component that updates cooldowns and triggers attacks, (3) define a minimal weapon interface or base class that concrete weapons can implement, (4) integrate with pooling and spatial systems for spawning projectiles or effects, and (5) build a simple test weapon plus diagnostic scene to validate automatic firing and stat scaling. For each subtask, specify how to keep the design extensible for future weapons and passives.",
-        "updatedAt": "2025-12-18T14:11:56.044Z"
+        "updatedAt": "2025-12-18T16:24:35.515Z"
       },
       {
         "id": "9",
@@ -696,7 +697,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-18T14:11:56.044Z",
+      "lastModified": "2025-12-18T16:24:35.521Z",
       "taskCount": 10,
       "completedCount": 7,
       "tags": [
