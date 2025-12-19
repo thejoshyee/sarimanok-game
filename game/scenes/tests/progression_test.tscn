@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://u0s1ts78rie3"]
+
+[ext_resource type="Script" uid="uid://ceiahu4xgs1he" path="res://scripts/progression_test.gd" id="1_q8jxe"]
+
+[node name="ProgressionTest" type="Node"]
+script = ExtResource("1_q8jxe")

@@ -688,9 +688,10 @@
             "description": "Create Progression resource or singleton with XP tracking, level calculation, and configurable XP curve for leveling thresholds.",
             "dependencies": [],
             "details": "Define XPToNextLevel curve using quadratic formula (e.g., level * 100 + level^2 * 20). Track current_xp, current_level, xp_at_level_up as exported vars. Add methods: add_xp(amount), check_level_up(), get_progress_ratio(). Align with existing stats patterns from Task 4.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Unit test XP curve: verify level 1→2 at 100XP, level 2→3 at 240XP total, precise calculations match formula.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-19T20:13:41.966Z"
           },
           {
             "id": 3,
@@ -750,7 +751,7 @@
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project.",
-        "updatedAt": "2025-12-19T18:06:53.114Z"
+        "updatedAt": "2025-12-19T20:13:41.966Z"
       },
       {
         "id": "10",
@@ -775,7 +776,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-19T18:06:53.123Z",
+      "lastModified": "2025-12-19T20:13:41.971Z",
       "taskCount": 10,
       "completedCount": 8,
       "tags": [
