@@ -5,6 +5,7 @@ extends Node2D
 
 var spawn_timer: float = 0.0
 var spawn_interval: float = 3.0  # Spawn enemy every 3 seconds
+var test_gems: Array = [] # track spawned test gems
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +22,10 @@ func _ready():
 		PoolManager.register_pool(config)
 	PoolManager.preload_all()
 	print("Enemy pool stats: ", PoolManager.get_pool_stats("enemy_test"))
+	print("XP gem pool stats: ", PoolManager.get_pool_stats("pickup_xp_gem"))
+
+	# Test: Spawn 10 xp gems in a circle for pooling verification
+	test_spawn_xp_gems()
 	
 	# Print viewport size to confirm 640×360
 	var viewport_size = get_viewport().get_visible_rect().size
@@ -54,6 +59,19 @@ func _draw():
 
 # Camera follows the player
 func _process(_delta):
+	# Test: Press Space to toggle XP Gems (despawn all, then respawn)
+	if Input.is_action_just_pressed("ui_select"): # space bar
+		if test_gems.size() > 0:
+			# despawn all test gems
+			for gem in test_gems:
+				PoolManager.despawn(gem)
+			test_gems.clear()
+			print("Despawned all test gems")
+		else:
+			# Respawn 10 gems
+			test_spawn_xp_gems()
+
+	# Camera follows the player
 	if has_node("Player"):
 		$Camera2D.position = $Player.position
 
@@ -73,3 +91,20 @@ func spawn_enemy():
 		var distance = randf_range(150, 250)
 		enemy.global_position = player_pos + Vector2(cos(angle), sin(angle)) * distance
 		print("Spawned enemy at: ", enemy.global_position)
+
+
+func test_spawn_xp_gems():
+	# spawn 10 xp gems in a circle pattern around player for test
+	var player_pos = $Player.position if has_node("Player") else Vector2(320, 180)
+	var radius = 100.0 
+
+	for i in range(10):
+		var angle = (i / 10.0) * TAU # Divide circle into 10 equal angles
+		var offset = Vector2(cos(angle), sin(angle)) * radius
+		var gem = PoolManager.spawn("pickup_xp_gem", player_pos + offset)
+		if gem:
+			test_gems.append(gem) # store reference to spawned gem
+			print("Spawned XP gem #", i, " at: ", gem.global_position)
+
+	# Print pool stats after spawning
+	print("After spawn - ", PoolManager.get_pool_stats("pickup_xp_gem"))
