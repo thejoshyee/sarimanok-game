@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": "1",
+        "id": 1,
         "title": "Audit existing Godot project setup",
         "description": "Inspect the current Godot 4 project to understand scenes, scripts, and configuration already in place.",
         "details": "Review the Godot project structure, main scene, autoloads (singletons), and any existing player, enemy, weapon, or progression scripts to avoid duplicating work.[1] Document what systems already exist (e.g., movement, input actions, basic UI, pooling helpers) and how they are organized (folders, naming conventions, node hierarchies).",
@@ -85,7 +85,7 @@
         "updatedAt": "2025-12-05T13:31:38.640Z"
       },
       {
-        "id": "2",
+        "id": 2,
         "title": "Configure project resolution and window settings",
         "description": "Set up viewport, stretch, and window scaling to match the PRD specifications.",
         "details": "In Project Settings → Display → Window, configure Viewport Width = 640 and Viewport Height = 360, set Stretch Mode to canvas_items, and Stretch Aspect to keep, to achieve the desired 640×360 viewport and proper scaling on different monitor resolutions.[1] Verify that the arena (1920×1088) and tile size (32×32) are consistent with tileset and camera configuration in the current scenes.",
@@ -141,7 +141,7 @@
         "updatedAt": "2025-12-05T20:47:20.983Z"
       },
       {
-        "id": "3",
+        "id": 3,
         "title": "Define input actions and controls",
         "description": "Set up and/or validate the Godot Input Map for movement, pause, and UI actions as specified.",
         "details": "In Project Settings → Input Map, ensure the following actions exist with correct bindings: move_up (W, Up Arrow, D-pad Up, Left Stick Up), move_down (S, Down Arrow, D-pad Down, Left Stick Down), move_left (A, Left Arrow, D-pad Left, Left Stick Left), move_right (D, Right Arrow, D-pad Right, Left Stick Right), pause (Esc, Start), ui_accept (Enter, Space, A/X button), ui_cancel (Esc, B/O button).[1] Confirm existing code uses get_action_strength for movement vectors to support analog sticks and update scripts if they currently rely on is_action_pressed for basic movement axes.[3]",
@@ -212,7 +212,7 @@
         "updatedAt": "2025-12-06T14:22:16.532Z"
       },
       {
-        "id": "4",
+        "id": 4,
         "title": "Implement or align Classic Sarimanok player controller",
         "description": "Create or adapt the CharacterBody2D-based Sarimanok player with correct movement, stats, and damage handling.",
         "details": "Ensure the player is implemented as a CharacterBody2D with movement driven by an input_vector built from move_* actions, normalized and multiplied by move_speed, then applied via move_and_slide.[1] Implement base stats (Max HP 100, Move Speed 200 px/s, Damage 100%, Attack Speed 100%, Pickup Range 50) as exported variables or in a dedicated stats/resource object consistent with current code patterns. Add a collision shape for enemy damage, a hit/health component if one already exists, and invincibility frames of 0.5s after taking damage, reusing existing damage/health systems if present.[2]",
@@ -313,7 +313,7 @@
         "updatedAt": "2025-12-07T18:12:13.329Z"
       },
       {
-        "id": "5",
+        "id": 5,
         "title": "Set up placeholder Sarimanok visuals and animation",
         "description": "Create the temporary visual representation and simple 2-frame animation for the player.",
         "details": "Use a 32×32 ColorRect or equivalent simple node as the placeholder Classic Sarimanok, with a multicolor or rainbow palette approximating the intended art direction.[2] Configure a 2-frame idle/walk bob animation that flips between frames every 0.2 seconds when the player is moving, and flip the sprite horizontally based on velocity.x in the existing animation/visual script or a new dedicated script following current project conventions.[1]",
@@ -369,7 +369,7 @@
         "updatedAt": "2025-12-09T14:46:25.714Z"
       },
       {
-        "id": "6",
+        "id": 6,
         "title": "Establish object pooling infrastructure",
         "description": "Implement or extend a reusable pooling system for enemies, projectiles, pickups, and particles.",
         "details": "Create a central pooling manager or per-type pool scenes that pre-allocate arrays for enemies (300), projectiles (200), pickups (500), and particles (100 per type) at game start, reusing any existing pooling utilities if they are already present.[3] Ensure that gameplay code does not call queue_free or instantiate during active gameplay, but instead marks instances inactive and returns them to their pool, with pools pre-warmed in the main scene’s _ready method.[1]",
@@ -479,7 +479,7 @@
         "updatedAt": "2025-12-13T00:49:42.162Z"
       },
       {
-        "id": "7",
+        "id": 7,
         "title": "Implement grid-based spatial partitioning for enemies",
         "description": "Add spatial hashing to optimize collision and proximity checks with many enemies.",
         "details": "Create a spatial grid system that maps grid cells (64×64 pixels) to arrays of enemy references, updating an enemy’s cell assignment only when it crosses a cell boundary.[1] Provide helper functions such as get_cell and get_nearby_enemies that return enemies in the same or adjacent cells, and refactor any existing naive O(n²) collision or proximity checks to use this system while retaining compatibility with current enemy and weapon code.[3]",
@@ -575,7 +575,7 @@
         "updatedAt": "2025-12-15T23:17:55.345Z"
       },
       {
-        "id": "8",
+        "id": 8,
         "title": "Integrate auto-attack hooks for weapons",
         "description": "Prepare the player and game loop for automatic weapon firing compatible with the planned weapon system.",
         "details": "Add generic weapon slots or a weapon manager component to the player that tracks equipped weapons and their cooldowns, following any existing weapon or skill architecture in the project.[2] Ensure that weapons auto-attack based on their cooldowns without player input, exposing hooks for six planned weapons in later tasks and using the player’s Damage and Attack Speed multipliers to modify weapon behavior.[1]",
@@ -586,7 +586,7 @@
           "6",
           "7"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -647,18 +647,19 @@
               4
             ],
             "details": "Create TestWeapon extending base with 2s cooldown, 10 damage projectile spawn. Build scene with player, dummy enemies, stat UI; equip to slot 0. Ensure design uses slots/signals for easy swap to 6 future weapons and passive stat tests.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run scene: confirm auto-fire every ~2s (modulated by attack speed), damage scales with player stats, cooldown UI updates, no input required.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-19T12:59:00.135Z"
           }
         ],
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Decompose into subtasks that (1) design or align the weapon management interface on the player (slots, cooldown tracking, stat modifiers), (2) implement a weapon manager or component that updates cooldowns and triggers attacks, (3) define a minimal weapon interface or base class that concrete weapons can implement, (4) integrate with pooling and spatial systems for spawning projectiles or effects, and (5) build a simple test weapon plus diagnostic scene to validate automatic firing and stat scaling. For each subtask, specify how to keep the design extensible for future weapons and passives.",
-        "updatedAt": "2025-12-18T16:24:35.515Z"
+        "updatedAt": "2025-12-19T12:59:00.135Z"
       },
       {
-        "id": "9",
+        "id": 9,
         "title": "Implement basic progression loop scaffolding",
         "description": "Lay down the core systems for XP collection, leveling, and stat upgrades without full content.",
         "details": "Create a pickup type representing XP gems that the player collects within a Pickup Range of 50 pixels, ideally reusing the pooling system for pickups.[1] Implement a simple XP curve, level tracking, and a placeholder level-up UI that can present upgrade choices for weapons and passives later, aligning with any existing UI and progression frameworks already in the codebase.[2]",
@@ -669,13 +670,82 @@
           "6"
         ],
         "status": "pending",
-        "subtasks": [],
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define XP pickup scene and pooling integration",
+            "description": "Create XP gem pickup scene with sprite, collision, and value property, integrating with existing pooling system for efficient spawning.",
+            "dependencies": [],
+            "details": "Design XP pickup as a pooled Area2D or RigidBody2D scene with XP value export var (e.g., 10-50 XP). Add to existing PickupPool manager, spawn via get_pooled('xp_gem', position). Set Pickup Range detection to 50px matching player stats from Task 4.",
+            "status": "pending",
+            "testStrategy": "Spawn 10 XP pickups manually in editor, verify pooling reuse and no memory leaks on collect/despawn cycles."
+          },
+          {
+            "id": 2,
+            "title": "Implement XP and level data model with XP curve",
+            "description": "Create Progression resource or singleton with XP tracking, level calculation, and configurable XP curve for leveling thresholds.",
+            "dependencies": [],
+            "details": "Define XPToNextLevel curve using quadratic formula (e.g., level * 100 + level^2 * 20). Track current_xp, current_level, xp_at_level_up as exported vars. Add methods: add_xp(amount), check_level_up(), get_progress_ratio(). Align with existing stats patterns from Task 4.",
+            "status": "pending",
+            "testStrategy": "Unit test XP curve: verify level 1→2 at 100XP, level 2→3 at 240XP total, precise calculations match formula."
+          },
+          {
+            "id": 3,
+            "title": "Wire XP collection into player and progression",
+            "description": "Connect player detection to XP pickups: on overlap within 50px pickup range, grant XP and despawn pickup.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "In player controller (Task 4), add Area2D monitor with 50px radius. On body_entered, check if XP pickup type, call progression.add_xp(pickup.xp_value), queue pickup despawn/recycle. Integrate with pooling deactivate. Use existing input_vector patterns.",
+            "status": "pending",
+            "testStrategy": "Move player near XP gem, verify XP increases by correct amount and gem despawns immediately."
+          },
+          {
+            "id": 4,
+            "title": "Create placeholder level-up UI and flow",
+            "description": "Build level-up screen that pauses game, displays upgrade choices, handles selection, and applies effects.",
+            "dependencies": [
+              2
+            ],
+            "details": "Extend existing UI framework (from pause menu patterns). Create LevelUpPanel with CanvasLayer/Modal, pause get_tree().paused=true on level_up signal. Show 3 upgrade buttons with icons/text. Use ui_accept/cancel actions from Task 3. Unpause after selection.",
+            "status": "pending",
+            "testStrategy": "Trigger level-up signal manually, verify game pauses, UI appears center-screen, navigation works with keyboard/controller."
+          },
+          {
+            "id": 5,
+            "title": "Integrate stat-upgrade options with effects",
+            "description": "Add placeholder upgrades that modify player stats or log debug output, selectable in level-up UI.",
+            "dependencies": [
+              3,
+              4
+            ],
+            "details": "Define 3 options: '+20% Move Speed', '+10 Max HP', 'Weapon Damage +1'. On select, apply to player stats resource (reuse Task 4 patterns), print debug 'Applied [upgrade] at level X'. Emit signal for future weapon/passive integration. Close UI and resume game.",
+            "status": "pending",
+            "testStrategy": "Level up, select each option 2x, verify stats update (speed=240→288, etc.) and console logs correct applications."
+          },
+          {
+            "id": 6,
+            "title": "Build test scenarios for end-to-end leveling",
+            "description": "Create comprehensive test scene validating XP collection, leveling, UI flow, and upgrade application.",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "details": "New TestProgression scene: spawn player, 20 XP gems in grid. Auto-collect path or manual. Assert XP thresholds trigger level-ups, UI sequence completes, stats persist post-upgrade. Log full flow, FPS stable. Align with Task 4 test patterns.",
+            "status": "pending",
+            "testStrategy": "Run test scene, collect all XP to reach level 3+, verify 2 level-ups occur, all 6 upgrades selectable, stats match expected values, no crashes."
+          }
+        ],
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project."
       },
       {
-        "id": "10",
+        "id": 10,
         "title": "Performance validation for Week 3 target",
         "description": "Verify that the foundation meets the Week 3 performance and stability goals.",
         "details": "Create a dedicated performance test scene or mode that can spawn at least 100 active enemies using the pooling and spatial partitioning systems while the player moves and auto-attacks.[3] Measure FPS and frame time using Godot’s profiler to confirm stable 60 FPS under this load, and document any bottlenecks or further optimizations needed to reach the eventual 200+ enemy target.[1]",
@@ -697,12 +767,14 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-18T16:24:35.521Z",
+      "lastModified": "2025-12-19T12:59:00.138Z",
       "taskCount": 10,
-      "completedCount": 7,
+      "completedCount": 8,
       "tags": [
         "master"
-      ]
+      ],
+      "created": "2025-12-19T13:07:33.384Z",
+      "description": "Tasks for master context"
     }
   }
 }
