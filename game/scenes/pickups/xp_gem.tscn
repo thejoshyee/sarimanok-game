@@ -6,6 +6,7 @@
 radius = 8.0
 
 [node name="XPGem" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_m8kyv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

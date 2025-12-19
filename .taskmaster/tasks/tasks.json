@@ -702,9 +702,10 @@
               2
             ],
             "details": "In player controller (Task 4), add Area2D monitor with 50px radius. On body_entered, check if XP pickup type, call progression.add_xp(pickup.xp_value), queue pickup despawn/recycle. Integrate with pooling deactivate. Use existing input_vector patterns.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Move player near XP gem, verify XP increases by correct amount and gem despawns immediately.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-19T21:16:43.663Z"
           },
           {
             "id": 4,
@@ -751,7 +752,7 @@
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project.",
-        "updatedAt": "2025-12-19T20:13:41.966Z"
+        "updatedAt": "2025-12-19T21:16:43.663Z"
       },
       {
         "id": "10",
@@ -776,7 +777,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-19T20:13:41.971Z",
+      "lastModified": "2025-12-19T21:16:43.666Z",
       "taskCount": 10,
       "completedCount": 8,
       "tags": [

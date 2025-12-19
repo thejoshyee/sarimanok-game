@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var sprite: ColorRect = $VisualSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var weapon_manager = $WeaponManager
+@onready var pickup_area: Area2D = $PickupArea
+@onready var progression: Progression = ProgressionManager
 
 # Runtime State
 var current_hp: float
@@ -83,6 +85,7 @@ func _ready() -> void:
 	add_to_group("player")
 	current_hp = stats.max_hp # start at full health 
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
+	pickup_area.area_entered.connect(_on_pickup_area_area_entered)
 
 	# connect WeaponManager to this player
 	$WeaponManager.player = self
@@ -98,3 +101,15 @@ func _on_damage_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
 		take_damage(10.0) # placeholder damage
 	# dont take damage if invincible
+
+
+func _on_pickup_area_area_entered(area: Area2D) -> void:
+	# Check if the area is an XP gem
+	if area.is_in_group("xp_gems"):
+		# Get XP value and add it to progression
+		var xp_value = area.xp_value
+		progression.add_xp(xp_value)
+		print("Collected ", xp_value, " XP. Total: ", progression.current_xp, " Level: ", progression.current_level)
+		
+		# Despawn the gem back to the pool
+		PoolManager.despawn(area)

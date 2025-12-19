@@ -8,6 +8,7 @@ func reset_state() -> void:
 	xp_value = 10
 
 func on_spawn() -> void:
+	add_to_group("xp_gems")
 	# called when this gem is taken from the pool
 	visible = true
 	monitoring = true # enable area2d collision detection
