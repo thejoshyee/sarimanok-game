@@ -24,12 +24,12 @@ grow_vertical = 2
 
 [node name="UpgradeOption1" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Option 1"
+text = "+20% Move Speed"
 
 [node name="UpgradeOption2" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Option 2"
+text = "+10 Max HP"
 
 [node name="UpgradeOption3" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Option 3"
+text = "+10% Weapon Damage"

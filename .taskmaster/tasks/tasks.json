@@ -729,9 +729,10 @@
               4
             ],
             "details": "Define 3 options: '+20% Move Speed', '+10 Max HP', 'Weapon Damage +1'. On select, apply to player stats resource (reuse Task 4 patterns), print debug 'Applied [upgrade] at level X'. Emit signal for future weapon/passive integration. Close UI and resume game.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Level up, select each option 2x, verify stats update (speed=240→288, etc.) and console logs correct applications.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-20T23:04:29.587Z"
           },
           {
             "id": 6,
@@ -753,7 +754,7 @@
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project.",
-        "updatedAt": "2025-12-20T20:05:34.201Z"
+        "updatedAt": "2025-12-20T23:04:29.587Z"
       },
       {
         "id": "10",
@@ -778,7 +779,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-20T20:05:34.206Z",
+      "lastModified": "2025-12-20T23:04:29.590Z",
       "taskCount": 10,
       "completedCount": 8,
       "tags": [
