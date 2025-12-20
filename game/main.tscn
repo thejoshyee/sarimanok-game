@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxqxr03wo51p8"]
+[gd_scene load_steps=13 format=3 uid="uid://cxqxr03wo51p8"]
 
 [ext_resource type="Script" uid="uid://bknm7mckcoe48" path="res://scripts/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_0xm2m"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bharnwex5kijy" path="res://resources/xp_gem_pool.tres" id="5_4c57u"]
 [ext_resource type="PackedScene" uid="uid://bib7nigil0j4a" path="res://scenes/ui/pool_debug_overlay.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dk4w6bjsr8gca" path="res://scenes/ui/grid_debug_overlay.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://dvdy2n5irl835" path="res://scenes/ui/level_up_panel.tscn" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://dmf2r32mowlp1" path="res://scenes/ui/hud.tscn" id="11_efxa6"]
 
 [sub_resource type="TileSet" id="TileSet_ig7tw"]
@@ -38,7 +39,7 @@ limit_bottom = 1088
 process_mode = 1
 position = Vector2(320, 180)
 
-[node name="CanvasLayer" parent="." instance=ExtResource("3_h2yge")]
+[node name="PauseMenu" parent="." instance=ExtResource("3_h2yge")]
 process_mode = 3
 
 [node name="PoolDebugOverlay" parent="." instance=ExtResource("8_5vw27")]
@@ -46,3 +47,6 @@ process_mode = 3
 [node name="GridDebugOverlay" parent="." instance=ExtResource("9_kek77")]
 
 [node name="HUD" parent="." instance=ExtResource("11_efxa6")]
+
+[node name="LevelUpPanel" parent="." instance=ExtResource("11_dg77c")]
+process_mode = 3

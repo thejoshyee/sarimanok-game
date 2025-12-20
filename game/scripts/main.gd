@@ -3,6 +3,8 @@ extends Node2D
 # Pool configurations to initialize at startup
 @export var pool_configs: Array[PoolConfig] = []
 
+@onready var level_up_panel = $LevelUpPanel
+
 var spawn_timer: float = 0.0
 var spawn_interval: float = 3.0  # Spawn enemy every 3 seconds
 var test_gems: Array = [] # track spawned test gems
@@ -39,6 +41,8 @@ func _ready():
 	# Enable camera smoothing for testing
 	$Camera2D.position_smoothing_enabled = true
 	$Camera2D.position_smoothing_speed = 5.0
+
+	ProgressionManager.level_up.connect(level_up_panel.show_level_up)
 
 
 func _draw():
