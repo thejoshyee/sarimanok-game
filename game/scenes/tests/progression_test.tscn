@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://u0s1ts78rie3"]
+[gd_scene load_steps=4 format=3 uid="uid://u0s1ts78rie3"]
 
 [ext_resource type="Script" uid="uid://ceiahu4xgs1he" path="res://scripts/progression_test.gd" id="1_q8jxe"]
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_mj010"]
+[ext_resource type="PackedScene" uid="uid://dvdy2n5irl835" path="res://scenes/ui/level_up_panel.tscn" id="3_7c3ca"]
 
 [node name="ProgressionTest" type="Node"]
 script = ExtResource("1_q8jxe")
+
+[node name="SarimanokPlayer" parent="." instance=ExtResource("2_mj010")]
+position = Vector2(320, 180)
+
+[node name="LevelUpPanel" parent="." instance=ExtResource("3_7c3ca")]

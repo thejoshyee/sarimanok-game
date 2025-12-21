@@ -669,7 +669,7 @@
           "4",
           "6"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -746,15 +746,16 @@
               5
             ],
             "details": "New TestProgression scene: spawn player, 20 XP gems in grid. Auto-collect path or manual. Assert XP thresholds trigger level-ups, UI sequence completes, stats persist post-upgrade. Log full flow, FPS stable. Align with Task 4 test patterns.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run test scene, collect all XP to reach level 3+, verify 2 level-ups occur, all 6 upgrades selectable, stats match expected values, no crashes.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-21T00:15:23.888Z"
           }
         ],
         "complexity": 7,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Split into subtasks for (1) defining the XP pickup scene and pooling integration, (2) implementing the XP and level data model, including a configurable XP curve, (3) wiring XP collection into the player and progression components, (4) creating the placeholder level-up UI and flow (pause game, selection, apply effect), (5) integrating simple stat-upgrade or placeholder options that affect player stats or log debug output, and (6) building test scenarios to validate end-to-end leveling behavior. For each subtask, align data flow and UI patterns with existing progression and interface systems in the project.",
-        "updatedAt": "2025-12-20T23:04:29.587Z"
+        "updatedAt": "2025-12-21T00:15:23.888Z"
       },
       {
         "id": "10",
@@ -779,9 +780,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-20T23:04:29.590Z",
+      "lastModified": "2025-12-21T00:15:23.892Z",
       "taskCount": 10,
-      "completedCount": 8,
+      "completedCount": 9,
       "tags": [
         "master"
       ]
