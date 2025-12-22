@@ -792,9 +792,10 @@
               1
             ],
             "details": "Leverage Task 6 pooling (300 enemies) and Task 7 grid for 100 active enemies; automate player patrol/auto-attack loops. Target hardware: mid-range PC; pass if maintains 100 active enemies indefinitely without new instantiations.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Monitor node creation in debugger; fail if queue_free/instantiate called or <100 active.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-22T20:40:58.736Z"
           },
           {
             "id": 3,
@@ -842,12 +843,12 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Organize into subtasks that (1) define the performance test scene or mode (enemy compositions, player setup, weapon behavior), (2) script automated or semi-automated load generation for enemies and attacks using existing pooling and spatial systems, (3) set up profiling procedures and metrics capture (FPS, frame time, script/physics cost), (4) document and triage any bottlenecks with proposed optimization tasks, and (5) create a repeatable checklist or script for rerunning the benchmark in future iterations. For each subtask, clarify target hardware assumptions and pass/fail thresholds tied to design goals.",
-        "updatedAt": "2025-12-22T05:04:02.086Z"
+        "updatedAt": "2025-12-22T20:40:58.736Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-22T05:04:02.096Z",
+      "lastModified": "2025-12-22T20:40:58.744Z",
       "taskCount": 10,
       "completedCount": 9,
       "tags": [

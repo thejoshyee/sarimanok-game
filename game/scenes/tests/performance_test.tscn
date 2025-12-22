@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://chhu4a7gaomrk"]
+[gd_scene load_steps=6 format=3 uid="uid://chhu4a7gaomrk"]
 
 [ext_resource type="Script" uid="uid://bh4ppueabuaat" path="res://scripts/tests/performance_test_player.gd" id="1_sn6pj"]
+[ext_resource type="Script" uid="uid://buqi7qjenr4pd" path="res://scripts/tests/performance_test.gd" id="1_srnqp"]
+[ext_resource type="Resource" uid="uid://cwo11ojx1iw81" path="res://resources/test_enemy_pool.tres" id="2_3s71k"]
 [ext_resource type="Script" uid="uid://bxv07x4ykmi2f" path="res://scripts/tests/enemy_spawner.gd" id="2_rtgyk"]
 [ext_resource type="Script" uid="uid://c1k8f06k8ogxp" path="res://scripts/tests/weapon_manager.gd" id="3_u8jjo"]
 
 [node name="PerformanceTest" type="Node2D"]
+script = ExtResource("1_srnqp")
+enemy_pool_config = ExtResource("2_3s71k")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(320, 180)

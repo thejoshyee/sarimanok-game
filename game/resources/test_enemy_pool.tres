@@ -6,4 +6,6 @@
 script = ExtResource("1_ptvp8")
 pool_id = "enemy_test"
 scene_path = "res://scenes/enemies/test_enemy.tscn"
+initial_size = 100
+max_size = 150
 metadata/_custom_type_script = "uid://dnolhjriaskgh"

@@ -18,8 +18,8 @@ func _process(delta: float) -> void:
 
 func fire_weapon() -> void:
 	# simple AOE attack - damage all enemies in range
-	var enemies = get_tree().get_nodes_in_group('enemy')
+	var enemies = get_tree().get_nodes_in_group('enemies')
 	for enemy in enemies:
 		if enemy.position.distance_to(player.position) < 100:
-			print("Hit enemy at ", enemy.position)
+			enemy.take_damage(damage)
 			
