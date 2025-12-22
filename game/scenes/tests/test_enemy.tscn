@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ubmha5ru5216" path="res://scripts/tests/test_enemy.gd" id="1_yyuyy"]
 
-[node name="TestEnemy" type="CharacterBody2D"]
+[node name="TestEnemy" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_yyuyy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
