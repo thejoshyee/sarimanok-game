@@ -1,3 +1,18 @@
-[gd_scene format=3 uid="uid://chhu4a7gaomrk"]
+[gd_scene load_steps=2 format=3 uid="uid://chhu4a7gaomrk"]
+
+[ext_resource type="Script" uid="uid://bh4ppueabuaat" path="res://scripts/tests/performance_test_player.gd" id="1_sn6pj"]
 
 [node name="PerformanceTest" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(320, 180)
+script = ExtResource("1_sn6pj")
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(1, 1, 0, 1)
+
+[node name="Enemies" type="Node2D" parent="."]
