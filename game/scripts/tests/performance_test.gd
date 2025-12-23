@@ -7,6 +7,7 @@ var fps_samples: Array[float] = []
 var frame_time_samples: Array[float] = []
 var last_logged_second := -1  # Track when we last logged physics
 
+@onready var fps_label: Label = $CanvasLayer/FPSLabel
 
 # Reference to the enemy pool config
 @export var enemy_pool_config: PoolConfig
@@ -33,6 +34,8 @@ func _process(delta: float) -> void:
 		fps_samples.append(current_fps)
 		frame_time_samples.append(current_frame_time)
 	
+		fps_label.text = "FPS: %.1f" % current_fps
+
 		# Log physics object count every 5 seconds for reference
 		var current_second = int(test_timer)
 		if current_second % 5 == 0 and current_second != last_logged_second:

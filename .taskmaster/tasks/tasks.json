@@ -821,9 +821,10 @@
               3
             ],
             "details": "Test on mid-range PC; triage script/physics/render spikes; propose fixes like update frequency tweaks. Pass: 60 FPS with 100 enemies; document gaps to 200+ target.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Compare before/after metrics; fail if major spikes (>50ms) in physics/script.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-23T21:07:47.802Z"
           },
           {
             "id": 5,
@@ -844,12 +845,12 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Organize into subtasks that (1) define the performance test scene or mode (enemy compositions, player setup, weapon behavior), (2) script automated or semi-automated load generation for enemies and attacks using existing pooling and spatial systems, (3) set up profiling procedures and metrics capture (FPS, frame time, script/physics cost), (4) document and triage any bottlenecks with proposed optimization tasks, and (5) create a repeatable checklist or script for rerunning the benchmark in future iterations. For each subtask, clarify target hardware assumptions and pass/fail thresholds tied to design goals.",
-        "updatedAt": "2025-12-23T19:33:38.637Z"
+        "updatedAt": "2025-12-23T21:07:47.802Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-23T19:33:38.643Z",
+      "lastModified": "2025-12-23T21:07:47.804Z",
       "taskCount": 10,
       "completedCount": 9,
       "tags": [

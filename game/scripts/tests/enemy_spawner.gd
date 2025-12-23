@@ -2,7 +2,7 @@ extends Node2D
 
 
 func spawn_enemies():
-	var enemy_count = 100
+	var enemy_count = 200
 	var spacing = 80
 	var grid_size = int(ceil(sqrt(enemy_count)))
 
@@ -19,8 +19,8 @@ func _process(_delta):
 	var active_count = get_tree().get_nodes_in_group('enemies').size()
 	
 	# Spawn more if below target
-	if active_count < 100:
-		var to_spawn = 100 - active_count
+	if active_count < 200:
+		var to_spawn = 200 - active_count
 		for i in range(to_spawn):
 			var enemy = PoolManager.spawn("enemy_test")
 			if enemy:
