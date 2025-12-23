@@ -806,9 +806,10 @@
               2
             ],
             "details": "Enable Profiler/Monitors tabs; track Performance.get_monitor(Performance.TIME_FPS), TIME_PROCESS, PHYSICS_2D_ACTIVE_OBJECTS; log to file/console. Target: 60 FPS avg, <16.67ms frame time; pass if stable under load on target hardware.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run 60s test; fail if avg FPS <60 or frame time >20ms sustained.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-23T19:33:38.637Z"
           },
           {
             "id": 4,
@@ -843,12 +844,12 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Organize into subtasks that (1) define the performance test scene or mode (enemy compositions, player setup, weapon behavior), (2) script automated or semi-automated load generation for enemies and attacks using existing pooling and spatial systems, (3) set up profiling procedures and metrics capture (FPS, frame time, script/physics cost), (4) document and triage any bottlenecks with proposed optimization tasks, and (5) create a repeatable checklist or script for rerunning the benchmark in future iterations. For each subtask, clarify target hardware assumptions and pass/fail thresholds tied to design goals.",
-        "updatedAt": "2025-12-22T20:40:58.736Z"
+        "updatedAt": "2025-12-23T19:33:38.637Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-22T20:40:58.744Z",
+      "lastModified": "2025-12-23T19:33:38.643Z",
       "taskCount": 10,
       "completedCount": 9,
       "tags": [
