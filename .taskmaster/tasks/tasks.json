@@ -771,7 +771,7 @@
           "8",
           "9"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -837,22 +837,23 @@
               4
             ],
             "details": "Script includes: load scene, start profiler, run 60s at 100 enemies, export CSV/logs, verify thresholds (60 FPS). Include hardware specs and pass/fail: stable 60 FPS, no >20ms spikes.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Rerun benchmark twice; fail if results vary >5% FPS or setup takes >2min.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-24T16:45:51.431Z"
           }
         ],
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Organize into subtasks that (1) define the performance test scene or mode (enemy compositions, player setup, weapon behavior), (2) script automated or semi-automated load generation for enemies and attacks using existing pooling and spatial systems, (3) set up profiling procedures and metrics capture (FPS, frame time, script/physics cost), (4) document and triage any bottlenecks with proposed optimization tasks, and (5) create a repeatable checklist or script for rerunning the benchmark in future iterations. For each subtask, clarify target hardware assumptions and pass/fail thresholds tied to design goals.",
-        "updatedAt": "2025-12-23T21:07:47.802Z"
+        "updatedAt": "2025-12-24T16:45:51.431Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-23T21:07:47.804Z",
+      "lastModified": "2025-12-24T16:45:51.432Z",
       "taskCount": 10,
-      "completedCount": 9,
+      "completedCount": 10,
       "tags": [
         "master"
       ]

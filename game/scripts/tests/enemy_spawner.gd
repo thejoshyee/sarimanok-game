@@ -1,8 +1,9 @@
 extends Node2D
 
+# Export enemy count so performance test can read it for CSV
+@export var enemy_count: int = 200
 
 func spawn_enemies():
-	var enemy_count = 200
 	var spacing = 80
 	var grid_size = int(ceil(sqrt(enemy_count)))
 
@@ -17,10 +18,10 @@ func spawn_enemies():
 func _process(_delta):
 	# Check current active enemy count
 	var active_count = get_tree().get_nodes_in_group('enemies').size()
-	
+
 	# Spawn more if below target
-	if active_count < 200:
-		var to_spawn = 200 - active_count
+	if active_count < enemy_count:
+		var to_spawn = enemy_count - active_count
 		for i in range(to_spawn):
 			var enemy = PoolManager.spawn("enemy_test")
 			if enemy:

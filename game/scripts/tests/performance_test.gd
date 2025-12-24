@@ -57,7 +57,7 @@ func _log_results() -> void:
 	var avg_frame_time = _calculate_average(frame_time_samples)
 	var max_frame_time = frame_time_samples.max()
 	var min_fps = fps_samples.min()
-	
+
 	# Log to console
 	print("\n=== PERFORMANCE TEST RESULTS (60s) ===")
 	print("Average FPS: %.2f" % avg_fps)
@@ -65,20 +65,59 @@ func _log_results() -> void:
 	print("Average Frame Time: %.2f ms" % avg_frame_time)
 	print("Max Frame Time: %.2f ms" % max_frame_time)
 	print("Total Samples: %d" % fps_samples.size())
-	
+
 	# Check pass/fail criteria
 	var passed = avg_fps >= 60.0 and avg_frame_time <= 20.0
 	print("TEST STATUS: %s" % ("PASS ✓" if passed else "FAIL ✗"))
 	print("Target: 60 FPS avg, <20ms frame time")
 	print("=======================================\n")
 
+	# Export CSV data
+	_export_csv(avg_fps, min_fps, avg_frame_time, max_frame_time, passed)
+
 
 func _calculate_average(samples: Array[float]) -> float:
 	if samples.is_empty():
 		return 0.0
-	
+
 	var sum = 0.0
 	for value in samples:
 		sum += value
-	
+
 	return sum / samples.size()
+
+
+func _export_csv(avg_fps: float, min_fps: float, avg_frame_time: float, max_frame_time: float, passed: bool) -> void:
+	# Generate timestamp for unique filename
+	var timestamp = Time.get_datetime_string_from_system().replace(":", "-")
+	var filename = "user://benchmark_results_%s.csv" % timestamp
+
+	# Get enemy count from spawner if available
+	var enemy_count = "unknown"
+	var spawner = get_node_or_null("EnemySpawner")
+	if spawner and "enemy_count" in spawner:
+		enemy_count = str(spawner.enemy_count)
+
+	# Create CSV content with header
+	var csv_content = ""
+	csv_content += "Timestamp,Enemy Count,Avg FPS,Min FPS,Avg Frame Time (ms),Max Frame Time (ms),Total Samples,Pass/Fail\n"
+	csv_content += "%s,%s,%.2f,%.2f,%.2f,%.2f,%d,%s\n" % [
+		timestamp,
+		enemy_count,
+		avg_fps,
+		min_fps,
+		avg_frame_time,
+		max_frame_time,
+		fps_samples.size(),
+		"PASS" if passed else "FAIL"
+	]
+
+	# Write to file
+	var file = FileAccess.open(filename, FileAccess.WRITE)
+	if file:
+		file.store_string(csv_content)
+		file.close()
+		print("CSV exported to: %s" % filename)
+		print("Full path: %s" % ProjectSettings.globalize_path(filename))
+	else:
+		print("ERROR: Failed to write CSV file")

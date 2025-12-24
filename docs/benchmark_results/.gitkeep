@@ -1,0 +1,6 @@
+# Benchmark Results Directory
+
+Store manual benchmark results here using the format:
+`YYYY-MM-DD_[test-name].txt`
+
+CSV exports are automatically saved to Godot's `user://` directory.

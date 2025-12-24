@@ -1,0 +1,112 @@
+# Performance Benchmark Results Template
+
+Copy this template for each test run.
+Save as: YYYY-MM-DD_[test-name].txt (e.g., 2024-12-24_baseline-100.txt)
+
+---
+
+## Test Information
+
+**Date:** YYYY-MM-DD
+**Time:** HH:MM
+**Tester:** [Your name]
+**Test Type:** [Baseline 100 / Target 200 / Custom]
+
+---
+
+## Hardware Specifications
+
+**CPU:**
+**GPU:**
+**RAM:**
+**OS:**
+**Godot Version:** 4.5
+
+---
+
+## Test Configuration
+
+**Test Scene:** performance_test.tscn
+**Enemy Count:**
+**Test Duration:** 60 seconds
+**Background Processes:** [List any running apps]
+
+---
+
+## Results (from console)
+
+```
+[Paste console output here]
+
+=== PERFORMANCE TEST RESULTS (60s) ===
+Average FPS:
+Min FPS:
+Average Frame Time:
+Max Frame Time:
+Total Samples:
+TEST STATUS:
+Target: 60 FPS avg, <20ms frame time
+=======================================
+```
+
+---
+
+## Pass/Fail Analysis
+
+**Overall Result:** ☐ PASS / ☐ FAIL
+
+**Criteria Check:**
+- ☐ Average FPS ≥ 60
+- ☐ Average frame time ≤ 16.67ms
+- ☐ Max frame time ≤ 20ms
+- ☐ No crashes or errors
+
+**Variance (if multiple runs):**
+- Run 1 FPS: _____
+- Run 2 FPS: _____
+- Variance: _____% (should be <5%)
+
+---
+
+## Observations
+
+**Anomalies:**
+- [Note any unusual behavior, spikes, stuttering, etc.]
+
+**Environmental Factors:**
+- [Temperature, thermal throttling, other running processes, etc.]
+
+**Visual Performance:**
+- [Perceived smoothness, any visible lag, etc.]
+
+---
+
+## Comparison to Baseline
+
+**Previous Best (if applicable):**
+- Date:
+- Avg FPS:
+- Avg Frame Time:
+
+**Change:**
+- FPS Delta:
+- Frame Time Delta:
+- Improvement/Regression:
+
+---
+
+## Notes
+
+[Any additional observations, questions, or concerns]
+
+---
+
+## CSV Export
+
+**CSV File:** benchmark_results_[timestamp].csv
+**Location:** [Paste full path from console output]
+**Verified:** ☐ Yes / ☐ No
+
+---
+
+**Template Version:** 1.0 (2024-12-24)
