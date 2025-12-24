@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": 1,
+        "id": "1",
         "title": "Audit existing Godot project setup",
         "description": "Inspect the current Godot 4 project to understand scenes, scripts, and configuration already in place.",
         "details": "Review the Godot project structure, main scene, autoloads (singletons), and any existing player, enemy, weapon, or progression scripts to avoid duplicating work.[1] Document what systems already exist (e.g., movement, input actions, basic UI, pooling helpers) and how they are organized (folders, naming conventions, node hierarchies).",
@@ -85,7 +85,7 @@
         "updatedAt": "2025-12-05T13:31:38.640Z"
       },
       {
-        "id": 2,
+        "id": "2",
         "title": "Configure project resolution and window settings",
         "description": "Set up viewport, stretch, and window scaling to match the PRD specifications.",
         "details": "In Project Settings → Display → Window, configure Viewport Width = 640 and Viewport Height = 360, set Stretch Mode to canvas_items, and Stretch Aspect to keep, to achieve the desired 640×360 viewport and proper scaling on different monitor resolutions.[1] Verify that the arena (1920×1088) and tile size (32×32) are consistent with tileset and camera configuration in the current scenes.",
@@ -141,7 +141,7 @@
         "updatedAt": "2025-12-05T20:47:20.983Z"
       },
       {
-        "id": 3,
+        "id": "3",
         "title": "Define input actions and controls",
         "description": "Set up and/or validate the Godot Input Map for movement, pause, and UI actions as specified.",
         "details": "In Project Settings → Input Map, ensure the following actions exist with correct bindings: move_up (W, Up Arrow, D-pad Up, Left Stick Up), move_down (S, Down Arrow, D-pad Down, Left Stick Down), move_left (A, Left Arrow, D-pad Left, Left Stick Left), move_right (D, Right Arrow, D-pad Right, Left Stick Right), pause (Esc, Start), ui_accept (Enter, Space, A/X button), ui_cancel (Esc, B/O button).[1] Confirm existing code uses get_action_strength for movement vectors to support analog sticks and update scripts if they currently rely on is_action_pressed for basic movement axes.[3]",
@@ -212,7 +212,7 @@
         "updatedAt": "2025-12-06T14:22:16.532Z"
       },
       {
-        "id": 4,
+        "id": "4",
         "title": "Implement or align Classic Sarimanok player controller",
         "description": "Create or adapt the CharacterBody2D-based Sarimanok player with correct movement, stats, and damage handling.",
         "details": "Ensure the player is implemented as a CharacterBody2D with movement driven by an input_vector built from move_* actions, normalized and multiplied by move_speed, then applied via move_and_slide.[1] Implement base stats (Max HP 100, Move Speed 200 px/s, Damage 100%, Attack Speed 100%, Pickup Range 50) as exported variables or in a dedicated stats/resource object consistent with current code patterns. Add a collision shape for enemy damage, a hit/health component if one already exists, and invincibility frames of 0.5s after taking damage, reusing existing damage/health systems if present.[2]",
@@ -313,7 +313,7 @@
         "updatedAt": "2025-12-07T18:12:13.329Z"
       },
       {
-        "id": 5,
+        "id": "5",
         "title": "Set up placeholder Sarimanok visuals and animation",
         "description": "Create the temporary visual representation and simple 2-frame animation for the player.",
         "details": "Use a 32×32 ColorRect or equivalent simple node as the placeholder Classic Sarimanok, with a multicolor or rainbow palette approximating the intended art direction.[2] Configure a 2-frame idle/walk bob animation that flips between frames every 0.2 seconds when the player is moving, and flip the sprite horizontally based on velocity.x in the existing animation/visual script or a new dedicated script following current project conventions.[1]",
@@ -369,7 +369,7 @@
         "updatedAt": "2025-12-09T14:46:25.714Z"
       },
       {
-        "id": 6,
+        "id": "6",
         "title": "Establish object pooling infrastructure",
         "description": "Implement or extend a reusable pooling system for enemies, projectiles, pickups, and particles.",
         "details": "Create a central pooling manager or per-type pool scenes that pre-allocate arrays for enemies (300), projectiles (200), pickups (500), and particles (100 per type) at game start, reusing any existing pooling utilities if they are already present.[3] Ensure that gameplay code does not call queue_free or instantiate during active gameplay, but instead marks instances inactive and returns them to their pool, with pools pre-warmed in the main scene’s _ready method.[1]",
@@ -479,7 +479,7 @@
         "updatedAt": "2025-12-13T00:49:42.162Z"
       },
       {
-        "id": 7,
+        "id": "7",
         "title": "Implement grid-based spatial partitioning for enemies",
         "description": "Add spatial hashing to optimize collision and proximity checks with many enemies.",
         "details": "Create a spatial grid system that maps grid cells (64×64 pixels) to arrays of enemy references, updating an enemy’s cell assignment only when it crosses a cell boundary.[1] Provide helper functions such as get_cell and get_nearby_enemies that return enemies in the same or adjacent cells, and refactor any existing naive O(n²) collision or proximity checks to use this system while retaining compatibility with current enemy and weapon code.[3]",
@@ -575,7 +575,7 @@
         "updatedAt": "2025-12-15T23:17:55.345Z"
       },
       {
-        "id": 8,
+        "id": "8",
         "title": "Integrate auto-attack hooks for weapons",
         "description": "Prepare the player and game loop for automatic weapon firing compatible with the planned weapon system.",
         "details": "Add generic weapon slots or a weapon manager component to the player that tracks equipped weapons and their cooldowns, following any existing weapon or skill architecture in the project.[2] Ensure that weapons auto-attack based on their cooldowns without player input, exposing hooks for six planned weapons in later tasks and using the player’s Damage and Attack Speed multipliers to modify weapon behavior.[1]",
@@ -659,7 +659,7 @@
         "updatedAt": "2025-12-19T12:59:00.135Z"
       },
       {
-        "id": 9,
+        "id": "9",
         "title": "Implement basic progression loop scaffolding",
         "description": "Lay down the core systems for XP collection, leveling, and stat upgrades without full content.",
         "details": "Create a pickup type representing XP gems that the player collects within a Pickup Range of 50 pixels, ideally reusing the pooling system for pickups.[1] Implement a simple XP curve, level tracking, and a placeholder level-up UI that can present upgrade choices for weapons and passives later, aligning with any existing UI and progression frameworks already in the codebase.[2]",
@@ -758,7 +758,7 @@
         "updatedAt": "2025-12-21T00:15:23.888Z"
       },
       {
-        "id": 10,
+        "id": "10",
         "title": "Performance validation for Week 3 target",
         "description": "Verify that the foundation meets the Week 3 performance and stability goals.",
         "details": "Create a dedicated performance test scene or mode that can spawn at least 100 active enemies using the pooling and spatial partitioning systems while the player moves and auto-attacks.[3] Measure FPS and frame time using Godot’s profiler to confirm stable 60 FPS under this load, and document any bottlenecks or further optimizations needed to reach the eventual 200+ enemy target.[1]",
@@ -852,7 +852,7 @@
         "id": "11",
         "title": "Create Enemy Base Scene with Area2D and Movement Logic",
         "description": "Implement the base Duwende enemy scene using Area2D with placeholder ColorRect art, basic movement toward player, and damage on contact, aligned with the current Godot 4 project structure and player/damage systems.",
-        "status": "pending",
+        "status": "in-progress",
         "dependencies": [],
         "priority": "high",
         "details": "Codebase alignment:\n- Place the enemy scene under `res://scenes/enemies/duwende/enemy_duwende.tscn` to stay consistent with existing enemy and spawn setups.\n- Implement the script as `res://scripts/enemies/enemy_duwende.gd`, extending `Area2D` and following existing naming/export patterns used in other enemy or actor scripts.\n- Integrate with the Classic Sarimanok player from Task 4 by assuming a `CharacterBody2D` player in group `\"player\"` with a `take_damage(amount: int)` method and HP/invincibility handled in the player/health component.\n\nScene requirements (Godot 4):\n- Root: `Area2D` named `EnemyDuwende`.\n- Children:\n  - `CollisionShape2D` using a `CircleShape2D` with radius = 16 (32×32 logical footprint) on the enemy-damage collision layer/mask already used for other enemies.\n  - `ColorRect` (placeholder art) with size 32×32, modulate color green, positioned so it visually matches the collision.\n- Add the root node to an `\"enemy\"` group to integrate with spatial partitioning and spawn systems.\n\nScript requirements (`enemy_duwende.gd`):\n- Exported stats to sync with scaling systems and Task 15:\n  - `@export var base_speed: float = 80.0`\n  - `@export var base_max_hp: int = 10`\n  - `@export var base_damage: int = 5`\n- Runtime fields:\n  - `var speed: float = base_speed`\n  - `var hp: int = base_max_hp`\n- Player reference acquisition in `_ready()` using existing group patterns:\n  ```gdscript\n  @onready var player: Node2D = get_tree().get_first_node_in_group(\"player\")\n  ```\n- Movement in `_physics_process(delta)` using direct position update (simple base enemy, no CharacterBody2D):\n  ```gdscript\n  func _physics_process(delta: float) -> void:\n      if player == null:\n          return\n      var direction: Vector2 = (player.global_position - global_position).normalized()\n      global_position += direction * speed * delta\n  ```\n- Damage/collision via `area_entered` or `body_entered` depending on current project pattern; base implementation using `area_entered` to match the original spec and player damage Area2D:\n  ```gdscript\n  @export var damage: int = 5\n  @export var hp: int = 10\n\n  func _ready() -> void:\n      add_to_group(\"enemy\")\n      area_entered.connect(_on_area_entered)\n\n  func _on_area_entered(area: Area2D) -> void:\n      if area.is_in_group(\"player\") and area.has_method(\"take_damage\"):\n          area.take_damage(damage)\n          queue_free()\n  ```\n- Ensure the enemy registers/unregisters with the grid-based spatial partitioning system from Task 7 if that system expects an API such as `spatial_grid.register_enemy(self)` and `spatial_grid.unregister_enemy(self)`.\n\nComplexity/architecture notes:\n- This enemy serves as the **baseline implementation** whose stats and scene structure will be duplicated and adjusted for the Red Duwende variant in Task 15, and whose instances will be spawned via the ring-based SpawnManager in Task 13.\n- Keep the script small and focused (movement + simple contact damage) so more complex behaviors can be layered via composition or inherited scripts later.\n",
@@ -864,8 +864,10 @@
             "description": "Create the enemy scene file with Area2D root, add CollisionShape2D with 32x32 CircleShape2D, and ColorRect with green color for placeholder art.",
             "dependencies": [],
             "details": "In Godot, create `res://scenes/enemies/duwende/enemy_duwende.tscn` with an `Area2D` root named `EnemyDuwende`.\n- Add a `CollisionShape2D` child, assign a `CircleShape2D` with radius = 16, and set its collision layer/mask to match the existing enemy-damage configuration used by the player from Task 4.\n- Add a `ColorRect` child as placeholder art, set size to 32×32 and color to green, and align it visually with the collision shape.\n- Add the root node to the `\"enemy\"` group so it can participate in spatial partitioning and pooling later.",
-            "status": "pending",
-            "testStrategy": "Open `enemy_duwende.tscn` and verify the node tree is `EnemyDuwende (Area2D)` > `CollisionShape2D` + `ColorRect`.\nEnable Debug > Visible Collision Shapes and confirm the circular collision area matches the visible 32×32 green square in size and position.\nCheck that the root node is in the `\"enemy\"` group and that its collision layer/mask allows interaction with the existing player damage Area2D/CollisionObject2D."
+            "status": "done",
+            "testStrategy": "Open `enemy_duwende.tscn` and verify the node tree is `EnemyDuwende (Area2D)` > `CollisionShape2D` + `ColorRect`.\nEnable Debug > Visible Collision Shapes and confirm the circular collision area matches the visible 32×32 green square in size and position.\nCheck that the root node is in the `\"enemy\"` group and that its collision layer/mask allows interaction with the existing player damage Area2D/CollisionObject2D.",
+            "updatedAt": "2025-12-24T23:39:55.293Z",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -876,7 +878,8 @@
             ],
             "details": "Create `res://scripts/enemies/enemy_duwende.gd` and attach it to the `EnemyDuwende` Area2D root.\n- Use Godot 4 syntax:\n  ```gdscript\n  extends Area2D\n\n  @export var base_speed: float = 80.0\n  var speed: float = base_speed\n  @onready var player: Node2D = get_tree().get_first_node_in_group(\"player\")\n\n  func _physics_process(delta: float) -> void:\n      if player == null:\n          return\n      var direction: Vector2 = (player.global_position - global_position).normalized()\n      global_position += direction * speed * delta\n  ```\n- Ensure this pattern matches how other moving actors/enemies in the project reference the player (via the `\"player\"` group).",
             "status": "pending",
-            "testStrategy": "In a test scene with the existing player and one `EnemyDuwende` 200 px away, run the game and sample positions over 1 second.\nConfirm that the distance between enemy and player decreases by roughly 80 px (± small integration error) per second and movement appears smooth with no jitter.\nTemporarily log `direction` and `global_position` each frame to verify normalization and correct movement direction."
+            "testStrategy": "In a test scene with the existing player and one `EnemyDuwende` 200 px away, run the game and sample positions over 1 second.\nConfirm that the distance between enemy and player decreases by roughly 80 px (± small integration error) per second and movement appears smooth with no jitter.\nTemporarily log `direction` and `global_position` each frame to verify normalization and correct movement direction.",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -888,83 +891,107 @@
             ],
             "details": "In `enemy_duwende.gd`, add exported stats and connect to the Area2D overlap signal used in the project:\n```gdscript\n@export var base_damage: int = 5\n@export var base_max_hp: int = 10\nvar damage: int = base_damage\nvar hp: int = base_max_hp\n\nfunc _ready() -> void:\n    add_to_group(\"enemy\")\n    area_entered.connect(_on_area_entered)\n\nfunc _on_area_entered(area: Area2D) -> void:\n    if area.is_in_group(\"player\") and area.has_method(\"take_damage\"):\n        area.take_damage(damage)\n        queue_free()\n```\nIf the current codebase instead uses `body_entered` for player/enemy contact, mirror that pattern by connecting `body_entered` and adjusting the callback signature to use `body` instead of `area`.\nEnsure `hp` and `damage` fields can later be overridden or scaled by the SpawnManager and the Red Duwende variant from Task 15.",
             "status": "pending",
-            "testStrategy": "With the existing player scene from Task 4, place `EnemyDuwende` so that the player can walk into it.\nRun the scene, move the player into the enemy, and verify that the player’s HP value decreases by exactly 5 while respecting any existing invincibility window logic.\nConfirm that the enemy instance calls `queue_free()` when it damages the player and that no errors are logged if multiple enemies collide with the player in quick succession.\nStress test by manually instancing ~50 `EnemyDuwende` in the scene and verifying that contact damage still works reliably without dropping FPS or producing physics/overlap warnings."
+            "testStrategy": "With the existing player scene from Task 4, place `EnemyDuwende` so that the player can walk into it.\nRun the scene, move the player into the enemy, and verify that the player’s HP value decreases by exactly 5 while respecting any existing invincibility window logic.\nConfirm that the enemy instance calls `queue_free()` when it damages the player and that no errors are logged if multiple enemies collide with the player in quick succession.\nStress test by manually instancing ~50 `EnemyDuwende` in the scene and verifying that contact damage still works reliably without dropping FPS or producing physics/overlap warnings.",
+            "parentId": "undefined"
           }
-        ]
+        ],
+        "complexity": 3,
+        "recommendedSubtasks": 3,
+        "expansionPrompt": "Break down into: 1) Scene setup with Area2D, CollisionShape2D, and ColorRect; 2) Basic movement logic in _physics_process toward player; 3) area_entered collision detection and damage application with cleanup.",
+        "updatedAt": "2025-12-24T23:39:55.293Z"
       },
       {
-        "id": 12,
+        "id": "12",
         "title": "Implement Enemy Stat Scaling Functions",
         "description": "Add time-based scaling for HP and damage using provided formulas in spawn manager.",
         "details": "In spawn manager script, implement:\nfunc get_scaled_hp(base_hp: int, elapsed_minutes: float) -> int:\n    var scale = 1.0 + (elapsed_minutes / 5.0) * 0.05\n    return int(base_hp * scale)\nfunc get_scaled_damage(base_damage: int, elapsed_minutes: float) -> int:\n    var scale = 1.0 + (elapsed_minutes / 5.0) * 0.03\n    return int(base_damage * scale)\nTrack get_tree().edited_scene_root.get_node('GameTimer').elapsed_minutes or similar global time.",
         "testStrategy": "Test at 0min: Green HP=10,dmg=5; 10min: HP=11,dmg=5; 20min: HP=12,dmg=6. Verify Red at 10min: HP=27,dmg=10 using debug prints.",
         "priority": "high",
         "dependencies": [
-          11
+          "11"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 2,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": ""
       },
       {
-        "id": 13,
+        "id": "13",
         "title": "Build Ring-Based Spawn System with Polar Coordinates",
         "description": "Create spawn manager that spawns enemies in ring around player (400-500px distance) using polar coordinates.",
         "details": "In SpawnManager node/script: Calculate spawn_dist = 465.0 (viewport_diagonal/2 + 100). Random angle = randf() * TAU. Spawn pos = player.global_position + Vector2(cos(angle), sin(angle)) * spawn_dist. Clamp to map bounds: max(0, min(1920, x)), max(0, min(1088, y)). Use get_scaled_hp/damage. Add spawn timer.",
         "testStrategy": "Verify all spawns occur outside viewport (distance >400px from player), within map bounds, uniform angle distribution (plot 100 spawns), correct enemy type/stats based on time.",
         "priority": "high",
         "dependencies": [
-          11,
-          12
+          "11",
+          "12"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 4,
+        "recommendedSubtasks": 4,
+        "expansionPrompt": "Divide into: 1) SpawnManager node/script setup; 2) Polar coordinate position calculation; 3) Map bounds clamping; 4) Spawn timer integration with stat scaling."
       },
       {
-        "id": 14,
+        "id": "14",
         "title": "Implement Dynamic Spawn Rate Scaling and Timeline Logic",
         "description": "Add exponential spawn interval scaling (2s → 0.8s) and enemy type unlock at 8:00.",
         "details": "In SpawnManager: base_interval=2.0, difficulty_scale=1.05. func get_spawn_interval(elapsed_minutes: float) -> float: return base_interval / pow(difficulty_scale, elapsed_minutes). Timer.wait_time = get_spawn_interval(elapsed_minutes). If elapsed_minutes < 8: spawn Green only; else: 70% Green/30% Red weighted random. Verify: 0min=2s, 5min≈1.57s, 10min≈1.23s.",
         "testStrategy": "Simulate time progression, measure actual spawn intervals match formula (±0.01s), confirm Red spawns only after 8min, correct spawn ratios post-8min (100 spawns: ~70 Green/~30 Red).",
         "priority": "medium",
         "dependencies": [
-          13
+          "13"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 5,
+        "recommendedSubtasks": 3,
+        "expansionPrompt": "Split into: 1) Exponential interval formula implementation; 2) Dynamic Timer.wait_time updates; 3) Enemy type probability logic with time-based unlocks."
       },
       {
-        "id": 15,
+        "id": "15",
         "title": "Add Red Duwende Variant and Object Pooling System",
         "description": "Create Red Duwende (speed=100, HP=25, damage=10) and implement object pooling for performance.",
         "details": "Duplicate enemy scene to 'enemy_duwende_red.tscn', change ColorRect to red, update base stats. Pool: Pre-instantiate 50 Green + 30 Red in SpawnManager, disable initially. On spawn: enable pooled instance, reset pos/HP/stats. On death: reset stats, disable/move offscreen, return to pool. No new instancing after pool exhaustion.",
         "testStrategy": "Verify Red stats/behavior correct, pool doesn't create >80 total enemies, memory stable with continuous spawning/dying, FPS maintained at 200+ enemies.",
         "priority": "medium",
         "dependencies": [
-          11,
-          13,
-          14
+          "11",
+          "13",
+          "14"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Break down into: 1) Duplicate/modify Red enemy scene; 2) Pool array initialization (50+30); 3) Spawn from pool logic; 4) Death/reset/return to pool; 5) Exhaustion handling and performance verification."
       },
       {
-        "id": 16,
+        "id": "16",
         "title": "Implement Enemy Death, Drops, and No-Inter-Collision",
         "description": "Add death handling with XP/Gold drops (Green:1/1, Red:3/2), particle effect, pool return. Ensure enemies pass through each other.",
         "details": "Enemy script: var current_hp. On damage: current_hp -= amount; if <=0: spawn_xp_gem(1 or 3), spawn_gold_coin(1 or 2), play_particles(), spawn_manager.return_to_pool(self). Area2D collision_layer=ENEMY_LAYER only collides with PLAYER_LAYER (bitmask), not self. No enemy-enemy collision.",
         "testStrategy": "Kill 50 Green/20 Red: verify correct drop counts, pool reuse (no new instances), enemies pass through each other (no bounce/block), particles play, all return to pool.",
         "priority": "medium",
         "dependencies": [
-          15
+          "15"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 6,
+        "recommendedSubtasks": 4,
+        "expansionPrompt": "Divide into: 1) HP tracking and death condition; 2) Drop spawning (XP/Gold with variants); 3) Particle effects and pool return; 4) Collision layer/mask setup for no enemy-enemy collision."
       }
     ],
     "metadata": {
-      "created": "2025-12-24T20:42:24.361Z",
-      "updated": "2025-12-24T20:42:24.362Z",
-      "description": "Tasks for master context"
+      "version": "1.0.0",
+      "lastModified": "2025-12-24T23:39:55.301Z",
+      "taskCount": 16,
+      "completedCount": 10,
+      "tags": [
+        "master"
+      ]
     }
   }
 }

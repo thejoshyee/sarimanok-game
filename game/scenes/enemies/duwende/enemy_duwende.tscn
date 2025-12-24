@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqufsuyg2a6yu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bvohl"]
+radius = 16.0
+
+[node name="EnemyDuwende" type="Area2D" groups=["enemy"]]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bvohl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.25565824, 0.9905693, 3.85046e-07, 1)
