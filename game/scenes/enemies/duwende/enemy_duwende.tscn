@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqufsuyg2a6yu"]
+[gd_scene load_steps=3 format=3 uid="uid://bqufsuyg2a6yu"]
+
+[ext_resource type="Script" uid="uid://141mxbakt2wp" path="res://scripts/enemies/enemy_duwende.gd" id="1_tyx3a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvohl"]
 radius = 16.0
 
 [node name="EnemyDuwende" type="Area2D" groups=["enemy"]]
 collision_layer = 2
+script = ExtResource("1_tyx3a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bvohl")

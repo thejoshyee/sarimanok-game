@@ -877,9 +877,10 @@
               1
             ],
             "details": "Create `res://scripts/enemies/enemy_duwende.gd` and attach it to the `EnemyDuwende` Area2D root.\n- Use Godot 4 syntax:\n  ```gdscript\n  extends Area2D\n\n  @export var base_speed: float = 80.0\n  var speed: float = base_speed\n  @onready var player: Node2D = get_tree().get_first_node_in_group(\"player\")\n\n  func _physics_process(delta: float) -> void:\n      if player == null:\n          return\n      var direction: Vector2 = (player.global_position - global_position).normalized()\n      global_position += direction * speed * delta\n  ```\n- Ensure this pattern matches how other moving actors/enemies in the project reference the player (via the `\"player\"` group).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "In a test scene with the existing player and one `EnemyDuwende` 200 px away, run the game and sample positions over 1 second.\nConfirm that the distance between enemy and player decreases by roughly 80 px (± small integration error) per second and movement appears smooth with no jitter.\nTemporarily log `direction` and `global_position` each frame to verify normalization and correct movement direction.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-25T17:32:14.031Z"
           },
           {
             "id": 3,
@@ -898,7 +899,7 @@
         "complexity": 3,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Break down into: 1) Scene setup with Area2D, CollisionShape2D, and ColorRect; 2) Basic movement logic in _physics_process toward player; 3) area_entered collision detection and damage application with cleanup.",
-        "updatedAt": "2025-12-24T23:39:55.293Z"
+        "updatedAt": "2025-12-25T17:32:14.031Z"
       },
       {
         "id": "12",
@@ -986,7 +987,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-24T23:39:55.301Z",
+      "lastModified": "2025-12-25T17:32:14.038Z",
       "taskCount": 16,
       "completedCount": 10,
       "tags": [

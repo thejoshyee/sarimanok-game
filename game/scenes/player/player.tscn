@@ -56,7 +56,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
 radius = 23.0
 
-[node name="SarimanokPlayer" type="CharacterBody2D"]
+[node name="SarimanokPlayer" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_8afob")
 stats = ExtResource("2_dovo2")
 
