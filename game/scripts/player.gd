@@ -98,8 +98,8 @@ func _ready() -> void:
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	# check if the body that hits us is an enemy
-	if body.is_in_group("enemies"):
-		take_damage(10.0) # placeholder damage
+	if body.is_in_group("enemies") and "damage" in body:
+		take_damage(body.damage) # use enemy's actual damage stat
 	# dont take damage if invincible
 
 

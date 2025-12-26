@@ -13,9 +13,11 @@ var hp: int = base_max_hp
 
 # reference to the player node
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
+@onready var damage_area: Area2D = $DamageArea
 
 func _ready() -> void:
 	add_to_group("enemies") # add to group for player damage detection
+	damage_area.body_entered.connect(_on_damage_area_body_entered)
 
 func _physics_process(_delta: float) -> void:
 	# safety check: stop if player doesn't exist
@@ -28,4 +30,12 @@ func _physics_process(_delta: float) -> void:
 	# Set velocity and move using CharacterBody2D's built-in method
 	velocity = direction * speed
 	move_and_slide()
-	
+
+
+func _on_damage_area_body_entered(body: Node2D) -> void:
+	# check if we hit the player
+	if body.is_in_group("player") and body.has_method("take_damage"):
+		# deal damage to the palyer using our damage stat
+		body.take_damage(damage)
+		# remove this enemy from the scene
+		queue_free()
