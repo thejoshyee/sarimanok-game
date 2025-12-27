@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dvdy2n5irl835"]
 
-[ext_resource type="Script" uid="uid://bqn6pd306mb6r" path="res://scripts/level_up_panel.gd" id="1_fclbr"]
+[ext_resource type="Script" uid="uid://bqn6pd306mb6r" path="res://scripts/ui/level_up_panel.gd" id="1_fclbr"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 process_mode = 3

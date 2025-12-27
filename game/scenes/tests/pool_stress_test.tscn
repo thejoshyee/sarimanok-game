@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbn08624truy5"]
 
-[ext_resource type="Script" uid="uid://b66rilure3ckx" path="res://scripts/pool_stress_test.gd" id="1_h8lil"]
+[ext_resource type="Script" uid="uid://b66rilure3ckx" path="res://scripts/tests/pool_stress_test.gd" id="1_h8lil"]
 [ext_resource type="PackedScene" uid="uid://bib7nigil0j4a" path="res://scenes/ui/pool_debug_overlay.tscn" id="2_p25n2"]
 [ext_resource type="PackedScene" uid="uid://dk4w6bjsr8gca" path="res://scenes/ui/grid_debug_overlay.tscn" id="3_p25n2"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bib7nigil0j4a"]
 
-[ext_resource type="Script" uid="uid://bodhs6j6834vy" path="res://scripts/pool_debug_overlay.gd" id="1_nsj36"]
+[ext_resource type="Script" uid="uid://bodhs6j6834vy" path="res://scripts/tests/pool_debug_overlay.gd" id="1_nsj36"]
 
 [node name="PoolDebugOverlay" type="Control"]
 custom_minimum_size = Vector2(300, 400)
