@@ -37,16 +37,19 @@ The arena is divided into distinct visual zones. All zones are passable - decora
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
 │ [Trees]  [BAHAY KUBO 2x2]  [Trees]          [RICE PADDIES - flooded fields]          [Trees] │
-│  Col 0-6      Col 10-15      Col 20-30            Col 40-80                         Col 90-95│  Rows 0-8
-│                                          (alternating water/plant tiles)                     │  NORTH EDGE
+│  Col 0-6      Col 10-15      Col 20-30            Col 40-80                         Col 90-95│  Rows 0-12
+│                                          (alternating water/plant tiles)                     │  NORTH
+│                                          ════════════════════════════════                    │
+│                                          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░                    │
+│                                          ════════════════════════════════                    │
 ├──────────────────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                              │
-│ [Fence]                    UPPER GRASS AREA                                          [Fence] │  Rows 9-20
+│ [Fence]                    OPEN GRASS AREA                                           [Fence] │  Rows 13-24
 │ [Fence]            (grass variations, occasional dirt path)                          [Fence] │
-│ [Fence]                                                                              [Fence] │
+│                                                                                              │
 ├──────────────────────────────────────────────────────────────────────────────────────────────┤
 │                                                                                              │
-│                          CENTER PLAY AREA - MOSTLY OPEN                                      │  Rows 21-42
+│                          CENTER PLAY AREA - MOSTLY OPEN                                      │  Rows 25-42
 │                          (light grass base, scattered dirt paths)                            │  MAIN GAMEPLAY
 │                          (sparse rocks and grass tufts for variety)                          │
 │                                                                                              │
@@ -57,7 +60,7 @@ The arena is divided into distinct visual zones. All zones are passable - decora
 │ [Fence]      (rows of crop tiles)                                                    [Fence] │
 ├──────────────────────────────────────────────────────────────────────────────────────────────┤
 │ [Trees]  [Fence posts]    [WELL/CART area Col 45-50]    [Fence posts]                [Trees] │  Rows 55-63
-│  Col 0-6                                                                            Col 90-95│  SOUTH EDGE
+│  Col 0-6                                                                            Col 90-95│  SOUTH
 └──────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -65,9 +68,9 @@ The arena is divided into distinct visual zones. All zones are passable - decora
 
 | Zone | Location | Tiles Used | Purpose |
 |------|----------|------------|---------|
-| **North Edge** | Rows 0-8 | Trees, bahay kubo, rice paddies | Cultural landmarks, visual interest |
-| **Upper Grass** | Rows 9-20 | Grass variations, fence edges | Transition area |
-| **Center Play** | Rows 21-42 | Light grass, sparse decorations | Main gameplay space (most open) |
+| **North/Rice Paddies** | Rows 0-12 | Trees, bahay kubo, rice paddies | Cultural landmarks, main Filipino identity |
+| **Open Grass** | Rows 13-24 | Grass variations, fence edges | Transition area |
+| **Center Play** | Rows 25-42 | Light grass, sparse decorations | Main gameplay space (most open) |
 | **Lower Farm** | Rows 43-54 | Vegetable crops, grass | Visual variety |
 | **South Edge** | Rows 55-63 | Trees, fence, well/cart | Southern boundary |
 | **West/East Edges** | Cols 0-6, 90-95 | Trees, fence posts | Side boundaries |

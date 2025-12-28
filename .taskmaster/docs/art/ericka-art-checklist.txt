@@ -5,8 +5,9 @@
 Work on these in order! Check off as you complete each one.
 Josh is coding in parallel - he'll use placeholders until your art is ready.
 
-Total Estimated Time: 18-24 hours
+Total Estimated Time: 20-27 hours
 Target Completion: Week 6 (before baby buffer)
+Priority: Characters FIRST, then Farm Tileset (needed for playable demo)
 
 
 ================================================================================
@@ -312,19 +313,116 @@ PHASE 5: SHARED ASSETS
 
 
 ================================================================================
-PHASE 6: FILIPINO TILES (Optional - 1-2 hours if time allows)
+PHASE 6: FARM TILESET - FILIPINO ELEMENTS (2-3 hours) ⭐ REQUIRED
 ================================================================================
 
-These add cultural flavor but are NOT required. We have asset packs as backup.
+These tiles give the farm arena its Filipino identity.
+Generic tiles (grass, dirt, rocks, trees) come from purchased asset packs.
 
-[ ] Rice Paddy Tiles (2 variations) - 32x32 each
-    Green rice stalks growing from muddy/watery base.
 
-[ ] Bahay Kubo (Background) - 64x64 or larger
-    Traditional nipa hut on stilts with warm light in windows.
+ARENA LAYOUT REFERENCE (Top-Down View)
+--------------------------------------
+This is a bird's eye view looking straight DOWN at the ground (like Google Maps
+satellite view). There is NO horizon - "north" just means top of the map.
 
-[ ] Bamboo Fence (3 pieces) - 32x32 each
-    Left end, Middle (repeating), Right end.
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ [Trees]  [BAHAY KUBO]  [Trees]        [RICE PADDIES]               [Trees]   │  Rows 0-12
+│           (2x2 tiles)            (alternating water/plant rows)              │  NORTH
+│                                   ════════════════════════                   │
+│                                   ░░░░░░░░░░░░░░░░░░░░░░░░                   │
+│                                   ════════════════════════                   │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│ [Fence]              OPEN GRASS AREA                                [Fence]  │  Rows 13-24
+│                      (grass variations, dirt paths)                          │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│                    CENTER PLAY AREA - MOSTLY OPEN                            │  Rows 25-42
+│                    (light grass, scattered rocks/tufts)                      │  MAIN GAMEPLAY
+│                    (where player spends most time)                           │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│ [Fence]      VEGETABLE PLOTS              OPEN AREA                 [Fence]  │  Rows 43-54
+│              (rows of crops)                                                 │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│ [Trees]   [Fence posts]    [CART/WELL]    [Fence posts]             [Trees]  │  Rows 55-63
+│                            (landmark)                                        │  SOUTH
+└──────────────────────────────────────────────────────────────────────────────┘
+  Cols 0-6                                                           Cols 89-95
+  WEST                                                               EAST
+
+What YOU draw: Bahay kubo, rice paddies, cart/well, (optional) bamboo fence
+From asset packs: Grass, dirt, trees, rocks, generic fence
+
+
+[ ] bahay_kubo.aseprite           64x64 (2x2 tiles)  ~1-2 hours  ⭐ REQUIRED
+    ------------------------------------------------------------------------
+    WHAT IT LOOKS LIKE:
+    - Traditional nipa hut on stilts
+    - Steep thatched roof made of nipa palm leaves
+    - Warm wood tones (browns, tans)
+    - Warm light glowing from windows (night scene)
+    - Recognizable silhouette even at small size
+
+    DESIGN TIPS:
+    - The 2x2 layout: TL (roof left), TR (roof right), BL (stilts left), BR (stilts right)
+    - Focus on the iconic triangular roof shape
+    - Stilts visible at bottom
+
+
+[ ] rice_paddy_water.aseprite     32x32, 1 frame     ~30 min  ⭐ REQUIRED
+    ------------------------------------------------------------------------
+    WHAT IT LOOKS LIKE:
+    - Blue-green flooded field base
+    - Slight ripple or reflection hints
+    - This is the "between rows" tile
+
+
+[ ] rice_paddy_plants.aseprite    32x32, 1 frame     ~30 min  ⭐ REQUIRED
+    ------------------------------------------------------------------------
+    WHAT IT LOOKS LIKE:
+    - Green rice stalks growing upward
+    - Muddy/watery base visible
+    - Arranged in neat row pattern
+
+    HOW THEY'RE USED IN THE TILEMAP:
+    Row 2: [water][water][water][water][water]
+    Row 3: [plant][plant][plant][plant][plant]
+    Row 4: [water][water][water][water][water]
+    Row 5: [plant][plant][plant][plant][plant]
+
+    Creates the signature look of Filipino rice farming - horizontal stripes
+    of green crops in shallow flooded fields (not a pond, just a few inches
+    of water covering the soil).
+
+
+[ ] carabao_cart.aseprite OR well.aseprite    32x32 or 64x64    ~30 min  ⭐ REQUIRED
+    ------------------------------------------------------------------------
+    PICK ONE:
+
+    Option A - Carabao Cart:
+    - Wooden cart with large wheels
+    - No carabao needed (just the cart)
+    - Rustic farm equipment look
+
+    Option B - Traditional Well:
+    - Stone or wooden well structure
+    - Bucket and rope visible
+    - Simple but recognizable
+
+
+[ ] bamboo_fence.aseprite         32x32 x3 pieces    ~30 min  (OPTIONAL)
+    ------------------------------------------------------------------------
+    WHAT IT LOOKS LIKE:
+    - Horizontal bamboo poles lashed together
+    - Natural bamboo green-tan color
+    - Visible bamboo nodes/joints
+    - 3 pieces: Left end, Middle (repeating), Right end
+
+    NOTE: Skip if time is tight - generic wood fence from asset pack works fine.
 
 
 ================================================================================
@@ -337,9 +435,10 @@ Player Characters       3        0         0%
 Enemies              4 (EA)     0         0%
 Weapon Icons           6        0         0%
 Weapon Effects         5        0         0%
+Farm Tileset           4        0         0%
 Shared (Shadow)        1        0         0%
 -------------------------------------------------
-TOTAL                 19        0         0%
+TOTAL                 23        0         0%
 
 
 ================================================================================
@@ -348,7 +447,7 @@ WEEKLY ART TARGETS
 
 Week 1-2:  Sarimanok Classic (PRIORITY) + Shadow + Golden
 Week 3-4:  Green Duwende + Red Duwende + Santelmo
-Week 5:    Manananggal Boss
+Week 5:    Manananggal Boss + Farm Tileset (Filipino elements)
 Week 6:    All Icons + Weapon Effects  ← ART COMPLETE
 Week 7+:   Rest / Polish if able / Baby buffer
 
@@ -401,6 +500,27 @@ ART STYLE GUIDELINES
 - Outlines: Black outlines help readability at small sizes
 - Test: Always zoom out to see how sprites read at actual game size
 - Silhouette: If the shape isn't clear in solid black, redesign it
+
+
+================================================================================
+FILE ORGANIZATION & HANDOFF
+================================================================================
+
+HOW TO DELIVER YOUR ART:
+- Each asset = separate .aseprite file
+- Export each to PNG when done
+- You do NOT need to arrange tiles into a tileset grid
+- Just draw each thing separately - Josh handles assembly
+
+EXAMPLES:
+  sarimanok_classic.aseprite → sarimanok_classic.png
+  green_duwende.aseprite → green_duwende.png
+  bahay_kubo.aseprite → bahay_kubo.png
+  rice_paddy_water.aseprite → rice_paddy_water.png
+
+For tileset tiles (bahay kubo, rice paddies, etc.):
+Josh will copy your tiles into the master tileset PNG, replacing the
+placeholder colored squares. You don't need to worry about that part!
 
 
 ================================================================================

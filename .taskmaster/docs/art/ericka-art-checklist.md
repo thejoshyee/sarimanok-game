@@ -1,8 +1,8 @@
 # Ericka's Art Checklist
 
-> **Total Estimated Time:** 18-24 hours  
-> **Target Completion:** Week 6 (before baby buffer)  
-> **Priority:** Characters FIRST (needed for Next Fest demo)
+> **Total Estimated Time:** 20-27 hours
+> **Target Completion:** Week 6 (before baby buffer)
+> **Priority:** Characters FIRST, then Farm Tileset (needed for playable demo)
 
 ---
 
@@ -326,27 +326,124 @@ Frame 1:        Frame 2:        Frame 3:
 
 ---
 
-## 🏠 Optional Filipino Environment Tiles (1-2 hrs if time)
+## 🏠 Farm Tileset - Filipino Elements (2-3 hrs)
 
-These add cultural flavor to the arena but are NOT required - we can use generic asset pack tiles.
+These tiles give the farm arena its Filipino identity. Generic tiles (grass, dirt, rocks, trees) will come from purchased asset packs.
 
-### Rice Paddy Tiles (2 variations)
+### Arena Layout Reference (Top-Down View)
 
-- 32x32 each
-- Green rice stalks growing from muddy/watery base
-- Different stalk arrangements for variety
+This is a bird's eye view looking straight DOWN at the ground (like Google Maps satellite view). There is NO horizon - "north" just means top of the map.
 
-### Bahay Kubo (Background)
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ [Trees]  [BAHAY KUBO]  [Trees]        [RICE PADDIES]               [Trees]   │  Rows 0-12
+│           (2x2 tiles)            (alternating water/plant rows)              │  NORTH
+│                                   ════════════════════════                   │
+│                                   ░░░░░░░░░░░░░░░░░░░░░░░░                   │
+│                                   ════════════════════════                   │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│ [Fence]              OPEN GRASS AREA                                [Fence]  │  Rows 13-24
+│                      (grass variations, dirt paths)                          │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│                    CENTER PLAY AREA - MOSTLY OPEN                            │  Rows 25-42
+│                    (light grass, scattered rocks/tufts)                      │  MAIN GAMEPLAY
+│                    (where player spends most time)                           │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│ [Fence]      VEGETABLE PLOTS              OPEN AREA                 [Fence]  │  Rows 43-54
+│              (rows of crops)                                                 │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│ [Trees]   [Fence posts]    [CART/WELL]    [Fence posts]             [Trees]  │  Rows 55-63
+│                            (landmark)                                        │  SOUTH
+└──────────────────────────────────────────────────────────────────────────────┘
+  Cols 0-6                                                           Cols 89-95
+  WEST                                                               EAST
+```
 
-- 64x64 or larger
+**What Ericka draws:** Bahay kubo, rice paddies, cart/well, (optional) bamboo fence
+**From asset packs:** Grass, dirt, trees, rocks, generic fence
+
+### Bahay Kubo ⭐ REQUIRED
+
+- [ ] Sprite (64x64, as 2x2 tiles) — 1-2 hrs
+
+**What it looks like:**
+
 - Traditional nipa hut on stilts
+- Steep thatched roof made of nipa palm leaves
+- Warm wood tones (browns, tans)
 - Warm light glowing from windows (night scene)
-- Steep thatched roof
+- Recognizable silhouette even at small size
 
-### Bamboo Fence (3 pieces)
+**Design tips:**
 
-- 32x32 each: Left end, Middle (repeating), Right end
-- Separates background from play area
+- The 2x2 layout: TL (roof left), TR (roof right), BL (stilts left), BR (stilts right)
+- Focus on the iconic triangular roof shape
+- Stilts visible at bottom
+
+---
+
+### Rice Paddy Tiles ⭐ REQUIRED
+
+- [ ] Water tile (32x32) — 30 min
+- [ ] Plant tile (32x32) — 30 min
+
+**What they look like:**
+
+**Water tile:**
+- Blue-green flooded field base
+- Slight ripple or reflection hints
+- This is the "between rows" tile
+
+**Plant tile:**
+- Green rice stalks growing upward
+- Muddy/watery base visible
+- Arranged in neat row pattern
+
+**How they're used in the tilemap:**
+```
+Row 2: [water][water][water][water][water]
+Row 3: [plant][plant][plant][plant][plant]
+Row 4: [water][water][water][water][water]
+Row 5: [plant][plant][plant][plant][plant]
+```
+Creates the signature look of Filipino rice farming - horizontal stripes of green crops in shallow flooded fields (not a pond, just a few inches of water covering the soil).
+
+---
+
+### Carabao Cart OR Traditional Well ⭐ REQUIRED (pick one)
+
+- [ ] Sprite (32x32 or 64x64) — 30 min
+
+**Option A - Carabao Cart:**
+- Wooden cart with large wheels
+- No carabao needed (just the cart)
+- Rustic farm equipment look
+
+**Option B - Traditional Well:**
+- Stone or wooden well structure
+- Bucket and rope visible
+- Simple but recognizable
+
+---
+
+### Bamboo Fence (Optional - can use generic fence from asset pack)
+
+- [ ] Left end (32x32) — 10 min
+- [ ] Middle/repeating (32x32) — 10 min
+- [ ] Right end (32x32) — 10 min
+
+**What it looks like:**
+- Horizontal bamboo poles lashed together
+- Natural bamboo green-tan color
+- Visible bamboo nodes/joints
+
+**Note:** Skip if time is tight - generic wood fence from asset pack works fine.
 
 ---
 
@@ -381,8 +478,9 @@ These add cultural flavor to the arena but are NOT required - we can use generic
 | Enemies           | 4 (EA) | 0     | 0%         |
 | Weapon Icons      | 6      | 0     | 0%         |
 | Weapon Effects    | 5      | 0     | 0%         |
+| Farm Tileset      | 4      | 0     | 0%         |
 | Shared (Shadow)   | 1      | 0     | 0%         |
-| **TOTAL**         | **19** | **0** | **0%**     |
+| **TOTAL**         | **23** | **0** | **0%**     |
 
 ---
 
@@ -392,9 +490,54 @@ These add cultural flavor to the arena but are NOT required - we can use generic
 | -------- | ---------------------------------------------- |
 | Week 1-2 | Sarimanok Classic (PRIORITY) + Shadow + Golden |
 | Week 3-4 | Green Duwende + Red Duwende + Santelmo         |
-| Week 5   | Manananggal Boss                               |
+| Week 5   | Manananggal Boss + Farm Tileset (Filipino elements) |
 | Week 6   | All Icons + Weapon Effects ← ART COMPLETE      |
 | Week 7+  | Rest / Polish if able / Baby buffer            |
+
+---
+
+## 📁 File Organization & Handoff
+
+### How Ericka Delivers Art
+
+**Each asset = separate files:**
+- `sarimanok_classic.aseprite` → exports to `sarimanok_classic.png`
+- `green_duwende.aseprite` → exports to `green_duwende.png`
+- `bahay_kubo.aseprite` → exports to `bahay_kubo.png`
+- etc.
+
+**Ericka does NOT need to arrange tiles into a tileset.** Just draw each thing separately.
+
+### How Josh Integrates Art
+
+**For sprites (characters, enemies, weapons):**
+- Drop PNG directly into `game/sprites/` folder
+- Update scene to use new sprite instead of placeholder ColorRect
+
+**For tileset tiles (bahay kubo, rice paddies, etc.):**
+- Josh copies Ericka's tiles into the master tileset PNG
+- Replaces placeholder colored squares with real art
+- Tilemap stays the same - just looks better
+
+**Example workflow:**
+1. Ericka draws `rice_paddy_water.png` (32x32)
+2. Ericka draws `rice_paddy_plants.png` (32x32)
+3. Josh opens `placeholder_farm.png` in Aseprite
+4. Josh pastes Ericka's tiles over the placeholder squares
+5. Save → Godot auto-updates → done
+
+**Folder structure:**
+```
+game/assets/
+├── original/           # Ericka's source files
+│   ├── characters/
+│   ├── enemies/
+│   ├── tiles/          # Individual tile PNGs
+│   └── weapons/
+├── tilesets/
+│   └── placeholder_farm.png  # Master tileset (Josh assembles)
+└── purchased/          # Asset pack files
+```
 
 ---
 

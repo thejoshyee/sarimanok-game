@@ -9,11 +9,13 @@
 | Asset Type                           | Budget                   | Priority |
 | ------------------------------------ | ------------------------ | -------- |
 | UI Kit (buttons, panels, HP/XP bars) | $10-15                   | HIGH     |
-| Tileset (grass, dirt, trees, fences) | $10-20                   | HIGH     |
+| Tileset (grass, dirt, rocks, trees)  | $10-20                   | HIGH     |
 | SFX Pack (fantasy/RPG sounds)        | $15-30                   | MEDIUM   |
 | Pickups (gems, coins)                | Often included in UI kit | LOW      |
 
 **Total Budget: ~$30-50**
+
+> **Note:** Filipino cultural tiles (bahay kubo, rice paddies, carabao cart) will be drawn by Ericka — only generic ground/decoration tiles need to be purchased.
 
 ---
 
@@ -80,13 +82,21 @@
 
 ### Tileset Checklist
 
-- [ ] Grass variations (2-3 types)
-- [ ] Dirt/path tiles
-- [ ] Fence pieces (left, middle, right, post)
-- [ ] Tree/bush decorations
-- [ ] Rock/grass tuft details
+**Generic tiles (from asset pack):**
+- [ ] Grass variations (2-3 types: dark, medium, light)
+- [ ] Dirt/path tiles (2 types)
+- [ ] Fence pieces (left, middle, right, post) — unless Ericka draws bamboo
+- [ ] Tree decorations (for arena edges)
+- [ ] Rocks (small, scattered decoration)
+- [ ] Grass tufts (small detail decoration)
 - [ ] 32x32 tile size
 - [ ] Commercial license included
+
+**Filipino tiles (Ericka draws - NOT from packs):**
+- Bahay kubo (64x64 nipa hut)
+- Rice paddy tiles (water + plants)
+- Carabao cart or traditional well
+- Bamboo fence (optional)
 
 ### SFX Pack Checklist
 
