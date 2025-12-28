@@ -947,9 +947,10 @@
               2
             ],
             "details": "In spawn_enemy(type) function, replace base_hp assignments with get_scaled_hp(base_hp, get_elapsed_minutes()), same for damage. Update both Green and Red enemy types.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn Green at 0min (HP=10,dmg=5), 10min (HP=11,dmg=5), 20min (HP=12,dmg=6); verify via enemy inspector or prints.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-28T18:25:22.017Z"
           },
           {
             "id": 4,
@@ -980,7 +981,7 @@
         "complexity": 2,
         "recommendedSubtasks": 0,
         "expansionPrompt": "",
-        "updatedAt": "2025-12-28T17:04:28.530Z"
+        "updatedAt": "2025-12-28T18:25:22.017Z"
       },
       {
         "id": "13",
@@ -1052,7 +1053,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-28T17:04:28.537Z",
+      "lastModified": "2025-12-28T18:25:22.025Z",
       "taskCount": 16,
       "completedCount": 11,
       "tags": [

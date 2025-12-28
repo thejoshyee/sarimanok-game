@@ -19,6 +19,13 @@ func _ready() -> void:
 	add_to_group("enemies") # add to group for player damage detection
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
 
+
+# Call this after spawning to apply time-based difficulty scaling
+func initialize_stats(elapsed_minutes: float) -> void:
+	hp = SpawnManager.get_scaled_hp(base_max_hp, elapsed_minutes)
+	damage = SpawnManager.get_scaled_damage(base_damage, elapsed_minutes)
+
+
 func _physics_process(_delta: float) -> void:
 	# safety check: stop if player doesn't exist
 	if player == null:

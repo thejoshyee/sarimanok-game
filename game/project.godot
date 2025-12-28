@@ -20,6 +20,7 @@ PoolManager="*res://autoloads/pool_manager.gd"
 GridManager="*res://autoloads/grid_manager.gd"
 ProgressionManager="*res://resources/progression.gd"
 GameTimer="*res://autoloads/game_timer.gd"
+SpawnManager="*res://autoloads/spawn_manager.gd"
 
 [display]
 

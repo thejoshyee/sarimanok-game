@@ -94,7 +94,11 @@ func spawn_enemy():
 		var angle = randf() * TAU
 		var distance = randf_range(150, 250)
 		enemy.global_position = player_pos + Vector2(cos(angle), sin(angle)) * distance
-		print("Spawned enemy at: ", enemy.global_position)
+
+		# Apply time-based stat scaling
+		enemy.initialize_stats(GameTimer.elapsed_minutes)
+
+		print("Spawned enemy at: ", enemy.global_position, " HP: ", enemy.hp, " DMG: ", enemy.damage)
 
 
 func test_spawn_xp_gems():

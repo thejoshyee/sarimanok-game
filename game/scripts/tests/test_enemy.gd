@@ -3,10 +3,23 @@ extends CharacterBody2D
 @export var speed: float = 50.0
 var _current_cell_id: int = -1 # track which grid cell this enemy is in
 
+# stats for scaling (matching enemy_duwende pattern)
+@export var base_damage: int = 5
+@export var base_max_hp: int = 10
+var damage: int = base_damage
+var hp: int = base_max_hp
+
+
 
 func _ready():
 	# Don't add to group here - on_spawn() handles it when active
 	pass
+
+# call this after spawning to apply time-based difficulty scaling
+func initialize_stats(elapsed_minutes: float) -> void:
+	hp = SpawnManager.get_scaled_hp(base_max_hp, elapsed_minutes)
+	damage = SpawnManager.get_scaled_damage(base_damage, elapsed_minutes)
+
 
 func _physics_process(_delta: float) -> void:
 	# Get reference to player and move toward them
