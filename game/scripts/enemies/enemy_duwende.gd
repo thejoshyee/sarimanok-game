@@ -1,5 +1,12 @@
 extends CharacterBody2D
 
+## REAL enemy implementation based on PRD spec (Green Duwende).
+## Has: HP, damage, DamageArea collision, stats + scaling
+## Missing: Pool lifecycle (on_spawn/on_despawn), GridManager integration
+##
+## TODO: Add pool support when building the full enemy system.
+## This will become the base for Green/Red/Black Duwende variants.
+
 
 # Movement speed in pixels per second
 @export var base_speed: float = 80.0

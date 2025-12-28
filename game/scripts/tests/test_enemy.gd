@@ -1,5 +1,13 @@
 extends CharacterBody2D
 
+## TEST/PROTOTYPE enemy used for testing pooling and scaling systems.
+## Has: Pool lifecycle (on_spawn/on_despawn), GridManager integration, stats + scaling
+## Missing: DamageArea collision (doesn't hurt player on contact)
+## 
+## TODO: Merge with enemy_duwende.gd when building real Duwende enemy system.
+## This file can be deleted once proper enemies are implemented.
+
+
 @export var speed: float = 50.0
 var _current_cell_id: int = -1 # track which grid cell this enemy is in
 
