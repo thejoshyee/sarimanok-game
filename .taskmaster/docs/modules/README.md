@@ -67,6 +67,48 @@ Each PRD file includes:
 - **Week 8:** "Complete 30:00 victory run with all new art, no visual glitches"
 - **Week 9:** "Eyes closed test - recognize all gameplay events by audio alone"
 
+## Art Integration Checkpoints
+
+**Problem solved:** Ericka creates art during Weeks 1-6, but art integration was originally scheduled for Week 8. This 2+ week gap risked discovering art problems too late to fix before the baby arrives (March 21, 2026).
+
+**Solution:** Each PRD module now includes an "Art Integration Checkpoint" section at the end. These checkpoints:
+
+- Generate as tasks alongside code tasks
+- Sequence naturally after code completion
+- Are **optional/skippable** if art isn't ready
+- Include fallback procedures (continue with placeholders)
+
+### Checkpoint Coverage
+
+| Module | Art Type | Checkpoint |
+|--------|----------|------------|
+| core/prd-core-weapons.md | Weapon effects (Ericka) | Feather, Peck, Wing Slap, etc. |
+| core/prd-core-progression.md | Pickups & icons (asset pack) | XP gems, coins, passive icons |
+| progression/prd-progression-victory.md | Santelmo & Boss (Ericka) | Fire ball, Manananggal (48x48) |
+| progression/prd-progression-meta.md | UI elements (asset pack) | HP/XP bars, buttons, panels |
+| characters/prd-characters-variants.md | Character variants (Ericka) | Shadow & Golden Sarimanok |
+| polish/prd-polish-feel.md | Particles & effects (asset pack) | Death puffs, hit sparks |
+| polish/prd-polish-content.md | **Master checkpoint** | All art, joint review |
+| polish/prd-polish-release.md | Achievement icons | 64x64 Steam icons |
+| launch/prd-launch-prep.md | Marketing assets | Capsule art, screenshots |
+
+### Key Principle
+
+**DO NOT block code progress on art issues.** If art isn't ready or doesn't work:
+1. Document the issue
+2. Continue with placeholder
+3. Week 8 (`prd-polish-content.md`) is the fallback integration point
+
+### Files Without Checkpoints
+
+- `core/prd-core-foundation.md` - Already parsed (Sarimanok Classic integrated separately)
+- `core/prd-core-enemies.md` - Already in progress (Duwendes integrated separately)
+- `progression/prd-progression-state.md` - No art (pure code/data)
+- `characters/prd-characters-endless.md` - No art (mode logic only)
+- `launch/prd-launch-execute.md` - No art (launch logistics only)
+
+---
+
 ## Usage with task-master-ai
 
 Parse individual modules based on what you're working on:

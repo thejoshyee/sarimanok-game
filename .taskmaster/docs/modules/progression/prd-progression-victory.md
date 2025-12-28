@@ -253,3 +253,41 @@ On death:
 - [Shop System & Score](prd-progression-meta.md) - Features 9-10
 - [Save System & GameState](prd-progression-state.md) - Week 4-5 tasks & Definition of Done
 
+---
+
+# Art Integration Checkpoint - Santelmo & Boss (Optional)
+
+**Trigger:** Complete this after victory/enemy code tasks are done, IF Ericka has delivered Santelmo and/or Manananggal art.
+
+## Sprite Preview Scene
+
+Use the Sprite Preview Scene created in weapons checkpoint (or create now if not done).
+
+## Verification Checklist - Santelmo
+
+- [ ] **Santelmo Sprite (32x32):** Floating fire ball, glows/flickers
+- [ ] **Fireball Projectile (16x16):** Distinct from Santelmo itself
+- [ ] **Float Animation:** Sine wave movement feels "ghostly"
+- [ ] **Visibility:** Stands out against grass AND against Duwendes
+- [ ] **Fire Flicker:** Animation plays at ~0.15s per frame
+
+## Verification Checklist - Manananggal Boss
+
+- [ ] **Boss Sprite (48x48):** Feels "boss-sized" next to 32x32 enemies
+- [ ] **Wing Animation:** 4 frames, smooth flap cycle
+- [ ] **Dive Telegraph:** Red flash is visible and alarming
+- [ ] **Blood Trail:** Effect visible but not obscuring gameplay
+- [ ] **Dramatic Entrance:** Sprite reads as "threatening"
+- [ ] **Joint Review:** Show to Ericka, get feedback (10 min)
+
+## If Issues Found
+
+1. Document specific issue (screenshot + description)
+2. Ericka iterates same week if possible
+3. **Manananggal Fallback:** Static 1-frame sprite is acceptable for EA (add animation post-launch)
+4. DO NOT block code progress on art issues
+
+## If Art Not Ready
+
+Skip this checkpoint. Continue with placeholder ColorRects (32x32 orange for Santelmo, 48x48 dark red for Manananggal). Art will be integrated in Week 8 polish phase.
+

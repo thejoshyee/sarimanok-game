@@ -222,3 +222,35 @@ Builds on Week 4, adds:
 - [Win Condition & Enemies](prd-progression-victory.md) - Features 7-8
 - [Save System & GameState](prd-progression-state.md) - Week 4 tasks & Definition of Done
 
+---
+
+# Art Integration Checkpoint - UI Elements (Optional)
+
+**Trigger:** Complete this after shop/UI code tasks are done, IF purchased UI asset pack is imported.
+
+## Asset Pack Import
+
+1. Purchase UI asset pack (see `.taskmaster/docs/art/asset-pack-guide.md`)
+2. Import to `game/assets/purchased/ui/`
+3. Set import filter to "Nearest" for pixel art
+
+## Verification Checklist
+
+- [ ] **HP Bar:** Filled/empty states clear, red/pink color scheme
+- [ ] **XP Bar:** Filled/empty states clear, distinct from HP bar (blue/purple)
+- [ ] **Buttons:** Normal, hover, pressed states work
+- [ ] **Panels:** Shop panel, level-up panel, results panel backgrounds
+- [ ] **Font Readability:** Text is legible at 640x360 viewport
+- [ ] **Weapon Slots:** Icons display at correct size in HUD
+- [ ] **Overall Consistency:** UI elements look cohesive together
+
+## If Issues Found
+
+1. Try different elements from asset pack
+2. Adjust colors to match game palette
+3. If asset pack style clashes: Try different pack or use Godot default theme with custom colors
+
+## If Asset Pack Not Purchased Yet
+
+Skip this checkpoint. Continue with Godot default theme. Purchase asset pack before Week 8 polish phase.
+

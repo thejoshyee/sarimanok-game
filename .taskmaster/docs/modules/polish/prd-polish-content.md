@@ -250,3 +250,62 @@ func _on_victory():
 - [Settings & Game Feel](prd-polish-feel.md) - Week 7
 - [Steam Build & Balance](prd-polish-release.md) - Weeks 10-11
 
+---
+
+# Art Integration Master Checkpoint (Week 8)
+
+**This is the final art integration pass.** If you completed earlier checkpoints in previous modules, Week 8 should be smooth. If art was skipped earlier, this is catch-up time.
+
+## Pre-Integration: Sprite Preview Scene
+
+Use `scenes/debug/sprite_preview.tscn` created earlier (or create now):
+- Background: Purchased tileset
+- All sprite size slots (16x16, 32x32, 48x48, 64x64)
+- Camera at 640x360 game viewport
+
+## Complete Art Checklist
+
+### Ericka Art (Cultural Identity - HIGH PRIORITY)
+
+| Asset | Size | Status | Notes |
+|-------|------|--------|-------|
+| Sarimanok Classic | 32x32 (2 frames) | [ ] | Rainbow/vibrant |
+| Sarimanok Shadow | 32x32 (2 frames) | [ ] | Dark purple/blue |
+| Sarimanok Golden | 32x32 (2 frames) | [ ] | Gold/red/bronze |
+| Green Duwende | 32x32 (2 frames) | [ ] | Green, small |
+| Red Duwende | 32x32 (2 frames) | [ ] | Red, slightly larger |
+| Santelmo | 32x32 (2 frames) | [ ] | Floating fire ball |
+| Manananggal | 48x48 (4 frames) | [ ] | Flying torso vampire |
+| Weapon icons (6) | 16x16 | [ ] | Bird-themed |
+
+### Asset Pack Art (Generic - FALLBACK OK)
+
+| Asset | Size | Source | Status |
+|-------|------|--------|--------|
+| XP Gem | 16x16 | Asset pack | [ ] |
+| Gold Coin | 16x16 | Asset pack | [ ] |
+| Passive icons (4) | 16x16 | Asset pack | [ ] |
+| HP Bar | UI kit | Asset pack | [ ] |
+| XP Bar | UI kit | Asset pack | [ ] |
+| Buttons | UI kit | Asset pack | [ ] |
+| Panels | UI kit | Asset pack | [ ] |
+| Tileset | 32x32 tiles | Asset pack | [ ] |
+
+## If Ericka Art Not Ready
+
+**Priority fallback:**
+1. **Sarimanok Classic** - MUST have for demo (even refined placeholder)
+2. **Enemies** - Can use color-coded rectangles with distinct shapes
+3. **Variants** - Can use recolored Classic placeholder
+4. **Icons** - Asset pack or simple geometric shapes
+
+**The game is SHIPPABLE with placeholders.** Real art is "Should Have," not "Must Have" for Early Access.
+
+## Joint Art Review (End of Week 8)
+
+Schedule 30-minute session with Ericka:
+1. Play through 10-minute run together
+2. Note any sprites that don't "read" correctly at game speed
+3. Prioritize fixes vs "good enough for EA"
+4. Document any art deferred to post-launch
+

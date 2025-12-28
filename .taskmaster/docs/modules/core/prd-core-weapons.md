@@ -185,3 +185,38 @@ All weapons use ColorRect placeholders or simple shapes during Weeks 1-3.
 - [Enemy System](prd-core-enemies.md) - Feature 2
 - [Progression Systems](prd-core-progression.md) - Features 4-6, Week 1-3 tasks
 
+---
+
+# Art Integration Checkpoint - Weapon Effects (Optional)
+
+**Trigger:** Complete this after weapon code tasks are done, IF Ericka has delivered weapon effect art.
+
+## Sprite Preview Scene Setup (First Time Only)
+
+If not already built, create `scenes/debug/sprite_preview.tscn`:
+- Background: Grass tileset (placeholder or purchased)
+- Sprite slots at various sizes (16x16, 32x32, 64x64)
+- Camera: 640x360 viewport at game scale
+- Purpose: 5-minute visual verification for any sprite
+
+## Verification Checklist
+
+- [ ] **Feather Projectile (16x16):** Visible against grass background, direction clear when rotated
+- [ ] **Peck Hit Effect (32x32):** Reads as directional thrust, not generic spark
+- [ ] **Wing Slap Circle (64x64):** Expanding motion visible, doesn't obscure player
+- [ ] **Ice Shard (16x16):** Blue recolor distinct from normal feather
+- [ ] **Flame Wing (64x64):** Orange recolor distinct from Wing Slap
+- [ ] **Animation Speed:** Effects play at correct speed (check feels responsive)
+- [ ] **Joint Review:** Show all effects to Ericka, get feedback (10 min)
+
+## If Issues Found
+
+1. Document specific issue (screenshot + description)
+2. Ericka iterates same week if possible
+3. If not fixable quickly: Continue with placeholder, revisit Week 8
+4. DO NOT block code progress on art issues
+
+## If Art Not Ready
+
+Skip this checkpoint. Continue with placeholder ColorRects. Art will be integrated in Week 8 polish phase.
+

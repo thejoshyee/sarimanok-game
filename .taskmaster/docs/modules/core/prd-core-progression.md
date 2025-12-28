@@ -344,3 +344,37 @@ Builds on Week 2, adds:
 - [Weapon System](prd-core-weapons.md) - Feature 3
 - **Next Milestone:** Week 4-5 (Win Condition & Shop System) - See [../progression/prd-progression-victory.md](../progression/prd-progression-victory.md)
 
+---
+
+# Art Integration Checkpoint - Pickups & Icons (Optional)
+
+**Trigger:** Complete this after progression code tasks are done, IF purchased asset pack is imported.
+
+## Asset Pack Import
+
+1. Purchase UI/pickup asset pack (see `.taskmaster/docs/art/asset-pack-guide.md`)
+2. Import to `game/assets/purchased/`
+3. Set import filter to "Nearest" for pixel art
+
+## Verification Checklist
+
+- [ ] **XP Gem (16x16):** Visible against grass background, distinct from Gold
+- [ ] **Gold Coin (16x16):** Yellow/gold reads clearly, distinct from XP
+- [ ] **Passive Icons (16x16):** All 4 icons readable in level-up panel
+  - Iron Beak (damage icon)
+  - Thick Plumage (HP/defense icon)
+  - Racing Legs (speed icon)
+  - Magnetic Aura (magnet icon)
+- [ ] **Magnet Effect:** Pickup drift toward player is visible
+- [ ] **Level-Up Panel:** Icons display correctly at intended size
+
+## If Issues Found
+
+1. Try different icons from asset pack
+2. Adjust colors/contrast if needed
+3. If asset pack doesn't work: Continue with placeholder, find better pack
+
+## If Asset Pack Not Purchased Yet
+
+Skip this checkpoint. Continue with placeholder ColorRects. Purchase asset pack before Week 8 polish phase.
+

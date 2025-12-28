@@ -165,3 +165,43 @@ func check_golden_unlock():
 
 - [Endless Mode](prd-characters-endless.md) - Feature 12, Week 6 tasks & MVP Checkpoint
 
+---
+
+# Art Integration Checkpoint - Character Variants (Optional)
+
+**Trigger:** Complete this after character select code is done, IF Ericka has delivered Shadow and/or Golden Sarimanok art.
+
+## Verification Checklist - Shadow Sarimanok
+
+- [ ] **Sprite (32x32):** Dark purple/blue color palette
+- [ ] **Visual Distinction:** Immediately recognizable as different from Classic
+- [ ] **Silhouette:** Still reads as "bird" despite darker colors
+- [ ] **Animation:** 2-frame bob animation works correctly
+- [ ] **Sprite Flip:** Flips correctly when moving left/right
+
+## Verification Checklist - Golden Sarimanok
+
+- [ ] **Sprite (32x32):** Gold/red/bronze color palette
+- [ ] **Visual Distinction:** Immediately recognizable as different from Classic and Shadow
+- [ ] **Silhouette:** Still reads as "bird" with metallic colors
+- [ ] **Animation:** 2-frame bob animation works correctly
+- [ ] **Sprite Flip:** Flips correctly when moving left/right
+
+## Character Select Screen
+
+- [ ] **All 3 Variants Visible:** Distinct at character select preview size
+- [ ] **Color Contrast:** No variant blends into UI background
+- [ ] **Locked State:** Grayed-out versions still distinguishable
+- [ ] **Joint Review:** Show all variants side-by-side to Ericka (10 min)
+
+## If Issues Found
+
+1. Document specific issue (screenshot + description)
+2. Ericka iterates same week if possible
+3. Colors too similar: Adjust saturation or hue
+4. DO NOT block code progress on art issues
+
+## If Art Not Ready
+
+Skip this checkpoint. Continue with placeholder ColorRects (purple for Shadow, gold for Golden). Art will be integrated in Week 8 polish phase.
+

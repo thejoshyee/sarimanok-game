@@ -274,3 +274,39 @@ Test and adjust:
 - [Art Integration & Audio Polish](prd-polish-content.md) - Weeks 8-9
 - [Steam Build & Balance](prd-polish-release.md) - Weeks 10-11
 
+---
+
+# Art Integration Checkpoint - Particles & Effects (Optional)
+
+**Trigger:** Complete this after game feel code is done, IF particle/effect assets are ready.
+
+## Asset Sources
+
+- Purchase particle/VFX asset pack from itch.io (see asset-pack-guide.md)
+- OR create simple particles in Godot (GPUParticles2D)
+
+## Verification Checklist
+
+- [ ] **Enemy Death Puff:** Small particle burst on enemy death, color matches enemy
+- [ ] **Hit Sparks:** Impact particles when weapons hit enemies
+- [ ] **Level-Up Sparkles:** Celebratory particle burst on level up
+- [ ] **XP Magnet Glow:** Subtle glow when pickups are in range
+- [ ] **Dawn Particles:** Rising sun effect, optional bird silhouettes
+- [ ] **Screen Shake:** Works on damage, boss spawn, boss death (code, no art)
+- [ ] **No Obscuring:** Particles don't block view of gameplay
+
+## Performance Check
+
+- [ ] Particles don't cause FPS drops at 200+ enemies
+- [ ] Reduced Motion setting disables particles correctly
+
+## If Issues Found
+
+1. Reduce particle count or simplify effect
+2. Adjust particle lifetime (shorter = less visual clutter)
+3. If asset pack particles clash: Use simple Godot built-in particles
+
+## If Assets Not Ready
+
+Skip this checkpoint. Game feel works without particles (screen shake, hitstop are code-based). Add particles in Week 8-9 polish phase.
+

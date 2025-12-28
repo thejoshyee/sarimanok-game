@@ -278,3 +278,42 @@ func save_game():
 - [Art Integration & Audio Polish](prd-polish-content.md) - Weeks 8-9
 - **Next Milestone:** Weeks 12-14 (Launch Prep) - See [../launch/prd-launch-prep.md](../launch/prd-launch-prep.md)
 
+---
+
+# Art Integration Checkpoint - Steam Assets (Required for Week 10)
+
+**Trigger:** Complete this during Week 10, BEFORE submitting demo to Steam.
+
+## Achievement Icons (Required)
+
+Steam achievements need icons (64x64 pixels, PNG format):
+
+| Achievement     | Icon Concept                    |
+| --------------- | ------------------------------- |
+| First Dawn      | Sun rising over silhouette      |
+| Night Owl       | Moon with clock                 |
+| Shadow Unlocked | Dark purple bird silhouette     |
+| Century         | "100" with enemy skull          |
+| Maxed Out       | Level 5 star                    |
+| Shopaholic      | Gold coins pile                 |
+| Perfectionist   | Golden shield                   |
+| Endless Night   | Infinity symbol with moon       |
+
+## Verification Checklist
+
+- [ ] **All 8 Icons Created:** 64x64 PNG files
+- [ ] **Readable at Small Size:** Icons recognizable in Steam overlay
+- [ ] **Consistent Style:** All icons match game's pixel art aesthetic
+- [ ] **Locked/Unlocked States:** Gray vs color versions (optional, Steam auto-grays)
+
+## Sources for Achievement Icons
+
+1. **Ericka creates:** If time allows (2-3 hours for all 8)
+2. **Asset pack:** Purchase icon pack from itch.io
+3. **Simple shapes:** Basic geometric icons are acceptable
+4. **Placeholder:** Use colored squares temporarily, replace post-launch
+
+## If Icons Not Ready
+
+Submit demo without achievements displaying icons (Steam allows this). Achievement functionality works, icons display as generic. Add real icons before EA launch.
+

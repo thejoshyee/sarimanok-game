@@ -167,3 +167,77 @@ Your Steam store page is a sales funnel: capsule → screenshots → trailer →
 **Related Files:**
 - **Next:** [Launch Execution](prd-launch-execute.md) - Weeks 13-14 (Next Fest & Launch)
 
+---
+
+# Art Integration Checkpoint - Marketing Assets (Required for Launch)
+
+**Trigger:** Complete this during Week 12, BEFORE setting Steam store page live.
+
+## Capsule Art (CRITICAL)
+
+Your capsule art is the single most important marketing asset. Bad capsule = no clicks = no wishlists.
+
+### Commission Timeline (Start Week 6!)
+
+| Week | Action |
+|------|--------|
+| Week 6 | Browse artists, save 5-10 candidates |
+| Week 7 | Contact top 3, commission winner (~$200-400) |
+| Week 8-9 | Artist works (5-10 business days) |
+| Week 10 | Receive art, request revisions if needed |
+| Week 11 | Final art ready |
+| Week 12 | Upload to Steam |
+
+### Where to Find Artists
+
+- **Fiverr:** Search "Steam capsule art" - $100-300
+- **ArtStation:** Browse "Games" category - $200-500
+- **Twitter/X:** Search #commissionsopen #gameart - $150-400
+- **r/gameDevClassifieds** or **r/HungryArtists** - $80-300
+
+### Commission Brief Template
+
+```
+PROJECT: Steam Capsule Art for "Sarimanok Survivor"
+SIZE: 616x353 pixels (can work larger, will scale down)
+STYLE: Painterly/stylized (NOT pixel art)
+DEADLINE: 10 business days
+
+SUBJECT: The Sarimanok (legendary Filipino bird) in heroic pose,
+facing off against shadowy creatures (duwendes/aswang) at night.
+Moon or mystical light in background. Filipino folklore aesthetic.
+
+MUST INCLUDE:
+- Sarimanok as central focus (colorful, vibrant)
+- Night/dusk atmosphere
+- Space for game title text (top or bottom)
+- Action/energy feel (this is a survivor game)
+
+REFERENCE IMAGES: [Attach Sarimanok reference + similar game capsules]
+BUDGET: $XXX (include 1 revision round)
+```
+
+## Verification Checklist - All Marketing Art
+
+- [ ] **Main Capsule (616×353):** Eye-catching, Sarimanok prominent
+- [ ] **Small Capsule (231×87):** Title readable at small size
+- [ ] **Header Capsule (460×215):** Works as store page header
+- [ ] **Screenshots (5-10):** Show varied gameplay, no repetitive shots
+- [ ] **Trailer:** Gameplay in first 5 seconds, under 60 seconds total
+
+## Screenshot Tips
+
+1. Capture at 1920×1080 minimum
+2. First 4 screenshots appear in hover preview - make them count!
+3. Show: combat, level-up, boss, weapon variety, shop/progression
+4. NO text overlays or watermarks
+
+## If Capsule Art Not Ready
+
+**Backup options (in order of preference):**
+1. Request rush delivery from artist (may cost extra)
+2. Ericka creates simplified illustration (4-6 hours emergency sprint)
+3. High-quality composite: upscaled Sarimanok sprite + professional typography + gradient background
+
+**DO NOT delay launch for capsule art.** A serviceable capsule can be replaced post-launch.
+
