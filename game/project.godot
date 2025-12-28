@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 PoolManager="*res://autoloads/pool_manager.gd"
 GridManager="*res://autoloads/grid_manager.gd"
 ProgressionManager="*res://resources/progression.gd"
+GameTimer="*res://autoloads/game_timer.gd"
 
 [display]
 

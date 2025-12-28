@@ -933,9 +933,10 @@
               1
             ],
             "details": "Add onready var game_timer = get_tree().edited_scene_root.get_node('GameTimer'); Implement a helper func get_elapsed_minutes() -> float: return game_timer.elapsed_minutes.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Print get_elapsed_minutes() at spawn time and verify it matches GameTimer display value.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-28T17:04:28.530Z"
           },
           {
             "id": 3,
@@ -979,7 +980,7 @@
         "complexity": 2,
         "recommendedSubtasks": 0,
         "expansionPrompt": "",
-        "updatedAt": "2025-12-27T17:35:33.866Z"
+        "updatedAt": "2025-12-28T17:04:28.530Z"
       },
       {
         "id": "13",
@@ -1051,7 +1052,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-27T17:35:33.872Z",
+      "lastModified": "2025-12-28T17:04:28.537Z",
       "taskCount": 16,
       "completedCount": 11,
       "tags": [

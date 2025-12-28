@@ -16,3 +16,8 @@ func get_scaled_hp(base_hp: int, elapsed_minutes: float) -> int:
 func get_scaled_damage(base_damage: int, elapsed_minutes: float) -> int:
 	var scale = 1.0 + (elapsed_minutes / 5.0) * 0.03 # +3% per 5min
 	return int(base_damage * scale)
+
+
+# Helper to get current game time from global timer
+func get_elapsed_minutes() -> float:
+	return GameTimer.elapsed_minutes
