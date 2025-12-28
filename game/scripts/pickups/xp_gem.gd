@@ -14,7 +14,8 @@ func on_spawn() -> void:
 	monitoring = true # enable area2d collision detection
 
 func on_despawn() -> void:
-	# cdalled when returned to the pool
+	# called when returned to the pool
+	remove_from_group("xp_gems")
 	visible = false
 	monitoring = false # disable area2d collision detection to save performance
 	
