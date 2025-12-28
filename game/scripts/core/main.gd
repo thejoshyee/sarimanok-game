@@ -1,5 +1,10 @@
 extends Node2D
 
+# Arena dimensions (96x64 tiles at 32x32 each)
+const ARENA_WIDTH: int = 3072   # 96 tiles * 32 pixels
+const ARENA_HEIGHT: int = 2048  # 64 tiles * 32 pixels
+const TILE_SIZE: int = 32
+
 # Pool configurations to initialize at startup
 @export var pool_configs: Array[PoolConfig] = []
 
@@ -36,7 +41,7 @@ func _ready():
 	# Print camera position for debugging
 	print("Camera position: ", $Camera2D.position)
 
-	queue_redraw()
+	# queue_redraw()  # Disabled for tilemap painting - re-enable for debug
 
 	# Enable camera smoothing for testing
 	$Camera2D.position_smoothing_enabled = true
@@ -45,20 +50,22 @@ func _ready():
 	ProgressionManager.level_up.connect(level_up_panel.show_level_up)
 
 
-func _draw():
+func _draw(show_debug_grid: bool = true):
+	if not show_debug_grid:
+		return
 	# Draw tile grid overlay (32×32 tiles)
 	var grid_color = Color(1, 1, 0, 0.3)  # Yellow, semi-transparent
-	
+
 	# Draw vertical lines every 32 pixels
-	for x in range(0, 1920 + 32, 32):
-		draw_line(Vector2(x, 0), Vector2(x, 1088), grid_color, 1)
-	
+	for x in range(0, ARENA_WIDTH + TILE_SIZE, TILE_SIZE):
+		draw_line(Vector2(x, 0), Vector2(x, ARENA_HEIGHT), grid_color, 1)
+
 	# Draw horizontal lines every 32 pixels
-	for y in range(0, 1088 + 32, 32):
-		draw_line(Vector2(0, y), Vector2(1920, y), grid_color, 1)
-	
+	for y in range(0, ARENA_HEIGHT + TILE_SIZE, TILE_SIZE):
+		draw_line(Vector2(0, y), Vector2(ARENA_WIDTH, y), grid_color, 1)
+
 	# Draw arena boundary in red
-	draw_rect(Rect2(0, 0, 1920, 1088), Color.RED, false, 2)
+	draw_rect(Rect2(0, 0, ARENA_WIDTH, ARENA_HEIGHT), Color.RED, false, 2)
 
 
 # Camera follows the player
