@@ -144,28 +144,51 @@ The arena is divided into distinct visual zones. All zones are passable - decora
 
 ### Placeholder Tileset Layout (256x128 PNG)
 
-```
-┌────┬────┬────┬────┬────┬────┬────┬────┐
-│ 0  │ 1  │ 2  │ 3  │ 4  │ 5  │ 6  │ 7  │  Row 0 (ground + crops start)
-│dark│med │lite│dirt│dirt│rice│rice│crop│
-│gras│gras│gras│dark│lite│watr│plnt│ 1  │
-├────┼────┼────┼────┼────┼────┼────┼────┤
-│ 8  │ 9  │ 10 │ 11 │ 12 │ 13 │ 14 │ 15 │  Row 1 (crops, rocks, edges)
-│crop│rock│tuft│fenc│fenc│fenc│tree│kubo│
-│ 2  │    │    │ H  │ V  │post│    │ TL │
-├────┼────┼────┼────┼────┼────┼────┼────┤
-│ 16 │ 17 │ 18 │ 19 │    │    │    │    │  Row 2 (bahay kubo + well)
-│kubo│kubo│kubo│well│    │    │    │    │
-│ TR │ BL │ BR │cart│    │    │    │    │
-├────┼────┼────┼────┼────┼────┼────┼────┤
-│    │    │    │    │    │    │    │    │  Row 3 (expansion space)
-│    │    │    │    │    │    │    │    │
-│    │    │    │    │    │    │    │    │
-└────┴────┴────┴────┴────┴────┴────┴────┘
+Each cell = 32x32 pixels. Total tileset = 256x128 pixels (8 cols x 4 rows).
 
-Each cell = 32x32 pixels
-Total tileset = 256x128 pixels (8 cols x 4 rows)
 ```
+Row 0 (y=0-31):
+  #2d5a1e   #3d7a2e   #4d9a3e   #5c4033   #7a5a43   #4a6a7a   #5a8a5a   #6a9a4a
+  grass     grass     grass     dirt      dirt      rice      rice      crop
+  dark      med       light     dark      light     water     plants    row1
+
+Row 1 (y=32-63):
+  #7aaa5a   #6a6a6a   #3d8a2e   #8a6a4a   #8a6a4a   #6a4a2a   #1a3a1a   #9a7a5a
+  crop      rock      grass     fence     fence     fence     tree      kubo
+  row2      small     tuft      horiz     vert      post                TL
+
+Row 2 (y=64-95):
+  #8a6a4a   #7a5a3a   #6a4a2a   #7a5a3a   (empty)   (empty)   (empty)   (empty)
+  kubo      kubo      kubo      well
+  TR        BL        BR        cart
+
+Row 3 (y=96-127):
+  (leave empty for future tiles)
+```
+
+**Tile Index Reference:**
+| Index | Tile | Hex Color |
+|-------|------|-----------|
+| 0 | grass_dark | #2d5a1e |
+| 1 | grass_medium | #3d7a2e |
+| 2 | grass_light | #4d9a3e |
+| 3 | dirt_dark | #5c4033 |
+| 4 | dirt_light | #7a5a43 |
+| 5 | rice_water | #4a6a7a |
+| 6 | rice_plants | #5a8a5a |
+| 7 | crop_row_1 | #6a9a4a |
+| 8 | crop_row_2 | #7aaa5a |
+| 9 | rock_small | #6a6a6a |
+| 10 | grass_tuft | #3d8a2e |
+| 11 | fence_h | #8a6a4a |
+| 12 | fence_v | #8a6a4a |
+| 13 | fence_post | #6a4a2a |
+| 14 | tree | #1a3a1a |
+| 15 | bahay_kubo_tl | #9a7a5a |
+| 16 | bahay_kubo_tr | #8a6a4a |
+| 17 | bahay_kubo_bl | #7a5a3a |
+| 18 | bahay_kubo_br | #6a4a2a |
+| 19 | well_cart | #7a5a3a |
 
 ---
 
