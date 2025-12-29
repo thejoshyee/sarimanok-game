@@ -16,7 +16,7 @@ var speed: float = base_speed
 @export var base_damage: int = 5
 @export var base_max_hp: int = 10
 var damage: int = base_damage
-var hp: int = base_max_hp
+var current_hp: int = base_max_hp
 
 # reference to the player node
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
@@ -29,8 +29,22 @@ func _ready() -> void:
 
 # Call this after spawning to apply time-based difficulty scaling
 func initialize_stats(elapsed_minutes: float) -> void:
-	hp = SpawnManager.get_scaled_hp(base_max_hp, elapsed_minutes)
+	current_hp = SpawnManager.get_scaled_hp(base_max_hp, elapsed_minutes)
 	damage = SpawnManager.get_scaled_damage(base_damage, elapsed_minutes)
+	# print("Enemy spawned with HP: ", current_hp, " Damage: ", damage)
+
+
+# Called when this enemy takes damage from weapons / projectiles
+func take_damage(amount: int) -> void:
+	current_hp -= amount
+	if current_hp <= 0:
+		die()
+
+
+# Handle enemy death - cleanup and rewards
+func die() -> void:
+	# TODO: Spawn XP pickup here
+	queue_free()
 
 
 func _physics_process(_delta: float) -> void:

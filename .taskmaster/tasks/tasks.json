@@ -960,9 +960,10 @@
               3
             ],
             "details": "In enemy script, set self.current_hp = scaled_hp from spawn manager when instantiated. Verify damage system uses current_hp.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn Red at 10min, confirm current_hp=27 in enemy script, take damage and verify death at correct threshold.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-29T15:06:52.014Z"
           },
           {
             "id": 5,
@@ -981,7 +982,7 @@
         "complexity": 2,
         "recommendedSubtasks": 0,
         "expansionPrompt": "",
-        "updatedAt": "2025-12-28T18:25:22.017Z"
+        "updatedAt": "2025-12-29T15:06:52.014Z"
       },
       {
         "id": "13",
@@ -1053,7 +1054,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-28T18:25:22.025Z",
+      "lastModified": "2025-12-29T15:06:52.023Z",
       "taskCount": 16,
       "completedCount": 11,
       "tags": [
