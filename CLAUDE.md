@@ -96,7 +96,8 @@ Follow this node hierarchy for consistent architecture:
 
 ```
 Main
-├── TileMap (2 layers: Ground, Decorations)
+├── TileMapLayer (Ground)
+├── TileMapLayer (Decorations)
 ├── Boundaries (StaticBody2D - invisible collision walls)
 ├── Player (CharacterBody2D)
 │   └── Sprite/AnimatedSprite2D (child, swappable)
