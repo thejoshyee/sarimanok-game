@@ -552,6 +552,64 @@ game/assets/
 
 ---
 
+## 🌙 Day/Night & Technical Asset Rules
+
+### Day/Night Coloring
+
+**Draw everything in NORMAL daytime colors.** The game handles night-time visually through code.
+
+- Use the full Resurrect 64 palette as intended (vibrant colors)
+- Code applies a blue tint over the entire game for night
+- When player wins at 30:00, code fades the tint away → dawn breaks
+- **You do NOT need to make separate day/night versions of any art**
+
+### Transparent Backgrounds
+
+**All sprites and objects need transparent backgrounds** (except ground tiles).
+
+| Asset Type | Background | Why |
+|------------|------------|-----|
+| Characters (Sarimanok) | Transparent | Placed over ground tiles |
+| Enemies (Duwendes, etc.) | Transparent | Move over any terrain |
+| Trees, rocks, decorations | Transparent | Layered on top of grass/dirt |
+| Weapon effects | Transparent | Appear over everything |
+| Ground tiles (grass, dirt) | Solid/filled | These ARE the background |
+
+**In Aseprite:** Make sure your background layer is transparent (checkerboard pattern), not white.
+
+### Multi-Tile Objects (Bahay Kubo, Large Trees, etc.)
+
+**Draw as ONE image at full size, export as ONE file.**
+
+| Object | Canvas Size | Tile Equivalent | Export As |
+|--------|-------------|-----------------|-----------|
+| Bahay Kubo | 64×64 | 2×2 tiles | Single 64×64 PNG |
+| Large tree | 64×96 | 2×3 tiles | Single 64×96 PNG |
+| Palm tree | 32×64 | 1×2 tiles | Single 32×64 PNG |
+| Cart/Well | 32×32 or 64×64 | 1×1 or 2×2 | Single PNG |
+
+**Do NOT slice these into separate tile pieces.** Josh places them as whole sprites in Godot.
+
+### What DOES Need to Tile Seamlessly
+
+Only **ground tiles** need to connect to each other:
+
+- Grass tiles (edges blend together)
+- Dirt path tiles (connect left/right/up/down)
+- Rice paddy water/plant rows (repeat horizontally)
+
+**Objects like trees, the bahay kubo, rocks, etc. do NOT need to tile** — they sit on top of the ground layer with transparent backgrounds.
+
+### Quick Checklist Before Exporting
+
+- [ ] Background is transparent (not white)
+- [ ] Using Resurrect 64 palette colors
+- [ ] Normal bright daytime colors (no pre-darkening for night)
+- [ ] Canvas size matches the spec in this doc
+- [ ] Exported as PNG with transparency
+
+---
+
 ## 💡 Quick Reference: What Each Weapon Does
 
 | Weapon              | Type       | Visual             | In-Game Behavior                     |
