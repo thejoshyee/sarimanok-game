@@ -66,7 +66,9 @@ func on_despawn() -> void:
 		GridManager.unregister_enemy(self, _current_cell_id)
 		_current_cell_id = -1
 
-func take_damage(_amount: float) -> void:
-	# print("Enemy took ", amount, " damage")
-	# Return to pool instead of freeing
-	PoolManager.despawn(self)
+func take_damage(amount: float) -> void:
+	hp -= int(amount)
+	print("[ENEMY] Took ", amount, " damage. HP: ", hp, "/", base_max_hp, " (scaled)")
+	if hp <= 0:
+		# return to pool instead of freeing
+		PoolManager.despawn(self)

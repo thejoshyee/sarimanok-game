@@ -912,7 +912,7 @@
         "dependencies": [
           "11"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -974,15 +974,16 @@
               4
             ],
             "details": "Test sequence: Play to 0/10/20min, spawn Green/Red, check HP/dmg values match formula (Green10min:HP11,dmg5; Red10min:HP27,dmg10), monitor FPS stability.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Use debug prints or overlay to display live scaled values; kill 10 enemies per interval to confirm drops unaffected by scaling.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-30T19:09:15.414Z"
           }
         ],
         "complexity": 2,
         "recommendedSubtasks": 0,
         "expansionPrompt": "",
-        "updatedAt": "2025-12-29T15:06:52.014Z"
+        "updatedAt": "2025-12-30T19:09:15.414Z"
       },
       {
         "id": "13",
@@ -1054,9 +1055,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-29T15:06:52.023Z",
+      "lastModified": "2025-12-30T19:09:15.415Z",
       "taskCount": 16,
-      "completedCount": 11,
+      "completedCount": 12,
       "tags": [
         "master"
       ]

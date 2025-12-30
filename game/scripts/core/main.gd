@@ -1,5 +1,7 @@
 extends Node2D
 
+var _debug_key_held: bool = false  # Prevent debug key spam
+
 # Arena dimensions (96x64 tiles at 32x32 each)
 const ARENA_WIDTH: int = 3072   # 96 tiles * 32 pixels
 const ARENA_HEIGHT: int = 2048  # 64 tiles * 32 pixels
@@ -82,6 +84,20 @@ func _process(_delta):
 			# Respawn 10 gems
 			test_spawn_xp_gems()
 
+	# DEBUG: Press 1/2/3 to skip 5/10/20 minutes (just_pressed prevents spam)
+	if Input.is_physical_key_pressed(KEY_1) and not _debug_key_held:
+		_debug_key_held = true
+		GameTimer.debug_skip_minutes(5)
+	elif Input.is_physical_key_pressed(KEY_2) and not _debug_key_held:
+		_debug_key_held = true
+		GameTimer.debug_skip_minutes(10)
+	elif Input.is_physical_key_pressed(KEY_3) and not _debug_key_held:
+		_debug_key_held = true
+		GameTimer.debug_skip_minutes(20)
+	elif not Input.is_physical_key_pressed(KEY_1) and not Input.is_physical_key_pressed(KEY_2) and not Input.is_physical_key_pressed(KEY_3):
+		_debug_key_held = false
+
+
 	# Camera follows the player
 	if has_node("Player"):
 		$Camera2D.position = $Player.position
@@ -91,6 +107,9 @@ func _process(_delta):
 	if spawn_timer >= spawn_interval:
 		spawn_timer = 0.0
 		spawn_enemy()
+
+	# DEBUG: Show FPS in window title
+	get_window().title = "Sarimanok - FPS: " + str(Engine.get_frames_per_second())
 
 
 func spawn_enemy():

@@ -15,3 +15,9 @@ func _process(delta: float) -> void:
 func reset() -> void:
 	# call this when starting a new run
 	elapsed_time = 0.0
+
+# DEBUG: Skip forward in time for testing scaling
+# Call with: GameTimer.debug_skip_minutes(10)
+func debug_skip_minutes(minutes: float) -> void:
+	elapsed_time += minutes * 60.0
+	print("[DEBUG] Skipped ", minutes, " minutes. Now at: ", elapsed_minutes, " min")
