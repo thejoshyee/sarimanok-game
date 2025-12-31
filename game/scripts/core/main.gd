@@ -12,8 +12,6 @@ const TILE_SIZE: int = 32
 
 @onready var level_up_panel = $LevelUpPanel
 
-var spawn_timer: float = 0.0
-var spawn_interval: float = 3.0  # Spawn enemy every 3 seconds
 var test_gems: Array = [] # track spawned test gems
 
 # Called when the node enters the scene tree for the first time.
@@ -102,29 +100,9 @@ func _process(_delta):
 	if has_node("Player"):
 		$Camera2D.position = $Player.position
 
-	# spawn enemies periodically
-	spawn_timer += _delta
-	if spawn_timer >= spawn_interval:
-		spawn_timer = 0.0
-		spawn_enemy()
-
 	# DEBUG: Show FPS in window title
 	get_window().title = "Sarimanok - FPS: " + str(Engine.get_frames_per_second())
 
-
-func spawn_enemy():
-	var enemy = PoolManager.spawn("enemy_test")
-	if enemy:
-		# spawn at random pos around player
-		var player_pos = $Player.position if has_node("Player") else Vector2(320, 180)
-		var angle = randf() * TAU
-		var distance = randf_range(150, 250)
-		enemy.global_position = player_pos + Vector2(cos(angle), sin(angle)) * distance
-
-		# Apply time-based stat scaling
-		enemy.initialize_stats(GameTimer.elapsed_minutes)
-
-		print("Spawned enemy at: ", enemy.global_position, " HP: ", enemy.hp, " DMG: ", enemy.damage)
 
 
 func test_spawn_xp_gems():
