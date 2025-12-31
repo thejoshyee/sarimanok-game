@@ -996,11 +996,63 @@
           "11",
           "12"
         ],
-        "status": "pending",
-        "subtasks": [],
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "SpawnManager Node and Script Setup",
+            "description": "Create and configure the SpawnManager node with necessary references to player, enemy scenes, and initial script structure.",
+            "dependencies": [],
+            "details": "Add SpawnManager as Node2D or Control under main scene. Attach script spawn_manager.gd. Export player NodePath, enemy prefab PackedScene. Initialize variables for spawn_dist, map bounds (1920x1088). Ensure dependencies Tasks 11-12 resolved.",
+            "status": "done",
+            "testStrategy": "Verify node exists in scene tree, script attached, player/enemy references valid via remote inspector.",
+            "updatedAt": "2025-12-31T17:26:48.363Z",
+            "parentId": "undefined"
+          },
+          {
+            "id": 2,
+            "title": "Implement Polar Coordinate Position Calculation",
+            "description": "Calculate spawn positions using ring-based polar coordinates around player at 400-500px distance.",
+            "dependencies": [
+              1
+            ],
+            "details": "Compute viewport_diagonal = sqrt(1920² + 1088²). Set spawn_dist = viewport_diagonal/2 + 100 (~465px). Generate angle = randf() * TAU. Compute pos = player.global_position + Vector2(cos(angle), sin(angle)) * spawn_dist * randf_range(0.8, 1.0) for 400-500px ring.",
+            "status": "pending",
+            "testStrategy": "Spawn 100 positions, verify all distances from player 400-500px using debug draw or console logs.",
+            "parentId": "undefined"
+          },
+          {
+            "id": 3,
+            "title": "Add Map Bounds Clamping Logic",
+            "description": "Clamp calculated spawn positions to valid map boundaries to prevent off-screen spawning.",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "After polar calculation, apply: clamped_x = max(0, min(1920, pos.x)), clamped_y = max(0, min(1088, pos.y)). Use clamped position for instantiation. Log unclamped vs clamped positions for debugging boundary cases.",
+            "status": "pending",
+            "testStrategy": "Test edge cases: player at corners/center, verify 100% spawns within 0-1920x, 0-1088y bounds.",
+            "parentId": "undefined"
+          },
+          {
+            "id": 4,
+            "title": "Integrate Spawn Timer with Stat Scaling",
+            "description": "Add timed spawning with get_scaled_hp/damage calls and connect to spawn logic.",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "Create Timer node child of SpawnManager, set wait_time=2.0s, aut-start=true. Connect timeout signal to spawn_enemy() function. In spawn_enemy(): instantiate enemy at clamped pos, call enemy.get_scaled_hp(), enemy.get_scaled_damage() based on game time/progress.",
+            "status": "pending",
+            "testStrategy": "Run for 30s, verify spawn rate ~every 2s, enemy stats scale correctly per game time, no crashes on repeated spawning.",
+            "parentId": "undefined"
+          }
+        ],
         "complexity": 4,
         "recommendedSubtasks": 4,
-        "expansionPrompt": "Divide into: 1) SpawnManager node/script setup; 2) Polar coordinate position calculation; 3) Map bounds clamping; 4) Spawn timer integration with stat scaling."
+        "expansionPrompt": "Divide into: 1) SpawnManager node/script setup; 2) Polar coordinate position calculation; 3) Map bounds clamping; 4) Spawn timer integration with stat scaling.",
+        "updatedAt": "2025-12-31T17:26:48.363Z"
       },
       {
         "id": "14",
@@ -1055,7 +1107,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-30T19:09:15.415Z",
+      "lastModified": "2025-12-31T17:26:48.364Z",
       "taskCount": 16,
       "completedCount": 12,
       "tags": [

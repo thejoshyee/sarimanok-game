@@ -5,6 +5,24 @@ const ARENA_WIDTH: int = 3072
 const ARENA_HEIGHT: int = 2048
 const SPAWN_OFFSET: int = 48  # How far outside arena to spawn enemies
 
+# Reference for spawning - set in Inspector
+@export var player_path: NodePath
+@export var enemy_scene: PackedScene
+
+# Cached player reference
+var player: Node2D
+
+# Spawn distance - ring around player (viewport diagonal/2 + padding)
+# WHY: Enemies spawn just outside visible area, ~465px from player
+var spawn_dist: float = 465.0
+
+func _ready() -> void:
+	# Convert NodePath to actual node reference
+	# WHY: NodePath is just a string - we need the real node to use it
+	print("Player path: ", player_path)
+	if player_path:
+		player = get_node(player_path)
+
 
 # Calculate scaled HP based on elapsed time
 # WHY: Enemies get 5% more HP every 5 minutes for progressive difficulty

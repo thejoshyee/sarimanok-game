@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cxqxr03wo51p8"]
+[gd_scene load_steps=21 format=4 uid="uid://cxqxr03wo51p8"]
 
 [ext_resource type="Script" uid="uid://bknm7mckcoe48" path="res://scripts/core/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_0xm2m"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dk4w6bjsr8gca" path="res://scenes/ui/grid_debug_overlay.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://dvdy2n5irl835" path="res://scenes/ui/level_up_panel.tscn" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://dmf2r32mowlp1" path="res://scenes/ui/hud.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://bqufsuyg2a6yu" path="res://scenes/enemies/duwende/enemy_duwende.tscn" id="14_w48qg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w48qg"]
 texture = ExtResource("6_ycdy4")
@@ -98,6 +99,8 @@ process_mode = 3
 
 [node name="SpawnManager" type="Node" parent="."]
 script = ExtResource("8_kek77")
+player_path = NodePath("../Player")
+enemy_scene = ExtResource("14_w48qg")
 
 [node name="Boundaries" type="Node2D" parent="."]
 
