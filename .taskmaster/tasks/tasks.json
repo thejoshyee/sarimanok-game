@@ -1017,9 +1017,10 @@
               1
             ],
             "details": "Compute viewport_diagonal = sqrt(1920² + 1088²). Set spawn_dist = viewport_diagonal/2 + 100 (~465px). Generate angle = randf() * TAU. Compute pos = player.global_position + Vector2(cos(angle), sin(angle)) * spawn_dist * randf_range(0.8, 1.0) for 400-500px ring.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn 100 positions, verify all distances from player 400-500px using debug draw or console logs.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-01T16:02:36.778Z"
           },
           {
             "id": 3,
@@ -1052,7 +1053,7 @@
         "complexity": 4,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Divide into: 1) SpawnManager node/script setup; 2) Polar coordinate position calculation; 3) Map bounds clamping; 4) Spawn timer integration with stat scaling.",
-        "updatedAt": "2025-12-31T17:26:48.363Z"
+        "updatedAt": "2026-01-01T16:02:36.778Z"
       },
       {
         "id": "14",
@@ -1107,7 +1108,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-31T17:26:48.364Z",
+      "lastModified": "2026-01-01T16:02:36.784Z",
       "taskCount": 16,
       "completedCount": 12,
       "tags": [

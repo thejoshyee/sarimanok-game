@@ -10,7 +10,7 @@ var player: Node2D
 # Spawn configuration
 const ARENA_WIDTH: int = 3072
 const ARENA_HEIGHT: int = 2048
-var spawn_dist: float = 465.0  # Ring distance from player
+var spawn_dist: float = 450.0 # Base ring distance from player (ring = 405-495px)
 
 # Spawn timing
 var spawn_timer: float = 0.0
@@ -40,7 +40,7 @@ func spawn_enemy() -> void:
 	# Calculate spawn position using polar coordinates
 	# WHY: Ring spawn ensures enemies come from all directions, just off-screen
 	var angle = randf() * TAU  # Random angle (0 to 2π)
-	var offset = Vector2(cos(angle), sin(angle)) * spawn_dist
+	var offset = Vector2(cos(angle), sin(angle)) * spawn_dist * randf_range(0.9, 1.1) # Randomize distance slightly
 	var spawn_pos = player.global_position + offset
 	
 	# Clamp to arena bounds (TODO: Refine this)
