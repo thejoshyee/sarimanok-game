@@ -56,7 +56,7 @@ Target FPS: 60 stable
 ### Bounded Arena Specs
 
 ```
-Map Size: 1920×1088 pixels (60×34 tiles)
+Map Size: 3072×2048 pixels (96×64 tiles)
 Tile Size: 32×32 pixels
 Viewport Coverage: ~1/3 of arena visible at once
 Camera: Follows player, bounded to map edges

@@ -1031,9 +1031,10 @@
               2
             ],
             "details": "After polar calculation, apply: clamped_x = max(0, min(1920, pos.x)), clamped_y = max(0, min(1088, pos.y)). Use clamped position for instantiation. Log unclamped vs clamped positions for debugging boundary cases.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test edge cases: player at corners/center, verify 100% spawns within 0-1920x, 0-1088y bounds.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-02T16:05:12.949Z"
           },
           {
             "id": 4,
@@ -1053,7 +1054,7 @@
         "complexity": 4,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Divide into: 1) SpawnManager node/script setup; 2) Polar coordinate position calculation; 3) Map bounds clamping; 4) Spawn timer integration with stat scaling.",
-        "updatedAt": "2026-01-01T16:02:36.778Z"
+        "updatedAt": "2026-01-02T16:05:12.949Z"
       },
       {
         "id": "14",
@@ -1108,7 +1109,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-01T16:02:36.784Z",
+      "lastModified": "2026-01-02T16:05:12.957Z",
       "taskCount": 16,
       "completedCount": 12,
       "tags": [

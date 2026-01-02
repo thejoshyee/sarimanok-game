@@ -43,9 +43,17 @@ func spawn_enemy() -> void:
 	var offset = Vector2(cos(angle), sin(angle)) * spawn_dist * randf_range(0.9, 1.1) # Randomize distance slightly
 	var spawn_pos = player.global_position + offset
 	
-	# Clamp to arena bounds (TODO: Refine this)
+	# Store unclamped position for debug comparison
+	var unclamped_pos = spawn_pos
+
+	# Clamp to arena bounds to prevent off-map spawning
 	spawn_pos.x = clamp(spawn_pos.x, 0, ARENA_WIDTH)
 	spawn_pos.y = clamp(spawn_pos.y, 0, ARENA_HEIGHT)
-	
+
+
+	# Debug: Log when clamping actually changes the position (boundary case)
+	if spawn_pos != unclamped_pos:
+		print("SPAWN CLAMPED: ", unclamped_pos, " -> ", spawn_pos)
+
 	enemy.global_position = spawn_pos
 	enemy.initialize_stats(GameTimer.elapsed_minutes)
