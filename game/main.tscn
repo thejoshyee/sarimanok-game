@@ -100,6 +100,10 @@ process_mode = 3
 script = ExtResource("13_ycdy4")
 player_path = NodePath("../Player")
 
+[node name="SpawnTimer" type="Timer" parent="SpawnManager"]
+wait_time = 2.0
+autostart = true
+
 [node name="Boundaries" type="Node2D" parent="."]
 
 [node name="WallTop" type="StaticBody2D" parent="Boundaries"]
@@ -125,3 +129,5 @@ shape = SubResource("RectangleShape2D_vivmo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/WallRight"]
 position = Vector2(3088, 1024)
 shape = SubResource("RectangleShape2D_2cqfq")
+
+[connection signal="timeout" from="SpawnManager/SpawnTimer" to="SpawnManager" method="spawn_enemy"]

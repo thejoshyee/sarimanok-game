@@ -996,7 +996,7 @@
           "11",
           "12"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1046,15 +1046,16 @@
               3
             ],
             "details": "Create Timer node child of SpawnManager, set wait_time=2.0s, aut-start=true. Connect timeout signal to spawn_enemy() function. In spawn_enemy(): instantiate enemy at clamped pos, call enemy.get_scaled_hp(), enemy.get_scaled_damage() based on game time/progress.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run for 30s, verify spawn rate ~every 2s, enemy stats scale correctly per game time, no crashes on repeated spawning.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-02T17:16:28.895Z"
           }
         ],
         "complexity": 4,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Divide into: 1) SpawnManager node/script setup; 2) Polar coordinate position calculation; 3) Map bounds clamping; 4) Spawn timer integration with stat scaling.",
-        "updatedAt": "2026-01-02T16:05:12.949Z"
+        "updatedAt": "2026-01-02T17:16:28.895Z"
       },
       {
         "id": "14",
@@ -1109,9 +1110,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-02T16:05:12.957Z",
+      "lastModified": "2026-01-02T17:16:28.897Z",
       "taskCount": 16,
-      "completedCount": 12,
+      "completedCount": 13,
       "tags": [
         "master"
       ]

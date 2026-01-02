@@ -12,24 +12,9 @@ const ARENA_WIDTH: int = 3072
 const ARENA_HEIGHT: int = 2048
 var spawn_dist: float = 450.0 # Base ring distance from player (ring = 405-495px)
 
-# Spawn timing
-var spawn_timer: float = 0.0
-var spawn_interval: float = 3.0
-
 func _ready() -> void:
 	if player_path:
 		player = get_node(player_path)
-
-
-func _process(delta: float) -> void:
-	if not player:
-		return
-	
-	# Spawn enemies on timer
-	spawn_timer += delta
-	if spawn_timer >= spawn_interval:
-		spawn_timer = 0.0
-		spawn_enemy()
 
 
 func spawn_enemy() -> void:
