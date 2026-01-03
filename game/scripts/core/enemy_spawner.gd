@@ -4,6 +4,8 @@ extends Node
 @export var player_path: NodePath
 @export var enemy_pool_id: String = "enemy_test"  # Pool ID instead of scene
 
+@onready var spawn_timer: Timer = $SpawnTimer
+
 # Cached player reference
 var player: Node2D
 
@@ -42,3 +44,8 @@ func spawn_enemy() -> void:
 
 	enemy.global_position = spawn_pos
 	enemy.initialize_stats(GameTimer.elapsed_minutes)
+
+	# Update spawn rate for next cycle - gets faster over time
+	var elapsed = GameTimer.elapsed_minutes
+	spawn_timer.wait_time = SpawnManager.get_spawn_interval(elapsed)
+	print("Spawn interval: ", spawn_timer.wait_time, "s at ", elapsed, " min")

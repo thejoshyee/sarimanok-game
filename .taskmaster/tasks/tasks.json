@@ -1088,9 +1088,10 @@
               1
             ],
             "details": "In _on_timer_timeout() or _process(delta): get current elapsed_minutes from GameTimer, set Timer.wait_time = get_spawn_interval(elapsed_minutes), then Timer.start(). Ensure smooth scaling without pauses.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Simulate time progression, log Timer.wait_time at intervals, confirm matches formula within ±0.01s.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-03T17:02:07.038Z"
           },
           {
             "id": 3,
@@ -1108,7 +1109,7 @@
         "complexity": 5,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Split into: 1) Exponential interval formula implementation; 2) Dynamic Timer.wait_time updates; 3) Enemy type probability logic with time-based unlocks.",
-        "updatedAt": "2026-01-02T23:14:10.404Z"
+        "updatedAt": "2026-01-03T17:02:07.038Z"
       },
       {
         "id": "15",
@@ -1147,7 +1148,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-02T23:14:10.413Z",
+      "lastModified": "2026-01-03T17:02:07.047Z",
       "taskCount": 16,
       "completedCount": 13,
       "tags": [
