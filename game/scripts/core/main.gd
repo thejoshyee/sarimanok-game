@@ -28,7 +28,8 @@ func _ready():
 	for config in pool_configs:
 		PoolManager.register_pool(config)
 	PoolManager.preload_all()
-	print("Enemy pool stats: ", PoolManager.get_pool_stats("enemy_test"))
+	print("Green pool: ", PoolManager.get_pool_stats("enemy_green_duwende"))
+	print("Red pool: ", PoolManager.get_pool_stats("enemy_red_duwende"))
 	print("XP gem pool stats: ", PoolManager.get_pool_stats("pickup_xp_gem"))
 
 	# Test: Spawn 10 xp gems in a circle for pooling verification

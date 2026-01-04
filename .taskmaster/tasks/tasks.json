@@ -1067,7 +1067,7 @@
         "dependencies": [
           "13"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1101,15 +1101,16 @@
               1
             ],
             "details": "In spawn function: if elapsed_minutes < 8: spawn Green; else: weighted_random([Green, 70], [Red, 30]) using randf() or RandomNumberGenerator. Integrate with existing pool system.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run 100 spawns pre/post 8min, verify 100% Green before, ~70/30 ratio after (within ±5%).",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-04T18:18:50.414Z"
           }
         ],
         "complexity": 5,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Split into: 1) Exponential interval formula implementation; 2) Dynamic Timer.wait_time updates; 3) Enemy type probability logic with time-based unlocks.",
-        "updatedAt": "2026-01-03T17:02:07.038Z"
+        "updatedAt": "2026-01-04T18:18:50.414Z"
       },
       {
         "id": "15",
@@ -1148,9 +1149,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-03T17:02:07.047Z",
+      "lastModified": "2026-01-04T18:18:50.421Z",
       "taskCount": 16,
-      "completedCount": 13,
+      "completedCount": 14,
       "tags": [
         "master"
       ]

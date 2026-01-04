@@ -1,8 +1,11 @@
 extends Node
 
 # References - set in Inspector
-@export var player_path: NodePath
-@export var enemy_pool_id: String = "enemy_test"  # Pool ID instead of scene
+@export var player_path: NodePath 
+
+# Enemy pool IDs
+const GREEN_DUWENDE_POOL: String = "enemy_green_duwende"
+const RED_DUWENDE_POOL: String = "enemy_red_duwende"
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -19,8 +22,24 @@ func _ready() -> void:
 		player = get_node(player_path)
 
 
+func _get_enemy_pool_id() -> String:
+	# Pick which enemy type to spawn based on elapsed time
+	var elapsed = GameTimer.elapsed_minutes
+
+	# Before 8 Minutes: only green duwende
+	if elapsed < 8.0:
+		return GREEN_DUWENDE_POOL
+
+	# After 8 minutes: 70% Green, 30% Red (Weighted random)
+	var roll = randf() # Random number 0.0 to 1.0
+	if roll < 0.7:
+		return GREEN_DUWENDE_POOL
+	else:
+		return RED_DUWENDE_POOL
+
+
 func spawn_enemy() -> void:
-	var enemy = PoolManager.spawn(enemy_pool_id)
+	var enemy = PoolManager.spawn(_get_enemy_pool_id())
 	if not enemy:
 		return
 	

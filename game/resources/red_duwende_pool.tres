@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PoolConfig" load_steps=2 format=3 uid="uid://dkxqfdgi577sb"]
+
+[ext_resource type="Script" uid="uid://dnolhjriaskgh" path="res://resources/pool_config.gd" id="1_dobug"]
+
+[resource]
+script = ExtResource("1_dobug")
+pool_id = "enemy_red_duwende"
+scene_path = "res://scenes/enemies/duwende/red_duwende.tscn"
+initial_size = 200
+max_size = 250
+metadata/_custom_type_script = "uid://dnolhjriaskgh"
