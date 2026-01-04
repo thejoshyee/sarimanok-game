@@ -61,7 +61,7 @@ func spawn(pool_id: String, pos: Vector2 = Vector2.ZERO) -> Node:
 	return pool.acquire(pos)
 
 
-# return an object to its pool
+# return an object to its pool (or queue_free if not pooled)
 func despawn(node: Node) -> void:
 	# find which pool this node belongs to
 	for pool in _pools.values():
@@ -69,7 +69,9 @@ func despawn(node: Node) -> void:
 			pool.release(node)
 			return
 
-	push_warning("Object not found in any pool: %s" % node.name)
+	# Object wasn't spawned from pool - just queue_free it
+	# This handles manually placed objects or test instances gracefully
+	node.call_deferred("queue_free")
 
 
 # warm up all registered pools

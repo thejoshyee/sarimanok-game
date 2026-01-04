@@ -77,8 +77,8 @@ func start_invincibility_blink() -> void:
 func die() -> void:
 	player_died.emit()
 	print("Player died")
-	# for now restart the scene
-	get_tree().reload_current_scene()
+	# Use call_deferred to avoid removing collision objects during physics callback
+	get_tree().call_deferred("reload_current_scene")
 	
 
 func _ready() -> void:
