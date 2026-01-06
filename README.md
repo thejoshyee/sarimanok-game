@@ -1,4 +1,8 @@
 # Sarimanok Survivor
+working title:
+sarimanok night of the aswang
+or
+sarimanok survivor 
 
 A Filipino folklore-themed survivor roguelite where you play as the legendary **Sarimanok**, defending the land from mythological creatures through the night. Survive until dawn, and balance is restored.
 
