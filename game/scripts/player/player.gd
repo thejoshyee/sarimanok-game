@@ -113,3 +113,11 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 		
 		# Despawn the gem back to the pool
 		PoolManager.despawn(area)
+
+	# Check if the area is a gold coin
+	if area.is_in_group("gold_coins"):
+		# Get gold value and add it to permanent gold
+		var gold_value = area.gold_value
+		ProgressionManager.add_gold(gold_value)
+		print("Collected ", gold_value, " gold. Total: ", ProgressionManager.gold)
+		PoolManager.despawn(area)

@@ -1231,9 +1231,10 @@
               1
             ],
             "details": "Preload XP gem and gold coin pickup scenes (reuse pooling from task 9). In handle_death(): if green: spawn_xp_gem(1), spawn_gold_coin(1); if red: spawn_xp_gem(3), spawn_gold_coin(2). Position drops at enemy global_position with slight random offset.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Kill 50 green/20 red enemies, count total XP/gold spawned (should be 50/60 XP gems, 50/40 coins), verify pickup collection works.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-07T23:56:12.462Z"
           },
           {
             "id": 3,
@@ -1261,12 +1262,12 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Divide into: 1) HP tracking and death condition; 2) Drop spawning (XP/Gold with variants); 3) Particle effects and pool return; 4) Collision layer/mask setup for no enemy-enemy collision.",
-        "updatedAt": "2026-01-07T20:41:34.374Z"
+        "updatedAt": "2026-01-07T23:56:12.462Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-07T20:41:34.381Z",
+      "lastModified": "2026-01-07T23:56:12.464Z",
       "taskCount": 16,
       "completedCount": 15,
       "tags": [

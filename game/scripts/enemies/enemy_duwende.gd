@@ -10,6 +10,11 @@ var speed: float = base_speed
 # Damage and HP Stats for scaling
 @export var base_damage: int = 5
 @export var base_max_hp: int = 10
+
+# Drop amounts on death (Green defaults, Red overrides in scene)
+@export var xp_drop_count: int = 1
+@export var gold_drop_count: int = 1
+
 var damage: int = base_damage
 var current_hp: int = base_max_hp
 
@@ -38,10 +43,32 @@ func take_damage(amount: int) -> void:
 		die()
 
 
-# Handle enemy death - cleanup and rewards
+# Handle enemy death - spawn drops and return to pool
 func die() -> void:
-	# TODO: Spawn XP pickup here
+	var drop_pos = global_position
+	
+	# Pick a random base direction for XP
+	var xp_base_angle = randf() * TAU
+	# Gold spawns on OPPOSITE side (180° offset)
+	var gold_base_angle = xp_base_angle + PI
+	
+	# Spawn XP gems clustered in one direction
+	for i in xp_drop_count:
+		var angle = xp_base_angle + randf_range(-0.5, 0.5)  # Slight spread within sector
+		var distance = randf_range(40, 60)  # was 20-40, now 40-60
+		var offset = Vector2(cos(angle), sin(angle)) * distance
+		PoolManager.spawn("pickup_xp_gem", drop_pos + offset)
+	
+	# Spawn gold coins clustered in opposite direction
+	for i in gold_drop_count:
+		var angle = gold_base_angle + randf_range(-0.5, 0.5)
+		var distance = randf_range(40, 60)  # was 20-40, now 40-60
+		var offset = Vector2(cos(angle), sin(angle)) * distance
+		PoolManager.spawn("pickup_gold_coin", drop_pos + offset)
+	
+	# Return enemy to pool
 	PoolManager.despawn(self)
+
 
 
 # === POOLING LIFECYCLE ===

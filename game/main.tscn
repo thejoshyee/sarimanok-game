@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cxqxr03wo51p8"]
+[gd_scene load_steps=22 format=4 uid="uid://cxqxr03wo51p8"]
 
 [ext_resource type="Script" uid="uid://bknm7mckcoe48" path="res://scripts/core/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_0xm2m"]
@@ -14,6 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://dvdy2n5irl835" path="res://scenes/ui/level_up_panel.tscn" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://dmf2r32mowlp1" path="res://scenes/ui/hud.tscn" id="11_efxa6"]
 [ext_resource type="Script" uid="uid://b7r65uo3acmjv" path="res://scripts/core/enemy_spawner.gd" id="13_ycdy4"]
+
+[sub_resource type="Resource" id="Resource_w48qg"]
+script = ExtResource("2_272bh")
+pool_id = "pickup_gold_coin"
+scene_path = "res://scenes/pickups/gold_coin.tscn"
+initial_size = 50
+max_size = 200
+metadata/_custom_type_script = "uid://dnolhjriaskgh"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w48qg"]
 texture = ExtResource("6_ycdy4")
@@ -57,7 +65,7 @@ size = Vector2(32, 2048)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ig7tw")
-pool_configs = Array[ExtResource("2_272bh")]([ExtResource("5_4c57u"), ExtResource("4_4c57u"), ExtResource("5_w48qg"), ExtResource("6_vivmo")])
+pool_configs = Array[ExtResource("2_272bh")]([ExtResource("5_4c57u"), ExtResource("4_4c57u"), ExtResource("5_w48qg"), ExtResource("6_vivmo"), SubResource("Resource_w48qg")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
