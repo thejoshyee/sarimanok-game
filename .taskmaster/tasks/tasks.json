@@ -1210,7 +1210,7 @@
         "dependencies": [
           "15"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1263,14 +1263,14 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Divide into: 1) HP tracking and death condition; 2) Drop spawning (XP/Gold with variants); 3) Particle effects and pool return; 4) Collision layer/mask setup for no enemy-enemy collision.",
-        "updatedAt": "2026-01-08T19:49:07.891Z"
+        "updatedAt": "2026-01-08T19:58:29.812Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-08T19:49:07.899Z",
+      "lastModified": "2026-01-08T19:58:29.813Z",
       "taskCount": 16,
-      "completedCount": 15,
+      "completedCount": 16,
       "tags": [
         "master"
       ]
