@@ -1,61 +1,101 @@
 {
 	"meta": {
-		"generatedAt": "2025-12-24T20:44:06.398Z",
-		"tasksAnalyzed": 6,
-		"totalTasks": 16,
-		"analysisCount": 6,
+		"generatedAt": "2026-01-08T20:54:08.497Z",
+		"tasksAnalyzed": 11,
+		"totalTasks": 27,
+		"analysisCount": 11,
 		"thresholdScore": 5,
 		"projectName": "Taskmaster",
 		"usedResearch": true
 	},
 	"complexityAnalysis": [
 		{
-			"taskId": 11,
-			"taskTitle": "Create Enemy Base Scene with Area2D and Movement Logic",
-			"complexityScore": 3,
-			"recommendedSubtasks": 3,
-			"expansionPrompt": "Break down into: 1) Scene setup with Area2D, CollisionShape2D, and ColorRect; 2) Basic movement logic in _physics_process toward player; 3) area_entered collision detection and damage application with cleanup.",
-			"reasoning": "Straightforward Godot scene creation with basic vector math for movement and signal-based collision. No complex state management or dependencies. Standard Area2D pattern with clear test strategy."
-		},
-		{
-			"taskId": 12,
-			"taskTitle": "Implement Enemy Stat Scaling Functions",
-			"complexityScore": 2,
-			"recommendedSubtasks": 0,
-			"expansionPrompt": "",
-			"reasoning": "Simple math functions with provided formulas. Minimal integration needed (access global time). Atomic task following best practices for scalable stats. Easy to test with debug prints."
-		},
-		{
-			"taskId": 13,
-			"taskTitle": "Build Ring-Based Spawn System with Polar Coordinates",
-			"complexityScore": 4,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Divide into: 1) SpawnManager node/script setup; 2) Polar coordinate position calculation; 3) Map bounds clamping; 4) Spawn timer integration with stat scaling.",
-			"reasoning": "Involves trigonometry (cos/sin/TAU), viewport calculations, and timer management. Dependencies on prior tasks add integration risk. Standard spawn pattern but requires precise boundary handling."
-		},
-		{
-			"taskId": 14,
-			"taskTitle": "Implement Dynamic Spawn Rate Scaling and Timeline Logic",
+			"taskId": 17,
+			"taskTitle": "Design core weapon architecture and WeaponData Resource",
 			"complexityScore": 5,
-			"recommendedSubtasks": 3,
-			"expansionPrompt": "Split into: 1) Exponential interval formula implementation; 2) Dynamic Timer.wait_time updates; 3) Enemy type probability logic with time-based unlocks.",
-			"reasoning": "Exponential math (pow), dynamic timer adjustments, and weighted random selection introduce state management. Dependencies create integration points. Matches industry dynamic difficulty patterns."
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break Task 17 into ~4 subtasks covering: (1) creating the WeaponData Resource script and exports, (2) setting up folder structure and .tres asset workflow, (3) encoding all PRD-based stats/upgrades for the 6 initial weapons, and (4) building a small test harness (scene or autoload script) to load, validate, and log WeaponData, including get_upgrade behavior.",
+			"reasoning": "Moderate complexity: mostly data modeling and Godot Resource workflow with clear patterns and limited runtime logic, but requires careful alignment with the PRD and future-proofing for scalability and localization."
 		},
 		{
-			"taskId": 15,
-			"taskTitle": "Add Red Duwende Variant and Object Pooling System",
+			"taskId": 18,
+			"taskTitle": "Implement base Weapon node with cooldown and upgrade handling",
 			"complexityScore": 7,
 			"recommendedSubtasks": 5,
-			"expansionPrompt": "Break down into: 1) Duplicate/modify Red enemy scene; 2) Pool array initialization (50+30); 3) Spawn from pool logic; 4) Death/reset/return to pool; 5) Exhaustion handling and performance verification.",
-			"reasoning": "Object pooling is performance-critical pattern requiring careful state reset, multiple dependencies, and memory/FPS testing. Red variant is simple duplication but pool integration is complex."
+			"expansionPrompt": "Break Task 18 into ~5 subtasks: (1) define the Weapon base script and scene (node structure, exported WeaponData), (2) implement cooldown handling with a reusable Timer and ready/try_fire flow, (3) implement level and upgrade application including virtual hooks, (4) enforce assertions/guards and idempotent runtime level changes, and (5) create a dedicated test scene or scripts to validate cooldown timing and upgrade-derived stats.",
+			"reasoning": "Higher complexity: introduces the core abstraction all weapons depend on, with timing logic, inheritance hooks, and runtime level changes that must be robust and easy to extend for multiple weapon types."
 		},
 		{
-			"taskId": 16,
-			"taskTitle": "Implement Enemy Death, Drops, and No-Inter-Collision",
+			"taskId": 19,
+			"taskTitle": "Create WeaponManager to track and auto-fire up to 6 weapons",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break Task 19 into ~5 subtasks: (1) create the WeaponManager scene/script and attach it to the player, (2) implement weapon instantiation and scene lookup/mapping from WeaponData, (3) implement auto-fire loop, positioning, and readiness checks, (4) add querying/upgrade APIs (get_weapon_by_id, upgrade_weapon, capacity checks), and (5) build a test setup that spawns several weapons, verifies auto-fire cadence, and enforces the 6-weapon limit.",
+			"reasoning": "Higher complexity: central coordinating component with lifecycle management, scene instantiation, player integration, and upgrade APIs that will be used by progression and gameplay systems, making correctness and clarity important."
+		},
+		{
+			"taskId": 20,
+			"taskTitle": "Implement melee cone weapon: Peck",
 			"complexityScore": 6,
 			"recommendedSubtasks": 4,
-			"expansionPrompt": "Divide into: 1) HP tracking and death condition; 2) Drop spawning (XP/Gold with variants); 3) Particle effects and pool return; 4) Collision layer/mask setup for no enemy-enemy collision.",
-			"reasoning": "Multiple systems integration (HP, drops, particles, pooling, collision layers). Bitmask collision setup requires Godot physics knowledge. Pool dependency adds reset complexity."
+			"expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling.",
+			"reasoning": "Moderate-to-high complexity: first concrete melee implementation, combining geometry (cone/arc), collision layers, integration with player facing, and level-based behavior changes that must align with WeaponData and base Weapon."
+		},
+		{
+			"taskId": 21,
+			"taskTitle": "Implement AOE circle weapons: Wing Slap and Flame Wing clone",
+			"complexityScore": 6,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break Task 21 into ~5 subtasks: (1) implement the generic AOECircleWeapon scene and script (Area2D, CircleShape2D, AnimationPlayer), (2) wire radius and damage scaling via WeaponData and _on_stats_changed, (3) create Wing Slap derived scene and configure its WeaponData including radius modifiers per level, (4) create Flame Wing clone configuration using shared script with altered damage/radius visuals, and (5) build a sandbox test scene to validate radius, damage progression, cooldown, and DRY mapping in WeaponManager.",
+			"reasoning": "Moderate-to-high complexity: introduces a reusable AOE pattern, two configured variants, and radius scaling driven by data, requiring careful coupling between WeaponData, shared script, and testing of spatial behavior."
+		},
+		{
+			"taskId": 22,
+			"taskTitle": "Implement projectile weapons: Feather Shot and Ice Shard clone",
+			"complexityScore": 8,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break Task 22 into ~6 subtasks: (1) create the generic Projectile scene and script with movement, hit detection, pierce, and optional debuff forwarding, (2) implement Feather Shot weapon scene/script integrating with Enemy query to target nearest enemy and spawn multiple projectiles, (3) handle per-level behavior (projectile_count, pierce_count, speed modifiers) via WeaponData and _on_stats_changed, (4) configure Ice Shard as a data-driven clone with slower speed and slow debuff parameters, (5) integrate projectiles into the main scene tree/lifecycle (despawning, off-screen handling), and (6) build a projectile test scene to verify counts, pierce behavior, cooldown, and debuff triggering.",
+			"reasoning": "High complexity: real-time physics/projectile behavior, enemy targeting, multi-projectile and pierce logic, data-driven debuffs, and reuse for clone weapons; correctness and performance affect core combat feel."
+		},
+		{
+			"taskId": 23,
+			"taskTitle": "Implement Spiral Feathers orbital weapon",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break Task 23 into ~5 subtasks: (1) create the OrbitalFeather scene and script for passive collision-based damage, (2) build the Spiral Feathers weapon scene with OrbitRoot and integrate with Weapon base class, (3) implement orbit logic (player-following, rotation, radius) and always-active behavior without cooldown, (4) implement level-based scaling of damage, orbit_speed, feather_count, and orbit_radius, including respawn/update of feathers, and (5) create an orbital test scene to validate contact damage, scaling behaviors, and movement smoothness around the player.",
+			"reasoning": "Higher complexity: continuous orbiting system with multiple child nodes, dynamic repositioning and scaling across levels, always-on damage zones, and ensuring performance/clarity when many orbitals are active."
+		},
+		{
+			"taskId": 24,
+			"taskTitle": "Implement debuff system for slow and future effects",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break Task 24 into ~4 subtasks: (1) implement the Debuff Resource and DebuffHandler node with lifetime and stacking logic, (2) integrate DebuffHandler into enemy scenes and expose an apply_debuff API on enemies, (3) wire Projectile._hit_target to call enemy debuff application based on WeaponData fields, and (4) create focused tests with Ice Shard and dummy enemies to validate slow factors, stacking, expiration, and non-impact for weapons without debuffs.",
+			"reasoning": "Moderate complexity: small but cross-cutting system influencing enemy movement; must be extensible (future burn), numerically stable (stacking/clamping), and cleanly integrated with projectiles and enemy movement code."
+		},
+		{
+			"taskId": 25,
+			"taskTitle": "Integrate weapon acquisition and upgrade flow with progression system",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break Task 25 into ~5 subtasks: (1) analyze existing progression/level-up code and define integration points with WeaponManager, (2) implement a WeaponDatabase/registry of WeaponData resources for choice generation, (3) implement choice-generation logic that respects MAX_WEAPONS, ownership, and upgrade caps, (4) hook level-up UI selection events to call WeaponManager.add_weapon/upgrade_weapon and update state, and (5) create end-to-end tests or scripted flows to verify starting Peck, new-weapon vs upgrade options, capacity enforcement, and max-level handling.",
+			"reasoning": "Higher complexity: cross-system integration between progression, UI, and WeaponManager, with multiple edge cases (capacity, max level, ownership) and need for data-driven extensibility as more weapons are added."
+		},
+		{
+			"taskId": 26,
+			"taskTitle": "Implement placeholder visuals and damage Areas for all weapon types",
+			"complexityScore": 4,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break Task 26 into ~3 subtasks: (1) audit each weapon scene to ensure Area2D/CollisionShape2D nodes exist with correct layers/masks and sizes, (2) add and configure placeholder visuals (ColorRect/Sprite2D, modulate colors, minimal animations) for each weapon type and ensure they are decoupled from gameplay scripts, and (3) run a combined debug arena scene with all weapons to visually verify hit areas, collisions, and clarity using visible collision shapes or debug tooling.",
+			"reasoning": "Low-to-moderate complexity: mostly editor and configuration work standardizing collision and temporary art; still needs careful verification across all weapons but involves limited new logic."
+		},
+		{
+			"taskId": 27,
+			"taskTitle": "Art integration checkpoint: sprite preview scene and weapon VFX validation",
+			"complexityScore": 3,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break Task 27 into ~3 subtasks: (1) create the reusable sprite_preview.tscn scene with camera, background, and sized sprite slots plus any simple editor tool script, (2) wire the scene so artists/designers can quickly assign and preview weapon-related sprites/animations, and (3) perform a review pass loading each delivered VFX asset, documenting any issues, and keeping gameplay scenes on placeholders when necessary.",
+			"reasoning": "Relatively low complexity: primarily tooling and visual validation with minimal game logic, but requires some care in making the preview scene generic and convenient for repeated use."
 		}
 	]
 }
