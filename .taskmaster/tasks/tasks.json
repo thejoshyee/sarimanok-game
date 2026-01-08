@@ -1254,20 +1254,21 @@
             "description": "Set Area2D collision_layer/mask so enemies only collide with player, pass through each other.",
             "dependencies": [],
             "details": "In enemy scene: Area2D collision_layer = ENEMY_LAYER (bit 1?), collision_mask = PLAYER_LAYER (bit 0?) only. Verify in Project Settings > Layer Names. Test grid partitioning from task 7 remains compatible.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn 20+ enemies clustered together, confirm no bouncing/blocking between enemies, but all detect player collision normally.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-08T19:49:07.891Z"
           }
         ],
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Divide into: 1) HP tracking and death condition; 2) Drop spawning (XP/Gold with variants); 3) Particle effects and pool return; 4) Collision layer/mask setup for no enemy-enemy collision.",
-        "updatedAt": "2026-01-07T23:56:12.462Z"
+        "updatedAt": "2026-01-08T19:49:07.891Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-07T23:56:12.464Z",
+      "lastModified": "2026-01-08T19:49:07.899Z",
       "taskCount": 16,
       "completedCount": 15,
       "tags": [
