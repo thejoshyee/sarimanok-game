@@ -15,6 +15,9 @@ var speed: float = base_speed
 @export var xp_drop_count: int = 1
 @export var gold_drop_count: int = 1
 
+# Preload death effect scene for instant spawning
+const DeathParticles = preload("res://scenes/effects/death_particles.tscn")
+
 var damage: int = base_damage
 var current_hp: int = base_max_hp
 
@@ -46,6 +49,12 @@ func take_damage(amount: int) -> void:
 # Handle enemy death - spawn drops and return to pool
 func die() -> void:
 	var drop_pos = global_position
+
+	# Spawn death particle effect at enemy position
+	var particles = DeathParticles.instantiate()
+	particles.global_position = drop_pos
+	get_tree().current_scene.add_child(particles)
+	particles.emitting = true  # Start the burst
 	
 	# Pick a random base direction for XP
 	var xp_base_angle = randf() * TAU
@@ -97,6 +106,8 @@ func on_despawn() -> void:
 func reset_state() -> void:
 	# Reset velocity when recycled from pool
 	velocity = Vector2.ZERO
+	# Reset HP to base value (initialize_stats will scale it after)
+	current_hp = base_max_hp
 
 
 func _physics_process(_delta: float) -> void:
