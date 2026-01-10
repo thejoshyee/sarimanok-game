@@ -1294,10 +1294,10 @@
               1
             ],
             "details": "Create the folders `res://weapons/data/`, `res://weapons/scripts/`, and `res://weapons/scenes/` in the project. Move `weapon_data.gd` into `res://weapons/scripts/` or keep as specified, and ensure the custom Resource is discoverable when creating new resources. Define a standard naming convention for WeaponData `.tres` files (e.g., `peck.tres`, `wing_slap.tres`). Optionally draft a small editor-side helper or documented steps for creating new WeaponData resources by duplicating an existing one to support the 10–15 minutes per new weapon goal, while deferring full tooling implementation to a later task.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "In the Godot FileSystem panel, confirm the folders exist and appear correctly. Create a new Resource via the editor using type `WeaponData`, save it under `res://weapons/data/`, then reopen it to verify that edits persist and the workflow is straightforward.",
             "parentId": "undefined",
-            "updatedAt": "2026-01-10T05:29:39.118Z"
+            "updatedAt": "2026-01-10T06:10:53.361Z"
           },
           {
             "id": 3,
@@ -1330,7 +1330,7 @@
         "complexity": 5,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 17 into ~4 subtasks covering: (1) creating the WeaponData Resource script and exports, (2) setting up folder structure and .tres asset workflow, (3) encoding all PRD-based stats/upgrades for the 6 initial weapons, and (4) building a small test harness (scene or autoload script) to load, validate, and log WeaponData, including get_upgrade behavior.",
-        "updatedAt": "2026-01-10T05:29:39.118Z"
+        "updatedAt": "2026-01-10T06:10:53.361Z"
       },
       {
         "id": "18",
@@ -1509,7 +1509,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-10T05:29:39.120Z",
+      "lastModified": "2026-01-10T06:10:53.363Z",
       "taskCount": 27,
       "completedCount": 16,
       "tags": [
