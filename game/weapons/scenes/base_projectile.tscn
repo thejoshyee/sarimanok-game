@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cry1dr5oxkrpu"]
 
-[ext_resource type="Script" uid="uid://ic6q5d1jqmr2" path="res://scripts/weapons/base_projectile.gd" id="1_phrj5"]
+[ext_resource type="Script" uid="uid://ic6q5d1jqmr2" path="res://weapons/scripts/base_projectile.gd" id="1_phrj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k1c0j"]
 size = Vector2(8, 8)

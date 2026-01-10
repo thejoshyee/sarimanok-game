@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_fvgik")
 pool_id = "projectile_base"
-scene_path = "res://scenes/weapons/base_projectile.tscn"
+scene_path = "res://weapons/scenes/base_projectile.tscn"
 initial_size = 20
 max_size = 100
 metadata/_custom_type_script = "uid://dnolhjriaskgh"
