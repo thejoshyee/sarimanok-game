@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://dy30sa5qe6d8h" path="res://weapons/scripts/weapon_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "spiral_feathers"
+display_name = "Spiral Feathers"
+description = "Feathers orbit around you, damaging enemies on contact"
+base_damage = 6.0
+cooldown = 0.0
+weapon_type = "orbital"
+upgrades = [{
+"damage": 6,
+"effect_description": "4 orbiting feathers",
+"level": 1
+}, {
+"damage": 8,
+"effect_description": "+33% damage",
+"level": 2
+}, {
+"damage": 10,
+"effect_description": "Faster rotation speed",
+"level": 3
+}, {
+"damage": 12,
+"effect_description": "6 orbiting feathers",
+"level": 4
+}, {
+"damage": 16,
+"effect_description": "8 feathers, larger orbit",
+"level": 5
+}]
+metadata/_custom_type_script = "uid://dy30sa5qe6d8h"

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://dy30sa5qe6d8h" path="res://weapons/scripts/weapon_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "feather_shot"
+display_name = "Feather Shot"
+description = "Shoots feather at nearest enemy"
+base_damage = 12.0
+cooldown = 1.0
+weapon_type = "projectile"
+upgrades = [{
+"damage": 12,
+"effect_description": "1 feather",
+"level": 1
+}, {
+"damage": 14,
+"effect_description": "2 feathers",
+"level": 2
+}, {
+"damage": 16,
+"effect_description": "3 feathers",
+"level": 3
+}, {
+"damage": 18,
+"effect_description": "Feathers pierce 2 enemies",
+"level": 4
+}, {
+"damage": 24,
+"effect_description": "4 feathers, pierce 3",
+"level": 5
+}]
+metadata/_custom_type_script = "uid://dy30sa5qe6d8h"
