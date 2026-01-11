@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": "1",
+        "id": 1,
         "title": "Audit existing Godot project setup",
         "description": "Inspect the current Godot 4 project to understand scenes, scripts, and configuration already in place.",
         "details": "Review the Godot project structure, main scene, autoloads (singletons), and any existing player, enemy, weapon, or progression scripts to avoid duplicating work.[1] Document what systems already exist (e.g., movement, input actions, basic UI, pooling helpers) and how they are organized (folders, naming conventions, node hierarchies).",
@@ -85,7 +85,7 @@
         "updatedAt": "2025-12-05T13:31:38.640Z"
       },
       {
-        "id": "2",
+        "id": 2,
         "title": "Configure project resolution and window settings",
         "description": "Set up viewport, stretch, and window scaling to match the PRD specifications.",
         "details": "In Project Settings → Display → Window, configure Viewport Width = 640 and Viewport Height = 360, set Stretch Mode to canvas_items, and Stretch Aspect to keep, to achieve the desired 640×360 viewport and proper scaling on different monitor resolutions.[1] Verify that the arena (1920×1088) and tile size (32×32) are consistent with tileset and camera configuration in the current scenes.",
@@ -141,7 +141,7 @@
         "updatedAt": "2025-12-05T20:47:20.983Z"
       },
       {
-        "id": "3",
+        "id": 3,
         "title": "Define input actions and controls",
         "description": "Set up and/or validate the Godot Input Map for movement, pause, and UI actions as specified.",
         "details": "In Project Settings → Input Map, ensure the following actions exist with correct bindings: move_up (W, Up Arrow, D-pad Up, Left Stick Up), move_down (S, Down Arrow, D-pad Down, Left Stick Down), move_left (A, Left Arrow, D-pad Left, Left Stick Left), move_right (D, Right Arrow, D-pad Right, Left Stick Right), pause (Esc, Start), ui_accept (Enter, Space, A/X button), ui_cancel (Esc, B/O button).[1] Confirm existing code uses get_action_strength for movement vectors to support analog sticks and update scripts if they currently rely on is_action_pressed for basic movement axes.[3]",
@@ -212,7 +212,7 @@
         "updatedAt": "2025-12-06T14:22:16.532Z"
       },
       {
-        "id": "4",
+        "id": 4,
         "title": "Implement or align Classic Sarimanok player controller",
         "description": "Create or adapt the CharacterBody2D-based Sarimanok player with correct movement, stats, and damage handling.",
         "details": "Ensure the player is implemented as a CharacterBody2D with movement driven by an input_vector built from move_* actions, normalized and multiplied by move_speed, then applied via move_and_slide.[1] Implement base stats (Max HP 100, Move Speed 200 px/s, Damage 100%, Attack Speed 100%, Pickup Range 50) as exported variables or in a dedicated stats/resource object consistent with current code patterns. Add a collision shape for enemy damage, a hit/health component if one already exists, and invincibility frames of 0.5s after taking damage, reusing existing damage/health systems if present.[2]",
@@ -313,7 +313,7 @@
         "updatedAt": "2025-12-07T18:12:13.329Z"
       },
       {
-        "id": "5",
+        "id": 5,
         "title": "Set up placeholder Sarimanok visuals and animation",
         "description": "Create the temporary visual representation and simple 2-frame animation for the player.",
         "details": "Use a 32×32 ColorRect or equivalent simple node as the placeholder Classic Sarimanok, with a multicolor or rainbow palette approximating the intended art direction.[2] Configure a 2-frame idle/walk bob animation that flips between frames every 0.2 seconds when the player is moving, and flip the sprite horizontally based on velocity.x in the existing animation/visual script or a new dedicated script following current project conventions.[1]",
@@ -369,7 +369,7 @@
         "updatedAt": "2025-12-09T14:46:25.714Z"
       },
       {
-        "id": "6",
+        "id": 6,
         "title": "Establish object pooling infrastructure",
         "description": "Implement or extend a reusable pooling system for enemies, projectiles, pickups, and particles.",
         "details": "Create a central pooling manager or per-type pool scenes that pre-allocate arrays for enemies (300), projectiles (200), pickups (500), and particles (100 per type) at game start, reusing any existing pooling utilities if they are already present.[3] Ensure that gameplay code does not call queue_free or instantiate during active gameplay, but instead marks instances inactive and returns them to their pool, with pools pre-warmed in the main scene’s _ready method.[1]",
@@ -479,7 +479,7 @@
         "updatedAt": "2025-12-13T00:49:42.162Z"
       },
       {
-        "id": "7",
+        "id": 7,
         "title": "Implement grid-based spatial partitioning for enemies",
         "description": "Add spatial hashing to optimize collision and proximity checks with many enemies.",
         "details": "Create a spatial grid system that maps grid cells (64×64 pixels) to arrays of enemy references, updating an enemy’s cell assignment only when it crosses a cell boundary.[1] Provide helper functions such as get_cell and get_nearby_enemies that return enemies in the same or adjacent cells, and refactor any existing naive O(n²) collision or proximity checks to use this system while retaining compatibility with current enemy and weapon code.[3]",
@@ -575,7 +575,7 @@
         "updatedAt": "2025-12-15T23:17:55.345Z"
       },
       {
-        "id": "8",
+        "id": 8,
         "title": "Integrate auto-attack hooks for weapons",
         "description": "Prepare the player and game loop for automatic weapon firing compatible with the planned weapon system.",
         "details": "Add generic weapon slots or a weapon manager component to the player that tracks equipped weapons and their cooldowns, following any existing weapon or skill architecture in the project.[2] Ensure that weapons auto-attack based on their cooldowns without player input, exposing hooks for six planned weapons in later tasks and using the player’s Damage and Attack Speed multipliers to modify weapon behavior.[1]",
@@ -659,7 +659,7 @@
         "updatedAt": "2025-12-19T12:59:00.135Z"
       },
       {
-        "id": "9",
+        "id": 9,
         "title": "Implement basic progression loop scaffolding",
         "description": "Lay down the core systems for XP collection, leveling, and stat upgrades without full content.",
         "details": "Create a pickup type representing XP gems that the player collects within a Pickup Range of 50 pixels, ideally reusing the pooling system for pickups.[1] Implement a simple XP curve, level tracking, and a placeholder level-up UI that can present upgrade choices for weapons and passives later, aligning with any existing UI and progression frameworks already in the codebase.[2]",
@@ -758,7 +758,7 @@
         "updatedAt": "2025-12-21T00:15:23.888Z"
       },
       {
-        "id": "10",
+        "id": 10,
         "title": "Performance validation for Week 3 target",
         "description": "Verify that the foundation meets the Week 3 performance and stability goals.",
         "details": "Create a dedicated performance test scene or mode that can spawn at least 100 active enemies using the pooling and spatial partitioning systems while the player moves and auto-attacks.[3] Measure FPS and frame time using Godot’s profiler to confirm stable 60 FPS under this load, and document any bottlenecks or further optimizations needed to reach the eventual 200+ enemy target.[1]",
@@ -849,7 +849,7 @@
         "updatedAt": "2025-12-24T16:45:51.431Z"
       },
       {
-        "id": "11",
+        "id": 11,
         "title": "Create Enemy Base Scene with Area2D and Movement Logic",
         "description": "Implement the base Duwende enemy scene using Area2D with placeholder ColorRect art, basic movement toward player, and damage on contact, aligned with the current Godot 4 project structure and player/damage systems.",
         "status": "done",
@@ -903,7 +903,7 @@
         "updatedAt": "2025-12-26T14:32:41.057Z"
       },
       {
-        "id": "12",
+        "id": 12,
         "title": "Implement Enemy Stat Scaling Functions",
         "description": "Add time-based scaling for HP and damage using provided formulas in spawn manager.",
         "details": "In spawn manager script, implement:\nfunc get_scaled_hp(base_hp: int, elapsed_minutes: float) -> int:\n    var scale = 1.0 + (elapsed_minutes / 5.0) * 0.05\n    return int(base_hp * scale)\nfunc get_scaled_damage(base_damage: int, elapsed_minutes: float) -> int:\n    var scale = 1.0 + (elapsed_minutes / 5.0) * 0.03\n    return int(base_damage * scale)\nTrack get_tree().edited_scene_root.get_node('GameTimer').elapsed_minutes or similar global time.",
@@ -986,7 +986,7 @@
         "updatedAt": "2025-12-30T19:09:15.414Z"
       },
       {
-        "id": "13",
+        "id": 13,
         "title": "Build Ring-Based Spawn System with Polar Coordinates",
         "description": "Create spawn manager that spawns enemies in ring around player (400-500px distance) using polar coordinates.",
         "details": "In SpawnManager node/script: Calculate spawn_dist = 465.0 (viewport_diagonal/2 + 100). Random angle = randf() * TAU. Spawn pos = player.global_position + Vector2(cos(angle), sin(angle)) * spawn_dist. Clamp to map bounds: max(0, min(1920, x)), max(0, min(1088, y)). Use get_scaled_hp/damage. Add spawn timer.",
@@ -1058,7 +1058,7 @@
         "updatedAt": "2026-01-02T17:16:28.895Z"
       },
       {
-        "id": "14",
+        "id": 14,
         "title": "Implement Dynamic Spawn Rate Scaling and Timeline Logic",
         "description": "Add exponential spawn interval scaling (2s → 0.8s) and enemy type unlock at 8:00.",
         "details": "In SpawnManager: base_interval=2.0, difficulty_scale=1.05. func get_spawn_interval(elapsed_minutes: float) -> float: return base_interval / pow(difficulty_scale, elapsed_minutes). Timer.wait_time = get_spawn_interval(elapsed_minutes). If elapsed_minutes < 8: spawn Green only; else: 70% Green/30% Red weighted random. Verify: 0min=2s, 5min≈1.57s, 10min≈1.23s.",
@@ -1113,7 +1113,7 @@
         "updatedAt": "2026-01-04T18:18:50.414Z"
       },
       {
-        "id": "15",
+        "id": 15,
         "title": "Add Red Duwende Variant and Object Pooling System",
         "description": "Create Red Duwende (speed=100, HP=25, damage=10) and implement object pooling for performance.",
         "details": "Duplicate enemy scene to 'enemy_duwende_red.tscn', change ColorRect to red, update base stats. Pool: Pre-instantiate 50 Green + 30 Red in SpawnManager, disable initially. On spawn: enable pooled instance, reset pos/HP/stats. On death: reset stats, disable/move offscreen, return to pool. No new instancing after pool exhaustion.",
@@ -1201,7 +1201,7 @@
         "updatedAt": "2026-01-07T02:11:22.111Z"
       },
       {
-        "id": "16",
+        "id": 16,
         "title": "Implement Enemy Death, Drops, and No-Inter-Collision",
         "description": "Add death handling with XP/Gold drops (Green:1/1, Red:3/2), particle effect, pool return. Ensure enemies pass through each other.",
         "details": "Enemy script: var current_hp. On damage: current_hp -= amount; if <=0: spawn_xp_gem(1 or 3), spawn_gold_coin(1 or 2), play_particles(), spawn_manager.return_to_pool(self). Area2D collision_layer=ENEMY_LAYER only collides with PLAYER_LAYER (bitmask), not self. No enemy-enemy collision.",
@@ -1266,7 +1266,7 @@
         "updatedAt": "2026-01-08T19:58:29.812Z"
       },
       {
-        "id": "17",
+        "id": 17,
         "title": "Design core weapon architecture and WeaponData Resource",
         "description": "Create the data-driven weapon architecture using Godot 4 Resources and define the WeaponData resource script to support all PRD fields and upgrade data.",
         "details": "Implementation details:\n- Engine: Godot 4.3+ (or latest stable 4.x) with GDScript 2.0 for best performance and tooling.\n- Create script `weapons/weapon_data.gd` extending `Resource` with `class_name WeaponData` exactly as in the PRD, adding typed exports for Godot 4:\n```gdscript\n# weapons/weapon_data.gd\nclass_name WeaponData\nextends Resource\n\n@export var id: String\n@export var display_name: String\n@export_multiline var description: String\n@export var base_damage: int\n@export var cooldown: float\n@export var weapon_type: String # \"projectile\", \"aoe\", \"melee\", \"orbital\"\n@export var sprite: Texture2D\n@export var icon: Texture2D\n@export var upgrades: Array[Dictionary] = [] # [{\"level\": int, \"damage\": int, \"effect_description\": String}]\n\n@export var debuff_type: String = \"\" # e.g. \"slow\", \"burn\"\n@export var debuff_duration: float = 0.0\n@export var debuff_strength: float = 0.0 # 0.5 = 50% slow\n@export var radius_modifier: float = 1.0\n@export var speed_modifier: float = 1.0\n@export var projectile_count: int = 1\n@export var pierce_count: int = 1\n\nfunc get_upgrade(level: int) -> Dictionary:\n\tfor u in upgrades:\n\t\tif int(u.get(\"level\", 0)) == level:\n\t\t\treturn u\n\treturn {}\n```\n- Use Godot 4 Resource workflows similar to recent modular weapon tutorials that use custom Resources to store weapon stats and behavior metadata.[1][2]\n- Create a folder structure: `res://weapons/data/` for `.tres` instances, `res://weapons/scripts/` for logic, `res://weapons/scenes/` for scenes.\n- Define 6 `.tres` WeaponData resources: Peck, Wing Slap, Feather Shot, Spiral Feathers, Ice Shard, Flame Wing. Populate base_damage, cooldown, weapon_type and upgrade arrays according to the PRD tables.\n- Encode upgrade effect text in `effect_description` but keep the actual gameplay effects implemented in weapon logic (damage scaling, radius, cooldown changes, pierce, projectile count, orbit size, etc.).\n- Ensure IDs are stable simple strings, e.g., \"peck\", \"wing_slap\", \"feather_shot\", \"spiral_feathers\", \"ice_shard\", \"flame_wing\".\n- Add a simple helper script or editor-only tool later (optional) to quickly create new WeaponData resources by duplicating existing ones, aligning with the 10–15 minutes per new weapon goal.\n- Plan for localization by making `display_name` and `description` text-based but keep actual localization for a later phase.\nSecurity / scalability considerations:\n- Data-only Resources avoid dynamic code loading, reducing security risks.\n- Keeping weapon definitions external allows easy balancing without code changes and keeps the weapon system scalable as the roster grows.\n",
@@ -1335,7 +1335,7 @@
         "updatedAt": "2026-01-11T03:33:37.708Z"
       },
       {
-        "id": "18",
+        "id": 18,
         "title": "Implement base Weapon node with cooldown and upgrade handling",
         "description": "Create an abstract Weapon base class that handles cooldown timing, level progression, and integrates with WeaponData to compute effective stats.",
         "details": "Implementation details:\n- Create `weapons/scripts/weapon.gd` as a base script with `class_name Weapon` and attach it to a generic weapon scene `weapons/scenes/weapon_base.tscn` using `Node2D` as root.\n- Base node structure:\n  - `Node2D` (Weapon)\n    - Optional `Timer` (cooldown_timer) or use `_process` with delta.\n- In Godot 4, using `Timer` with `one_shot = true` and `start(cooldown)` is reliable; but for always-ready if `cooldown <= 0`, skip timer.\n- Script outline:\n```gdscript\nclass_name Weapon\nextends Node2D\n\n@export var weapon_data: WeaponData\nvar level: int = 1\nvar current_cooldown: float\nvar damage: int\nvar ready: bool = true\n\nfunc _ready() -> void:\n\tassert(weapon_data != null)\n\t_apply_level_stats()\n\nfunc _apply_level_stats() -> void:\n\tvar upgrade := weapon_data.get_upgrade(level)\n\tif upgrade.is_empty():\n\t\tdamage = weapon_data.base_damage\n\telse:\n\t\tdamage = int(upgrade.get(\"damage\", weapon_data.base_damage))\n\t# Allow subclasses to react (e.g., radius, projectile_count)\n\t_on_stats_changed(upgrade)\n\nfunc _on_stats_changed(upgrade: Dictionary) -> void:\n\tpass # virtual, overridden by subclasses\n\nfunc try_fire() -> void:\n\tif not ready:\n\t\treturn\n\tif _do_fire():\n\t\t_start_cooldown()\n\nfunc _do_fire() -> bool:\n\t# virtual; return true if fired\n\treturn false\n\nfunc _start_cooldown() -> void:\n\tready = false\n\tvar cd := weapon_data.cooldown\n\t# Subclasses may override or modify via stats\n\tcurrent_cooldown = cd\n\tif current_cooldown <= 0.0:\n\t\tready = true\n\t\treturn\n\tvar t := Timer.new()\n\tt.one_shot = true\n\tt.wait_time = current_cooldown\n\tadd_child(t)\n\tt.timeout.connect(_on_cooldown_done)\n\tt.start()\n\nfunc _on_cooldown_done() -> void:\n\tready = true\n\nfunc set_level(new_level: int) -> void:\n\tlevel = clamp(new_level, 1, 5)\n\t_apply_level_stats()\n```\n- Choose per-fire `Timer` nodes or a single reusable timer; for simplicity and directness, create a single `Timer` child in the scene and reuse it rather than spawning new ones each time.\n- Modify `_start_cooldown()` accordingly to use a pre-existing `cooldown_timer` child.\n- Provide safe virtual hooks for child classes: `_on_stats_changed`, `_do_fire`.\n- Base class should not know about player or enemies; specific weapon types will use references passed by the WeaponManager.\n- Ensure level upgrades are idempotent and that changing levels at runtime updates all computed stats correctly.\n",
@@ -1345,13 +1345,70 @@
           "17"
         ],
         "status": "pending",
-        "subtasks": [],
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define Weapon base scene and script structure",
+            "description": "Create the base Weapon scene and script, wiring up the exported WeaponData and node hierarchy.",
+            "dependencies": [],
+            "details": "Create `weapons/scenes/weapon_base.tscn` with a `Node2D` root named `Weapon` and a child `Timer` node named `cooldown_timer` (one_shot enabled by default). Attach `weapons/scripts/weapon.gd` to the root, declare `class_name Weapon`, and add an `@export var weapon_data: WeaponData` plus core fields (`level`, `current_cooldown`, `damage`, `ready`). Ensure the scene is reusable as a base for inherited weapon scenes.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 2,
+            "title": "Implement reusable cooldown Timer and firing flow",
+            "description": "Implement cooldown handling using the child Timer and the ready/try_fire/_do_fire flow in the Weapon script.",
+            "dependencies": [
+              1
+            ],
+            "details": "In `weapon.gd`, reference the child `Timer` as `@onready var cooldown_timer: Timer = $cooldown_timer`. Implement `try_fire()` to early-return if `not ready`, otherwise call `_do_fire()` and, if it returns true, start cooldown. Implement `_start_cooldown()` to set `ready = false`, compute `current_cooldown` from `weapon_data.cooldown`, and if `current_cooldown <= 0.0` immediately set `ready = true` and return. Otherwise set `cooldown_timer.wait_time = current_cooldown`, connect its `timeout` to `_on_cooldown_done` once (or use `one_shot` signal connection guard), and call `cooldown_timer.start()`. Implement `_on_cooldown_done()` to set `ready = true`. Avoid creating new Timer instances each fire.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 3,
+            "title": "Implement level handling, upgrade application, and virtual hooks",
+            "description": "Add level-based stat computation integrating WeaponData and expose virtual hooks for subclasses to react to stat changes and firing.",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement `_ready()` to assert `weapon_data` is set and then call `_apply_level_stats()`. Implement `_apply_level_stats()` to fetch the current upgrade dictionary from `weapon_data.get_upgrade(level)`, compute `damage` using base and upgrade values, and assign any additional computed fields as needed. Add a virtual `_on_stats_changed(upgrade: Dictionary) -> void` that does nothing by default but is called at the end of `_apply_level_stats()` for subclasses to update things like radius or projectile count. Implement `_do_fire() -> bool` as a virtual method returning `false` by default so subclasses can perform their own firing behavior and return whether a shot was actually fired.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 4,
+            "title": "Add assertions, guards, and idempotent runtime level changes",
+            "description": "Harden the Weapon base class with safety checks and ensure level changes at runtime correctly recompute stats without side effects.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Ensure `_ready()` uses `assert(weapon_data != null)` and optionally verifies that `weapon_data` exposes expected methods/fields (e.g., `cooldown`, `base_damage`, `get_upgrade`). Implement `set_level(new_level: int) -> void` to clamp `new_level` to a valid range (e.g., 1–5), early-return if the clamped level equals the current level, and otherwise assign `level` and call `_apply_level_stats()` to recompute all stats. Confirm that `_apply_level_stats()` fully derives current stats from `weapon_data` and `level` so repeated calls with the same level do not accumulate changes. Guard signal connections to `cooldown_timer.timeout` to avoid duplicate connections on re-entering `_start_cooldown()`.",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 5,
+            "title": "Create test scene and scripts to validate cooldown and upgrades",
+            "description": "Build a small test scene to exercise Weapon cooldown timing, ready/try_fire logic, and upgrade-derived stats.",
+            "dependencies": [
+              2,
+              3,
+              4
+            ],
+            "details": "Create `weapons/tests/weapon_base_test.tscn` with a root Node2D and a child instance of `weapon_base.tscn` referencing a concrete `WeaponData` (e.g., Peck data). Add a simple test script to the root that, on `_ready()`, calls `try_fire()` repeatedly, logs when `_do_fire()` is invoked (temporarily override in a test subclass or via a test weapon script), and verifies that subsequent `try_fire()` calls during cooldown do not fire until the Timer completes. Add tests that call `set_level()` with different values at runtime, log resulting `damage` and other derived stats, and verify they match `WeaponData` values and update correctly when level changes back and forth. Use Godot’s output/logging to manually confirm behavior.",
+            "status": "pending",
+            "testStrategy": "Run the `weapon_base_test.tscn` scene, observe console logs for correct try_fire/ready behavior across cooldowns and verify that damage and other stats match expected values when changing levels multiple times."
+          }
+        ],
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 18 into ~5 subtasks: (1) define the Weapon base script and scene (node structure, exported WeaponData), (2) implement cooldown handling with a reusable Timer and ready/try_fire flow, (3) implement level and upgrade application including virtual hooks, (4) enforce assertions/guards and idempotent runtime level changes, and (5) create a dedicated test scene or scripts to validate cooldown timing and upgrade-derived stats."
       },
       {
-        "id": "19",
+        "id": 19,
         "title": "Create WeaponManager to track and auto-fire up to 6 weapons",
         "description": "Implement a WeaponManager node that owns equipped weapons, enforces the 6-weapon limit, and triggers automatic firing when cooldowns are ready.",
         "details": "Implementation details:\n- Create `weapons/scripts/weapon_manager.gd` and a scene `weapons/scenes/weapon_manager.tscn` with root `Node2D`.\n- Attach WeaponManager as a child of the Player root (from Core Foundation), so it has access to player position and facing direction.\n- WeaponManager responsibilities:\n  - Store up to 6 weapon instances.\n  - Instantiate weapon scenes based on WeaponData (and child class/scene mapping by type or id).\n  - Position weapons relative to the player as needed (most will use player global_position but may not need visible nodes during placeholder phase).\n  - Auto-fire all weapons each frame or at fixed intervals.\n- Script sketch:\n```gdscript\nclass_name WeaponManager\nextends Node2D\n\nconst MAX_WEAPONS := 6\n\nvar weapons: Array[Weapon] = []\nvar player: Node2D\n\nfunc _ready() -> void:\n\tplayer = get_parent() as Node2D\n\nfunc add_weapon(data: WeaponData) -> Weapon:\n\tif weapons.size() >= MAX_WEAPONS:\n\t\treturn null\n\tvar scene := _get_weapon_scene_for_data(data)\n\tvar weapon := scene.instantiate() as Weapon\n\tweapon.weapon_data = data\n\tweapon.set_level(1)\n\tadd_child(weapon)\n\tweapons.append(weapon)\n\treturn weapon\n\nfunc _process(delta: float) -> void:\n\tfor weapon in weapons:\n\t\t# Optionally update weapon target/facing from player\n\t\tweapon.global_position = player.global_position\n\t\tif weapon.ready:\n\t\t\tweapon.try_fire()\n\nfunc get_weapon_by_id(id: String) -> Weapon:\n\tfor w in weapons:\n\t\tif w.weapon_data.id == id:\n\t\t\treturn w\n\treturn null\n\nfunc upgrade_weapon(id: String) -> void:\n\tvar w := get_weapon_by_id(id)\n\tif w:\n\t\tw.set_level(w.level + 1)\n```\n- Implement `_get_weapon_scene_for_data(data: WeaponData)` using either a match on `data.id` or a `Dictionary` mapping id → PackedScene exported on WeaponManager for flexibility.\n- Integration with progression/level-up system (from Feature 4) will call `add_weapon` or `upgrade_weapon` based on choices; ensure that when 6 weapons are owned, only upgrades are offered via higher-level system (outside WeaponManager but relying on its state).\n- For initial placeholder art, attach simple `ColorRect` or `Sprite2D` nodes to each weapon scene, not to the WeaponManager.\n- Follow best practice from recent Godot community discussions on weapon managers where all weapons inherit from a base Weapon class and are managed centrally.[6][9]\n",
@@ -1368,7 +1425,7 @@
         "expansionPrompt": "Break Task 19 into ~5 subtasks: (1) create the WeaponManager scene/script and attach it to the player, (2) implement weapon instantiation and scene lookup/mapping from WeaponData, (3) implement auto-fire loop, positioning, and readiness checks, (4) add querying/upgrade APIs (get_weapon_by_id, upgrade_weapon, capacity checks), and (5) build a test setup that spawns several weapons, verifies auto-fire cadence, and enforces the 6-weapon limit."
       },
       {
-        "id": "20",
+        "id": 20,
         "title": "Implement melee cone weapon: Peck",
         "description": "Create the Peck melee weapon as a cone attack in the facing direction, using Area2D for damage detection and supporting level-based damage, arc, and cooldown changes.",
         "details": "Implementation details:\n- Create scene `weapons/scenes/peck.tscn`:\n  - Root: `Node2D` with script `peck_weapon.gd` extending `Weapon`.\n  - Child: `Area2D` (`hit_area`)\n    - `CollisionShape2D` with `ArcShape2D` or a pie-shaped polygon via `CollisionPolygon2D` representing a small cone in front of the player.\n    - Use collision layer/mask to detect enemies only (cooperate with Enemy System’s layers).\n  - Child: placeholder `ColorRect` or `Sprite2D` for hit effect (32x32) oriented forward.\n- In `peck_weapon.gd`:\n```gdscript\nclass_name PeckWeapon\nextends Weapon\n\n@onready var hit_area: Area2D = $HitArea\n\nfunc _on_stats_changed(upgrade: Dictionary) -> void:\n\t# Level 4: faster cooldown (0.4s)\n\tif level >= 4:\n\t\tweapon_data.cooldown = 0.4\n\t# Level 5: wider arc -> adjust collision shape angle\n\tvar shape := hit_area.get_node(\"CollisionShape2D\").shape\n\tif shape is ArcShape2D:\n\t\tshape.angle = deg_to_rad(level >= 5 ? 80.0 : 50.0)\n\t# Damage already handled in base class\n\nfunc _do_fire() -> bool:\n\t# Align cone with player facing (assume player has a direction vector or rotation)\n\tvar player := (get_parent() as Node2D).get_parent() as Node2D # or injected reference\n\tglobal_rotation = player.global_rotation\n\t# Optionally briefly enable hit_area monitoring\n\tvar enemies := hit_area.get_overlapping_bodies()\n\tfor e in enemies:\n\t\tif e.has_method(\"apply_damage\"):\n\t\t\te.apply_damage(damage, weapon_data)\n\t# Trigger simple visual effect (e.g., briefly show ColorRect)\n\treturn true\n```\n- Use `Area2D.monitoring = true` and `get_overlapping_bodies()`; ensure physics layers are set to match enemies.\n- Damage numbers come from `damage` computed based on WeaponData upgrades (Level 1–5: 10, 15, 20, 25, 35).\n- For facing direction, rely on an injected direction or use player rotation; adapt to how the Player from Feature 1 exposes facing (e.g., `velocity.normalized()` or mouse direction), but keep this minimal for now.\n- Ensure the Peck WeaponData cooldown is 0.5s base, with logic for 0.4s at level 4.\n",
@@ -1385,7 +1442,7 @@
         "expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling."
       },
       {
-        "id": "21",
+        "id": 21,
         "title": "Implement AOE circle weapons: Wing Slap and Flame Wing clone",
         "description": "Create a reusable AOE circle weapon implementation for Wing Slap and a clone configuration for Flame Wing with different radius and damage using shared logic.",
         "details": "Implementation details:\n- Create generic AOE weapon script `aoe_circle_weapon.gd` extending `Weapon`, and scene `weapons/scenes/aoe_circle_weapon.tscn`:\n  - Root `Node2D` with `Area2D` child (`aoe_area`) and `CollisionShape2D` using `CircleShape2D`.\n  - Placeholder `ColorRect` or `Sprite2D` (64x64) representing an expanding circle; use `AnimationPlayer` for a quick scale animation.\n- `aoe_circle_weapon.gd` outline:\n```gdscript\nclass_name AOECircleWeapon\nextends Weapon\n\n@export var base_radius: float = 48.0\n@onready var aoe_area: Area2D = $AOEArea\n@onready var shape: CircleShape2D = $AOEArea/CollisionShape2D.shape\n\nfunc _ready() -> void:\n\tshape.radius = base_radius\n\tsuper._ready()\n\nfunc _on_stats_changed(upgrade: Dictionary) -> void:\n\t# Damage handled by base\n\t# Level-based radius scaling is done via WeaponData.radius_modifier if needed\n\tvar r_mod := weapon_data.radius_modifier\n\tshape.radius = base_radius * r_mod\n\nfunc _do_fire() -> bool:\n\t# Play quick expand animation (optional) and damage all enemies in area\n\tvar enemies := aoe_area.get_overlapping_bodies()\n\tfor e in enemies:\n\t\tif e.has_method(\"apply_damage\"):\n\t\t\te.apply_damage(damage, weapon_data)\n\treturn true\n```\n- Create two scenes inheriting from `aoe_circle_weapon.tscn`:\n  - `wing_slash_weapon.tscn` (Wing Slap)\n  - `flame_wing_weapon.tscn` (Flame Wing)\n- Wing Slap tuning per PRD:\n  - Base cooldown 1.5s, base damage 8.\n  - Upgrades: damage 8, 12, 16, 20, 28; radius increases at levels 3 and 5.\n  - Represent radius changes by modifying `radius_modifier` in WeaponData and reading it in `_on_stats_changed`.\n- Flame Wing clone:\n  - Uses the same `AOECircleWeapon` script and scene structure.\n  - WeaponData: base damage 10 (+20% vs Wing Slap base 8), cooldown 1.5s, radius modifier 0.75 relative to Wing Slap (75% radius) for all levels.\n  - Optionally increase radius slightly with level if desired, but base difference should remain smaller than Wing Slap.\n  - Assign an orange/red placeholder color or sprite to distinguish it.\n- In WeaponManager’s `_get_weapon_scene_for_data`, map Wing Slap and Flame Wing IDs to these respective scenes, keeping logic DRY.\n",
@@ -1402,7 +1459,7 @@
         "expansionPrompt": "Break Task 21 into ~5 subtasks: (1) implement the generic AOECircleWeapon scene and script (Area2D, CircleShape2D, AnimationPlayer), (2) wire radius and damage scaling via WeaponData and _on_stats_changed, (3) create Wing Slap derived scene and configure its WeaponData including radius modifiers per level, (4) create Flame Wing clone configuration using shared script with altered damage/radius visuals, and (5) build a sandbox test scene to validate radius, damage progression, cooldown, and DRY mapping in WeaponManager."
       },
       {
-        "id": "22",
+        "id": 22,
         "title": "Implement projectile weapons: Feather Shot and Ice Shard clone",
         "description": "Create a projectile weapon system for Feather Shot that fires toward the nearest enemy with pierce and multi-projectile upgrades, then configure Ice Shard as a slower projectile clone applying a slow debuff.",
         "details": "Implementation details:\n- Projectile node setup:\n  - Create `weapons/scenes/projectile.tscn`:\n    - Root: `Area2D` (`Projectile`)\n      - `CollisionShape2D` (CircleShape2D or small rectangle)\n      - `Sprite2D` placeholder (16x16 for feathers).\n  - Script `projectile.gd`:\n```gdscript\nclass_name Projectile\nextends Area2D\n\nvar speed: float = 150.0\nvar damage: int = 0\nvar pierce_remaining: int = 1\nvar direction: Vector2 = Vector2.RIGHT\nvar weapon_data: WeaponData\n\nfunc _ready() -> void:\n\tarea_entered.connect(_on_area_entered)\n\tbody_entered.connect(_on_body_entered)\n\nfunc _physics_process(delta: float) -> void:\n\tglobal_position += direction * speed * delta\n\t# Optional: queue_free when off-screen using a VisibilityNotifier2D\n\nfunc _hit_target(target: Node) -> void:\n\tif target.has_method(\"apply_damage\"):\n\t\ttarget.apply_damage(damage, weapon_data)\n\t# Apply debuff if present in weapon_data\n\tif weapon_data.debuff_type != \"\" and target.has_method(\"apply_debuff\"):\n\t\ttarget.apply_debuff(weapon_data.debuff_type, weapon_data.debuff_strength, weapon_data.debuff_duration)\n\tpierce_remaining -= 1\n\tif pierce_remaining <= 0:\n\t\tqueue_free()\n\nfunc _on_body_entered(body: Node) -> void:\n\t_hit_target(body)\n\nfunc _on_area_entered(area: Area2D) -> void:\n\t# If enemies are Areas in your enemy system, handle similarly\n\t_hit_target(area)\n```\n- Feather Shot weapon:\n  - Scene `weapons/scenes/feather_shot_weapon.tscn` with script `feather_shot_weapon.gd` extending `Weapon`.\n  - Export `PackedScene` for projectile to reuse across weapons.\n  - On `_do_fire()`, query nearest enemy from Enemy System (e.g., via a global EnemyManager singleton, or by scanning a group `\"enemies\"`).\n  - Compute direction: `direction = (enemy.global_position - global_position).normalized()`.\n  - Spawn `weapon_data.projectile_count` projectiles; for multiple shots, optionally fan them slightly around the main direction.\n  - Level effects:\n    - Level 1–3: projectile_count = 1, 2, 3.\n    - Level 4: pierce_count = 2.\n    - Level 5: projectile_count = 4, pierce_count = 3.\n  - Implement `_on_stats_changed(upgrade)` to set projectile_count and pierce from level, using weapon_data fields or computed in code:\n```gdscript\nfunc _on_stats_changed(upgrade: Dictionary) -> void:\n\tmatch level:\n\t\t1:\n\t\t\tweapon_data.projectile_count = 1\n\t\t\tweapon_data.pierce_count = 1\n\t\t2:\n\t\t\tweapon_data.projectile_count = 2\n\t\t3:\n\t\t\tweapon_data.projectile_count = 3\n\t\t4:\n\t\t\tweapon_data.pierce_count = 2\n\t\t5:\n\t\t\tweapon_data.projectile_count = 4\n\t\t\tweapon_data.pierce_count = 3\n```\n  - When instantiating a projectile:\n```gdscript\nvar p := projectile_scene.instantiate() as Projectile\np.global_position = global_position\np.direction = direction\np.speed = 150.0 * weapon_data.speed_modifier\np.damage = damage\np.pierce_remaining = weapon_data.pierce_count\np.weapon_data = weapon_data\nget_tree().current_scene.add_child(p)\n```\n- Ice Shard clone:\n  - Uses the same Feather Shot weapon script and projectile scene (clone behavior).\n  - WeaponData differences:\n    - Blue-tinted sprite (recolor) for the projectile texture.\n    - `speed_modifier = 100.0 / 150.0` (~0.666) to make projectile slower.\n    - `debuff_type = \"slow\"`, `debuff_duration = 0.5`, `debuff_strength = 0.5` (50% slow).\n    - Base damage 10, cooldown 1.2s.\n  - No change to code required; Projectile will apply debuff automatically based on WeaponData.\n- Industry practice from recent Godot weapon system tutorials recommends central projectile scenes and modular weapons using Resources, which this follows.[1][2]\n",
@@ -1420,7 +1477,7 @@
         "expansionPrompt": "Break Task 22 into ~6 subtasks: (1) create the generic Projectile scene and script with movement, hit detection, pierce, and optional debuff forwarding, (2) implement Feather Shot weapon scene/script integrating with Enemy query to target nearest enemy and spawn multiple projectiles, (3) handle per-level behavior (projectile_count, pierce_count, speed modifiers) via WeaponData and _on_stats_changed, (4) configure Ice Shard as a data-driven clone with slower speed and slow debuff parameters, (5) integrate projectiles into the main scene tree/lifecycle (despawning, off-screen handling), and (6) build a projectile test scene to verify counts, pierce behavior, cooldown, and debuff triggering."
       },
       {
-        "id": "23",
+        "id": 23,
         "title": "Implement Spiral Feathers orbital weapon",
         "description": "Create the Spiral Feathers orbital weapon with always-active orbiting projectiles that damage enemies on contact, scaling damage, rotation speed, feather count, and orbit radius by level.",
         "details": "Implementation details:\n- Scene `weapons/scenes/spiral_feathers_weapon.tscn`:\n  - Root: `Node2D` with script `spiral_feathers_weapon.gd` extending `Weapon`.\n  - Child `Node2D` (`OrbitRoot`) to act as rotation pivot around the player.\n- For each feather:\n  - Use either the same `Projectile` scene with modified behavior, or a simpler `Area2D`-based `OrbitalFeather` scene, since orbitals are passive and do not move linearly.\n  - To keep things simple and direct, create `OrbitalFeather` scene:\n    - Root `Area2D` with `CollisionShape2D` and `Sprite2D` (reusing the Feather Shot sprite, rotated).\n    - Script `orbital_feather.gd` with:\n```gdscript\nclass_name OrbitalFeather\nextends Area2D\n\nvar damage: int = 0\nvar weapon_data: WeaponData\n\nfunc _ready() -> void:\n\tbody_entered.connect(_on_body_entered)\n\tarea_entered.connect(_on_area_entered)\n\nfunc _hit(target: Node) -> void:\n\tif target.has_method(\"apply_damage\"):\n\t\ttarget.apply_damage(damage, weapon_data)\n\nfunc _on_body_entered(body: Node) -> void:\n\t_hit(body)\n\nfunc _on_area_entered(area: Area2D) -> void:\n\t_hit(area)\n```\n- In `spiral_feathers_weapon.gd`:\n  - Maintain:\n```gdscript\n@export var feather_scene: PackedScene\nvar orbit_speed: float = 1.0 # radians/sec\nvar orbit_radius: float = 32.0\nvar feather_count: int = 4\nvar feathers: Array[OrbitalFeather] = []\n```\n  - Override `_ready()` to spawn feathers based on current `feather_count`.\n  - In `_process(delta)`, rotate `OrbitRoot` around the player:\n```gdscript\nfunc _process(delta: float) -> void:\n\tvar player := (get_parent() as Node2D).get_parent() as Node2D\n\tglobal_position = player.global_position\n\t$OrbitRoot.rotation += orbit_speed * delta\n```\n  - When spawning each feather, position it around the OrbitRoot:\n```gdscript\nfunc _spawn_feathers() -> void:\n\tfor f in feathers:\n\t\tf.queue_free()\n\tfeathers.clear()\n\tfor i in range(feather_count):\n\t\tvar feather := feather_scene.instantiate() as OrbitalFeather\n\t\tfeather.damage = damage\n\t\tfeather.weapon_data = weapon_data\n\t\tvar angle := TAU * float(i) / float(feather_count)\n\t\tfeather.position = Vector2.RIGHT.rotated(angle) * orbit_radius\n\t\t$OrbitRoot.add_child(feather)\n\t\tfeathers.append(feather)\n```\n  - Override `_on_stats_changed(upgrade)` to update damage, orbit_speed, orbit_radius, and feather_count per level:\n    - Level 1: 4 feathers, base damage 6, base orbit_radius (e.g., 32), base orbit_speed.\n    - Level 2: damage 8.\n    - Level 3: faster rotation (increase orbit_speed by ~33%).\n    - Level 4: 6 feathers.\n    - Level 5: 8 feathers, larger orbit (e.g., radius * 1.3).\n  - Always keep `Weapon.ready = true` and cooldown set to 0 for passive weapons; override `try_fire()` or `_do_fire()` to do nothing since it is always active.\n- Reuse the Feather Shot projectile sprite texture for the orbital feathers for consistency, as required by the PRD.\n",
@@ -1438,7 +1495,7 @@
         "expansionPrompt": "Break Task 23 into ~5 subtasks: (1) create the OrbitalFeather scene and script for passive collision-based damage, (2) build the Spiral Feathers weapon scene with OrbitRoot and integrate with Weapon base class, (3) implement orbit logic (player-following, rotation, radius) and always-active behavior without cooldown, (4) implement level-based scaling of damage, orbit_speed, feather_count, and orbit_radius, including respawn/update of feathers, and (5) create an orbital test scene to validate contact damage, scaling behaviors, and movement smoothness around the player."
       },
       {
-        "id": "24",
+        "id": 24,
         "title": "Implement debuff system for slow and future effects",
         "description": "Create a lightweight debuff system that allows projectiles and weapons to apply time-limited debuffs like slow or burn to enemies, starting with slow for Ice Shard.",
         "details": "Implementation details:\n- Aim for a simple, extensible debuff component attached to enemies, avoiding over-engineering but allowing slow and later burn.\n- Create `debuff.gd` as a simple data structure (Resource or class):\n```gdscript\nclass_name Debuff\nextends Resource\n\n@export var debuff_type: String\n@export var strength: float\n@export var duration: float\nvar elapsed: float = 0.0\n```\n- Create `debuff_handler.gd` to be attached to enemy scenes:\n```gdscript\nclass_name DebuffHandler\nextends Node\n\nvar active_debuffs: Array[Debuff] = []\n\nfunc apply_debuff(debuff_type: String, strength: float, duration: float) -> void:\n\tif duration <= 0.0:\n\t\treturn\n\tvar d := Debuff.new()\n\td.debuff_type = debuff_type\n\td.strength = strength\n\td.duration = duration\n\tactive_debuffs.append(d)\n\nfunc _process(delta: float) -> void:\n\tfor d in active_debuffs:\n\t\td.elapsed += delta\n\tactive_debuffs = active_debuffs.filter(func(x: Debuff) -> bool:\n\t\treturn x.elapsed < x.duration)\n\nfunc get_total_slow_factor() -> float:\n\tvar factor := 1.0\n\tfor d in active_debuffs:\n\t\tif d.debuff_type == \"slow\":\n\t\t\tfactor *= (1.0 - d.strength)\n\treturn clamp(factor, 0.2, 1.0)\n```\n- Integrate with Enemy movement (from Enemy System PRD):\n  - Where enemies compute their speed or velocity, multiply their base speed by `debuff_handler.get_total_slow_factor()` if a DebuffHandler is present.\n- Ensure `Projectile._hit_target` calls `target.apply_debuff()`; wire this method on the enemy root to forward to DebuffHandler:\n```gdscript\nfunc apply_debuff(debuff_type: String, strength: float, duration: float) -> void:\n\tif $DebuffHandler:\n\t\t$DebuffHandler.apply_debuff(debuff_type, strength, duration)\n```\n- This allows any weapon that sets `WeaponData.debuff_type`, `debuff_duration`, and `debuff_strength` to apply debuffs automatically.\n- Focus now only on slow debuff used by Ice Shard, but keep `debuff_type` string-based to later handle \"burn\" (e.g., periodic damage) without system redesign.\n",
@@ -1454,7 +1511,7 @@
         "expansionPrompt": "Break Task 24 into ~4 subtasks: (1) implement the Debuff Resource and DebuffHandler node with lifetime and stacking logic, (2) integrate DebuffHandler into enemy scenes and expose an apply_debuff API on enemies, (3) wire Projectile._hit_target to call enemy debuff application based on WeaponData fields, and (4) create focused tests with Ice Shard and dummy enemies to validate slow factors, stacking, expiration, and non-impact for weapons without debuffs."
       },
       {
-        "id": "25",
+        "id": 25,
         "title": "Integrate weapon acquisition and upgrade flow with progression system",
         "description": "Connect the WeaponManager with the existing level-up/progression system to handle acquiring new weapons, enforcing the 6-weapon limit, and offering only upgrades when full.",
         "details": "Implementation details:\n- Work with the Progression Systems PRD (Features 4–6) to determine where level-up choices are generated; typically there is a LevelUp UI or ChoiceManager.\n- Extend the progression code to query WeaponManager state when generating level-up options:\n  - If `weapons.size() < MAX_WEAPONS`, include both new weapon options (WeaponData not yet owned) and upgrade `+1` options for existing weapons.\n  - If `weapons.size() >= MAX_WEAPONS`, only offer `+1` upgrade options for weapons already owned.\n- Implementation outline in a central LevelUpManager:\n```gdscript\nfunc get_weapon_choices() -> Array:\n\tvar choices: Array = []\n\tvar owned_ids := weapon_manager.weapons.map(func(w): return w.weapon_data.id)\n\tvar all_weapon_datas := _get_all_weapon_datas()\n\tvar can_add_new := weapon_manager.weapons.size() < WeaponManager.MAX_WEAPONS\n\tif can_add_new:\n\t\t# Include some unowned weapons\n\t\tvar unowned := all_weapon_datas.filter(func(d: WeaponData): return not owned_ids.has(d.id))\n\t\tchoices += _pick_random(unowned, desired_new_count)\n\t# Always include upgrade options for owned weapons\n\tvar upgradable := weapon_manager.weapons.filter(func(w: Weapon): return w.level < 5)\n\tchoices += upgradable\n\treturn choices\n```\n- On selection:\n  - If choice is a WeaponData not currently owned, call `weapon_manager.add_weapon(weapon_data)`.\n  - If choice refers to an existing Weapon, call `weapon_manager.upgrade_weapon(id)`.\n- Ensure that Peck as the starting weapon is always granted at game start:\n  - On Player initialization, call `weapon_manager.add_weapon(peck_weapon_data)` and set its level to 1.\n- Keep this logic data-driven by obtaining all WeaponData via a simple registry or resource list (e.g., an exported `Array[WeaponData]` on a central `WeaponDatabase` node).\n- Ensure there is no path in the UI to acquire more than 6 weapons; LevelUpManager should never offer a new weapon if at capacity.\n",
@@ -1474,7 +1531,7 @@
         "expansionPrompt": "Break Task 25 into ~5 subtasks: (1) analyze existing progression/level-up code and define integration points with WeaponManager, (2) implement a WeaponDatabase/registry of WeaponData resources for choice generation, (3) implement choice-generation logic that respects MAX_WEAPONS, ownership, and upgrade caps, (4) hook level-up UI selection events to call WeaponManager.add_weapon/upgrade_weapon and update state, and (5) create end-to-end tests or scripted flows to verify starting Peck, new-weapon vs upgrade options, capacity enforcement, and max-level handling."
       },
       {
-        "id": "26",
+        "id": 26,
         "title": "Implement placeholder visuals and damage Areas for all weapon types",
         "description": "Wire up placeholder ColorRect/Sprite2D visuals and Area2D hit detection for all weapons to ensure clear feedback during Weeks 1–3 before final art arrives.",
         "details": "Implementation details:\n- For consistency across the system, review each weapon scene (Peck, Wing Slap, Flame Wing, Feather Shot, Ice Shard, Spiral Feathers) and ensure:\n  - Each uses `Area2D` with appropriate `CollisionShape2D` sized to match the intended gameplay effect.\n  - Each has a placeholder visual:\n    - Peck: 32x32 ColorRect or Sprite2D, offset in front of player, oriented with facing direction.\n    - Wing Slap: 64x64 ColorRect or circular Sprite2D centered on player, quick fade/scale animation.\n    - Flame Wing: Same as Wing Slap but orange/red color to distinguish.\n    - Feather Shot / Ice Shard: 16x16 ColorRect or Sprite2D for projectiles; Ice Shard tinted blue.\n    - Spiral Feathers: 16x16 orbital sprites reusing projectile sprite geometry.\n- Use Godot 4’s `CanvasItem` modulate property for easy color-tinting clones.\n- Ensure that all Area2D nodes are set to the correct physics layers/masks to detect enemies and ignore players/other projectiles.\n- Add simple one-shot animations using `AnimationPlayer` where appropriate (e.g., scaling AOE effects) but keep them minimal to avoid scope creep.\n- Keep the visual implementation decoupled from logic (Weapon and Projectile scripts should not depend on final art assets, only on node names/types), so that art integration later is just a matter of replacing textures.\n",
@@ -1493,7 +1550,7 @@
         "expansionPrompt": "Break Task 26 into ~3 subtasks: (1) audit each weapon scene to ensure Area2D/CollisionShape2D nodes exist with correct layers/masks and sizes, (2) add and configure placeholder visuals (ColorRect/Sprite2D, modulate colors, minimal animations) for each weapon type and ensure they are decoupled from gameplay scripts, and (3) run a combined debug arena scene with all weapons to visually verify hit areas, collisions, and clarity using visible collision shapes or debug tooling."
       },
       {
-        "id": "27",
+        "id": 27,
         "title": "Art integration checkpoint: sprite preview scene and weapon VFX validation",
         "description": "Create a reusable sprite preview scene for quick visual checks and use it to validate delivered weapon effect art (if available), without blocking weapon code progress.",
         "details": "Implementation details:\n- Only perform this task once core weapon code is functional and art assets are available; otherwise keep placeholders as per PRD.\n- Sprite preview scene:\n  - Path: `scenes/debug/sprite_preview.tscn`.\n  - Root: `Node2D` or `Control` with a `Camera2D` configured for a 640×360 viewport at game scale.\n  - Background: simple grass tileset or solid color (placeholder or purchased tileset), implemented using `TileMap` or a full-screen Sprite2D.\n  - Add multiple sprite slots:\n    - Node group or named positions for 16x16, 32x32, 64x64 sprites.\n    - For each size, add a `Sprite2D` or `AnimatedSprite2D` that can have its `texture`/`sprite_frames` updated in the editor.\n- Expose a small editor script or tool script that allows quickly assigning a texture or animation to a slot for preview.\n- Use the scene to verify each weapon VFX sprite/animation when Ericka delivers them:\n  - Feather projectile (16x16): visibility and direction clarity when rotated.\n  - Peck hit effect (32x32): reads as directional thrust.\n  - Wing Slap circle (64x64): expanding motion visible, does not obscure player.\n  - Ice Shard (16x16): blue recolor distinct from Feather.\n  - Flame Wing (64x64): orange recolor distinct from Wing Slap.\n  - Animation speeds feel responsive.\n- Coordinate a short in-team review session (10 minutes) to show all effects to Ericka and collect notes.\n- Do not modify weapon gameplay logic during this checkpoint; only visuals and asset assignments.\n",
@@ -1516,7 +1573,9 @@
       "completedCount": 17,
       "tags": [
         "master"
-      ]
+      ],
+      "created": "2026-01-11T03:34:43.321Z",
+      "description": "Tasks for master context"
     }
   }
 }
