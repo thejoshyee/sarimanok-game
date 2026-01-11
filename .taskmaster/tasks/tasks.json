@@ -1273,7 +1273,7 @@
         "testStrategy": "Manual and script-level tests:\n- In the Godot editor, create `.tres` WeaponData resources for all 6 weapons and verify fields are editable and saved properly.\n- Run a small test script in an autoload or temporary scene that loads each WeaponData (`load(\"res://weapons/data/peck.tres\")`) and prints id, base_damage, and all upgrade levels to the console.\n- Assert `get_upgrade(level)` returns the correct dictionary for levels 1–5 for each weapon; log an error if an upgrade is missing.\n- Confirm that changing values in the Inspector (e.g., damage, cooldown) updates when re-running the test script, ensuring fully data-driven configuration.",
         "priority": "high",
         "dependencies": [],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1323,15 +1323,16 @@
               3
             ],
             "details": "Implement either a temporary test scene (e.g., `weapons/scenes/weapon_data_test.tscn`) with a script or an autoload singleton (e.g., `WeaponDataTester.gd`) that runs at startup. The script should scan `res://weapons/data/` or use a hardcoded list of the six `.tres` paths, load each WeaponData, and log key fields (id, display_name, base_damage, cooldown, weapon_type, number of upgrades). Add simple validation checks, such as non-empty id, cooldown > 0, and numeric types where expected, logging warnings for any invalid entries. Call `get_upgrade` for a range of levels (e.g., 1–5) per weapon and print or assert that it returns meaningful dictionaries for defined levels and an empty dictionary for undefined ones.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the test scene or start the project with the tester autoload enabled. Inspect the output in the Godot console to confirm all six WeaponData assets load without errors, validation passes (or clearly reports issues), and `get_upgrade` returns correct data for each defined upgrade level while safely handling missing levels.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-11T03:33:37.708Z"
           }
         ],
         "complexity": 5,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 17 into ~4 subtasks covering: (1) creating the WeaponData Resource script and exports, (2) setting up folder structure and .tres asset workflow, (3) encoding all PRD-based stats/upgrades for the 6 initial weapons, and (4) building a small test harness (scene or autoload script) to load, validate, and log WeaponData, including get_upgrade behavior.",
-        "updatedAt": "2026-01-11T02:57:23.663Z"
+        "updatedAt": "2026-01-11T03:33:37.708Z"
       },
       {
         "id": "18",
@@ -1510,9 +1511,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-11T02:57:23.666Z",
+      "lastModified": "2026-01-11T03:33:37.709Z",
       "taskCount": 27,
-      "completedCount": 16,
+      "completedCount": 17,
       "tags": [
         "master"
       ]

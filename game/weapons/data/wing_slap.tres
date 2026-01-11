@@ -10,7 +10,7 @@ description = "Damages all enemies around you"
 base_damage = 8.0
 cooldown = 1.5
 weapon_type = "aoe"
-upgrades = [{
+upgrades = Array[Dictionary]([{
 "damage": 8,
 "effect_description": "Base",
 "level": 1
@@ -30,5 +30,5 @@ upgrades = [{
 "damage": 28,
 "effect_description": "Even larger radius",
 "level": 5
-}]
+}])
 metadata/_custom_type_script = "uid://dy30sa5qe6d8h"

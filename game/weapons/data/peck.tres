@@ -8,8 +8,7 @@ id = "peck"
 display_name = "Peck"
 description = "A quick beak strike in the facing direction"
 cooldown = 0.5
-weapon_type = "melee"
-upgrades = [{
+upgrades = Array[Dictionary]([{
 "damage": 10,
 "effect_description": "Base",
 "level": 1
@@ -29,5 +28,5 @@ upgrades = [{
 "damage": 35,
 "effect_description": "Hits in wider arc",
 "level": 5
-}]
+}])
 metadata/_custom_type_script = "uid://dy30sa5qe6d8h"
