@@ -1392,9 +1392,10 @@
               3
             ],
             "details": "Ensure `_ready()` uses `assert(weapon_data != null)` and optionally verifies that `weapon_data` exposes expected methods/fields (e.g., `cooldown`, `base_damage`, `get_upgrade`). Implement `set_level(new_level: int) -> void` to clamp `new_level` to a valid range (e.g., 1–5), early-return if the clamped level equals the current level, and otherwise assign `level` and call `_apply_level_stats()` to recompute all stats. Confirm that `_apply_level_stats()` fully derives current stats from `weapon_data` and `level` so repeated calls with the same level do not accumulate changes. Guard signal connections to `cooldown_timer.timeout` to avoid duplicate connections on re-entering `_start_cooldown()`.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-13T03:49:11.376Z"
           },
           {
             "id": 5,
@@ -1414,7 +1415,7 @@
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 18 into ~5 subtasks: (1) define the Weapon base script and scene (node structure, exported WeaponData), (2) implement cooldown handling with a reusable Timer and ready/try_fire flow, (3) implement level and upgrade application including virtual hooks, (4) enforce assertions/guards and idempotent runtime level changes, and (5) create a dedicated test scene or scripts to validate cooldown timing and upgrade-derived stats.",
-        "updatedAt": "2026-01-13T01:57:42.369Z"
+        "updatedAt": "2026-01-13T03:49:11.376Z"
       },
       {
         "id": "19",
@@ -1577,7 +1578,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-13T01:57:42.372Z",
+      "lastModified": "2026-01-13T03:49:11.383Z",
       "taskCount": 27,
       "completedCount": 17,
       "tags": [

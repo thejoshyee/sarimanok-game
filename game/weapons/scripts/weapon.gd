@@ -22,15 +22,35 @@ var can_fire: bool = true  # Can this weapon fire right now?
 func _ready() -> void:
 	# Validate: Weapon must have data assigned in Inspector
 	assert(weapon_data != null, "Weapon requires weapon_data resource assigned!")
-	
+
 	# Connect timer's timeout signal to our callback
-	cooldown_timer.timeout.connect(_on_cooldown_done)
+	# Guard: Only connect if not already connected
+	# WHY: Prevents duplicate callbacks if _ready() somehow runs twice
+	if not cooldown_timer.timeout.is_connected(_on_cooldown_done):
+		cooldown_timer.timeout.connect(_on_cooldown_done)
 	
 	# Compute initial stats based on current level
 	_apply_level_stats()
 
 
 # === LEVEL & STATS ===
+
+# Sets weapon level at runtime, clamping to valid range
+# WHY: Ensures stats are recomputed whenever level changes
+func set_level(new_level: int) -> void:
+	# Clamp to valid range (weapons go from level 1 to 5)
+	var clamped := clampi(new_level, 1, 5)
+	
+	# Early return if no actual change (idempotent)
+	# WHY: Prevents unnecessary stat recalculation and side effects
+	if clamped == level:
+		return
+	
+	# Update level and recompute all stats
+	level = clamped
+	_apply_level_stats()
+
+
 # Computes weapon stats based on current level and WeaponData
 func _apply_level_stats() -> void:
 	# Get upgrade data for current level (empty dict if no upgrade exists)
