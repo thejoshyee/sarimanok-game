@@ -56,10 +56,9 @@ func _apply_level_stats() -> void:
 	# Get upgrade data for current level (empty dict if no upgrade exists)
 	var upgrade := weapon_data.get_upgrade(level)
 	
-	# Compute damage: base value + any upgrade bonus
-	# upgrade.get() returns 0 if key doesn't exist
-	damage = int(weapon_data.base_damage + upgrade.get("damage", 0))
-	
+	# Use upgrade's damage as final value, fallback to base_damage if no upgrade exists
+	damage = int(upgrade.get("damage", weapon_data.base_damage))
+
 	# Let subclasses react to stat changes (e.g., update radius, projectile count)
 	_on_stats_changed(upgrade)
 
