@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c86vau5nc2qb4"]
+
+[ext_resource type="Script" uid="uid://drofsm3i2esjb" path="res://weapons/scripts/test_weapon.gd" id="1_kil7l"]
+[ext_resource type="Script" uid="uid://d1o17io6p6nhp" path="res://weapons/tests/weapon_base_test.gd" id="1_m3epa"]
+[ext_resource type="Resource" uid="uid://cgdv8g0n1po3p" path="res://weapons/data/peck.tres" id="2_m3epa"]
+
+[node name="WeaponBaseTest" type="Node2D"]
+script = ExtResource("1_m3epa")
+
+[node name="TestWeapon" type="Node2D" parent="."]
+script = ExtResource("1_kil7l")
+weapon_data = ExtResource("2_m3epa")
+metadata/_custom_type_script = "uid://drofsm3i2esjb"
+
+[node name="cooldown_timer" type="Timer" parent="TestWeapon"]
+one_shot = true

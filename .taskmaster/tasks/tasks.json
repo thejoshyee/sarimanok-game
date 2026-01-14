@@ -1407,15 +1407,16 @@
               4
             ],
             "details": "Create `weapons/tests/weapon_base_test.tscn` with a root Node2D and a child instance of `weapon_base.tscn` referencing a concrete `WeaponData` (e.g., Peck data). Add a simple test script to the root that, on `_ready()`, calls `try_fire()` repeatedly, logs when `_do_fire()` is invoked (temporarily override in a test subclass or via a test weapon script), and verifies that subsequent `try_fire()` calls during cooldown do not fire until the Timer completes. Add tests that call `set_level()` with different values at runtime, log resulting `damage` and other derived stats, and verify they match `WeaponData` values and update correctly when level changes back and forth. Use Godot’s output/logging to manually confirm behavior.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Run the `weapon_base_test.tscn` scene, observe console logs for correct try_fire/ready behavior across cooldowns and verify that damage and other stats match expected values when changing levels multiple times.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-14T03:32:44.701Z"
           }
         ],
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 18 into ~5 subtasks: (1) define the Weapon base script and scene (node structure, exported WeaponData), (2) implement cooldown handling with a reusable Timer and ready/try_fire flow, (3) implement level and upgrade application including virtual hooks, (4) enforce assertions/guards and idempotent runtime level changes, and (5) create a dedicated test scene or scripts to validate cooldown timing and upgrade-derived stats.",
-        "updatedAt": "2026-01-13T03:49:11.376Z"
+        "updatedAt": "2026-01-14T03:32:44.701Z"
       },
       {
         "id": "19",
@@ -1578,7 +1579,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-13T03:49:11.383Z",
+      "lastModified": "2026-01-14T03:32:44.704Z",
       "taskCount": 27,
       "completedCount": 17,
       "tags": [
