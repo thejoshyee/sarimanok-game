@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name WeaponManager
 
 
@@ -6,7 +6,10 @@ class_name WeaponManager
 signal weapon_attack_started(slot_index: int, weapon: Variant)
 signal weapon_attack_completed(slot_index: int, weapon: Variant)
 
-# 6 Weapon Slots - will hold weapon references
+# Maximum number of weapon slots available to the player
+const MAX_WEAPONS: int = 6
+
+# Weapon slots - will hold weapon references
 var weapon_slots: Array = []
 
 # track cooldowns for each slot (slot_index -> time remaining)
@@ -16,9 +19,12 @@ var cooldowns: Dictionary = {}
 var player: CharacterBody2D
 
 func _ready() -> void:
-	# initialize 6 weapon slots
-	weapon_slots.resize(6)
-	for i in range(6):
+	# Get player reference from parent (WeaponManager is child of Player)
+	player = get_parent()
+	
+	# initialize weapon slots
+	weapon_slots.resize(MAX_WEAPONS)
+	for i in range(MAX_WEAPONS):
 		weapon_slots[i] = null
 		cooldowns[i] = 0.0
 
@@ -34,7 +40,7 @@ func _process(delta: float) -> void:
 				cooldowns[slot_index] = 0.0
 
 	# auto-attack loop: check each slot for ready weapons
-	for slot_index in range(6):
+	for slot_index in range(MAX_WEAPONS):
 		var weapon = weapon_slots[slot_index]
 
 		# skip empty slots
@@ -62,19 +68,19 @@ func get_attack_speed_multiplier() -> float:
 
 # Check if a slot's cooldown is ready (0.0 = ready to fire)
 func is_ready(slot_index: int) -> bool:
-	if slot_index < 0 or slot_index >= 6:
+	if slot_index < 0 or slot_index >= MAX_WEAPONS:
 		return false
 	return cooldowns[slot_index] <= 0.0
 
 # Set a weapon's cooldown (called after it attacks)
 func set_cooldown(slot_index: int, duration: float) -> void:
-	if slot_index >= 0 and slot_index < 6:
+	if slot_index >= 0 and slot_index < MAX_WEAPONS:
 		cooldowns[slot_index] = duration
 
 
 # equip a weapon to a specific slot
 func equip(slot_index: int, weapon: BaseWeapon) -> void:
-	if slot_index >= 0 and slot_index < 6:
+	if slot_index >= 0 and slot_index < MAX_WEAPONS:
 		weapon_slots[slot_index] = weapon
 		cooldowns[slot_index] = 0.0 # Reset cooldown when equipping a new weapon
 
@@ -89,6 +95,6 @@ func equip(slot_index: int, weapon: BaseWeapon) -> void:
 
 # Get the current cooldown remaining for a specific slot
 func get_cooldown(slot_index: int) -> float:
-	if slot_index >= 0 and slot_index < 6:
+	if slot_index >= 0 and slot_index < MAX_WEAPONS:
 		return cooldowns[slot_index]
 	return 0.0
