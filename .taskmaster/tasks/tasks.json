@@ -1450,9 +1450,10 @@
               1
             ],
             "details": "Implement _get_weapon_scene_for_data using exported Dictionary mapping id → PackedScene or match statement on data.id. Ensure returns null if over limit.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Manually call add_weapon in editor or test scene; confirm weapon node appears as child and weapons.size() increments up to 6.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-16T05:15:11.048Z"
           },
           {
             "id": 3,
@@ -1499,7 +1500,7 @@
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 19 into ~5 subtasks: (1) create the WeaponManager scene/script and attach it to the player, (2) implement weapon instantiation and scene lookup/mapping from WeaponData, (3) implement auto-fire loop, positioning, and readiness checks, (4) add querying/upgrade APIs (get_weapon_by_id, upgrade_weapon, capacity checks), and (5) build a test setup that spawns several weapons, verifies auto-fire cadence, and enforces the 6-weapon limit.",
-        "updatedAt": "2026-01-15T03:30:48.567Z"
+        "updatedAt": "2026-01-16T05:15:11.048Z"
       },
       {
         "id": "20",
@@ -1645,7 +1646,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-15T03:30:48.569Z",
+      "lastModified": "2026-01-16T05:15:11.049Z",
       "taskCount": 27,
       "completedCount": 17,
       "tags": [
