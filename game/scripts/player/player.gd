@@ -90,10 +90,13 @@ func _ready() -> void:
 	# connect WeaponManager to this player
 	$WeaponManager.player = self
 
-	# Test: Equip test gun to slot 0
-	var test_gun = TestGun.new()
-	weapon_manager.equip(0, test_gun)
-	print("Test gun equipped to slot 0")
+	# Test: Add Peck weapon via add_weapon()
+	var peck_data = preload("res://weapons/data/peck.tres")
+	if weapon_manager.add_weapon(peck_data):
+		print("Peck weapon added successfully")
+	else:
+		print("Failed to add Peck weapon")
+
 
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
