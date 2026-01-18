@@ -1478,9 +1478,10 @@
               2
             ],
             "details": "Include capacity check in add_weapon (already sketched). These APIs support integration with progression system (Feature 4) for add/upgrade choices.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "In script or test scene, call get_weapon_by_id and verify returns correct instance; call upgrade_weapon and check weapon.level increases via get_level().",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-17T20:30:03.768Z"
           },
           {
             "id": 5,
@@ -1501,7 +1502,7 @@
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 19 into ~5 subtasks: (1) create the WeaponManager scene/script and attach it to the player, (2) implement weapon instantiation and scene lookup/mapping from WeaponData, (3) implement auto-fire loop, positioning, and readiness checks, (4) add querying/upgrade APIs (get_weapon_by_id, upgrade_weapon, capacity checks), and (5) build a test setup that spawns several weapons, verifies auto-fire cadence, and enforces the 6-weapon limit.",
-        "updatedAt": "2026-01-17T04:37:57.402Z"
+        "updatedAt": "2026-01-17T20:30:03.768Z"
       },
       {
         "id": "20",
@@ -1647,7 +1648,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-17T04:37:57.406Z",
+      "lastModified": "2026-01-17T20:30:03.770Z",
       "taskCount": 27,
       "completedCount": 17,
       "tags": [

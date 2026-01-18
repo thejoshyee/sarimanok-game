@@ -122,3 +122,31 @@ func _find_empty_slot() -> int:
 		if weapon_slots[i] == null:
 			return i
 	return -1
+
+
+# === QUERYING APIs ===
+
+# Finds a weapon by its unique id (e.g., "peck", "wing_slap")
+# Returns the Weapon instance if found, null if not equipped
+func get_weapon_by_id(id: String) -> Weapon:
+	for weapon in weapon_slots:
+		# Skip empty slots
+		if weapon == null:
+			continue
+		# Check if this weapon's data matches the requested id
+		if weapon.weapon_data.id == id:
+			return weapon
+	return null
+
+
+# Upgrades a weapon by its id, incrementing its level by 1
+# Returns true if upgrade succeeded, false if weapon not found
+func upgrade_weapon(id: String) -> bool:
+	var weapon := get_weapon_by_id(id)
+	if weapon == null:
+		push_warning("WeaponManager: Cannot upgrade '%s' - weapon not found" % id)
+		return false
+	
+	# Increment level (set_level handles clamping to max of 5)
+	weapon.set_level(weapon.level + 1)
+	return true
