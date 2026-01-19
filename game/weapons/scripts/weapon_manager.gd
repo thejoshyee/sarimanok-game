@@ -19,6 +19,12 @@ func _ready() -> void:
 	# TODO: Replace with specific weapon scenes when created
 	# Using generic weapon_base.tscn as placeholder for all weapons
 	weapon_scenes["peck"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["wing_slap"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["feather_shot"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["spiral_feathers"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["ice_shard"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["flame_wing"] = preload("res://weapons/scenes/weapon_base.tscn")
+
 
 	# Get player reference from parent (WeaponManager is child of Player)
 	player = get_parent()
@@ -76,6 +82,11 @@ func _get_weapon_scene_for_data(data: WeaponData) -> PackedScene:
 # Adds a weapon to the first available slot
 # Returns true if weapon was added, false if at capacity or invalid data
 func add_weapon(data: WeaponData) -> bool:
+	# Check if we already have this weapon
+	if get_weapon_by_id(data.id) != null:
+		push_warning("WeaponManager: Already have weapon '%s'" % data.id)
+		return false
+
 	# Check if we've hit the weapon limit
 	var current_count := _get_weapon_count()
 	if current_count >= MAX_WEAPONS:

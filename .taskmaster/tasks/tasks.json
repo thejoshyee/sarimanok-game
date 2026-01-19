@@ -1429,7 +1429,7 @@
           "17",
           "18"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1494,15 +1494,16 @@
               4
             ],
             "details": "Log weapons.size(), attempt add beyond 6 and confirm null return. Use simple ColorRect/Sprite2D placeholders on weapon scenes. Follow Godot best practices.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run test scene: confirm exactly 6 weapons max, auto-fire works without errors, positioning follows player movement, FPS stable with logs on checks/fires.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-19T04:40:33.761Z"
           }
         ],
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 19 into ~5 subtasks: (1) create the WeaponManager scene/script and attach it to the player, (2) implement weapon instantiation and scene lookup/mapping from WeaponData, (3) implement auto-fire loop, positioning, and readiness checks, (4) add querying/upgrade APIs (get_weapon_by_id, upgrade_weapon, capacity checks), and (5) build a test setup that spawns several weapons, verifies auto-fire cadence, and enforces the 6-weapon limit.",
-        "updatedAt": "2026-01-17T20:30:03.768Z"
+        "updatedAt": "2026-01-19T04:40:33.761Z"
       },
       {
         "id": "20",
@@ -1648,9 +1649,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-17T20:30:03.770Z",
+      "lastModified": "2026-01-19T04:40:33.762Z",
       "taskCount": 27,
-      "completedCount": 17,
+      "completedCount": 18,
       "tags": [
         "master"
       ]

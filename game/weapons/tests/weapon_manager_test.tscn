@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7xfotb6j3mkr"]
+
+[ext_resource type="Script" uid="uid://clgenfe0nvv5f" path="res://weapons/tests/weapon_manager_test.gd" id="1_52d7k"]
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_5xb7i"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_52d7k")
+
+[node name="SarimanokPlayer" parent="." instance=ExtResource("2_5xb7i")]
