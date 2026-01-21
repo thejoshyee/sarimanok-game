@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c3tomqu6ioyoh"]
+
+[node name="PeckWeapon" type="Node2D"]
+
+[node name="cooldown_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitArea"]
+polygon = PackedVector2Array(0, -20, 0, 20, 50, 0)
+
+[node name="HitVisual" type="ColorRect" parent="."]
+visible = false
+offset_top = -20.0
+offset_right = 50.0
+offset_bottom = 20.0
+color = Color(0.99026644, 0.5497381, 0, 1)
