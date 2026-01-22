@@ -158,6 +158,24 @@ func _process(delta):
 - Projectile (Feather Shot): Fires at nearest enemy
 - Passive (Spiral Feathers): Constantly orbiting, no cooldown
 
+**Data-Driven Design (IMPORTANT):**
+
+All weapon stats should live in WeaponData resources (.tres files), not hardcoded in scripts:
+
+- Base stats (damage, cooldown) go in WeaponData
+- Level-specific stats (upgraded cooldown, arc width) go in the `upgrades` array
+- Scripts read values using `upgrade.get("key", fallback_value)`
+- This allows balance tweaking without code changes
+
+```gdscript
+# GOOD: Read from data
+effective_cooldown = upgrade.get("cooldown", weapon_data.cooldown)
+
+# BAD: Hardcoded values
+if level >= 4:
+    effective_cooldown = 0.4  # Don't do this!
+```
+
 ### Enemy Behavior Pattern
 
 All enemies use simple pathfinding toward player:

@@ -1537,9 +1537,10 @@
               1
             ],
             "details": "Attach script to root Node2D. Override _on_stats_changed: check level>=4 for cooldown=0.4; get CollisionShape2D shape, adjust ArcShape2D.angle with deg_to_rad(80/50). Base cooldown 0.5s in WeaponData. Ensure damage uses base Weapon scaling (10/15/20/25/35).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "In editor, simulate level changes via debug; verify cooldown updates in inspector, arc angle changes visually on shape preview for levels 1-5.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-22T03:23:04.964Z"
           },
           {
             "id": 3,
@@ -1572,7 +1573,7 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling.",
-        "updatedAt": "2026-01-21T03:30:44.189Z"
+        "updatedAt": "2026-01-22T03:23:04.964Z"
       },
       {
         "id": "21",
@@ -1701,7 +1702,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-21T03:30:44.190Z",
+      "lastModified": "2026-01-22T03:23:04.967Z",
       "taskCount": 27,
       "completedCount": 18,
       "tags": [

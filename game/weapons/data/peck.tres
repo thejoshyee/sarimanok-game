@@ -21,10 +21,13 @@ upgrades = Array[Dictionary]([{
 "effect_description": "+100% damage",
 "level": 3
 }, {
+"cooldown": 0.4,
 "damage": 25,
 "effect_description": "Faster cooldown (0.4s)",
 "level": 4
 }, {
+"arc_angle": 80.0,
+"cooldown": 0.4,
 "damage": 35,
 "effect_description": "Hits in wider arc",
 "level": 5

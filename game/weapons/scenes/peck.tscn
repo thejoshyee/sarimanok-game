@@ -1,6 +1,11 @@
-[gd_scene format=3 uid="uid://c3tomqu6ioyoh"]
+[gd_scene load_steps=3 format=3 uid="uid://c3tomqu6ioyoh"]
+
+[ext_resource type="Script" uid="uid://dsv513rgixona" path="res://weapons/scripts/peck_weapon.gd" id="1_oeja5"]
+[ext_resource type="Resource" uid="uid://cgdv8g0n1po3p" path="res://weapons/data/peck.tres" id="2_m3nqp"]
 
 [node name="PeckWeapon" type="Node2D"]
+script = ExtResource("1_oeja5")
+weapon_data = ExtResource("2_m3nqp")
 
 [node name="cooldown_timer" type="Timer" parent="."]
 one_shot = true
