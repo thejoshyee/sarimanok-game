@@ -1551,9 +1551,10 @@
               2
             ],
             "details": "Access player via get_parent() chain or injected ref; set global_rotation = player.global_rotation. Briefly set monitoring=true, iterate enemies with has_method('apply_damage'), show/hide ColorRect for effect. Return true on success. Ensure physics frames cooperate.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Attach to test player; rotate player, fire: verify cone rotates correctly, only frontal enemies hit/log damage, visual flashes, no backend/behind hits.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-23T15:35:11.306Z"
           },
           {
             "id": 4,
@@ -1573,7 +1574,7 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling.",
-        "updatedAt": "2026-01-22T03:23:04.964Z"
+        "updatedAt": "2026-01-23T15:35:11.306Z"
       },
       {
         "id": "21",
@@ -1702,7 +1703,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-22T03:23:04.967Z",
+      "lastModified": "2026-01-23T15:35:11.307Z",
       "taskCount": 27,
       "completedCount": 18,
       "tags": [

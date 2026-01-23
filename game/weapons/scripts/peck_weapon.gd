@@ -9,6 +9,7 @@ const DEFAULT_ARC_ANGLE: float = 50.0  # Default arc width in degrees
 # === NODE REFERENCES ===
 @onready var hit_area: Area2D = $HitArea
 @onready var collision_shape: CollisionPolygon2D = $HitArea/CollisionPolygon2D
+@onready var hit_visual: ColorRect = $HitVisual
 
 
 # === COMPUTED STATS ===
@@ -59,3 +60,44 @@ func _start_cooldown() -> void:
 	
 	cooldown_timer.wait_time = effective_cooldown
 	cooldown_timer.start()
+
+
+# === FIRING ===
+# Called by base Weapon.try_fire() when cooldown is ready
+func _do_fire() -> bool:
+	# Get player reference
+	# WeaponManager is our parent, player is WeaponManager's parent
+	var weapon_manager = get_parent()
+	var player = weapon_manager.player
+	
+	# Guard: Can't fire without a valid player
+	if player == null:
+		return false
+	
+	# Rotate cone to match player facing direction
+	# Use player's velocity to determine facing (moving direction)
+	if player.velocity.length() > 0:
+		# velocity.angle() converts velocity vector to angle in radians
+		rotation = player.velocity.angle()
+	# If player is stationary, keep current rotation (last facing direction)
+	
+	# Step 3: Detect and damage enemies in the cone
+	var enemies = hit_area.get_overlapping_bodies()
+	for enemy in enemies:
+		# Check if this body can take damage (has the method)
+		if enemy.has_method("take_damage"):
+			enemy.take_damage(damage)
+	
+	# Step 4: Flash the visual to show attack happened
+	_show_hit_flash()
+
+	return true
+
+
+# Brief visual flash when peck fires
+func _show_hit_flash() -> void:
+	hit_visual.visible = true
+	
+	# Hide after 0.1 seconds (brief flash)
+	await get_tree().create_timer(0.1).timeout
+	hit_visual.visible = false

@@ -18,7 +18,7 @@ var player: CharacterBody2D
 func _ready() -> void:
 	# TODO: Replace with specific weapon scenes when created
 	# Using generic weapon_base.tscn as placeholder for all weapons
-	weapon_scenes["peck"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["peck"] = preload("res://weapons/scenes/peck.tscn")
 	weapon_scenes["wing_slap"] = preload("res://weapons/scenes/weapon_base.tscn")
 	weapon_scenes["feather_shot"] = preload("res://weapons/scenes/weapon_base.tscn")
 	weapon_scenes["spiral_feathers"] = preload("res://weapons/scenes/weapon_base.tscn")
@@ -161,3 +161,18 @@ func upgrade_weapon(id: String) -> bool:
 	# Increment level (set_level handles clamping to max of 5)
 	weapon.set_level(weapon.level + 1)
 	return true
+
+
+# Returns cooldown remaining for weapon in slot, or 0 if empty/ready
+func get_cooldown(slot_index: int) -> float:
+	if slot_index < 0 or slot_index >= MAX_WEAPONS:
+		return 0.0
+	
+	var weapon = weapon_slots[slot_index]
+	if weapon == null:
+		return 0.0
+	
+	# Return time left on cooldown timer, or 0 if ready to fire
+	if weapon.can_fire:
+		return 0.0
+	return weapon.cooldown_timer.time_left
