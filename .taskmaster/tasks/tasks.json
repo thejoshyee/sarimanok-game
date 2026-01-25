@@ -1537,9 +1537,10 @@
               1
             ],
             "details": "Create `game/weapons/scenes/beak_projectile.tscn`:\n- Root: `Area2D` named BeakProjectile with beak_projectile.gd script\n- Child `CollisionShape2D` with `RectangleShape2D` (16x8 pixels)\n- Child `ColorRect` (16x8, orange color #FD8B00) offset so projectile origin is at left edge\n- Set collision_layer = 0 (projectile doesn't block anything)\n- Set collision_mask = 2 (detects enemies on layer 2)\n- Set monitoring = true, monitorable = false",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Add scene to test level, verify visual displays correctly, collision shape matches visual size, and collision layers are properly configured.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-25T20:18:48.651Z"
           },
           {
             "id": 3,
@@ -1607,7 +1608,7 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling.",
-        "updatedAt": "2026-01-24T04:12:51.590Z"
+        "updatedAt": "2026-01-25T20:18:48.651Z"
       },
       {
         "id": "21",
@@ -1736,7 +1737,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-24T04:12:51.591Z",
+      "lastModified": "2026-01-25T20:18:48.659Z",
       "taskCount": 27,
       "completedCount": 18,
       "tags": [

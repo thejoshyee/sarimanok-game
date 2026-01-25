@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp66oni1u7w2s"]
+
+[ext_resource type="Script" uid="uid://b5sjg47ck5buy" path="res://weapons/scripts/beak_projectile.gd" id="1_7402u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7402u"]
+size = Vector2(16, 8)
+
+[node name="BeakProjectile" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_7402u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7402u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_top = -4.0
+offset_right = 16.0
+offset_bottom = 4.0
+color = Color(0.99215686, 0.54509807, 0, 1)
