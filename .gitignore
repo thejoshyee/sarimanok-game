@@ -30,3 +30,6 @@ Thumbs.db
 
 # TaskMaster user-specific state
 .taskmaster/state.json
+
+# Godot version backup copies
+sari-manok-(4.5)/
