@@ -1563,9 +1563,10 @@
               3
             ],
             "details": "Rewrite `game/weapons/scripts/peck_weapon.gd`:\n- Remove @onready hit_area, collision_shape, hit_visual references\n- Remove _update_collision_arc() and _show_hit_flash() methods\n- Add properties: `projectile_count: int`, `spread_angle: float`, `projectile_range: float`\n- In `_on_stats_changed(upgrade)`: read projectile_count, spread_angle, range from upgrade dict\n- In `_do_fire()`:\n  - Get player direction from velocity (or last_direction if stationary)\n  - Calculate spread angles: if count=1, fire straight; if count>1, distribute evenly across spread_angle\n  - For each projectile: spawn via PoolManager.spawn(\"projectile_beak\", global_position), call launch(direction, damage)\n  - Return true\n- Remove cone-specific cooldown override (effective_cooldown) - use base class cooldown handling",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Equip Peck weapon, move player in different directions, verify projectiles spawn and travel in movement direction. Test at levels 1, 3, and 5 to verify projectile count changes.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-27T19:06:01.837Z"
           },
           {
             "id": 5,
@@ -1609,7 +1610,7 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling.",
-        "updatedAt": "2026-01-27T01:09:50.133Z"
+        "updatedAt": "2026-01-27T19:06:01.837Z"
       },
       {
         "id": "21",
@@ -1738,7 +1739,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-27T01:09:50.135Z",
+      "lastModified": "2026-01-27T19:06:01.838Z",
       "taskCount": 27,
       "completedCount": 18,
       "tags": [
