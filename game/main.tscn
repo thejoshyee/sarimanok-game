@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cxqxr03wo51p8"]
+[gd_scene load_steps=23 format=4 uid="uid://cxqxr03wo51p8"]
 
 [ext_resource type="Script" uid="uid://bknm7mckcoe48" path="res://scripts/core/main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_0xm2m"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://ccuacn7tyacar" path="res://resources/green_duwende_pool.tres" id="5_w48qg"]
 [ext_resource type="Resource" uid="uid://dkxqfdgi577sb" path="res://resources/red_duwende_pool.tres" id="6_vivmo"]
 [ext_resource type="Texture2D" uid="uid://cc7v55axxinrj" path="res://assets/tilesets/placeholder_farm.png" id="6_ycdy4"]
+[ext_resource type="Resource" uid="uid://dul4s68fbppeo" path="res://resources/beak_projectile_pool.tres" id="7_vivmo"]
 [ext_resource type="PackedScene" uid="uid://bib7nigil0j4a" path="res://scenes/ui/pool_debug_overlay.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dk4w6bjsr8gca" path="res://scenes/ui/grid_debug_overlay.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://dvdy2n5irl835" path="res://scenes/ui/level_up_panel.tscn" id="11_dg77c"]
@@ -65,7 +66,7 @@ size = Vector2(32, 2048)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ig7tw")
-pool_configs = Array[ExtResource("2_272bh")]([ExtResource("5_4c57u"), ExtResource("4_4c57u"), ExtResource("5_w48qg"), ExtResource("6_vivmo"), SubResource("Resource_w48qg")])
+pool_configs = Array[ExtResource("2_272bh")]([ExtResource("5_4c57u"), ExtResource("4_4c57u"), ExtResource("5_w48qg"), ExtResource("6_vivmo"), SubResource("Resource_w48qg"), ExtResource("7_vivmo")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

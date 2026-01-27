@@ -31,6 +31,7 @@ func _ready():
 	print("Green pool: ", PoolManager.get_pool_stats("enemy_green_duwende"))
 	print("Red pool: ", PoolManager.get_pool_stats("enemy_red_duwende"))
 	print("XP gem pool stats: ", PoolManager.get_pool_stats("pickup_xp_gem"))
+	print("Beak projectile pool: ", PoolManager.get_pool_stats("projectile_beak"))
 
 	# Test: Spawn 10 xp gems in a circle for pooling verification
 	test_spawn_xp_gems()
