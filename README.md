@@ -51,7 +51,7 @@ Play as the **Sarimanok**—a legendary bird from Maranao folklore—defending t
 
 ## Status
 
-🚧 **In Development** - Active development (63% complete)
+🚧 **In Development** - Active development (67% complete)
 
 ### Completed Systems
 - ✅ Core Foundation (resolution, input, player controller, object pooling)
@@ -60,10 +60,16 @@ Play as the **Sarimanok**—a legendary bird from Maranao folklore—defending t
 - ✅ Spatial Partitioning (grid-based optimization for 200+ enemies)
 - ✅ Progression Loop (XP collection, leveling, upgrade UI scaffolding)
 - ✅ Performance Validation (60 FPS with 100+ enemies)
-- ✅ Weapon Data Architecture (WeaponData Resource system)
+- ✅ Weapon Data Architecture (WeaponData Resource system, WeaponManager)
 
 ### In Progress
-- 🔨 Weapon System (base weapon, manager, Peck, Wing Slap, projectiles, orbitals)
+- 🔨 Weapon Implementation (base Weapon node, Peck melee weapon)
+
+### Upcoming
+- ⏳ AOE weapons (Wing Slap, Flame Wing)
+- ⏳ Projectile weapons (Feather Shot, Ice Shard)
+- ⏳ Orbital weapon (Spiral Feathers)
+- ⏳ Debuff system and progression integration
 
 ## Roadmap
 
@@ -83,7 +89,7 @@ Play as the **Sarimanok**—a legendary bird from Maranao folklore—defending t
 
 ## Building from Source
 
-Requires [Godot 4.5+](https://godotengine.org/download)
+Requires [Godot 4.6+](https://godotengine.org/download)
 
 ```bash
 # Clone the repository
@@ -108,7 +114,7 @@ The creatures in this game are based on authentic Filipino mythology:
 
 ## Acknowledgments
 
-- Built with [Godot Engine](https://godotengine.org/) 4.5
+- Built with [Godot Engine](https://godotengine.org/) 4.6
 - Pixel art created in [Aseprite](https://www.aseprite.org/)
 - Inspired by Vampire Survivors and Filipino heritage
 
