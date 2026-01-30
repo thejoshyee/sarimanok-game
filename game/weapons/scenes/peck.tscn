@@ -1,25 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3tomqu6ioyoh"]
+[gd_scene format=3 uid="uid://c3tomqu6ioyoh"]
 
 [ext_resource type="Script" uid="uid://dsv513rgixona" path="res://weapons/scripts/peck_weapon.gd" id="1_oeja5"]
 [ext_resource type="Resource" uid="uid://cgdv8g0n1po3p" path="res://weapons/data/peck.tres" id="2_m3nqp"]
 
-[node name="PeckWeapon" type="Node2D"]
+[node name="PeckWeapon" type="Node2D" unique_id=942863045]
 script = ExtResource("1_oeja5")
 weapon_data = ExtResource("2_m3nqp")
 
-[node name="cooldown_timer" type="Timer" parent="."]
+[node name="cooldown_timer" type="Timer" parent="." unique_id=614481672]
 one_shot = true
-
-[node name="HitArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitArea"]
-polygon = PackedVector2Array(0, -20, 0, 20, 50, 0)
-
-[node name="HitVisual" type="ColorRect" parent="."]
-visible = false
-offset_top = -20.0
-offset_right = 50.0
-offset_bottom = 20.0
-color = Color(0.99026644, 0.5497381, 0, 1)
