@@ -6,37 +6,44 @@
 script = ExtResource("1_38lef")
 id = "peck"
 display_name = "Peck"
-description = "A quick beak strike in the facing direction"
+description = "Fires sharp beak projectiles in the facing direction"
 cooldown = 0.5
 upgrades = Array[Dictionary]([{
 "damage": 10,
 "effect_description": "Base",
 "level": 1,
-"projectile_count": 1
+"projectile_count": 1,
+"range": 100,
+"spread_angle": 0
 }, {
 "damage": 15,
 "effect_description": "+50% damage",
 "level": 2,
-"projectile_count": 1
+"projectile_count": 1,
+"range": 100,
+"spread_angle": 0
 }, {
 "damage": 20,
 "effect_description": "+damage, 2 beaks",
 "level": 3,
 "projectile_count": 2,
-"spread_angle": 20.0
+"range": 100,
+"spread_angle": 15
 }, {
 "cooldown": 0.4,
 "damage": 25,
 "effect_description": "Faster cooldown",
 "level": 4,
 "projectile_count": 2,
-"spread_angle": 20.0
+"range": 100,
+"spread_angle": 15
 }, {
 "cooldown": 0.4,
 "damage": 35,
 "effect_description": "3 beaks, wider spread",
 "level": 5,
 "projectile_count": 3,
-"spread_angle": 30.0
+"range": 100,
+"spread_angle": 30
 }])
 metadata/_custom_type_script = "uid://dy30sa5qe6d8h"

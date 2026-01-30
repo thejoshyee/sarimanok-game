@@ -1576,9 +1576,10 @@
               4
             ],
             "details": "Update `game/weapons/data/peck.tres` upgrades array:\n- Level 1: damage=10, projectile_count=1, spread_angle=0, range=100\n- Level 2: damage=15, projectile_count=1, spread_angle=0, range=100\n- Level 3: damage=20, projectile_count=2, spread_angle=15, range=100\n- Level 4: damage=25, projectile_count=2, spread_angle=15, range=100, cooldown=0.4\n- Level 5: damage=35, projectile_count=3, spread_angle=30, range=100, cooldown=0.4\n\nUpdate description to \"Fires sharp beak projectiles in the facing direction\"",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Load peck.tres, call get_upgrade() for each level, verify all expected keys are present with correct values.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-30T07:17:01.184Z"
           },
           {
             "id": 6,
@@ -1610,7 +1611,7 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling.",
-        "updatedAt": "2026-01-27T21:15:57.856Z"
+        "updatedAt": "2026-01-30T07:17:01.184Z"
       },
       {
         "id": "21",
@@ -1739,7 +1740,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-27T21:15:57.857Z",
+      "lastModified": "2026-01-30T07:17:01.185Z",
       "taskCount": 27,
       "completedCount": 18,
       "tags": [
