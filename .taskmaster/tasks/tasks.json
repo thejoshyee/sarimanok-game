@@ -1516,7 +1516,7 @@
           "18",
           "19"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1604,15 +1604,16 @@
               6
             ],
             "details": "Create/update `game/weapons/tests/peck_weapon_test.tscn`:\n- Add Player with WeaponManager, equip Peck weapon\n- Spawn several test enemies (DummyEnemy with take_damage that prints damage received)\n- Test cases to verify:\n  1. Projectiles spawn from player position and travel in movement direction\n  2. Projectiles despawn at ~100px distance without hitting anything\n  3. Projectiles damage enemies on contact and despawn immediately\n  4. Level 1-2: Single projectile straight ahead\n  5. Level 3-4: Two projectiles with 15° spread\n  6. Level 5: Three projectiles with 30° spread\n  7. Cooldown is 0.5s at levels 1-3, 0.4s at levels 4-5\n  8. Pooling works: projectiles return to pool on despawn, get reused",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run test scene, manually control player, observe projectile behavior at each level. Use PoolManager.get_pool_stats() to verify pooling. Check console for damage logs from test enemies.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-01-31T19:30:41.569Z"
           }
         ],
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling.",
-        "updatedAt": "2026-01-30T23:41:25.981Z"
+        "updatedAt": "2026-01-31T19:30:41.569Z"
       },
       {
         "id": "21",
@@ -1741,9 +1742,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-01-30T23:41:25.982Z",
+      "lastModified": "2026-01-31T19:30:41.571Z",
       "taskCount": 27,
-      "completedCount": 18,
+      "completedCount": 19,
       "tags": [
         "master"
       ]

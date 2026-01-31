@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c7sownlifurvj"]
+
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="1_07nmq"]
+[ext_resource type="Script" uid="uid://dw1rw0inr08nd" path="res://weapons/tests/peck_weapon_test.gd" id="1_ujkr7"]
+[ext_resource type="PackedScene" uid="uid://cstilawxin8ed" path="res://scenes/tests/test_enemy.tscn" id="2_kypme"]
+
+[node name="Node2D" type="Node2D" unique_id=159524356]
+script = ExtResource("1_ujkr7")
+
+[node name="SarimanokPlayer" parent="." unique_id=40892967 instance=ExtResource("1_07nmq")]
+position = Vector2(320, 180)
+
+[node name="TestEnemy1" parent="." unique_id=1788615445 instance=ExtResource("2_kypme")]
+position = Vector2(470, 180)
+speed = 0.0
+
+[node name="TestEnemy2" parent="." unique_id=2127049259 instance=ExtResource("2_kypme")]
+position = Vector2(170, 180)
+speed = 0.0
+
+[node name="TestEnemy3" parent="." unique_id=306109445 instance=ExtResource("2_kypme")]
+position = Vector2(320, 330)
+speed = 0.0
+
+[node name="TestEnemy4" parent="." unique_id=1305427257 instance=ExtResource("2_kypme")]
+position = Vector2(320, 30)
+speed = 0.0
