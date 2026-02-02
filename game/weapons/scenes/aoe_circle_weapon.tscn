@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b5gqupt5kg11b"]
+
+[ext_resource type="Script" uid="uid://dwjqf1c8ouad3" path="res://weapons/scripts/aoe_circle_weapon.gd" id="1_a0yk3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gqytn"]
+radius = 64.0
+
+[node name="AOECircleWeapon" type="Node2D" unique_id=249070991]
+script = ExtResource("1_a0yk3")
+
+[node name="AOEArea" type="Area2D" parent="." unique_id=1504371311]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AOEArea" unique_id=1005411962]
+shape = SubResource("CircleShape2D_gqytn")
+
+[node name="Placeholder" type="ColorRect" parent="." unique_id=1129076957]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(0, 1, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1322105097]
+
+[node name="cooldown_timer" type="Timer" parent="." unique_id=125175549]
+one_shot = true
