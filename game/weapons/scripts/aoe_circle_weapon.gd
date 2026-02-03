@@ -40,9 +40,18 @@ func _update_radius(new_radius: float) -> void:
 # Called by parent Weapon when level changes
 # Reads upgrade data and applies AOE-specific stats
 func _on_stats_changed(upgrade: Dictionary) -> void:
-	# Get radius from upgrade data, fallback to base_radius if not specified
-	var new_radius: float = upgrade.get("radius", base_radius)
-	_update_radius(new_radius)
+	# Read radius_modifier from upgrade data, fallback to existing value
+	# Each level can specify a multiplier (1.0, 1.25, 1.5, etc.)
+	var modifier: float = upgrade.get("radius_modifier", weapon_data.radius_modifier)
+	
+	# Update the WeaponData's radius_modifier so other systems can reference it
+	weapon_data.radius_modifier = modifier
+	
+	# Calculate actual radius: base × modifier
+	# Multiplier approach lets us tweak base_radius without updating all upgrades
+	var actual_radius: float = base_radius * modifier
+	_update_radius(actual_radius)
+
 
 
 # Called by parent Weapon.try_fire() when cooldown is ready

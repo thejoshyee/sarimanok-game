@@ -1647,9 +1647,10 @@
               1
             ],
             "details": "In _on_stats_changed: shape.radius = base_radius * weapon_data.radius_modifier. In _do_fire(): get enemies via aoe_area.get_overlapping_bodies(), filter by has_method('apply_damage'), call e.apply_damage(damage, weapon_data). Return true.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Attach to test scene, change radius_modifier in WeaponData inspector, verify shape.radius updates and console logs confirm damage to overlapping bodies.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-03T18:16:34.579Z"
           },
           {
             "id": 3,
@@ -1694,7 +1695,7 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 21 into ~5 subtasks: (1) implement the generic AOECircleWeapon scene and script (Area2D, CircleShape2D, AnimationPlayer), (2) wire radius and damage scaling via WeaponData and _on_stats_changed, (3) create Wing Slap derived scene and configure its WeaponData including radius modifiers per level, (4) create Flame Wing clone configuration using shared script with altered damage/radius visuals, and (5) build a sandbox test scene to validate radius, damage progression, cooldown, and DRY mapping in WeaponManager.",
-        "updatedAt": "2026-02-02T23:47:08.215Z"
+        "updatedAt": "2026-02-03T18:16:34.579Z"
       },
       {
         "id": "22",
@@ -1806,7 +1807,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-02T23:47:08.230Z",
+      "lastModified": "2026-02-03T18:16:34.580Z",
       "taskCount": 27,
       "completedCount": 19,
       "tags": [
