@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3 uid="uid://hycrtbimie1a"]
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://hycrtbimie1a"]
 
 [ext_resource type="Script" uid="uid://dy30sa5qe6d8h" path="res://weapons/scripts/weapon_data.gd" id="1_vspic"]
 
@@ -13,22 +13,27 @@ weapon_type = "aoe"
 upgrades = Array[Dictionary]([{
 "damage": 8,
 "effect_description": "Base",
-"level": 1
+"level": 1,
+"radius_modifier": 1.0
 }, {
 "damage": 12,
 "effect_description": "+50% damage",
-"level": 2
+"level": 2,
+"radius_modifier": 1.0
 }, {
 "damage": 16,
 "effect_description": "Larger radius",
-"level": 3
+"level": 3,
+"radius_modifier": 1.25
 }, {
 "damage": 20,
 "effect_description": "+150% damage",
-"level": 4
+"level": 4,
+"radius_modifier": 1.25
 }, {
 "damage": 28,
 "effect_description": "Even larger radius",
-"level": 5
+"level": 5,
+"radius_modifier": 1.5
 }])
 metadata/_custom_type_script = "uid://dy30sa5qe6d8h"

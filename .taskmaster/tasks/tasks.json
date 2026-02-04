@@ -1661,9 +1661,10 @@
               2
             ],
             "details": "Set WeaponData properties per PRD: base_damage=8, cooldown=1.5. Define radius_modifier array or logic for levels 1-2:1.0, 3-4:1.25, 5:1.5. Ensure script remains AOECircleWeapon.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn in WeaponManager, upgrade through levels 1-5, verify damage values and radius visually scales at levels 3 and 5 via enemy hit logs.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-04T06:49:09.385Z"
           },
           {
             "id": 4,
@@ -1695,7 +1696,7 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 21 into ~5 subtasks: (1) implement the generic AOECircleWeapon scene and script (Area2D, CircleShape2D, AnimationPlayer), (2) wire radius and damage scaling via WeaponData and _on_stats_changed, (3) create Wing Slap derived scene and configure its WeaponData including radius modifiers per level, (4) create Flame Wing clone configuration using shared script with altered damage/radius visuals, and (5) build a sandbox test scene to validate radius, damage progression, cooldown, and DRY mapping in WeaponManager.",
-        "updatedAt": "2026-02-03T18:16:34.579Z"
+        "updatedAt": "2026-02-04T06:49:09.385Z"
       },
       {
         "id": "22",
@@ -1807,7 +1808,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-03T18:16:34.580Z",
+      "lastModified": "2026-02-04T06:49:09.394Z",
       "taskCount": 27,
       "completedCount": 19,
       "tags": [

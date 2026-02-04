@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bf76ifnpdt5q3"]
+
+[ext_resource type="PackedScene" uid="uid://b5gqupt5kg11b" path="res://weapons/scenes/aoe_circle_weapon.tscn" id="1_ev7pr"]
+[ext_resource type="Resource" uid="uid://hycrtbimie1a" path="res://weapons/data/wing_slap.tres" id="2_nuuj8"]
+
+[node name="WingSlapWeapon" unique_id=249070991 instance=ExtResource("1_ev7pr")]
+weapon_data = ExtResource("2_nuuj8")
