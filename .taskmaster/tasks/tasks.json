@@ -1675,9 +1675,10 @@
               2
             ],
             "details": "Configure WeaponData: base_damage=10 (25% higher than Wing Slap's 8), radius_modifier=0.75 constant or scaled proportionally. Change placeholder ColorRect/Sprite2D to orange/red tint. Keep same AOECircleWeapon script.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Compare side-by-side with Wing Slap: verify smaller radius (75%), higher base damage 10, distinct orange visual, same cooldown 1.5s.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-05T06:39:45.135Z"
           },
           {
             "id": 5,
@@ -1696,7 +1697,7 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 21 into ~5 subtasks: (1) implement the generic AOECircleWeapon scene and script (Area2D, CircleShape2D, AnimationPlayer), (2) wire radius and damage scaling via WeaponData and _on_stats_changed, (3) create Wing Slap derived scene and configure its WeaponData including radius modifiers per level, (4) create Flame Wing clone configuration using shared script with altered damage/radius visuals, and (5) build a sandbox test scene to validate radius, damage progression, cooldown, and DRY mapping in WeaponManager.",
-        "updatedAt": "2026-02-04T06:49:09.385Z"
+        "updatedAt": "2026-02-05T06:39:45.135Z"
       },
       {
         "id": "22",
@@ -1808,7 +1809,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-04T06:49:09.394Z",
+      "lastModified": "2026-02-05T06:39:45.137Z",
       "taskCount": 27,
       "completedCount": 19,
       "tags": [

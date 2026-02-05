@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c3wx0nle1y62u"]
+
+[ext_resource type="PackedScene" uid="uid://b5gqupt5kg11b" path="res://weapons/scenes/aoe_circle_weapon.tscn" id="1_ejgtm"]
+[ext_resource type="Resource" path="res://weapons/data/flame_wing.tres" id="2_cugkt"]
+
+[node name="FlameWingWeapon" unique_id=249070991 instance=ExtResource("1_ejgtm")]
+weapon_data = ExtResource("2_cugkt")
+
+[node name="Placeholder" parent="." index="1" unique_id=1129076957]
+color = Color(1, 0.4, 0, 1)
