@@ -19,11 +19,11 @@ func _ready() -> void:
 	# TODO: Replace with specific weapon scenes when created
 	# Using generic weapon_base.tscn as placeholder for all weapons
 	weapon_scenes["peck"] = preload("res://weapons/scenes/peck.tscn")
-	weapon_scenes["wing_slap"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["wing_slap"] = preload("res://weapons/scenes/wing_slap_weapon.tscn")
 	weapon_scenes["feather_shot"] = preload("res://weapons/scenes/weapon_base.tscn")
 	weapon_scenes["spiral_feathers"] = preload("res://weapons/scenes/weapon_base.tscn")
 	weapon_scenes["ice_shard"] = preload("res://weapons/scenes/weapon_base.tscn")
-	weapon_scenes["flame_wing"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["flame_wing"] = preload("res://weapons/scenes/flame_wing_weapon.tscn")
 
 
 	# Get player reference from parent (WeaponManager is child of Player)

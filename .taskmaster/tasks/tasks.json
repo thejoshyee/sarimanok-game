@@ -1689,15 +1689,16 @@
               4
             ],
             "details": "In WeaponManager: if weapon_id == WING_SLAP_ID return wing_slap_weapon scene; if FLAME_WING_ID return flame_wing scene. Test scene: Player + WeaponManager + enemies at known distances, auto-fire both weapons, upgrade system.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "In sandbox: Spawn enemies in grid at distances 30/50/70px. Test both weapons: hit confirmation, radius coverage, damage progression on upgrade, cooldown timing, WeaponManager switches correctly without errors.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-06T19:26:17.677Z"
           }
         ],
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 21 into ~5 subtasks: (1) implement the generic AOECircleWeapon scene and script (Area2D, CircleShape2D, AnimationPlayer), (2) wire radius and damage scaling via WeaponData and _on_stats_changed, (3) create Wing Slap derived scene and configure its WeaponData including radius modifiers per level, (4) create Flame Wing clone configuration using shared script with altered damage/radius visuals, and (5) build a sandbox test scene to validate radius, damage progression, cooldown, and DRY mapping in WeaponManager.",
-        "updatedAt": "2026-02-05T06:39:45.135Z"
+        "updatedAt": "2026-02-06T19:26:17.677Z"
       },
       {
         "id": "22",
@@ -1809,7 +1810,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-05T06:39:45.137Z",
+      "lastModified": "2026-02-06T19:26:17.686Z",
       "taskCount": 27,
       "completedCount": 19,
       "tags": [
