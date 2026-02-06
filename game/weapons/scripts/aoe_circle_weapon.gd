@@ -18,10 +18,6 @@ extends Weapon
 func _ready() -> void:
 	# Call parent _ready() first - sets up cooldown timer and validates weapon_data
 	super._ready()
-	
-	# Set the collision shape's radius to match our base_radius export
-	# The CircleShape2D we created in editor needs to sync with our code value
-	_update_radius(base_radius)
 
 
 # Updates the collision circle to match the given radius

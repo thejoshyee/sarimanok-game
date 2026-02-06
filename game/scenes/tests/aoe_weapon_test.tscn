@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cru3yf1ys3qpa"]
+
+[ext_resource type="Script" uid="uid://bsmq7c8jkexhy" path="res://scripts/tests/aoe_weapon_test.gd" id="1_hn8us"]
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_et60n"]
+
+[node name="AOEWeaponTest" type="Node2D" unique_id=1803364470]
+script = ExtResource("1_hn8us")
+
+[node name="SarimanokPlayer" parent="." unique_id=104211995 instance=ExtResource("2_et60n")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1050198999]
