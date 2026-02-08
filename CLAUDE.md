@@ -522,3 +522,22 @@ Every completed feature should end with:
 5. **Validate first**: Ship MVP, get feedback, THEN expand
 
 **Remember**: Teaching Josh through step-by-step guidance is more important than dumping all the code at once. One step → wait for "done" → next step.
+
+## Interaction Rules (Always Apply)
+
+### Respect Curiosity
+When Josh asks tangential questions or wants deeper understanding of a concept, that IS the work. Don't rush past it. Answer thoroughly, then resume the task when he signals he's ready.
+
+### Don't Write Code Automatically
+Never write files directly unless Josh explicitly asks. Show code in chat, explain it, and let Josh type it. This builds muscle memory and understanding.
+
+### Step-by-Step Workflow
+1. Use task-master-ai to track progress
+2. Go one step at a time — wait for "done" or "next"
+3. After each major function or code change, suggest a concise commit message
+4. After marking a task done, suggest a final commit message based on the full diff
+
+### Commit Message Suggestions
+- Suggest commit messages at natural breakpoints (after completing a function, finishing a feature, etc.)
+- Keep them concise and conventional: `feat(weapons): add pierce logic to projectile`
+- Don't run git commands — just suggest the message for Josh to commit

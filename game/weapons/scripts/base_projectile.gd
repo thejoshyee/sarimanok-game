@@ -1,11 +1,17 @@
 extends Area2D
-class_name BaseProjectile
+class_name Projectile
 
 var damage: float = 0.0
 var speed: float = 300.0
 var direction: Vector2 = Vector2.ZERO
 var lifetime: float = 5.0  # despawn after 5 seconds
 var time_alive: float = 0.0
+
+# === Pierce & Debuff Support ===
+# Feather Shot needs pierce (pass through multiple enemies)
+# Ice Shard needs debuff forwarding (apply slow on hit)
+var pierce_remaining: int = 1       # 1 = dies on first hit, 2 = passes through 1 enemy, etc.
+var weapon_data: WeaponData = null   # Reference to weapon's data for debuff info
 
 func _ready() -> void:
 	# connect to body_entered to detect hitting enemies
@@ -21,17 +27,34 @@ func _physics_process(delta: float) -> void:
 		despawn()
 
 func _on_body_entered(body: Node2D) -> void:
-	# check if we hit an enemy
-	if body.is_in_group("enemies") and body.has_method("take_damage"):
-		body.take_damage(damage)
+	# Only damage things that can take damage
+	if not body.has_method("take_damage"):
+		return
+	
+	# Deal damage
+	body.take_damage(damage)
+	
+	# Apply debuff if weapon_data has one (e.g., Ice Shard's slow)
+	if weapon_data and weapon_data.debuff_type != "" and body.has_method("apply_debuff"):
+		body.apply_debuff(weapon_data.debuff_type, weapon_data.debuff_strength, weapon_data.debuff_duration)
+	
+	# Pierce logic: decrement hits remaining, despawn when exhausted
+	# pierce_remaining = 3 means "pass through 2 enemies, die on 3rd"
+	pierce_remaining -= 1
+	if pierce_remaining <= 0:
 		despawn()
 
-# reset projectile state when spawned from pool
-func reset(start_pos: Vector2, target_direction: Vector2, projectile_damage: float) -> void:
+
+# Reset projectile state when spawned from pool
+# Pooled projectiles get reused — must clear stale data from last use
+func reset(start_pos: Vector2, target_direction: Vector2, projectile_damage: float, pierce: int = 1, data: WeaponData = null) -> void:
 	global_position = start_pos
 	direction = target_direction.normalized()
 	damage = projectile_damage
 	time_alive = 0.0
+	pierce_remaining = pierce
+	weapon_data = data
+	
 
 # Called when spawned from pool
 func on_spawn() -> void:
