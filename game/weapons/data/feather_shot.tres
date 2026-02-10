@@ -12,22 +12,32 @@ cooldown = 1.0
 weapon_type = "projectile"
 upgrades = [{
 "damage": 12,
+"projectile_count": 1,
+"pierce_count": 1,
 "effect_description": "1 feather",
 "level": 1
 }, {
 "damage": 14,
+"projectile_count": 2,
+"pierce_count": 1,
 "effect_description": "2 feathers",
 "level": 2
 }, {
 "damage": 16,
+"projectile_count": 3,
+"pierce_count": 1,
 "effect_description": "3 feathers",
 "level": 3
 }, {
 "damage": 18,
+"projectile_count": 3,
+"pierce_count": 2,
 "effect_description": "Feathers pierce 2 enemies",
 "level": 4
 }, {
 "damage": 24,
+"projectile_count": 4,
+"pierce_count": 3,
 "effect_description": "4 feathers, pierce 3",
 "level": 5
 }]

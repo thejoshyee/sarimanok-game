@@ -17,6 +17,7 @@ func _on_stats_changed(upgrade: Dictionary) -> void:
 	pierce_count = upgrade.get("pierce_count", pierce_count)
 
 
+
 # === FIRING ===
 # Called by base Weapon.try_fire() when cooldown is ready
 func _do_fire() -> bool:
