@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://iss1jcmvjf7v"]
+
+[ext_resource type="Script" uid="uid://c27lj8mj7mv1t" path="res://weapons/scripts/feather_shot_weapon.gd" id="1_fotfo"]
+[ext_resource type="Resource" uid="uid://de17i1g4ci1ur" path="res://weapons/data/ice_shard.tres" id="2_fotfo"]
+
+[node name="IceShardWeapon" type="Node2D" unique_id=2136175277]
+script = ExtResource("1_fotfo")
+weapon_data = ExtResource("2_fotfo")
+
+[node name="cooldown_timer" type="Timer" parent="." unique_id=656408825]

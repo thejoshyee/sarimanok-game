@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bp1d40dn54bsp"]
 
 [ext_resource type="Script" uid="uid://c27lj8mj7mv1t" path="res://weapons/scripts/feather_shot_weapon.gd" id="1_u05wa"]
-[ext_resource type="Resource" path="res://weapons/data/feather_shot.tres" id="2_s4j4i"]
+[ext_resource type="Resource" uid="uid://brcaga3whgf2e" path="res://weapons/data/feather_shot.tres" id="2_s4j4i"]
 
-[node name="FeatherShotWeapon" type="Node2D" unique_id=2136175277]
+[node name="IceShard" type="Node2D" unique_id=2136175277]
 script = ExtResource("1_u05wa")
 weapon_data = ExtResource("2_s4j4i")
 

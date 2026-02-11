@@ -54,6 +54,14 @@ func reset(start_pos: Vector2, target_direction: Vector2, projectile_damage: flo
 	time_alive = 0.0
 	pierce_remaining = pierce
 	weapon_data = data
+	# Apply weapon's speed modifier (e.g., Ice Shard fires slower at 0.67x)
+	if weapon_data:
+		speed = 300.0 * weapon_data.speed_modifier
+	else:
+		speed = 300.0
+	# Tint projectile based on weapon (e.g., blue for Ice Shard)
+	modulate = weapon_data.projectile_color if weapon_data else Color.WHITE
+
 	
 
 # Called when spawned from pool

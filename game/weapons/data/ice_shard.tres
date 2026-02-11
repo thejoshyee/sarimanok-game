@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://de17i1g4ci1ur"]
 
 [ext_resource type="Script" uid="uid://dy30sa5qe6d8h" path="res://weapons/scripts/weapon_data.gd" id="1"]
 
@@ -7,32 +7,42 @@ script = ExtResource("1")
 id = "ice_shard"
 display_name = "Ice Shard"
 description = "Slower projectile that slows enemies on hit"
-base_damage = 10.0
 cooldown = 1.2
 weapon_type = "projectile"
+projectile_color = Color(0.7202559, 0.9221292, 1.2917371, 1)
 debuff_type = "slow"
 debuff_duration = 0.5
 debuff_strength = 0.5
 speed_modifier = 0.67
-upgrades = [{
+upgrades = Array[Dictionary]([{
 "damage": 10,
 "effect_description": "1 ice shard, 0.5s slow",
-"level": 1
+"level": 1,
+"pierce_count": 1,
+"projectile_count": 1
 }, {
 "damage": 12,
 "effect_description": "2 ice shards",
-"level": 2
+"level": 2,
+"pierce_count": 1,
+"projectile_count": 2
 }, {
 "damage": 14,
 "effect_description": "3 ice shards",
-"level": 3
+"level": 3,
+"pierce_count": 1,
+"projectile_count": 3
 }, {
 "damage": 16,
 "effect_description": "Ice shards pierce 2 enemies",
-"level": 4
+"level": 4,
+"pierce_count": 2,
+"projectile_count": 3
 }, {
 "damage": 22,
 "effect_description": "4 ice shards, pierce 3",
-"level": 5
-}]
+"level": 5,
+"pierce_count": 3,
+"projectile_count": 4
+}])
 metadata/_custom_type_script = "uid://dy30sa5qe6d8h"

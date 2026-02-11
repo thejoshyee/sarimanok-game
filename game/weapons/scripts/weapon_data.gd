@@ -17,6 +17,8 @@ extends Resource
 # Art assets for displaying the weapon
 @export var sprite: Texture2D  # In-game weapon visual (projectile, effect area)
 @export var icon: Texture2D  # 16x16 icon for UI (level-up choices, HUD slots)
+@export var projectile_color: Color = Color.WHITE  # Tint for projectiles (white = no tint)
+
 
 # === MODIFIERS ===
 # Special effects and scaling properties
