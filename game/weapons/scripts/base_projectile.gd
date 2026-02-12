@@ -16,6 +16,9 @@ var weapon_data: WeaponData = null   # Reference to weapon's data for debuff inf
 func _ready() -> void:
 	# connect to body_entered to detect hitting enemies
 	body_entered.connect(_on_body_entered)
+	# Despawn when projectile leaves the visible screen area
+	# Faster cleanup than waiting 5s lifetime — frees pool slot sooner
+	$VisibleOnScreenNotifier2D.screen_exited.connect(despawn)
 
 func _physics_process(delta: float) -> void:
 	# move in direction
@@ -76,8 +79,12 @@ func on_despawn() -> void:
 	visible = false
 	set_physics_process(false)
 	set_deferred("monitoring", false)  # Disable collision detection
+	
 
 # return projectile to pool instead of freeing it
 func despawn() -> void:
+	# Guard against double-despawn (e.g., screen_exited fires on already-pooled projectile)
+	if not visible:
+		return
 	if PoolManager:
 		PoolManager.despawn(self)

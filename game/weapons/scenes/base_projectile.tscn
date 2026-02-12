@@ -1,18 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cry1dr5oxkrpu"]
+[gd_scene format=3 uid="uid://cry1dr5oxkrpu"]
 
 [ext_resource type="Script" uid="uid://ic6q5d1jqmr2" path="res://weapons/scripts/base_projectile.gd" id="1_phrj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k1c0j"]
 size = Vector2(8, 8)
 
-[node name="BaseProjectile" type="Area2D"]
+[node name="BaseProjectile" type="Area2D" unique_id=1494804226]
 collision_mask = 2
 script = ExtResource("1_phrj5")
 
-[node name="Sprite" type="ColorRect" parent="."]
+[node name="Sprite" type="ColorRect" parent="." unique_id=1247944609]
 offset_right = 8.0
 offset_bottom = 8.0
 color = Color(0.9615182, 5.0537287e-06, 1.732707e-06, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1573711774]
 shape = SubResource("RectangleShape2D_k1c0j")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=878651364]

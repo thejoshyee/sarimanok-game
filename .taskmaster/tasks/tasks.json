@@ -1772,9 +1772,10 @@
               1
             ],
             "details": "Add projectiles to get_tree().current_scene, implement VisibilityNotifier2D in projectile.tscn for off-screen queue_free(), verify pierce_remaining properly triggers queue_free() after final hit.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn projectiles off-screen and confirm they despawn, test pierce by lining up multiple enemies and verifying projectile destroys after pierce_count hits.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-12T23:26:13.084Z"
           },
           {
             "id": 6,
@@ -1794,7 +1795,7 @@
         "complexity": 8,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Break Task 22 into ~6 subtasks: (1) create the generic Projectile scene and script with movement, hit detection, pierce, and optional debuff forwarding, (2) implement Feather Shot weapon scene/script integrating with Enemy query to target nearest enemy and spawn multiple projectiles, (3) handle per-level behavior (projectile_count, pierce_count, speed modifiers) via WeaponData and _on_stats_changed, (4) configure Ice Shard as a data-driven clone with slower speed and slow debuff parameters, (5) integrate projectiles into the main scene tree/lifecycle (despawning, off-screen handling), and (6) build a projectile test scene to verify counts, pierce behavior, cooldown, and debuff triggering.",
-        "updatedAt": "2026-02-11T02:24:58.000Z"
+        "updatedAt": "2026-02-12T23:26:13.084Z"
       },
       {
         "id": "23",
@@ -1888,7 +1889,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-11T02:24:58.001Z",
+      "lastModified": "2026-02-12T23:26:13.092Z",
       "taskCount": 27,
       "completedCount": 20,
       "tags": [
