@@ -72,3 +72,13 @@ func take_damage(amount: float) -> void:
 	if hp <= 0:
 		# return to pool instead of freeing
 		PoolManager.despawn(self)
+
+
+func apply_debuff(type: String, strength: float, duration: float) -> void:
+	print("[ENEMY] Debuff applied: %s (strength: %.1f, duration: %.1fs)" % [type, strength, duration])
+	# Apply slow debuff by reducing speed
+	if type == "slow":
+		var original_speed = speed
+		speed *= (1.0 - strength)
+		# Restore speed after duration
+		get_tree().create_timer(duration).timeout.connect(func(): speed = original_speed)

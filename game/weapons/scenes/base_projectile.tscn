@@ -12,7 +12,6 @@ script = ExtResource("1_phrj5")
 [node name="Sprite" type="ColorRect" parent="." unique_id=1247944609]
 offset_right = 8.0
 offset_bottom = 8.0
-color = Color(0.9615182, 5.0537287e-06, 1.732707e-06, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1573711774]
 shape = SubResource("RectangleShape2D_k1c0j")

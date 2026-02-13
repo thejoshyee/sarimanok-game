@@ -1712,7 +1712,7 @@
           "19",
           "17"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1787,15 +1787,16 @@
               5
             ],
             "details": "Include line of dummy enemies with apply_damage/apply_debuff methods that log details, test level progression, multi-projectile fanning, nearest enemy targeting accuracy.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run through levels 1-5: verify projectile counts (1-4), pierce behavior (1-3), Ice Shard slow debuff triggers and strength, cooldown timing, no memory leaks after many spawns.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-13T19:42:56.943Z"
           }
         ],
         "complexity": 8,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Break Task 22 into ~6 subtasks: (1) create the generic Projectile scene and script with movement, hit detection, pierce, and optional debuff forwarding, (2) implement Feather Shot weapon scene/script integrating with Enemy query to target nearest enemy and spawn multiple projectiles, (3) handle per-level behavior (projectile_count, pierce_count, speed modifiers) via WeaponData and _on_stats_changed, (4) configure Ice Shard as a data-driven clone with slower speed and slow debuff parameters, (5) integrate projectiles into the main scene tree/lifecycle (despawning, off-screen handling), and (6) build a projectile test scene to verify counts, pierce behavior, cooldown, and debuff triggering.",
-        "updatedAt": "2026-02-12T23:26:13.084Z"
+        "updatedAt": "2026-02-13T19:42:56.943Z"
       },
       {
         "id": "23",
@@ -1889,9 +1890,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-12T23:26:13.092Z",
+      "lastModified": "2026-02-13T19:42:56.947Z",
       "taskCount": 27,
-      "completedCount": 20,
+      "completedCount": 21,
       "tags": [
         "master"
       ]

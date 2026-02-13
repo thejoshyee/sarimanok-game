@@ -9,6 +9,7 @@ display_name = "Feather Shot"
 description = "Shoots feather at nearest enemy"
 base_damage = 12.0
 weapon_type = "projectile"
+projectile_color = Color(1, 0.9, 0.2, 1)
 upgrades = Array[Dictionary]([{
 "damage": 12,
 "effect_description": "1 feather",

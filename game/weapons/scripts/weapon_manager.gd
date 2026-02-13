@@ -22,7 +22,7 @@ func _ready() -> void:
 	weapon_scenes["wing_slap"] = preload("res://weapons/scenes/wing_slap_weapon.tscn")
 	weapon_scenes["feather_shot"] = preload("res://weapons/scenes/feather_shot_weapon.tscn")
 	weapon_scenes["spiral_feathers"] = preload("res://weapons/scenes/weapon_base.tscn")
-	weapon_scenes["ice_shard"] = preload("res://weapons/scenes/weapon_base.tscn")
+	weapon_scenes["ice_shard"] = preload("res://weapons/scenes/feather_shot_weapon.tscn") # feather shot clone with slow debuff
 	weapon_scenes["flame_wing"] = preload("res://weapons/scenes/flame_wing_weapon.tscn")
 
 
