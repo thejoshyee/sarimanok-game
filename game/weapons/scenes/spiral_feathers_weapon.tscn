@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://6ubfgrcbrt03"]
+
+[ext_resource type="Script" uid="uid://jk30rgs32tjg" path="res://weapons/scripts/spiral_feathers_weapon.gd" id="1_oe1ax"]
+[ext_resource type="PackedScene" uid="uid://bem4scbx8rr86" path="res://weapons/scenes/orbital_feather.tscn" id="2_n5mfx"]
+[ext_resource type="Resource" path="res://weapons/data/spiral_feathers.tres" id="3_2touq"]
+
+[node name="SpiralFeathersWeapon" type="Node2D" unique_id=1213925600]
+script = ExtResource("1_oe1ax")
+feather_scene = ExtResource("2_n5mfx")
+weapon_data = ExtResource("3_2touq")
+
+[node name="cooldown_timer" type="Timer" parent="." unique_id=490507196]
+
+[node name="OrbitRoot" type="Node2D" parent="." unique_id=1189326729]
