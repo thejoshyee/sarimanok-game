@@ -19,9 +19,6 @@ func _ready() -> void:
 	
 	# Call super to load weapon_data and apply level stats
 	super._ready()
-	
-	# Spawn the initial set of feathers around the player
-	_spawn_feathers()
 
 
 func _process(delta: float) -> void:
@@ -54,6 +51,18 @@ func _spawn_feathers() -> void:
 		
 		$OrbitRoot.add_child(feather)
 		feathers.append(feather)
+
+
+func _on_stats_changed(upgrade: Dictionary) -> void:
+	# Read orbit params from the upgrade dict, fallback to current defaults
+	orbit_speed = upgrade.get("orbit_speed", orbit_speed)
+	orbit_radius = upgrade.get("orbit_radius", orbit_radius)
+	feather_count = upgrade.get("feather_count", feather_count)
+
+	# Respawn feathers with new count/radius/damage
+	# base class already set self.damage before calling here,
+	# so _spawn_feathers picks up the new damage value automatically
+	_spawn_feathers()
 
 
 func try_fire() -> void:

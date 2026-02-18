@@ -1857,9 +1857,10 @@
               3
             ],
             "details": "Level 1: 4 feathers, dmg=6, radius=32, base speed. L2: dmg=8. L3: speed*1.33. L4: 6 feathers. L5: 8 feathers, radius*1.3. Update all feather.damage.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Simulate level-ups, verify param changes and feathers respawn at new count/radius with correct damage.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-18T01:31:02.902Z"
           },
           {
             "id": 5,
@@ -1877,7 +1878,7 @@
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 23 into ~5 subtasks: (1) create the OrbitalFeather scene and script for passive collision-based damage, (2) build the Spiral Feathers weapon scene with OrbitRoot and integrate with Weapon base class, (3) implement orbit logic (player-following, rotation, radius) and always-active behavior without cooldown, (4) implement level-based scaling of damage, orbit_speed, feather_count, and orbit_radius, including respawn/update of feathers, and (5) create an orbital test scene to validate contact damage, scaling behaviors, and movement smoothness around the player.",
-        "updatedAt": "2026-02-18T01:03:30.961Z"
+        "updatedAt": "2026-02-18T01:31:02.902Z"
       },
       {
         "id": "24",
@@ -1953,7 +1954,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-18T01:03:30.967Z",
+      "lastModified": "2026-02-18T01:31:02.903Z",
       "taskCount": 27,
       "completedCount": 21,
       "tags": [

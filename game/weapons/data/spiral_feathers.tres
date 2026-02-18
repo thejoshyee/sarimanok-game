@@ -13,22 +13,37 @@ weapon_type = "orbital"
 upgrades = [{
 "damage": 6,
 "effect_description": "4 orbiting feathers",
-"level": 1
+"feather_count": 4,
+"level": 1,
+"orbit_radius": 32.0,
+"orbit_speed": 1.0
 }, {
 "damage": 8,
 "effect_description": "+33% damage",
-"level": 2
+"feather_count": 4,
+"level": 2,
+"orbit_radius": 32.0,
+"orbit_speed": 1.0
 }, {
 "damage": 10,
 "effect_description": "Faster rotation speed",
-"level": 3
+"feather_count": 4,
+"level": 3,
+"orbit_radius": 32.0,
+"orbit_speed": 1.33
 }, {
 "damage": 12,
 "effect_description": "6 orbiting feathers",
-"level": 4
+"feather_count": 6,
+"level": 4,
+"orbit_radius": 32.0,
+"orbit_speed": 1.33
 }, {
 "damage": 16,
 "effect_description": "8 feathers, larger orbit",
-"level": 5
+"feather_count": 8,
+"level": 5,
+"orbit_radius": 41.6,
+"orbit_speed": 1.33
 }]
 metadata/_custom_type_script = "uid://dy30sa5qe6d8h"
