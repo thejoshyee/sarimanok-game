@@ -1844,9 +1844,10 @@
               2
             ],
             "details": "In _process: get player pos, set global_position, rotate OrbitRoot by orbit_speed*delta. Spawn feathers at even angles around radius. Set Weapon.ready=true, cooldown=0.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "In test scene, confirm feathers orbit smoothly around moving player, no firing input needed, constant rotation.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-18T01:03:30.961Z"
           },
           {
             "id": 4,
@@ -1876,7 +1877,7 @@
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 23 into ~5 subtasks: (1) create the OrbitalFeather scene and script for passive collision-based damage, (2) build the Spiral Feathers weapon scene with OrbitRoot and integrate with Weapon base class, (3) implement orbit logic (player-following, rotation, radius) and always-active behavior without cooldown, (4) implement level-based scaling of damage, orbit_speed, feather_count, and orbit_radius, including respawn/update of feathers, and (5) create an orbital test scene to validate contact damage, scaling behaviors, and movement smoothness around the player.",
-        "updatedAt": "2026-02-17T00:54:17.699Z"
+        "updatedAt": "2026-02-18T01:03:30.961Z"
       },
       {
         "id": "24",
@@ -1952,7 +1953,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-17T00:54:17.701Z",
+      "lastModified": "2026-02-18T01:03:30.967Z",
       "taskCount": 27,
       "completedCount": 21,
       "tags": [
