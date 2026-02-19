@@ -1891,11 +1891,60 @@
         "dependencies": [
           "22"
         ],
-        "status": "pending",
-        "subtasks": [],
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Debuff Resource and DebuffHandler",
+            "description": "Create debuff.gd as Resource class and debuff_handler.gd Node with apply_debuff, _process for lifetime management, and get_total_slow_factor with stacking and clamping logic.",
+            "dependencies": [],
+            "details": "Follow provided GDScript exactly: Debuff with exported type/strength/duration/elapsed; DebuffHandler with active_debuffs array, apply_debuff creation, _process filtering expired debuffs, and multiplicative slow factor clamped 0.2-1.0.",
+            "status": "in-progress",
+            "testStrategy": "Unit test: Apply multiple slow debuffs, advance time via mock delta, verify stacking (e.g., two 0.3 strength = 0.49 factor), expiration, and clamp at 0.2.",
+            "updatedAt": "2026-02-19T22:54:05.843Z",
+            "parentId": "undefined"
+          },
+          {
+            "id": 2,
+            "title": "Integrate DebuffHandler into enemy scenes",
+            "description": "Add DebuffHandler node to enemy scenes and expose apply_debuff method on enemy root node forwarding to DebuffHandler.",
+            "dependencies": [
+              1
+            ],
+            "details": "Instantiate DebuffHandler as child node in enemy .tscn files; add enemy script method: if $DebuffHandler then $DebuffHandler.apply_debuff(...); ensure get_total_slow_factor accessible.",
+            "status": "pending",
+            "testStrategy": "Scene test: Load enemy scene, call enemy.apply_debuff('slow', 0.3, 5.0), verify DebuffHandler.active_debuffs has entry and get_total_slow_factor == 0.7.",
+            "parentId": "undefined"
+          },
+          {
+            "id": 3,
+            "title": "Wire Projectile hit_target to apply debuffs from WeaponData",
+            "description": "Modify Projectile._hit_target to call target.apply_debuff using weapon's debuff_type, debuff_strength, debuff_duration if present.",
+            "dependencies": [
+              2
+            ],
+            "details": "In Projectile script: if weapon_data.debuff_type: target.apply_debuff(weapon_data.debuff_type, weapon_data.debuff_strength, weapon_data.debuff_duration); handle nil checks.",
+            "status": "pending",
+            "testStrategy": "Integration test: Fire Ice Shard (with debuff data) at enemy, confirm apply_debuff called with correct params and slow factor applied post-hit.",
+            "parentId": "undefined"
+          },
+          {
+            "id": 4,
+            "title": "Create integration tests with Ice Shard and dummy enemies",
+            "description": "Build test scene validating slow application, stacking, expiration, and no-effect for non-debuff weapons.",
+            "dependencies": [
+              3
+            ],
+            "details": "Test scene with dummy enemies (base speed movement), player firing Ice Shard; log/verify speed multipliers, multiple hits stacking, expiration after duration, normal speed for other weapons.",
+            "status": "pending",
+            "testStrategy": "Metrics: Single Ice Shard hit -> speed *0.7; two hits -> speed *0.49; after 5s -> full speed; non-debuff weapon -> speed *1.0; visually confirm movement and console logs.",
+            "parentId": "undefined"
+          }
+        ],
         "complexity": 6,
         "recommendedSubtasks": 4,
-        "expansionPrompt": "Break Task 24 into ~4 subtasks: (1) implement the Debuff Resource and DebuffHandler node with lifetime and stacking logic, (2) integrate DebuffHandler into enemy scenes and expose an apply_debuff API on enemies, (3) wire Projectile._hit_target to call enemy debuff application based on WeaponData fields, and (4) create focused tests with Ice Shard and dummy enemies to validate slow factors, stacking, expiration, and non-impact for weapons without debuffs."
+        "expansionPrompt": "Break Task 24 into ~4 subtasks: (1) implement the Debuff Resource and DebuffHandler node with lifetime and stacking logic, (2) integrate DebuffHandler into enemy scenes and expose an apply_debuff API on enemies, (3) wire Projectile._hit_target to call enemy debuff application based on WeaponData fields, and (4) create focused tests with Ice Shard and dummy enemies to validate slow factors, stacking, expiration, and non-impact for weapons without debuffs.",
+        "updatedAt": "2026-02-19T22:54:05.843Z"
       },
       {
         "id": "25",
@@ -1955,7 +2004,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-19T02:25:05.544Z",
+      "lastModified": "2026-02-19T22:54:05.845Z",
       "taskCount": 27,
       "completedCount": 23,
       "tags": [
