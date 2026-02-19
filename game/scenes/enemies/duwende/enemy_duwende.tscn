@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqufsuyg2a6yu"]
+[gd_scene format=3 uid="uid://bqufsuyg2a6yu"]
 
 [ext_resource type="Script" uid="uid://141mxbakt2wp" path="res://scripts/enemies/enemy_duwende.gd" id="1_tyx3a"]
 
@@ -8,22 +8,23 @@ radius = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tyx3a"]
 radius = 16.0
 
-[node name="EnemyDuwende" type="CharacterBody2D" groups=["enemies"]]
+[node name="EnemyDuwende" type="CharacterBody2D" unique_id=148958636 groups=["enemies"]]
 collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_tyx3a")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1626808763]
 shape = SubResource("CircleShape2D_bvohl")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=906190844]
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
 color = Color(0.25565824, 0.9905693, 3.85046e-07, 1)
 
-[node name="DamageArea" type="Area2D" parent="."]
+[node name="DamageArea" type="Area2D" parent="." unique_id=1680105707]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1834703573]
 shape = SubResource("CircleShape2D_tyx3a")
