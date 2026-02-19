@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://cwa1yq1pr5mkk"]
 
 [ext_resource type="Script" uid="uid://dy30sa5qe6d8h" path="res://weapons/scripts/weapon_data.gd" id="1"]
 
@@ -10,7 +10,7 @@ description = "Feathers orbit around you, damaging enemies on contact"
 base_damage = 6.0
 cooldown = 0.0
 weapon_type = "orbital"
-upgrades = [{
+upgrades = Array[Dictionary]([{
 "damage": 6,
 "effect_description": "4 orbiting feathers",
 "feather_count": 4,
@@ -45,5 +45,5 @@ upgrades = [{
 "level": 5,
 "orbit_radius": 41.6,
 "orbit_speed": 1.33
-}]
+}])
 metadata/_custom_type_script = "uid://dy30sa5qe6d8h"

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dgh6etmnqkn55"]
+
+[ext_resource type="Script" uid="uid://dpty5rdmm2tod" path="res://weapons/tests/spiral_feathers_test.gd" id="1_exroq"]
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="2_q6ewb"]
+
+[node name="SpiralFeathersTest" type="Node2D" unique_id=1802423923]
+script = ExtResource("1_exroq")
+
+[node name="SarimanokPlayer" parent="." unique_id=323522213 instance=ExtResource("2_q6ewb")]
+
+[node name="Camera2D" type="Camera2D" parent="SarimanokPlayer" unique_id=633644768]

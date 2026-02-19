@@ -1810,7 +1810,7 @@
           "19",
           "17"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1870,15 +1870,16 @@
               4
             ],
             "details": "Spawn moving dummy enemies with apply_damage method. Test levels 1-5: confirm damage values, feather count, speed, radius. Log damages to console.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run scene: enemies die on orbital contact at correct rates, smooth 60fps with 8+ feathers, all level upgrades visible.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-19T01:26:05.709Z"
           }
         ],
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 23 into ~5 subtasks: (1) create the OrbitalFeather scene and script for passive collision-based damage, (2) build the Spiral Feathers weapon scene with OrbitRoot and integrate with Weapon base class, (3) implement orbit logic (player-following, rotation, radius) and always-active behavior without cooldown, (4) implement level-based scaling of damage, orbit_speed, feather_count, and orbit_radius, including respawn/update of feathers, and (5) create an orbital test scene to validate contact damage, scaling behaviors, and movement smoothness around the player.",
-        "updatedAt": "2026-02-18T01:31:02.902Z"
+        "updatedAt": "2026-02-19T01:26:05.709Z"
       },
       {
         "id": "24",
@@ -1954,9 +1955,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-18T01:31:02.903Z",
+      "lastModified": "2026-02-19T01:26:05.710Z",
       "taskCount": 27,
-      "completedCount": 21,
+      "completedCount": 22,
       "tags": [
         "master"
       ]

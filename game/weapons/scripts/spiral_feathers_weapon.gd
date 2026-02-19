@@ -22,12 +22,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# Follow the player every frame so orbitals stay centered
-	# WHY: This weapon isn't parented to the player directly,
-	#      so we track position manually
-	var player := get_tree().get_first_node_in_group("player") as Node2D
-	global_position = player.global_position
-	
 	# Spin the OrbitRoot — feathers are children of it so they spin too
 	$OrbitRoot.rotation += orbit_speed * delta
 
