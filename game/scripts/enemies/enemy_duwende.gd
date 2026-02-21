@@ -32,6 +32,17 @@ func _ready() -> void:
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
 
 
+# Forward debuff application to the DebuffHandler child node
+func apply_debuff(debuff_type: String, strength: float, duration: float) -> void:
+	$DebuffHandler.apply_debuff(debuff_type, strength, duration)
+
+
+# Expose slow factor so movement code can use it
+func get_total_slow_factor() -> float:
+	return $DebuffHandler.get_total_slow_factor()
+
+
+
 # Call this after spawning to apply time-based difficulty scaling
 func initialize_stats(elapsed_minutes: float) -> void:
 	current_hp = SpawnManager.get_scaled_hp(base_max_hp, elapsed_minutes)
@@ -108,6 +119,8 @@ func reset_state() -> void:
 	velocity = Vector2.ZERO
 	# Reset HP to base value (initialize_stats will scale it after)
 	current_hp = base_max_hp
+	# Reset debuffs
+	$DebuffHandler.active_debuffs.clear()
 
 
 func _physics_process(_delta: float) -> void:
@@ -119,7 +132,7 @@ func _physics_process(_delta: float) -> void:
 	var direction: Vector2 = (player.global_position - global_position).normalized()
 
 	# Set velocity and move using CharacterBody2D's built-in method
-	velocity = direction * speed
+	velocity = direction * speed * get_total_slow_factor()
 	move_and_slide()
 
 

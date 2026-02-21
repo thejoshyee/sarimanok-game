@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bqufsuyg2a6yu"]
 
 [ext_resource type="Script" uid="uid://141mxbakt2wp" path="res://scripts/enemies/enemy_duwende.gd" id="1_tyx3a"]
+[ext_resource type="Script" uid="uid://oc2uig8ktdeb" path="res://scripts/enemies/debuff_handler.gd" id="2_4db11"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvohl"]
 radius = 16.0
@@ -28,3 +29,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1834703573]
 shape = SubResource("CircleShape2D_tyx3a")
+
+[node name="DebuffHandler" type="Node" parent="." unique_id=974833638]
+script = ExtResource("2_4db11")
+metadata/_custom_type_script = "uid://oc2uig8ktdeb"
