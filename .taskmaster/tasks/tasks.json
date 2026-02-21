@@ -1899,9 +1899,9 @@
             "description": "Create debuff.gd as Resource class and debuff_handler.gd Node with apply_debuff, _process for lifetime management, and get_total_slow_factor with stacking and clamping logic.",
             "dependencies": [],
             "details": "Follow provided GDScript exactly: Debuff with exported type/strength/duration/elapsed; DebuffHandler with active_debuffs array, apply_debuff creation, _process filtering expired debuffs, and multiplicative slow factor clamped 0.2-1.0.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Unit test: Apply multiple slow debuffs, advance time via mock delta, verify stacking (e.g., two 0.3 strength = 0.49 factor), expiration, and clamp at 0.2.",
-            "updatedAt": "2026-02-19T22:54:05.843Z",
+            "updatedAt": "2026-02-21T01:17:41.924Z",
             "parentId": "undefined"
           },
           {
@@ -1944,7 +1944,7 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 24 into ~4 subtasks: (1) implement the Debuff Resource and DebuffHandler node with lifetime and stacking logic, (2) integrate DebuffHandler into enemy scenes and expose an apply_debuff API on enemies, (3) wire Projectile._hit_target to call enemy debuff application based on WeaponData fields, and (4) create focused tests with Ice Shard and dummy enemies to validate slow factors, stacking, expiration, and non-impact for weapons without debuffs.",
-        "updatedAt": "2026-02-19T22:54:05.843Z"
+        "updatedAt": "2026-02-21T01:17:41.924Z"
       },
       {
         "id": "25",
@@ -2004,7 +2004,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-19T22:54:05.845Z",
+      "lastModified": "2026-02-21T01:17:41.928Z",
       "taskCount": 27,
       "completedCount": 23,
       "tags": [
