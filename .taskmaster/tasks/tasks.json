@@ -1925,9 +1925,10 @@
               2
             ],
             "details": "In Projectile script: if weapon_data.debuff_type: target.apply_debuff(weapon_data.debuff_type, weapon_data.debuff_strength, weapon_data.debuff_duration); handle nil checks.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Integration test: Fire Ice Shard (with debuff data) at enemy, confirm apply_debuff called with correct params and slow factor applied post-hit.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-22T00:16:31.817Z"
           },
           {
             "id": 4,
@@ -1945,7 +1946,7 @@
         "complexity": 6,
         "recommendedSubtasks": 4,
         "expansionPrompt": "Break Task 24 into ~4 subtasks: (1) implement the Debuff Resource and DebuffHandler node with lifetime and stacking logic, (2) integrate DebuffHandler into enemy scenes and expose an apply_debuff API on enemies, (3) wire Projectile._hit_target to call enemy debuff application based on WeaponData fields, and (4) create focused tests with Ice Shard and dummy enemies to validate slow factors, stacking, expiration, and non-impact for weapons without debuffs.",
-        "updatedAt": "2026-02-21T22:29:12.252Z"
+        "updatedAt": "2026-02-22T00:16:31.817Z"
       },
       {
         "id": "25",
@@ -2005,7 +2006,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-21T22:29:12.253Z",
+      "lastModified": "2026-02-22T00:16:31.818Z",
       "taskCount": 27,
       "completedCount": 23,
       "tags": [
