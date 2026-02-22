@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dxow0q2kehjxl"]
+
+[ext_resource type="Script" uid="uid://by5wuviux3rug" path="res://scripts/tests/debuff_test.gd" id="1_46qh4"]
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="1_rawrs"]
+
+[node name="DebuffTest" type="Node2D" unique_id=1332962674]
+script = ExtResource("1_46qh4")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=895217972]
+position = Vector2(320, 180)
+
+[node name="SarimanokPlayer" parent="." unique_id=1345368187 instance=ExtResource("1_rawrs")]
+position = Vector2(320, 180)
