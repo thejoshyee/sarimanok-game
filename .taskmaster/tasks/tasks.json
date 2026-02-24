@@ -1998,9 +1998,10 @@
               2
             ],
             "details": "Implement provided GDScript outline: filter unowned weapons, pick random new_count, add upgradable owned weapons; handle can_add_new = weapons.size() < MAX_WEAPONS (6).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Unit test: mock WeaponManager states (0/3/6 weapons, various levels) and assert correct choice arrays returned.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-24T23:19:39.067Z"
           },
           {
             "id": 4,
@@ -2031,7 +2032,7 @@
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 25 into ~5 subtasks: (1) analyze existing progression/level-up code and define integration points with WeaponManager, (2) implement a WeaponDatabase/registry of WeaponData resources for choice generation, (3) implement choice-generation logic that respects MAX_WEAPONS, ownership, and upgrade caps, (4) hook level-up UI selection events to call WeaponManager.add_weapon/upgrade_weapon and update state, and (5) create end-to-end tests or scripted flows to verify starting Peck, new-weapon vs upgrade options, capacity enforcement, and max-level handling.",
-        "updatedAt": "2026-02-24T00:52:56.075Z"
+        "updatedAt": "2026-02-24T23:19:39.067Z"
       },
       {
         "id": "26",
@@ -2071,7 +2072,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-24T00:52:56.079Z",
+      "lastModified": "2026-02-24T23:19:39.068Z",
       "taskCount": 27,
       "completedCount": 24,
       "tags": [
