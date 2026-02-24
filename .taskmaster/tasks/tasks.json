@@ -1984,9 +1984,10 @@
               1
             ],
             "details": "Set up autoload or scene singleton with _get_all_weapon_datas() func, load all WeaponData resources (Peck, Wing Slap, etc.), ensure easy extensibility for new weapons without code changes.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-23T20:51:51.300Z"
           },
           {
             "id": 3,
@@ -2030,7 +2031,7 @@
         "complexity": 7,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 25 into ~5 subtasks: (1) analyze existing progression/level-up code and define integration points with WeaponManager, (2) implement a WeaponDatabase/registry of WeaponData resources for choice generation, (3) implement choice-generation logic that respects MAX_WEAPONS, ownership, and upgrade caps, (4) hook level-up UI selection events to call WeaponManager.add_weapon/upgrade_weapon and update state, and (5) create end-to-end tests or scripted flows to verify starting Peck, new-weapon vs upgrade options, capacity enforcement, and max-level handling.",
-        "updatedAt": "2026-02-23T06:21:17.966Z"
+        "updatedAt": "2026-02-23T20:51:51.300Z"
       },
       {
         "id": "26",
@@ -2070,7 +2071,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-23T06:21:17.968Z",
+      "lastModified": "2026-02-23T20:51:51.308Z",
       "taskCount": 27,
       "completedCount": 24,
       "tags": [

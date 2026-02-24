@@ -25,6 +25,7 @@ GridManager="*res://autoloads/grid_manager.gd"
 ProgressionManager="*res://resources/progression.gd"
 GameTimer="*res://autoloads/game_timer.gd"
 SpawnManager="*res://autoloads/spawn_manager.gd"
+WeaponDatabase="*uid://docosi7bukua1"
 
 [display]
 
