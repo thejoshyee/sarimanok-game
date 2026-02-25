@@ -51,6 +51,11 @@ func _ready():
 
 	ProgressionManager.level_up.connect(level_up_panel.show_level_up)
 
+	# Give level_up_panel access to weapon_manager for dynamic choices
+	level_up_panel.weapon_manager = $Player/WeaponManager
+
+
+
 
 func _draw(show_debug_grid: bool = true):
 	if not show_debug_grid:

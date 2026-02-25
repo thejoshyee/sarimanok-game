@@ -75,7 +75,7 @@ func get_level_up_choices(weapon_manager: WeaponManager, count: int = 3) -> Arra
 		pool.append({ "type": "upgrade", "weapon_data": data })
 	
 	# Shuffle and pick up to 'count' choices
-    # TODO (Update 2): Add weighted selection when weapon pool grows beyond 6
+	# TODO (Update 2): Add weighted selection when weapon pool grows beyond 6
 	pool.shuffle()
 	for i in range(mini(count, pool.size())):
 		choices.append(pool[i])

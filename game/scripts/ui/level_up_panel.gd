@@ -5,6 +5,11 @@ signal upgrade_selected(upgrade_type: String, level: int)
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 @onready var progression: Progression = ProgressionManager
 
+var weapon_manager: Node = null
+
+# Store the current choices so _on_option_selected can use them
+var current_choices: Array = []
+
 func _ready() -> void:
 	# Start hidden - only show when level-up occurs
 	visible = false
@@ -16,37 +21,59 @@ func _ready() -> void:
 
 
 func show_level_up(_new_level: int) -> void:
+	# Generate dynamic weapon choices from WeaponDatabase
+	current_choices = WeaponDatabase.get_level_up_choices(weapon_manager)
+	
+	# Update button labels to show weapon choices
+	var buttons = [
+		$VBoxContainer/UpgradeOption1,
+		$VBoxContainer/UpgradeOption2,
+		$VBoxContainer/UpgradeOption3
+	]
+	
+	for i in range(3):
+		if i < current_choices.size():
+			var choice = current_choices[i]
+			# Show "NEW: Weapon Name" or "UP: Weapon Name Lv X→Y"
+			if choice.type == "new":
+				buttons[i].text = "NEW: " + choice.weapon_data.display_name
+			else:
+				var current_lvl = weapon_manager.get_weapon_by_id(choice.weapon_data.id).level
+				buttons[i].text = "UP: " + choice.weapon_data.display_name + " Lv" + str(current_lvl) + "→" + str(current_lvl + 1)
+			buttons[i].visible = true
+		else:
+			# Hide button if fewer than 3 choices available
+			buttons[i].visible = false
+	
 	# Pause the game and show the panel
 	get_tree().paused = true
 	visible = true
-
-	# focus the first button for keyboard/controller navigation
-	$VBoxContainer/UpgradeOption1.grab_focus()
+	
+	# Focus first visible button
+	if current_choices.size() > 0:
+		buttons[0].grab_focus()
 
 
 func _on_option_selected(option_number: int) -> void:
-	# apply the upgrade  based on option selected
-	match option_number:
-		1: # Increase Move Speed
-			player.stats.move_speed *= 1.1
-			print("Applied +10% Move Speed at level ", progression.current_level, 
-			" (New speed: ", player.stats.move_speed, ")")
-
-		2: # Increase Max HP
-			player.stats.max_hp += 10
-			player.current_hp += 10 # Also heal the player by 10
-			print("Applied +10 Max HP at level ", progression.current_level,
-			" (New max HP: ", player.stats.max_hp, ")")
-
-		3: # Increase Damage +1
-			player.stats.damage_multiplier += 0.1 # +10% damage = +0.1 multiplier
-			print("Applied +10% Weapon Damage at level ", progression.current_level, 
-			" (New damage: ", player.stats.damage_multiplier, ")")
-
-	# Emit signal for future weapon/passive system integration
-	var upgrade_names = ["move_speed", "max_hp", "damage"]
-	upgrade_selected.emit(upgrade_names[option_number - 1], progression.current_level)
-			
-	# Hide panel and unpause the game
+	# option_number is 1-based, array is 0-based
+	var index = option_number - 1
+	if index >= current_choices.size():
+		return
+	
+	var choice = current_choices[index]
+	
+	if choice.type == "new":
+		# Add new weapon to player's arsenal
+		weapon_manager.add_weapon(choice.weapon_data)
+		print("Added new weapon: ", choice.weapon_data.display_name)
+	else:
+		# Upgrade existing weapon
+		weapon_manager.upgrade_weapon(choice.weapon_data.id)
+		print("Upgraded weapon: ", choice.weapon_data.display_name)
+	
+	# Emit signal for any listeners
+	upgrade_selected.emit(choice.type, progression.current_level)
+	
+	# Hide panel and unpause
 	visible = false
 	get_tree().paused = false

@@ -34,12 +34,15 @@ func _ready() -> void:
 
 # Forward debuff application to the DebuffHandler child node
 func apply_debuff(debuff_type: String, strength: float, duration: float) -> void:
-	$DebuffHandler.apply_debuff(debuff_type, strength, duration)
+	if has_node("DebuffHandler"):
+		$DebuffHandler.apply_debuff(debuff_type, strength, duration)
 
 
 # Expose slow factor so movement code can use it
 func get_total_slow_factor() -> float:
-	return $DebuffHandler.get_total_slow_factor()
+	if has_node("DebuffHandler"):
+		return $DebuffHandler.get_total_slow_factor()
+	return 1.0  # No slow if no handler
 
 
 
@@ -115,12 +118,12 @@ func on_despawn() -> void:
 
 
 func reset_state() -> void:
-	# Reset velocity when recycled from pool
 	velocity = Vector2.ZERO
-	# Reset HP to base value (initialize_stats will scale it after)
 	current_hp = base_max_hp
-	# Reset debuffs
-	$DebuffHandler.active_debuffs.clear()
+	# Reset debuffs (if DebuffHandler exists)
+	if has_node("DebuffHandler"):
+		$DebuffHandler.active_debuffs.clear()
+
 
 
 func _physics_process(_delta: float) -> void:
