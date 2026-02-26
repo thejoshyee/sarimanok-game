@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://d1d2wcv2sfyjm"]
+
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="1_1u7fs"]
+[ext_resource type="Script" uid="uid://wstv7etffon3" path="res://scripts/tests/weapon_progression_e2e_test.gd" id="1_bll14"]
+
+[node name="Node2D" type="Node2D" unique_id=2116201866]
+script = ExtResource("1_bll14")
+
+[node name="SarimanokPlayer" parent="." unique_id=1345368187 instance=ExtResource("1_1u7fs")]
