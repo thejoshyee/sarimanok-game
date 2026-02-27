@@ -65,6 +65,11 @@ func release(instance: Node) -> void:
 # create new pooled instance (hidden by default)
 func _create_instance() -> Node:
 	var instance = _scene.instantiate()
+
+	# disable collision detection for Area2D instances
+	if instance is Area2D:
+		instance.monitoring = false
+
 	_container.add_child(instance)
 
 	# start hidden / disabled

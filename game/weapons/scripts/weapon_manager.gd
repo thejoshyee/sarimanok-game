@@ -34,6 +34,14 @@ func _ready() -> void:
 	for i in range(MAX_WEAPONS):
 		weapon_slots[i] = null
 
+	# # DEBUG: Add all weapons for visual testing (remove later)
+	# var all_ids = ["peck", "wing_slap", "feather_shot", "spiral_feathers", "ice_shard", "flame_wing"]
+	# for id in all_ids:
+	# 	var data = WeaponDatabase.get_weapon_by_id(id)
+	# 	if data:
+	# 		add_weapon(data)
+
+
 
 func _process(_delta: float) -> void:
 	# Auto-fire loop: position weapons and trigger firing

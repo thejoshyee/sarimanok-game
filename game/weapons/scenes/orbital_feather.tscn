@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://br44usug7u3fu" path="res://weapons/scripts/orbital_feather.gd" id="1_idt4a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftqbn"]
-radius = 4.0
+radius = 8.0
 
 [node name="OrbitalFeather" type="Area2D" unique_id=1620213580]
 collision_layer = 0
@@ -14,8 +14,8 @@ script = ExtResource("1_idt4a")
 shape = SubResource("CircleShape2D_ftqbn")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1107849921]
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 color = Color(1, 1, 0, 1)

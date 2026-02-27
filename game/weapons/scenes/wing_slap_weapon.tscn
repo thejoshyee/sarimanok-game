@@ -5,3 +5,6 @@
 
 [node name="WingSlapWeapon" unique_id=249070991 instance=ExtResource("1_ev7pr")]
 weapon_data = ExtResource("2_nuuj8")
+
+[node name="Placeholder" parent="." index="1" unique_id=1129076957]
+color = Color(1.353256, 0.697192, 0.2624418, 1)

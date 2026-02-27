@@ -9,3 +9,10 @@ weapon_data = ExtResource("2_m3nqp")
 
 [node name="cooldown_timer" type="Timer" parent="." unique_id=614481672]
 one_shot = true
+
+[node name="Placeholder" type="ColorRect" parent="." unique_id=356808606]
+visible = false
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+color = Color(0.99, 0.54, 0, 1)

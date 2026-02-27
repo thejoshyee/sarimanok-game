@@ -2070,9 +2070,10 @@
               1
             ],
             "details": "Peck: 32x32 forward offset; Wing Slap: 64x64 centered fade/scale orange; Flame Wing: same red; Projectiles: 16x16 tinted; Spiral: orbital 16x16. Use CanvasItem modulate for colors, AnimationPlayer for simple one-shots.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Manually play each weapon in editor; verify visuals appear correctly oriented/tinted without obscuring player and independent of weapon logic.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-27T22:11:10.176Z"
           },
           {
             "id": 3,
@@ -2091,7 +2092,7 @@
         "complexity": 4,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Break Task 26 into ~3 subtasks: (1) audit each weapon scene to ensure Area2D/CollisionShape2D nodes exist with correct layers/masks and sizes, (2) add and configure placeholder visuals (ColorRect/Sprite2D, modulate colors, minimal animations) for each weapon type and ensure they are decoupled from gameplay scripts, and (3) run a combined debug arena scene with all weapons to visually verify hit areas, collisions, and clarity using visible collision shapes or debug tooling.",
-        "updatedAt": "2026-02-27T01:15:39.990Z"
+        "updatedAt": "2026-02-27T22:11:10.176Z"
       },
       {
         "id": "27",
@@ -2112,7 +2113,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-27T01:15:39.993Z",
+      "lastModified": "2026-02-27T22:11:10.179Z",
       "taskCount": 27,
       "completedCount": 25,
       "tags": [
