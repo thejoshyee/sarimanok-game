@@ -2049,7 +2049,7 @@
           "22",
           "23"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -2084,15 +2084,16 @@
               2
             ],
             "details": "Use WeaponManager to cycle weapons; spawn dummy enemies; enable Visible Collision Shapes; check Peck cone directionality, AOE visibility, projectile paths, orbital contact.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Confirm enemies take damage only in correct areas, visuals provide clear feedback, no overlaps or misses across levels 1-5 if applicable.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-02-28T00:12:58.934Z"
           }
         ],
         "complexity": 4,
         "recommendedSubtasks": 3,
         "expansionPrompt": "Break Task 26 into ~3 subtasks: (1) audit each weapon scene to ensure Area2D/CollisionShape2D nodes exist with correct layers/masks and sizes, (2) add and configure placeholder visuals (ColorRect/Sprite2D, modulate colors, minimal animations) for each weapon type and ensure they are decoupled from gameplay scripts, and (3) run a combined debug arena scene with all weapons to visually verify hit areas, collisions, and clarity using visible collision shapes or debug tooling.",
-        "updatedAt": "2026-02-27T22:11:10.176Z"
+        "updatedAt": "2026-02-28T00:12:58.934Z"
       },
       {
         "id": "27",
@@ -2113,9 +2114,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-02-27T22:11:10.179Z",
+      "lastModified": "2026-02-28T00:12:58.935Z",
       "taskCount": 27,
-      "completedCount": 25,
+      "completedCount": 26,
       "tags": [
         "master"
       ]
