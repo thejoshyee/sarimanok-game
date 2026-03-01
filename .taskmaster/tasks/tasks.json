@@ -2147,16 +2147,150 @@
         "recommendedSubtasks": 3,
         "expansionPrompt": "Break Task 27 into ~3 subtasks: (1) create the reusable sprite_preview.tscn scene with camera, background, and sized sprite slots plus any simple editor tool script, (2) wire the scene so artists/designers can quickly assign and preview weapon-related sprites/animations, and (3) perform a review pass loading each delivered VFX asset, documenting any issues, and keeping gameplay scenes on placeholders when necessary.",
         "updatedAt": "2026-03-01T00:52:14.702Z"
+      },
+      {
+        "id": 28,
+        "title": "Implement XP Collection and Progression System",
+        "description": "Create XP tracking system with curve formula and bar UI display",
+        "details": "In Player script, add vars: `current_xp: float = 0`, `level: int = 1`, `xp_to_next: int = 5`. Implement `calculate_xp_needed(level: int) -> int: return 5 + (level - 1) * 5`. On XP collection: `current_xp += amount; if current_xp >= xp_to_next: current_xp -= xp_to_next; level += 1; xp_to_next = calculate_xp_needed(level); show_level_up_screen()`. Create XPBar as ProgressBar node (max_value dynamic), update via signal. Use Godot 4.3 Tween for smooth bar fill. Connect to UI canvas layer.",
+        "testStrategy": "Collect exact XP amounts (5,10,15,...) verify level ups at correct thresholds, check cumulative XP math, ensure bar visually fills correctly",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 29,
+        "title": "Create Level-Up UI Screen",
+        "description": "Build pausable level-up panel showing 3 random upgrade choices with icons",
+        "details": "Create LevelUpPanel as Popup with VBoxContainer for 3 ChoiceButton nodes (TextureButton + Label). Use CanvasLayer, modal=true. Layout matches PRD ASCII art. On show: `get_tree().paused = true; panel.visible = true`. Buttons show icon (16x16), name, '+1 Lv.X→Y'. Use Godot 4.3 Popup theme with pixel font. Signal `choice_selected(choice_id)` to apply and `get_tree().paused = false`. Placeholder ColorRect icons until assets.",
+        "testStrategy": "Trigger level-up, verify game pauses, 3 choices display correctly, clicking resumes game, UI readable at 640x360",
+        "priority": "high",
+        "dependencies": [
+          28
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 30,
+        "title": "Implement Passive System Manager",
+        "description": "Create data-driven passive tracking with 4 specific passives and stacking modifiers",
+        "details": "Create PassiveData Resource: `{name: String, level: int=0, max_level: int=5, effect: String}`. Singleton PassiveManager autoload: `passives: Array[PassiveData] = []`. Add 4 passives with exact PRD stats. `get_modifier(passive_name: String) -> float: match passive_name: 'Iron Beak': return 1.0 + 0.1 * passives[0].level`. Apply in Player: `damage *= passive_manager.get_modifier('Iron Beak')`. Upgrade: `passives[i].level += 1`. Use ResourceLoader for data-driven.",
+        "testStrategy": "Upgrade Iron Beak to lv5, verify 150% damage multiplier on weapons, test all 4 passives stack independently",
+        "priority": "high",
+        "dependencies": [
+          29
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 31,
+        "title": "Build Pickup Scene with Magnetic Effect",
+        "description": "Create XP Gem and Gold Coin pickups with drift behavior controlled by Magnetic Aura",
+        "details": "Pickup.tscn: Area2D + Sprite2D(16x16 ColorRect blue/yellow) + CollisionShape2D(CircleShape2D r=8). Vars: `pickup_range: float = 64.0, magnet_speed: float = 100.0`. In _process: `if distance_to(player) < player.passive_manager.get_modifier('Magnetic Aura') * base_range: move_toward(player, magnet_speed * delta)`. On body_entered(player): queue_free(), emit_signal('collected', type). Connect player pickup_range to passive system. 0.5s delay: `await get_tree().create_timer(0.5).timeout`. Godot 4.3 Area2D monitorable=true.",
+        "testStrategy": "Spawn pickups, verify 0.5s pause then magnetic drift, test Magnetic Aura increases range (20% per level), auto-collect on overlap",
+        "priority": "high",
+        "dependencies": [
+          30
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 32,
+        "title": "Integrate Enemy Death Pickup Spawning",
+        "description": "Enemies drop XP gems and gold coins at death location",
+        "details": "In Enemy script death(): `var xp_gem = pickup_scene.instantiate(); xp_gem.global_position = global_position; get_tree().current_scene.add_child(xp_gem); xp_gem.collected.connect(_on_pickup_collected)`. 70% XP gem, 30% gold coin chance. Connect player pickup signals to XP system and gold counter. Use preload('res://Pickups/XP_Gem.tscn') for efficiency. Ensure spawn offset random 8px to avoid overlap.",
+        "testStrategy": "Kill 20 enemies, verify ~70% XP/~30% gold drops, pickups spawn at death position, collect correctly",
+        "priority": "medium",
+        "dependencies": [
+          31
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 33,
+        "title": "Implement Level-Up Choice Pool Logic",
+        "description": "Generate 3 random choices from upgradeable weapons and passives respecting max limits",
+        "details": "In LevelUpManager: `get_choices(count: int=3) -> Array: var pool = []; for weapon in weapon_manager.weapons: if weapon.level < weapon.max_level: pool.append(weapon); if slots_available and !weapon.owned: pool.append(weapon); for passive in passive_manager.passives: if passive.level < 5: pool.append(passive); return pool.shuffle().slice(0, count)`. Max 6 weapons. Filter owned/max_level. Display logic handles 'NEW!' vs '+1'.",
+        "testStrategy": "Test early/mid/late game scenarios: verify pool excludes maxed items, shows NEW weapons when slots free, always 3 choices available until endgame",
+        "priority": "medium",
+        "dependencies": [
+          29,
+          30
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 34,
+        "title": "Add All Passive Stat Applications",
+        "description": "Wire Thick Plumage, Racing Legs, Magnetic Aura into player stats",
+        "details": "Player script: `max_hp = base_hp + passive_manager.get_modifier('Thick Plumage') * 15`. `speed = base_speed * (1.0 + passive_manager.get_modifier('Racing Legs') * 0.1)`. Pickup: `pickup_range = base_range * (1.0 + passive_manager.get_modifier('Magnetic Aura') * 0.2)`. Update in _ready() and passive_changed signal. Use Godot 4.3 signals for reactive updates. Test multipliers: Thick +75HP@lv5, Speed +50%, Range +100%.",
+        "testStrategy": "Max each passive independently, verify exact stat boosts (HP+75, speed*1.5, range*2.0), ensure they stack multiplicatively with weapons",
+        "priority": "medium",
+        "dependencies": [
+          30,
+          31
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 35,
+        "title": "Implement XP Bar and Timer UI",
+        "description": "Display XP progress bar and survival timer on screen",
+        "details": "HUD.tscn CanvasLayer: ProgressBar (XP bar) + Label (timer). XPBar.max_value = player.xp_to_next; value = player.current_xp. Tween smooth fill. Timer: `run_time += delta; label.text = format_time(run_time)`. Use tr('survival_time') for localization. Position top-left, pixel-perfect 640x360. Update via signals from Player.",
+        "testStrategy": "Level up multiple times, verify bar resets/scales correctly, timer increments smoothly, readable against backgrounds",
+        "priority": "medium",
+        "dependencies": [
+          28
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 36,
+        "title": "Add Placeholder SFX for Core Loop",
+        "description": "Integrate audio for XP pickup, enemy hit, enemy death, level up",
+        "details": "Project Settings: Audio buses (Master/Music/SFX). Preload free BFXR sounds: xp_pickup.ogg, enemy_hit.ogg, enemy_death.ogg, level_up.ogg. AudioStreamPlayer2D on pickups/enemies. Enemy hit: modulate volume by damage. Level-up: play on pause. SFX bus volume slider in settings. Godot 4.3 AudioServer bus effects clean.",
+        "testStrategy": "Complete full loop: kill enemies → pickup XP → level up, verify all 4 sounds play at correct moments, no audio overlap",
+        "priority": "low",
+        "dependencies": [
+          32,
+          29
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 37,
+        "title": "Week 1-3 Integration and Performance Testing",
+        "description": "Verify core progression loop works end-to-end with performance targets",
+        "details": "Test scenarios: survive 60s (Week1), reach lv10 (Week2), max 6 weapons+4 passives (Week3). Profile: 60FPS@100+ enemies, no leaks (run 10min). Check XP curve, choice pool, passive stacking, pickup magnet. Add damage numbers: Label tween-up on enemy hit. Enemy flash: modulate white 0.1s. Use Godot Performance monitor.",
+        "testStrategy": "Run integration tests: 60s survival, lv10 reach, full max-out run. Verify 60FPS, no errors, all passives/weapons upgrade correctly, damage numbers visible",
+        "priority": "high",
+        "dependencies": [
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "status": "pending",
+        "subtasks": []
       }
     ],
     "metadata": {
-      "version": "1.0.0",
-      "lastModified": "2026-03-01T00:52:14.704Z",
-      "taskCount": 27,
-      "completedCount": 26,
-      "tags": [
-        "master"
-      ]
+      "created": "2026-03-01T00:54:37.384Z",
+      "updated": "2026-03-01T00:54:37.385Z",
+      "description": "Tasks for master context"
     }
   }
 }
