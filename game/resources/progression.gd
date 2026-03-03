@@ -8,9 +8,10 @@ signal level_up(new_level: int)
 @export var gold: int = 0
 
 
-# Quadratic XP curve: level 1->2 needs 120xp, 2->3 needs 280xp, 3->4 needs 480xp, 4->5 needs 720xp, 5->6 needs 1000xp, etc
+# Linear XP curve: 5, 10, 15, 20, 25, etc because we want to make it easy for the player to level up for now
+# to get that feel of progression, but we can change it later if we want to make it more challenging
 func get_xp_for_level(level: int) -> int:
-	return level * 100 + level * level * 20
+	return 5 + (level - 1) * 5
 
 func add_xp(amount: int) -> void:
 	current_xp += amount

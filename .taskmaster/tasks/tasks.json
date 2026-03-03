@@ -2177,9 +2177,10 @@
               1
             ],
             "details": "Create xpgem.tscn: Area2D with CollisionShape2D (CircleShape2D r=8), Sprite2D (gem texture), script with XP amount based on enemy level. In Enemy script or death signal, instance and add_child_to_world gem at death position with velocity. Use Godot 4.5 RigidBody2D for physics pickup.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Kill enemies in test scene; verify gems spawn at correct positions with XP values printed; count drops match enemy deaths.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-03T07:28:09.925Z"
           },
           {
             "id": 3,
@@ -2221,7 +2222,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-03T06:58:25.556Z"
+        "updatedAt": "2026-03-03T07:28:09.925Z"
       },
       {
         "id": "29",
@@ -2353,7 +2354,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-03T06:58:25.557Z",
+      "lastModified": "2026-03-03T07:28:09.926Z",
       "taskCount": 37,
       "completedCount": 26,
       "tags": [
