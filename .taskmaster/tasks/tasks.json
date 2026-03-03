@@ -2163,10 +2163,10 @@
             "title": "Review Existing ProgressionManager and UI Components",
             "description": "Examine the ProgressionManager autoload script and related UI scenes to document current XP tracking, level calculation, signals, and existing XP bar or level_up_panel status.",
             "dependencies": [],
-            "details": "Open game/resources/progression.gd, inspect variables, functions like calculate_xp_needed, signals (e.g., level_up), and connect points. Check HUD.tscn or CanvasLayer for XPBar or temporary level_up_panel. Note gaps vs original Player script plan. Use Godot 4.5 editor search.",
-            "status": "in-progress",
+            "details": "Open game/resources/progression.gd, inspect variables, functions like calculate_xp_needed, signals (e.g., level_up), and connect points. Check HUD.tscn or CanvasLayer for XPBar or temporary level_up_panel. Note gaps vs original Player script plan. Use Godot 4.5 editor search.\n<info added on 2026-03-03T06:58:10.964Z>\nReview findings confirmed via codebase analysis:\n\nProgressionManager (game/resources/progression.gd):\n- add_xp(amount) at line 15: Adds XP and triggers check_level_up()\n- check_level_up() at line 24: Compares current_xp to threshold, emits level_up signal, handles multi-level-ups\n- level_up signal at line 4: Emits new_level when player levels up\n- get_progress_ratio() at line 32: Returns current_xp / xp_needed for progress bars\n- Current XP curve (line 12-13): Quadratic formula level*100 + level²*20 (e.g., 120, 280, 480 XP per level)\n\nHUD (game/scenes/ui/hud.tscn):\n- Contains HPLabel, CooldownLabel, StatsLabel only\n- No XP bar or progress indicator present — must be added in subtask 28.3\n\nLevel-Up Panel (game/scripts/ui/level_up_panel.gd):\n- Fully functional with dynamic weapon choices via WeaponDatabase.get_level_up_choices()\n- Shows NEW/UPGRADE options with level indicators\n- Pauses game during selection, emits upgrade_selected signal\n\nCritical Fix Required:\n- XP curve in progression.gd line 12-13 uses quadratic formula\n- PRD specifies linear formula: 5 + (level-1) * 5 (i.e., 5, 10, 15, 20 XP per level)\n- Must update get_xp_for_level() function before XP gem implementation in 28.2\n</info added on 2026-03-03T06:58:10.964Z>",
+            "status": "done",
             "testStrategy": "Verify autoload loads correctly; manually trigger signals in editor to confirm emissions; document exact API for integration.",
-            "updatedAt": "2026-03-03T03:55:35.469Z",
+            "updatedAt": "2026-03-03T06:58:25.556Z",
             "parentId": "undefined"
           },
           {
@@ -2221,7 +2221,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-03T03:55:35.469Z"
+        "updatedAt": "2026-03-03T06:58:25.556Z"
       },
       {
         "id": "29",
@@ -2353,7 +2353,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-03T03:55:35.490Z",
+      "lastModified": "2026-03-03T06:58:25.557Z",
       "taskCount": 37,
       "completedCount": 26,
       "tags": [
