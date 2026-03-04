@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://dkxqfdgi577sb" path="res://resources/red_duwende_pool.tres" id="6_vivmo"]
 [ext_resource type="Texture2D" uid="uid://cc7v55axxinrj" path="res://assets/tilesets/placeholder_farm.png" id="6_ycdy4"]
 [ext_resource type="Resource" uid="uid://dul4s68fbppeo" path="res://resources/beak_projectile_pool.tres" id="7_vivmo"]
+[ext_resource type="Resource" uid="uid://62hpqq7p03m" path="res://resources/gold_coin_pool.tres" id="8_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://bib7nigil0j4a" path="res://scenes/ui/pool_debug_overlay.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dk4w6bjsr8gca" path="res://scenes/ui/grid_debug_overlay.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://dvdy2n5irl835" path="res://scenes/ui/level_up_panel.tscn" id="11_dg77c"]
@@ -66,7 +67,7 @@ size = Vector2(32, 2048)
 
 [node name="Node2D" type="Node2D" unique_id=1622169148]
 script = ExtResource("1_ig7tw")
-pool_configs = Array[ExtResource("2_272bh")]([ExtResource("5_4c57u"), ExtResource("4_4c57u"), ExtResource("5_w48qg"), ExtResource("6_vivmo"), SubResource("Resource_w48qg"), ExtResource("7_vivmo")])
+pool_configs = Array[ExtResource("2_272bh")]([ExtResource("5_4c57u"), ExtResource("4_4c57u"), ExtResource("5_w48qg"), ExtResource("6_vivmo"), SubResource("Resource_w48qg"), ExtResource("7_vivmo"), ExtResource("8_2cqfq")])
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1290967941]
 visible = false

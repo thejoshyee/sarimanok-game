@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PoolConfig" format=3 uid="uid://62hpqq7p03m"]
+
+[ext_resource type="Script" uid="uid://dnolhjriaskgh" path="res://resources/pool_config.gd" id="1_kkn5x"]
+
+[resource]
+script = ExtResource("1_kkn5x")
+pool_id = "pickup_gold_coin"
+scene_path = "res://scenes/pickups/gold_coin.tscn"
+initial_size = 200
+max_size = 200
+can_grow = false
+metadata/_custom_type_script = "uid://dnolhjriaskgh"

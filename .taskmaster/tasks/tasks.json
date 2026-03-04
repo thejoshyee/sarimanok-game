@@ -2191,9 +2191,10 @@
               2
             ],
             "details": "In Player script, add Area2D (pickup_area) with larger radius. Connect body_entered signal: if XP gem, get amount, call ProgressionManager.add_xp(amount), queue_free gem. Ensure ProgressionManager handles overflow leveling with emit level_up. Integrate show_level_up_screen().",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn XP gems near player; walk into them to collect exact amounts (e.g., 5,10); verify ProgressionManager current_xp updates and levels at thresholds.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-04T00:33:30.335Z"
           },
           {
             "id": 4,
@@ -2222,7 +2223,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-03T07:28:09.925Z"
+        "updatedAt": "2026-03-04T00:33:30.335Z"
       },
       {
         "id": "29",
@@ -2354,7 +2355,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-03T07:28:09.926Z",
+      "lastModified": "2026-03-04T00:33:30.343Z",
       "taskCount": 37,
       "completedCount": 26,
       "tags": [
