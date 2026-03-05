@@ -2,6 +2,8 @@ extends Node
 class_name Progression
 
 signal level_up(new_level: int)
+signal xp_changed(current_xp: int, xp_needed: int)
+
 
 @export var current_xp: int = 0
 @export var current_level: int = 1
@@ -16,6 +18,8 @@ func get_xp_for_level(level: int) -> int:
 func add_xp(amount: int) -> void:
 	current_xp += amount
 	check_level_up()
+	# Emit after check_level_up so current_xp/level are correct post-overflow
+	xp_changed.emit(current_xp, get_xp_for_level(current_level))
 
 
 func add_gold(amount: int) -> void:
