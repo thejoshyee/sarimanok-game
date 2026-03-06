@@ -2156,7 +2156,7 @@
         "testStrategy": "Collect exact XP amounts (5,10,15,...) verify level ups at correct thresholds, check cumulative XP math, ensure bar visually fills correctly",
         "priority": "high",
         "dependencies": [],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -2219,12 +2219,13 @@
               4
             ],
             "details": "Ensure enemy death -> gem drop -> player pickup -> ProgressionManager.add_xp() -> signals update XPBar and trigger level_up_panel. Validate curve: level 1 needs 5XP, lv2 needs 10XP total cumulative. Godot 4.5 best practices: typed signals, @export vars. Test edge cases like exact threshold, overflow.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Arena test scene: spawn enemies, collect exact XP (5,10,15,20...) verify levels at 5/15/30/...XP cumulative; bar visuals; level_up_panel shows; no XP loss on level-up.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-06T21:54:52.811Z"
           }
         ],
-        "updatedAt": "2026-03-06T06:47:53.542Z"
+        "updatedAt": "2026-03-06T21:54:52.811Z"
       },
       {
         "id": "29",
@@ -2356,9 +2357,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-06T06:47:53.544Z",
+      "lastModified": "2026-03-06T21:54:52.829Z",
       "taskCount": 37,
-      "completedCount": 26,
+      "completedCount": 27,
       "tags": [
         "master"
       ]
