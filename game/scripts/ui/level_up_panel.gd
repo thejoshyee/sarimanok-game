@@ -15,9 +15,10 @@ func _ready() -> void:
 	visible = false
 	
 	# Connect button signals
-	$VBoxContainer/UpgradeOption1.pressed.connect(_on_option_selected.bind(1))
-	$VBoxContainer/UpgradeOption2.pressed.connect(_on_option_selected.bind(2))
-	$VBoxContainer/UpgradeOption3.pressed.connect(_on_option_selected.bind(3))
+	$PanelContainer/VBoxContainer/HBoxContainer/UpgradeOption1.pressed.connect(_on_option_selected.bind(1))
+	$PanelContainer/VBoxContainer/HBoxContainer/UpgradeOption2.pressed.connect(_on_option_selected.bind(2))
+	$PanelContainer/VBoxContainer/HBoxContainer/UpgradeOption3.pressed.connect(_on_option_selected.bind(3))
+
 
 
 func show_level_up(_new_level: int) -> void:
@@ -26,10 +27,11 @@ func show_level_up(_new_level: int) -> void:
 	
 	# Update button labels to show weapon choices
 	var buttons = [
-		$VBoxContainer/UpgradeOption1,
-		$VBoxContainer/UpgradeOption2,
-		$VBoxContainer/UpgradeOption3
+		$PanelContainer/VBoxContainer/HBoxContainer/UpgradeOption1,
+		$PanelContainer/VBoxContainer/HBoxContainer/UpgradeOption2,
+		$PanelContainer/VBoxContainer/HBoxContainer/UpgradeOption3
 	]
+
 	
 	for i in range(3):
 		if i < current_choices.size():
