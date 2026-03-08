@@ -1,6 +1,6 @@
 extends Node
 
-# Total sceconds elapsed thgis run
+# Total seconds elapsed this run
 var elapsed_time: float = 0.0
 
 # Convenience property - most systems want minutes, not seconds
