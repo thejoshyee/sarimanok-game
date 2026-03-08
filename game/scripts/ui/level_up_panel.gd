@@ -20,6 +20,13 @@ func _ready() -> void:
 	$PanelContainer/VBoxContainer/HBoxContainer/UpgradeOption3.pressed.connect(_on_option_selected.bind(3))
 
 
+# Create a 16x16 solid-color placeholder icon texture
+func _make_icon(color: Color) -> ImageTexture:
+	var img = Image.create(16, 16, false, Image.FORMAT_RGBA8)
+	img.fill(color)
+	return ImageTexture.create_from_image(img)
+
+
 
 func show_level_up(_new_level: int) -> void:
 	# Generate dynamic weapon choices from WeaponDatabase
@@ -32,7 +39,10 @@ func show_level_up(_new_level: int) -> void:
 		$PanelContainer/VBoxContainer/HBoxContainer/UpgradeOption3
 	]
 
-	
+	# Distinct colors per slot so you can tell icons apart visually
+	var icon_colors = [Color.TOMATO, Color.MEDIUM_SEA_GREEN, Color.CORNFLOWER_BLUE]
+
+
 	for i in range(3):
 		if i < current_choices.size():
 			var choice = current_choices[i]
@@ -42,6 +52,7 @@ func show_level_up(_new_level: int) -> void:
 			else:
 				var current_lvl = weapon_manager.get_weapon_by_id(choice.weapon_data.id).level
 				buttons[i].text = "UP: " + choice.weapon_data.display_name + " Lv" + str(current_lvl) + "→" + str(current_lvl + 1)
+			buttons[i].icon = _make_icon(icon_colors[i])
 			buttons[i].visible = true
 		else:
 			# Hide button if fewer than 3 choices available

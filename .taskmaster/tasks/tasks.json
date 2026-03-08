@@ -2258,9 +2258,10 @@
               1
             ],
             "details": "For each ChoiceButton (TextureButton + Label), add or update TextureButton child with ColorRect node sized exactly 16x16 pixels. Use distinct colors for each choice (e.g., red, green, blue) and position icon left of name text.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Trigger level-up, confirm each of 3 buttons displays a clear 16x16 colored square icon beside weapon name and level text.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-08T19:30:52.215Z"
           },
           {
             "id": 3,
@@ -2302,7 +2303,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-07T21:20:20.501Z"
+        "updatedAt": "2026-03-08T19:30:52.215Z"
       },
       {
         "id": "30",
@@ -2421,7 +2422,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-07T21:20:20.503Z",
+      "lastModified": "2026-03-08T19:30:52.216Z",
       "taskCount": 37,
       "completedCount": 27,
       "tags": [
