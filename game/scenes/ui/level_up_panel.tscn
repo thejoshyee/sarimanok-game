@@ -15,15 +15,10 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1639443988]
-anchors_preset = 8
-anchor_left = 0.5
+anchor_left = 0.05
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.95
 anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -46.5
-offset_right = 220.0
-offset_bottom = 46.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -43,14 +38,17 @@ layout_mode = 2
 
 [node name="UpgradeOption1" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=2037637275]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "+20% Move Speed"
 
 [node name="UpgradeOption2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1024319290]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "+10 Max HP"
 
 [node name="UpgradeOption3" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=872606546]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "+10% Weapon Damage"
 
 [node name="ClickToChooseLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=565401826]
