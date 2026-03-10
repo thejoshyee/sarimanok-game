@@ -72,7 +72,8 @@ func _ready() -> void:
 		btn.add_theme_stylebox_override("pressed", btn_pressed)
 
 
-# Create a 16x16 solid-color placeholder icon texture
+# Placeholder: generates a solid-color 16x16 square icon.
+# Replace with real weapon art textures when available
 func _make_icon(color: Color) -> ImageTexture:
 	var img = Image.create(16, 16, false, Image.FORMAT_RGBA8)
 	img.fill(color)
