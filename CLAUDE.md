@@ -418,6 +418,32 @@ Test it with F6 - does the timer fire?
 
 ## Code Implementation Rules
 
+### Godot Way First
+
+**Always prefer Godot's built-in systems over code-based workarounds.** Josh is learning Godot — teaching him the engine's intended patterns prevents technical debt and builds transferable skills.
+
+**Priorities (in order):**
+
+1. **Scene/Inspector first** — If something can be configured in the scene file or Inspector (themes, styles, fonts, node properties, animations), do it there instead of in code
+2. **Resources (.tres)** — Use Godot Resource files for reusable data (themes, weapon stats, enemy configs) instead of hardcoding values in scripts
+3. **Signals over polling** — Use Godot's signal system instead of checking state every frame
+4. **Built-in nodes** — Use purpose-built nodes (Timer, Area2D, AnimationPlayer) instead of reimplementing their behavior in GDScript
+
+**Examples:**
+
+- **UI theming:** Use Theme resources assigned in the scene, not `add_theme_*_override()` in `_ready()`
+- **Font/colors:** Set in Inspector or Theme, not in code
+- **Node properties:** Set in the scene file, not in `_ready()` unless they're truly dynamic
+- **Animations:** Use AnimationPlayer or Tween nodes, not manual frame tracking
+
+**When code IS appropriate:**
+
+- Dynamic/runtime behavior (spawning enemies, calculating damage, generating choices)
+- State that changes during gameplay
+- Logic that depends on game conditions
+
+**Rule of thumb:** If a value is known at design time and won't change at runtime, it belongs in the scene/resource, not in code.
+
 ### Teach Through Comments
 
 Code examples should have comments explaining WHY:
