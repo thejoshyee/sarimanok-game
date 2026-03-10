@@ -2285,9 +2285,10 @@
               3
             ],
             "details": "In level_up_panel.gd, set VBoxContainer focus_mode and ensure ChoiceButtons are focusable. Connect ui_accept to emit choice_selected(choice_id) based on get_focus_owner(). Handle ui_cancel to close without selection.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Trigger level-up, use Tab/Enter/Space to navigate between buttons, verify selection works and game resumes correctly.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-10T22:11:05.159Z"
           },
           {
             "id": 5,
@@ -2304,7 +2305,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-08T23:08:19.312Z"
+        "updatedAt": "2026-03-10T22:11:05.159Z"
       },
       {
         "id": "30",
@@ -2423,7 +2424,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-08T23:08:19.314Z",
+      "lastModified": "2026-03-10T22:11:05.164Z",
       "taskCount": 37,
       "completedCount": 27,
       "tags": [

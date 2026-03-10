@@ -110,14 +110,31 @@ func show_level_up(_new_level: int) -> void:
 		else:
 			# Hide button if fewer than 3 choices available
 			buttons[i].visible = false
+
+	# Set focus neighbors so arrow keys wrap around the visible buttons
+	var visible_buttons: Array[Button] = []
+	for btn in buttons:
+		if btn.visible:
+			visible_buttons.append(btn)
+	
+	for i in range(visible_buttons.size()):
+		var prev = visible_buttons[(i - 1) % visible_buttons.size()]
+		var next = visible_buttons[(i + 1) % visible_buttons.size()]
+		visible_buttons[i].focus_neighbor_left = prev.get_path()
+		visible_buttons[i].focus_neighbor_right = next.get_path()
+		# Also handle up/down as aliases for left/right since buttons are horizontal
+		visible_buttons[i].focus_neighbor_top = prev.get_path()
+		visible_buttons[i].focus_neighbor_bottom = next.get_path()
+		
 	
 	# Pause the game and show the panel
 	get_tree().paused = true
 	visible = true
 	
 	# Focus first visible button
-	if current_choices.size() > 0:
-		buttons[0].grab_focus()
+	if visible_buttons.size() > 0:
+		visible_buttons[0].grab_focus()
+
 
 
 func _on_option_selected(option_number: int) -> void:

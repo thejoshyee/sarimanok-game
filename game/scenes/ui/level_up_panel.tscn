@@ -53,5 +53,5 @@ text = "+10% Weapon Damage"
 
 [node name="ClickToChooseLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=565401826]
 layout_mode = 2
-text = "Click to choose one"
+text = "Arrow Keys + Enter to choose"
 horizontal_alignment = 1
