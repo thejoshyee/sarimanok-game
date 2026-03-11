@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dvdy2n5irl835"]
 
 [ext_resource type="Script" uid="uid://bqn6pd306mb6r" path="res://scripts/ui/level_up_panel.gd" id="1_fclbr"]
+[ext_resource type="Theme" uid="uid://dvk133yfs250h" path="res://assets/themes/level_up_theme.tres" id="2_3u7we"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=513594816]
 process_mode = 3
@@ -15,12 +16,14 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1639443988]
+anchors_preset = -1
 anchor_left = 0.05
 anchor_top = 0.5
 anchor_right = 0.95
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_3u7we")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=346676671]
 layout_mode = 2
