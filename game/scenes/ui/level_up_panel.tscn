@@ -30,6 +30,8 @@ layout_mode = 2
 
 [node name="LevelUpLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=767591494]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.9019608, 0.7490196, 0.3019608, 1)
+theme_override_font_sizes/font_size = 32
 text = "LEVEL UP!"
 horizontal_alignment = 1
 
@@ -56,5 +58,6 @@ text = "+10% Weapon Damage"
 
 [node name="ClickToChooseLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=565401826]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Arrow Keys + Enter to choose"
 horizontal_alignment = 1

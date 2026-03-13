@@ -2,6 +2,22 @@
 
 [ext_resource type="FontFile" uid="uid://bffj5qwmsd3nx" path="res://assets/fonts/m5x7.ttf" id="1_xrchr"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus1"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.2509804, 0.2, 0.34901962, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9019608, 0.7490196, 0.3019608, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ed5w"]
 content_margin_left = 3.0
 content_margin_top = 3.0
@@ -34,22 +50,6 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus1"]
-content_margin_left = 3.0
-content_margin_top = 3.0
-content_margin_right = 3.0
-content_margin_bottom = 3.0
-bg_color = Color(0.2509804, 0.2, 0.34901962, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.9019608, 0.7490196, 0.3019608, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_press1"]
 content_margin_left = 3.0
 content_margin_top = 3.0
@@ -66,6 +66,22 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w4j0"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.09985284, 0.07846785, 0.14733289, 0.95000005)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9019608, 0.7490196, 0.3019608, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
 [resource]
 default_font = ExtResource("1_xrchr")
 default_font_size = 24
@@ -76,3 +92,4 @@ Button/styles/focus = SubResource("StyleBoxFlat_focus1")
 Button/styles/hover = SubResource("StyleBoxFlat_2ed5w")
 Button/styles/normal = SubResource("StyleBoxFlat_xrchr")
 Button/styles/pressed = SubResource("StyleBoxFlat_press1")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_8w4j0")
