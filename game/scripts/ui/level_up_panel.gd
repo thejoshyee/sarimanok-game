@@ -28,7 +28,6 @@ func _make_icon(color: Color) -> ImageTexture:
 	return ImageTexture.create_from_image(img)
 
 
-
 func show_level_up(_new_level: int) -> void:
 	# Generate dynamic weapon choices from WeaponDatabase
 	current_choices = WeaponDatabase.get_level_up_choices(weapon_manager)
@@ -49,10 +48,17 @@ func show_level_up(_new_level: int) -> void:
 			var choice = current_choices[i]
 			# Show "Weapon Name  NEW" or "Weapon Name  +1  Lv.X→Y"
 			if choice.type == "new":
-				buttons[i].text = choice.weapon_data.display_name + " NEW"
+				buttons[i].text = "NEW!\n" + choice.weapon_data.display_name
+				buttons[i].add_theme_color_override("font_color", Color(0.9, 0.75, 0.3))
+				var tween = create_tween().set_loops()
+				tween.tween_property(buttons[i], "modulate:a", 0.4, 0.5)
+				tween.tween_property(buttons[i], "modulate:a", 1.0, 0.5)
 			else:
+				buttons[i].remove_theme_color_override("font_color")
+				buttons[i].modulate.a = 1.0
 				var current_lvl = weapon_manager.get_weapon_by_id(choice.weapon_data.id).level
-				buttons[i].text = choice.weapon_data.display_name + " +1 Lv." + str(current_lvl) + ">" + str(current_lvl + 1)
+				buttons[i].text = choice.weapon_data.display_name + " +1 Lv." + str(current_lvl) + " > " + str(current_lvl + 1) + " "
+
 
 			buttons[i].icon = _make_icon(icon_colors[i])
 			buttons[i].visible = true
