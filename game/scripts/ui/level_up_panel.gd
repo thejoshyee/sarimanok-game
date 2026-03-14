@@ -47,12 +47,13 @@ func show_level_up(_new_level: int) -> void:
 	for i in range(3):
 		if i < current_choices.size():
 			var choice = current_choices[i]
-			# Show "NEW: Weapon Name" or "UP: Weapon Name Lv X→Y"
+			# Show "Weapon Name  NEW" or "Weapon Name  +1  Lv.X→Y"
 			if choice.type == "new":
-				buttons[i].text = "NEW: " + choice.weapon_data.display_name
+				buttons[i].text = choice.weapon_data.display_name + " NEW"
 			else:
 				var current_lvl = weapon_manager.get_weapon_by_id(choice.weapon_data.id).level
-				buttons[i].text = "UP: " + choice.weapon_data.display_name + " Lv" + str(current_lvl) + " > " + str(current_lvl + 1) + " "
+				buttons[i].text = choice.weapon_data.display_name + " +1 Lv." + str(current_lvl) + ">" + str(current_lvl + 1)
+
 			buttons[i].icon = _make_icon(icon_colors[i])
 			buttons[i].visible = true
 		else:

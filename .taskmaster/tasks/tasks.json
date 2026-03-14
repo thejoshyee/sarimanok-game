@@ -2237,7 +2237,7 @@
         "dependencies": [
           "28"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -2300,12 +2300,13 @@
               4
             ],
             "details": "In script, when populating choices from WeaponDatabase, format label text precisely as specified. Double-check get_tree().paused = true/false toggles and choice_selected signal emission to ProgressionManager.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Trigger level-up multiple times, verify text shows correct 'NEW' or 'UPGRADE' with level progression (e.g., '+1 Lv.2→3'), game pauses/resumes correctly, and selected upgrade applies.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-14T01:50:18.325Z"
           }
         ],
-        "updatedAt": "2026-03-10T22:11:05.159Z"
+        "updatedAt": "2026-03-14T01:50:18.325Z"
       },
       {
         "id": "30",
@@ -2424,9 +2425,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-10T22:11:05.164Z",
+      "lastModified": "2026-03-14T01:50:18.330Z",
       "taskCount": 37,
-      "completedCount": 27,
+      "completedCount": 28,
       "tags": [
         "master"
       ]

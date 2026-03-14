@@ -32,7 +32,6 @@ WeaponDatabase="*uid://docosi7bukua1"
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
 
 [editor]
 
@@ -103,15 +102,15 @@ grid_debug={
 ]
 }
 
-[rendering]
-
-textures/canvas_textures/default_texture_filter=0
-2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true
-
 [layer_names]
 
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemy"
 2d_physics/layer_3="projectile"
 2d_physics/layer_4="pickup"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
