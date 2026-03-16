@@ -1,16 +1,16 @@
 extends Node
 
 # Tracks passive levels during a run
-# WHY: Central place for all passive state — weapons/player query modifiers from here
+# Central place for all passive state — weapons/player query modifiers from here
 # Passives reset each run (like weapons), persistent upgrades are in GameState
 
 signal passive_upgraded(passive_id: String, new_level: int)
 
-# All available passives (loaded from .tres files in task 30.3)
+# All available passives 
 var passives: Array[PassiveData] = []
 
 # Per-run levels — maps passive id -> current level
-# WHY: Separate from PassiveData so the Resource stays clean/reusable
+# Separate from PassiveData so the Resource stays clean/reusable
 var passive_levels: Dictionary = {}
 
 
@@ -65,6 +65,6 @@ func get_bonus(passive_id: String) -> float:
 
 
 # Get the modifier (1.0 + bonus) for multiplicative passives like damage/speed
-# WHY: Weapons multiply by this directly: damage *= passive_manager.get_modifier("iron_beak")
+# Weapons multiply by this directly: damage *= passive_manager.get_modifier("iron_beak")
 func get_modifier(passive_id: String) -> float:
 	return 1.0 + get_bonus(passive_id)
