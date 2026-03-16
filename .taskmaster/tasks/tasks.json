@@ -2339,9 +2339,10 @@
               1
             ],
             "details": "Script passive_manager.gd with var passives: Array[PassiveData] = []. Add func load_passives(), func upgrade_passive(index: int), func get_passive_index(name: String) -> int.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test loading empty array, upgrading level beyond max clamps correctly.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-16T21:16:05.860Z"
           },
           {
             "id": 3,
@@ -2382,7 +2383,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-16T04:49:40.250Z"
+        "updatedAt": "2026-03-16T21:16:05.860Z"
       },
       {
         "id": "31",
@@ -2488,7 +2489,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-16T04:49:40.258Z",
+      "lastModified": "2026-03-16T21:16:05.865Z",
       "taskCount": 37,
       "completedCount": 28,
       "tags": [
