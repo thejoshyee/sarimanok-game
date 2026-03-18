@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PassiveData" format=3 uid="uid://b75rf1by0v0wg"]
+
+[ext_resource type="Script" uid="uid://lmfc66jnyop4" path="res://scripts/passives/passive_data.gd" id="1_xipnd"]
+
+[resource]
+script = ExtResource("1_xipnd")
+id = "thick_plumage"
+display_name = "Thick Plumage"
+description = "+15 Max HP per level	"
+effect = "max_hp"
+bonus_per_level = 15.0

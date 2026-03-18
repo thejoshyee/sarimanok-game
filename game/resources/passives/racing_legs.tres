@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PassiveData" format=3 uid="uid://dwtq3rgm4inxu"]
+
+[ext_resource type="Script" uid="uid://lmfc66jnyop4" path="res://scripts/passives/passive_data.gd" id="1_diuku"]
+
+[resource]
+script = ExtResource("1_diuku")
+id = "racing_legs"
+display_name = "Racing Legs"
+description = "+10% Move Speed per level		"
+effect = "move_speed"
+bonus_per_level = 0.1

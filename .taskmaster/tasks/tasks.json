@@ -2353,9 +2353,10 @@
               2
             ],
             "details": "Create 4 .tres files: 'Iron Beak', and 3 others with PRD stats (damage mult, etc.). Implement load_passives() using ResourceLoader to populate passives array by name.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Print passives array after load, verify all 4 loaded with correct initial level=0 and max_level=5.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-18T03:49:08.067Z"
           },
           {
             "id": 4,
@@ -2383,7 +2384,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-16T21:16:05.860Z"
+        "updatedAt": "2026-03-18T03:49:08.067Z"
       },
       {
         "id": "31",
@@ -2489,7 +2490,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-16T21:16:05.865Z",
+      "lastModified": "2026-03-18T03:49:08.070Z",
       "taskCount": 37,
       "completedCount": 28,
       "tags": [

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PassiveData" format=3 uid="uid://1v73owttuiqn"]
+
+[ext_resource type="Script" uid="uid://lmfc66jnyop4" path="res://scripts/passives/passive_data.gd" id="1_3hnp7"]
+
+[resource]
+script = ExtResource("1_3hnp7")
+id = "magnetic_aura"
+display_name = "Magnetic Aura"
+description = "+20% Pickup Range per level		"
+effect = "pickup_range"
+bonus_per_level = 0.2

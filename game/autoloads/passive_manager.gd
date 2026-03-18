@@ -15,7 +15,29 @@ var passive_levels: Dictionary = {}
 
 
 func _ready() -> void:
+	_load_passives()
 	reset()
+
+
+# Load all PassiveData resources from the passives folder
+func _load_passives() -> void:
+	var path = "res://resources/passives/"
+	var dir = DirAccess.open(path)
+	if dir == null:
+		push_warning("PassiveManager: can't open %s" % path)
+		return
+	
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		# Skip .uid files and import files, only load .tres
+		if file_name.ends_with(".tres"):
+			var passive = load(path + file_name) as PassiveData
+			if passive:
+				passives.append(passive)
+		file_name = dir.get_next()
+	
+	print("PassiveManager: loaded %d passives" % passives.size())
 
 
 # Reset all passive levels to 0 — call at start of each run
