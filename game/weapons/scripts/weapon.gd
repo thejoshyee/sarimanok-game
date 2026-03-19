@@ -32,6 +32,10 @@ func _ready() -> void:
 	# Compute initial stats based on current level
 	_apply_level_stats()
 
+	# Recompute stats when passives change (e.g., Iron Beak boosts damage)
+	PassiveManager.passive_upgraded.connect(_on_passive_upgraded)
+
+
 
 # === LEVEL & STATS ===
 
@@ -58,6 +62,10 @@ func _apply_level_stats() -> void:
 	
 	# Use upgrade's damage as final value, fallback to base_damage if no upgrade exists
 	damage = int(upgrade.get("damage", weapon_data.base_damage))
+
+	# Apply Iron Beak passive: +10% damage per level
+	var iron_beak_modifier = PassiveManager.get_modifier("iron_beak")
+	damage = int(damage * iron_beak_modifier)
 
 	# Let subclasses react to stat changes (e.g., update radius, projectile count)
 	_on_stats_changed(upgrade)
@@ -109,3 +117,8 @@ func _start_cooldown() -> void:
 # Called when cooldown_timer finishes - weapon can fire again
 func _on_cooldown_done() -> void:
 	can_fire = true
+
+
+# When any passive upgrades, recompute stats so Iron Beak modifier stays current
+func _on_passive_upgraded(_passive_id: String, _new_level: int) -> void:
+	_apply_level_stats()

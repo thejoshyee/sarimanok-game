@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var weapon_manager = $WeaponManager
 @onready var pickup_area: Area2D = $PickupArea
 @onready var progression: Progression = ProgressionManager
+@onready var pickup_shape: CircleShape2D = $PickupArea/CollisionShape2D.shape
 
 # Runtime State
 var current_hp: float
@@ -29,8 +30,8 @@ func _physics_process(_delta: float) -> void:
 	if input_vector.length() > 1.0:
 		input_vector = input_vector.normalized()
 
-	# apply movement
-	velocity = input_vector * stats.move_speed
+	# Apply Racing Legs passive: +10% move speed per level
+	velocity = input_vector * stats.move_speed * PassiveManager.get_modifier("racing_legs")
 	move_and_slide()
 
 	# handle animation and sprite flipping
@@ -50,7 +51,7 @@ func take_damage(amount: float) -> void:
 
 	# apply damage
 	current_hp -= amount
-	print("Player took ", amount, " damage. HP: ", current_hp, "/", stats.max_hp)
+	print("Player took ", amount, " damage. HP: ", current_hp, "/", get_effective_max_hp())
 
 	# check for death
 	if current_hp <= 0:
@@ -83,9 +84,12 @@ func die() -> void:
 
 func _ready() -> void:
 	add_to_group("player")
-	current_hp = stats.max_hp # start at full health 
+	current_hp = get_effective_max_hp()
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
 	pickup_area.area_entered.connect(_on_pickup_area_area_entered)
+
+	# Update HP when passives change (e.g., Thick Plumage increases max HP)
+	PassiveManager.passive_upgraded.connect(_on_passive_upgraded)
 
 	# connect WeaponManager to this player
 	$WeaponManager.player = self
@@ -96,6 +100,9 @@ func _ready() -> void:
 		print("Peck weapon added successfully")
 	else:
 		print("Failed to add Peck weapon")
+
+	_update_pickup_range()
+
 
 
 
@@ -124,3 +131,23 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 		ProgressionManager.add_gold(gold_value)
 		print("Collected ", gold_value, " gold. Total: ", ProgressionManager.gold)
 		PoolManager.despawn(area)
+
+
+# Returns max HP including passive bonuses (Thick Plumage: +15 HP/level)
+func get_effective_max_hp() -> float:
+	return stats.max_hp + PassiveManager.get_bonus("thick_plumage")
+
+
+# Applies pickup range from stats + Magnetic Aura passive to the collision shape
+func _update_pickup_range() -> void:
+	pickup_shape.radius = stats.pickup_range * PassiveManager.get_modifier("magnetic_aura")
+
+
+func _on_passive_upgraded(passive_id: String, _new_level: int) -> void:
+	# When Thick Plumage upgrades, increase current HP by the per-level bonus
+	if passive_id == "thick_plumage":
+		var bonus = PassiveManager.get_passive("thick_plumage").bonus_per_level
+		current_hp += bonus
+
+	if passive_id == "magnetic_aura":
+		_update_pickup_range()

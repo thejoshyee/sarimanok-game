@@ -2318,7 +2318,7 @@
         "dependencies": [
           "29"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -2380,12 +2380,13 @@
               4
             ],
             "details": "In Player script (WeaponManager or damage func): damage *= passive_manager.get_modifier('Iron Beak') before applying. Add upgrade calls on level-up. Test stacking independently.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Upgrade Iron Beak to lv5, verify 150% damage on Peck/Spiral Feathers; test all 4 passives upgraded independently multiply correctly without interference.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-19T20:33:37.365Z"
           }
         ],
-        "updatedAt": "2026-03-19T05:05:05.916Z"
+        "updatedAt": "2026-03-19T20:33:37.365Z"
       },
       {
         "id": "31",
@@ -2491,9 +2492,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-19T05:05:05.919Z",
+      "lastModified": "2026-03-19T20:33:37.368Z",
       "taskCount": 37,
-      "completedCount": 28,
+      "completedCount": 29,
       "tags": [
         "master"
       ]
