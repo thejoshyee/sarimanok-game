@@ -2367,9 +2367,10 @@
               3
             ],
             "details": "In PassiveManager: match passive_name with cases for all 4 passives returning 1.0 + bonus * get_passive_level(name), handle missing passive gracefully.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test Iron Beak: lv0=1.0, lv5=1.5; verify other passives return correct independent multipliers.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-19T05:05:05.916Z"
           },
           {
             "id": 5,
@@ -2384,7 +2385,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-18T03:49:08.067Z"
+        "updatedAt": "2026-03-19T05:05:05.916Z"
       },
       {
         "id": "31",
@@ -2490,7 +2491,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-18T03:49:08.070Z",
+      "lastModified": "2026-03-19T05:05:05.919Z",
       "taskCount": 37,
       "completedCount": 28,
       "tags": [
