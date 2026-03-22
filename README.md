@@ -1,5 +1,8 @@
-# Sarimanok Survivor
-# Sarimanok hero or something 
+# Sarimanok Survivor (Working Title)
+
+# More Original Title Needed
+## Ideas:
+- Sarimanok Adventures
 
 > *A Filipino folklore-themed bullet heaven where you play as a legendary bird defending the land until dawn*
 
