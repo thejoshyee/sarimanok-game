@@ -2419,9 +2419,10 @@
               1
             ],
             "details": "Set up node hierarchy per specs: Area2D root > Sprite2D (blue for XP, yellow for Gold variants), CollisionShape2D. Configure collision layers to match player/enemy setup from research. Add 0.5s spawn delay with await get_tree().create_timer(0.5).timeout.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Instantiate scene in test scene, verify visual/collision setup, confirm 0.5s delay before active.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-25T05:50:16.239Z"
           },
           {
             "id": 3,
@@ -2443,9 +2444,10 @@
               3
             ],
             "details": "In player or scene script: connect pickup.collected to func(type): if 'xp' call ProgressionManager.add_xp(amount), GameState.gold += amount if 'gold'. Use PoolManager.get_pooled('pickup_xp') instead of instantiate() if pattern exists from research.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Collect 10 XP/5 gold, verify XP bar increases, gold counter updates, level-up triggers if threshold met.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-25T05:50:16.253Z"
           },
           {
             "id": 5,
@@ -2455,12 +2457,13 @@
               4
             ],
             "details": "Set Sprite2D ColorRect color (blue #00aaff for XP, yellow #ffaa00 for gold). Add @export enum PickupType {XP, GOLD}, set per scene. Preload both in enemy scripts for Task 32. Ensure magnetic/passive integration identical.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn both types, verify color/type, 70/30 drop rates in enemy test, collection updates correct stats.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-25T05:50:16.258Z"
           }
         ],
-        "updatedAt": "2026-03-24T05:29:43.295Z"
+        "updatedAt": "2026-03-25T05:50:16.258Z"
       },
       {
         "id": "32",
@@ -2553,7 +2556,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-24T05:29:43.300Z",
+      "lastModified": "2026-03-25T05:50:16.259Z",
       "taskCount": 37,
       "completedCount": 29,
       "tags": [
