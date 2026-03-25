@@ -4,7 +4,7 @@ extends Area2D
 @export var xp_value: int = 10
 
 func reset_state() -> void:
-	# Reset any sttate when reused from pool
+	# Reset any state when reused from pool
 	xp_value = 10
 
 func on_spawn() -> void:
