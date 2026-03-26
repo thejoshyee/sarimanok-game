@@ -2398,7 +2398,7 @@
         "dependencies": [
           "30"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -2432,9 +2432,10 @@
               2
             ],
             "details": "In _process: get player node (via group 'player'), if distance < player.passive_manager.get_modifier('Magnetic Aura') * pickup_range, move_toward(player.global_position, magnet_speed * delta). On body_entered(player): queue_free(), emit 'collected'(type: 'xp' or 'gold').",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn near player without Aura (no movement), enable Aura modifier, verify drift toward player.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-03-26T00:30:28.447Z"
           },
           {
             "id": 4,
@@ -2463,7 +2464,7 @@
             "updatedAt": "2026-03-25T05:50:16.258Z"
           }
         ],
-        "updatedAt": "2026-03-25T05:50:16.258Z"
+        "updatedAt": "2026-03-26T00:30:28.447Z"
       },
       {
         "id": "32",
@@ -2556,9 +2557,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-25T05:50:16.259Z",
+      "lastModified": "2026-03-26T00:30:28.454Z",
       "taskCount": 37,
-      "completedCount": 29,
+      "completedCount": 30,
       "tags": [
         "master"
       ]
