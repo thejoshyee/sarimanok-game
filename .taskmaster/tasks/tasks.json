@@ -2476,16 +2476,18 @@
         "dependencies": [
           "31"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
             "title": "Research Enemy Death Flow and Pickup Signals",
             "description": "Analyze existing Enemy script death() method, queue_free timing, and pickup scenes (XP_Gem.tscn, GoldCoin.tscn) signals like 'collected'.",
             "dependencies": [],
-            "details": "Review codebase for enemy death signals/methods, pickup instantiation patterns, and emitted signals. Note any existing connections or pooling usage.",
-            "status": "pending",
-            "testStrategy": "Document findings in comments: confirm death() exists, signals emitted by pickups, no overlaps with current code."
+            "details": "Review codebase for enemy death signals/methods, pickup instantiation patterns, and emitted signals. Note any existing connections or pooling usage.\n<info added on 2026-03-27T22:10:48.819Z>\nLet me analyze the codebase to verify the implementation status mentioned in the user request.Retroactive audit confirms implementation complete. enemy_duwende.gd die() spawns pickups via PoolManager.spawn(\"pickup_xp_gem\"/\"pickup_gold_coin\") at lines 83/90 with random offset clustering. player.gd _on_pickup_area_area_entered() at line 116 handles collection, calling progression.add_xp() for XP gems and PoolManager.despawn() to return pickups to pool. Gold coin handling also implemented. All pickup spawning uses pool system rather than instantiate(). Work completed under Task 31 (pickup system audit/implementation) and related pooling tasks before Task 32 was generated from PRD.\n</info added on 2026-03-27T22:10:48.819Z>",
+            "status": "done",
+            "testStrategy": "Document findings in comments: confirm death() exists, signals emitted by pickups, no overlaps with current code.",
+            "updatedAt": "2026-03-27T22:10:10.768Z",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -2495,8 +2497,10 @@
               1
             ],
             "details": "Use preload('res://Pickups/XP_Gem.tscn') and preload('res://Pickups/Gold_Coin.tscn'). Define Vector2 offset with randf_range(-8,8) for x/y.",
-            "status": "pending",
-            "testStrategy": "Print spawned position vs enemy position; verify offsets within ±8px range across 10 spawns."
+            "status": "done",
+            "testStrategy": "Print spawned position vs enemy position; verify offsets within ±8px range across 10 spawns.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-27T22:10:10.777Z"
           },
           {
             "id": 3,
@@ -2506,8 +2510,10 @@
               2
             ],
             "details": "Use randf() < 0.7 for XP gem else gold coin. Set pickup.global_position = global_position + offset. Add to get_tree().current_scene.",
-            "status": "pending",
-            "testStrategy": "Kill 20 enemies, count XP/gold ratio approximates 14:6; positions near death location without overlap."
+            "status": "done",
+            "testStrategy": "Kill 20 enemies, count XP/gold ratio approximates 14:6; positions near death location without overlap.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-27T22:10:10.782Z"
           },
           {
             "id": 4,
@@ -2518,8 +2524,10 @@
               3
             ],
             "details": "In enemy script or central manager, use pickup.collected.connect(func(): if XP: ProgressionManager.add_xp(10); if gold: GameState.gold += 5).",
-            "status": "pending",
-            "testStrategy": "Spawn and collect 10 each type; verify XP increases in progression, gold in GameState counter."
+            "status": "done",
+            "testStrategy": "Spawn and collect 10 each type; verify XP increases in progression, gold in GameState counter.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-27T22:10:10.788Z"
           },
           {
             "id": 5,
@@ -2530,10 +2538,13 @@
               3
             ],
             "details": "Research PoolManager API. If exists, adapt spawning: var pickup = PoolManager.get('XP_Gem'); else keep instantiate(). Ensure queue_free() or pool return.",
-            "status": "pending",
-            "testStrategy": "Monitor node count during 50 enemy kills; verify no memory leaks, pooling reduces instantiate calls if implemented."
+            "status": "done",
+            "testStrategy": "Monitor node count during 50 enemy kills; verify no memory leaks, pooling reduces instantiate calls if implemented.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-27T22:10:10.792Z"
           }
-        ]
+        ],
+        "updatedAt": "2026-03-27T22:10:10.792Z"
       },
       {
         "id": 33,
@@ -2613,13 +2624,13 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-26T00:30:28.454Z",
+      "lastModified": "2026-03-27T22:10:10.792Z",
       "taskCount": 37,
-      "completedCount": 30,
+      "completedCount": 31,
       "tags": [
         "master"
       ],
-      "created": "2026-03-26T23:38:00.507Z",
+      "created": "2026-03-27T22:10:26.859Z",
       "description": "Tasks for master context"
     }
   }
