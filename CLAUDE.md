@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Engine:** Godot 4.5
 **Language:** GDScript (not C#)
-**Development Stage:** Pre-production (no game code yet)
+**Development Stage:** Active development (core gameplay systems implemented)
 **Timeline:** 16-week development cycle targeting mid-March 2026 launch
 
 ## Development Commands
@@ -276,26 +276,61 @@ Save location: `user://save_data.json` (Godot handles platform-specific paths)
 ```
 game/
 ├── project.godot         # Godot project configuration
+├── autoloads/           # Singleton scripts (registered in project.godot)
+│   ├── pool_manager.gd
+│   ├── grid_manager.gd
+│   ├── game_timer.gd
+│   ├── spawn_manager.gd
+│   └── passive_manager.gd
+├── resources/           # Resource scripts and .tres data files
+│   ├── progression.gd   # ProgressionManager autoload
+│   ├── player_stats.gd
+│   ├── pool_config.gd
+│   └── passives/        # PassiveData .tres files
 ├── scenes/              # .tscn scene files
-│   ├── main.tscn
+│   ├── levels/          # Main game level scenes
 │   ├── player/
 │   ├── enemies/
-│   ├── weapons/
-│   └── ui/
+│   │   └── duwende/
+│   ├── pickups/
+│   ├── effects/
+│   ├── ui/
+│   └── tests/           # Test/sandbox scenes
 ├── scripts/             # .gd GDScript files
-│   ├── autoload/        # Singletons (GameState.gd)
+│   ├── core/            # main.gd, enemy_spawner.gd
 │   ├── player/
-│   ├── enemies/
-│   └── weapons/
-├── sprites/             # Art assets (PNG)
-│   ├── characters/
-│   ├── enemies/
-│   ├── weapons/
-│   └── ui/
-└── audio/               # Sound effects and music
-    ├── music/
-    └── sfx/
+│   ├── enemies/         # enemy_duwende.gd, debuff.gd, debuff_handler.gd
+│   ├── pickups/         # xp_gem.gd, gold_coin.gd
+│   ├── passives/        # passive_data.gd
+│   ├── effects/         # death_particles.gd
+│   ├── pooling/         # typed_pool.gd
+│   ├── ui/              # hud.gd, level_up_panel.gd, pause_menu.gd
+│   └── tests/           # Test scripts
+├── weapons/             # Weapon system (self-contained module)
+│   ├── data/            # WeaponData .tres files (peck, wing_slap, etc.)
+│   ├── scenes/          # Weapon .tscn files
+│   ├── scripts/         # weapon.gd, weapon_manager.gd, weapon_database.gd, etc.
+│   └── tests/           # Weapon test scripts
+├── assets/              # Art, audio, and theme resources
+│   ├── sprites/
+│   ├── audio/
+│   ├── fonts/
+│   ├── themes/
+│   └── tilesets/
+└── test_reports/        # Generated test output
 ```
+
+### Registered Autoloads (project.godot)
+
+| Name | Path | Purpose |
+|------|------|---------|
+| PoolManager | `res://autoloads/pool_manager.gd` | Object pooling for enemies, projectiles, pickups |
+| GridManager | `res://autoloads/grid_manager.gd` | Spatial grid for collision optimization |
+| ProgressionManager | `res://resources/progression.gd` | XP, leveling, `level_up` signal |
+| GameTimer | `res://autoloads/game_timer.gd` | 30-minute run timer |
+| SpawnManager | `res://autoloads/spawn_manager.gd` | Enemy wave spawning |
+| WeaponDatabase | `res://weapons/scripts/weapon_database.gd` | Central weapon registry |
+| PassiveManager | `res://autoloads/passive_manager.gd` | Per-run passive tracking |
 
 ## Key Documentation
 
