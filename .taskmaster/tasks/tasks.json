@@ -2558,7 +2558,67 @@
           "30"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Fix Weapon Pool Logic in get_choices()",
+            "description": "Correct the get_choices function to properly build pool excluding maxed weapons and adding unowned weapons only when slots available",
+            "dependencies": [],
+            "details": "Update LevelUpManager.get_choices(): Create separate lists for upgrades (weapon.level < max_level) and new weapons (slots_available && !weapon.owned). Append weapons to pool from both lists without duplication. Use weapon_manager.weapons and check weapon_manager.weapon_slots.length() < MAX_WEAPONS=6.",
+            "status": "pending",
+            "testStrategy": "Verify pool excludes maxed weapons, includes upgrades for owned weapons, adds new weapons only when slots <6"
+          },
+          {
+            "id": 2,
+            "title": "Implement Passive Pool Building",
+            "description": "Add passive collection logic to get_choices() respecting max_level=5",
+            "dependencies": [
+              1
+            ],
+            "details": "In get_choices(), after weapons: for passive in passive_manager.passives: if passive.level < passive.max_level: pool.append(passive). Ensure PassiveManager integration from task 30 works correctly with existing 4 passives.",
+            "status": "pending",
+            "testStrategy": "Test with all passives at level 0 (all eligible), some at level 5 (excluded), verify pool contains only eligible passives"
+          },
+          {
+            "id": 3,
+            "title": "Add Edge Case Handling and Pool Validation",
+            "description": "Handle cases where pool has fewer than 3 choices and ensure always valid selection",
+            "dependencies": [
+              1,
+              2
+            ],
+            "details": "After building pool: if pool.size() < count: handle gracefully (log warning, return all available, or fallback). Implement slots_available check: return weapon_manager.weapon_slots.size() < WeaponManager.MAX_WEAPONS. Shuffle and slice(0, count) only if sufficient.",
+            "status": "pending",
+            "testStrategy": "Test endgame: all weapons maxed/slots full, all passives maxed - verify returns available items or handles gracefully"
+          },
+          {
+            "id": 4,
+            "title": "Connect LevelUpManager to ProgressionManager Signal",
+            "description": "Wire get_choices() to level_up signal and replace hardcoded choices in level_up_panel",
+            "dependencies": [
+              1,
+              2,
+              3
+            ],
+            "details": "In LevelUpManager: connect to ProgressionManager.level_up signal. On emit: choices = get_choices(3); emit custom signal with choices array. In level_up_panel.gd: replace hardcoded stats with dynamic choices received from LevelUpManager.",
+            "status": "pending",
+            "testStrategy": "Trigger level_up signal manually, verify level_up_panel receives exactly 3 choices from dynamic pool"
+          },
+          {
+            "id": 5,
+            "title": "Test Early/Mid/Late Game Pool Scenarios",
+            "description": "Create comprehensive test suite covering all pool generation scenarios",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Test cases: 1) Early game (empty slots, low levels), 2) Mid game (some maxed, mixed owned/unowned), 3) Late game (slots full, many maxed), 4) Edge case (no choices available), 5) Verify NEW! vs +1 distinction passes to display logic.",
+            "status": "pending",
+            "testStrategy": "Use debug scene: manipulate weapon/passive levels and slots, call get_choices() repeatedly, assert pool composition matches expected for each scenario"
+          }
+        ]
       },
       {
         "id": 34,
