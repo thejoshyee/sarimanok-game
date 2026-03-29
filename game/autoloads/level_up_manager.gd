@@ -24,7 +24,17 @@ func get_choices(count: int = 3) -> Array:
 		var unowned: Array[WeaponData] = WeaponDatabase.get_unowned_weapons(weapon_manager)
 		for data in unowned:
 			pool.append({ "type": "new_weapon", "data": data })
-	
+
+	# --- Passive upgrades: any passive below max level ---
+	for passive in PassiveManager.passives:
+		var current_level = PassiveManager.get_level(passive.id)
+		if current_level < passive.max_level:
+			pool.append({ "type": "upgrade_passive", "data": passive })
+
+	# --- Edge case: fewer choices than requested ---
+	if pool.size() < count:
+		push_warning("LevelUpManager: only %d choices available (requested %d)" % [pool.size(), count])
+
 	# Shuffle and return up to 'count' choices
 	pool.shuffle()
 	return pool.slice(0, mini(count, pool.size()))
