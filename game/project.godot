@@ -27,6 +27,7 @@ GameTimer="*res://autoloads/game_timer.gd"
 SpawnManager="*res://autoloads/spawn_manager.gd"
 WeaponDatabase="*uid://docosi7bukua1"
 PassiveManager="*uid://c4ib3ycc15c4w"
+LevelUpManager="*uid://bif4ju21fljey"
 
 [display]
 

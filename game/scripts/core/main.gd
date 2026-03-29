@@ -53,6 +53,9 @@ func _ready():
 
 	# Give level_up_panel access to weapon_manager for dynamic choices
 	level_up_panel.weapon_manager = $Player/WeaponManager
+	# Give LevelUpManager access to weapon_manager for choice pool building
+	LevelUpManager.weapon_manager = $Player/WeaponManager
+
 
 
 
