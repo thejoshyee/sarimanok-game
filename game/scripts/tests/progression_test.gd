@@ -1,3 +1,6 @@
+# NOTE: This test scene is outdated — level_up_panel now uses
+# show_level_up_with_choices() via LevelUpManager, not show_level_up()
+
 extends Node
 
 @onready var player = $SarimanokPlayer
