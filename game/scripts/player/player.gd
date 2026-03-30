@@ -66,6 +66,12 @@ func take_damage(amount: float) -> void:
 	sprite.modulate.a = 1.0 # make sure to be visible again
 
 
+
+func heal(amount: float) -> void:
+	current_hp = min(current_hp + amount, get_effective_max_hp())
+	print("Player healed ", amount, " HP. HP: ", current_hp, "/", get_effective_max_hp())
+
+
 func start_invincibility_blink() -> void:
 	# blink 5 times during invincibility (0.5s / 0.1s per blink)
 	for i in range(5):

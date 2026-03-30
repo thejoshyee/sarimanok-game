@@ -49,7 +49,7 @@ func _ready():
 	$Camera2D.position_smoothing_enabled = true
 	$Camera2D.position_smoothing_speed = 5.0
 
-	ProgressionManager.level_up.connect(level_up_panel.show_level_up)
+	ProgressionManager.level_up.connect(_on_level_up)
 
 	# Give level_up_panel access to weapon_manager for dynamic choices
 	level_up_panel.weapon_manager = $Player/WeaponManager
@@ -113,6 +113,14 @@ func _process(_delta):
 	# DEBUG: Show FPS in window title
 	get_window().title = "Sarimanok - FPS: " + str(Engine.get_frames_per_second())
 
+
+func _on_level_up(new_level: int) -> void:
+	var choices = LevelUpManager.get_choices(3)
+	if choices.size() == 0:
+		# All upgrades maxed — heal instead of showing panel
+		LevelUpManager.grant_consolation_heal()
+		return
+	level_up_panel.show_level_up_with_choices(new_level, choices)
 
 
 func test_spawn_xp_gems():

@@ -38,3 +38,16 @@ func get_choices(count: int = 3) -> Array:
 	# Shuffle and return up to 'count' choices
 	pool.shuffle()
 	return pool.slice(0, mini(count, pool.size()))
+
+
+# When all upgrades are maxed, grant a consolation HP heal instead of showing panel
+const HEAL_PERCENT: float = 0.10  # 10% of max HP
+
+func grant_consolation_heal() -> void:
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("heal"):
+		var heal_amount = int(player.get_effective_max_hp() * HEAL_PERCENT)
+		player.heal(heal_amount)
+		print("LevelUpManager: Pool empty — healed player for ", heal_amount, " HP")
+	else:
+		push_warning("LevelUpManager: No player or heal method found for consolation heal")
