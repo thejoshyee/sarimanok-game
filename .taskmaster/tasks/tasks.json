@@ -2606,10 +2606,11 @@
               2,
               3
             ],
-            "details": "In LevelUpManager: connect to ProgressionManager.level_up signal. On emit: choices = get_choices(3); emit custom signal with choices array. In level_up_panel.gd: replace hardcoded stats with dynamic choices received from LevelUpManager.",
-            "status": "pending",
+            "details": "In LevelUpManager: connect to ProgressionManager.level_up signal. On emit: choices = get_choices(3); emit custom signal with choices array. In level_up_panel.gd: replace hardcoded stats with dynamic choices received from LevelUpManager.\n<info added on 2026-04-01T00:55:29.162Z>\nCompleted as part of subtask 33.3. Implementation uses a direct function call pattern: main.gd _on_level_up() calls LevelUpManager.get_choices(3) at line 118, then passes results to level_up_panel.show_level_up_with_choices() at line 123. Hardcoded stat choices replaced with dynamic weapon and passive choices. Chose direct function call from main.gd over custom signal on LevelUpManager for simplicity — same result, less indirection. Key files: main.gd lines 117-123, level_up_manager.gd get_choices(), level_up_panel.gd show_level_up_with_choices().\n</info added on 2026-04-01T00:55:29.162Z>",
+            "status": "done",
             "testStrategy": "Trigger level_up signal manually, verify level_up_panel receives exactly 3 choices from dynamic pool",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-01T00:54:13.167Z"
           },
           {
             "id": 5,
@@ -2627,7 +2628,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-03-30T22:57:20.914Z"
+        "updatedAt": "2026-04-01T00:54:13.167Z"
       },
       {
         "id": 34,
@@ -2693,13 +2694,13 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-03-30T22:57:20.916Z",
+      "lastModified": "2026-04-01T00:54:13.169Z",
       "taskCount": 37,
       "completedCount": 31,
       "tags": [
         "master"
       ],
-      "created": "2026-03-30T22:58:12.904Z",
+      "created": "2026-04-01T00:55:13.719Z",
       "description": "Tasks for master context"
     }
   }
