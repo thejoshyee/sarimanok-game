@@ -3,6 +3,7 @@
 # More Original Title Needed
 ## Ideas:
 - Sarimanok Adventures
+- Sarimanok Fighters
 
 > *A Filipino folklore-themed bullet heaven where you play as a legendary bird defending the land until dawn*
 
