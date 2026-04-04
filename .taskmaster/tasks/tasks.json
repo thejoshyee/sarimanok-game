@@ -2663,9 +2663,10 @@
               1
             ],
             "details": "In _ready(), call passive_manager.passive_changed.connect(_on_passive_changed). Implement func _on_passive_changed(): recalculate max_hp, speed, pickup_range using the same formulas, then apply changes (e.g., update health bar if max_hp changes). Use Godot 4.3 signal syntax.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Manually emit passive_changed signal in editor; verify stats update immediately via print statements.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-04T22:17:59.033Z"
           },
           {
             "id": 3,
@@ -2707,7 +2708,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-04T21:55:31.183Z"
+        "updatedAt": "2026-04-04T22:17:59.033Z"
       },
       {
         "id": "35",
@@ -2759,7 +2760,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-04T21:55:31.189Z",
+      "lastModified": "2026-04-04T22:17:59.033Z",
       "taskCount": 37,
       "completedCount": 32,
       "tags": [
