@@ -144,11 +144,9 @@ func get_effective_max_hp() -> float:
 	return stats.max_hp + PassiveManager.get_bonus("thick_plumage")
 
 
-# Small collection radius — pickups are collected when they reach the player
-# Magnetic drift in the pickup scripts handles pulling items from farther away
+# Apply Magnetic Aura passive: +20% pickup range per level
 func _update_pickup_range() -> void:
-	pickup_shape.radius = 16.0
-
+	pickup_shape.radius = stats.pickup_range * PassiveManager.get_modifier("magnetic_aura")
 
 
 func _on_passive_upgraded(passive_id: String, _new_level: int) -> void:
