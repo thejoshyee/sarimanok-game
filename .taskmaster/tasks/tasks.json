@@ -2691,9 +2691,10 @@
               2
             ],
             "details": "Get pickup_area: Area2D child node, shape: CircleShape2D = pickup_area/CollisionShape2D.shape. In stat update func: shape.radius = pickup_range. Or scale pickup_area.scale = Vector2(pickup_range / base_range, pickup_range / base_range) if using fixed shape.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn pickups outside base range=50; with Magnetic Aura lv5 (range*2=100), verify they magnetize correctly.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-05T19:25:43.331Z"
           },
           {
             "id": 5,
@@ -2709,7 +2710,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-05T19:11:53.042Z"
+        "updatedAt": "2026-04-05T19:25:43.331Z"
       },
       {
         "id": "35",
@@ -2761,7 +2762,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-05T19:11:53.042Z",
+      "lastModified": "2026-04-05T19:25:43.332Z",
       "taskCount": 37,
       "completedCount": 32,
       "tags": [
