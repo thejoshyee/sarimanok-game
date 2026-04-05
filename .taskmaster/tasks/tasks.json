@@ -2677,9 +2677,10 @@
               2
             ],
             "details": "In _physics_process(), use calculated 'speed' var for velocity = input_vector * speed. For HP, if health script exists, call health.set_max_health(max_hp); else add simple health var clamped to max_hp. Ensure current_hp scales if max_hp increases.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Move player with Racing Legs lv5 (speed*1.5=300); take damage to verify HP respects new max_hp.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-05T19:11:53.042Z"
           },
           {
             "id": 4,
@@ -2708,7 +2709,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-04T22:17:59.033Z"
+        "updatedAt": "2026-04-05T19:11:53.042Z"
       },
       {
         "id": "35",
@@ -2760,7 +2761,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-04T22:17:59.033Z",
+      "lastModified": "2026-04-05T19:11:53.042Z",
       "taskCount": 37,
       "completedCount": 32,
       "tags": [
