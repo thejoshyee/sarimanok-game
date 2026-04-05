@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cokoia2vy57u7"]
+
+[ext_resource type="PackedScene" uid="uid://cpkbwqsncisvf" path="res://scenes/player/player.tscn" id="1_3o5o7"]
+[ext_resource type="Script" uid="uid://dla0iay3krino" path="res://scripts/tests/passive_stat_test.gd" id="1_cf0xx"]
+
+[node name="PassiveStatTest" type="Node2D" unique_id=2134509353]
+script = ExtResource("1_cf0xx")
+
+[node name="SarimanokPlayer" parent="." unique_id=1345368187 instance=ExtResource("1_3o5o7")]

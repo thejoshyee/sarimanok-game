@@ -2642,7 +2642,7 @@
           "30",
           "31"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -2705,12 +2705,13 @@
               4
             ],
             "details": "Use a test level-up UI or script to set passives: Thick Plumage lv5 (+75HP, total 175), Racing Legs lv5 (+50%, speed*1.5), Magnetic Aura lv5 (+100%, range*2). Test stacking: all three maxed. Verify no interference with Iron Beak damage.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run tests: HP=base+75, speed=base*1.5, range=base*2.0 independently; combinations multiplicative. Use Godot debugger for precise values.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-05T19:34:54.617Z"
           }
         ],
-        "updatedAt": "2026-04-05T19:25:43.331Z"
+        "updatedAt": "2026-04-05T19:34:54.617Z"
       },
       {
         "id": "35",
@@ -2762,9 +2763,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-05T19:25:43.332Z",
+      "lastModified": "2026-04-05T19:34:54.617Z",
       "taskCount": 37,
-      "completedCount": 32,
+      "completedCount": 33,
       "tags": [
         "master"
       ]
