@@ -2743,10 +2743,11 @@
             "dependencies": [
               1
             ],
-            "details": "In HUD.tscn, add ProgressBar named XPBar under CanvasLayer. Set anchors and position for top-left (e.g., margin 10px). Connect max_value to player.xp_to_next and value to player.current_xp via signals.",
-            "status": "pending",
+            "details": "In HUD.tscn, add ProgressBar named XPBar under CanvasLayer. Set anchors and position for top-left (e.g., margin 10px). Connect max_value to player.xp_to_next and value to player.current_xp via signals.\n<info added on 2026-04-07T18:10:05.190Z>\nDesign decision confirmed: Using full-width XP bar (Vampire Survivors style) instead of top-left with 10px margin. The XPBar node already exists in hud.tscn at line 24-29 with anchor_right=1.0 and anchors_preset=10 (top-wide), stretching across the full top of the screen. The HUD script (hud.gd lines 44-52) already connects to ProgressionManager.xp_changed signal and implements smooth tween updates via create_tween() with TRANS_SINE easing. This subtask is already fully implemented and requires no additional work.\n</info added on 2026-04-07T18:10:05.190Z>",
+            "status": "done",
             "testStrategy": "Manually set player XP values in editor; confirm bar scales and fills correctly without tween.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-07T18:10:22.773Z"
           },
           {
             "id": 3,
@@ -2786,7 +2787,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-06T20:01:32.683Z"
+        "updatedAt": "2026-04-07T18:10:22.773Z"
       },
       {
         "id": "36",
@@ -2825,7 +2826,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-06T20:01:32.683Z",
+      "lastModified": "2026-04-07T18:10:22.773Z",
       "taskCount": 37,
       "completedCount": 33,
       "tags": [
