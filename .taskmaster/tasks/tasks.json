@@ -2770,9 +2770,10 @@
               1
             ],
             "details": "In HUD.tscn, add Label named TimerLabel next to XPBar, top-left positioned. In hud.gd _process(): read GameTimer.elapsed_time, format as MM:SS via format_time func, set label.text = tr('survival_time') % formatted_time.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run game for 2+ minutes; confirm timer increments smoothly (e.g., 01:30 at 90s) and localizes correctly.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-09T22:23:47.221Z"
           },
           {
             "id": 5,
@@ -2788,7 +2789,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-09T06:25:13.539Z"
+        "updatedAt": "2026-04-09T22:23:47.221Z"
       },
       {
         "id": "36",
@@ -2827,7 +2828,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-09T06:25:13.540Z",
+      "lastModified": "2026-04-09T22:23:47.221Z",
       "taskCount": 37,
       "completedCount": 33,
       "tags": [
