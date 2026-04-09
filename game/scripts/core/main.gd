@@ -49,15 +49,14 @@ func _ready():
 	$Camera2D.position_smoothing_enabled = true
 	$Camera2D.position_smoothing_speed = 5.0
 
-	ProgressionManager.level_up.connect(_on_level_up)
+	$HUD.level_up_bar_complete.connect(_on_level_up)
 
 	# Give level_up_panel access to weapon_manager for dynamic choices
 	level_up_panel.weapon_manager = $Player/WeaponManager
 	# Give LevelUpManager access to weapon_manager for choice pool building
 	LevelUpManager.weapon_manager = $Player/WeaponManager
 
-
-
+	level_up_panel.upgrade_selected.connect(func(_type, _level): $HUD._on_level_up_choice_made())
 
 
 func _draw(show_debug_grid: bool = true):

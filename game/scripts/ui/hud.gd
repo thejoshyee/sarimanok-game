@@ -1,9 +1,18 @@
 extends CanvasLayer
 
+signal level_up_bar_complete(new_level: int)
+
 @onready var hp_label: Label = $MarginContainer/VBoxContainer/HPLabel
 @onready var cooldown_label: Label = $MarginContainer/VBoxContainer/CooldownLabel
 @onready var stats_label: Label = $MarginContainer/VBoxContainer/StatsLabel
 @onready var xp_bar: ProgressBar = $XPBar
+
+# Tracks whether we're mid-level-up animation
+var _leveling_up := false
+var _old_max_value: float = 0.0
+
+var _pending_xp: int = 0
+var _pending_xp_needed: int = 0
 
 
 func _ready() -> void:
@@ -14,6 +23,9 @@ func _ready() -> void:
 
 	# Connect to XP signal — "ring the bell, HUD listens"
 	ProgressionManager.xp_changed.connect(_on_xp_changed)
+
+	# Also listen for level-ups so we can do the "fill to full" animation
+	ProgressionManager.level_up.connect(_on_level_up)
 
 	# Set initial bar state
 	xp_bar.max_value = ProgressionManager.get_xp_for_level(ProgressionManager.current_level)
@@ -42,11 +54,37 @@ func update_weapon_stats(player: CharacterBody2D) -> void:
 
 
 func _on_xp_changed(current_xp: int, xp_needed: int) -> void:
-	# Update the goal (max) in case we leveled up
-	xp_bar.max_value = xp_needed
+	if _leveling_up:
+		# Just store the values — _on_level_up's tween will handle the bar
+		_pending_xp = current_xp
+		_pending_xp_needed = xp_needed
+		return
 	
-	# Smooth tween — like a CSS transition on the bar width
+	xp_bar.max_value = xp_needed
 	var tween = create_tween()
 	tween.tween_property(xp_bar, "value", current_xp, 0.3) \
+		.set_trans(Tween.TRANS_SINE) \
+		.set_ease(Tween.EASE_IN_OUT)
+
+func _on_level_up(new_level: int) -> void:
+	_old_max_value = xp_bar.max_value
+	_leveling_up = true
+	var tween = create_tween()
+	tween.tween_property(xp_bar, "value", _old_max_value, 0.3) \
+		.set_trans(Tween.TRANS_SINE) \
+		.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_callback(func():
+		# Show panel while bar is still full
+		level_up_bar_complete.emit(new_level)
+	)
+
+
+func _on_level_up_choice_made() -> void:
+	# Panel is closing — reset bar to overflow XP
+	_leveling_up = false
+	xp_bar.max_value = _pending_xp_needed
+	xp_bar.value = 0.0
+	var tween = create_tween()
+	tween.tween_property(xp_bar, "value", _pending_xp, 0.3) \
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_IN_OUT)

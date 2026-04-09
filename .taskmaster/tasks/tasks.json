@@ -2757,9 +2757,10 @@
               2
             ],
             "details": "In hud.gd, on xp_changed signal: create Tween to interpolate XPBar.value from current to target over 0.3s. On level_up: tween to 1.0, then reset to 0 after brief delay. Use player signals.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Gain XP incrementally; verify smooth tweening. Trigger level-up; confirm bar fills fully then resets smoothly.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-09T06:25:13.539Z"
           },
           {
             "id": 4,
@@ -2787,7 +2788,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-07T18:10:22.773Z"
+        "updatedAt": "2026-04-09T06:25:13.539Z"
       },
       {
         "id": "36",
@@ -2826,7 +2827,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-07T18:10:22.773Z",
+      "lastModified": "2026-04-09T06:25:13.540Z",
       "taskCount": 37,
       "completedCount": 33,
       "tags": [
