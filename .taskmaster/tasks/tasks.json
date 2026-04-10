@@ -2723,7 +2723,7 @@
         "dependencies": [
           "28"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -2784,12 +2784,13 @@
               4
             ],
             "details": "Adjust XPBar and TimerLabel margins/anchors for 640x360 viewport. Apply UI theme if available. Test signal updates, tweening, level-up reset, timer accuracy against backgrounds.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Level up 3+ times: verify bar tweens/resets, timer runs continuously. Test readability on varied backgrounds; spawn enemies/XP pickups for real-time updates.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-10T22:34:15.742Z"
           }
         ],
-        "updatedAt": "2026-04-09T22:23:47.221Z"
+        "updatedAt": "2026-04-10T22:34:15.742Z"
       },
       {
         "id": "36",
@@ -2828,9 +2829,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-09T22:23:47.221Z",
+      "lastModified": "2026-04-10T22:34:15.748Z",
       "taskCount": 37,
-      "completedCount": 33,
+      "completedCount": 34,
       "tags": [
         "master"
       ]
