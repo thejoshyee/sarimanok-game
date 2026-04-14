@@ -2824,9 +2824,10 @@
               1
             ],
             "details": "Add AudioStreamPlayer2D as child to XP gem pickup root and enemy root nodes. For player level-up, add to player scene. Set autoplay=false, bus='SFX'. Consider object pooling: ensure AudioStreamPlayer2D is reused properly in pooled enemies/pickups per existing architecture. Use AudioStreamPlayer (non-2D) for UI-like level-up if non-spatial.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Inspect scenes in editor: verify nodes exist with correct bus, no autoplay. Run scene and check no errors on node instantiation.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-14T22:55:45.702Z"
           },
           {
             "id": 3,
@@ -2866,7 +2867,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-13T05:48:28.212Z"
+        "updatedAt": "2026-04-14T22:55:45.702Z"
       },
       {
         "id": "37",
@@ -2891,7 +2892,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-13T05:48:28.213Z",
+      "lastModified": "2026-04-14T22:55:45.703Z",
       "taskCount": 37,
       "completedCount": 34,
       "tags": [

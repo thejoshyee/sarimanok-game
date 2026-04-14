@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://141mxbakt2wp" path="res://scripts/enemies/enemy_duwende.gd" id="1_tyx3a"]
 [ext_resource type="Script" uid="uid://oc2uig8ktdeb" path="res://scripts/enemies/debuff_handler.gd" id="2_4db11"]
+[ext_resource type="AudioStream" uid="uid://c2wt2mfr60wky" path="res://assets/audio/sfx/enemy_hit.wav" id="3_lv0fq"]
+[ext_resource type="AudioStream" uid="uid://b1yfkwq146fyj" path="res://assets/audio/sfx/enemy_death.wav" id="4_pj2tg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvohl"]
 radius = 16.0
@@ -33,3 +35,11 @@ shape = SubResource("CircleShape2D_tyx3a")
 [node name="DebuffHandler" type="Node" parent="." unique_id=974833638]
 script = ExtResource("2_4db11")
 metadata/_custom_type_script = "uid://oc2uig8ktdeb"
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="." unique_id=1845086177]
+stream = ExtResource("3_lv0fq")
+bus = &"SFX"
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=850615072]
+stream = ExtResource("4_pj2tg")
+bus = &"SFX"
