@@ -126,7 +126,12 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 		var xp_value = area.xp_value
 		progression.add_xp(xp_value)
 		print("Collected ", xp_value, " XP. Total: ", progression.current_xp, " Level: ", progression.current_level)
-		
+
+		# Play pickup SFX on the gem before despawning
+		var sfx := area.get_node_or_null("AudioStreamPlayer2D")
+		if sfx:
+			sfx.play()
+
 		# Despawn the gem back to the pool
 		PoolManager.despawn(area)
 

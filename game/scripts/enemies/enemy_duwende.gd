@@ -56,6 +56,13 @@ func initialize_stats(elapsed_minutes: float) -> void:
 # Called when this enemy takes damage from weapons / projectiles
 func take_damage(amount: int) -> void:
 	current_hp -= amount
+
+	# Louder hits = louder sound, clamped to avoid extremes
+	var hit_sfx := get_node_or_null("HitSFX") as AudioStreamPlayer2D
+	if hit_sfx:
+		hit_sfx.volume_db = clamp(-10.0 + (amount / 10.0), -20.0, 0.0)
+		hit_sfx.play()
+
 	if current_hp <= 0:
 		die()
 
@@ -63,6 +70,11 @@ func take_damage(amount: int) -> void:
 # Handle enemy death - spawn drops and return to pool
 func die() -> void:
 	var drop_pos = global_position
+
+	# Play death SFX before despawn (pooling may cut tail — acceptable for now)
+	var death_sfx := get_node_or_null("DeathSFX") as AudioStreamPlayer2D
+	if death_sfx:
+		death_sfx.play()
 
 	# Spawn death particle effect at enemy position
 	var particles = DeathParticles.instantiate()

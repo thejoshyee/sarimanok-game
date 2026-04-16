@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyi8td7balb1c"]
+[gd_scene load_steps=6 format=3 uid="uid://cyi8td7balb1c"]
 
 [ext_resource type="Script" uid="uid://141mxbakt2wp" path="res://scripts/enemies/enemy_duwende.gd" id="1_0qaf4"]
+[ext_resource type="AudioStream" uid="uid://c2wt2mfr60wky" path="res://assets/audio/sfx/enemy_hit.wav" id="2_hit"]
+[ext_resource type="AudioStream" uid="uid://b1yfkwq146fyj" path="res://assets/audio/sfx/enemy_death.wav" id="3_death"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvohl"]
 radius = 16.0
@@ -33,3 +35,11 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 shape = SubResource("CircleShape2D_tyx3a")
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hit")
+bus = &"SFX"
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_death")
+bus = &"SFX"

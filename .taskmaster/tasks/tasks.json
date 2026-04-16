@@ -2837,9 +2837,10 @@
               2
             ],
             "details": "In XP pickup script, call $AudioStreamPlayer2D.stream = preload('xp_pickup.ogg'); play() on collection signal. For enemies: on hit signal, modulate volume by damage amount (e.g., volume_db = -10 + (damage/10)); play enemy_hit.ogg. On death, play enemy_death.ogg. Integrate with existing pooling and autoload patterns.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Trigger events manually: collect XP, hit enemy (verify volume scales), kill enemy; confirm sounds play without overlap or pooling issues.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-16T00:06:19.388Z"
           },
           {
             "id": 4,
@@ -2865,9 +2866,21 @@
             "status": "pending",
             "testStrategy": "Run full core loop multiple times: verify all 4 SFX trigger correctly, volume modulates on hits, slider adjusts SFX independently, no pops/clicks or pooling desyncs.",
             "parentId": "undefined"
+          },
+          {
+            "id": 6,
+            "title": "Add Gold Coin Pickup SFX",
+            "description": "Source a distinct coin jingle, add AudioStreamPlayer2D to gold_coin scene, and wire trigger on pickup.",
+            "dependencies": [
+              3
+            ],
+            "details": "Obtain or generate a short coin pickup SFX (BFXR 'pickup/coin' preset works) at assets/audio/sfx/gold_pickup.wav. Add AudioStreamPlayer2D child to scenes/pickups/gold_coin.tscn with stream assigned and bus='SFX'. In player.gd _on_pickup_area_area_entered, play the sfx on the gold coin area before PoolManager.despawn(area), mirroring the XP gem pattern.",
+            "status": "pending",
+            "testStrategy": "Collect a gold coin in-game: verify distinct coin sound plays on pickup without cutting XP pickup SFX or overlapping incorrectly. Confirm SFX bus volume slider affects it.",
+            "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-14T22:55:45.702Z"
+        "updatedAt": "2026-04-16T00:06:19.388Z"
       },
       {
         "id": "37",
@@ -2892,7 +2905,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-14T22:55:45.703Z",
+      "lastModified": "2026-04-16T00:06:19.389Z",
       "taskCount": 37,
       "completedCount": 34,
       "tags": [
