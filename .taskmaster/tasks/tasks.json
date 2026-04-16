@@ -2850,9 +2850,10 @@
               2
             ],
             "details": "In player or progression script, on level_up signal during pause (e.g., get_tree().paused == true), use AudioStreamPlayer (non-2D for UI) with level_up.ogg on 'SFX' bus. Ensure it respects pause mode (set to Process or PauseDisabled). Preload stream for instant playback.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Trigger level-up while paused: verify sound plays clearly over music/UI, respects SFX bus mute, no spatial positioning artifacts.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-16T21:33:18.499Z"
           },
           {
             "id": 5,
@@ -2880,7 +2881,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-16T00:06:19.388Z"
+        "updatedAt": "2026-04-16T21:33:18.499Z"
       },
       {
         "id": "37",
@@ -2905,7 +2906,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-16T00:06:19.389Z",
+      "lastModified": "2026-04-16T21:33:18.556Z",
       "taskCount": 37,
       "completedCount": 34,
       "tags": [

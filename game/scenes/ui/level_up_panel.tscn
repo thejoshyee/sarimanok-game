@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqn6pd306mb6r" path="res://scripts/ui/level_up_panel.gd" id="1_fclbr"]
 [ext_resource type="Theme" uid="uid://dvk133yfs250h" path="res://assets/themes/level_up_theme.tres" id="2_3u7we"]
+[ext_resource type="AudioStream" uid="uid://b1fnyggv0lqd1" path="res://assets/audio/sfx/level_up.wav" id="3_we5xh"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=513594816]
 process_mode = 3
@@ -68,3 +69,7 @@ theme_override_font_sizes/font_size = 16
 text = "Arrow Keys + Enter to choose"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LevelUpSFX" type="AudioStreamPlayer" parent="." unique_id=733053652]
+stream = ExtResource("3_we5xh")
+bus = &"SFX"

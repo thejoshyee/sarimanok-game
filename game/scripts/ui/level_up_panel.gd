@@ -4,6 +4,7 @@ signal upgrade_selected(upgrade_type: String, level: int)
 
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player")
 @onready var progression: Progression = ProgressionManager
+@onready var level_up_sfx: AudioStreamPlayer = $LevelUpSFX
 
 var weapon_manager: Node = null
 
@@ -91,7 +92,8 @@ func _display_choices() -> void:
 	
 	get_tree().paused = true
 	visible = true
-	
+	level_up_sfx.play()  # panel is the single funnel for both show_level_up paths, so one trigger covers all level-up cases
+
 	if visible_buttons.size() > 0:
 		visible_buttons[0].grab_focus()
 

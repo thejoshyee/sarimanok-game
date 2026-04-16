@@ -18,6 +18,10 @@ config/name="sari-manok"
 run/main_scene="uid://cxqxr03wo51p8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout="uid://cp44mb2e6ymxy"
+
 [autoload]
 
 PoolManager="*res://autoloads/pool_manager.gd"
@@ -33,6 +37,8 @@ LevelUpManager="*uid://bif4ju21fljey"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 
 [editor]
