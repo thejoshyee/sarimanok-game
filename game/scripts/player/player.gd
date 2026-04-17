@@ -14,6 +14,8 @@ extends CharacterBody2D
 var current_hp: float
 var is_invincible: bool = false
 var invincibility_duration: float = 0.5
+var is_dead: bool = false
+
 
 signal player_died
 
@@ -45,6 +47,10 @@ func _physics_process(_delta: float) -> void:
 
 
 func take_damage(amount: float) -> void:
+	# Ignore all damage once dead — prevents multi-call die() from overlapping enemies
+	if is_dead or is_invincible:
+		return
+
 	# dont take damage if invincible
 	if is_invincible:
 		return
@@ -82,9 +88,11 @@ func start_invincibility_blink() -> void:
 
 
 func die() -> void:
+	if is_dead:
+		return
+	is_dead = true
 	player_died.emit()
 	print("Player died")
-	# Use call_deferred to avoid removing collision objects during physics callback
 	get_tree().call_deferred("reload_current_scene")
 	
 
