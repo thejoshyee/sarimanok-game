@@ -9,6 +9,8 @@ func _ready() -> void:
 	# Connect button signals
 	$VBoxContainer/Resume.pressed.connect(_on_resume_pressed)
 	$VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
+	$VBoxContainer/SFXSlider.value_changed.connect(_on_sfx_slider_changed)
+
 
 func _input(event: InputEvent) -> void:
 	# Listen for pause action (esc key or start button)
@@ -43,3 +45,12 @@ func _on_quit_pressed() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+
+func _on_sfx_slider_changed(value: float) -> void:
+	# Convert linear slider value (0–1) to decibels for the SFX bus.
+	var sfx_bus := AudioServer.get_bus_index("SFX")
+	if value <= 0.0:
+		AudioServer.set_bus_volume_db(sfx_bus, -80.0)
+	else:
+		AudioServer.set_bus_volume_db(sfx_bus, linear_to_db(value))

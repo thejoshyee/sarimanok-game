@@ -2864,9 +2864,10 @@
               4
             ],
             "details": "In settings scene/script, link slider to AudioServer.set_bus_volume_db('SFX', linear_to_db(slider.value)). Verify buses (Master/Music/SFX) clean in Project Settings > Audio. Test full loop: kill enemies → pickup XP → level up, check no overlaps with 200+ enemies via pooling.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run full core loop multiple times: verify all 4 SFX trigger correctly, volume modulates on hits, slider adjusts SFX independently, no pops/clicks or pooling desyncs.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-17T20:07:54.190Z"
           },
           {
             "id": 6,
@@ -2881,7 +2882,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-16T21:33:18.499Z"
+        "updatedAt": "2026-04-17T20:07:54.190Z"
       },
       {
         "id": "37",
@@ -2906,7 +2907,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-16T21:33:18.556Z",
+      "lastModified": "2026-04-17T20:07:54.197Z",
       "taskCount": 37,
       "completedCount": 34,
       "tags": [
