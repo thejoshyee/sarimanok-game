@@ -149,7 +149,14 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 		var gold_value = area.gold_value
 		ProgressionManager.add_gold(gold_value)
 		print("Collected ", gold_value, " gold. Total: ", ProgressionManager.gold)
+
+		# Play pickup SFX on the coin before despawning
+		var sfx := area.get_node_or_null("AudioStreamPlayer2D")
+		if sfx:
+			sfx.play()
+
 		PoolManager.despawn(area)
+
 
 
 # Returns max HP including passive bonuses (Thick Plumage: +15 HP/level)
