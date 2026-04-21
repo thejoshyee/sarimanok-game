@@ -63,8 +63,14 @@ func take_damage(amount: int) -> void:
 		hit_sfx.volume_db = clamp(-10.0 + (amount / 10.0), -20.0, 0.0)
 		hit_sfx.play()
 
+	# Spawn floating damage number at enemy position
+	var dmg_label = PoolManager.spawn("particle_damage_number", global_position + Vector2(-8, -20))
+	if dmg_label:
+		dmg_label.show_damage(amount)
+
 	if current_hp <= 0:
 		die()
+
 
 
 # Handle enemy death - spawn drops and return to pool

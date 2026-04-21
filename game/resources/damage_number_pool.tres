@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PoolConfig" format=3 uid="uid://b05r1c6ulq7bd"]
+
+[ext_resource type="Script" uid="uid://dnolhjriaskgh" path="res://resources/pool_config.gd" id="1_2ev3s"]
+
+[resource]
+script = ExtResource("1_2ev3s")
+pool_id = "particle_damage_number"
+scene_path = "res://scenes/effects/damage_number.tscn"
+initial_size = 30
+max_size = 0
+metadata/_custom_type_script = "uid://dnolhjriaskgh"

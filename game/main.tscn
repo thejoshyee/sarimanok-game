@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://62hpqq7p03m" path="res://resources/gold_coin_pool.tres" id="8_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://bib7nigil0j4a" path="res://scenes/ui/pool_debug_overlay.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dk4w6bjsr8gca" path="res://scenes/ui/grid_debug_overlay.tscn" id="9_kek77"]
+[ext_resource type="Resource" uid="uid://b05r1c6ulq7bd" path="res://resources/damage_number_pool.tres" id="9_yaehf"]
 [ext_resource type="PackedScene" uid="uid://dvdy2n5irl835" path="res://scenes/ui/level_up_panel.tscn" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://dmf2r32mowlp1" path="res://scenes/ui/hud.tscn" id="11_efxa6"]
 [ext_resource type="Script" uid="uid://b7r65uo3acmjv" path="res://scripts/core/enemy_spawner.gd" id="13_ycdy4"]
@@ -67,7 +68,7 @@ size = Vector2(32, 2048)
 
 [node name="Node2D" type="Node2D" unique_id=1622169148]
 script = ExtResource("1_ig7tw")
-pool_configs = Array[ExtResource("2_272bh")]([ExtResource("5_4c57u"), ExtResource("4_4c57u"), ExtResource("5_w48qg"), ExtResource("6_vivmo"), SubResource("Resource_w48qg"), ExtResource("7_vivmo"), ExtResource("8_2cqfq")])
+pool_configs = Array[ExtResource("2_272bh")]([ExtResource("5_4c57u"), ExtResource("4_4c57u"), ExtResource("5_w48qg"), ExtResource("6_vivmo"), SubResource("Resource_w48qg"), ExtResource("7_vivmo"), ExtResource("8_2cqfq"), ExtResource("9_yaehf")])
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1290967941]
 visible = false
