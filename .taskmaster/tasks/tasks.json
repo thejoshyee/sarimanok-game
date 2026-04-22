@@ -2921,9 +2921,10 @@
             "description": "Add brief white modulation flash to enemies upon receiving damage.",
             "dependencies": [],
             "details": "In enemy damage handling script, create a 0.1s Tween that modulates the enemy sprite's self_modulate from white (Color(1,1,1,1)) to transparent/normal over 0.1 seconds. Ensure it stacks correctly for rapid hits.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Hit enemy repeatedly and confirm 0.1s white flash triggers each time, visible against game background, and resets properly without lingering effects.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-22T21:51:21.970Z"
           },
           {
             "id": 3,
@@ -2964,7 +2965,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-21T06:52:31.978Z"
+        "updatedAt": "2026-04-22T21:51:21.970Z"
       },
       {
         "id": "38",
@@ -2980,7 +2981,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-21T06:52:31.986Z",
+      "lastModified": "2026-04-22T21:51:21.970Z",
       "taskCount": 38,
       "completedCount": 35,
       "tags": [
