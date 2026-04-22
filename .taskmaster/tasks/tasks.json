@@ -2935,9 +2935,10 @@
               2
             ],
             "details": "Playtest each scenario manually: Week1 - survive 60s without dying; Week2 - reach level 10 via XP; Week3 - acquire max weapons/passives. Verify XP curve progression, choice pool variety, passive stacking effects, and pickup magnet functionality.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Record completion times, check no crashes/errors, validate progression metrics match targets, screenshot key milestones for documentation.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-22T22:49:51.762Z"
           },
           {
             "id": 4,
@@ -2965,7 +2966,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-22T21:51:21.970Z"
+        "updatedAt": "2026-04-22T22:49:51.762Z"
       },
       {
         "id": "38",
@@ -2981,7 +2982,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-22T21:51:21.970Z",
+      "lastModified": "2026-04-22T22:49:51.762Z",
       "taskCount": 38,
       "completedCount": 35,
       "tags": [
