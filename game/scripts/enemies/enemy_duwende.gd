@@ -28,8 +28,20 @@ var _current_cell_id: int = -1
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
 @onready var damage_area: Area2D = $DamageArea
 
+# Visual node for hit flash — typed as CanvasItem so it works on both
+# ColorRect (placeholder) and Sprite2D (final art) without changes.
+@onready var visual: CanvasItem = $ColorRect
+
+# Track active flash tween so rapid hits restart cleanly instead of stacking
+var _flash_tween: Tween = null
+
+# Cached base color for placeholder ColorRect flash restore
+var _base_color: Color = Color.WHITE
+
 func _ready() -> void:
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
+	if visual is ColorRect:
+		_base_color = (visual as ColorRect).color
 
 
 # Forward debuff application to the DebuffHandler child node
@@ -52,11 +64,22 @@ func initialize_stats(elapsed_minutes: float) -> void:
 	damage = SpawnManager.get_scaled_damage(base_damage, elapsed_minutes)
 	# print("Enemy spawned with HP: ", current_hp, " Damage: ", damage)
 
+# Brief white flash to signal a hit landed
+# TODO: Replace with shader-based white flash when real sprites swap in.
+func flash_hit() -> void:
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+
+	if visual is ColorRect:
+		(visual as ColorRect).color = Color.WHITE
+		_flash_tween = create_tween()
+		_flash_tween.tween_property(visual, "color", _base_color, 0.1)
+
 
 # Called when this enemy takes damage from weapons / projectiles
 func take_damage(amount: int) -> void:
 	current_hp -= amount
-
+	flash_hit()
 	# Louder hits = louder sound, clamped to avoid extremes
 	var hit_sfx := get_node_or_null("HitSFX") as AudioStreamPlayer2D
 	if hit_sfx:
@@ -141,6 +164,10 @@ func reset_state() -> void:
 	# Reset debuffs (if DebuffHandler exists)
 	if has_node("DebuffHandler"):
 		$DebuffHandler.active_debuffs.clear()
+	if _flash_tween and _flash_tween.is_valid():
+		_flash_tween.kill()
+	if visual is ColorRect:
+		(visual as ColorRect).color = _base_color
 
 
 
