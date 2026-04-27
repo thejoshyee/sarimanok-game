@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	# accumulate time each frame
 	elapsed_time += delta
 
-func reset() -> void:
+func reset_run() -> void:
 	# call this when starting a new run
 	elapsed_time = 0.0
 
