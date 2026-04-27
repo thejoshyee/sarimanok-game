@@ -2986,9 +2986,9 @@
             "description": "Implement new GameState singleton autoload that orchestrates reset_run() calls across all affected managers as per CLAUDE.md pattern.",
             "dependencies": [],
             "details": "Create GameState.gd script with func reset_run(): call PoolManager.reset_run(), SpawnManager.reset_run(), etc. Add to autoloads in project settings. Ensure it follows the central reset entry point design.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Verify GameState is accessible via get_node('/root/GameState') and reset_run() executes without errors in a test scene.",
-            "updatedAt": "2026-04-27T00:40:08.546Z",
+            "updatedAt": "2026-04-27T23:41:07.910Z",
             "parentId": "undefined"
           },
           {
@@ -3042,7 +3042,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-27T00:40:08.546Z"
+        "updatedAt": "2026-04-27T23:41:07.910Z"
       },
       {
         "id": "39",
@@ -3091,7 +3091,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-27T00:40:08.548Z",
+      "lastModified": "2026-04-27T23:41:07.912Z",
       "taskCount": 42,
       "completedCount": 36,
       "tags": [
