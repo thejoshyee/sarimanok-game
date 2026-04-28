@@ -2999,9 +2999,10 @@
               1
             ],
             "details": "In PoolManager script: func reset_run(): for each active enemy in pool, call deactivate() or queue_free() and return to inactive pool. Clear any active lists. Ensure enemies parented under PoolManager are properly reset.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Spawn enemies, call reset_run(), verify no active enemies remain and all return to pool for reuse.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-28T07:04:42.364Z"
           },
           {
             "id": 3,
@@ -3042,7 +3043,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-27T23:41:07.910Z"
+        "updatedAt": "2026-04-28T07:04:42.364Z"
       },
       {
         "id": "39",
@@ -3091,7 +3092,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-27T23:41:07.912Z",
+      "lastModified": "2026-04-28T07:04:42.366Z",
       "taskCount": 42,
       "completedCount": 36,
       "tags": [

@@ -96,3 +96,8 @@ func get_all_stats() -> Dictionary:
 	for pool_id in _pools.keys():
 		all_stats[pool_id] = _pools[pool_id].get_stats()
 	return all_stats
+
+# Reset every pool for a new run.
+func reset_run() -> void:
+	for pool in _pools.values():
+		pool.reset_run()

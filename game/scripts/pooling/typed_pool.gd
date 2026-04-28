@@ -62,6 +62,13 @@ func release(instance: Node) -> void:
 	if instance.has_method("on_despawn"):
 		instance.on_despawn()
 
+# Release every active instance back to the available pool.
+func reset_run() -> void:
+	var active_copy = _active.duplicate()
+	for instance in active_copy:
+		if is_instance_valid(instance):
+			release(instance)
+
 # create new pooled instance (hidden by default)
 func _create_instance() -> Node:
 	var instance = _scene.instantiate()
