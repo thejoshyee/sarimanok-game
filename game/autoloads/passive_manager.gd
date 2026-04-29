@@ -16,7 +16,7 @@ var passive_levels: Dictionary = {}
 
 func _ready() -> void:
 	_load_passives()
-	reset()
+	reset_run()
 
 
 # Load all PassiveData resources from the passives folder
@@ -41,7 +41,7 @@ func _load_passives() -> void:
 
 
 # Reset all passive levels to 0 — call at start of each run
-func reset() -> void:
+func reset_run() -> void:
 	passive_levels.clear()
 	for passive in passives:
 		passive_levels[passive.id] = 0

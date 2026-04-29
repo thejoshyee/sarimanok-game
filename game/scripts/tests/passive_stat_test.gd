@@ -47,7 +47,7 @@ func assert_approx(actual: float, expected: float, message: String, tolerance: f
 
 
 func _reset_passives() -> void:
-	PassiveManager.reset()
+	PassiveManager.reset_run()
 
 
 func _max_passive(passive_id: String) -> void:

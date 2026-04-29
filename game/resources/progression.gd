@@ -15,6 +15,7 @@ signal xp_changed(current_xp: int, xp_needed: int)
 func get_xp_for_level(level: int) -> int:
 	return 5 + (level - 1) * 5
 
+
 func add_xp(amount: int) -> void:
 	current_xp += amount
 	check_level_up()
@@ -26,6 +27,13 @@ func add_gold(amount: int) -> void:
 	gold += amount
 
 
+# Reset XP and level for a new run.
+func reset_run() -> void:
+	current_xp = 0
+	current_level = 1
+	xp_changed.emit(current_xp, get_xp_for_level(current_level))
+
+
 func check_level_up() -> void:
 	var xp_needed = get_xp_for_level(current_level)
 	if current_xp >= xp_needed:
@@ -33,6 +41,7 @@ func check_level_up() -> void:
 		current_level += 1
 		level_up.emit(current_level)
 		check_level_up() # check again in case of multiple level ups
+
 
 func get_progress_ratio() -> float:
 	var xp_needed = get_xp_for_level(current_level)

@@ -68,7 +68,7 @@ func _reset_to_clean_state() -> void:
 	if peck:
 		peck.set_level(1)
 	# Reset all passives
-	PassiveManager.reset()
+	PassiveManager.reset_run()
 
 
 # === TEST 1: Early Game ===

@@ -3012,9 +3012,10 @@
               1
             ],
             "details": "SpawnManager: reset current_wave=0, timers, difficulty. ProgressionManager: xp=0, level=1, clear pending_upgrades. GameTimer: elapsed_time=0. PassiveManager: clear passives array or reset levels to 0.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Set states to non-zero values, call individual reset_run(), verify each returns to initial state independently.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-29T06:10:30.644Z"
           },
           {
             "id": 4,
@@ -3043,7 +3044,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-28T07:04:42.364Z"
+        "updatedAt": "2026-04-29T06:10:30.644Z"
       },
       {
         "id": "39",
@@ -3092,7 +3093,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-28T07:04:42.366Z",
+      "lastModified": "2026-04-29T06:10:30.645Z",
       "taskCount": 42,
       "completedCount": 36,
       "tags": [
