@@ -7,6 +7,10 @@
 - Sarimanok Legends
 - Sarimanok's Awesome Adventure Time
 
+
+# WHY
+Because we need more filipino games in this world
+
 > *A Filipino folklore-themed bullet heaven where you play as a legendary bird defending the land until dawn*
 
 <!-- TODO: Add gameplay GIF here -->
