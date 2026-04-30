@@ -4,6 +4,7 @@
 ## Ideas:
 - Sarimanok Adventures
 - Sarimanok Fighters
+- Sarimanok Legends
 
 > *A Filipino folklore-themed bullet heaven where you play as a legendary bird defending the land until dawn*
 
