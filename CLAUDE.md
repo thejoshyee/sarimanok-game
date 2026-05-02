@@ -376,7 +376,7 @@ Josh is simultaneously learning:
 - **Explain WHY briefly** - one sentence is often enough
 - **ONE STEP AT A TIME** - Give only the next step, wait for Josh to complete it and say "done" or "next"
 - **Never dump all steps at once** - it's overwhelming and requires scrolling
-- **Code comments can be verbose** - put detailed explanations there
+- **Code comments are minimal** - explanations belong in chat where Josh can learn, not in code where they rot
 
 ## Response Format for Implementation Tasks
 
@@ -479,17 +479,28 @@ Test it with F6 - does the timer fire?
 
 **Rule of thumb:** If a value is known at design time and won't change at runtime, it belongs in the scene/resource, not in code.
 
-### Teach Through Comments
+### Comments: Minimal, Important Only
 
-Code examples should have comments explaining WHY:
+**Default to no comments.** Explanations belong in chat where Josh can learn — not in code, where they rot. Add a comment only when WHY is genuinely non-obvious: a hidden constraint, subtle invariant, workaround for a specific bug, or behavior that would surprise a future reader.
+
+**Don't:**
+- Write `# WHY:` blocks explaining design rationale — that's a chat conversation
+- Restate what the code does (`# Calculate damage multiplier` above an obviously-named function)
+- Document the current task, ticket number, or who added it
+
+**Do:**
+- Flag a non-obvious gotcha (`# Wait one physics frame — get_overlapping_bodies() needs it`)
+- Note a hard constraint or magic number's source (`# +5% HP per 5 min — see PRD §4.2`)
+- Reference a specific bug the code works around
 
 ```gdscript
-# Track damage multiplier from shop + passives
-# WHY: Multiple systems modify damage, central calculation prevents bugs
 func get_damage_multiplier() -> float:
-    var shop_bonus = shop_damage * 0.02  # +2% per purchase
-    var passive_bonus = passives.get("iron_beak", 0) * 0.10  # +10% per level
+    var shop_bonus = shop_damage * 0.02
+    var passive_bonus = passives.get("iron_beak", 0) * 0.10
     return 1.0 + shop_bonus + passive_bonus
+```
+
+If Josh wants to know *why* damage splits into shop/passive bonuses, that's a chat question — answer it there, not in the source.
 ````
 
 ### Start Simple, Polish Later
@@ -570,7 +581,7 @@ Every completed feature should end with:
 
 - **Get to the point** - Brief explanations, Josh can ask for more
 - **Don't repeat questions back** - Just answer them
-- **Code comments = detailed explanations** - Chat responses = concise
+- **Code comments = sparse, only for non-obvious gotchas** - Chat = where explanations live
 - **Celebrate wins briefly**: "Great, X works!"
 - **Be direct about issues**: "This will cause X because Y"
 
@@ -602,3 +613,17 @@ Never write files directly unless Josh explicitly asks. Show code in chat, expla
 - Suggest commit messages at natural breakpoints (after completing a function, finishing a feature, etc.)
 - Keep them concise and conventional: `feat(weapons): add pierce logic to projectile`
 - Don't run git commands — just suggest the message for Josh to commit
+
+---
+
+## Lessons Learned
+
+Project-specific gotchas discovered during development. Add to this list when something non-obvious bites us.
+
+### Verify autoload state before adding reset methods (2026-05-01)
+
+When a task plan calls for adding `reset_run()` (or any per-run cleanup) to an autoload, **open the autoload first** and confirm it actually owns per-run state. Autoload names can mislead:
+
+- `SpawnManager` sounds stateful, but is just stateless scaling math (`get_scaled_hp`, `get_spawn_interval`). Real wave state lives in `GameTimer.elapsed_minutes` and the scene-level `enemy_spawner.gd`.
+
+Adding a no-op `reset_run()` pollutes the API; calling a non-existent one crashes at runtime (`Invalid call. Nonexistent function 'reset_run'`). Process: open the file → grep for state vars → only add a reset if there's something to reset.

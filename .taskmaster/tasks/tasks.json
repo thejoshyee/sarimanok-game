@@ -3027,9 +3027,10 @@
               3
             ],
             "details": "In player.gd die() method: GameState.reset_run(); await get_tree().reload_current_scene(); or reverse order if timing issues arise. Ensure call happens during death flow.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Trigger player death, verify reset_run() executes (add debug prints), and reload happens without persistent state.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-02T06:09:43.933Z"
           },
           {
             "id": 5,
@@ -3044,7 +3045,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-29T06:10:30.644Z"
+        "updatedAt": "2026-05-02T06:09:43.933Z"
       },
       {
         "id": "39",
@@ -3093,7 +3094,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-29T06:10:30.645Z",
+      "lastModified": "2026-05-02T06:09:43.940Z",
       "taskCount": 42,
       "completedCount": 36,
       "tags": [

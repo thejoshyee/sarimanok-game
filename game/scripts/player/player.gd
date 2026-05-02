@@ -93,7 +93,9 @@ func die() -> void:
 	is_dead = true
 	player_died.emit()
 	print("Player died")
+	GameState.reset_run()
 	get_tree().call_deferred("reload_current_scene")
+
 	
 
 func _ready() -> void:
