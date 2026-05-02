@@ -2976,7 +2976,7 @@
         "description": "Autoloads survive reload_current_scene, so enemies/XP/wave state persist across deaths. Add reset_run() methods to each autoload and wire them into the death flow.",
         "details": "Problem: When player dies, get_tree().reload_current_scene() only resets main.tscn. PoolManager parents enemies under itself (autoload), so they survive as frozen zombies. SpawnManager wave state, ProgressionManager XP/level, GameTimer elapsed time, and PassiveManager picks all persist.\n\nFix plan:\n1. Add reset_run() to each affected autoload:\n   - PoolManager: release all active pooled objects back to their pools\n   - SpawnManager: reset wave state, timers, difficulty curve\n   - ProgressionManager: reset xp, level, pending level-ups\n   - GameTimer: reset elapsed time\n   - PassiveManager: clear per-run passive selections\n2. Create a central reset entry point (e.g., on main.gd _ready, or a new GameState.reset_run() autoload per CLAUDE.md)\n3. Call the reset before or immediately after reload_current_scene in player.die()\n4. Verify: die, confirm old enemies are gone, timer/level reset, spawn wave starts from t=0\n\nReference: CLAUDE.md mentions GameState.reset_run() as the intended pattern - this task may also involve creating that GameState autoload.",
         "testStrategy": "",
-        "status": "in-progress",
+        "status": "done",
         "dependencies": [],
         "priority": "high",
         "subtasks": [
@@ -3040,12 +3040,13 @@
               4
             ],
             "details": "Play through waves to non-zero state (enemies active, XP gained, timer running, passives selected), die, verify full reset post-reload: no zombies, wave=0, XP=0, timer=0.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Death test checklist: 1) Old enemies gone, 2) GameTimer=0, 3) SpawnManager wave=0 starts immediately, 4) Progression XP=0/level=1, 5) PassiveManager cleared.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-02T23:13:16.904Z"
           }
         ],
-        "updatedAt": "2026-05-02T06:09:43.933Z"
+        "updatedAt": "2026-05-02T23:13:16.904Z"
       },
       {
         "id": "39",
@@ -3094,9 +3095,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-02T06:09:43.940Z",
+      "lastModified": "2026-05-02T23:13:16.911Z",
       "taskCount": 42,
-      "completedCount": 36,
+      "completedCount": 37,
       "tags": [
         "master"
       ]
