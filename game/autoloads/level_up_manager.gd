@@ -1,12 +1,17 @@
+# Generates level-up choices mixing weapons (and later passives)
+
 extends Node
 
-# Generates level-up choices mixing weapons (and later passives)
-# WHY: Central place so level_up_panel doesn't need to know
-# about WeaponDatabase, PassiveManager, or pool-building rules
+# Filler options for when there are no more weapons or passives to upgrade
+const FILLER_OPTIONS: Array[Dictionary] = [
+	{ "type": "filler_heal", "value": 20, "display_name": "Quick Heal", "icon_color": Color.MEDIUM_SEA_GREEN },
+	{ "type": "filler_gold", "value": 50, "display_name": "Gold Bonus", "icon_color": Color.GOLD },
+	{ "type": "filler_stat_damage", "value": 5, "display_name": "Sharper Beak", "icon_color": Color.TOMATO },
+	{ "type": "filler_stat_speed", "value": 5, "display_name": "Quick Feet", "icon_color": Color.CORNFLOWER_BLUE },
+]
 
 ## Set by main scene — can't use @onready since autoloads load before scene tree
 var weapon_manager: WeaponManager = null
-
 
 # Build pool of choices: upgrades + new weapons (if slots available)
 # Returns Array of Dictionaries: { "type": "new_weapon"/"upgrade_weapon", "data": WeaponData }
