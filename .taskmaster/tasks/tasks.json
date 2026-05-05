@@ -3077,9 +3077,10 @@
               1
             ],
             "details": "After filtering available weapons/passives and slicing/shuffling to min(3, pool.size()), while choices.size() < 3, append random filler from filler pool (avoid duplicates if possible). Return always exactly 3 choices.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Add debug print/log to verify get_choices() always returns array.size() == 3, even when weapon/passive pool is empty.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-05T23:18:23.789Z"
           },
           {
             "id": 3,
@@ -3120,7 +3121,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-03T21:32:26.796Z"
+        "updatedAt": "2026-05-05T23:18:23.789Z"
       },
       {
         "id": "40",
@@ -3158,7 +3159,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-03T21:32:26.796Z",
+      "lastModified": "2026-05-05T23:18:23.796Z",
       "taskCount": 42,
       "completedCount": 37,
       "tags": [

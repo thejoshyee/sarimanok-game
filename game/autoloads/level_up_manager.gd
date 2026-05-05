@@ -36,13 +36,20 @@ func get_choices(count: int = 3) -> Array:
 		if current_level < passive.max_level:
 			pool.append({ "type": "upgrade_passive", "data": passive })
 
-	# --- Edge case: fewer choices than requested ---
-	if pool.size() < count:
-		push_warning("LevelUpManager: only %d choices available (requested %d)" % [pool.size(), count])
-
-	# Shuffle and return up to 'count' choices
+	# Shuffle weapon/passive pool and take what's available
 	pool.shuffle()
-	return pool.slice(0, mini(count, pool.size()))
+	var choices: Array = pool.slice(0, mini(count, pool.size()))
+
+	# Pad with random fillers (no duplicates) until we have exactly `count`
+	var fillers: Array = FILLER_OPTIONS.duplicate()
+	fillers.shuffle()
+	while choices.size() < count and fillers.size() > 0:
+		choices.append(fillers.pop_front())
+
+	print("LevelUpManager.get_choices: returning %d choices" % choices.size())
+
+	return choices
+
 
 
 # When all upgrades are maxed, grant a consolation HP heal instead of showing panel
