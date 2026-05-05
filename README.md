@@ -6,6 +6,7 @@
 - Sarimanok Fighters
 - Sarimanok Legends
 - Sarimanok's Awesome Adventure Time
+- Sarimanok Tales
 
 
 # WHY
