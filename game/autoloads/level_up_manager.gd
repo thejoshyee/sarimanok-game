@@ -13,6 +13,14 @@ const FILLER_OPTIONS: Array[Dictionary] = [
 ## Set by main scene — can't use @onready since autoloads load before scene tree
 var weapon_manager: WeaponManager = null
 
+# Per-run filler stat accumulators — wiped each run via reset_run()
+var filler_damage_bonus: float = 0.0
+var filler_speed_bonus: float = 0.0
+
+func reset_run() -> void:
+	filler_damage_bonus = 0.0
+	filler_speed_bonus = 0.0
+
 # Build pool of choices: upgrades + new weapons (if slots available)
 # Returns Array of Dictionaries: { "type": "new_weapon"/"upgrade_weapon", "data": WeaponData }
 func get_choices(count: int = 3) -> Array:
@@ -49,8 +57,27 @@ func get_choices(count: int = 3) -> Array:
 	print("LevelUpManager.get_choices: returning %d choices" % choices.size())
 
 	return choices
+	
+func apply_filler(choice: Dictionary) -> void:
+	match choice.type:
+		"filler_heal":
+			var player = get_tree().get_first_node_in_group("player")
+			if player and player.has_method("heal"):
+				player.heal(choice.value)
+		"filler_gold":
+			ProgressionManager.add_gold(choice.value)
+		"filler_stat_damage":
+			filler_damage_bonus += choice.value / 100.0
+			_refresh_weapon_damage()
+		"filler_stat_speed":
+			filler_speed_bonus += choice.value / 100.0
 
-
+func _refresh_weapon_damage() -> void:
+	if weapon_manager == null:
+		return
+	for weapon in weapon_manager.weapon_slots:
+		if weapon != null:
+			weapon._apply_level_stats()
 
 # When all upgrades are maxed, grant a consolation HP heal instead of showing panel
 const HEAL_PERCENT: float = 0.10  # 10% of max HP

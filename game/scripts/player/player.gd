@@ -32,8 +32,8 @@ func _physics_process(_delta: float) -> void:
 	if input_vector.length() > 1.0:
 		input_vector = input_vector.normalized()
 
-	# Apply Racing Legs passive: +10% move speed per level
-	velocity = input_vector * stats.move_speed * PassiveManager.get_modifier("racing_legs")
+	# Apply all speed modifiers
+	velocity = input_vector * stats.move_speed * PassiveManager.get_modifier("racing_legs") * (1.0 + LevelUpManager.filler_speed_bonus)
 	move_and_slide()
 
 	# handle animation and sprite flipping

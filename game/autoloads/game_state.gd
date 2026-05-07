@@ -6,3 +6,4 @@ func reset_run() -> void:
 	ProgressionManager.reset_run()
 	GameTimer.reset_run()
 	PassiveManager.reset_run()
+	LevelUpManager.reset_run()

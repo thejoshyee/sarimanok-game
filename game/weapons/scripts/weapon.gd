@@ -67,6 +67,8 @@ func _apply_level_stats() -> void:
 	var iron_beak_modifier = PassiveManager.get_modifier("iron_beak")
 	damage = int(damage * iron_beak_modifier)
 
+	damage = int(damage * (1.0 + LevelUpManager.filler_damage_bonus))
+
 	# Let subclasses react to stat changes (e.g., update radius, projectile count)
 	_on_stats_changed(upgrade)
 

@@ -65,6 +65,10 @@ func _display_choices() -> void:
 				var passive = choice.data
 				var current_lvl = PassiveManager.get_level(passive.id)
 				buttons[i].text = passive.display_name + " +1 Lv." + str(current_lvl) + " > " + str(current_lvl + 1)
+			elif choice.type.begins_with("filler_"):
+				buttons[i].remove_theme_color_override("font_color")
+				buttons[i].modulate.a = 1.0
+				buttons[i].text = choice.display_name
 			else:
 				buttons[i].remove_theme_color_override("font_color")
 				buttons[i].modulate.a = 1.0
@@ -72,7 +76,8 @@ func _display_choices() -> void:
 				var current_lvl = weapon_manager.get_weapon_by_id(weapon_data.id).level
 				buttons[i].text = weapon_data.display_name + " +1 Lv." + str(current_lvl) + " > " + str(current_lvl + 1)
 
-			buttons[i].icon = _make_icon(icon_colors[i])
+			var icon_color = choice.get("icon_color", icon_colors[i])
+			buttons[i].icon = _make_icon(icon_color)
 			buttons[i].visible = true
 		else:
 			buttons[i].visible = false
@@ -117,6 +122,12 @@ func _on_option_selected(option_number: int) -> void:
 	elif choice_type == "upgrade_passive":
 		PassiveManager.upgrade_passive(choice.data.id)
 		print("Upgraded passive: ", choice.data.display_name)
+	elif choice_type == "upgrade_passive":
+		PassiveManager.upgrade_passive(choice.data.id)
+		print("Upgraded passive: ", choice.data.display_name)
+	elif choice_type.begins_with("filler_"):
+		LevelUpManager.apply_filler(choice)
+		print("Applied filler: ", choice.display_name)
 
 	upgrade_selected.emit(choice_type, progression.current_level)
 	
