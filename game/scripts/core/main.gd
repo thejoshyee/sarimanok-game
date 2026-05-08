@@ -115,10 +115,6 @@ func _process(_delta):
 
 func _on_level_up(new_level: int) -> void:
 	var choices = LevelUpManager.get_choices(3)
-	if choices.size() == 0:
-		# All upgrades maxed — heal instead of showing panel
-		LevelUpManager.grant_consolation_heal()
-		return
 	level_up_panel.show_level_up_with_choices(new_level, choices)
 
 

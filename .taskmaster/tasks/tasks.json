@@ -3054,7 +3054,7 @@
         "description": "When all weapons/passives are maxed, level-up panel shows <3 choices instead of fallback filler options (heal/+gold/minor stat per spec).",
         "details": "Current behavior: level_up_manager.gd returns fewer choices when pool is dry and level_up_panel.gd hides empty buttons. The grant_consolation_heal() is an auto-grant rather than a selectable filler.\n\nExpected behavior (per spec): always offer exactly 3 selectable choices. When weapon/passive pool is exhausted, fill remaining slots with filler options like:\n- Small heal (e.g., +20% max HP or flat +20 HP)\n- Gold bonus (+X gold)\n- Minor stat bump (+5% damage, +5% speed)\n\nImplementation notes:\n- Modify level_up_manager.gd choice generation to pad with filler options until 3 choices exist\n- Define filler options as simple inline entries (not new resources unless needed)\n- Ensure level_up_panel.gd displays all 3 filler buttons with proper labels/icons\n- Test: max out all weapons and passives, trigger level up, verify 3 choices appear\n\nDiscovered during 37.4 profiling playtest.",
         "testStrategy": "",
-        "status": "in-progress",
+        "status": "done",
         "dependencies": [],
         "priority": "high",
         "subtasks": [
@@ -3118,12 +3118,13 @@
               4
             ],
             "details": "Delete or comment out grant_consolation_heal() calls. Playtest: max all weapons (weapon_manager add/upgrade to max), max passives, trigger level-up, select each filler type 2-3 times, verify effects stack correctly.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Full playtest: Max weapons/passives via console/debug, level-up 3+ times, confirm always 3 choices, each filler selectable and applies (check player stats/gold/HP), no crashes or auto-grants.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-08T06:44:50.057Z"
           }
         ],
-        "updatedAt": "2026-05-08T06:04:12.849Z"
+        "updatedAt": "2026-05-08T06:44:50.057Z"
       },
       {
         "id": "40",
@@ -3161,9 +3162,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-08T06:04:12.856Z",
+      "lastModified": "2026-05-08T06:44:50.060Z",
       "taskCount": 42,
-      "completedCount": 37,
+      "completedCount": 38,
       "tags": [
         "master"
       ]
