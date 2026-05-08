@@ -68,7 +68,7 @@ func _display_choices() -> void:
 			elif choice.type.begins_with("filler_"):
 				buttons[i].remove_theme_color_override("font_color")
 				buttons[i].modulate.a = 1.0
-				buttons[i].text = choice.display_name
+				buttons[i].text = _format_filler_label(choice)
 			else:
 				buttons[i].remove_theme_color_override("font_color")
 				buttons[i].modulate.a = 1.0
@@ -133,3 +133,17 @@ func _on_option_selected(option_number: int) -> void:
 	
 	visible = false
 	get_tree().paused = false
+
+
+func _format_filler_label(choice: Dictionary) -> String:
+	var suffix := ""
+	match choice.type:
+		"filler_heal":
+			suffix = "+%d HP" % choice.value
+		"filler_gold":
+			suffix = "+%d Gold" % choice.value
+		"filler_stat_damage":
+			suffix = "+%d%% Damage" % choice.value
+		"filler_stat_speed":
+			suffix = "+%d%% Speed" % choice.value
+	return "%s\n%s" % [choice.display_name, suffix]

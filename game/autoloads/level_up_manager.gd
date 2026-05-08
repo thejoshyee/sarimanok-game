@@ -2,6 +2,9 @@
 
 extends Node
 
+# Set to true to only show filler options
+const DEBUG_FILLERS_ONLY: bool = false
+
 # Filler options for when there are no more weapons or passives to upgrade
 const FILLER_OPTIONS: Array[Dictionary] = [
 	{ "type": "filler_heal", "value": 20, "display_name": "Quick Heal", "icon_color": Color.MEDIUM_SEA_GREEN },
@@ -25,7 +28,11 @@ func reset_run() -> void:
 # Returns Array of Dictionaries: { "type": "new_weapon"/"upgrade_weapon", "data": WeaponData }
 func get_choices(count: int = 3) -> Array:
 	var pool: Array = []
-	
+
+	# If DEBUG_FILLERS_ONLY is true, return only filler options
+	if DEBUG_FILLERS_ONLY:
+		return FILLER_OPTIONS.duplicate()
+
 	# --- Weapon upgrades: owned weapons below max level ---
 	var upgradeable: Array[WeaponData] = WeaponDatabase.get_upgradeable_weapons(weapon_manager)
 	for data in upgradeable:
