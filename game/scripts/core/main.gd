@@ -91,7 +91,7 @@ func _process(_delta):
 			# Respawn 10 gems
 			test_spawn_xp_gems()
 
-	# DEBUG: Press 1/2/3 to skip 5/10/20 minutes (just_pressed prevents spam)
+	# DEBUG: Press 1/2/3 to skip 5/10/20 minutes and key 4 to max all weapons to level 5
 	if Input.is_physical_key_pressed(KEY_1) and not _debug_key_held:
 		_debug_key_held = true
 		GameTimer.debug_skip_minutes(5)
@@ -101,8 +101,12 @@ func _process(_delta):
 	elif Input.is_physical_key_pressed(KEY_3) and not _debug_key_held:
 		_debug_key_held = true
 		GameTimer.debug_skip_minutes(20)
-	elif not Input.is_physical_key_pressed(KEY_1) and not Input.is_physical_key_pressed(KEY_2) and not Input.is_physical_key_pressed(KEY_3):
+	elif Input.is_physical_key_pressed(KEY_4) and not _debug_key_held:
+		_debug_key_held = true
+		debug_max_weapons()
+	elif not Input.is_physical_key_pressed(KEY_1) and not Input.is_physical_key_pressed(KEY_2) and not Input.is_physical_key_pressed(KEY_3) and not Input.is_physical_key_pressed(KEY_4):
 		_debug_key_held = false
+
 
 
 	# Camera follows the player
@@ -133,3 +137,12 @@ func test_spawn_xp_gems():
 
 	# Print pool stats after spawning
 	print("After spawn - ", PoolManager.get_pool_stats("pickup_xp_gem"))
+
+func debug_max_weapons() -> void:
+	var wm = $Player/WeaponManager
+	for data in WeaponDatabase.get_all_weapons():
+		if wm.get_weapon_by_id(data.id) == null:
+			wm.add_weapon(data)
+		for i in 4:
+			wm.upgrade_weapon(data.id)
+	print("DEBUG: maxed all weapons to level 5")
