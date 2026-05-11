@@ -3155,9 +3155,10 @@
               1
             ],
             "details": "Add a boolean guard flag (e.g., is_dying) at the top of die(). If already true, early-return and log a warning. Run the same test session and check logs for any guard-trigger events to confirm whether die() is being called twice before despawn.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "After adding the guard, run the same 5–10 minute session and verify that the guard never fires; if it does, the double-call hypothesis is confirmed.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-11T23:28:26.074Z"
           },
           {
             "id": 3,
@@ -3199,7 +3200,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-11T06:11:08.858Z"
+        "updatedAt": "2026-05-11T23:28:26.074Z"
       },
       {
         "id": "41",
@@ -3226,7 +3227,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-11T06:11:08.867Z",
+      "lastModified": "2026-05-11T23:28:26.077Z",
       "taskCount": 42,
       "completedCount": 38,
       "tags": [

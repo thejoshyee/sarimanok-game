@@ -23,6 +23,7 @@ var current_hp: int = base_max_hp
 
 # Grid tracking for spatial partitioning
 var _current_cell_id: int = -1
+var is_dying: bool = false
 
 # reference to the player node
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
@@ -98,6 +99,10 @@ func take_damage(amount: int) -> void:
 
 # Handle enemy death - spawn drops and return to pool
 func die() -> void:
+	if is_dying:
+		push_warning("die() called twice on same enemy - double kill detected at %s" % global_position)
+		return
+	is_dying = true
 	var drop_pos = global_position
 
 	# Play death SFX before despawn (pooling may cut tail — acceptable for now)
@@ -159,6 +164,7 @@ func on_despawn() -> void:
 
 
 func reset_state() -> void:
+	is_dying = false
 	velocity = Vector2.ZERO
 	current_hp = base_max_hp
 	# Reset debuffs (if DebuffHandler exists)
