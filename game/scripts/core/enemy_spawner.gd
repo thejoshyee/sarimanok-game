@@ -39,32 +39,27 @@ func _get_enemy_pool_id() -> String:
 
 
 func spawn_enemy() -> void:
+	var spawn_pos = _find_valid_spawn_pos()
+	if spawn_pos == Vector2.INF:
+		return
+
 	var enemy = PoolManager.spawn(_get_enemy_pool_id())
 	if not enemy:
 		return
-	
-	# Calculate spawn position using polar coordinates
-	# WHY: Ring spawn ensures enemies come from all directions, just off-screen
-	var angle = randf() * TAU  # Random angle (0 to 2π)
-	var offset = Vector2(cos(angle), sin(angle)) * spawn_dist * randf_range(0.9, 1.1) # Randomize distance slightly
-	var spawn_pos = player.global_position + offset
-	
-	# Store unclamped position for debug comparison
-	var unclamped_pos = spawn_pos
-
-	# Clamp to arena bounds to prevent off-map spawning
-	spawn_pos.x = clamp(spawn_pos.x, 0, ARENA_WIDTH)
-	spawn_pos.y = clamp(spawn_pos.y, 0, ARENA_HEIGHT)
-
-
-	# Debug: Log when clamping actually changes the position (boundary case)
-	if spawn_pos != unclamped_pos:
-		print("SPAWN CLAMPED: ", unclamped_pos, " -> ", spawn_pos)
 
 	enemy.global_position = spawn_pos
 	enemy.initialize_stats(GameTimer.elapsed_minutes)
 
-	# Update spawn rate for next cycle - gets faster over time
 	var elapsed = GameTimer.elapsed_minutes
 	spawn_timer.wait_time = SpawnManager.get_spawn_interval(elapsed)
-	print("Spawn interval: ", spawn_timer.wait_time, "s at ", elapsed, " min")
+
+
+func _find_valid_spawn_pos() -> Vector2:
+	const MAX_ATTEMPTS = 8
+	for _i in MAX_ATTEMPTS:
+		var angle = randf() * TAU
+		var offset = Vector2(cos(angle), sin(angle)) * spawn_dist * randf_range(0.9, 1.1)
+		var pos = player.global_position + offset
+		if pos.x >= 0 and pos.x <= ARENA_WIDTH and pos.y >= 0 and pos.y <= ARENA_HEIGHT:
+			return pos
+	return Vector2.INF

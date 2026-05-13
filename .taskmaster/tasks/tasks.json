@@ -3132,7 +3132,7 @@
         "description": "Around the 3-minute mark of a normal run, a single enemy dropped a large burst of XP gems and gold coins in one frame, causing a 186ms physics spike before the game recovered.",
         "details": "Repro context (from 37.4 profiling playtest): Standard main game scene with maxed weapons/passives, enemy rush enabled. At ~3 min mark, one enemy death spawned excessive pickups in a single frame; Godot Performance monitor recorded a one-frame physics spike of 186ms with immediate recovery.\n\nSuspected causes:\n1. enemy_duwende.gd die() function (lines 100-134) being called twice before the enemy despawns — two passes through the drop logic in a single frame.\n2. Boss drop logic stacking with normal duwende drop logic on the same node.\n3. A pool entry being recycled before the previous die() finishes, causing duplicate drops.\n\nInvestigation steps:\n- Add a guard flag (e.g., is_dying) at the top of die() and early-return if already true. Log when the guard fires to confirm double-trigger.\n- Verify the enemy is removed from collision/grid before drops spawn so it can't take another lethal hit.\n- Check if any AOE weapon hit-list still references the enemy after death.\n- If reproducible, capture the spike frame in the Profiler and look for which function dominated.\n\nNot a perf-architecture issue; isolated one-frame hitch. Worth fixing before launch since it's visible.",
         "testStrategy": "Once a guard or fix is in place, run a 5-10 min session with enemy rush + maxed weapons. Watch for any single-frame physics spike >50ms in the Performance monitor. Try to force reproduction by funneling many enemies into AOE attacks at once.",
-        "status": "in-progress",
+        "status": "done",
         "dependencies": [],
         "priority": "medium",
         "subtasks": [
@@ -3197,12 +3197,13 @@
               4
             ],
             "details": "If the glitch is still reproducible, capture the spike frame in the Profiler and inspect the call stack to identify the function that dominates the frame. Use this information to refine or implement a targeted fix (e.g., optimizing pickup spawning or collision setup).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "After identifying the dominant function, apply an optimization or structural change and re-run the test session to confirm that the spike is eliminated or reduced below 50ms.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-13T07:34:17.084Z"
           }
         ],
-        "updatedAt": "2026-05-13T07:17:20.642Z"
+        "updatedAt": "2026-05-13T07:34:17.084Z"
       },
       {
         "id": "41",
@@ -3229,9 +3230,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-13T07:17:20.643Z",
+      "lastModified": "2026-05-13T07:34:17.085Z",
       "taskCount": 42,
-      "completedCount": 38,
+      "completedCount": 39,
       "tags": [
         "master"
       ]
