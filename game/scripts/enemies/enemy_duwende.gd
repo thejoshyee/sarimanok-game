@@ -100,9 +100,15 @@ func take_damage(amount: int) -> void:
 # Handle enemy death - spawn drops and return to pool
 func die() -> void:
 	if is_dying:
-		push_warning("die() called twice on same enemy - double kill detected at %s" % global_position)
+		push_warning("die() called twice on same enemy — double-kill detected at %s" % global_position)
 		return
 	is_dying = true
+
+	remove_from_group("enemies")
+	if _current_cell_id != -1:
+		GridManager.unregister_enemy(self, _current_cell_id)
+		_current_cell_id = -1
+
 	var drop_pos = global_position
 
 	# Play death SFX before despawn (pooling may cut tail — acceptable for now)

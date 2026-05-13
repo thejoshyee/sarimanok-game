@@ -3168,9 +3168,10 @@
               1
             ],
             "details": "Inspect the enemy_duwende.gd die() logic and confirm that the enemy is removed from collision layers, groups, or any grid/manager before the drop code runs. If not, reorder or add removal steps and retest the scenario.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the test session again and confirm that no enemy can receive a second lethal hit after the first die() call; monitor for any remaining spikes or duplicate drops.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-13T06:42:02.346Z"
           },
           {
             "id": 4,
@@ -3200,7 +3201,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-11T23:28:26.074Z"
+        "updatedAt": "2026-05-13T06:42:02.346Z"
       },
       {
         "id": "41",
@@ -3227,7 +3228,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-11T23:28:26.077Z",
+      "lastModified": "2026-05-13T06:42:02.354Z",
       "taskCount": 42,
       "completedCount": 38,
       "tags": [
