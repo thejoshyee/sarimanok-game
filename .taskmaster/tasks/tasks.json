@@ -3181,9 +3181,10 @@
               1
             ],
             "details": "Review AOE weapon scripts and their hit-list handling. Ensure that enemies are removed from hit-lists or that the lists are cleared before or during the die() call. If references persist, update the logic to avoid reprocessing dead enemies.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "After updating AOE hit-list handling, run the test session and verify that no enemy is processed twice by AOE weapons, and that the spike does not recur.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-13T07:17:20.642Z"
           },
           {
             "id": 5,
@@ -3201,7 +3202,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-13T06:42:02.346Z"
+        "updatedAt": "2026-05-13T07:17:20.642Z"
       },
       {
         "id": "41",
@@ -3228,7 +3229,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-13T06:42:02.354Z",
+      "lastModified": "2026-05-13T07:17:20.643Z",
       "taskCount": 42,
       "completedCount": 38,
       "tags": [
