@@ -3211,7 +3211,7 @@
         "description": "During Task 37.4 full-run playtest, the player reached 180 HP and steamrolled the back half of the run. Tune HP scaling and/or enemy damage during the dedicated balancing window.",
         "details": "Surfaced during Task 37 integration testing. Player ended a 30-min run at 180 HP with maxed weapons/passives, killing waves trivially. This is not an integration bug; it's expected to be tuned during the dedicated balancing phase.\n\nWhen this task is picked up:\n- Review HP scaling sources: base HP, Thick Plumage passive, shop HP upgrades. Check if they stack additively when they should be multiplicative (or vice versa).\n- Compare actual vs target survivability curve from the PRD (player should feel pressure throughout, not just early game).\n- Consider scaling enemy damage with run time so late-game enemies threaten a maxed player.\n- Re-run the 30-min full playtest and confirm the player feels challenged from ~15 min onward.\n\nReference: Task 37.5 issue triage, item #3.",
         "testStrategy": "Full 30-min playtest with maxed build. Player should die or come close to dying at least once after the 15-min mark. Average HP at end of run should sit closer to PRD target, not 2x+ over.",
-        "status": "deferred",
+        "status": "in-progress",
         "dependencies": [],
         "priority": "medium",
         "subtasks": [
@@ -3220,9 +3220,11 @@
             "title": "Inspect all HP scaling sources and stacking rules",
             "description": "Audit every place player max HP is modified so the current stacking behavior is fully understood.",
             "dependencies": [],
-            "details": "Review base HP, Thick Plumage, shop HP upgrades, and any other buffs or modifiers that affect max HP. Determine whether each source is applied additively, multiplicatively, or through a flat bonus, and note any ordering issues or duplicate application paths that could explain the 180 HP result.",
-            "status": "pending",
-            "testStrategy": "Log each HP modifier independently and together on a controlled test build to confirm the final max HP matches the intended formula."
+            "details": "Review base HP, Thick Plumage, shop HP upgrades, and any other buffs or modifiers that affect max HP. Determine whether each source is applied additively, multiplicatively, or through a flat bonus, and note any ordering issues or duplicate application paths that could explain the 180 HP result.\n<info added on 2026-05-16T05:45:03.613Z>\nAudit completed 2026-05-15 (before deferring Task 41 to Week 11 balance phase).\n\nHP scaling sources identified (only two exist):\n1. Base HP: PlayerStats.max_hp = 100.0 (game/resources/player_stats.gd:4)\n2. Thick Plumage passive: +15 HP/level, max 5 levels = up to +75 (game/resources/passives/thick_plumage.tres:11)\n3. Shop HP upgrades: NOT IMPLEMENTED — game/autoloads/game_state.gd is a reset_run() orchestrator only, contains no stat getters\n4. Filler heal: +20 current HP, does NOT touch max (game/autoloads/level_up_manager.gd:70-73)\n\nEffective max HP formula (game/scripts/player/player.gd:165-166):\nget_effective_max_hp() = stats.max_hp + PassiveManager.get_bonus(\"thick_plumage\") = 100 + (15 × thick_plumage_level)\n\nStacking: Pure additive flat bonuses. No multipliers. Theoretical cap: 175 HP.\n\nTwo non-balance findings to file separately:\n- BUG: current_hp can exceed effective max. player.gd:174-178 _on_passive_upgraded() adds bonus_per_level (15) to current_hp without clamping to the new max. The \"180 HP\" print Josh saw was likely current_hp, not max — explains the discrepancy with the 175 formula cap.\n- DOCS DRIFT: CLAUDE.md (lines 88-91) documents GameState.get_max_hp(), get_damage_multiplier(), get_move_speed() which do not exist. The HP math lives on the player.\n\nWhen this task is revived in Week 11: re-validate this audit against any new HP sources (shop upgrades, character variants) that have landed by then.\n</info added on 2026-05-16T05:45:03.613Z>",
+            "status": "done",
+            "testStrategy": "Log each HP modifier independently and together on a controlled test build to confirm the final max HP matches the intended formula.",
+            "parentId": "undefined",
+            "updatedAt": "2026-05-16T05:48:05.773Z"
           },
           {
             "id": 2,
@@ -3232,8 +3234,10 @@
               1
             ],
             "details": "Use the PRD target and the playtest result to map expected pressure at early, mid, and late game checkpoints. Identify where player durability diverges from target, especially around the 15-minute mark and into the back half of the run, so tuning can focus on the correct window.",
-            "status": "pending",
-            "testStrategy": "Record HP, damage taken, and deaths or near-deaths at regular intervals in a 30-minute run, then compare the graph against the desired curve."
+            "status": "deferred",
+            "testStrategy": "Record HP, damage taken, and deaths or near-deaths at regular intervals in a 30-minute run, then compare the graph against the desired curve.",
+            "updatedAt": "2026-05-16T05:47:55.356Z",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -3244,8 +3248,10 @@
               2
             ],
             "details": "Modify one or more of the HP scaling sources to bring endgame max HP closer to the target. This may include reducing flat HP gains, converting a modifier from additive to multiplicative, or lowering the benefit of Thick Plumage or shop upgrades so combined scaling does not explode by the end of the run.",
-            "status": "pending",
-            "testStrategy": "Run side-by-side builds before and after the tuning changes and verify that endgame HP lands within the expected PRD range."
+            "status": "deferred",
+            "testStrategy": "Run side-by-side builds before and after the tuning changes and verify that endgame HP lands within the expected PRD range.",
+            "parentId": "undefined",
+            "updatedAt": "2026-05-16T05:47:55.367Z"
           },
           {
             "id": 4,
@@ -3255,8 +3261,10 @@
               2
             ],
             "details": "Review current enemy damage values and the time-based scaling system to see if late-game enemies are under-tuned relative to player power. If necessary, increase damage scaling by elapsed run time or raise late-wave enemy damage bands so they remain a credible threat after the player has stacked strong defenses.",
-            "status": "pending",
-            "testStrategy": "Simulate or playtest enemy encounters at 15, 20, and 30 minutes and confirm damage intake meaningfully pressures a high-HP build."
+            "status": "deferred",
+            "testStrategy": "Simulate or playtest enemy encounters at 15, 20, and 30 minutes and confirm damage intake meaningfully pressures a high-HP build.",
+            "parentId": "undefined",
+            "updatedAt": "2026-05-16T05:47:55.373Z"
           },
           {
             "id": 5,
@@ -3267,10 +3275,13 @@
               4
             ],
             "details": "Perform a complete 30-minute full-run playtest with a maxed build and check that the player feels challenged starting around 15 minutes onward. Confirm the player comes close to dying at least once late in the run, and that average end-of-run HP is closer to the PRD target rather than remaining far above it.",
-            "status": "pending",
-            "testStrategy": "Use the existing 30-minute test scenario with debug telemetry for HP, deaths, and damage taken. Pass if late-game pressure is visible and end-state HP is within the target band."
+            "status": "deferred",
+            "testStrategy": "Use the existing 30-minute test scenario with debug telemetry for HP, deaths, and damage taken. Pass if late-game pressure is visible and end-state HP is within the target band.",
+            "parentId": "undefined",
+            "updatedAt": "2026-05-16T05:47:55.379Z"
           }
-        ]
+        ],
+        "updatedAt": "2026-05-16T05:48:05.773Z"
       },
       {
         "id": 42,
@@ -3282,18 +3293,41 @@
         "dependencies": [],
         "priority": "low",
         "subtasks": []
+      },
+      {
+        "id": 43,
+        "title": "Fix current_hp drift past max when Thick Plumage levels up",
+        "description": "current_hp can exceed get_effective_max_hp() because _on_passive_upgraded() adds bonus_per_level without clamping.",
+        "details": "In game/scripts/player/player.gd:174-178, _on_passive_upgraded() adds PassiveData.bonus_per_level (15) directly to current_hp on every Thick Plumage level-up. The new max is recomputed via get_effective_max_hp(), but current_hp is never clamped to it. This is the likely source of the 180 HP observation in Task 37.4 (formula caps max at 175 HP at L5 Thick Plumage).\\n\\nFix: after adding the bonus, clamp current_hp = min(current_hp, get_effective_max_hp()) — or just heal(bonus) which already clamps. Surfaced during Task 41.1 audit.",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 44,
+        "title": "Update CLAUDE.md: remove phantom GameState API references",
+        "description": "CLAUDE.md documents GameState getters that don't exist in the autoload. Bring docs in line with code.",
+        "details": "CLAUDE.md lines 88-91 list GameState.get_damage_multiplier(), GameState.get_max_hp(), GameState.get_move_speed() as the canonical 'key methods'. None exist in game/autoloads/game_state.gd, which is only a reset_run() orchestrator. The actual stat math lives on Player (get_effective_max_hp) and on PassiveManager (get_bonus/get_modifier). Update CLAUDE.md to reflect the real API: document GameState.reset_run() and point to PassiveManager and Player for stat computation. Surfaced during Task 41.1 audit.",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "low",
+        "subtasks": []
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-13T07:34:17.085Z",
+      "lastModified": "2026-05-16T05:48:05.773Z",
       "taskCount": 42,
       "completedCount": 39,
       "tags": [
         "master"
       ],
-      "created": "2026-05-15T00:27:29.440Z",
-      "description": "Tasks for master context"
+      "created": "2026-05-16T05:52:07.285Z",
+      "description": "Tasks for master context",
+      "updated": "2026-05-16T05:52:47.327Z"
     }
   }
 }
