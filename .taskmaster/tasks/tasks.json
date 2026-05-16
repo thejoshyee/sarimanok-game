@@ -3303,7 +3303,42 @@
         "status": "pending",
         "dependencies": [],
         "priority": "medium",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 2,
+            "title": "Implement HP clamping after passive HP increase",
+            "description": "Update Thick Plumage level-up logic so current_hp never exceeds the effective max HP after the bonus is applied.",
+            "dependencies": [
+              1
+            ],
+            "details": "Modify _on_passive_upgraded() to either call heal(bonus_per_level) if it clamps internally, or explicitly set current_hp = min(current_hp + bonus_per_level, get_effective_max_hp()) after recalculating effective max HP.",
+            "status": "pending",
+            "testStrategy": "Run a controlled scenario where current_hp is near max, level Thick Plumage, and confirm current_hp does not exceed the new max."
+          },
+          {
+            "id": 4,
+            "title": "Add regression coverage for HP overflow on passive upgrades",
+            "description": "Create or extend tests to prove current_hp cannot drift above max when Thick Plumage levels up repeatedly.",
+            "dependencies": [
+              2,
+              3
+            ],
+            "details": "Add a focused test case or scripted verification that simulates multiple Thick Plumage upgrades from a partially damaged and near-full state, then asserts current_hp <= get_effective_max_hp() after each upgrade.",
+            "status": "pending",
+            "testStrategy": "Automate the scenario with assertions across several level-up steps, including the L5 cap case mentioned in the task context."
+          },
+          {
+            "id": 5,
+            "title": "Validate in-game behavior and clean up related code comments",
+            "description": "Perform a quick gameplay verification and update comments or notes to reflect the corrected HP handling.",
+            "dependencies": [
+              4
+            ],
+            "details": "Run the game, reproduce a Thick Plumage level-up at high HP, confirm no overflow occurs, and add or adjust a brief comment in player.gd if the clamping logic is non-obvious.",
+            "status": "pending",
+            "testStrategy": "Playtest the upgrade sequence in the editor, confirm UI/telemetry shows capped HP, and ensure no new warnings or errors appear in the console."
+          }
+        ]
       },
       {
         "id": 44,
