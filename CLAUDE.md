@@ -43,6 +43,41 @@ Currently no automated tests - testing is done through manual playtesting in the
 
 ## Architecture & Technical Specifications
 
+### Architecture Patterns
+
+Six core patterns this project uses. When adding a new system, ask "which of these applies?"
+
+**1. Autoloads (singletons)** — Globally-shared state/services
+- **Use when:** State must be accessed from any scene (run timer, spawn manager, progression)
+- **Don't use when:** State is owned by a specific entity (player HP, enemy speed) — that goes on the node
+- **Pattern:** Register in `project.godot` → access via `ManagerName.method()`
+
+**2. Resources (.tres data files)** — Data-driven config
+- **Use when:** Values are known at design time and should be tweakable without code (weapon stats, passive bonuses)
+- **Don't use when:** Values are computed/dynamic at runtime
+- **Pattern:** Define schema in `.gd extends Resource` → create `.tres` instances → load via `preload("res://...")`
+
+**3. Object pooling** — Perf-critical spawned entities
+- **Use when:** Entity is created/destroyed many times per second (enemies, projectiles, pickups, particles)
+- **Don't use when:** One-off entities (player, boss, UI)
+- **Pattern:** `PoolManager.spawn()` / `despawn()` instead of `instantiate()` / `queue_free()`
+
+**4. Signals over polling** — Cross-system communication
+- **Use when:** System A reacts to events in System B (HUD on HP change, weapons on level-up)
+- **Don't use when:** Tight per-frame coupling required (physics, movement)
+- **Pattern:** `signal name(args)` → `emit(args)` → `node.signal.connect(callback)`
+
+**5. Scene composition** — Build complex behaviors by combining nodes
+- **Use when:** Always — this is Godot's core paradigm
+- **Pattern:** Sprites/visuals as swappable children, parent logic stays sprite-agnostic (art swap doesn't break code)
+
+**6. Components (composition over inheritance)** — Reusable behavior as child nodes
+- **Use when:** Same behavior is needed by 2+ entity types (HealthComponent for player + enemies; future HitboxComponent / HurtboxComponent)
+- **Don't use when:** Behavior is unique to one entity (player input handling)
+- **Pattern:** Component is a `Node` with its own script → attach as child → parent forwards calls / listens to signals → component owns its state
+
+**Decision principle:** Default to the simpler pattern. Refactor to a more sophisticated one when duplication appears (e.g., HP started on player; HealthComponent extracted once enemies needed it too — see Task 45).
+
 ### Display Configuration
 
 ```
