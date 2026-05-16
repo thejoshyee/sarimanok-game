@@ -3350,6 +3350,19 @@
         "dependencies": [],
         "priority": "low",
         "subtasks": []
+      },
+      {
+        "id": 45,
+        "title": "Refactor HP into a reusable HealthComponent (Godot composition pattern)",
+        "description": "Extract HP logic from player.gd and enemy_duwende.gd into a shared HealthComponent node so all entities use the same canonical mutators and signal.",
+        "details": "Currently HP logic is duplicated across game/scripts/player/player.gd and game/scripts/enemies/enemy_duwende.gd, and Manananggal/future enemies will duplicate it again. Extract into a Godot Node component.\\n\\nScope:\\n- Create game/scripts/components/health_component.gd with: current_hp, max_hp, take_damage(amount), heal(amount), set_max_hp(value) [clamps current], die signal, health_changed(current, max) signal\\n- Refactor player.gd to attach HealthComponent as child node; forward take_damage/heal/die through it; replace get_effective_max_hp() with component.set_max_hp() called whenever Thick Plumage changes\\n- Refactor enemy_duwende.gd to use the same component\\n- Update hud.gd to bind to component.health_changed signal instead of polling player.current_hp\\n- Audit all callers: weapons (take_damage on enemies), debuff system, death_particles, all test scenes (test_enemy.gd, progression_test.gd, passive_stat_test.gd, level_up_pool_scenario_test.gd, debuff_test.gd, projectile_weapon_test.gd)\\n- Verify integration test: full 30-min run, no HP regressions, HUD updates correctly, enemies die correctly, passive HP bonuses still apply, invincibility frames still work\\n\\nBenefits:\\n- Single source of truth for HP mutations (cannot bypass clamping by accident)\\n- Manananggal boss + future enemies get HP for free\\n- HUD decoupled from player (binds to component signal)\\n- Component-based architecture is the idiomatic Godot pattern (matches HitboxComponent/HurtboxComponent conventions used in many Godot games)\\n\\nPrerequisite: Task 43 (current_hp drift fix) should ship first so this refactor migrates correct behavior, not a bug. Surfaced during Task 43 design discussion when comparing inline-clamp vs heal()-reuse approaches.",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [
+          43
+        ],
+        "priority": "medium",
+        "subtasks": []
       }
     ],
     "metadata": {
@@ -3362,7 +3375,7 @@
       ],
       "created": "2026-05-16T05:52:07.285Z",
       "description": "Tasks for master context",
-      "updated": "2026-05-16T05:52:47.327Z"
+      "updated": "2026-05-16T22:28:55.438Z"
     }
   }
 }
