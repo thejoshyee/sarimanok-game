@@ -172,10 +172,9 @@ func _update_pickup_range() -> void:
 
 
 func _on_passive_upgraded(passive_id: String, _new_level: int) -> void:
-	# When Thick Plumage upgrades, increase current HP by the per-level bonus
 	if passive_id == "thick_plumage":
 		var bonus = PassiveManager.get_passive("thick_plumage").bonus_per_level
-		current_hp += bonus
+		heal(bonus)
 
 	if passive_id == "magnetic_aura":
 		_update_pickup_range()
