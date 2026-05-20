@@ -1,10 +1,10 @@
 extends Node2D
 
-var _debug_key_held: bool = false  # Prevent debug key spam
+var _debug_key_held: bool = false # Prevent debug key spam
 
 # Arena dimensions (96x64 tiles at 32x32 each)
-const ARENA_WIDTH: int = 3072   # 96 tiles * 32 pixels
-const ARENA_HEIGHT: int = 2048  # 64 tiles * 32 pixels
+const ARENA_WIDTH: int = 3072 # 96 tiles * 32 pixels
+const ARENA_HEIGHT: int = 2048 # 64 tiles * 32 pixels
 const TILE_SIZE: int = 32
 
 # Pool configurations to initialize at startup
@@ -23,7 +23,6 @@ func _ready():
 		#
 		# Other systems should use PoolManager.spawn() and PoolManager.despawn()
 		# instead of instantiate() and queue_free() during gameplay
-
 	# initialize pools before any gameplay systems start
 	for config in pool_configs:
 		PoolManager.register_pool(config)
@@ -63,7 +62,7 @@ func _draw(show_debug_grid: bool = true):
 	if not show_debug_grid:
 		return
 	# Draw tile grid overlay (32×32 tiles)
-	var grid_color = Color(1, 1, 0, 0.3)  # Yellow, semi-transparent
+	var grid_color = Color(1, 1, 0, 0.3) # Yellow, semi-transparent
 
 	# Draw vertical lines every 32 pixels
 	for x in range(0, ARENA_WIDTH + TILE_SIZE, TILE_SIZE):
@@ -91,7 +90,7 @@ func _process(_delta):
 			# Respawn 10 gems
 			test_spawn_xp_gems()
 
-	# DEBUG: Press 1/2/3 to skip 5/10/20 minutes and key 4 to max all weapons to level 5
+	# DEBUG: Press 1/2/3 to skip 5/10/20 min, 4 to max weapons, 5 to upgrade Thick Plumage, 6 to take damage
 	if Input.is_physical_key_pressed(KEY_1) and not _debug_key_held:
 		_debug_key_held = true
 		GameTimer.debug_skip_minutes(5)
@@ -104,9 +103,15 @@ func _process(_delta):
 	elif Input.is_physical_key_pressed(KEY_4) and not _debug_key_held:
 		_debug_key_held = true
 		debug_max_weapons()
-	elif not Input.is_physical_key_pressed(KEY_1) and not Input.is_physical_key_pressed(KEY_2) and not Input.is_physical_key_pressed(KEY_3) and not Input.is_physical_key_pressed(KEY_4):
+	elif Input.is_physical_key_pressed(KEY_5) and not _debug_key_held:
+		_debug_key_held = true
+		PassiveManager.upgrade_passive("thick_plumage")
+	elif Input.is_physical_key_pressed(KEY_6) and not _debug_key_held:
+		_debug_key_held = true
+		if has_node("Player"):
+			$Player.take_damage(20)
+	elif not Input.is_physical_key_pressed(KEY_1) and not Input.is_physical_key_pressed(KEY_2) and not Input.is_physical_key_pressed(KEY_3) and not Input.is_physical_key_pressed(KEY_4) and not Input.is_physical_key_pressed(KEY_5) and not Input.is_physical_key_pressed(KEY_6):
 		_debug_key_held = false
-
 
 
 	# Camera follows the player
@@ -125,7 +130,7 @@ func _on_level_up(new_level: int) -> void:
 func test_spawn_xp_gems():
 	# spawn 10 xp gems in a circle pattern around player for test
 	var player_pos = $Player.position if has_node("Player") else Vector2(320, 180)
-	var radius = 100.0 
+	var radius = 100.0
 
 	for i in range(10):
 		var angle = (i / 10.0) * TAU # Divide circle into 10 equal angles
