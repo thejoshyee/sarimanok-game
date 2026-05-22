@@ -3389,9 +3389,10 @@
               2
             ],
             "details": "Review Player.get_effective_max_hp and PassiveManager.get_bonus/get_modifier, plus any related methods, to describe where damage, HP, and movement-related stats are computed.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Cross-check the code references and confirm the documented ownership of stat math matches implementation.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-22T01:09:11.817Z"
           },
           {
             "id": 4,
@@ -3418,7 +3419,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-22T01:00:53.248Z"
+        "updatedAt": "2026-05-22T01:09:11.817Z"
       },
       {
         "id": "45",
@@ -3447,7 +3448,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-22T01:00:53.248Z",
+      "lastModified": "2026-05-22T01:09:11.817Z",
       "taskCount": 46,
       "completedCount": 40,
       "tags": [
