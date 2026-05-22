@@ -3376,9 +3376,10 @@
               1
             ],
             "details": "Document that GameState is an orchestrator focused on reset_run() and does not provide stat calculation getters. Capture any other legitimate responsibilities worth mentioning in CLAUDE.md.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Compare the source file’s public methods against the docs and ensure no nonexistent APIs remain referenced.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-22T01:00:53.248Z"
           },
           {
             "id": 3,
@@ -3417,7 +3418,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-22T00:54:04.069Z"
+        "updatedAt": "2026-05-22T01:00:53.248Z"
       },
       {
         "id": "45",
@@ -3446,7 +3447,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-22T00:54:04.070Z",
+      "lastModified": "2026-05-22T01:00:53.248Z",
       "taskCount": 46,
       "completedCount": 40,
       "tags": [
