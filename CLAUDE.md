@@ -108,22 +108,18 @@ Camera: Follows player, bounded to map edges
 
 ### Core Game State Architecture
 
-The game uses a **GameState autoload singleton** that manages all persistent and per-run state. This is the single source of truth for game data.
+**GameState** (`game/autoloads/game_state.gd`) is a thin **reset orchestrator** — its only public method is `reset_run()`, which fans out per-run cleanup to the 5 stateful autoloads (`PoolManager`, `ProgressionManager`, `GameTimer`, `PassiveManager`, `LevelUpManager`). Call it at the start of every run. It owns no state itself.
 
-**Critical patterns:**
+**Where stats live:**
 
-1. **Persistent data** (gold, shop upgrades, unlocks) lives in GameState and saves to `user://save_data.json`
-2. **Run data** (HP, XP, weapons, passives) resets each run via `GameState.reset_run()`
-3. **Computed stats** are calculated from base + shop bonuses + passive bonuses
-4. All scenes access GameState via autoload, never duplicate state locally
+- **Base values:** `PlayerStats` resource (`stats.max_hp`, `stats.move_speed`, `stats.pickup_range`).
+- **Per-run bonuses:** `PassiveManager` exposes two helpers:
+  - `get_bonus(id)` → additive (e.g., `+25 HP` from `thick_plumage`).
+  - `get_modifier(id)` → `1.0 + bonus`, for multiplicative stats (damage, speed, magnet range).
+- **Effective values are computed inline at the call site**, not by a central getter. Example: `weapon.gd` does `base_damage * PassiveManager.get_modifier("iron_beak")`. The only helper is `Player.get_effective_max_hp()`.
+- **Move speed** also adds `LevelUpManager.filler_speed_bonus` (a small temporary boost given when the level-up choice pool runs dry).
 
-**Key methods to use:**
-
-- `GameState.reset_run()` - Call at run start to initialize fresh state
-- `GameState.end_run(won: bool)` - Call at run end to save gold/scores
-- `GameState.get_damage_multiplier()` - Computes base × shop × passive damage
-- `GameState.get_max_hp()` - Computes total HP including bonuses
-- `GameState.get_move_speed()` - Computes final movement speed
+When you need an effective stat, multiply (`get_modifier`) or add (`get_bonus`) at the call site. Don't reach for GameState.
 
 ### Scene Structure Pattern
 
