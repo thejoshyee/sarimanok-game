@@ -254,21 +254,6 @@ XP requirements scale linearly: 5, 10, 15, 20, 25...
 - Self-segmenting vampire with flying torso
 - NOT a generic shapeshifter - specific upper-body-detaches folklore
 
-### Save System
-
-Save location: `user://save_data.json` (Godot handles platform-specific paths)
-
-**What persists:**
-
-- Gold earned across all runs
-- Shop upgrade purchase counts
-- Unlocks (Endless Mode, characters)
-- High scores and best times
-
-**What resets each run:**
-
-- XP, level, weapons, passives, HP
-
 ## Development Workflow
 
 1. **Weeks 1-6:** Build core gameplay with placeholders
@@ -372,7 +357,7 @@ game/
 ## Notes for Claude Code
 
 - When implementing features, always check the PRD first for exact specifications
-- The GameState singleton pattern is critical - never bypass it
+- Autoloads own per-run state — use the right one (`ProgressionManager` for XP/gold, `PassiveManager` for bonuses, etc.); don't duplicate state on scenes
 - Object pooling is mandatory for performance
 - Sprites are swappable children - keep parent logic sprite-agnostic
 - This is a first-time game dev team - favor simple, working solutions over clever optimizations
@@ -525,13 +510,11 @@ Test it with F6 - does the timer fire?
 - Reference a specific bug the code works around
 
 ```gdscript
-func get_damage_multiplier() -> float:
-    var shop_bonus = shop_damage * 0.02
-    var passive_bonus = passives.get("iron_beak", 0) * 0.10
-    return 1.0 + shop_bonus + passive_bonus
+func get_effective_max_hp() -> float:
+    return stats.max_hp + PassiveManager.get_bonus("thick_plumage")
 ```
 
-If Josh wants to know *why* damage splits into shop/passive bonuses, that's a chat question — answer it there, not in the source.
+If Josh wants to know *why* HP gets its own helper while damage and speed are computed inline at the call site, that's a chat question — answer it there, not in the source.
 ````
 
 ### Start Simple, Polish Later
@@ -585,7 +568,7 @@ Focus on what Josh needs NOW for this project:
 
 1. **Nodes and Scene Tree** - `$NodeName`, `@onready`, `add_child()`, `queue_free()`
 2. **Signals and Events** - Defining, emitting, connecting
-3. **Autoloads/Singletons** - GameState pattern
+3. **Autoloads/Singletons** - global services (PoolManager, ProgressionManager, PassiveManager)
 4. **Basic GDScript** - Variables, functions, control flow, Arrays, Dictionaries
 5. **UI Basics** - Button signals, Label updates, visibility, tweens
 

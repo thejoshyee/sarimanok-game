@@ -3353,7 +3353,7 @@
         "description": "CLAUDE.md documents GameState getters that don't exist in the autoload. Bring docs in line with code.",
         "details": "CLAUDE.md lines 88-91 list GameState.get_damage_multiplier(), GameState.get_max_hp(), GameState.get_move_speed() as the canonical 'key methods'. None exist in game/autoloads/game_state.gd, which is only a reset_run() orchestrator. The actual stat math lives on Player (get_effective_max_hp) and on PassiveManager (get_bonus/get_modifier). Update CLAUDE.md to reflect the real API: document GameState.reset_run() and point to PassiveManager and Player for stat computation. Surfaced during Task 41.1 audit.",
         "testStrategy": "",
-        "status": "in-progress",
+        "status": "done",
         "dependencies": [],
         "priority": "low",
         "subtasks": [
@@ -3402,9 +3402,10 @@
               3
             ],
             "details": "Replace the fake key-method list with a concise explanation that GameState.reset_run() is the relevant orchestrator API, while stat computation belongs to Player and PassiveManager. Keep wording aligned with how developers should actually use the codebase.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Review the edited section for clarity, accuracy, and absence of stale method names or misleading guidance.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-22T01:20:48.507Z"
           },
           {
             "id": 5,
@@ -3414,12 +3415,13 @@
               4
             ],
             "details": "Read the updated CLAUDE.md in context and verify that the surrounding documentation still flows logically, with no broken references to nonexistent GameState getters elsewhere in the file.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Search the repository and CLAUDE.md for old GameState getter names and confirm they no longer appear in authoritative guidance.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-22T01:20:48.514Z"
           }
         ],
-        "updatedAt": "2026-05-22T01:09:11.817Z"
+        "updatedAt": "2026-05-22T01:20:48.514Z"
       },
       {
         "id": "45",
@@ -3448,9 +3450,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-22T01:09:11.817Z",
+      "lastModified": "2026-05-22T01:20:48.514Z",
       "taskCount": 46,
-      "completedCount": 40,
+      "completedCount": 41,
       "tags": [
         "master"
       ]
