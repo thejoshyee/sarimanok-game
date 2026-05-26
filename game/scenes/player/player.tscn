@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://cryrpg8b36ia6" path="res://resources/classic_sarimanok_stats.tres" id="2_dovo2"]
 [ext_resource type="PackedScene" uid="uid://dv8mawj3jcn5l" path="res://weapons/scenes/weapon_manager.tscn" id="3_gmlin"]
 [ext_resource type="AudioStream" uid="uid://b1fnyggv0lqd1" path="res://assets/audio/sfx/level_up.wav" id="4_lvxji"]
+[ext_resource type="Script" uid="uid://cnfsieuffi7r4" path="res://scripts/components/health_component.gd" id="5_p47bc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dovo2"]
 size = Vector2(32, 32)
@@ -105,3 +106,6 @@ shape = SubResource("CircleShape2D_gmlin")
 [node name="LevelUpSFX" type="AudioStreamPlayer" parent="." unique_id=781465842]
 stream = ExtResource("4_lvxji")
 bus = &"SFX"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=280204972]
+script = ExtResource("5_p47bc")
