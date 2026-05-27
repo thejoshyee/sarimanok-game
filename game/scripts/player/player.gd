@@ -9,9 +9,9 @@ extends CharacterBody2D
 @onready var pickup_area: Area2D = $PickupArea
 @onready var progression: Progression = ProgressionManager
 @onready var pickup_shape: CircleShape2D = $PickupArea/CollisionShape2D.shape
+@onready var health_component: HealthComponent = $HealthComponent
 
 # Runtime State
-var current_hp: float
 var is_invincible: bool = false
 var invincibility_duration: float = 0.5
 var is_dead: bool = false
@@ -26,7 +26,7 @@ func _physics_process(_delta: float) -> void:
 	var vertical = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 
 	# build movement vector
-	var input_vector = Vector2(horizontal, vertical) 
+	var input_vector = Vector2(horizontal, vertical)
 
 	# normalize so diagonal movement isn't faster than cardinal
 	if input_vector.length() > 1.0:
@@ -47,35 +47,22 @@ func _physics_process(_delta: float) -> void:
 
 
 func take_damage(amount: float) -> void:
-	# Ignore all damage once dead — prevents multi-call die() from overlapping enemies
 	if is_dead or is_invincible:
 		return
 
-	# dont take damage if invincible
-	if is_invincible:
+	health_component.take_damage(amount)
+	if is_dead:
 		return
 
-	# apply damage
-	current_hp -= amount
-	print("Player took ", amount, " damage. HP: ", current_hp, "/", get_effective_max_hp())
-
-	# check for death
-	if current_hp <= 0:
-		die()
-		return
-
-	# start invincibility frames with visual feedback
 	is_invincible = true
 	start_invincibility_blink()
 	await get_tree().create_timer(invincibility_duration).timeout
 	is_invincible = false
-	sprite.modulate.a = 1.0 # make sure to be visible again
-
+	sprite.modulate.a = 1.0
 
 
 func heal(amount: float) -> void:
-	current_hp = min(current_hp + amount, get_effective_max_hp())
-	print("Player healed ", amount, " HP. HP: ", current_hp, "/", get_effective_max_hp())
+	health_component.heal(amount)
 
 
 func start_invincibility_blink() -> void:
@@ -97,10 +84,12 @@ func die() -> void:
 	get_tree().call_deferred("reload_current_scene")
 
 	
-
 func _ready() -> void:
 	add_to_group("player")
-	current_hp = get_effective_max_hp()
+	health_component.set_max_hp(get_effective_max_hp())
+	health_component.heal(health_component.max_hp)
+	health_component.died.connect(die)
+
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
 	pickup_area.area_entered.connect(_on_pickup_area_area_entered)
 
@@ -118,8 +107,6 @@ func _ready() -> void:
 		print("Failed to add Peck weapon")
 
 	_update_pickup_range()
-
-
 
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
@@ -160,7 +147,6 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 		PoolManager.despawn(area)
 
 
-
 # Returns max HP including passive bonuses (Thick Plumage: +15 HP/level)
 func get_effective_max_hp() -> float:
 	return stats.max_hp + PassiveManager.get_bonus("thick_plumage")
@@ -174,7 +160,8 @@ func _update_pickup_range() -> void:
 func _on_passive_upgraded(passive_id: String, _new_level: int) -> void:
 	if passive_id == "thick_plumage":
 		var bonus = PassiveManager.get_passive("thick_plumage").bonus_per_level
-		heal(bonus)
+		health_component.set_max_hp(get_effective_max_hp())
+		health_component.heal(bonus)
 
 	if passive_id == "magnetic_aura":
 		_update_pickup_range()
