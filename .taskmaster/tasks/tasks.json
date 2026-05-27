@@ -3454,9 +3454,10 @@
               1
             ],
             "details": "Attach HealthComponent as a child node of the player scene, initialize it from the player’s base HP and passive bonuses, and replace direct current_hp/max_hp handling in player.gd with component calls. Forward take_damage, heal, and die behavior through the component, and replace get_effective_max_hp() with set_max_hp() whenever Thick Plumage or other max HP modifiers change. Ensure invincibility-frame logic still gates damage application correctly.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run player damage/heal scenarios in a controlled scene and confirm HP changes occur only through the component, max HP updates clamp current HP, and invincibility frames still prevent repeated damage.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-27T05:14:04.865Z"
           },
           {
             "id": 3,
@@ -3499,7 +3500,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-23T22:01:39.651Z"
+        "updatedAt": "2026-05-27T05:14:04.865Z"
       },
       {
         "id": "46",
@@ -3515,7 +3516,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-23T22:01:39.651Z",
+      "lastModified": "2026-05-27T05:14:04.869Z",
       "taskCount": 46,
       "completedCount": 41,
       "tags": [

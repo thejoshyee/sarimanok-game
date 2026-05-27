@@ -18,10 +18,11 @@ var _pending_xp_needed: int = 0
 
 
 func _ready() -> void:
-	# find the player and connect to it
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		update_hp(player.current_hp, player.stats.max_hp)
+		player.health_component.health_changed.connect(update_hp)
+		update_hp(player.health_component.current_hp, player.health_component.max_hp)
+
 
 	# Connect to XP signal — "ring the bell, HUD listens"
 	ProgressionManager.xp_changed.connect(_on_xp_changed)
@@ -39,10 +40,8 @@ func _process(_delta: float) -> void:
 	var remaining := 1800.0 - GameTimer.elapsed_time
 	timer_label.text = format_time(max(remaining, 0.0))
 
-	# update HP display every frame
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		update_hp(player.current_hp, player.stats.max_hp)
 		update_weapon_stats(player)
 
 func update_hp(current: float, max_hp: float) -> void:
