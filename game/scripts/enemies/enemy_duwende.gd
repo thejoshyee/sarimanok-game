@@ -19,7 +19,6 @@ var speed: float = base_speed
 const DeathParticles = preload("res://scenes/effects/death_particles.tscn")
 
 var damage: int = base_damage
-var current_hp: int = base_max_hp
 
 # Grid tracking for spatial partitioning
 var _current_cell_id: int = -1
@@ -28,6 +27,7 @@ var is_dying: bool = false
 # reference to the player node
 @onready var player: Node2D = get_tree().get_first_node_in_group("player")
 @onready var damage_area: Area2D = $DamageArea
+@onready var health_component: HealthComponent = $HealthComponent
 
 # Visual node for hit flash — typed as CanvasItem so it works on both
 # ColorRect (placeholder) and Sprite2D (final art) without changes.
@@ -41,6 +41,7 @@ var _base_color: Color = Color.WHITE
 
 func _ready() -> void:
 	damage_area.body_entered.connect(_on_damage_area_body_entered)
+	health_component.died.connect(die)
 	if visual is ColorRect:
 		_base_color = (visual as ColorRect).color
 
@@ -55,15 +56,15 @@ func apply_debuff(debuff_type: String, strength: float, duration: float) -> void
 func get_total_slow_factor() -> float:
 	if has_node("DebuffHandler"):
 		return $DebuffHandler.get_total_slow_factor()
-	return 1.0  # No slow if no handler
-
+	return 1.0 # No slow if no handler
 
 
 # Call this after spawning to apply time-based difficulty scaling
 func initialize_stats(elapsed_minutes: float) -> void:
-	current_hp = SpawnManager.get_scaled_hp(base_max_hp, elapsed_minutes)
 	damage = SpawnManager.get_scaled_damage(base_damage, elapsed_minutes)
-	# print("Enemy spawned with HP: ", current_hp, " Damage: ", damage)
+	health_component.set_max_hp(SpawnManager.get_scaled_hp(base_max_hp, elapsed_minutes))
+	health_component.heal(health_component.max_hp)
+
 
 # Brief white flash to signal a hit landed
 # TODO: Replace with shader-based white flash when real sprites swap in.
@@ -79,22 +80,17 @@ func flash_hit() -> void:
 
 # Called when this enemy takes damage from weapons / projectiles
 func take_damage(amount: int) -> void:
-	current_hp -= amount
+	health_component.take_damage(amount)
 	flash_hit()
-	# Louder hits = louder sound, clamped to avoid extremes
+
 	var hit_sfx := get_node_or_null("HitSFX") as AudioStreamPlayer2D
 	if hit_sfx:
 		hit_sfx.volume_db = clamp(-10.0 + (amount / 10.0), -20.0, 0.0)
 		hit_sfx.play()
 
-	# Spawn floating damage number at enemy position
 	var dmg_label = PoolManager.spawn("particle_damage_number", global_position + Vector2(-8, -20))
 	if dmg_label:
 		dmg_label.show_damage(amount)
-
-	if current_hp <= 0:
-		die()
-
 
 
 # Handle enemy death - spawn drops and return to pool
@@ -106,7 +102,7 @@ func die() -> void:
 
 	remove_from_group("enemies")
 	if _current_cell_id != -1:
-		GridManager.unregister_enemy(self, _current_cell_id)
+		GridManager.unregister_enemy(self , _current_cell_id)
 		_current_cell_id = -1
 
 	var drop_pos = global_position
@@ -120,7 +116,7 @@ func die() -> void:
 	var particles = DeathParticles.instantiate()
 	particles.global_position = drop_pos
 	get_tree().current_scene.add_child(particles)
-	particles.emitting = true  # Start the burst
+	particles.emitting = true # Start the burst
 	
 	# Pick a random base direction for XP
 	var xp_base_angle = randf() * TAU
@@ -129,21 +125,20 @@ func die() -> void:
 	
 	# Spawn XP gems clustered in one direction
 	for i in xp_drop_count:
-		var angle = xp_base_angle + randf_range(-0.5, 0.5)  # Slight spread within sector
-		var distance = randf_range(40, 60)  # was 20-40, now 40-60
+		var angle = xp_base_angle + randf_range(-0.5, 0.5) # Slight spread within sector
+		var distance = randf_range(40, 60) # was 20-40, now 40-60
 		var offset = Vector2(cos(angle), sin(angle)) * distance
 		PoolManager.spawn("pickup_xp_gem", drop_pos + offset)
 	
 	# Spawn gold coins clustered in opposite direction
 	for i in gold_drop_count:
 		var angle = gold_base_angle + randf_range(-0.5, 0.5)
-		var distance = randf_range(40, 60)  # was 20-40, now 40-60
+		var distance = randf_range(40, 60) # was 20-40, now 40-60
 		var offset = Vector2(cos(angle), sin(angle)) * distance
 		PoolManager.spawn("pickup_gold_coin", drop_pos + offset)
 	
 	# Return enemy to pool
-	PoolManager.despawn(self)
-
+	PoolManager.despawn(self )
 
 
 # === POOLING LIFECYCLE ===
@@ -154,7 +149,7 @@ func on_spawn() -> void:
 	set_physics_process(true)
 	add_to_group("enemies") # Only in group when active
 	# register with grid system for spatial queries
-	GridManager.register_enemy(self)
+	GridManager.register_enemy(self )
 	_current_cell_id = GridManager.get_cell_id(global_position)
 
 
@@ -165,22 +160,21 @@ func on_despawn() -> void:
 	remove_from_group("enemies") # remove when inactive
 	# unregister from grid system
 	if _current_cell_id != -1:
-		GridManager.unregister_enemy(self, _current_cell_id)
+		GridManager.unregister_enemy(self , _current_cell_id)
 		_current_cell_id = -1
 
 
 func reset_state() -> void:
 	is_dying = false
 	velocity = Vector2.ZERO
-	current_hp = base_max_hp
-	# Reset debuffs (if DebuffHandler exists)
+	health_component.set_max_hp(base_max_hp)
+	health_component.heal(health_component.max_hp)
 	if has_node("DebuffHandler"):
 		$DebuffHandler.active_debuffs.clear()
 	if _flash_tween and _flash_tween.is_valid():
 		_flash_tween.kill()
 	if visual is ColorRect:
 		(visual as ColorRect).color = _base_color
-
 
 
 func _physics_process(_delta: float) -> void:
@@ -202,4 +196,4 @@ func _on_damage_area_body_entered(body: Node2D) -> void:
 		# deal damage to the palyer using our damage stat
 		body.take_damage(damage)
 		# remove this enemy from the scene
-		PoolManager.despawn(self)
+		PoolManager.despawn(self )

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://oc2uig8ktdeb" path="res://scripts/enemies/debuff_handler.gd" id="2_4db11"]
 [ext_resource type="AudioStream" uid="uid://c2wt2mfr60wky" path="res://assets/audio/sfx/enemy_hit.wav" id="3_lv0fq"]
 [ext_resource type="AudioStream" uid="uid://b1yfkwq146fyj" path="res://assets/audio/sfx/enemy_death.wav" id="4_pj2tg"]
+[ext_resource type="Script" uid="uid://cnfsieuffi7r4" path="res://scripts/components/health_component.gd" id="5_768ni"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvohl"]
 radius = 16.0
@@ -43,3 +44,6 @@ bus = &"SFX"
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=850615072]
 stream = ExtResource("4_pj2tg")
 bus = &"SFX"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=511099356]
+script = ExtResource("5_768ni")
