@@ -596,6 +596,7 @@ Every completed feature should end with:
 - **Get to the point** - Brief explanations, Josh can ask for more
 - **Don't repeat questions back** - Just answer them
 - **Code comments = sparse, only for non-obvious gotchas** - Chat = where explanations live
+- **Link files as clickable markdown** - Josh works in VSCode and clicks to navigate. Always reference files/lines as `[player.gd:49](game/scripts/player/player.gd#L49)`, never as backticked paths or plain text
 - **Celebrate wins briefly**: "Great, X works!"
 - **Be direct about issues**: "This will cause X because Y"
 

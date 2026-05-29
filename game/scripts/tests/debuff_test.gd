@@ -41,13 +41,14 @@ func _spawn_test_enemies() -> void:
 	for dist in distances:
 		var enemy = duwende_scene.instantiate()
 		enemy.position = player.position + (Vector2.RIGHT * dist)
-		enemy.base_speed = 30.0  # Slow base speed so slow effect is visible
+		enemy.base_speed = 30.0 # Slow base speed so slow effect is visible
 		enemy.speed = 30.0
-		enemy.base_max_hp = 999
-		enemy.current_hp = 999
 		add_child(enemy)
+		enemy.health_component.set_max_hp(999)
+		enemy.health_component.heal(999)
 		enemy.add_to_group("enemies")
 		spawned_enemies.append(enemy)
+
 	
 	print("[DEBUFF TEST] Spawned %d duwende enemies (speed=30, hp=999)" % spawned_enemies.size())
 

@@ -3482,9 +3482,10 @@
               3
             ],
             "details": "Refactor hud.gd to connect to the player’s HealthComponent health_changed signal instead of polling player.current_hp. Audit weapons, debuff system, death_particles, and all listed test scenes so they call take_damage or other HP actions on the relevant HealthComponent rather than direct HP fields. Ensure caller code resolves the correct component on player or enemy nodes and keeps existing gameplay interactions intact.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Open the HUD in a live scene and confirm it updates immediately on HP changes without polling. Exercise weapons, debuffs, and test scenes to verify they still damage the intended targets and no script references to removed HP fields remain.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-05-29T00:19:15.320Z"
           },
           {
             "id": 5,
@@ -3501,7 +3502,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-28T00:47:33.354Z"
+        "updatedAt": "2026-05-29T00:19:15.320Z"
       },
       {
         "id": "46",
@@ -3531,7 +3532,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-28T00:47:33.354Z",
+      "lastModified": "2026-05-29T00:19:15.326Z",
       "taskCount": 47,
       "completedCount": 41,
       "tags": [

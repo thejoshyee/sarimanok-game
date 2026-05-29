@@ -91,7 +91,8 @@ func _test_thick_plumage_independent() -> void:
 	assert_approx(player.get_effective_max_hp(), 175.0, "lv5: total HP = 175")
 
 	# current_hp should have scaled up too (passive_upgraded adds bonus each level)
-	assert_approx(player.current_hp, 175.0, "lv5: current HP scaled to 175")
+	assert_approx(player.health_component.current_hp, 175.0, "lv5: current HP scaled to 175")
+
 	print("")
 
 
@@ -137,7 +138,9 @@ func _test_all_combined() -> void:
 	_reset_passives()
 
 	# Reset player HP to base
-	player.current_hp = player.get_effective_max_hp()
+	player.health_component.set_max_hp(player.get_effective_max_hp())
+	player.health_component.heal(player.health_component.max_hp)
+
 
 	# Max all 4 passives
 	_max_passive("iron_beak")
