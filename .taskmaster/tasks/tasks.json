@@ -3533,10 +3533,11 @@
             "dependencies": [
               1
             ],
-            "details": "Search for assignments, additive mutations, and helper methods that modify max_hp, including code in player setup, passive application, level transitions, and debug utilities. Determine whether any path can raise the base stat from 100 to 105 or otherwise alter the displayed max without changing the expected passive formula.",
-            "status": "pending",
+            "details": "Search for assignments, additive mutations, and helper methods that modify max_hp, including code in player setup, passive application, level transitions, and debug utilities. Determine whether any path can raise the base stat from 100 to 105 or otherwise alter the displayed max without changing the expected passive formula.\n<info added on 2026-06-01T06:41:09.896Z>\nTRACE COMPLETE — no runtime path can produce max_hp = 180.\n\nVerified sources:\n1. stats.max_hp never mutated at runtime — grep for max_hp = writes returns only scene defaults, test fixtures, and HealthComponent.set_max_hp setter (health_component.gd:28). No player/passive code assigns to the base stat.\n2. Exactly two calls update the player's HealthComponent.max_hp: player.gd:89 (_ready) and player.gd:163 (_on_passive_upgraded). Both invoke set_max_hp(get_effective_max_hp()), which recomputes from scratch: stats.max_hp (100) + PassiveManager.get_bonus(\"thick_plumage\").\n3. Bonus double-clamped to 75: thick_plumage.tres bonus_per_level = 15.0, max_level = 5 (inherited default in passive_data.gd:14). passive_data.get_bonus applies clampi(level, 0, max_level), and passive_manager.upgrade_passive also clamps. Therefore get_effective_max_hp <= 100 + 75 = 175.\n4. No shop/permanent/meta HP upgrade exists — grep for shop|permanent|meta_upgrade|bonus_hp returns only an unrelated comment about gold in player.gd:137.\n\nImplication for remaining subtasks: set_max_hp recomputes (idempotent), it does not accumulate. A duplicate passive_upgraded signal connection (46.3 hypothesis) cannot inflate MAX HP — recomputing twice still yields 175. A duplicate would only run heal(15) again (player.gd:164), but heal() clamps current_hp to max. Neither current nor max can reach 180 via any code path. This points strongly to 46.4: the original 180 observation was likely a misread or transient log artifact.\n</info added on 2026-06-01T06:41:09.896Z>",
+            "status": "done",
             "testStrategy": "Instrument all max_hp mutation sites with temporary logs showing call site, before/after values, and frame/time. Run the 37.4 scenario and confirm whether any unexpected mutation occurs.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-01T06:42:19.207Z"
           },
           {
             "id": 3,
@@ -3580,7 +3581,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-05-30T20:42:31.444Z"
+        "updatedAt": "2026-06-01T06:42:19.207Z"
       },
       {
         "id": "47",
@@ -3599,7 +3600,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-05-30T20:42:31.444Z",
+      "lastModified": "2026-06-01T06:42:19.207Z",
       "taskCount": 47,
       "completedCount": 42,
       "tags": [
