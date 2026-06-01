@@ -3511,7 +3511,7 @@
         "description": "Find what actually produced max_hp = 180 (formula at L5 Thick Plumage caps at 175).",
         "details": "Task 41.1 audit traced HP scaling and found only two sources: base PlayerStats.max_hp (100) + Thick Plumage (+15 × level, max 5 = +75). Theoretical max is 175.\\n\\nDuring 43.4 we noticed the original 'current_hp drift past max' theory doesn't hold up — passive_stat_test.gd:94 already verifies current_hp ends at exactly 175 after L5 from full, and the old += bonus path matches the max increase 1:1. So 180 HP came from somewhere else.\\n\\nCandidates to investigate:\\n- Check PlayerStats.tres values across all scenes — is one set to max_hp = 105? (105 + 75 = 180)\\n- Search for any code that mutates stats.max_hp at runtime\\n- Check if there's a duplicate passive_upgraded signal connection causing double-application\\n- Look at the actual print log from 37.4 if Josh still has it — was it '180/180' or '180/175'? Direction of the discrepancy tells us which side is wrong\\n- Check if any test/debug code in scenes/levels/ overrides player stats\\n\\nDeliverable: identify the actual mechanism, file a fix task if it's a bug or close this if it's expected behavior we didn't account for in the audit.",
         "testStrategy": "",
-        "status": "in-progress",
+        "status": "done",
         "dependencies": [],
         "priority": "low",
         "subtasks": [
@@ -3546,10 +3546,11 @@
             "dependencies": [
               2
             ],
-            "details": "Inspect signal connections in scenes, autoloads, player scripts, and passive systems for duplicate subscriptions, repeated setup on scene reload, or stale references. Confirm whether the passive bonus is applied exactly once per upgrade, and whether any duplicate handler could produce a higher-than-expected max_hp display.",
-            "status": "pending",
+            "details": "Inspect signal connections in scenes, autoloads, player scripts, and passive systems for duplicate subscriptions, repeated setup on scene reload, or stale references. Confirm whether the passive bonus is applied exactly once per upgrade, and whether any duplicate handler could produce a higher-than-expected max_hp display.\n<info added on 2026-06-02T04:48:07.909Z>\nNow I have the code context. Let me also check the weapon.gd file to confirm the signal connection there:I now have all the context needed. Let me generate the update text:\n\nSIGNAL WIRING VERIFIED — no duplicate connection, no double-application. The 175 cap holds.\n\nFindings:\n1. passive_upgraded is connected to the player exactly ONCE (player.gd:97). No other player-side connection exists.\n2. On death the whole scene reloads (player.gd:84 reload_current_scene), so the old player node is freed and Godot auto-disconnects its signal — no stacking across runs.\n3. weapon.gd:36 also connects passive_upgraded, but to a different handler (_on_passive_upgraded in weapon.gd) that only recalculates weapon stats — never touches HP.\n\nTwo incidental discoveries:\nA. DEAD CODE (now fixed): level_up_panel.gd had two identical elif choice_type == \"upgrade_passive\": branches. In an if/elif chain the first match always wins, so the second was unreachable — NOT a double-application bug. Removed the duplicate branch this session.\nB. REAL-WORLD EXPLANATION for 37.4 high HP: main.gd:108 — KEY_5 is a debug hotkey that grants +1 Thick Plumage per press (alongside KEY_2/3 skip time, KEY_4 max weapons, KEY_6 take damage). During the 37.4 stress test Josh was mashing debug keys; KEY_5 ramped HP fast. Still clamps at level 5 = 175.\n\nConclusion: combined with 46.2 (idempotent recompute setter), the duplicate-application theory is fully ruled out. No bug. 180 is unreachable; the debug key explains how HP climbed quickly during 37.4.\n</info added on 2026-06-02T04:48:07.909Z>",
+            "status": "done",
             "testStrategy": "Add connection-count assertions or debug output for passive_upgraded listeners, then trigger a passive upgrade in a controlled test. Confirm the bonus is applied once and that repeated scene entry does not stack handlers.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-02T04:48:36.747Z"
           },
           {
             "id": 4,
@@ -3561,9 +3562,10 @@
               3
             ],
             "details": "Locate any saved logs, screenshots, profiler notes, or chat history from Task 37.4. Compare the reported current_hp and max_hp values at the moment of observation, because 180/180 implies a base-stat issue while 180/175 implies a current-health desync or UI display bug.",
-            "status": "pending",
+            "status": "cancelled",
             "testStrategy": "Review archived outputs and reproduce the exact moment with identical setup. Capture the HP readout at the point of discrepancy and verify both the numerical state and the UI text.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-02T05:17:08.844Z"
           },
           {
             "id": 5,
@@ -3576,12 +3578,13 @@
               4
             ],
             "details": "Inspect scenes, test harnesses, level scripts, and debug configuration for any code that overrides player stats.max_hp or substitutes a different PlayerStats resource. If a concrete mechanism is found, file the corresponding fix task; if no bug exists and the 180 came from an expected override or special-case setup, document that conclusion and close the investigation.",
-            "status": "pending",
+            "status": "cancelled",
             "testStrategy": "Run the affected scenario with all debug/test overrides disabled, then with each override enabled one at a time. Confirm which configuration produces 180 and whether it matches intended behavior.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-02T05:17:08.857Z"
           }
         ],
-        "updatedAt": "2026-06-01T06:42:19.207Z"
+        "updatedAt": "2026-06-02T05:17:12.181Z"
       },
       {
         "id": "47",
@@ -3600,9 +3603,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-01T06:42:19.207Z",
+      "lastModified": "2026-06-02T05:17:12.181Z",
       "taskCount": 47,
-      "completedCount": 42,
+      "completedCount": 43,
       "tags": [
         "master"
       ]

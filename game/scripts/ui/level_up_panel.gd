@@ -122,9 +122,6 @@ func _on_option_selected(option_number: int) -> void:
 	elif choice_type == "upgrade_passive":
 		PassiveManager.upgrade_passive(choice.data.id)
 		print("Upgraded passive: ", choice.data.display_name)
-	elif choice_type == "upgrade_passive":
-		PassiveManager.upgrade_passive(choice.data.id)
-		print("Upgraded passive: ", choice.data.display_name)
 	elif choice_type.begins_with("filler_"):
 		LevelUpManager.apply_filler(choice)
 		print("Applied filler: ", choice.display_name)
