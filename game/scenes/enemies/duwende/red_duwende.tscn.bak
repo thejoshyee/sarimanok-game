@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyi8td7balb1c"]
+
+[ext_resource type="Script" uid="uid://141mxbakt2wp" path="res://scripts/enemies/enemy_duwende.gd" id="1_0qaf4"]
+[ext_resource type="AudioStream" uid="uid://c2wt2mfr60wky" path="res://assets/audio/sfx/enemy_hit.wav" id="2_hit"]
+[ext_resource type="AudioStream" uid="uid://b1yfkwq146fyj" path="res://assets/audio/sfx/enemy_death.wav" id="3_death"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="4_hcomp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bvohl"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tyx3a"]
+radius = 16.0
+
+[node name="EnemyDuwende" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_0qaf4")
+base_speed = 100.0
+base_damage = 10
+base_max_hp = 25
+xp_drop_count = 3
+gold_drop_count = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bvohl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.8, 0.13333334, 0.13333334, 1)
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("CircleShape2D_tyx3a")
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hit")
+bus = &"SFX"
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_death")
+bus = &"SFX"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_hcomp")
