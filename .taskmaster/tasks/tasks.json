@@ -3618,9 +3618,10 @@
               1
             ],
             "details": "Use Godot's New Inherited Scene flow with `enemy_duwende.tscn` as the parent, then save over `green_duwende.tscn`. Preserve only the variant-specific override, which should be the ColorRect tint for green, and avoid reintroducing full node definitions or duplicate nodes from the old standalone scene.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Open `green_duwende.tscn` in text form and verify it contains an `instance=ExtResource(...)` reference to `enemy_duwende.tscn` and only the expected color override.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-05T05:16:01.907Z"
           },
           {
             "id": 3,
@@ -3660,12 +3661,12 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-06-03T20:23:05.960Z"
+        "updatedAt": "2026-06-05T05:16:01.907Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-03T20:23:05.961Z",
+      "lastModified": "2026-06-05T05:16:01.912Z",
       "taskCount": 47,
       "completedCount": 43,
       "tags": [
