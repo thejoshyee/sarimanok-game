@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c527tqmu0wcs5"]
+[gd_scene format=3 uid="uid://c527tqmu0wcs5"]
 
-[ext_resource type="Script" uid="uid://141mxbakt2wp" path="res://scripts/enemies/enemy_duwende.gd" id="1_wpa0x"]
-[ext_resource type="AudioStream" uid="uid://c2wt2mfr60wky" path="res://assets/audio/sfx/enemy_hit.wav" id="2_ytelp"]
-[ext_resource type="AudioStream" uid="uid://b1yfkwq146fyj" path="res://assets/audio/sfx/enemy_death.wav" id="3_gxywo"]
-[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="4_hcomp"]
+[ext_resource type="Script" uid="uid://141mxbakt2wp" path="res://scripts/enemies/enemy_duwende.gd" id="1_iqk52"]
+[ext_resource type="Script" uid="uid://oc2uig8ktdeb" path="res://scripts/enemies/debuff_handler.gd" id="2_uwpig"]
+[ext_resource type="AudioStream" uid="uid://c2wt2mfr60wky" path="res://assets/audio/sfx/enemy_hit.wav" id="3_w1ues"]
+[ext_resource type="AudioStream" uid="uid://b1yfkwq146fyj" path="res://assets/audio/sfx/enemy_death.wav" id="4_2lj5s"]
+[ext_resource type="Script" uid="uid://cnfsieuffi7r4" path="res://scripts/components/health_component.gd" id="5_ylnyi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bvohl"]
 radius = 16.0
@@ -11,34 +12,38 @@ radius = 16.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_tyx3a"]
 radius = 16.0
 
-[node name="EnemyDuwende" type="CharacterBody2D" unique_id=1802429421 groups=["enemies"]]
+[node name="EnemyDuwende" type="CharacterBody2D" unique_id=148958636 groups=["enemies"]]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_wpa0x")
+script = ExtResource("1_iqk52")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1823710055]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1626808763]
 shape = SubResource("CircleShape2D_bvohl")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1351349396]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=906190844]
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
 color = Color(0.25565824, 0.9905693, 3.85046e-07, 1)
 
-[node name="DamageArea" type="Area2D" parent="." unique_id=2069888108]
+[node name="DamageArea" type="Area2D" parent="." unique_id=1680105707]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=42641625]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1834703573]
 shape = SubResource("CircleShape2D_tyx3a")
 
-[node name="HitSFX" type="AudioStreamPlayer2D" parent="." unique_id=331574700]
-stream = ExtResource("2_ytelp")
+[node name="DebuffHandler" type="Node" parent="." unique_id=974833638]
+script = ExtResource("2_uwpig")
+metadata/_custom_type_script = "uid://oc2uig8ktdeb"
+
+[node name="HitSFX" type="AudioStreamPlayer2D" parent="." unique_id=1845086177]
+stream = ExtResource("3_w1ues")
 bus = &"SFX"
 
-[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=1488362094]
-stream = ExtResource("3_gxywo")
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=850615072]
+stream = ExtResource("4_2lj5s")
 bus = &"SFX"
 
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("4_hcomp")
+[node name="HealthComponent" type="Node" parent="." unique_id=511099356]
+script = ExtResource("5_ylnyi")
