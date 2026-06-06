@@ -3631,9 +3631,10 @@
               1
             ],
             "details": "Create a new inherited scene from `enemy_duwende.tscn`, then save it over `red_duwende.tscn`. Apply only the red variant overrides: the exported gameplay values for speed, damage, HP, XP drop, and gold drop, plus the red ColorRect tint. Ensure the scene stays lean and references the base instead of redefining the full node tree.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Open `red_duwende.tscn` in text form and confirm it references `enemy_duwende.tscn`, keeps the exported overrides, and does not contain duplicated base nodes.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-06T06:05:20.709Z"
           },
           {
             "id": 4,
@@ -3661,12 +3662,12 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-06-05T05:16:01.907Z"
+        "updatedAt": "2026-06-06T06:05:20.709Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-05T05:16:01.912Z",
+      "lastModified": "2026-06-06T06:05:20.715Z",
       "taskCount": 47,
       "completedCount": 43,
       "tags": [
