@@ -3592,7 +3592,7 @@
         "description": "Convert green_duwende.tscn and red_duwende.tscn from independent scene files into proper inherited scenes that extend enemy_duwende.tscn as a base, overriding only variant-specific properties.",
         "details": "**Current Problem:**\nBoth `green_duwende.tscn` (45 lines) and `red_duwende.tscn` (50 lines) are standalone scenes that fully redefine all nodes (CharacterBody2D, CollisionShape2D, ColorRect, DamageArea, HitSFX, DeathSFX, HealthComponent). They share `enemy_duwende.gd` as their script but have no `instance=` reference to a base scene. This caused crashes during Task 45.3 when HealthComponent was added only to `enemy_duwende.tscn` — the pooled variants didn't inherit the new node.\n\n**Why Inherited Scenes:**\nGodot's inherited scene pattern (`Scene → New Inherited Scene`) creates a child .tscn that references a parent and only stores overrides. When the parent adds a new child node (like HealthComponent, future HurtboxComponent, etc.), all inherited scenes automatically get it.\n\n**Implementation Steps:**\n\n1. **Backup current variant scenes** (optional safety net):\n   - Copy `green_duwende.tscn` → `green_duwende_backup.tscn`\n   - Copy `red_duwende.tscn` → `red_duwende_backup.tscn`\n\n2. **Create inherited green_duwende.tscn:**\n   - In Godot: Scene → New Inherited Scene → select `enemy_duwende.tscn`\n   - Save as `green_duwende.tscn` (overwrite existing)\n   - In the root node Inspector, set:\n     - `base_speed = 80.0` (same as base, can omit)\n     - `base_damage = 5` (same as base, can omit)\n     - `base_max_hp = 10` (same as base, can omit)\n     - `xp_drop_count = 1` (same as base, can omit)\n     - `gold_drop_count = 1` (same as base, can omit)\n   - Select ColorRect node → set color to green `Color(0.25565824, 0.9905693, 3.85046e-07, 1)`\n   - Note: Since Green uses all base defaults, the inherited scene should only override the ColorRect color\n\n3. **Create inherited red_duwende.tscn:**\n   - In Godot: Scene → New Inherited Scene → select `enemy_duwende.tscn`\n   - Save as `red_duwende.tscn` (overwrite existing)\n   - In the root node Inspector, set the variant-specific @export values:\n     - `base_speed = 100.0`\n     - `base_damage = 10`\n     - `base_max_hp = 25`\n     - `xp_drop_count = 3`\n     - `gold_drop_count = 2`\n   - Select ColorRect node → set color to red `Color(0.8, 0.13333334, 0.13333334, 1)`\n\n4. **Verify DebuffHandler inheritance:**\n   - Current `enemy_duwende.tscn` has DebuffHandler (lines 36-38)\n   - Current `green_duwende.tscn` is MISSING DebuffHandler\n   - Current `red_duwende.tscn` is MISSING DebuffHandler\n   - After refactor, both variants will inherit DebuffHandler from base automatically\n\n5. **Verify pool configs still work:**\n   - `green_duwende_pool.tres` points to `res://scenes/enemies/duwende/green_duwende.tscn` — path unchanged\n   - `red_duwende_pool.tres` points to `res://scenes/enemies/duwende/red_duwende.tscn` — path unchanged\n   - No changes needed to pool configs\n\n**Expected .tscn structure after refactor (red_duwende.tscn example):**\n```\n[gd_scene load_steps=2 format=3 uid=\"uid://cyi8td7balb1c\"]\n\n[ext_resource type=\"PackedScene\" uid=\"uid://bqufsuyg2a6yu\" path=\"res://scenes/enemies/duwende/enemy_duwende.tscn\" id=\"1_base\"]\n\n[node name=\"EnemyDuwende\" instance=ExtResource(\"1_base\")]\nbase_speed = 100.0\nbase_damage = 10\nbase_max_hp = 25\nxp_drop_count = 3\ngold_drop_count = 2\n\n[node name=\"ColorRect\" parent=\".\" index=\"1\"]\ncolor = Color(0.8, 0.13333334, 0.13333334, 1)\n```\n\nThis reduces ~50 lines to ~12 lines and ensures future shared nodes (HurtboxComponent, etc.) only need to be added to the base scene.\n\n**Important Notes:**\n- The `unique_id` properties in the current standalone scenes will be dropped — inherited scenes use the parent's node structure\n- DebuffHandler was missing from both variants; inheritance fixes this automatically\n- This task blocks adding Black Duwende (which would be a third inherited scene) and any future shared components",
         "testStrategy": "1. **Scene structure verification:**\n   - Open `green_duwende.tscn` in text editor → confirm it has `instance=ExtResource(...)` referencing `enemy_duwende.tscn`\n   - Open `red_duwende.tscn` in text editor → confirm same inherited structure\n   - Both files should be 10-15 lines, not 40-50 lines\n\n2. **In-editor verification:**\n   - Open each variant in Godot editor\n   - Confirm all nodes from base scene appear (CollisionShape2D, ColorRect, DamageArea, DebuffHandler, HitSFX, DeathSFX, HealthComponent)\n   - Nodes from base should show inheritance indicator (gray icon or \"inherited\" badge)\n\n3. **Variant property verification:**\n   - Select root of green_duwende.tscn → Inspector should show default values (base_speed=80, base_damage=5, etc.)\n   - Select root of red_duwende.tscn → Inspector should show Red values (base_speed=100, base_damage=10, base_max_hp=25, xp_drop_count=3, gold_drop_count=2)\n   - ColorRect colors should match their respective variants\n\n4. **Inheritance propagation test:**\n   - Add a temporary test node (e.g., Node2D named \"TestInheritance\") to `enemy_duwende.tscn`\n   - Open `green_duwende.tscn` → confirm \"TestInheritance\" node appears automatically\n   - Open `red_duwende.tscn` → confirm \"TestInheritance\" node appears automatically\n   - Remove the test node from base\n\n5. **Runtime pooling test:**\n   - Run the game (F5)\n   - Play for 8+ minutes to trigger Red Duwende spawns\n   - Verify both Green and Red enemies spawn correctly\n   - Verify they take damage and die normally (HealthComponent works)\n   - Verify debuffs apply (DebuffHandler now inherited by Green)\n   - Verify XP/Gold drops match variant counts (1/1 for Green, 3/2 for Red)\n\n6. **DebuffHandler fix verification:**\n   - Apply a slow debuff to a Green Duwende (via weapon or test)\n   - Confirm it slows (previously Green was missing DebuffHandler)\n   - The `enemy_duwende.gd:51` check `has_node(\"DebuffHandler\")` should now return true for all variants",
-        "status": "in-progress",
+        "status": "done",
         "dependencies": [
           "15",
           "45"
@@ -3645,9 +3645,10 @@
               3
             ],
             "details": "Inspect both inherited scenes to confirm they now include shared base children such as `DebuffHandler` through inheritance, even though the variants previously lacked it. Reopen each scene after saving to verify the `@export` values survive the round trip and still reflect the intended green and red variant settings rather than resetting to defaults.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Reopen both scenes in the editor and inspect the Inspector plus scene tree for inherited children, correct exported values, and unchanged color overrides after reload.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-06T18:55:42.040Z"
           },
           {
             "id": 5,
@@ -3657,19 +3658,20 @@
               4
             ],
             "details": "Confirm `green_duwende_pool.tres` and `red_duwende_pool.tres` still reference the same scene paths and do not need any edits. Then run a gameplay or test scene to verify each pooled variant loads, uses the correct stats and color, and behaves correctly with inherited shared components like `HealthComponent` and `DebuffHandler`.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Load each pool resource and verify the referenced scene path is unchanged, then spawn both variants in a test run and confirm they appear with the correct stats, tint, and shared component behavior.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-06T18:57:47.151Z"
           }
         ],
-        "updatedAt": "2026-06-06T06:05:20.709Z"
+        "updatedAt": "2026-06-06T18:57:47.151Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-06T06:05:20.715Z",
+      "lastModified": "2026-06-06T18:57:47.151Z",
       "taskCount": 47,
-      "completedCount": 43,
+      "completedCount": 44,
       "tags": [
         "master"
       ]
