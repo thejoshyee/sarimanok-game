@@ -1,101 +1,77 @@
 {
 	"meta": {
-		"generatedAt": "2026-01-08T20:54:08.497Z",
-		"tasksAnalyzed": 11,
-		"totalTasks": 27,
-		"analysisCount": 11,
+		"generatedAt": "2026-06-07T23:52:49.742Z",
+		"tasksAnalyzed": 8,
+		"totalTasks": 55,
+		"analysisCount": 8,
 		"thresholdScore": 5,
 		"projectName": "Taskmaster",
 		"usedResearch": true
 	},
 	"complexityAnalysis": [
 		{
-			"taskId": 17,
-			"taskTitle": "Design core weapon architecture and WeaponData Resource",
-			"complexityScore": 5,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Break Task 17 into ~4 subtasks covering: (1) creating the WeaponData Resource script and exports, (2) setting up folder structure and .tres asset workflow, (3) encoding all PRD-based stats/upgrades for the 6 initial weapons, and (4) building a small test harness (scene or autoload script) to load, validate, and log WeaponData, including get_upgrade behavior.",
-			"reasoning": "Moderate complexity: mostly data modeling and Godot Resource workflow with clear patterns and limited runtime logic, but requires careful alignment with the PRD and future-proofing for scalability and localization."
-		},
-		{
-			"taskId": 18,
-			"taskTitle": "Implement base Weapon node with cooldown and upgrade handling",
-			"complexityScore": 7,
-			"recommendedSubtasks": 5,
-			"expansionPrompt": "Break Task 18 into ~5 subtasks: (1) define the Weapon base script and scene (node structure, exported WeaponData), (2) implement cooldown handling with a reusable Timer and ready/try_fire flow, (3) implement level and upgrade application including virtual hooks, (4) enforce assertions/guards and idempotent runtime level changes, and (5) create a dedicated test scene or scripts to validate cooldown timing and upgrade-derived stats.",
-			"reasoning": "Higher complexity: introduces the core abstraction all weapons depend on, with timing logic, inheritance hooks, and runtime level changes that must be robust and easy to extend for multiple weapon types."
-		},
-		{
-			"taskId": 19,
-			"taskTitle": "Create WeaponManager to track and auto-fire up to 6 weapons",
-			"complexityScore": 7,
-			"recommendedSubtasks": 5,
-			"expansionPrompt": "Break Task 19 into ~5 subtasks: (1) create the WeaponManager scene/script and attach it to the player, (2) implement weapon instantiation and scene lookup/mapping from WeaponData, (3) implement auto-fire loop, positioning, and readiness checks, (4) add querying/upgrade APIs (get_weapon_by_id, upgrade_weapon, capacity checks), and (5) build a test setup that spawns several weapons, verifies auto-fire cadence, and enforces the 6-weapon limit.",
-			"reasoning": "Higher complexity: central coordinating component with lifecycle management, scene instantiation, player integration, and upgrade APIs that will be used by progression and gameplay systems, making correctness and clarity important."
-		},
-		{
-			"taskId": 20,
-			"taskTitle": "Implement melee cone weapon: Peck",
-			"complexityScore": 6,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Break Task 20 into ~4 subtasks: (1) build the Peck scene (Node2D, Area2D, collision shape, placeholder visual, layers/masks), (2) implement peck_weapon.gd extending Weapon with stats reaction and cooldown/arc changes across levels, (3) implement firing logic including player facing alignment and enemy hit detection, and (4) create an arena test scene validating cone coverage, damage values per level, and cooldown/arc scaling.",
-			"reasoning": "Moderate-to-high complexity: first concrete melee implementation, combining geometry (cone/arc), collision layers, integration with player facing, and level-based behavior changes that must align with WeaponData and base Weapon."
-		},
-		{
-			"taskId": 21,
-			"taskTitle": "Implement AOE circle weapons: Wing Slap and Flame Wing clone",
-			"complexityScore": 6,
-			"recommendedSubtasks": 5,
-			"expansionPrompt": "Break Task 21 into ~5 subtasks: (1) implement the generic AOECircleWeapon scene and script (Area2D, CircleShape2D, AnimationPlayer), (2) wire radius and damage scaling via WeaponData and _on_stats_changed, (3) create Wing Slap derived scene and configure its WeaponData including radius modifiers per level, (4) create Flame Wing clone configuration using shared script with altered damage/radius visuals, and (5) build a sandbox test scene to validate radius, damage progression, cooldown, and DRY mapping in WeaponManager.",
-			"reasoning": "Moderate-to-high complexity: introduces a reusable AOE pattern, two configured variants, and radius scaling driven by data, requiring careful coupling between WeaponData, shared script, and testing of spatial behavior."
-		},
-		{
-			"taskId": 22,
-			"taskTitle": "Implement projectile weapons: Feather Shot and Ice Shard clone",
-			"complexityScore": 8,
+			"taskId": 48,
+			"taskTitle": "Implement global game timer, win/lose condition hooks, and state signaling",
+			"complexityScore": 6.5,
 			"recommendedSubtasks": 6,
-			"expansionPrompt": "Break Task 22 into ~6 subtasks: (1) create the generic Projectile scene and script with movement, hit detection, pierce, and optional debuff forwarding, (2) implement Feather Shot weapon scene/script integrating with Enemy query to target nearest enemy and spawn multiple projectiles, (3) handle per-level behavior (projectile_count, pierce_count, speed modifiers) via WeaponData and _on_stats_changed, (4) configure Ice Shard as a data-driven clone with slower speed and slow debuff parameters, (5) integrate projectiles into the main scene tree/lifecycle (despawning, off-screen handling), and (6) build a projectile test scene to verify counts, pierce behavior, cooldown, and debuff triggering.",
-			"reasoning": "High complexity: real-time physics/projectile behavior, enemy targeting, multi-projectile and pierce logic, data-driven debuffs, and reuse for clone weapons; correctness and performance affect core combat feel."
+			"expansionPrompt": "Break Task 48 into ~6 subtasks covering: (1) creating and wiring the GameSession autoload singleton, (2) implementing the core timer and process loop with elapsed_time and VICTORY_TIME, (3) defining and emitting time_updated, victory_reached, and defeat_reached signals with correct guards, (4) adding helper utilities like format_time() and is_gameplay_active() while ensuring they are stateless/side-effect free, (5) integrating defeat/victory with existing player HP death logic and game-over screen routing, and (6) implementing reset/restart behavior to correctly clear GameSession state between runs and from main menu. For each subtask, specify files/scripts touched, how to test it in isolation, and any dependency on existing systems like the current game over flow.",
+			"reasoning": "This task defines a central runtime system (GameSession singleton) that multiple other systems will depend on, so its design must be robust and future-proof. It involves implementing time tracking tied to the main loop, defining and managing multiple signals, wiring win/lose conditions, and refactoring existing game-over pathways to use the new signaling model. Although the GDScript code itself is not complex algorithmically, the integration and regression risk are non-trivial because existing flows must be updated without breaking current behavior. Proper reset semantics between runs are another subtle edge area. Splitting into around six subtasks keeps concerns separated: core timer, signaling, helpers, HP/death integration, UI/game-over refactor, and restart-state handling, which reduces integration bugs and simplifies testing."
 		},
 		{
-			"taskId": 23,
-			"taskTitle": "Implement Spiral Feathers orbital weapon",
+			"taskId": 49,
+			"taskTitle": "Update HUD timer display and global freeze handling on win/lose",
 			"complexityScore": 7,
-			"recommendedSubtasks": 5,
-			"expansionPrompt": "Break Task 23 into ~5 subtasks: (1) create the OrbitalFeather scene and script for passive collision-based damage, (2) build the Spiral Feathers weapon scene with OrbitRoot and integrate with Weapon base class, (3) implement orbit logic (player-following, rotation, radius) and always-active behavior without cooldown, (4) implement level-based scaling of damage, orbit_speed, feather_count, and orbit_radius, including respawn/update of feathers, and (5) create an orbital test scene to validate contact damage, scaling behaviors, and movement smoothness around the player.",
-			"reasoning": "Higher complexity: continuous orbiting system with multiple child nodes, dynamic repositioning and scaling across levels, always-on damage zones, and ensuring performance/clarity when many orbitals are active."
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Decompose Task 49 into ~7 subtasks: (1) HUD timer UI layout and styling with a TimerLabel anchored top-center and resolution-safe alignment, (2) subscribing HUD to GameSession.time_updated and rendering formatted time without owning timer logic, (3) implementing GameSession.is_gameplay_active() (or equivalent) and validating its semantics against win/lose states and future pause use cases, (4) applying the global freeze check to player movement/combat scripts, (5) applying the freeze check to enemies, projectiles, and pickups in a consistent, centralized pattern, (6) verifying that UI, transitions, and tweens are not frozen and adjusting node placement or tween creation accordingly, and (7) handling run restart/reset so frozen states and HUD display re-initialize correctly. For each subtask, list concrete scripts to touch, potential side effects on existing gameplay feel, and specific in-game test cases to run.",
+			"reasoning": "This task introduces a cross-cutting concern: a logical global freeze that must be respected by multiple gameplay entities while avoiding side effects on UI and transitions. The HUD timer subscription itself is straightforward, but propagating the freeze flag into various movement/AI/projectile scripts is more invasive and can create subtle bugs if missed or applied inconsistently. There are also design considerations around how is_gameplay_active() interacts with future pause features. Because this touches many files and core gameplay behavior, it carries relatively high integration and regression risk despite moderate individual code complexity. Decomposing into UI, helper function semantics, player integration, enemy/projectile integration, non-frozen UI/tween checks, and restart handling provides manageable, verifiable steps."
 		},
 		{
-			"taskId": 24,
-			"taskTitle": "Implement debuff system for slow and future effects",
+			"taskId": 50,
+			"taskTitle": "Implement dawn transition sequence using CanvasModulate and parallax sky",
 			"complexityScore": 6,
-			"recommendedSubtasks": 4,
-			"expansionPrompt": "Break Task 24 into ~4 subtasks: (1) implement the Debuff Resource and DebuffHandler node with lifetime and stacking logic, (2) integrate DebuffHandler into enemy scenes and expose an apply_debuff API on enemies, (3) wire Projectile._hit_target to call enemy debuff application based on WeaponData fields, and (4) create focused tests with Ice Shard and dummy enemies to validate slow factors, stacking, expiration, and non-impact for weapons without debuffs.",
-			"reasoning": "Moderate complexity: small but cross-cutting system influencing enemy movement; must be extensible (future burn), numerically stable (stacking/clamping), and cleanly integrated with projectiles and enemy movement code."
-		},
-		{
-			"taskId": 25,
-			"taskTitle": "Integrate weapon acquisition and upgrade flow with progression system",
-			"complexityScore": 7,
 			"recommendedSubtasks": 5,
-			"expansionPrompt": "Break Task 25 into ~5 subtasks: (1) analyze existing progression/level-up code and define integration points with WeaponManager, (2) implement a WeaponDatabase/registry of WeaponData resources for choice generation, (3) implement choice-generation logic that respects MAX_WEAPONS, ownership, and upgrade caps, (4) hook level-up UI selection events to call WeaponManager.add_weapon/upgrade_weapon and update state, and (5) create end-to-end tests or scripted flows to verify starting Peck, new-weapon vs upgrade options, capacity enforcement, and max-level handling.",
-			"reasoning": "Higher complexity: cross-system integration between progression, UI, and WeaponManager, with multiple edge cases (capacity, max level, ownership) and need for data-driven extensibility as more weapons are added."
+			"expansionPrompt": "Break Task 50 into ~5 subtasks: (1) constructing or refactoring the parallax sky layer scene hierarchy (ParallaxBackground, Sky, Moon, Stars) and CanvasModulate under Main, (2) implementing the visual setup for night state, including gradient sky and initial CanvasModulate color, with placeholders if needed, (3) creating a DawnController node/script that connects to GameSession.victory_reached and exposes exported NodePaths for Moon, Stars, Sky, and CanvasModulate, (4) implementing the tween-driven night-to-dawn transition sequence (fade out moon/stars, recolor sky, adjust CanvasModulate) in a way that remains functional under gameplay freeze rules, and (5) integrating signals or callbacks so that downstream systems (results screen, audio cues) can hook into a dawn_transition_finished event without tight coupling. For each subtask, identify how to test visually and how to guard against multiple triggers or defeat/victory race conditions.",
+			"reasoning": "This task is mostly about orchestrating visual and timing effects, using Godot’s tween system and scene graph structure. The algorithms are simple, but there are several moving parts: parallax background setup, global modulate behavior, connection to victory signals, and ensuring the transition plays correctly when gameplay is logically frozen. There is also a sequencing concern with other systems (results screen, audio cues). The complexity is moderate due to integration and UX polish rather than hard logic. Around five subtasks are sufficient to separate scene setup, controller wiring, tween choreography, freeze compatibility, and signaling for downstream flows."
 		},
 		{
-			"taskId": 26,
-			"taskTitle": "Implement placeholder visuals and damage Areas for all weapon types",
-			"complexityScore": 4,
-			"recommendedSubtasks": 3,
-			"expansionPrompt": "Break Task 26 into ~3 subtasks: (1) audit each weapon scene to ensure Area2D/CollisionShape2D nodes exist with correct layers/masks and sizes, (2) add and configure placeholder visuals (ColorRect/Sprite2D, modulate colors, minimal animations) for each weapon type and ensure they are decoupled from gameplay scripts, and (3) run a combined debug arena scene with all weapons to visually verify hit areas, collisions, and clarity using visible collision shapes or debug tooling.",
-			"reasoning": "Low-to-moderate complexity: mostly editor and configuration work standardizing collision and temporary art; still needs careful verification across all weapons but involves limited new logic."
+			"taskId": 51,
+			"taskTitle": "Create unified results screen for victory/defeat with time, kills, score, and gold",
+			"complexityScore": 7.5,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Split Task 51 into ~7 subtasks: (1) design and implement the ResultsScreen scene hierarchy and layout (CanvasLayer/Control, PanelContainer, labels, buttons) with responsive sizing for the target viewport, (2) extend GameSession or introduce a RunStats singleton to track enemies_killed, score, gold_earned, and final_time, including public update methods and initialization/reset paths, (3) integrate enemy death and pickup events so they update the stats source correctly, reusing existing drop and progression systems, (4) implement ResultsScreen.gd logic for show_results(is_victory: bool), pulling data from the stats source and handling header text and messaging, (5) wire GameSession.victory_reached and defeat_reached into the main game controller to show the results screen at appropriate times and coordinate with the dawn transition or defeat animations, (6) implement button behavior for SHOP/RETRY/MENU, delegating navigation to a SceneManager or main controller while ensuring GameSession and stats are properly reset, and (7) ensure results screen input handling prevents gameplay input leaks and guards against double-display if signals fire unexpectedly. For each subtask, describe interaction with existing progression and scene management systems and outline targeted functional tests.",
+			"reasoning": "This task spans UI construction, run-stat tracking, integration with enemy death and drop systems, signal wiring for win/lose, and scene navigation, all of which touch multiple existing systems. While none of the individual operations are algorithmically complex, the coordination of state (final_time, score, gold, kills) and navigation (retry vs menu vs shop) can easily introduce bugs or inconsistent behavior if not carefully structured. The results screen also becomes a core UX element that must correctly reflect underlying systems like GameSession and progression. Given the cross-system nature and higher regression risk, the complexity is on the higher side of moderate. About seven subtasks give enough granularity to isolate layout, stats plumbing, integration points, and navigation behavior."
 		},
 		{
-			"taskId": 27,
-			"taskTitle": "Art integration checkpoint: sprite preview scene and weapon VFX validation",
-			"complexityScore": 3,
-			"recommendedSubtasks": 3,
-			"expansionPrompt": "Break Task 27 into ~3 subtasks: (1) create the reusable sprite_preview.tscn scene with camera, background, and sized sprite slots plus any simple editor tool script, (2) wire the scene so artists/designers can quickly assign and preview weapon-related sprites/animations, and (3) perform a review pass loading each delivered VFX asset, documenting any issues, and keeping gameplay scenes on placeholders when necessary.",
-			"reasoning": "Relatively low complexity: primarily tooling and visual validation with minimal game logic, but requires some care in making the preview scene generic and convenient for repeated use."
+			"taskId": 52,
+			"taskTitle": "Implement Santelmo enemy behavior and fireball projectile",
+			"complexityScore": 7,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Decompose Task 52 into ~6 subtasks: (1) create the Santelmo.tscn enemy scene using the existing enemy architecture (CharacterBody2D, collision, timer), ensuring collision layers/masks are consistent with current enemies, (2) implement Santelmo.gd core stats, health handling, and integration with existing enemy death/drop systems, including XP/Gold values, (3) implement the floating + sine-wave movement behavior toward the player, using a centralized get_player_reference() pattern and respecting GameSession.is_gameplay_active(), (4) create the SantelmoFireball.tscn projectile scene (Area2D, collision, lifetime) and script its motion, damage application, and cleanup, (5) wire the Santelmo fireball timer and spawning logic, including direction targeting, scene instantiation, and grouping of projectiles, and (6) integrate Santelmo into any existing enemy management utilities (groups, spatial partitioning, scaling functions) in preparation for the spawn controller changes in Task 54. For each subtask, call out how to reuse existing enemy/projectile patterns and specify dedicated test setups (e.g., debug scene with a stationary player).",
+			"reasoning": "This task introduces a new enemy with non-trivial movement patterns and a projectile attack, both of which must integrate cleanly with existing enemy, damage, and drop systems. Movement involves vector math and continuous sine-offset behavior, which requires tuning and careful handling of delta to avoid erratic motion. The projectile system reuses patterns but still needs correct collision, lifetime, and freeze-state handling. Additionally, this enemy must be ready for integration into the time-based spawn system and scaling functions. The complexity is driven by gameplay behavior and the number of integration points rather than raw code volume, so a moderate-high score is appropriate. Six subtasks separate scene setup, core stats/death integration, movement logic, projectile scene, firing logic, and system integration."
+		},
+		{
+			"taskId": 53,
+			"taskTitle": "Implement Manananggal boss behavior, dive attack, and dramatic entrance/visual FX",
+			"complexityScore": 8.5,
+			"recommendedSubtasks": 8,
+			"expansionPrompt": "Break Task 53 into ~8 subtasks: (1) create the Manananggal.tscn boss scene (CharacterBody2D, collisions, AnimationPlayer, timers, optional particles) following the existing enemy/boss conventions, (2) implement core boss stats (HP, damage, speeds) and health/damage handling integrated with existing scaling and drop systems, ensuring death does not trigger victory, (3) implement baseline flying movement that chases the player while ignoring terrain, including correct collision layers/masks and testing pathing behavior, (4) implement the dive cooldown, telegraph sequence, and dive-state logic with clear state flags and animation hooks, ensuring timing is tunable via exported variables, (5) implement damage application for contact during both normal movement and dives, coordinating with existing player damage routines, (6) implement the dramatic entrance flow: spawn-time animation, camera shake, audio, and any entrance-specific logic that temporarily disables movement, (7) implement the blood trail visual effect and wire it to is_diving state, balancing performance and readability, and (8) ensure correct lifecycle and integration with GameSession and enemy systems: one-time spawn per run, behavior under gameplay freeze, and no re-spawn on restart without explicit reset. For each subtask, outline test scenarios and edge cases (e.g., death mid-dive, victory while boss alive).",
+			"reasoning": "This boss introduces complex behavior and must integrate deeply into combat and pacing. It has high HP, dangerous damage, stateful movement modes (normal vs dive), telegraphed attacks, visual/audio FX, and special spawn semantics (one-time spawn at a specific time, no run-end on death). The dive behavior requires careful state management and timing (including asynchronous telegraph via await), plus integration with animations and particles. Boss interactions with terrain layers, freeze states, and the spawn controller add to the complexity. Because errors can heavily impact game difficulty and feel, and debugging state bugs in bosses is often time-consuming, this task is relatively high complexity. Around eight subtasks help isolate scene setup, core stats, movement, dive logic, FX, and lifecycle concerns."
+		},
+		{
+			"taskId": 54,
+			"taskTitle": "Update enemy spawn controller with Santelmo, Manananggal, and new spawn timeline",
+			"complexityScore": 8,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Decompose Task 54 into ~7 subtasks: (1) review and refactor the existing EnemySpawner to ensure it already uses GameSession.elapsed_time and supports time-based logic cleanly, (2) add exported PackedScene references and basic integration for Santelmo and Manananggal, aligning with the current enemy instantiation and pooling patterns, (3) implement the updated spawn timeline logic in update_spawn_parameters(), covering all time bands and interval interpolations, and write unit-like checks for boundary values (8:00, 10:00, 20:00, 30:00), (4) implement spawn_regular_enemy() to use the allowed_enemy_scenes list and an appropriate get_random_spawn_position() that keeps spawns off-screen but performant, (5) implement and test the one-time Manananggal spawn function and state (manananggal_spawned flag), including re-run/reset behavior and ensuring it is not part of the regular spawn pool, (6) integrate and verify XP/Gold drops for all enemy types according to the Updated Enemy Drops table, making sure this aligns with existing Enemy Death & Drops logic, and (7) performance/edge-case testing and guardrails: cap total enemies if needed, ensure spawning halts on is_gameplay_active() false, and confirm compatibility with enemy stat scaling functions. For each subtask, specify where to log or visualize spawn behavior for debugging (e.g., debug overlay with current interval and enemy mix).",
+			"reasoning": "The spawn controller orchestrates game pacing over the entire 30-minute run and must coordinate with multiple systems: GameSession time, new enemies (Santelmo and Manananggal), existing scaling and drop logic, and performance constraints at high spawn rates. The time-banded interval logic and one-shot boss spawn require careful handling of edge times and reset behavior. Integration with pooling or instantiation patterns and spatial spawning rules adds more complexity. Bugs here can cause major balance and performance problems that are harder to detect quickly. The algorithms are straightforward, but the combination of state, timing, and integration yields high overall complexity. Seven subtasks allow isolation of refactor, timeline math, regular spawning, boss spawning, drop wiring, and performance/edge-case validation."
+		},
+		{
+			"taskId": 55,
+			"taskTitle": "Art and animation integration checkpoint for Santelmo and Manananggal",
+			"complexityScore": 5.5,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Split Task 55 into ~5 subtasks: (1) use the existing Sprite Preview Scene to import and validate Santelmo and Manananggal sprite sheets/animations in isolation (alignment, frame order, looping), (2) integrate Santelmo art into Santelmo.tscn: replace placeholders, configure AnimatedSprite2D or AnimationPlayer clips for float/fire flicker, and adjust origins and collision shapes based on visuals, (3) integrate fireball projectile art: assign textures/animations, ensure visual distinction and correct scale, and verify readability against typical backgrounds, (4) integrate Manananggal art into Manananggal.tscn: configure idle/flight, telegraph, and dive animations; set up blood trail particles or sprite trail; and tune camera shake/audio intensity to match visuals, and (5) implement and document fallbacks for missing art (ColorRect placeholders, neutral animations), plus run an in-game visual QA pass capturing screenshots/gifs for review and recording any issues for follow-up. For each subtask, specify which scenes to modify and what visual acceptance criteria to check (readability, silhouette, animation smoothness).",
+			"reasoning": "This task is primarily about content integration and polish rather than new logic. It requires careful configuration of AnimatedSprite2D/AnimationPlayer, collision alignment, and particles, and coordination with existing behavior scripts to ensure animation names and states match expectations. There is some iteration needed to get readability and feel right in-game, and fallback handling must not break logic if art is delayed. Complexity is moderate due to the number of assets and the need for QA, but the technical risk is lower than core gameplay or system tasks since most logic already exists. Five subtasks are appropriate to separate preview/validation, Santelmo integration, projectile visuals, Manananggal integration, and fallback/QA workflow."
 		}
 	]
 }
