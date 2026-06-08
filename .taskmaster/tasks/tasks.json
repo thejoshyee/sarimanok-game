@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": 1,
+        "id": "1",
         "title": "Audit existing Godot project setup",
         "description": "Inspect the current Godot 4 project to understand scenes, scripts, and configuration already in place.",
         "details": "Review the Godot project structure, main scene, autoloads (singletons), and any existing player, enemy, weapon, or progression scripts to avoid duplicating work.[1] Document what systems already exist (e.g., movement, input actions, basic UI, pooling helpers) and how they are organized (folders, naming conventions, node hierarchies).",
@@ -85,7 +85,7 @@
         "updatedAt": "2025-12-05T13:31:38.640Z"
       },
       {
-        "id": 2,
+        "id": "2",
         "title": "Configure project resolution and window settings",
         "description": "Set up viewport, stretch, and window scaling to match the PRD specifications.",
         "details": "In Project Settings → Display → Window, configure Viewport Width = 640 and Viewport Height = 360, set Stretch Mode to canvas_items, and Stretch Aspect to keep, to achieve the desired 640×360 viewport and proper scaling on different monitor resolutions.[1] Verify that the arena (1920×1088) and tile size (32×32) are consistent with tileset and camera configuration in the current scenes.",
@@ -141,7 +141,7 @@
         "updatedAt": "2025-12-05T20:47:20.983Z"
       },
       {
-        "id": 3,
+        "id": "3",
         "title": "Define input actions and controls",
         "description": "Set up and/or validate the Godot Input Map for movement, pause, and UI actions as specified.",
         "details": "In Project Settings → Input Map, ensure the following actions exist with correct bindings: move_up (W, Up Arrow, D-pad Up, Left Stick Up), move_down (S, Down Arrow, D-pad Down, Left Stick Down), move_left (A, Left Arrow, D-pad Left, Left Stick Left), move_right (D, Right Arrow, D-pad Right, Left Stick Right), pause (Esc, Start), ui_accept (Enter, Space, A/X button), ui_cancel (Esc, B/O button).[1] Confirm existing code uses get_action_strength for movement vectors to support analog sticks and update scripts if they currently rely on is_action_pressed for basic movement axes.[3]",
@@ -212,7 +212,7 @@
         "updatedAt": "2025-12-06T14:22:16.532Z"
       },
       {
-        "id": 4,
+        "id": "4",
         "title": "Implement or align Classic Sarimanok player controller",
         "description": "Create or adapt the CharacterBody2D-based Sarimanok player with correct movement, stats, and damage handling.",
         "details": "Ensure the player is implemented as a CharacterBody2D with movement driven by an input_vector built from move_* actions, normalized and multiplied by move_speed, then applied via move_and_slide.[1] Implement base stats (Max HP 100, Move Speed 200 px/s, Damage 100%, Attack Speed 100%, Pickup Range 50) as exported variables or in a dedicated stats/resource object consistent with current code patterns. Add a collision shape for enemy damage, a hit/health component if one already exists, and invincibility frames of 0.5s after taking damage, reusing existing damage/health systems if present.[2]",
@@ -313,7 +313,7 @@
         "updatedAt": "2025-12-07T18:12:13.329Z"
       },
       {
-        "id": 5,
+        "id": "5",
         "title": "Set up placeholder Sarimanok visuals and animation",
         "description": "Create the temporary visual representation and simple 2-frame animation for the player.",
         "details": "Use a 32×32 ColorRect or equivalent simple node as the placeholder Classic Sarimanok, with a multicolor or rainbow palette approximating the intended art direction.[2] Configure a 2-frame idle/walk bob animation that flips between frames every 0.2 seconds when the player is moving, and flip the sprite horizontally based on velocity.x in the existing animation/visual script or a new dedicated script following current project conventions.[1]",
@@ -369,7 +369,7 @@
         "updatedAt": "2025-12-09T14:46:25.714Z"
       },
       {
-        "id": 6,
+        "id": "6",
         "title": "Establish object pooling infrastructure",
         "description": "Implement or extend a reusable pooling system for enemies, projectiles, pickups, and particles.",
         "details": "Create a central pooling manager or per-type pool scenes that pre-allocate arrays for enemies (300), projectiles (200), pickups (500), and particles (100 per type) at game start, reusing any existing pooling utilities if they are already present.[3] Ensure that gameplay code does not call queue_free or instantiate during active gameplay, but instead marks instances inactive and returns them to their pool, with pools pre-warmed in the main scene’s _ready method.[1]",
@@ -479,7 +479,7 @@
         "updatedAt": "2025-12-13T00:49:42.162Z"
       },
       {
-        "id": 7,
+        "id": "7",
         "title": "Implement grid-based spatial partitioning for enemies",
         "description": "Add spatial hashing to optimize collision and proximity checks with many enemies.",
         "details": "Create a spatial grid system that maps grid cells (64×64 pixels) to arrays of enemy references, updating an enemy’s cell assignment only when it crosses a cell boundary.[1] Provide helper functions such as get_cell and get_nearby_enemies that return enemies in the same or adjacent cells, and refactor any existing naive O(n²) collision or proximity checks to use this system while retaining compatibility with current enemy and weapon code.[3]",
@@ -575,7 +575,7 @@
         "updatedAt": "2025-12-15T23:17:55.345Z"
       },
       {
-        "id": 8,
+        "id": "8",
         "title": "Integrate auto-attack hooks for weapons",
         "description": "Prepare the player and game loop for automatic weapon firing compatible with the planned weapon system.",
         "details": "Add generic weapon slots or a weapon manager component to the player that tracks equipped weapons and their cooldowns, following any existing weapon or skill architecture in the project.[2] Ensure that weapons auto-attack based on their cooldowns without player input, exposing hooks for six planned weapons in later tasks and using the player’s Damage and Attack Speed multipliers to modify weapon behavior.[1]",
@@ -659,7 +659,7 @@
         "updatedAt": "2025-12-19T12:59:00.135Z"
       },
       {
-        "id": 9,
+        "id": "9",
         "title": "Implement basic progression loop scaffolding",
         "description": "Lay down the core systems for XP collection, leveling, and stat upgrades without full content.",
         "details": "Create a pickup type representing XP gems that the player collects within a Pickup Range of 50 pixels, ideally reusing the pooling system for pickups.[1] Implement a simple XP curve, level tracking, and a placeholder level-up UI that can present upgrade choices for weapons and passives later, aligning with any existing UI and progression frameworks already in the codebase.[2]",
@@ -758,7 +758,7 @@
         "updatedAt": "2025-12-21T00:15:23.888Z"
       },
       {
-        "id": 10,
+        "id": "10",
         "title": "Performance validation for Week 3 target",
         "description": "Verify that the foundation meets the Week 3 performance and stability goals.",
         "details": "Create a dedicated performance test scene or mode that can spawn at least 100 active enemies using the pooling and spatial partitioning systems while the player moves and auto-attacks.[3] Measure FPS and frame time using Godot’s profiler to confirm stable 60 FPS under this load, and document any bottlenecks or further optimizations needed to reach the eventual 200+ enemy target.[1]",
@@ -849,7 +849,7 @@
         "updatedAt": "2025-12-24T16:45:51.431Z"
       },
       {
-        "id": 11,
+        "id": "11",
         "title": "Create Enemy Base Scene with Area2D and Movement Logic",
         "description": "Implement the base Duwende enemy scene using Area2D with placeholder ColorRect art, basic movement toward player, and damage on contact, aligned with the current Godot 4 project structure and player/damage systems.",
         "status": "done",
@@ -903,7 +903,7 @@
         "updatedAt": "2025-12-26T14:32:41.057Z"
       },
       {
-        "id": 12,
+        "id": "12",
         "title": "Implement Enemy Stat Scaling Functions",
         "description": "Add time-based scaling for HP and damage using provided formulas in spawn manager.",
         "details": "In spawn manager script, implement:\nfunc get_scaled_hp(base_hp: int, elapsed_minutes: float) -> int:\n    var scale = 1.0 + (elapsed_minutes / 5.0) * 0.05\n    return int(base_hp * scale)\nfunc get_scaled_damage(base_damage: int, elapsed_minutes: float) -> int:\n    var scale = 1.0 + (elapsed_minutes / 5.0) * 0.03\n    return int(base_damage * scale)\nTrack get_tree().edited_scene_root.get_node('GameTimer').elapsed_minutes or similar global time.",
@@ -986,7 +986,7 @@
         "updatedAt": "2025-12-30T19:09:15.414Z"
       },
       {
-        "id": 13,
+        "id": "13",
         "title": "Build Ring-Based Spawn System with Polar Coordinates",
         "description": "Create spawn manager that spawns enemies in ring around player (400-500px distance) using polar coordinates.",
         "details": "In SpawnManager node/script: Calculate spawn_dist = 465.0 (viewport_diagonal/2 + 100). Random angle = randf() * TAU. Spawn pos = player.global_position + Vector2(cos(angle), sin(angle)) * spawn_dist. Clamp to map bounds: max(0, min(1920, x)), max(0, min(1088, y)). Use get_scaled_hp/damage. Add spawn timer.",
@@ -1058,7 +1058,7 @@
         "updatedAt": "2026-01-02T17:16:28.895Z"
       },
       {
-        "id": 14,
+        "id": "14",
         "title": "Implement Dynamic Spawn Rate Scaling and Timeline Logic",
         "description": "Add exponential spawn interval scaling (2s → 0.8s) and enemy type unlock at 8:00.",
         "details": "In SpawnManager: base_interval=2.0, difficulty_scale=1.05. func get_spawn_interval(elapsed_minutes: float) -> float: return base_interval / pow(difficulty_scale, elapsed_minutes). Timer.wait_time = get_spawn_interval(elapsed_minutes). If elapsed_minutes < 8: spawn Green only; else: 70% Green/30% Red weighted random. Verify: 0min=2s, 5min≈1.57s, 10min≈1.23s.",
@@ -1113,7 +1113,7 @@
         "updatedAt": "2026-01-04T18:18:50.414Z"
       },
       {
-        "id": 15,
+        "id": "15",
         "title": "Add Red Duwende Variant and Object Pooling System",
         "description": "Create Red Duwende (speed=100, HP=25, damage=10) and implement object pooling for performance.",
         "details": "Duplicate enemy scene to 'enemy_duwende_red.tscn', change ColorRect to red, update base stats. Pool: Pre-instantiate 50 Green + 30 Red in SpawnManager, disable initially. On spawn: enable pooled instance, reset pos/HP/stats. On death: reset stats, disable/move offscreen, return to pool. No new instancing after pool exhaustion.",
@@ -1201,7 +1201,7 @@
         "updatedAt": "2026-01-07T02:11:22.111Z"
       },
       {
-        "id": 16,
+        "id": "16",
         "title": "Implement Enemy Death, Drops, and No-Inter-Collision",
         "description": "Add death handling with XP/Gold drops (Green:1/1, Red:3/2), particle effect, pool return. Ensure enemies pass through each other.",
         "details": "Enemy script: var current_hp. On damage: current_hp -= amount; if <=0: spawn_xp_gem(1 or 3), spawn_gold_coin(1 or 2), play_particles(), spawn_manager.return_to_pool(self). Area2D collision_layer=ENEMY_LAYER only collides with PLAYER_LAYER (bitmask), not self. No enemy-enemy collision.",
@@ -1266,7 +1266,7 @@
         "updatedAt": "2026-01-08T19:58:29.812Z"
       },
       {
-        "id": 17,
+        "id": "17",
         "title": "Design core weapon architecture and WeaponData Resource",
         "description": "Create the data-driven weapon architecture using Godot 4 Resources and define the WeaponData resource script to support all PRD fields and upgrade data.",
         "details": "Implementation details:\n- Engine: Godot 4.3+ (or latest stable 4.x) with GDScript 2.0 for best performance and tooling.\n- Create script `weapons/weapon_data.gd` extending `Resource` with `class_name WeaponData` exactly as in the PRD, adding typed exports for Godot 4:\n```gdscript\n# weapons/weapon_data.gd\nclass_name WeaponData\nextends Resource\n\n@export var id: String\n@export var display_name: String\n@export_multiline var description: String\n@export var base_damage: int\n@export var cooldown: float\n@export var weapon_type: String # \"projectile\", \"aoe\", \"melee\", \"orbital\"\n@export var sprite: Texture2D\n@export var icon: Texture2D\n@export var upgrades: Array[Dictionary] = [] # [{\"level\": int, \"damage\": int, \"effect_description\": String}]\n\n@export var debuff_type: String = \"\" # e.g. \"slow\", \"burn\"\n@export var debuff_duration: float = 0.0\n@export var debuff_strength: float = 0.0 # 0.5 = 50% slow\n@export var radius_modifier: float = 1.0\n@export var speed_modifier: float = 1.0\n@export var projectile_count: int = 1\n@export var pierce_count: int = 1\n\nfunc get_upgrade(level: int) -> Dictionary:\n\tfor u in upgrades:\n\t\tif int(u.get(\"level\", 0)) == level:\n\t\t\treturn u\n\treturn {}\n```\n- Use Godot 4 Resource workflows similar to recent modular weapon tutorials that use custom Resources to store weapon stats and behavior metadata.[1][2]\n- Create a folder structure: `res://weapons/data/` for `.tres` instances, `res://weapons/scripts/` for logic, `res://weapons/scenes/` for scenes.\n- Define 6 `.tres` WeaponData resources: Peck, Wing Slap, Feather Shot, Spiral Feathers, Ice Shard, Flame Wing. Populate base_damage, cooldown, weapon_type and upgrade arrays according to the PRD tables.\n- Encode upgrade effect text in `effect_description` but keep the actual gameplay effects implemented in weapon logic (damage scaling, radius, cooldown changes, pierce, projectile count, orbit size, etc.).\n- Ensure IDs are stable simple strings, e.g., \"peck\", \"wing_slap\", \"feather_shot\", \"spiral_feathers\", \"ice_shard\", \"flame_wing\".\n- Add a simple helper script or editor-only tool later (optional) to quickly create new WeaponData resources by duplicating existing ones, aligning with the 10–15 minutes per new weapon goal.\n- Plan for localization by making `display_name` and `description` text-based but keep actual localization for a later phase.\nSecurity / scalability considerations:\n- Data-only Resources avoid dynamic code loading, reducing security risks.\n- Keeping weapon definitions external allows easy balancing without code changes and keeps the weapon system scalable as the roster grows.\n",
@@ -1335,7 +1335,7 @@
         "updatedAt": "2026-01-11T03:33:37.708Z"
       },
       {
-        "id": 18,
+        "id": "18",
         "title": "Implement base Weapon node with cooldown and upgrade handling",
         "description": "Create an abstract Weapon base class that handles cooldown timing, level progression, and integrates with WeaponData to compute effective stats.",
         "details": "Implementation details:\n- Create `weapons/scripts/weapon.gd` as a base script with `class_name Weapon` and attach it to a generic weapon scene `weapons/scenes/weapon_base.tscn` using `Node2D` as root.\n- Base node structure:\n  - `Node2D` (Weapon)\n    - Optional `Timer` (cooldown_timer) or use `_process` with delta.\n- In Godot 4, using `Timer` with `one_shot = true` and `start(cooldown)` is reliable; but for always-ready if `cooldown <= 0`, skip timer.\n- Script outline:\n```gdscript\nclass_name Weapon\nextends Node2D\n\n@export var weapon_data: WeaponData\nvar level: int = 1\nvar current_cooldown: float\nvar damage: int\nvar ready: bool = true\n\nfunc _ready() -> void:\n\tassert(weapon_data != null)\n\t_apply_level_stats()\n\nfunc _apply_level_stats() -> void:\n\tvar upgrade := weapon_data.get_upgrade(level)\n\tif upgrade.is_empty():\n\t\tdamage = weapon_data.base_damage\n\telse:\n\t\tdamage = int(upgrade.get(\"damage\", weapon_data.base_damage))\n\t# Allow subclasses to react (e.g., radius, projectile_count)\n\t_on_stats_changed(upgrade)\n\nfunc _on_stats_changed(upgrade: Dictionary) -> void:\n\tpass # virtual, overridden by subclasses\n\nfunc try_fire() -> void:\n\tif not ready:\n\t\treturn\n\tif _do_fire():\n\t\t_start_cooldown()\n\nfunc _do_fire() -> bool:\n\t# virtual; return true if fired\n\treturn false\n\nfunc _start_cooldown() -> void:\n\tready = false\n\tvar cd := weapon_data.cooldown\n\t# Subclasses may override or modify via stats\n\tcurrent_cooldown = cd\n\tif current_cooldown <= 0.0:\n\t\tready = true\n\t\treturn\n\tvar t := Timer.new()\n\tt.one_shot = true\n\tt.wait_time = current_cooldown\n\tadd_child(t)\n\tt.timeout.connect(_on_cooldown_done)\n\tt.start()\n\nfunc _on_cooldown_done() -> void:\n\tready = true\n\nfunc set_level(new_level: int) -> void:\n\tlevel = clamp(new_level, 1, 5)\n\t_apply_level_stats()\n```\n- Choose per-fire `Timer` nodes or a single reusable timer; for simplicity and directness, create a single `Timer` child in the scene and reuse it rather than spawning new ones each time.\n- Modify `_start_cooldown()` accordingly to use a pre-existing `cooldown_timer` child.\n- Provide safe virtual hooks for child classes: `_on_stats_changed`, `_do_fire`.\n- Base class should not know about player or enemies; specific weapon types will use references passed by the WeaponManager.\n- Ensure level upgrades are idempotent and that changing levels at runtime updates all computed stats correctly.\n",
@@ -1419,7 +1419,7 @@
         "updatedAt": "2026-02-19T02:25:05.541Z"
       },
       {
-        "id": 19,
+        "id": "19",
         "title": "Create WeaponManager to track and auto-fire up to 6 weapons",
         "description": "Implement a WeaponManager node that owns equipped weapons, enforces the 6-weapon limit, and triggers automatic firing when cooldowns are ready.",
         "details": "Implementation details:\n- Create `weapons/scripts/weapon_manager.gd` and a scene `weapons/scenes/weapon_manager.tscn` with root `Node2D`.\n- Attach WeaponManager as a child of the Player root (from Core Foundation), so it has access to player position and facing direction.\n- WeaponManager responsibilities:\n  - Store up to 6 weapon instances.\n  - Instantiate weapon scenes based on WeaponData (and child class/scene mapping by type or id).\n  - Position weapons relative to the player as needed (most will use player global_position but may not need visible nodes during placeholder phase).\n  - Auto-fire all weapons each frame or at fixed intervals.\n- Script sketch:\n```gdscript\nclass_name WeaponManager\nextends Node2D\n\nconst MAX_WEAPONS := 6\n\nvar weapons: Array[Weapon] = []\nvar player: Node2D\n\nfunc _ready() -> void:\n\tplayer = get_parent() as Node2D\n\nfunc add_weapon(data: WeaponData) -> Weapon:\n\tif weapons.size() >= MAX_WEAPONS:\n\t\treturn null\n\tvar scene := _get_weapon_scene_for_data(data)\n\tvar weapon := scene.instantiate() as Weapon\n\tweapon.weapon_data = data\n\tweapon.set_level(1)\n\tadd_child(weapon)\n\tweapons.append(weapon)\n\treturn weapon\n\nfunc _process(delta: float) -> void:\n\tfor weapon in weapons:\n\t\t# Optionally update weapon target/facing from player\n\t\tweapon.global_position = player.global_position\n\t\tif weapon.ready:\n\t\t\tweapon.try_fire()\n\nfunc get_weapon_by_id(id: String) -> Weapon:\n\tfor w in weapons:\n\t\tif w.weapon_data.id == id:\n\t\t\treturn w\n\treturn null\n\nfunc upgrade_weapon(id: String) -> void:\n\tvar w := get_weapon_by_id(id)\n\tif w:\n\t\tw.set_level(w.level + 1)\n```\n- Implement `_get_weapon_scene_for_data(data: WeaponData)` using either a match on `data.id` or a `Dictionary` mapping id → PackedScene exported on WeaponManager for flexibility.\n- Integration with progression/level-up system (from Feature 4) will call `add_weapon` or `upgrade_weapon` based on choices; ensure that when 6 weapons are owned, only upgrades are offered via higher-level system (outside WeaponManager but relying on its state).\n- For initial placeholder art, attach simple `ColorRect` or `Sprite2D` nodes to each weapon scene, not to the WeaponManager.\n- Follow best practice from recent Godot community discussions on weapon managers where all weapons inherit from a base Weapon class and are managed centrally.[6][9]\n",
@@ -1506,7 +1506,7 @@
         "updatedAt": "2026-01-19T04:40:33.761Z"
       },
       {
-        "id": 20,
+        "id": "20",
         "title": "Implement melee cone weapon: Peck",
         "description": "Create the Peck melee weapon as a cone attack in the facing direction, using Area2D for damage detection and supporting level-based damage, arc, and cooldown changes.",
         "details": "Implementation details:\n- Create scene `weapons/scenes/peck.tscn`:\n  - Root: `Node2D` with script `peck_weapon.gd` extending `Weapon`.\n  - Child: `Area2D` (`hit_area`)\n    - `CollisionShape2D` with `ArcShape2D` or a pie-shaped polygon via `CollisionPolygon2D` representing a small cone in front of the player.\n    - Use collision layer/mask to detect enemies only (cooperate with Enemy System’s layers).\n  - Child: placeholder `ColorRect` or `Sprite2D` for hit effect (32x32) oriented forward.\n- In `peck_weapon.gd`:\n```gdscript\nclass_name PeckWeapon\nextends Weapon\n\n@onready var hit_area: Area2D = $HitArea\n\nfunc _on_stats_changed(upgrade: Dictionary) -> void:\n\t# Level 4: faster cooldown (0.4s)\n\tif level >= 4:\n\t\tweapon_data.cooldown = 0.4\n\t# Level 5: wider arc -> adjust collision shape angle\n\tvar shape := hit_area.get_node(\"CollisionShape2D\").shape\n\tif shape is ArcShape2D:\n\t\tshape.angle = deg_to_rad(level >= 5 ? 80.0 : 50.0)\n\t# Damage already handled in base class\n\nfunc _do_fire() -> bool:\n\t# Align cone with player facing (assume player has a direction vector or rotation)\n\tvar player := (get_parent() as Node2D).get_parent() as Node2D # or injected reference\n\tglobal_rotation = player.global_rotation\n\t# Optionally briefly enable hit_area monitoring\n\tvar enemies := hit_area.get_overlapping_bodies()\n\tfor e in enemies:\n\t\tif e.has_method(\"apply_damage\"):\n\t\t\te.apply_damage(damage, weapon_data)\n\t# Trigger simple visual effect (e.g., briefly show ColorRect)\n\treturn true\n```\n- Use `Area2D.monitoring = true` and `get_overlapping_bodies()`; ensure physics layers are set to match enemies.\n- Damage numbers come from `damage` computed based on WeaponData upgrades (Level 1–5: 10, 15, 20, 25, 35).\n- For facing direction, rely on an injected direction or use player rotation; adapt to how the Player from Feature 1 exposes facing (e.g., `velocity.normalized()` or mouse direction), but keep this minimal for now.\n- Ensure the Peck WeaponData cooldown is 0.5s base, with logic for 0.4s at level 4.\n",
@@ -1616,7 +1616,7 @@
         "updatedAt": "2026-01-31T19:30:41.569Z"
       },
       {
-        "id": 21,
+        "id": "21",
         "title": "Implement AOE circle weapons: Wing Slap and Flame Wing clone",
         "description": "Create a reusable AOE circle weapon implementation for Wing Slap and a clone configuration for Flame Wing with different radius and damage using shared logic.",
         "details": "Implementation details:\n- Create generic AOE weapon script `aoe_circle_weapon.gd` extending `Weapon`, and scene `weapons/scenes/aoe_circle_weapon.tscn`:\n  - Root `Node2D` with `Area2D` child (`aoe_area`) and `CollisionShape2D` using `CircleShape2D`.\n  - Placeholder `ColorRect` or `Sprite2D` (64x64) representing an expanding circle; use `AnimationPlayer` for a quick scale animation.\n- `aoe_circle_weapon.gd` outline:\n```gdscript\nclass_name AOECircleWeapon\nextends Weapon\n\n@export var base_radius: float = 48.0\n@onready var aoe_area: Area2D = $AOEArea\n@onready var shape: CircleShape2D = $AOEArea/CollisionShape2D.shape\n\nfunc _ready() -> void:\n\tshape.radius = base_radius\n\tsuper._ready()\n\nfunc _on_stats_changed(upgrade: Dictionary) -> void:\n\t# Damage handled by base\n\t# Level-based radius scaling is done via WeaponData.radius_modifier if needed\n\tvar r_mod := weapon_data.radius_modifier\n\tshape.radius = base_radius * r_mod\n\nfunc _do_fire() -> bool:\n\t# Play quick expand animation (optional) and damage all enemies in area\n\tvar enemies := aoe_area.get_overlapping_bodies()\n\tfor e in enemies:\n\t\tif e.has_method(\"apply_damage\"):\n\t\t\te.apply_damage(damage, weapon_data)\n\treturn true\n```\n- Create two scenes inheriting from `aoe_circle_weapon.tscn`:\n  - `wing_slash_weapon.tscn` (Wing Slap)\n  - `flame_wing_weapon.tscn` (Flame Wing)\n- Wing Slap tuning per PRD:\n  - Base cooldown 1.5s, base damage 8.\n  - Upgrades: damage 8, 12, 16, 20, 28; radius increases at levels 3 and 5.\n  - Represent radius changes by modifying `radius_modifier` in WeaponData and reading it in `_on_stats_changed`.\n- Flame Wing clone:\n  - Uses the same `AOECircleWeapon` script and scene structure.\n  - WeaponData: base damage 10 (+20% vs Wing Slap base 8), cooldown 1.5s, radius modifier 0.75 relative to Wing Slap (75% radius) for all levels.\n  - Optionally increase radius slightly with level if desired, but base difference should remain smaller than Wing Slap.\n  - Assign an orange/red placeholder color or sprite to distinguish it.\n- In WeaponManager’s `_get_weapon_scene_for_data`, map Wing Slap and Flame Wing IDs to these respective scenes, keeping logic DRY.\n",
@@ -1701,7 +1701,7 @@
         "updatedAt": "2026-02-06T21:01:15.153Z"
       },
       {
-        "id": 22,
+        "id": "22",
         "title": "Implement projectile weapons: Feather Shot and Ice Shard clone",
         "description": "Create a projectile weapon system for Feather Shot that fires toward the nearest enemy with pierce and multi-projectile upgrades, then configure Ice Shard as a slower projectile clone applying a slow debuff.",
         "details": "Implementation details:\n- Projectile node setup:\n  - Create `weapons/scenes/projectile.tscn`:\n    - Root: `Area2D` (`Projectile`)\n      - `CollisionShape2D` (CircleShape2D or small rectangle)\n      - `Sprite2D` placeholder (16x16 for feathers).\n  - Script `projectile.gd`:\n```gdscript\nclass_name Projectile\nextends Area2D\n\nvar speed: float = 150.0\nvar damage: int = 0\nvar pierce_remaining: int = 1\nvar direction: Vector2 = Vector2.RIGHT\nvar weapon_data: WeaponData\n\nfunc _ready() -> void:\n\tarea_entered.connect(_on_area_entered)\n\tbody_entered.connect(_on_body_entered)\n\nfunc _physics_process(delta: float) -> void:\n\tglobal_position += direction * speed * delta\n\t# Optional: queue_free when off-screen using a VisibilityNotifier2D\n\nfunc _hit_target(target: Node) -> void:\n\tif target.has_method(\"apply_damage\"):\n\t\ttarget.apply_damage(damage, weapon_data)\n\t# Apply debuff if present in weapon_data\n\tif weapon_data.debuff_type != \"\" and target.has_method(\"apply_debuff\"):\n\t\ttarget.apply_debuff(weapon_data.debuff_type, weapon_data.debuff_strength, weapon_data.debuff_duration)\n\tpierce_remaining -= 1\n\tif pierce_remaining <= 0:\n\t\tqueue_free()\n\nfunc _on_body_entered(body: Node) -> void:\n\t_hit_target(body)\n\nfunc _on_area_entered(area: Area2D) -> void:\n\t# If enemies are Areas in your enemy system, handle similarly\n\t_hit_target(area)\n```\n- Feather Shot weapon:\n  - Scene `weapons/scenes/feather_shot_weapon.tscn` with script `feather_shot_weapon.gd` extending `Weapon`.\n  - Export `PackedScene` for projectile to reuse across weapons.\n  - On `_do_fire()`, query nearest enemy from Enemy System (e.g., via a global EnemyManager singleton, or by scanning a group `\"enemies\"`).\n  - Compute direction: `direction = (enemy.global_position - global_position).normalized()`.\n  - Spawn `weapon_data.projectile_count` projectiles; for multiple shots, optionally fan them slightly around the main direction.\n  - Level effects:\n    - Level 1–3: projectile_count = 1, 2, 3.\n    - Level 4: pierce_count = 2.\n    - Level 5: projectile_count = 4, pierce_count = 3.\n  - Implement `_on_stats_changed(upgrade)` to set projectile_count and pierce from level, using weapon_data fields or computed in code:\n```gdscript\nfunc _on_stats_changed(upgrade: Dictionary) -> void:\n\tmatch level:\n\t\t1:\n\t\t\tweapon_data.projectile_count = 1\n\t\t\tweapon_data.pierce_count = 1\n\t\t2:\n\t\t\tweapon_data.projectile_count = 2\n\t\t3:\n\t\t\tweapon_data.projectile_count = 3\n\t\t4:\n\t\t\tweapon_data.pierce_count = 2\n\t\t5:\n\t\t\tweapon_data.projectile_count = 4\n\t\t\tweapon_data.pierce_count = 3\n```\n  - When instantiating a projectile:\n```gdscript\nvar p := projectile_scene.instantiate() as Projectile\np.global_position = global_position\np.direction = direction\np.speed = 150.0 * weapon_data.speed_modifier\np.damage = damage\np.pierce_remaining = weapon_data.pierce_count\np.weapon_data = weapon_data\nget_tree().current_scene.add_child(p)\n```\n- Ice Shard clone:\n  - Uses the same Feather Shot weapon script and projectile scene (clone behavior).\n  - WeaponData differences:\n    - Blue-tinted sprite (recolor) for the projectile texture.\n    - `speed_modifier = 100.0 / 150.0` (~0.666) to make projectile slower.\n    - `debuff_type = \"slow\"`, `debuff_duration = 0.5`, `debuff_strength = 0.5` (50% slow).\n    - Base damage 10, cooldown 1.2s.\n  - No change to code required; Projectile will apply debuff automatically based on WeaponData.\n- Industry practice from recent Godot weapon system tutorials recommends central projectile scenes and modular weapons using Resources, which this follows.[1][2]\n",
@@ -1799,7 +1799,7 @@
         "updatedAt": "2026-02-13T19:42:56.943Z"
       },
       {
-        "id": 23,
+        "id": "23",
         "title": "Implement Spiral Feathers orbital weapon",
         "description": "Create the Spiral Feathers orbital weapon with always-active orbiting projectiles that damage enemies on contact, scaling damage, rotation speed, feather count, and orbit radius by level.",
         "details": "Implementation details:\n- Scene `weapons/scenes/spiral_feathers_weapon.tscn`:\n  - Root: `Node2D` with script `spiral_feathers_weapon.gd` extending `Weapon`.\n  - Child `Node2D` (`OrbitRoot`) to act as rotation pivot around the player.\n- For each feather:\n  - Use either the same `Projectile` scene with modified behavior, or a simpler `Area2D`-based `OrbitalFeather` scene, since orbitals are passive and do not move linearly.\n  - To keep things simple and direct, create `OrbitalFeather` scene:\n    - Root `Area2D` with `CollisionShape2D` and `Sprite2D` (reusing the Feather Shot sprite, rotated).\n    - Script `orbital_feather.gd` with:\n```gdscript\nclass_name OrbitalFeather\nextends Area2D\n\nvar damage: int = 0\nvar weapon_data: WeaponData\n\nfunc _ready() -> void:\n\tbody_entered.connect(_on_body_entered)\n\tarea_entered.connect(_on_area_entered)\n\nfunc _hit(target: Node) -> void:\n\tif target.has_method(\"apply_damage\"):\n\t\ttarget.apply_damage(damage, weapon_data)\n\nfunc _on_body_entered(body: Node) -> void:\n\t_hit(body)\n\nfunc _on_area_entered(area: Area2D) -> void:\n\t_hit(area)\n```\n- In `spiral_feathers_weapon.gd`:\n  - Maintain:\n```gdscript\n@export var feather_scene: PackedScene\nvar orbit_speed: float = 1.0 # radians/sec\nvar orbit_radius: float = 32.0\nvar feather_count: int = 4\nvar feathers: Array[OrbitalFeather] = []\n```\n  - Override `_ready()` to spawn feathers based on current `feather_count`.\n  - In `_process(delta)`, rotate `OrbitRoot` around the player:\n```gdscript\nfunc _process(delta: float) -> void:\n\tvar player := (get_parent() as Node2D).get_parent() as Node2D\n\tglobal_position = player.global_position\n\t$OrbitRoot.rotation += orbit_speed * delta\n```\n  - When spawning each feather, position it around the OrbitRoot:\n```gdscript\nfunc _spawn_feathers() -> void:\n\tfor f in feathers:\n\t\tf.queue_free()\n\tfeathers.clear()\n\tfor i in range(feather_count):\n\t\tvar feather := feather_scene.instantiate() as OrbitalFeather\n\t\tfeather.damage = damage\n\t\tfeather.weapon_data = weapon_data\n\t\tvar angle := TAU * float(i) / float(feather_count)\n\t\tfeather.position = Vector2.RIGHT.rotated(angle) * orbit_radius\n\t\t$OrbitRoot.add_child(feather)\n\t\tfeathers.append(feather)\n```\n  - Override `_on_stats_changed(upgrade)` to update damage, orbit_speed, orbit_radius, and feather_count per level:\n    - Level 1: 4 feathers, base damage 6, base orbit_radius (e.g., 32), base orbit_speed.\n    - Level 2: damage 8.\n    - Level 3: faster rotation (increase orbit_speed by ~33%).\n    - Level 4: 6 feathers.\n    - Level 5: 8 feathers, larger orbit (e.g., radius * 1.3).\n  - Always keep `Weapon.ready = true` and cooldown set to 0 for passive weapons; override `try_fire()` or `_do_fire()` to do nothing since it is always active.\n- Reuse the Feather Shot projectile sprite texture for the orbital feathers for consistency, as required by the PRD.\n",
@@ -1882,7 +1882,7 @@
         "updatedAt": "2026-02-19T01:26:05.709Z"
       },
       {
-        "id": 24,
+        "id": "24",
         "title": "Implement debuff system for slow and future effects",
         "description": "Create a lightweight debuff system that allows projectiles and weapons to apply time-limited debuffs like slow or burn to enemies, starting with slow for Ice Shard.",
         "details": "Implementation details:\n- Aim for a simple, extensible debuff component attached to enemies, avoiding over-engineering but allowing slow and later burn.\n- Create `debuff.gd` as a simple data structure (Resource or class):\n```gdscript\nclass_name Debuff\nextends Resource\n\n@export var debuff_type: String\n@export var strength: float\n@export var duration: float\nvar elapsed: float = 0.0\n```\n- Create `debuff_handler.gd` to be attached to enemy scenes:\n```gdscript\nclass_name DebuffHandler\nextends Node\n\nvar active_debuffs: Array[Debuff] = []\n\nfunc apply_debuff(debuff_type: String, strength: float, duration: float) -> void:\n\tif duration <= 0.0:\n\t\treturn\n\tvar d := Debuff.new()\n\td.debuff_type = debuff_type\n\td.strength = strength\n\td.duration = duration\n\tactive_debuffs.append(d)\n\nfunc _process(delta: float) -> void:\n\tfor d in active_debuffs:\n\t\td.elapsed += delta\n\tactive_debuffs = active_debuffs.filter(func(x: Debuff) -> bool:\n\t\treturn x.elapsed < x.duration)\n\nfunc get_total_slow_factor() -> float:\n\tvar factor := 1.0\n\tfor d in active_debuffs:\n\t\tif d.debuff_type == \"slow\":\n\t\t\tfactor *= (1.0 - d.strength)\n\treturn clamp(factor, 0.2, 1.0)\n```\n- Integrate with Enemy movement (from Enemy System PRD):\n  - Where enemies compute their speed or velocity, multiply their base speed by `debuff_handler.get_total_slow_factor()` if a DebuffHandler is present.\n- Ensure `Projectile._hit_target` calls `target.apply_debuff()`; wire this method on the enemy root to forward to DebuffHandler:\n```gdscript\nfunc apply_debuff(debuff_type: String, strength: float, duration: float) -> void:\n\tif $DebuffHandler:\n\t\t$DebuffHandler.apply_debuff(debuff_type, strength, duration)\n```\n- This allows any weapon that sets `WeaponData.debuff_type`, `debuff_duration`, and `debuff_strength` to apply debuffs automatically.\n- Focus now only on slow debuff used by Ice Shard, but keep `debuff_type` string-based to later handle \"burn\" (e.g., periodic damage) without system redesign.\n",
@@ -1950,7 +1950,7 @@
         "updatedAt": "2026-02-22T00:54:23.378Z"
       },
       {
-        "id": 25,
+        "id": "25",
         "title": "Integrate weapon acquisition and upgrade flow with progression system",
         "description": "Connect the WeaponManager with the existing level-up/progression system to handle acquiring new weapons, enforcing the 6-weapon limit, and offering only upgrades when full.",
         "details": "Implementation details:\n- Work with the Progression Systems PRD (Features 4–6) to determine where level-up choices are generated; typically there is a LevelUp UI or ChoiceManager.\n- Extend the progression code to query WeaponManager state when generating level-up options:\n  - If `weapons.size() < MAX_WEAPONS`, include both new weapon options (WeaponData not yet owned) and upgrade `+1` options for existing weapons.\n  - If `weapons.size() >= MAX_WEAPONS`, only offer `+1` upgrade options for weapons already owned.\n- Implementation outline in a central LevelUpManager:\n```gdscript\nfunc get_weapon_choices() -> Array:\n\tvar choices: Array = []\n\tvar owned_ids := weapon_manager.weapons.map(func(w): return w.weapon_data.id)\n\tvar all_weapon_datas := _get_all_weapon_datas()\n\tvar can_add_new := weapon_manager.weapons.size() < WeaponManager.MAX_WEAPONS\n\tif can_add_new:\n\t\t# Include some unowned weapons\n\t\tvar unowned := all_weapon_datas.filter(func(d: WeaponData): return not owned_ids.has(d.id))\n\t\tchoices += _pick_random(unowned, desired_new_count)\n\t# Always include upgrade options for owned weapons\n\tvar upgradable := weapon_manager.weapons.filter(func(w: Weapon): return w.level < 5)\n\tchoices += upgradable\n\treturn choices\n```\n- On selection:\n  - If choice is a WeaponData not currently owned, call `weapon_manager.add_weapon(weapon_data)`.\n  - If choice refers to an existing Weapon, call `weapon_manager.upgrade_weapon(id)`.\n- Ensure that Peck as the starting weapon is always granted at game start:\n  - On Player initialization, call `weapon_manager.add_weapon(peck_weapon_data)` and set its level to 1.\n- Keep this logic data-driven by obtaining all WeaponData via a simple registry or resource list (e.g., an exported `Array[WeaponData]` on a central `WeaponDatabase` node).\n- Ensure there is no path in the UI to acquire more than 6 weapons; LevelUpManager should never offer a new weapon if at capacity.\n",
@@ -2037,7 +2037,7 @@
         "updatedAt": "2026-02-26T05:25:33.354Z"
       },
       {
-        "id": 26,
+        "id": "26",
         "title": "Implement placeholder visuals and damage Areas for all weapon types",
         "description": "Wire up placeholder ColorRect/Sprite2D visuals and Area2D hit detection for all weapons to ensure clear feedback during Weeks 1–3 before final art arrives.",
         "details": "Implementation details:\n- For consistency across the system, review each weapon scene (Peck, Wing Slap, Flame Wing, Feather Shot, Ice Shard, Spiral Feathers) and ensure:\n  - Each uses `Area2D` with appropriate `CollisionShape2D` sized to match the intended gameplay effect.\n  - Each has a placeholder visual:\n    - Peck: 32x32 ColorRect or Sprite2D, offset in front of player, oriented with facing direction.\n    - Wing Slap: 64x64 ColorRect or circular Sprite2D centered on player, quick fade/scale animation.\n    - Flame Wing: Same as Wing Slap but orange/red color to distinguish.\n    - Feather Shot / Ice Shard: 16x16 ColorRect or Sprite2D for projectiles; Ice Shard tinted blue.\n    - Spiral Feathers: 16x16 orbital sprites reusing projectile sprite geometry.\n- Use Godot 4’s `CanvasItem` modulate property for easy color-tinting clones.\n- Ensure that all Area2D nodes are set to the correct physics layers/masks to detect enemies and ignore players/other projectiles.\n- Add simple one-shot animations using `AnimationPlayer` where appropriate (e.g., scaling AOE effects) but keep them minimal to avoid scope creep.\n- Keep the visual implementation decoupled from logic (Weapon and Projectile scripts should not depend on final art assets, only on node names/types), so that art integration later is just a matter of replacing textures.\n",
@@ -2096,7 +2096,7 @@
         "updatedAt": "2026-02-28T00:12:58.934Z"
       },
       {
-        "id": 27,
+        "id": "27",
         "title": "Art integration checkpoint: sprite preview scene and weapon VFX validation",
         "description": "Create a reusable sprite preview scene for quick visual checks and use it to validate delivered weapon effect art (if available), without blocking weapon code progress.",
         "details": "Implementation details:\n- Only perform this task once core weapon code is functional and art assets are available; otherwise keep placeholders as per PRD.\n- Sprite preview scene:\n  - Path: `scenes/debug/sprite_preview.tscn`.\n  - Root: `Node2D` or `Control` with a `Camera2D` configured for a 640×360 viewport at game scale.\n  - Background: simple grass tileset or solid color (placeholder or purchased tileset), implemented using `TileMap` or a full-screen Sprite2D.\n  - Add multiple sprite slots:\n    - Node group or named positions for 16x16, 32x32, 64x64 sprites.\n    - For each size, add a `Sprite2D` or `AnimatedSprite2D` that can have its `texture`/`sprite_frames` updated in the editor.\n- Expose a small editor script or tool script that allows quickly assigning a texture or animation to a slot for preview.\n- Use the scene to verify each weapon VFX sprite/animation when Ericka delivers them:\n  - Feather projectile (16x16): visibility and direction clarity when rotated.\n  - Peck hit effect (32x32): reads as directional thrust.\n  - Wing Slap circle (64x64): expanding motion visible, does not obscure player.\n  - Ice Shard (16x16): blue recolor distinct from Feather.\n  - Flame Wing (64x64): orange recolor distinct from Wing Slap.\n  - Animation speeds feel responsive.\n- Coordinate a short in-team review session (10 minutes) to show all effects to Ericka and collect notes.\n- Do not modify weapon gameplay logic during this checkpoint; only visuals and asset assignments.\n",
@@ -2149,7 +2149,7 @@
         "updatedAt": "2026-03-01T00:52:14.702Z"
       },
       {
-        "id": 28,
+        "id": "28",
         "title": "Implement XP Collection and Progression System",
         "description": "Create XP tracking system with curve formula and bar UI display",
         "details": "In Player script, add vars: `current_xp: float = 0`, `level: int = 1`, `xp_to_next: int = 5`. Implement `calculate_xp_needed(level: int) -> int: return 5 + (level - 1) * 5`. On XP collection: `current_xp += amount; if current_xp >= xp_to_next: current_xp -= xp_to_next; level += 1; xp_to_next = calculate_xp_needed(level); show_level_up_screen()`. Create XPBar as ProgressBar node (max_value dynamic), update via signal. Use Godot 4.3 Tween for smooth bar fill. Connect to UI canvas layer.",
@@ -2228,7 +2228,7 @@
         "updatedAt": "2026-03-06T21:54:52.811Z"
       },
       {
-        "id": 29,
+        "id": "29",
         "title": "Create Level-Up UI Screen",
         "description": "Build pausable level-up panel showing 3 random upgrade choices with icons",
         "details": "Create LevelUpPanel as Popup with VBoxContainer for 3 ChoiceButton nodes (TextureButton + Label). Use CanvasLayer, modal=true. Layout matches PRD ASCII art. On show: `get_tree().paused = true; panel.visible = true`. Buttons show icon (16x16), name, '+1 Lv.X→Y'. Use Godot 4.3 Popup theme with pixel font. Signal `choice_selected(choice_id)` to apply and `get_tree().paused = false`. Placeholder ColorRect icons until assets.",
@@ -2309,7 +2309,7 @@
         "updatedAt": "2026-03-14T01:50:18.325Z"
       },
       {
-        "id": 30,
+        "id": "30",
         "title": "Implement Passive System Manager",
         "description": "Create data-driven passive tracking with 4 specific passives and stacking modifiers",
         "details": "Create PassiveData Resource: `{name: String, level: int=0, max_level: int=5, effect: String}`. Singleton PassiveManager autoload: `passives: Array[PassiveData] = []`. Add 4 passives with exact PRD stats. `get_modifier(passive_name: String) -> float: match passive_name: 'Iron Beak': return 1.0 + 0.1 * passives[0].level`. Apply in Player: `damage *= passive_manager.get_modifier('Iron Beak')`. Upgrade: `passives[i].level += 1`. Use ResourceLoader for data-driven.",
@@ -2389,7 +2389,7 @@
         "updatedAt": "2026-03-19T20:33:37.365Z"
       },
       {
-        "id": 31,
+        "id": "31",
         "title": "Build Pickup Scene with Magnetic Effect",
         "description": "Create XP Gem and Gold Coin pickups with drift behavior controlled by Magnetic Aura",
         "details": "Pickup.tscn: Area2D + Sprite2D(16x16 ColorRect blue/yellow) + CollisionShape2D(CircleShape2D r=8). Vars: `pickup_range: float = 64.0, magnet_speed: float = 100.0`. In _process: `if distance_to(player) < player.passive_manager.get_modifier('Magnetic Aura') * base_range: move_toward(player, magnet_speed * delta)`. On body_entered(player): queue_free(), emit_signal('collected', type). Connect player pickup_range to passive system. 0.5s delay: `await get_tree().create_timer(0.5).timeout`. Godot 4.3 Area2D monitorable=true.",
@@ -2467,7 +2467,7 @@
         "updatedAt": "2026-03-26T00:30:28.447Z"
       },
       {
-        "id": 32,
+        "id": "32",
         "title": "Integrate Enemy Death Pickup Spawning",
         "description": "Enemies drop XP gems and gold coins at death location",
         "details": "In Enemy script death(): `var xp_gem = pickup_scene.instantiate(); xp_gem.global_position = global_position; get_tree().current_scene.add_child(xp_gem); xp_gem.collected.connect(_on_pickup_collected)`. 70% XP gem, 30% gold coin chance. Connect player pickup signals to XP system and gold counter. Use preload('res://Pickups/XP_Gem.tscn') for efficiency. Ensure spawn offset random 8px to avoid overlap.",
@@ -2547,7 +2547,7 @@
         "updatedAt": "2026-03-27T22:10:10.792Z"
       },
       {
-        "id": 33,
+        "id": "33",
         "title": "Implement Level-Up Choice Pool Logic",
         "description": "Generate 3 random choices from upgradeable weapons and passives respecting max limits",
         "details": "In LevelUpManager: `get_choices(count: int=3) -> Array: var pool = []; for weapon in weapon_manager.weapons: if weapon.level < weapon.max_level: pool.append(weapon); if slots_available and !weapon.owned: pool.append(weapon); for passive in passive_manager.passives: if passive.level < 5: pool.append(passive); return pool.shuffle().slice(0, count)`. Max 6 weapons. Filter owned/max_level. Display logic handles 'NEW!' vs '+1'.",
@@ -2632,7 +2632,7 @@
         "updatedAt": "2026-04-02T23:49:42.287Z"
       },
       {
-        "id": 34,
+        "id": "34",
         "title": "Add All Passive Stat Applications",
         "description": "Wire Thick Plumage, Racing Legs, Magnetic Aura into player stats",
         "details": "Player script: `max_hp = base_hp + passive_manager.get_modifier('Thick Plumage') * 15`. `speed = base_speed * (1.0 + passive_manager.get_modifier('Racing Legs') * 0.1)`. Pickup: `pickup_range = base_range * (1.0 + passive_manager.get_modifier('Magnetic Aura') * 0.2)`. Update in _ready() and passive_changed signal. Use Godot 4.3 signals for reactive updates. Test multipliers: Thick +75HP@lv5, Speed +50%, Range +100%.",
@@ -2714,7 +2714,7 @@
         "updatedAt": "2026-04-05T19:34:54.617Z"
       },
       {
-        "id": 35,
+        "id": "35",
         "title": "Implement XP Bar and Timer UI",
         "description": "Display XP progress bar and survival timer on screen",
         "details": "HUD.tscn CanvasLayer: ProgressBar (XP bar) + Label (timer). XPBar.max_value = player.xp_to_next; value = player.current_xp. Tween smooth fill. Timer: `run_time += delta; label.text = format_time(run_time)`. Use tr('survival_time') for localization. Position top-left, pixel-perfect 640x360. Update via signals from Player.",
@@ -2793,7 +2793,7 @@
         "updatedAt": "2026-04-10T22:34:15.742Z"
       },
       {
-        "id": 36,
+        "id": "36",
         "title": "Add Placeholder SFX for Core Loop",
         "description": "Integrate audio for XP pickup, enemy hit, enemy death, level up",
         "details": "Project Settings: Audio buses (Master/Music/SFX). Preload free BFXR sounds: xp_pickup.ogg, enemy_hit.ogg, enemy_death.ogg, level_up.ogg. AudioStreamPlayer2D on pickups/enemies. Enemy hit: modulate volume by damage. Level-up: play on pause. SFX bus volume slider in settings. Godot 4.3 AudioServer bus effects clean.",
@@ -2886,7 +2886,7 @@
         "updatedAt": "2026-04-18T19:48:03.918Z"
       },
       {
-        "id": 37,
+        "id": "37",
         "title": "Week 1-3 Integration and Performance Testing",
         "description": "Verify core progression loop works end-to-end with performance targets",
         "details": "Test scenarios: survive 60s (Week1), reach lv10 (Week2), max 6 weapons+4 passives (Week3). Profile: 60FPS@100+ enemies, no leaks (run 10min). Check XP curve, choice pool, passive stacking, pickup magnet. Add damage numbers: Label tween-up on enemy hit. Enemy flash: modulate white 0.1s. Use Godot Performance monitor.",
@@ -2971,7 +2971,7 @@
         "updatedAt": "2026-04-24T23:29:36.426Z"
       },
       {
-        "id": 38,
+        "id": "38",
         "title": "Implement run-reset architecture for scene reload",
         "description": "Autoloads survive reload_current_scene, so enemies/XP/wave state persist across deaths. Add reset_run() methods to each autoload and wire them into the death flow.",
         "details": "Problem: When player dies, get_tree().reload_current_scene() only resets main.tscn. PoolManager parents enemies under itself (autoload), so they survive as frozen zombies. SpawnManager wave state, ProgressionManager XP/level, GameTimer elapsed time, and PassiveManager picks all persist.\n\nFix plan:\n1. Add reset_run() to each affected autoload:\n   - PoolManager: release all active pooled objects back to their pools\n   - SpawnManager: reset wave state, timers, difficulty curve\n   - ProgressionManager: reset xp, level, pending level-ups\n   - GameTimer: reset elapsed time\n   - PassiveManager: clear per-run passive selections\n2. Create a central reset entry point (e.g., on main.gd _ready, or a new GameState.reset_run() autoload per CLAUDE.md)\n3. Call the reset before or immediately after reload_current_scene in player.die()\n4. Verify: die, confirm old enemies are gone, timer/level reset, spawn wave starts from t=0\n\nReference: CLAUDE.md mentions GameState.reset_run() as the intended pattern - this task may also involve creating that GameState autoload.",
@@ -3049,7 +3049,7 @@
         "updatedAt": "2026-05-02T23:13:16.904Z"
       },
       {
-        "id": 39,
+        "id": "39",
         "title": "Fix level-up panel: always show 3 choices with filler fallbacks",
         "description": "When all weapons/passives are maxed, level-up panel shows <3 choices instead of fallback filler options (heal/+gold/minor stat per spec).",
         "details": "Current behavior: level_up_manager.gd returns fewer choices when pool is dry and level_up_panel.gd hides empty buttons. The grant_consolation_heal() is an auto-grant rather than a selectable filler.\n\nExpected behavior (per spec): always offer exactly 3 selectable choices. When weapon/passive pool is exhausted, fill remaining slots with filler options like:\n- Small heal (e.g., +20% max HP or flat +20 HP)\n- Gold bonus (+X gold)\n- Minor stat bump (+5% damage, +5% speed)\n\nImplementation notes:\n- Modify level_up_manager.gd choice generation to pad with filler options until 3 choices exist\n- Define filler options as simple inline entries (not new resources unless needed)\n- Ensure level_up_panel.gd displays all 3 filler buttons with proper labels/icons\n- Test: max out all weapons and passives, trigger level up, verify 3 choices appear\n\nDiscovered during 37.4 profiling playtest.",
@@ -3127,7 +3127,7 @@
         "updatedAt": "2026-05-08T06:44:50.057Z"
       },
       {
-        "id": 40,
+        "id": "40",
         "title": "Investigate XP/coin pickup burst glitch (186ms physics spike)",
         "description": "Around the 3-minute mark of a normal run, a single enemy dropped a large burst of XP gems and gold coins in one frame, causing a 186ms physics spike before the game recovered.",
         "details": "Repro context (from 37.4 profiling playtest): Standard main game scene with maxed weapons/passives, enemy rush enabled. At ~3 min mark, one enemy death spawned excessive pickups in a single frame; Godot Performance monitor recorded a one-frame physics spike of 186ms with immediate recovery.\n\nSuspected causes:\n1. enemy_duwende.gd die() function (lines 100-134) being called twice before the enemy despawns — two passes through the drop logic in a single frame.\n2. Boss drop logic stacking with normal duwende drop logic on the same node.\n3. A pool entry being recycled before the previous die() finishes, causing duplicate drops.\n\nInvestigation steps:\n- Add a guard flag (e.g., is_dying) at the top of die() and early-return if already true. Log when the guard fires to confirm double-trigger.\n- Verify the enemy is removed from collision/grid before drops spawn so it can't take another lethal hit.\n- Check if any AOE weapon hit-list still references the enemy after death.\n- If reproducible, capture the spike frame in the Profiler and look for which function dominated.\n\nNot a perf-architecture issue; isolated one-frame hitch. Worth fixing before launch since it's visible.",
@@ -3206,7 +3206,7 @@
         "updatedAt": "2026-05-13T07:34:17.084Z"
       },
       {
-        "id": 41,
+        "id": "41",
         "title": "Balance pass: late-game player power (180 HP felt OP)",
         "description": "During Task 37.4 full-run playtest, the player reached 180 HP and steamrolled the back half of the run. Tune HP scaling and/or enemy damage during the dedicated balancing window.",
         "details": "Surfaced during Task 37 integration testing. Player ended a 30-min run at 180 HP with maxed weapons/passives, killing waves trivially. This is not an integration bug; it's expected to be tuned during the dedicated balancing phase.\n\nWhen this task is picked up:\n- Review HP scaling sources: base HP, Thick Plumage passive, shop HP upgrades. Check if they stack additively when they should be multiplicative (or vice versa).\n- Compare actual vs target survivability curve from the PRD (player should feel pressure throughout, not just early game).\n- Consider scaling enemy damage with run time so late-game enemies threaten a maxed player.\n- Re-run the 30-min full playtest and confirm the player feels challenged from ~15 min onward.\n\nReference: Task 37.5 issue triage, item #3.",
@@ -3284,7 +3284,7 @@
         "updatedAt": "2026-05-16T05:48:05.773Z"
       },
       {
-        "id": 42,
+        "id": "42",
         "title": "Polish: improve AOE attack visibility through visual noise",
         "description": "During Task 37.4 playtest, hard to tell when AOE weapons (Wing Slap, Flame Wing) actually land hits because of overlapping visual chaos from simultaneous attacks.",
         "details": "Surfaced during Task 37 integration testing. With maxed weapons + many enemies + damage numbers + hit flashes all firing at once, the player can't visually confirm AOE hits. Not a bug — a clarity/feedback problem to address during the polish/VFX phase.\n\nWhen this task is picked up:\n- Make AOE radius briefly visible on fire (expanding ring or filled circle that fades).\n- Consider stronger color contrast for AOE VFX vs background and vs other weapon effects.\n- Cap simultaneous damage numbers per frame, or merge nearby ones, to reduce visual noise.\n- Could also be solved by hit-flash on AOE-damaged enemies pulsing slightly differently from projectile-damaged ones.\n- Review with Ericka once weapon VFX sprites are delivered (links to Task 27).\n\nReference: Task 37.5 issue triage, item #4.",
@@ -3295,7 +3295,7 @@
         "subtasks": []
       },
       {
-        "id": 43,
+        "id": "43",
         "title": "Fix current_hp drift past max when Thick Plumage levels up",
         "description": "current_hp can exceed get_effective_max_hp() because _on_passive_upgraded() adds bonus_per_level without clamping.",
         "details": "In game/scripts/player/player.gd:174-178, _on_passive_upgraded() adds PassiveData.bonus_per_level (15) directly to current_hp on every Thick Plumage level-up. The new max is recomputed via get_effective_max_hp(), but current_hp is never clamped to it. This is the likely source of the 180 HP observation in Task 37.4 (formula caps max at 175 HP at L5 Thick Plumage).\\n\\nFix: after adding the bonus, clamp current_hp = min(current_hp, get_effective_max_hp()) — or just heal(bonus) which already clamps. Surfaced during Task 41.1 audit.",
@@ -3348,7 +3348,7 @@
         "updatedAt": "2026-05-20T00:15:13.450Z"
       },
       {
-        "id": 44,
+        "id": "44",
         "title": "Update CLAUDE.md: remove phantom GameState API references",
         "description": "CLAUDE.md documents GameState getters that don't exist in the autoload. Bring docs in line with code.",
         "details": "CLAUDE.md lines 88-91 list GameState.get_damage_multiplier(), GameState.get_max_hp(), GameState.get_move_speed() as the canonical 'key methods'. None exist in game/autoloads/game_state.gd, which is only a reset_run() orchestrator. The actual stat math lives on Player (get_effective_max_hp) and on PassiveManager (get_bonus/get_modifier). Update CLAUDE.md to reflect the real API: document GameState.reset_run() and point to PassiveManager and Player for stat computation. Surfaced during Task 41.1 audit.",
@@ -3424,7 +3424,7 @@
         "updatedAt": "2026-05-22T01:20:48.514Z"
       },
       {
-        "id": 45,
+        "id": "45",
         "title": "Refactor HP into a reusable HealthComponent (Godot composition pattern)",
         "description": "Extract HP logic from player.gd and enemy_duwende.gd into a shared HealthComponent node so all entities use the same canonical mutators and signal.",
         "details": "Currently HP logic is duplicated across game/scripts/player/player.gd and game/scripts/enemies/enemy_duwende.gd, and Manananggal/future enemies will duplicate it again. Extract into a Godot Node component.\\n\\nScope:\\n- Create game/scripts/components/health_component.gd with: current_hp, max_hp, take_damage(amount), heal(amount), set_max_hp(value) [clamps current], die signal, health_changed(current, max) signal\\n- Refactor player.gd to attach HealthComponent as child node; forward take_damage/heal/die through it; replace get_effective_max_hp() with component.set_max_hp() called whenever Thick Plumage changes\\n- Refactor enemy_duwende.gd to use the same component\\n- Update hud.gd to bind to component.health_changed signal instead of polling player.current_hp\\n- Audit all callers: weapons (take_damage on enemies), debuff system, death_particles, all test scenes (test_enemy.gd, progression_test.gd, passive_stat_test.gd, level_up_pool_scenario_test.gd, debuff_test.gd, projectile_weapon_test.gd)\\n- Verify integration test: full 30-min run, no HP regressions, HUD updates correctly, enemies die correctly, passive HP bonuses still apply, invincibility frames still work\\n\\nBenefits:\\n- Single source of truth for HP mutations (cannot bypass clamping by accident)\\n- Manananggal boss + future enemies get HP for free\\n- HUD decoupled from player (binds to component signal)\\n- Component-based architecture is the idiomatic Godot pattern (matches HitboxComponent/HurtboxComponent conventions used in many Godot games)\\n\\nPrerequisite: Task 43 (current_hp drift fix) should ship first so this refactor migrates correct behavior, not a bug. Surfaced during Task 43 design discussion when comparing inline-clamp vs heal()-reuse approaches.",
@@ -3506,7 +3506,7 @@
         "updatedAt": "2026-05-29T20:16:34.450Z"
       },
       {
-        "id": 46,
+        "id": "46",
         "title": "Investigate actual source of 180 max HP observation in Task 37.4",
         "description": "Find what actually produced max_hp = 180 (formula at L5 Thick Plumage caps at 175).",
         "details": "Task 41.1 audit traced HP scaling and found only two sources: base PlayerStats.max_hp (100) + Thick Plumage (+15 × level, max 5 = +75). Theoretical max is 175.\\n\\nDuring 43.4 we noticed the original 'current_hp drift past max' theory doesn't hold up — passive_stat_test.gd:94 already verifies current_hp ends at exactly 175 after L5 from full, and the old += bonus path matches the max increase 1:1. So 180 HP came from somewhere else.\\n\\nCandidates to investigate:\\n- Check PlayerStats.tres values across all scenes — is one set to max_hp = 105? (105 + 75 = 180)\\n- Search for any code that mutates stats.max_hp at runtime\\n- Check if there's a duplicate passive_upgraded signal connection causing double-application\\n- Look at the actual print log from 37.4 if Josh still has it — was it '180/180' or '180/175'? Direction of the discrepancy tells us which side is wrong\\n- Check if any test/debug code in scenes/levels/ overrides player stats\\n\\nDeliverable: identify the actual mechanism, file a fix task if it's a bug or close this if it's expected behavior we didn't account for in the audit.",
@@ -3587,7 +3587,7 @@
         "updatedAt": "2026-06-02T05:17:12.181Z"
       },
       {
-        "id": 47,
+        "id": "47",
         "title": "Refactor duwende variants into Godot inherited scenes from enemy_duwende.tscn",
         "description": "Convert green_duwende.tscn and red_duwende.tscn from independent scene files into proper inherited scenes that extend enemy_duwende.tscn as a base, overriding only variant-specific properties.",
         "details": "**Current Problem:**\nBoth `green_duwende.tscn` (45 lines) and `red_duwende.tscn` (50 lines) are standalone scenes that fully redefine all nodes (CharacterBody2D, CollisionShape2D, ColorRect, DamageArea, HitSFX, DeathSFX, HealthComponent). They share `enemy_duwende.gd` as their script but have no `instance=` reference to a base scene. This caused crashes during Task 45.3 when HealthComponent was added only to `enemy_duwende.tscn` — the pooled variants didn't inherit the new node.\n\n**Why Inherited Scenes:**\nGodot's inherited scene pattern (`Scene → New Inherited Scene`) creates a child .tscn that references a parent and only stores overrides. When the parent adds a new child node (like HealthComponent, future HurtboxComponent, etc.), all inherited scenes automatically get it.\n\n**Implementation Steps:**\n\n1. **Backup current variant scenes** (optional safety net):\n   - Copy `green_duwende.tscn` → `green_duwende_backup.tscn`\n   - Copy `red_duwende.tscn` → `red_duwende_backup.tscn`\n\n2. **Create inherited green_duwende.tscn:**\n   - In Godot: Scene → New Inherited Scene → select `enemy_duwende.tscn`\n   - Save as `green_duwende.tscn` (overwrite existing)\n   - In the root node Inspector, set:\n     - `base_speed = 80.0` (same as base, can omit)\n     - `base_damage = 5` (same as base, can omit)\n     - `base_max_hp = 10` (same as base, can omit)\n     - `xp_drop_count = 1` (same as base, can omit)\n     - `gold_drop_count = 1` (same as base, can omit)\n   - Select ColorRect node → set color to green `Color(0.25565824, 0.9905693, 3.85046e-07, 1)`\n   - Note: Since Green uses all base defaults, the inherited scene should only override the ColorRect color\n\n3. **Create inherited red_duwende.tscn:**\n   - In Godot: Scene → New Inherited Scene → select `enemy_duwende.tscn`\n   - Save as `red_duwende.tscn` (overwrite existing)\n   - In the root node Inspector, set the variant-specific @export values:\n     - `base_speed = 100.0`\n     - `base_damage = 10`\n     - `base_max_hp = 25`\n     - `xp_drop_count = 3`\n     - `gold_drop_count = 2`\n   - Select ColorRect node → set color to red `Color(0.8, 0.13333334, 0.13333334, 1)`\n\n4. **Verify DebuffHandler inheritance:**\n   - Current `enemy_duwende.tscn` has DebuffHandler (lines 36-38)\n   - Current `green_duwende.tscn` is MISSING DebuffHandler\n   - Current `red_duwende.tscn` is MISSING DebuffHandler\n   - After refactor, both variants will inherit DebuffHandler from base automatically\n\n5. **Verify pool configs still work:**\n   - `green_duwende_pool.tres` points to `res://scenes/enemies/duwende/green_duwende.tscn` — path unchanged\n   - `red_duwende_pool.tres` points to `res://scenes/enemies/duwende/red_duwende.tscn` — path unchanged\n   - No changes needed to pool configs\n\n**Expected .tscn structure after refactor (red_duwende.tscn example):**\n```\n[gd_scene load_steps=2 format=3 uid=\"uid://cyi8td7balb1c\"]\n\n[ext_resource type=\"PackedScene\" uid=\"uid://bqufsuyg2a6yu\" path=\"res://scenes/enemies/duwende/enemy_duwende.tscn\" id=\"1_base\"]\n\n[node name=\"EnemyDuwende\" instance=ExtResource(\"1_base\")]\nbase_speed = 100.0\nbase_damage = 10\nbase_max_hp = 25\nxp_drop_count = 3\ngold_drop_count = 2\n\n[node name=\"ColorRect\" parent=\".\" index=\"1\"]\ncolor = Color(0.8, 0.13333334, 0.13333334, 1)\n```\n\nThis reduces ~50 lines to ~12 lines and ensures future shared nodes (HurtboxComponent, etc.) only need to be added to the base scene.\n\n**Important Notes:**\n- The `unique_id` properties in the current standalone scenes will be dropped — inherited scenes use the parent's node structure\n- DebuffHandler was missing from both variants; inheritance fixes this automatically\n- This task blocks adding Black Duwende (which would be a third inherited scene) and any future shared components",
@@ -3667,14 +3667,14 @@
         "updatedAt": "2026-06-06T18:57:47.151Z"
       },
       {
-        "id": 48,
+        "id": "48",
         "title": "Implement global game timer, win/lose condition hooks, and state signaling",
         "description": "Add a centralized game timer system that counts up to 30:00, exposes formatted time for UI, and emits win/lose events that other systems (gameplay freeze, transitions, results screen) subscribe to.",
         "details": "Extend the EXISTING GameTimer autoload (game/autoloads/game_timer.gd) — do NOT create a new GameSession singleton. GameTimer already has elapsed_time, a computed elapsed_minutes property, a _process(delta) that accumulates time, reset_run(), and debug_skip_minutes().\n\nAdd to GameTimer:\n- Run state (ACTIVE / WON / LOST) plus a run_active flag, and an is_gameplay_active() accessor that other systems (HUD freeze in task 49, spawn controller in task 54) can query.\n- const VICTORY_TIME := 1800.0  # 30:00. In _process, only accumulate elapsed_time while ACTIVE; when elapsed_time >= VICTORY_TIME, switch to WON, stop the clock, and emit run_won exactly once (guard against re-emit).\n- Loss: REUSE the existing death path — health_component.gd emits the `died` signal at 0 HP, which drives player.gd die() and its `player_died` signal. Route that into a guarded GameTimer.mark_run_lost() that switches to LOST and emits run_lost once. Do NOT add new HP checks or reimplement death detection.\n- format_time(seconds) -> \"MM:SS\" helper, pure and side-effect free, for the HUD and results screen.\n- reset_run() also resets run state back to ACTIVE; it is already fanned out by GameState.reset_run().\n\nrun_won / run_lost are the integration seam for task 49 (HUD + global freeze), task 50 (dawn transition), and task 51 (results screen). This task delivers ONLY the timer logic, run state, and signals — no UI or screen.",
         "testStrategy": "Manual / debug tests:\n- Use GameTimer.debug_skip_minutes() to jump near 30:00, then confirm run_won fires exactly once and elapsed_time stops increasing.\n- Drive the player to 0 HP and confirm run_lost fires exactly once via the existing health_component `died` -> player_died path, with no duplicate game-over.\n\nIntegration:\n- Watch the HUD timer (task 49) increment with no drift over several minutes, and confirm it halts on win/lose.\n- Confirm enemy time-scaling (elapsed_minutes) stops once the run ends.\n\nEdge cases:\n- GameState.reset_run() returns state to ACTIVE and elapsed_time to 0, and does NOT emit run_won / run_lost.\n- Triggering win or lose more than once is a no-op (guards).",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
@@ -3682,8 +3682,10 @@
             "description": "Introduce run-state tracking and win/lose signaling into the existing GameTimer autoload without creating new singletons.",
             "dependencies": [],
             "details": "In game/autoloads/game_timer.gd, add an enum or equivalent flags for run states (e.g. RUN_STATE_ACTIVE, RUN_STATE_WON, RUN_STATE_LOST) plus a backing variable such as current_run_state or separate bools, ensuring defaults represent an active run. Add a bool like run_active that mirrors whether time should be accumulated in _process. Declare new signals: run_won (no args), run_lost (no args), and optionally time_updated(total_seconds: float) if not already present. Keep naming consistent with existing project conventions. Do not modify or remove existing elapsed_time, elapsed_minutes, reset_run(), or debug_skip_minutes() behaviors yet—only extend them. Document in comments that GameTimer is now the central authority for run state and win/lose signaling for downstream tasks (49, 50, 51, 54).",
-            "status": "pending",
-            "testStrategy": "Use the Godot editor to open game/autoloads/game_timer.gd, run the project, and confirm there are no script errors and that existing features (elapsed_time accumulation, elapsed_minutes usage by enemy scaling) still work. Use a temporary script in a test scene to connect to run_won and run_lost and print when they fire to confirm the signals exist and are connectable."
+            "status": "done",
+            "testStrategy": "Use the Godot editor to open game/autoloads/game_timer.gd, run the project, and confirm there are no script errors and that existing features (elapsed_time accumulation, elapsed_minutes usage by enemy scaling) still work. Use a temporary script in a test scene to connect to run_won and run_lost and print when they fire to confirm the signals exist and are connectable.",
+            "updatedAt": "2026-06-08T17:40:23.325Z",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -3694,7 +3696,8 @@
             ],
             "details": "In game/autoloads/game_timer.gd, modify _process(delta) so that it only accumulates elapsed_time while run_active (or while current_run_state is ACTIVE). Ensure _process early-returns when in WON or LOST states. Add a constant VICTORY_TIME = 30 * 60.0 for clarity. In _process, after increasing elapsed_time, emit a time_updated(elapsed_time) signal if defined. When elapsed_time reaches or exceeds VICTORY_TIME and the run state is still ACTIVE, change state to WON, set run_active to false, and emit run_won once. Guard against multiple emissions by checking state before switching. Keep the existing elapsed_minutes computation or property compatible with the new logic so that enemy scaling and other time-based systems continue to work using the clamped time when the run is over.",
             "status": "pending",
-            "testStrategy": "In a debug or test scene, temporarily modify GameTimer to expose a debug method (or use the existing debug_skip_minutes) to quickly increase elapsed_time close to VICTORY_TIME, then unpause and observe in the console that run_won is emitted exactly once and that elapsed_time stops increasing. Also verify that elapsed_minutes used by enemy scaling in the spawn manager stops increasing after the run is won. Confirm that if the game is left running well past 30:00, run_won is still only fired once and no errors occur."
+            "testStrategy": "In a debug or test scene, temporarily modify GameTimer to expose a debug method (or use the existing debug_skip_minutes) to quickly increase elapsed_time close to VICTORY_TIME, then unpause and observe in the console that run_won is emitted exactly once and that elapsed_time stops increasing. Also verify that elapsed_minutes used by enemy scaling in the spawn manager stops increasing after the run is won. Confirm that if the game is left running well past 30:00, run_won is still only fired once and no errors occur.",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -3706,7 +3709,8 @@
             ],
             "details": "In game/autoloads/game_timer.gd, add a static or regular helper function format_time(seconds: float) -> String that converts a float in seconds to an MM:SS string, using integer minutes and seconds and zero-padding to two digits. Ensure the function does not read or mutate any GameTimer state so UI or other systems can safely call it with arbitrary values. Add an is_gameplay_active() -> bool method that returns true only when the run is in the ACTIVE state (or equivalently when run_active is true and state is not WON/LOST). This accessor will be used later by combat, movement, spawn controller, and HUD freeze logic in other tasks; for now, only document its intended usage in code comments and avoid modifying other scripts. Keep these helpers pure and side-effect free to simplify testing and reuse.",
             "status": "pending",
-            "testStrategy": "In an isolated test scene or via the Godot console, call GameTimer.format_time() with representative values (0, 59, 60, 61, 1799, 1800) and verify the returned strings (\"00:00\", \"00:59\", \"01:00\", \"01:01\", \"29:59\", \"30:00\"). Toggle GameTimer’s internal run state manually (e.g. simulate win and loss) and call is_gameplay_active() to confirm it returns true only when the run is active and false after win or loss. Ensure no changes to other systems are required to run these tests."
+            "testStrategy": "In an isolated test scene or via the Godot console, call GameTimer.format_time() with representative values (0, 59, 60, 61, 1799, 1800) and verify the returned strings (\"00:00\", \"00:59\", \"01:00\", \"01:01\", \"29:59\", \"30:00\"). Toggle GameTimer’s internal run state manually (e.g. simulate win and loss) and call is_gameplay_active() to confirm it returns true only when the run is active and false after win or loss. Ensure no changes to other systems are required to run these tests.",
+            "parentId": "undefined"
           },
           {
             "id": 4,
@@ -3719,7 +3723,8 @@
             ],
             "details": "Inspect game/scripts/components/health_component.gd to confirm it already emits a died signal at 0 HP, and game/scripts/player/player.gd to see how die() and player_died are currently used. In player.gd, extend or adjust the existing death handling so that when the player_died or equivalent death path runs for the first time in a run, it calls GameTimer (autoload) to transition to the LOST state and emit run_lost. Implement a guarded method on GameTimer, e.g. mark_run_lost(), that checks current_run_state before switching to LOST, sets run_active to false, and emits run_lost exactly once. Ensure no new HP checks are added; rely entirely on the existing died signal and death flow. Avoid breaking current game-over behavior by keeping the existing logic that shows or triggers the game-over screen, which will be refactored in the next subtask to listen to run_lost instead of direct calls.",
             "status": "pending",
-            "testStrategy": "In a test arena, intentionally let the player reach 0 HP and observe that the existing visual/game-over behavior still occurs, while also adding temporary print statements on GameTimer.run_lost and within the new mark_run_lost() to confirm it fires exactly once per run. Kill the player multiple times across separate runs (after reset) to ensure run_lost is emitted once each run and that no additional or early emissions happen while still alive. Confirm that enemy scaling and other time-based systems stop advancing once the run is lost because GameTimer no longer accumulates time."
+            "testStrategy": "In a test arena, intentionally let the player reach 0 HP and observe that the existing visual/game-over behavior still occurs, while also adding temporary print statements on GameTimer.run_lost and within the new mark_run_lost() to confirm it fires exactly once per run. Kill the player multiple times across separate runs (after reset) to ensure run_lost is emitted once each run and that no additional or early emissions happen while still alive. Confirm that enemy scaling and other time-based systems stop advancing once the run is lost because GameTimer no longer accumulates time.",
+            "parentId": "undefined"
           },
           {
             "id": 5,
@@ -3731,7 +3736,8 @@
             ],
             "details": "Review the current game over implementation (likely in a HUD, main scene, or dedicated game-over screen script) to identify where it listens to player_died or other ad-hoc triggers. Update those scripts so that they connect to GameTimer’s run_lost and, if applicable, run_won signals to drive transitions, results screen triggers, and any existing game-over UI entry points. Keep the behavior functionally equivalent for now: victory and defeat should result in the same screens or transitions as before, but now via GameTimer as the single authoritative source. Ensure that player.gd and health_component.gd no longer directly trigger game-over UI; they should only drive GameTimer run state. Note any dependencies on upcoming tasks (49, 50, 51, 54) in comments so future work can plug into these signals cleanly.",
             "status": "pending",
-            "testStrategy": "Start a run and intentionally die to trigger defeat; verify that the same game-over screen or flow appears, and that it is now driven by GameTimer.run_lost rather than a direct call from player.gd. If a win flow already exists (e.g. surviving to a certain time), test surviving to 30:00 and confirm that the victory flow is now driven by GameTimer.run_won. Use debug logs to ensure only one subscription path handles each event and that there are no duplicated UI activations or multiple scene transitions. Also verify that disconnecting GameTimer signals (if applicable on cleanup) does not break subsequent runs."
+            "testStrategy": "Start a run and intentionally die to trigger defeat; verify that the same game-over screen or flow appears, and that it is now driven by GameTimer.run_lost rather than a direct call from player.gd. If a win flow already exists (e.g. surviving to a certain time), test surviving to 30:00 and confirm that the victory flow is now driven by GameTimer.run_won. Use debug logs to ensure only one subscription path handles each event and that there are no duplicated UI activations or multiple scene transitions. Also verify that disconnecting GameTimer signals (if applicable on cleanup) does not break subsequent runs.",
+            "parentId": "undefined"
           },
           {
             "id": 6,
@@ -3744,115 +3750,145 @@
             ],
             "details": "In game/autoloads/game_timer.gd, extend the existing reset_run() so that, in addition to zeroing elapsed_time, it also resets elapsed_minutes if needed, sets current_run_state back to ACTIVE (or equivalent), and sets run_active to true. Confirm that no win/lose signals are fired during reset and that any internal flags used by mark_run_lost() or the win path are cleared. Then review the existing GameState.reset_run() orchestrator (or equivalent global reset function) to confirm it already calls GameTimer.reset_run(); if not, add a call there so all per-run cleanup flows through GameState. Ensure that transitions from main menu into gameplay and any in-run restart options always pass through GameState.reset_run(), so GameTimer is consistently reinitialized. Add comments to clarify that other systems relying on is_gameplay_active() should assume a fresh ACTIVE state after reset_run.",
             "status": "pending",
-            "testStrategy": "From the main menu, start a run, allow some time to pass (or win/lose), then trigger a restart via the existing restart flow and confirm that elapsed_time is back to 0, elapsed_minutes used by enemy scaling is reset, and is_gameplay_active() returns true. Verify that run_won or run_lost are not re-emitted on reset. Repeat the cycle multiple times to ensure there is no state leakage (e.g., timer not advancing, state stuck in WON/LOST, or multiple signal connections). If the project has a direct \"Restart\" button on the game-over screen, test that both main-menu starts and in-game restarts produce identical, clean GameTimer behavior."
+            "testStrategy": "From the main menu, start a run, allow some time to pass (or win/lose), then trigger a restart via the existing restart flow and confirm that elapsed_time is back to 0, elapsed_minutes used by enemy scaling is reset, and is_gameplay_active() returns true. Verify that run_won or run_lost are not re-emitted on reset. Repeat the cycle multiple times to ensure there is no state leakage (e.g., timer not advancing, state stuck in WON/LOST, or multiple signal connections). If the project has a direct \"Restart\" button on the game-over screen, test that both main-menu starts and in-game restarts produce identical, clean GameTimer behavior.",
+            "parentId": "undefined"
           }
-        ]
+        ],
+        "complexity": 6.5,
+        "recommendedSubtasks": 6,
+        "expansionPrompt": "Break Task 48 into ~6 subtasks covering: (1) creating and wiring the GameSession autoload singleton, (2) implementing the core timer and process loop with elapsed_time and VICTORY_TIME, (3) defining and emitting time_updated, victory_reached, and defeat_reached signals with correct guards, (4) adding helper utilities like format_time() and is_gameplay_active() while ensuring they are stateless/side-effect free, (5) integrating defeat/victory with existing player HP death logic and game-over screen routing, and (6) implementing reset/restart behavior to correctly clear GameSession state between runs and from main menu. For each subtask, specify files/scripts touched, how to test it in isolation, and any dependency on existing systems like the current game over flow.",
+        "updatedAt": "2026-06-08T17:40:23.325Z"
       },
       {
-        "id": 49,
+        "id": "49",
         "title": "Update HUD timer display and global freeze handling on win/lose",
         "description": "Render the MM:SS timer at top center of the screen, subscribe to GameSession time updates, and introduce a centralized gameplay freeze mechanism that pauses movement/combat while allowing UI and transition animations to continue.",
         "details": "HUD timer implementation:\n1) In the existing HUD scene, create a `Label` (or `RichTextLabel` if preferred) named `TimerLabel` anchored at top-center:\n   - Layout:\n     - Anchor: Top = 0, Bottom = 0.\n     - Horizontal alignment: center using anchor/margin or a `HBoxContainer`.\n     - Set `horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER`.\n   - Style: Use a readable pixel font; ensure contrast against background.\n\n2) In the HUD script:\n   - On `_ready()`, connect to `GameSession.time_updated`:\n```gdscript\nfunc _ready() -> void:\n    GameSession.time_updated.connect(_on_time_updated)\n    _on_time_updated(GameSession.elapsed_time)\n\nfunc _on_time_updated(total_seconds: float) -> void:\n    $TimerLabel.text = GameSession.format_time(total_seconds)\n```\n   - Ensure the HUD does not manage its own timer; it only reflects `GameSession`.\n\nGameplay freeze handling:\n3) Define global freeze state usage:\n   - In `GameSession`, add helper:\n```gdscript\nstatic func is_gameplay_active() -> bool:\n    return GameSession.is_running and not GameSession.is_victory and not GameSession.is_defeat\n```\n\n4) Player, enemies, projectiles, and pickups should respect freeze:\n   - In each `_physics_process(delta)` or `_process(delta)` for gameplay-controlled entities, early-return when not active. Example for enemies:\n```gdscript\nfunc _physics_process(delta: float) -> void:\n    if not GameSession.is_gameplay_active():\n        return\n    # existing movement/AI code here\n```\n   - Ensure UI scenes (HUD, results screen, transitions) are *not* using this global check, so they keep animating.\n\n5) Ensure that animation players and tweens for dawn transition (Task 50) are not blocked by freeze:\n   - Place them either in a separate scene that does not check `is_gameplay_active()` or run them via `SceneTree.create_tween()` which continues regardless of entity logic, as long as the tree is not paused.\n\n6) Timer visibility on game over:\n   - Confirm the HUD timer remains visible until the results screen appears so the player can see final time briefly (even though final time is also shown on results).\n\nBest practices & Godot notes:\n- In Godot 4, pausing the entire SceneTree is often too heavy-handed; using a logical freeze flag as above keeps fine-grained control.\n- If you later add a pause menu, you can reuse `GameSession.is_running` but consider a separate `is_paused_by_player` vs system end-state flags.\n",
         "testStrategy": "Visual tests:\n- Start a run and confirm the timer shows `00:00` at start and increments correctly, rolling from e.g. `00:59` to `01:00`.\n- Confirm the timer is centered at the top and not clipped at different resolutions/aspect ratios.\n\nFreeze behavior tests:\n- On victory and defeat (simulate via debug Calls to `trigger_victory()` and `trigger_defeat()`):\n  - Confirm player and enemies stop moving and attacking.\n  - Confirm projectiles stop moving and do not damage the player.\n  - Confirm HUD and transition tweens/animations still play.\n\nEdge cases:\n- Verify that on run restart, timer resets to `00:00` and continues incrementing.\n- Validate that cinematic transitions (from Task 50) play even while gameplay entities are frozen.\n- Check that there are no script errors from nodes trying to access `GameSession` too early (use `autoload` and ensure connection is in `_ready()`).",
         "priority": "high",
         "dependencies": [
-          48
+          "48"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 7,
+        "expansionPrompt": "Decompose Task 49 into ~7 subtasks: (1) HUD timer UI layout and styling with a TimerLabel anchored top-center and resolution-safe alignment, (2) subscribing HUD to GameSession.time_updated and rendering formatted time without owning timer logic, (3) implementing GameSession.is_gameplay_active() (or equivalent) and validating its semantics against win/lose states and future pause use cases, (4) applying the global freeze check to player movement/combat scripts, (5) applying the freeze check to enemies, projectiles, and pickups in a consistent, centralized pattern, (6) verifying that UI, transitions, and tweens are not frozen and adjusting node placement or tween creation accordingly, and (7) handling run restart/reset so frozen states and HUD display re-initialize correctly. For each subtask, list concrete scripts to touch, potential side effects on existing gameplay feel, and specific in-game test cases to run."
       },
       {
-        "id": 50,
+        "id": "50",
         "title": "Implement dawn transition sequence using CanvasModulate and parallax sky",
         "description": "Create a parallax sky layer with moon and stars plus a global CanvasModulate, then implement the tween-driven night-to-dawn transition that plays on victory, including visual and audio cues.",
         "details": "Scene structure implementation (as per PRD):\n1) In the main game scene, organize nodes as:\n```text\nMain\n├── ParallaxBackground (SkyLayer)\n│   ├── Sky (ColorRect or Sprite2D)\n│   ├── Moon (Sprite2D)\n│   └── Stars (Sprite2D or GPUParticles2D)\n├── CanvasModulate (Night Filter)\n├── Background (bahay kubo, trees)\n├── TileMap (ground/decor)\n├── Player\n├── Enemies\n└── Camera2D\n```\n\n2) CanvasModulate setup:\n   - Add `CanvasModulate` node directly under `Main` above world elements.\n   - Set default color to gameplay night tint: `Color(0.6, 0.6, 0.8)`.\n\n3) Sky background:\n   - `Sky`:\n     - Use a `ColorRect` or `Sprite2D` with `TextureRect` using `GradientTexture2D`.\n     - For gradient in code:\n```gdscript\nvar gradient := Gradient.new()\ngradient.colors = [Color(0.05, 0.05, 0.2), Color(0.1, 0.1, 0.3)]\nvar gradient_tex := GradientTexture2D.new()\ngradient_tex.gradient = gradient\n$ParallaxBackground/Sky.texture = gradient_tex\n```\n   - `Moon` and `Stars`:\n     - Use placeholder textures if final art not ready (ColorRect or simple circle sprite for moon, small white dot sprites/particles for stars).\n\nDawn transition script:\n4) Create a `DawnController.gd` script attached to a dedicated node under `Main` (or reuse `Main` script) that connects to `GameSession.victory_reached`:\n```gdscript\nfunc _ready() -> void:\n    GameSession.victory_reached.connect(trigger_dawn_transition)\n```\n\n5) Implement `trigger_dawn_transition()` based on PRD example:\n```gdscript\nfunc trigger_dawn_transition() -> void:\n    var tween := create_tween()\n\n    # fade out moon and stars over 2s\n    tween.tween_property($ParallaxBackground/Moon, \"modulate:a\", 0.0, 2.0)\n    tween.parallel().tween_property($ParallaxBackground/Stars, \"modulate:a\", 0.0, 2.0)\n\n    # shift sky gradient or modulate to warm dawn color\n    tween.parallel().tween_property($ParallaxBackground/Sky, \"modulate\", Color(1.0, 0.8, 0.6), 2.0)\n\n    # shift CanvasModulate from night tint to warm dawn color\n    tween.parallel().tween_property($CanvasModulate, \"color\", Color(1.0, 0.95, 0.9), 2.0)\n\n    # optional: light screen brighten via Camera2D or UI overlay\n\n    await tween.finished\n\n    # After visual transition, trigger victory text & sound (Task 51) or emit a signal\n    EventsBus.emit_signal(\"dawn_transition_finished\") # or call a method on Results / UI\n```\n   - If you have a shared `EventsBus` singleton, use it; otherwise directly call a method on a UI controller responsible for victory text.\n\nAudio & feel:\n6) Ensure the Sarimanok crow SFX is triggered after transition (coordinated with Task 51 results screen), not inside `trigger_dawn_transition` to keep responsibilities separate.\n\nBest practices:\n- Use `SceneTree.create_tween()` (implicit when calling `create_tween()` on a node in Godot 4) so tweens are managed by the engine and do not require a manual `_process`.\n- Keep all visual-only components ignorant of gameplay state; they rely solely on the victory signal.\n- Use exported NodePaths in `DawnController` for Moon, Stars, Sky, and CanvasModulate to avoid brittle `$` paths.\n",
         "testStrategy": "Visual tests:\n- Start a run, force `GameSession.trigger_victory()` via debug key and ensure:\n  - Moon and stars fade out smoothly over ~2 seconds.\n  - Sky color shifts from dark blue/purple to orange/pink feel.\n  - CanvasModulate color changes from `Color(0.6,0.6,0.8)` to `Color(1.0,0.95,0.9)`.\n- Verify that world tiles and characters look like natural daytime once the CanvasModulate reaches dawn color.\n\nBehavior tests:\n- Confirm that the transition runs even though gameplay entities are frozen (from Task 49) at victory.\n- Ensure the transition only runs once per run and does not re-trigger on subsequent scene loads unless a new run starts.\n\nEdge cases:\n- If the player dies exactly at or very near 30:00, confirm that defeat takes precedence and the dawn transition does not play (guard with state flags from Task 48).\n- Test on different machines/resolutions for any visual artifacts or stutter during the tween.",
         "priority": "medium",
         "dependencies": [
-          48,
-          49
+          "48",
+          "49"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 6,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Break Task 50 into ~5 subtasks: (1) constructing or refactoring the parallax sky layer scene hierarchy (ParallaxBackground, Sky, Moon, Stars) and CanvasModulate under Main, (2) implementing the visual setup for night state, including gradient sky and initial CanvasModulate color, with placeholders if needed, (3) creating a DawnController node/script that connects to GameSession.victory_reached and exposes exported NodePaths for Moon, Stars, Sky, and CanvasModulate, (4) implementing the tween-driven night-to-dawn transition sequence (fade out moon/stars, recolor sky, adjust CanvasModulate) in a way that remains functional under gameplay freeze rules, and (5) integrating signals or callbacks so that downstream systems (results screen, audio cues) can hook into a dawn_transition_finished event without tight coupling. For each subtask, identify how to test visually and how to guard against multiple triggers or defeat/victory race conditions."
       },
       {
-        "id": 51,
+        "id": "51",
         "title": "Create unified results screen for victory/defeat with time, kills, score, and gold",
         "description": "Implement a reusable results screen scene that shows VICTORY/DEFEATED header, time survived (30:00 or death time), enemies killed, score, gold earned, and SHOP/RETRY/MENU buttons, driven by run statistics.",
         "details": "Scene design:\n1) Create a `ResultsScreen` scene (e.g. `ResultsScreen.tscn`) as a `CanvasLayer` or `Control` that overlays on top of gameplay.\n   - Structure:\n```text\nResultsScreen (CanvasLayer/Control)\n└── PanelContainer\n    ├── VBoxContainer\n    │   ├── Label (Header: \"VICTORY!\" / \"DEFEATED\")\n    │   ├── Label (Time Survived: MM:SS)\n    │   ├── Label (Enemies Killed: N)\n    │   ├── Label (Score: N)\n    │   ├── Label (Gold Earned: N)\n    │   └── HBoxContainer\n    │       ├── Button [SHOP]\n    │       ├── Button [RETRY]\n    │       └── Button [MENU]\n```\n   - Style to match game UI; center in screen with fixed min-size to fit 640×360 viewport.\n\nStats source design:\n2) Extend `GameSession` (or a dedicated `RunStats` singleton) with:\n   - `var enemies_killed: int = 0`.\n   - `var score: int = 0`.\n   - `var gold_earned: int = 0`.\n   - Methods for updating stats when enemies die and pickups collected.\n   - On victory/defeat, capture `final_time := elapsed_time`.\n\n3) Enemy death hookup:\n   - In each enemy script, on death event, call `GameSession.add_enemy_kill(enemy_type)` and pass xp/gold values if score is derived from those, or compute locally.\n   - Score formula (if not already defined in other PRDs): simplest is `score += xp_value * 10` or something predetermined; follow `prd-progression-meta` if specified there.\n\nResultsScreen logic:\n4) In `ResultsScreen.gd`:\n   - Public method `show_results(is_victory: bool)` that:\n```gdscript\nfunc show_results(is_victory: bool) -> void:\n    visible = true\n    get_tree().set_input_as_handled()\n    $PanelContainer/VBoxContainer/HeaderLabel.text = is_victory ? \"VICTORY! Balance is restored!\" : \"DEFEATED\"\n\n    var time_str := GameSession.format_time(GameSession.elapsed_time)\n    $.../TimeLabel.text = \"Time Survived: %s\" % time_str\n    $.../KillsLabel.text = \"Enemies Killed: %d\" % GameSession.enemies_killed\n    $.../ScoreLabel.text = \"Score: %d\" % GameSession.score\n    $.../GoldLabel.text = \"Gold Earned: %d\" % GameSession.gold_earned\n```\n   - Connect SHOP/RETRY/MENU buttons:\n     - [SHOP]: go to shop scene using progression system (see `prd-progression-meta`), passing run stats as needed.\n     - [RETRY]: reload current gameplay scene and reset `GameSession`/stats.\n     - [MENU]: return to main menu scene.\n\n5) Hook into victory/defeat signals:\n   - In the main game controller, connect to:\n```gdscript\nGameSession.victory_reached.connect(_on_victory)\nGameSession.defeat_reached.connect(_on_defeat)\n\nfunc _on_victory() -> void:\n    # optionally wait for dawn transition finished signal, then:\n    $ResultsScreen.show_results(true)\n\nfunc _on_defeat() -> void:\n    $ResultsScreen.show_results(false)\n```\n   - For defeat, before results screen, play Sarimanok death animation and then show text. This can be done by awaiting an animation player finished signal before calling `show_results(false)`.\n\nAudio & text cues:\n6) On victory:\n   - Show \"COCKADOODLEDOO!\" text (could be part of header or a temporary large label above player that fades out).\n   - Play Sarimanok crow SFX via an `AudioStreamPlayer` in the UI or main scene.\n\nBest practices:\n- Keep `ResultsScreen` agnostic of gameplay. It reads data from `GameSession` or a passed-in struct at show-time, not on every frame.\n- Use signals from buttons instead of direct scene tree lookups for navigation logic (handled by main controller or a `SceneManager` singleton).\n",
         "testStrategy": "Functionality tests:\n- Trigger victory and defeat via debug keys and verify:\n  - Header text is correct (\"VICTORY! Balance is restored!\" vs \"DEFEATED\").\n  - Time survived matches HUD timer at moment of end.\n  - Enemies killed increments correctly during the run and final value matches expectation in debug scenarios.\n  - Score and gold earned show expected numbers based on known kill and pickup events.\n\nNavigation tests:\n- [SHOP] navigates to the shop scene with run stats handed over.\n- [RETRY] restarts the level and resets timer and stats.\n- [MENU] returns to main menu.\n\nEdge cases:\n- Ensure results screen blocks gameplay input while visible (no moving character behind overlay).\n- Confirm that results screen does not show twice if for some reason both victory and defeat signals fire (protected by state flags in `GameSession`).\n- Verify behavior when player dies very early (e.g., under 10 seconds) and when reaching full 30:00.\n- Test on different aspect ratios to ensure panel remains centered and fully visible.",
         "priority": "high",
         "dependencies": [
-          48,
-          49,
-          50
+          "48",
+          "49",
+          "50"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 7.5,
+        "recommendedSubtasks": 7,
+        "expansionPrompt": "Split Task 51 into ~7 subtasks: (1) design and implement the ResultsScreen scene hierarchy and layout (CanvasLayer/Control, PanelContainer, labels, buttons) with responsive sizing for the target viewport, (2) extend GameSession or introduce a RunStats singleton to track enemies_killed, score, gold_earned, and final_time, including public update methods and initialization/reset paths, (3) integrate enemy death and pickup events so they update the stats source correctly, reusing existing drop and progression systems, (4) implement ResultsScreen.gd logic for show_results(is_victory: bool), pulling data from the stats source and handling header text and messaging, (5) wire GameSession.victory_reached and defeat_reached into the main game controller to show the results screen at appropriate times and coordinate with the dawn transition or defeat animations, (6) implement button behavior for SHOP/RETRY/MENU, delegating navigation to a SceneManager or main controller while ensuring GameSession and stats are properly reset, and (7) ensure results screen input handling prevents gameplay input leaks and guards against double-display if signals fire unexpectedly. For each subtask, describe interaction with existing progression and scene management systems and outline targeted functional tests."
       },
       {
-        "id": 52,
+        "id": "52",
         "title": "Implement Santelmo enemy behavior and fireball projectile",
         "description": "Add the Santelmo enemy type that spawns from 10:00 onward, floats toward the player with a sine-wave path, and shoots fireball projectiles every 2 seconds with defined damage, speed, and lifetime.",
         "details": "Santelmo scene design:\n1) Create `Santelmo.tscn` as a `CharacterBody2D` (or `Area2D` if simpler, but `CharacterBody2D` fits existing enemy architecture):\n   - Children:\n     - `Sprite2D` or placeholder `ColorRect` (32×32) if art not ready.\n     - `CollisionShape2D` matching 32×32.\n     - `Timer` node for fireball cooldown (set `wait_time = 2.0`, `one_shot = false`, `autostart = true`).\n\n2) Stats in script `Santelmo.gd`:\n   - Constants per PRD:\n```gdscript\n@export var max_hp: int = 15\n@export var damage: int = 8\n@export var move_speed: float = 60.0\n@export var sine_amplitude: float = 16.0\n@export var sine_frequency: float = 2.0 # cycles per second\nvar hp := max_hp\nvar sine_time: float = 0.0\n```\n\nMovement behavior (floating + sine):\n3) In `_physics_process(delta)` (only when gameplay active):\n```gdscript\nfunc _physics_process(delta: float) -> void:\n    if not GameSession.is_gameplay_active():\n        return\n\n    var player := get_player_reference()\n    if player == null:\n        return\n\n    sine_time += delta\n\n    var to_player := (player.global_position - global_position)\n    var base_dir := to_player.normalized()\n\n    # perpendicular vector for sine offset\n    var perp := Vector2(-base_dir.y, base_dir.x)\n    var sine_offset := perp * sine_amplitude * sin(sine_frequency * sine_time * TAU)\n\n    var velocity := base_dir * move_speed + sine_offset * delta\n    velocity = velocity.clamped(move_speed * 1.5) # avoid extremes\n\n    velocity = move_and_slide(velocity)\n```\n   - Adjust amplitude/frequency via exports to tune ghostly feel.\n\nFireball shooting:\n4) Create `SantelmoFireball.tscn` as `Area2D`:\n   - Children:\n     - `Sprite2D` (16×16) or placeholder.\n     - `CollisionShape2D` (circle or capsule around 16×16).\n     - Optional `Timer` for lifetime or handle via script.\n   - Script `SantelmoFireball.gd`:\n```gdscript\n@export var speed: float = 150.0\n@export var damage: int = 8\n@export var lifetime: float = 5.0\nvar direction: Vector2 = Vector2.ZERO\n\nfunc _ready() -> void:\n    set_deferred(\"monitoring\", true)\n\nfunc _physics_process(delta: float) -> void:\n    if not GameSession.is_gameplay_active():\n        return\n\n    lifetime -= delta\n    if lifetime <= 0.0:\n        queue_free()\n        return\n\n    global_position += direction * speed * delta\n```\n   - Connect `area_entered` or `body_entered` to deal damage to player:\n```gdscript\nfunc _on_body_entered(body: Node) -> void:\n    if body.is_in_group(\"player\"):\n        body.take_damage(damage)\n        queue_free()\n```\n\n5) In `Santelmo.gd`, connect `Timer.timeout` to fireball spawner:\n```gdscript\n@export var fireball_scene: PackedScene\n\nfunc _on_FireballTimer_timeout() -> void:\n    if not GameSession.is_gameplay_active():\n        return\n    var player := get_player_reference()\n    if player == null:\n        return\n\n    var fb := fireball_scene.instantiate() as Area2D\n    get_tree().current_scene.add_child(fb)\n    fb.global_position = global_position\n\n    var dir := (player.global_position - global_position).normalized()\n    fb.direction = dir\n```\n\nSpawning & drops:\n6) Integrate Santelmo into enemy spawn system from 10:00+ (detailed in Task 54) with HP 15, damage 8, speed 60.\n7) On death, drop XP=4 and Gold=3, using existing drop system; ensure this is consistent with `Updated Enemy Drops` table.\n\nBest practices:\n- Use exported `PackedScene` for fireball so you can swap it out later without code changes.\n- Keep `get_player_reference()` centralized (e.g., via `GameSession.player` or group lookup) instead of repeated `get_tree().get_first_node_in_group()` calls.\n- Make sure projectiles are grouped (e.g., `group: \"enemy_projectile\"`) for potential later collision filtering.\n",
         "testStrategy": "Behavior tests:\n- Spawn a Santelmo via debug command and observe:\n  - It roughly moves toward the player but with a hovering, sine-wave side-to-side motion.\n  - It does not get stuck on tiles more than other enemies.\n\nFireball tests:\n- Confirm fireballs spawn every ~2 seconds, travel toward the player at consistent speed, and despawn after ~5 seconds if they hit nothing.\n- On contact with player, verify exactly 8 HP damage is applied and the fireball disappears.\n\nBalance tests:\n- In the 10:00–20:00 window, observe that Santelmos are dangerous but avoidable; adjust amplitude/speed as necessary.\n\nEdge cases:\n- Verify projectiles do not continue to move after victory/defeat due to the gameplay freeze check.\n- Ensure Santelmo despawns properly when the scene is reloaded (no orphaned projectiles).\n- Check that XP and Gold drops for Santelmo match PRD (4 XP, 3 gold) and are counted correctly by stats.",
         "priority": "high",
         "dependencies": [
-          48,
-          49
+          "48",
+          "49"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 7,
+        "recommendedSubtasks": 6,
+        "expansionPrompt": "Decompose Task 52 into ~6 subtasks: (1) create the Santelmo.tscn enemy scene using the existing enemy architecture (CharacterBody2D, collision, timer), ensuring collision layers/masks are consistent with current enemies, (2) implement Santelmo.gd core stats, health handling, and integration with existing enemy death/drop systems, including XP/Gold values, (3) implement the floating + sine-wave movement behavior toward the player, using a centralized get_player_reference() pattern and respecting GameSession.is_gameplay_active(), (4) create the SantelmoFireball.tscn projectile scene (Area2D, collision, lifetime) and script its motion, damage application, and cleanup, (5) wire the Santelmo fireball timer and spawning logic, including direction targeting, scene instantiation, and grouping of projectiles, and (6) integrate Santelmo into any existing enemy management utilities (groups, spatial partitioning, scaling functions) in preparation for the spawn controller changes in Task 54. For each subtask, call out how to reuse existing enemy/projectile patterns and specify dedicated test setups (e.g., debug scene with a stationary player)."
       },
       {
-        "id": 53,
+        "id": "53",
         "title": "Implement Manananggal boss behavior, dive attack, and dramatic entrance/visual FX",
         "description": "Create the Manananggal boss enemy with 500 HP, high damage, flying movement that ignores terrain, a telegraphed dive attack every 5 seconds, a blood trail effect, and a dramatic one-time spawn at 20:00 without ending the game on death.",
         "details": "Boss scene design:\n1) Create `Manananggal.tscn` as a `CharacterBody2D`:\n   - Children:\n     - `AnimatedSprite2D` or `Sprite2D` (48×48). Use placeholder if art not ready.\n     - `CollisionShape2D` covering 48×48.\n     - `AnimationPlayer` for wing flap and telegraph red flash (if art allows).\n     - `Timer` for dive cooldown (`wait_time = 5.0`, autostart = true).\n     - Optional `GPUParticles2D` or small `Trail` node for blood trail.\n\n2) Stats in `Manananggal.gd`:\n```gdscript\n@export var max_hp: int = 500\n@export var damage: int = 25\n@export var move_speed: float = 90.0\n@export var dive_speed_multiplier: float = 3.0 # 270px/s\n@export var dive_duration: float = 0.5\nvar hp := max_hp\nvar is_diving: bool = false\nvar dive_time_remaining: float = 0.0\nvar dive_direction: Vector2 = Vector2.ZERO\n```\n\nDramatic entrance:\n3) On spawn (20:00, see Task 54):\n   - Play screen shake using `Camera2D`:\n```gdscript\nfunc play_entrance() -> void:\n    var cam := get_viewport().get_camera_2d()\n    if cam:\n        cam.add_trauma(0.5) # if using a trauma-based shake script\n    $EntranceScreechPlayer.play() # screech sound\n    if $AnimationPlayer.has_animation(\"entrance\"):\n        $AnimationPlayer.play(\"entrance\")\n```\n   - Optionally freeze boss movement for ~1 second during entrance.\n\nMovement & dive behavior:\n4) `_physics_process(delta)`:\n```gdscript\nfunc _physics_process(delta: float) -> void:\n    if not GameSession.is_gameplay_active():\n        return\n\n    var player := get_player_reference()\n    if player == null:\n        return\n\n    if is_diving:\n        dive_time_remaining -= delta\n        var velocity := dive_direction * move_speed * dive_speed_multiplier\n        velocity = move_and_slide(velocity)\n        if dive_time_remaining <= 0.0:\n            is_diving = false\n        return\n\n    # normal chase\n    var dir := (player.global_position - global_position).normalized()\n    var velocity := dir * move_speed\n    velocity = move_and_slide(velocity)\n```\n   - Terrain ignoring: since flight ignores obstacles, ensure collision layers let Manananggal pass over non-critical colliders or use low collision priority that doesn’t collide with environment (but still with player).\n\n5) Dive cooldown timer:\n```gdscript\nfunc _on_DiveTimer_timeout() -> void:\n    if not GameSession.is_gameplay_active():\n        return\n    start_dive()\n\nfunc start_dive() -> void:\n    var player := get_player_reference()\n    if player == null:\n        return\n\n    # Telegraph: 1.0s warning\n    is_diving = false\n    dive_direction = (player.global_position - global_position).normalized()\n    if $AnimationPlayer.has_animation(\"telegraph\"):\n        $AnimationPlayer.play(\"telegraph\")\n    $ScreechPlayer.play()\n    await get_tree().create_timer(1.0).timeout\n\n    # Dive\n    is_diving = true\n    dive_time_remaining = dive_duration\n    if $AnimationPlayer.has_animation(\"dive\"):\n        $AnimationPlayer.play(\"dive\")\n```\n\n6) Blood trail effect:\n   - Attach `GPUParticles2D` behind the boss with red particles, emitting only while `is_diving` (toggle `emitting` in code).\n\nDamage & death:\n7) On contact with player (both normal and dive):\n   - Use `body_entered` or collision detection to call `player.take_damage(25)`.\n\n8) On death:\n```gdscript\nfunc die() -> void:\n    GameSession.gold_earned += 100\n    # XP drop 50 (see Task 54 drops integration)\n    spawn_drops(xp=50, gold=100)\n    queue_free()\n```\n   - Ensure it does *not* trigger victory or end game; player must still survive to 30:00.\n\nBest practices:\n- Use animation states (idle, move, telegraph, dive) if using `AnimationTree`, but keep logic simple for EA (state handled via boolean flags and `AnimationPlayer`).\n- Make telegraph clearly noticeable: flash red via `modulate`, briefly enlarge sprite, and play an alarming sound.\n- Use exports for speeds/durations to allow rapid balance tuning.\n",
         "testStrategy": "Behavior tests:\n- Force-spawn Manananggal early and observe:\n  - Entrance plays once with screen shake and screech.\n  - Boss moves toward the player, ignoring terrain collisions.\n  - Every ~5 seconds, a telegraph plays for ~1 second, then a high-speed dive toward the player occurs lasting ~0.5s.\n\nDamage tests:\n- Confirm contact damage is 25 HP whether in normal chase or dive.\n- During dives, ensure it is possible for player to dodge if they react to telegraph.\n\nDeath & reward tests:\n- On boss death:\n  - Confirm XP and Gold drops match PRD (50 XP, 100 gold).\n  - Confirm `GameSession.gold_earned` increases appropriately.\n  - Ensure game continues with other enemies spawning; no victory is triggered.\n\nEdge cases:\n- Verify boss does not re-spawn after death (only one-time spawn in a run).\n- Confirm dive doesn’t lock the boss into a state where it never returns to normal movement when interrupted.\n- Check interactions with freeze: boss should stop moving/attacking during victory/defeat freeze, but if victory occurs while boss is alive, it should just stop and not run entrance/dive further.",
         "priority": "high",
         "dependencies": [
-          48,
-          49,
-          52
+          "48",
+          "49",
+          "52"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 8.5,
+        "recommendedSubtasks": 8,
+        "expansionPrompt": "Break Task 53 into ~8 subtasks: (1) create the Manananggal.tscn boss scene (CharacterBody2D, collisions, AnimationPlayer, timers, optional particles) following the existing enemy/boss conventions, (2) implement core boss stats (HP, damage, speeds) and health/damage handling integrated with existing scaling and drop systems, ensuring death does not trigger victory, (3) implement baseline flying movement that chases the player while ignoring terrain, including correct collision layers/masks and testing pathing behavior, (4) implement the dive cooldown, telegraph sequence, and dive-state logic with clear state flags and animation hooks, ensuring timing is tunable via exported variables, (5) implement damage application for contact during both normal movement and dives, coordinating with existing player damage routines, (6) implement the dramatic entrance flow: spawn-time animation, camera shake, audio, and any entrance-specific logic that temporarily disables movement, (7) implement the blood trail visual effect and wire it to is_diving state, balancing performance and readability, and (8) ensure correct lifecycle and integration with GameSession and enemy systems: one-time spawn per run, behavior under gameplay freeze, and no re-spawn on restart without explicit reset. For each subtask, outline test scenarios and edge cases (e.g., death mid-dive, victory while boss alive)."
       },
       {
-        "id": 54,
+        "id": "54",
         "title": "Update enemy spawn controller with Santelmo, Manananggal, and new spawn timeline",
         "description": "Modify the enemy spawn system to follow the updated Week 4 timeline, adding Santelmo from 10:00, spawning Manananggal once at 20:00, and increasing spawn rates over time while wiring correct XP/Gold drops for each enemy type.",
         "details": "Spawn timeline per PRD:\n- 0:00–8:00: Green Duwende, 1 every 2s → 1 every 1s.\n- 8:00–10:00: Green + Red Duwende, 1 per 1s.\n- 10:00–20:00: Green + Red + Santelmo, 1 per 0.8s → 0.5s.\n- 20:00: Manananggal spawns (one-time dramatic entrance).\n- 20:00–30:00: All enemies + Manananggal, spawn every 0.3s.\n\nSpawn controller implementation:\n1) In your existing `EnemySpawner` node/script (or create one under `Main`):\n   - Keep reference to enemy scenes:\n```gdscript\n@export var green_duwende_scene: PackedScene\n@export var red_duwende_scene: PackedScene\n@export var santelmo_scene: PackedScene\n@export var manananggal_scene: PackedScene\n```\n   - Variables:\n```gdscript\nvar spawn_timer: float = 0.0\nvar current_interval: float = 2.0\nvar manananggal_spawned: bool = false\n```\n\n2) `_process(delta)` in spawner:\n```gdscript\nfunc _process(delta: float) -> void:\n    if not GameSession.is_gameplay_active():\n        return\n\n    var t := GameSession.elapsed_time\n    update_spawn_parameters(t)\n\n    spawn_timer -= delta\n    if spawn_timer <= 0.0:\n        spawn_timer = current_interval\n        spawn_regular_enemy(t)\n\n    if t >= 20.0 * 60.0 and not manananggal_spawned:\n        spawn_manananggal()\n        manananggal_spawned = true\n```\n\n3) Implement `update_spawn_parameters(t: float)` to set intervals and which enemies are eligible:\n```gdscript\nvar allowed_enemy_scenes: Array[PackedScene] = []\n\nfunc update_spawn_parameters(t: float) -> void:\n    allowed_enemy_scenes.clear()\n    if t < 8 * 60.0:\n        allowed_enemy_scenes.append(green_duwende_scene)\n        # interval scales from 2.0 down to 1.0 over first 8 minutes\n        var factor := clamp(t / (8.0 * 60.0), 0.0, 1.0)\n        current_interval = lerp(2.0, 1.0, factor)\n    elif t < 10 * 60.0:\n        allowed_enemy_scenes.append_array([green_duwende_scene, red_duwende_scene])\n        current_interval = 1.0\n    elif t < 20 * 60.0:\n        allowed_enemy_scenes.append_array([green_duwende_scene, red_duwende_scene, santelmo_scene])\n        # 0.8 -> 0.5 over 10 minutes\n        var factor := clamp((t - 10.0 * 60.0) / (10.0 * 60.0), 0.0, 1.0)\n        current_interval = lerp(0.8, 0.5, factor)\n    else:\n        allowed_enemy_scenes.append_array([green_duwende_scene, red_duwende_scene, santelmo_scene])\n        current_interval = 0.3\n```\n\n4) Implement `spawn_regular_enemy(t)`:\n```gdscript\nfunc spawn_regular_enemy(t: float) -> void:\n    if allowed_enemy_scenes.is_empty():\n        return\n    var scene := allowed_enemy_scenes[randi() % allowed_enemy_scenes.size()]\n    var enemy := scene.instantiate()\n    get_tree().current_scene.add_child(enemy)\n    enemy.global_position = get_random_spawn_position()\n```\n   - `get_random_spawn_position()` should spawn enemies off-screen or at edges.\n\n5) Manananggal spawn:\n```gdscript\nfunc spawn_manananggal() -> void:\n    var boss := manananggal_scene.instantiate()\n    get_tree().current_scene.add_child(boss)\n    boss.global_position = get_boss_spawn_position()\n    boss.play_entrance() # method from Task 53\n```\n   - Choose spawn position just off-screen to fly in.\n\nUpdated drops wiring:\n6) Ensure each enemy type uses the `Updated Enemy Drops` table:\n   - Green Duwende: XP=1, Gold=1.\n   - Red Duwende: XP=3, Gold=2.\n   - Santelmo: XP=4, Gold=3.\n   - Manananggal: XP=50, Gold=100.\n   - Implement via exported vars in each enemy and use existing drop system.\n\nBest practices:\n- Keep spawn logic time-based using `GameSession.elapsed_time` so it is deterministic and central.\n- Use exported intervals so balancing is easy.\n- Ensure manananggal is not part of the regular spawn pool; it is spawned only once by the dedicated logic.\n",
         "testStrategy": "Timeline tests (use debug time scaling or manual `elapsed_time` set):\n- At 0–8 minutes: only Green Duwende spawns; verify interval interpolates between 2.0s and 1.0s.\n- At 8–10 minutes: both Green and Red Duwende spawn; check mix and fixed 1.0s interval.\n- At 10–20 minutes: Santelmo also spawns; verify interval smoothly moves from 0.8s to 0.5s; ensure Santelmo appears with roughly 1/3 share depending on random selection.\n- At exactly 20:00: Manananggal spawns once; log/print to confirm and observe entrance.\n- From 20–30 minutes: all regular enemies spawn at 0.3s interval while boss is alive.\n\nDrop tests:\n- Kill each enemy type individually and confirm XP and Gold values match the table via debug print and HUD.\n\nEdge cases:\n- Verify manananggal does not respawn after death or if the run is restarted without resetting `manananggal_spawned`.\n- Ensure spawner stops working at victory/defeat due to `is_gameplay_active()` guard.\n- Check performance at 0.3s spawn interval; cap total enemies if needed to maintain FPS.",
         "priority": "high",
         "dependencies": [
-          48,
-          52,
-          53
+          "48",
+          "52",
+          "53"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 8,
+        "recommendedSubtasks": 7,
+        "expansionPrompt": "Decompose Task 54 into ~7 subtasks: (1) review and refactor the existing EnemySpawner to ensure it already uses GameSession.elapsed_time and supports time-based logic cleanly, (2) add exported PackedScene references and basic integration for Santelmo and Manananggal, aligning with the current enemy instantiation and pooling patterns, (3) implement the updated spawn timeline logic in update_spawn_parameters(), covering all time bands and interval interpolations, and write unit-like checks for boundary values (8:00, 10:00, 20:00, 30:00), (4) implement spawn_regular_enemy() to use the allowed_enemy_scenes list and an appropriate get_random_spawn_position() that keeps spawns off-screen but performant, (5) implement and test the one-time Manananggal spawn function and state (manananggal_spawned flag), including re-run/reset behavior and ensuring it is not part of the regular spawn pool, (6) integrate and verify XP/Gold drops for all enemy types according to the Updated Enemy Drops table, making sure this aligns with existing Enemy Death & Drops logic, and (7) performance/edge-case testing and guardrails: cap total enemies if needed, ensure spawning halts on is_gameplay_active() false, and confirm compatibility with enemy stat scaling functions. For each subtask, specify where to log or visualize spawn behavior for debugging (e.g., debug overlay with current interval and enemy mix)."
       },
       {
-        "id": 55,
+        "id": "55",
         "title": "Art and animation integration checkpoint for Santelmo and Manananggal",
         "description": "Integrate delivered Santelmo and Manananggal art into their scenes, configure animations (float, fire flicker, wing flap, telegraph, blood trail), and validate they meet the visual checklists while supporting graceful fallbacks when art is missing.",
         "details": "Sprite integration workflow:\n1) Reuse the existing Sprite Preview Scene from weapons checkpoint:\n   - Load Santelmo and Manananggal sprites there to quickly verify alignment, animations, and readability in isolation.\n\nSantelmo integration:\n2) In `Santelmo.tscn`:\n   - Replace placeholder sprite with final 32×32 sprite(s).\n   - Set `Sprite2D` or `AnimatedSprite2D` frames:\n     - Float/fire flicker animation at ~0.15s per frame (about 6–8 fps).\n   - Ensure origin and collision shape are centered so movement feels smooth.\n   - Color/contrast pass:\n     - Test visibility against grass background and near Duwendes; adjust `modulate` or outline if necessary.\n\n3) Fireball projectile:\n   - Ensure 16×16 fireball sprite is distinct from Santelmo body and other fire effects.\n   - Configure `AnimatedSprite2D` if it has flicker or rotation; otherwise static is fine.\n\nManananggal integration:\n4) In `Manananggal.tscn`:\n   - Replace placeholder with final 48×48 sprite sheet.\n   - Configure:\n     - Wing animation (4 frames) with smooth flap cycle at appropriate speed (e.g., 0.1–0.12s per frame).\n     - Dive telegraph animation: red flash (via separate animation track on `modulate` or dedicated telegraph frames).\n   - Blood trail:\n     - Implement with `GPUParticles2D` or an animated sprite trail; tune alpha so it is visible but not distracting.\n\n5) Dramatic entrance polish:\n   - Ensure entrance pose/animation reads as threatening.\n   - Adjust camera shake intensity and screech volume to feel impactful but not uncomfortable.\n\nFallback handling:\n6) If art is not ready for either enemy:\n   - Keep or switch to placeholder `ColorRect`:\n     - Santelmo: 32×32 orange.\n     - Manananggal: 48×48 dark red.\n   - Document missing items and mark integration step for Week 8 polish.\n\nProcess & collaboration:\n7) For each enemy, follow the verification checklist from PRD:\n   - Capture screenshots/gifs of:\n     - Santelmo float animation.\n     - Fireball in motion.\n     - Manananggal idle/flight, dive telegraph, dive motion, and blood trail.\n   - Share with Ericka for 10-minute feedback review and note adjustments.\n\nBest practices:\n- Keep animation names consistent (`\"idle\"`, `\"move\"`, `\"telegraph\"`, `\"dive\"`) for easier scripting.\n- Avoid tight coupling between art assets and logic; use animation names that the code already expects and avoid changing them frequently.\n",
         "testStrategy": "Visual QA tests:\n- In Sprite Preview Scene, verify:\n  - Santelmo float animation looks ghostly and loops without popping.\n  - Fireball looks like a projectile and reads clearly against all common backgrounds.\n  - Manananggal feels boss-sized and visually distinct next to 32×32 enemies.\n\nIn-game tests:\n- Spawn Santelmo and Manananggal in gameplay and verify:\n  - Animations play correctly during movement, attacking, and telegraph states.\n  - Blood trail is visible but not obscuring enemies or player.\n\nChecklist validation:\n- Walk through each PRD checklist item and mark as pass/fail.\n- For any failures, capture screenshots and annotate issues for Ericka.\n\nEdge cases:\n- Ensure animations do not break when game is frozen (on victory/defeat) if they rely on animation players rather than `_process` movement.\n- Verify that placeholder sprites still work if final art is swapped out later; no code modifications should be necessary beyond reassigning textures/animations.",
         "priority": "medium",
         "dependencies": [
-          52,
-          53
+          "52",
+          "53"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 5.5,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Split Task 55 into ~5 subtasks: (1) use the existing Sprite Preview Scene to import and validate Santelmo and Manananggal sprite sheets/animations in isolation (alignment, frame order, looping), (2) integrate Santelmo art into Santelmo.tscn: replace placeholders, configure AnimatedSprite2D or AnimationPlayer clips for float/fire flicker, and adjust origins and collision shapes based on visuals, (3) integrate fireball projectile art: assign textures/animations, ensure visual distinction and correct scale, and verify readability against typical backgrounds, (4) integrate Manananggal art into Manananggal.tscn: configure idle/flight, telegraph, and dive animations; set up blood trail particles or sprite trail; and tune camera shake/audio intensity to match visuals, and (5) implement and document fallbacks for missing art (ColorRect placeholders, neutral animations), plus run an in-game visual QA pass capturing screenshots/gifs for review and recording any issues for follow-up. For each subtask, specify which scenes to modify and what visual acceptance criteria to check (readability, silhouette, animation smoothness)."
       }
     ],
     "metadata": {
-      "created": "2026-06-07T23:43:31.550Z",
-      "updated": "2026-06-07T23:43:31.550Z",
-      "description": "Tasks for master context"
+      "version": "1.0.0",
+      "lastModified": "2026-06-08T17:40:23.331Z",
+      "taskCount": 55,
+      "completedCount": 44,
+      "tags": [
+        "master"
+      ]
     }
   }
 }
