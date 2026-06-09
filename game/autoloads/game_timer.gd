@@ -18,10 +18,14 @@ var elapsed_minutes: float:
 	get:
 		return elapsed_time / 60.0
 
+const VICTORY_TIME: float = 30.0 * 60.0 # 30 minutes dawn breaks you win
+
 func _process(delta: float) -> void:
 	if not run_active:
 		return
 	elapsed_time += delta
+	if elapsed_time >= VICTORY_TIME:
+		win_run()
 
 func win_run() -> void:
 	if run_state != RunState.ACTIVE:

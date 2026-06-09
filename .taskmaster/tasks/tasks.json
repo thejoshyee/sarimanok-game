@@ -3695,9 +3695,10 @@
               1
             ],
             "details": "In game/autoloads/game_timer.gd, modify _process(delta) so that it only accumulates elapsed_time while run_active (or while current_run_state is ACTIVE). Ensure _process early-returns when in WON or LOST states. Add a constant VICTORY_TIME = 30 * 60.0 for clarity. In _process, after increasing elapsed_time, emit a time_updated(elapsed_time) signal if defined. When elapsed_time reaches or exceeds VICTORY_TIME and the run state is still ACTIVE, change state to WON, set run_active to false, and emit run_won once. Guard against multiple emissions by checking state before switching. Keep the existing elapsed_minutes computation or property compatible with the new logic so that enemy scaling and other time-based systems continue to work using the clamped time when the run is over.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "In a debug or test scene, temporarily modify GameTimer to expose a debug method (or use the existing debug_skip_minutes) to quickly increase elapsed_time close to VICTORY_TIME, then unpause and observe in the console that run_won is emitted exactly once and that elapsed_time stops increasing. Also verify that elapsed_minutes used by enemy scaling in the spawn manager stops increasing after the run is won. Confirm that if the game is left running well past 30:00, run_won is still only fired once and no errors occur.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-09T23:07:50.690Z"
           },
           {
             "id": 3,
@@ -3757,7 +3758,7 @@
         "complexity": 6.5,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Break Task 48 into ~6 subtasks covering: (1) creating and wiring the GameSession autoload singleton, (2) implementing the core timer and process loop with elapsed_time and VICTORY_TIME, (3) defining and emitting time_updated, victory_reached, and defeat_reached signals with correct guards, (4) adding helper utilities like format_time() and is_gameplay_active() while ensuring they are stateless/side-effect free, (5) integrating defeat/victory with existing player HP death logic and game-over screen routing, and (6) implementing reset/restart behavior to correctly clear GameSession state between runs and from main menu. For each subtask, specify files/scripts touched, how to test it in isolation, and any dependency on existing systems like the current game over flow.",
-        "updatedAt": "2026-06-08T17:40:23.325Z"
+        "updatedAt": "2026-06-09T23:07:50.690Z"
       },
       {
         "id": "49",
@@ -3883,7 +3884,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-08T17:40:23.331Z",
+      "lastModified": "2026-06-09T23:07:50.695Z",
       "taskCount": 55,
       "completedCount": 44,
       "tags": [
