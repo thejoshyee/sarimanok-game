@@ -41,6 +41,16 @@ func lose_run() -> void:
 	run_active = false
 	run_lost.emit()
 
+func format_time(seconds: float) -> String:
+	var total := int(seconds)
+	@warning_ignore("integer_division")
+	var minutes := total / 60
+	var secs := total % 60
+	return "%02d:%02d" % [minutes, secs]
+
+func is_gameplay_active() -> bool:
+	return run_state == RunState.ACTIVE
+
 func reset_run() -> void:
 	# call this when starting a new run
 	elapsed_time = 0.0

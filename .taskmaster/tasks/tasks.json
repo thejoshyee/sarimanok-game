@@ -3709,9 +3709,10 @@
               2
             ],
             "details": "In game/autoloads/game_timer.gd, add a static or regular helper function format_time(seconds: float) -> String that converts a float in seconds to an MM:SS string, using integer minutes and seconds and zero-padding to two digits. Ensure the function does not read or mutate any GameTimer state so UI or other systems can safely call it with arbitrary values. Add an is_gameplay_active() -> bool method that returns true only when the run is in the ACTIVE state (or equivalently when run_active is true and state is not WON/LOST). This accessor will be used later by combat, movement, spawn controller, and HUD freeze logic in other tasks; for now, only document its intended usage in code comments and avoid modifying other scripts. Keep these helpers pure and side-effect free to simplify testing and reuse.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "In an isolated test scene or via the Godot console, call GameTimer.format_time() with representative values (0, 59, 60, 61, 1799, 1800) and verify the returned strings (\"00:00\", \"00:59\", \"01:00\", \"01:01\", \"29:59\", \"30:00\"). Toggle GameTimer’s internal run state manually (e.g. simulate win and loss) and call is_gameplay_active() to confirm it returns true only when the run is active and false after win or loss. Ensure no changes to other systems are required to run these tests.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-10T20:43:57.775Z"
           },
           {
             "id": 4,
@@ -3758,7 +3759,7 @@
         "complexity": 6.5,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Break Task 48 into ~6 subtasks covering: (1) creating and wiring the GameSession autoload singleton, (2) implementing the core timer and process loop with elapsed_time and VICTORY_TIME, (3) defining and emitting time_updated, victory_reached, and defeat_reached signals with correct guards, (4) adding helper utilities like format_time() and is_gameplay_active() while ensuring they are stateless/side-effect free, (5) integrating defeat/victory with existing player HP death logic and game-over screen routing, and (6) implementing reset/restart behavior to correctly clear GameSession state between runs and from main menu. For each subtask, specify files/scripts touched, how to test it in isolation, and any dependency on existing systems like the current game over flow.",
-        "updatedAt": "2026-06-09T23:07:50.690Z"
+        "updatedAt": "2026-06-10T20:43:57.775Z"
       },
       {
         "id": "49",
@@ -3884,7 +3885,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-09T23:07:50.695Z",
+      "lastModified": "2026-06-10T20:43:57.779Z",
       "taskCount": 55,
       "completedCount": 44,
       "tags": [
