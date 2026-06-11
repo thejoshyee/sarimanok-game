@@ -78,12 +78,13 @@ func die() -> void:
 	if is_dead:
 		return
 	is_dead = true
+	GameTimer.lose_run()
 	player_died.emit()
 	print("Player died")
 	GameState.reset_run()
 	get_tree().call_deferred("reload_current_scene")
 
-	
+
 func _ready() -> void:
 	add_to_group("player")
 	health_component.set_max_hp(get_effective_max_hp())
@@ -108,7 +109,7 @@ func _ready() -> void:
 
 	_update_pickup_range()
 
-
+ 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	# check if the body that hits us is an enemy
 	if body.is_in_group("enemies") and "damage" in body:
@@ -165,3 +166,8 @@ func _on_passive_upgraded(passive_id: String, _new_level: int) -> void:
 
 	if passive_id == "magnetic_aura":
 		_update_pickup_range()
+
+# DEBUG: Take fatal damage on 'K' key press to test death and run loss
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_K:
+		take_damage(9999)

@@ -3724,9 +3724,10 @@
               3
             ],
             "details": "Inspect game/scripts/components/health_component.gd to confirm it already emits a died signal at 0 HP, and game/scripts/player/player.gd to see how die() and player_died are currently used. In player.gd, extend or adjust the existing death handling so that when the player_died or equivalent death path runs for the first time in a run, it calls GameTimer (autoload) to transition to the LOST state and emit run_lost. Implement a guarded method on GameTimer, e.g. mark_run_lost(), that checks current_run_state before switching to LOST, sets run_active to false, and emits run_lost exactly once. Ensure no new HP checks are added; rely entirely on the existing died signal and death flow. Avoid breaking current game-over behavior by keeping the existing logic that shows or triggers the game-over screen, which will be refactored in the next subtask to listen to run_lost instead of direct calls.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "In a test arena, intentionally let the player reach 0 HP and observe that the existing visual/game-over behavior still occurs, while also adding temporary print statements on GameTimer.run_lost and within the new mark_run_lost() to confirm it fires exactly once per run. Kill the player multiple times across separate runs (after reset) to ensure run_lost is emitted once each run and that no additional or early emissions happen while still alive. Confirm that enemy scaling and other time-based systems stop advancing once the run is lost because GameTimer no longer accumulates time.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-11T23:48:31.509Z"
           },
           {
             "id": 5,
@@ -3759,7 +3760,7 @@
         "complexity": 6.5,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Break Task 48 into ~6 subtasks covering: (1) creating and wiring the GameSession autoload singleton, (2) implementing the core timer and process loop with elapsed_time and VICTORY_TIME, (3) defining and emitting time_updated, victory_reached, and defeat_reached signals with correct guards, (4) adding helper utilities like format_time() and is_gameplay_active() while ensuring they are stateless/side-effect free, (5) integrating defeat/victory with existing player HP death logic and game-over screen routing, and (6) implementing reset/restart behavior to correctly clear GameSession state between runs and from main menu. For each subtask, specify files/scripts touched, how to test it in isolation, and any dependency on existing systems like the current game over flow.",
-        "updatedAt": "2026-06-10T20:43:57.775Z"
+        "updatedAt": "2026-06-11T23:48:31.509Z"
       },
       {
         "id": "49",
@@ -3885,7 +3886,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-10T20:43:57.779Z",
+      "lastModified": "2026-06-11T23:48:31.515Z",
       "taskCount": 55,
       "completedCount": 44,
       "tags": [
