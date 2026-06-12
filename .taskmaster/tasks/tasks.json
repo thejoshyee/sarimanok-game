@@ -3738,9 +3738,10 @@
               4
             ],
             "details": "Review the current game over implementation (likely in a HUD, main scene, or dedicated game-over screen script) to identify where it listens to player_died or other ad-hoc triggers. Update those scripts so that they connect to GameTimer’s run_lost and, if applicable, run_won signals to drive transitions, results screen triggers, and any existing game-over UI entry points. Keep the behavior functionally equivalent for now: victory and defeat should result in the same screens or transitions as before, but now via GameTimer as the single authoritative source. Ensure that player.gd and health_component.gd no longer directly trigger game-over UI; they should only drive GameTimer run state. Note any dependencies on upcoming tasks (49, 50, 51, 54) in comments so future work can plug into these signals cleanly.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Start a run and intentionally die to trigger defeat; verify that the same game-over screen or flow appears, and that it is now driven by GameTimer.run_lost rather than a direct call from player.gd. If a win flow already exists (e.g. surviving to a certain time), test surviving to 30:00 and confirm that the victory flow is now driven by GameTimer.run_won. Use debug logs to ensure only one subscription path handles each event and that there are no duplicated UI activations or multiple scene transitions. Also verify that disconnecting GameTimer signals (if applicable on cleanup) does not break subsequent runs.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-12T21:28:07.685Z"
           },
           {
             "id": 6,
@@ -3760,7 +3761,7 @@
         "complexity": 6.5,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Break Task 48 into ~6 subtasks covering: (1) creating and wiring the GameSession autoload singleton, (2) implementing the core timer and process loop with elapsed_time and VICTORY_TIME, (3) defining and emitting time_updated, victory_reached, and defeat_reached signals with correct guards, (4) adding helper utilities like format_time() and is_gameplay_active() while ensuring they are stateless/side-effect free, (5) integrating defeat/victory with existing player HP death logic and game-over screen routing, and (6) implementing reset/restart behavior to correctly clear GameSession state between runs and from main menu. For each subtask, specify files/scripts touched, how to test it in isolation, and any dependency on existing systems like the current game over flow.",
-        "updatedAt": "2026-06-11T23:48:31.509Z"
+        "updatedAt": "2026-06-12T21:28:07.685Z"
       },
       {
         "id": "49",
@@ -3886,7 +3887,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-11T23:48:31.515Z",
+      "lastModified": "2026-06-12T21:28:07.686Z",
       "taskCount": 55,
       "completedCount": 44,
       "tags": [

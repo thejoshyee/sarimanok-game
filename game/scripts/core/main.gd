@@ -50,6 +50,9 @@ func _ready():
 
 	$HUD.level_up_bar_complete.connect(_on_level_up)
 
+	GameTimer.run_lost.connect(_on_run_lost)
+	GameTimer.run_won.connect(_on_run_won)
+
 	# Give level_up_panel access to weapon_manager for dynamic choices
 	level_up_panel.weapon_manager = $Player/WeaponManager
 	# Give LevelUpManager access to weapon_manager for choice pool building
@@ -125,6 +128,17 @@ func _process(_delta):
 func _on_level_up(new_level: int) -> void:
 	var choices = LevelUpManager.get_choices(3)
 	level_up_panel.show_level_up_with_choices(new_level, choices)
+
+
+func _on_run_lost() -> void:
+	GameState.reset_run()
+	get_tree().call_deferred("reload_current_scene")
+
+
+func _on_run_won() -> void:
+	# Victory transition lands in tasks 49-51 (results screen). For now, same as defeat.
+	GameState.reset_run()
+	get_tree().call_deferred("reload_current_scene")
 
 
 func test_spawn_xp_gems():

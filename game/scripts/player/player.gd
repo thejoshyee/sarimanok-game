@@ -81,8 +81,6 @@ func die() -> void:
 	GameTimer.lose_run()
 	player_died.emit()
 	print("Player died")
-	GameState.reset_run()
-	get_tree().call_deferred("reload_current_scene")
 
 
 func _ready() -> void:
