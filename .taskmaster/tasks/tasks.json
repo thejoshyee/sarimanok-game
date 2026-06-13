@@ -3674,7 +3674,7 @@
         "testStrategy": "Manual / debug tests:\n- Use GameTimer.debug_skip_minutes() to jump near 30:00, then confirm run_won fires exactly once and elapsed_time stops increasing.\n- Drive the player to 0 HP and confirm run_lost fires exactly once via the existing health_component `died` -> player_died path, with no duplicate game-over.\n\nIntegration:\n- Watch the HUD timer (task 49) increment with no drift over several minutes, and confirm it halts on win/lose.\n- Confirm enemy time-scaling (elapsed_minutes) stops once the run ends.\n\nEdge cases:\n- GameState.reset_run() returns state to ACTIVE and elapsed_time to 0, and does NOT emit run_won / run_lost.\n- Triggering win or lose more than once is a no-op (guards).",
         "priority": "high",
         "dependencies": [],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -3753,15 +3753,16 @@
               5
             ],
             "details": "In game/autoloads/game_timer.gd, extend the existing reset_run() so that, in addition to zeroing elapsed_time, it also resets elapsed_minutes if needed, sets current_run_state back to ACTIVE (or equivalent), and sets run_active to true. Confirm that no win/lose signals are fired during reset and that any internal flags used by mark_run_lost() or the win path are cleared. Then review the existing GameState.reset_run() orchestrator (or equivalent global reset function) to confirm it already calls GameTimer.reset_run(); if not, add a call there so all per-run cleanup flows through GameState. Ensure that transitions from main menu into gameplay and any in-run restart options always pass through GameState.reset_run(), so GameTimer is consistently reinitialized. Add comments to clarify that other systems relying on is_gameplay_active() should assume a fresh ACTIVE state after reset_run.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "From the main menu, start a run, allow some time to pass (or win/lose), then trigger a restart via the existing restart flow and confirm that elapsed_time is back to 0, elapsed_minutes used by enemy scaling is reset, and is_gameplay_active() returns true. Verify that run_won or run_lost are not re-emitted on reset. Repeat the cycle multiple times to ensure there is no state leakage (e.g., timer not advancing, state stuck in WON/LOST, or multiple signal connections). If the project has a direct \"Restart\" button on the game-over screen, test that both main-menu starts and in-game restarts produce identical, clean GameTimer behavior.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-13T23:43:24.577Z"
           }
         ],
         "complexity": 6.5,
         "recommendedSubtasks": 6,
         "expansionPrompt": "Break Task 48 into ~6 subtasks covering: (1) creating and wiring the GameSession autoload singleton, (2) implementing the core timer and process loop with elapsed_time and VICTORY_TIME, (3) defining and emitting time_updated, victory_reached, and defeat_reached signals with correct guards, (4) adding helper utilities like format_time() and is_gameplay_active() while ensuring they are stateless/side-effect free, (5) integrating defeat/victory with existing player HP death logic and game-over screen routing, and (6) implementing reset/restart behavior to correctly clear GameSession state between runs and from main menu. For each subtask, specify files/scripts touched, how to test it in isolation, and any dependency on existing systems like the current game over flow.",
-        "updatedAt": "2026-06-12T21:28:07.685Z"
+        "updatedAt": "2026-06-13T23:43:24.577Z"
       },
       {
         "id": "49",
@@ -3887,9 +3888,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-12T21:28:07.686Z",
+      "lastModified": "2026-06-13T23:43:24.578Z",
       "taskCount": 55,
-      "completedCount": 44,
+      "completedCount": 45,
       "tags": [
         "master"
       ]
