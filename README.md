@@ -8,6 +8,7 @@
 - Sarimanok's Awesome Adventure Time
 - Sarimanok Tales
 - Sarimanok Survival
+- Sarimanok Survival: The Game
 
 
 # WHY
