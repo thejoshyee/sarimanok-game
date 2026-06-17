@@ -39,6 +39,9 @@ func _get_enemy_pool_id() -> String:
 
 
 func spawn_enemy() -> void:
+	if not GameTimer.is_gameplay_active():
+		return
+
 	var spawn_pos = _find_valid_spawn_pos()
 	if spawn_pos == Vector2.INF:
 		return
