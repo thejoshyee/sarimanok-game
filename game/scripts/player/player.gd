@@ -21,6 +21,8 @@ signal player_died
 
 
 func _physics_process(_delta: float) -> void:
+	if not GameTimer.is_gameplay_active():
+		return
 	# Get input as floats (0.0 to 1.0) - works for both keyboard and analog sticks
 	var horizontal = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var vertical = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")

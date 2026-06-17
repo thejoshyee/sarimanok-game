@@ -42,8 +42,10 @@ func _ready() -> void:
 	# 		add_weapon(data)
 
 
-
 func _process(_delta: float) -> void:
+	if not GameTimer.is_gameplay_active():
+		return
+		
 	# Auto-fire loop: position weapons and trigger firing
 	for slot_index in range(MAX_WEAPONS):
 		var weapon = weapon_slots[slot_index]
@@ -104,7 +106,7 @@ func add_weapon(data: WeaponData) -> bool:
 	# Get the scene for this weapon type
 	var scene := _get_weapon_scene_for_data(data)
 	if scene == null:
-		return false  # Warning already printed by helper
+		return false # Warning already printed by helper
 
 	# Instantiate the weapon
 	var weapon: Weapon = scene.instantiate()
@@ -114,7 +116,7 @@ func add_weapon(data: WeaponData) -> bool:
 
 	# Configure the weapon
 	weapon.weapon_data = data
-	weapon.set_level(1)  # New weapons always start at level 1
+	weapon.set_level(1) # New weapons always start at level 1
 
 	# Find first empty slot and assign
 	var slot_index := _find_empty_slot()

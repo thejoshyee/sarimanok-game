@@ -20,6 +20,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if not GameTimer.is_gameplay_active():
+		return
+
 	# Calculate movement this frame
 	var movement: Vector2 = direction * speed * delta
 	
@@ -67,18 +70,18 @@ func on_spawn() -> void:
 	# Make projectile visible and active
 	visible = true
 	set_physics_process(true)
-	set_deferred("monitoring", true)  # Enable collision detection
+	set_deferred("monitoring", true) # Enable collision detection
 
 
 func on_despawn() -> void:
 	# Hide and disable - projectile sits dormant in pool
 	visible = false
 	set_physics_process(false)
-	set_deferred("monitoring", false)  # Disable collision detection
+	set_deferred("monitoring", false) # Disable collision detection
 
 
 func despawn() -> void:
 	# Use PoolManager instead of queue_free()
 	# This recycles the object instead of destroying it - better performance
 	if PoolManager:
-		PoolManager.despawn(self)
+		PoolManager.despawn(self )

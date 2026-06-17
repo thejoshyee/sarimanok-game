@@ -4,14 +4,14 @@ class_name Projectile
 var damage: float = 0.0
 var speed: float = 300.0
 var direction: Vector2 = Vector2.ZERO
-var lifetime: float = 5.0  # despawn after 5 seconds
+var lifetime: float = 5.0 # despawn after 5 seconds
 var time_alive: float = 0.0
 
 # === Pierce & Debuff Support ===
 # Feather Shot needs pierce (pass through multiple enemies)
 # Ice Shard needs debuff forwarding (apply slow on hit)
-var pierce_remaining: int = 1       # 1 = dies on first hit, 2 = passes through 1 enemy, etc.
-var weapon_data: WeaponData = null   # Reference to weapon's data for debuff info
+var pierce_remaining: int = 1 # 1 = dies on first hit, 2 = passes through 1 enemy, etc.
+var weapon_data: WeaponData = null # Reference to weapon's data for debuff info
 
 func _ready() -> void:
 	# connect to body_entered to detect hitting enemies
@@ -21,6 +21,9 @@ func _ready() -> void:
 	$VisibleOnScreenNotifier2D.screen_exited.connect(despawn)
 
 func _physics_process(delta: float) -> void:
+	if not GameTimer.is_gameplay_active():
+		return
+		
 	# move in direction
 	position += direction * speed * delta
 
@@ -66,19 +69,18 @@ func reset(start_pos: Vector2, target_direction: Vector2, projectile_damage: flo
 	modulate = weapon_data.projectile_color if weapon_data else Color.WHITE
 
 	
-
 # Called when spawned from pool
 func on_spawn() -> void:
 	visible = true
 	set_physics_process(true)
-	set_deferred("monitoring", true)  # Enable collision detection
+	set_deferred("monitoring", true) # Enable collision detection
 
 
 # Called when returned to pool
 func on_despawn() -> void:
 	visible = false
 	set_physics_process(false)
-	set_deferred("monitoring", false)  # Disable collision detection
+	set_deferred("monitoring", false) # Disable collision detection
 	
 
 # return projectile to pool instead of freeing it
@@ -87,4 +89,4 @@ func despawn() -> void:
 	if not visible:
 		return
 	if PoolManager:
-		PoolManager.despawn(self)
+		PoolManager.despawn(self )

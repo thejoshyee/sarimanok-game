@@ -38,14 +38,16 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# 30-minute run — show time remaining
 	var remaining := 1800.0 - GameTimer.elapsed_time
-	timer_label.text = format_time(max(remaining, 0.0))
+	timer_label.text = GameTimer.format_time(max(remaining, 0.0))
 
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
 		update_weapon_stats(player)
 
+
 func update_hp(current: float, max_hp: float) -> void:
 	hp_label.text = "HP: %d/%d" % [current, max_hp]
+
 
 func update_weapon_stats(player: CharacterBody2D) -> void:
 	# Display weapon cooldown for slot 0
@@ -57,12 +59,6 @@ func update_weapon_stats(player: CharacterBody2D) -> void:
 	var stats = player.stats
 	stats_label.text = "Damage: %.1fx | Attack Speed: %.1fx" % [stats.damage_multiplier, stats.attack_speed_multiplier]
 
-func format_time(seconds: float) -> String:
-	var total_seconds: int = int(seconds)
-	@warning_ignore("integer_division")
-	var mins: int = total_seconds / 60
-	var secs: int = total_seconds % 60
-	return "%02d:%02d" % [mins, secs]
 
 func _on_xp_changed(current_xp: int, xp_needed: int) -> void:
 	if _leveling_up:
@@ -76,6 +72,7 @@ func _on_xp_changed(current_xp: int, xp_needed: int) -> void:
 	tween.tween_property(xp_bar, "value", current_xp, 0.3) \
 		.set_trans(Tween.TRANS_SINE) \
 		.set_ease(Tween.EASE_IN_OUT)
+
 
 func _on_level_up(new_level: int) -> void:
 	_old_max_value = xp_bar.max_value

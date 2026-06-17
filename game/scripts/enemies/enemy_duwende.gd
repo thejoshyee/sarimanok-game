@@ -178,6 +178,9 @@ func reset_state() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not GameTimer.is_gameplay_active():
+		return
+	
 	# safety check: stop if player doesn't exist
 	if player == null:
 		return

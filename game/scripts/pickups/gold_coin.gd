@@ -9,6 +9,9 @@ var magnet_speed: float = 100.0
 var is_being_attracted: bool = false
 
 func _process(delta: float) -> void:
+	if not GameTimer.is_gameplay_active():
+		return
+		
 	var players = get_tree().get_nodes_in_group("player")
 	if players.is_empty():
 		return

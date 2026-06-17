@@ -4,11 +4,14 @@ extends Area2D
 @export var xp_value: int = 10
 
 # Magnetic drift settings
-var pickup_range: float = 64.0   # Base range to start drifting toward player
-var magnet_speed: float = 100.0  # How fast the gem flies toward the player
+var pickup_range: float = 64.0 # Base range to start drifting toward player
+var magnet_speed: float = 100.0 # How fast the gem flies toward the player
 var is_being_attracted: bool = false
 
 func _process(delta: float) -> void:
+	if not GameTimer.is_gameplay_active():
+		return
+	
 	# Find the player
 	var players = get_tree().get_nodes_in_group("player")
 	if players.is_empty():

@@ -7,10 +7,10 @@ extends Weapon
 
 # === ORBIT CONFIG ===
 # These start with defaults, but get overridden by WeaponData upgrades
-var orbit_speed: float = 1.0      # Radians per second
-var orbit_radius: float = 32.0    # Distance from player center
-var feather_count: int = 4        # How many feathers orbit at once
-var feathers: Array = []          # Tracks active OrbitalFeather instances
+var orbit_speed: float = 1.0 # Radians per second
+var orbit_radius: float = 32.0 # Distance from player center
+var feather_count: int = 4 # How many feathers orbit at once
+var feathers: Array = [] # Tracks active OrbitalFeather instances
 
 func _ready() -> void:
 	# Always active — no cooldown needed
@@ -22,6 +22,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if not GameTimer.is_gameplay_active():
+		return
+		
 	# Spin the OrbitRoot — feathers are children of it so they spin too
 	$OrbitRoot.rotation += orbit_speed * delta
 
