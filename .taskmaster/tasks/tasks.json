@@ -3881,9 +3881,9 @@
             "description": "Build or adjust the Main scene so the ParallaxBackground sky layer and CanvasModulate sit in the correct positions relative to gameplay content.",
             "dependencies": [],
             "details": "Create the Main node structure with ParallaxBackground containing Sky, Moon, and Stars, and place CanvasModulate directly under Main above world elements. Use placeholders for Moon and Stars if final art is unavailable. Ensure the sky layer is visually behind the Background, TileMap, Player, Enemies, and Camera2D, and keep node names stable for controller wiring.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Open the main scene and verify the node tree order matches the PRD. Run the scene and confirm the sky renders behind all gameplay objects and the CanvasModulate affects the world while leaving the sky layer controllable separately.",
-            "updatedAt": "2026-06-18T23:44:55.941Z",
+            "updatedAt": "2026-06-20T04:13:41.331Z",
             "parentId": "undefined"
           },
           {
@@ -3939,7 +3939,7 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 50 into ~5 subtasks: (1) constructing or refactoring the parallax sky layer scene hierarchy (ParallaxBackground, Sky, Moon, Stars) and CanvasModulate under Main, (2) implementing the visual setup for night state, including gradient sky and initial CanvasModulate color, with placeholders if needed, (3) creating a DawnController node/script that connects to GameSession.victory_reached and exposes exported NodePaths for Moon, Stars, Sky, and CanvasModulate, (4) implementing the tween-driven night-to-dawn transition sequence (fade out moon/stars, recolor sky, adjust CanvasModulate) in a way that remains functional under gameplay freeze rules, and (5) integrating signals or callbacks so that downstream systems (results screen, audio cues) can hook into a dawn_transition_finished event without tight coupling. For each subtask, identify how to test visually and how to guard against multiple triggers or defeat/victory race conditions.",
-        "updatedAt": "2026-06-18T23:44:55.941Z"
+        "updatedAt": "2026-06-20T04:13:41.331Z"
       },
       {
         "id": "51",
@@ -4032,7 +4032,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-18T23:44:55.946Z",
+      "lastModified": "2026-06-20T04:13:41.334Z",
       "taskCount": 55,
       "completedCount": 46,
       "tags": [

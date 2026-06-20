@@ -142,4 +142,21 @@ shape = SubResource("RectangleShape2D_vivmo")
 position = Vector2(3088, 1024)
 shape = SubResource("RectangleShape2D_2cqfq")
 
+[node name="SkyLayer" type="ParallaxBackground" parent="." unique_id=1604762842]
+layer = -1
+
+[node name="Sky" type="ColorRect" parent="SkyLayer" unique_id=96416697]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Moon" type="ColorRect" parent="SkyLayer" unique_id=633845123]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Stars" type="ColorRect" parent="SkyLayer" unique_id=723087192]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2062783403]
+
 [connection signal="timeout" from="SpawnManager/SpawnTimer" to="SpawnManager" method="spawn_enemy"]
