@@ -3893,10 +3893,11 @@
             "dependencies": [
               1
             ],
-            "details": "Assign a dark blue/purple gradient to Sky using a ColorRect, Sprite2D, or GradientTexture2D-based setup. Set CanvasModulate to Color(0.6, 0.6, 0.8) as the gameplay night tint. Configure Moon and Stars with placeholder visuals and ensure they start visible at full alpha so the transition has something to fade out later.",
-            "status": "pending",
+            "details": "Assign a dark blue/purple gradient to Sky using a ColorRect, Sprite2D, or GradientTexture2D-based setup. Set CanvasModulate to Color(0.6, 0.6, 0.8) as the gameplay night tint. Configure Moon and Stars with placeholder visuals and ensure they start visible at full alpha so the transition has something to fade out later.\n<info added on 2026-06-21T05:46:28.103Z>\nDESIGN PIVOT CONFIRMED: VS-style flat top-down games have no visible sky, horizon, moon, or stars. Night/day is achieved purely via CanvasModulate scene tint.\n\nImplementation status: CanvasModulate node exists in main.tscn at line 145 with color Color(0.53382146, 0.549283, 0.9401212, 1) — a cool moonlit blue. SkyLayer/Moon/Stars nodes were removed per 50.1.\n\nSubtask 50.2 is DONE. The night state is a single CanvasModulate.color value (approximately Color(0.53, 0.55, 0.94)) set in the editor by eye. Typed RGB/hex values get sRGB-converted by Godot's color picker, so visual tuning in the viewport is preferred.\n\nDawn transition (50.3-50.5) simplifies to tweening CanvasModulate.color from this night blue to a warm dawn gold (e.g. ~Color(1.0, 0.95, 0.9)). No moon/stars fades required. DawnController exports only the CanvasModulate NodePath. dawn_transition_finished signal remains for results screen and crow SFX hooks. Sun rays or screen-edge glow are optional post-MVP polish.\n</info added on 2026-06-21T05:46:28.103Z>",
+            "status": "done",
             "testStrategy": "Start a normal run and visually inspect that the scene begins in a night state with a dark sky, visible moon, visible stars, and the intended global night tint. Confirm placeholders are acceptable until art assets are swapped in later.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-06-21T05:46:44.953Z"
           },
           {
             "id": 3,
@@ -3939,7 +3940,7 @@
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 50 into ~5 subtasks: (1) constructing or refactoring the parallax sky layer scene hierarchy (ParallaxBackground, Sky, Moon, Stars) and CanvasModulate under Main, (2) implementing the visual setup for night state, including gradient sky and initial CanvasModulate color, with placeholders if needed, (3) creating a DawnController node/script that connects to GameSession.victory_reached and exposes exported NodePaths for Moon, Stars, Sky, and CanvasModulate, (4) implementing the tween-driven night-to-dawn transition sequence (fade out moon/stars, recolor sky, adjust CanvasModulate) in a way that remains functional under gameplay freeze rules, and (5) integrating signals or callbacks so that downstream systems (results screen, audio cues) can hook into a dawn_transition_finished event without tight coupling. For each subtask, identify how to test visually and how to guard against multiple triggers or defeat/victory race conditions.",
-        "updatedAt": "2026-06-20T04:13:41.331Z"
+        "updatedAt": "2026-06-21T05:46:44.953Z"
       },
       {
         "id": "51",
@@ -4032,7 +4033,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-06-20T04:13:41.334Z",
+      "lastModified": "2026-06-21T05:46:44.953Z",
       "taskCount": 55,
       "completedCount": 46,
       "tags": [
