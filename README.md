@@ -9,6 +9,7 @@
 - Sarimanok Tales
 - Sarimanok Survival
 - Sarimanok Survival: The Game
+- Sarimanok and friends: Revenge of the Bird
 
 
 # WHY
