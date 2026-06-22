@@ -1,3 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# godot_ai dev tool (local-only, not part of the shipped game)
+addons/godot_ai/
+godot-ai-LICENSE.txt

@@ -33,6 +33,7 @@ WeaponDatabase="*uid://docosi7bukua1"
 PassiveManager="*uid://c4ib3ycc15c4w"
 LevelUpManager="*uid://bif4ju21fljey"
 GameState="*uid://dd0v55sxqjxo7"
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [display]
 
@@ -45,6 +46,10 @@ window/stretch/mode="canvas_items"
 [editor]
 
 run/main_run_args="--resolution 1920x1080"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
 
 [input]
 
