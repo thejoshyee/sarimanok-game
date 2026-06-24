@@ -10,7 +10,7 @@
 - Sarimanok Survival
 - Sarimanok Survival: The Game
 - Sarimanok and friends: Revenge of the Bird
-
+- Sarimanok Survivor: The Fierce Fight
 
 # WHY
 Because we need more filipino games in this world
