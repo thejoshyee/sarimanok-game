@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dvdy2n5irl835" path="res://scenes/ui/level_up_panel.tscn" id="11_dg77c"]
 [ext_resource type="PackedScene" uid="uid://dmf2r32mowlp1" path="res://scenes/ui/hud.tscn" id="11_efxa6"]
 [ext_resource type="Script" uid="uid://b7r65uo3acmjv" path="res://scripts/core/enemy_spawner.gd" id="13_ycdy4"]
+[ext_resource type="Script" uid="uid://dt8k62b4o86f5" path="res://scripts/core/dawn_controller.gd" id="18_074og"]
 
 [sub_resource type="Resource" id="Resource_w48qg"]
 script = ExtResource("2_272bh")
@@ -144,5 +145,9 @@ shape = SubResource("RectangleShape2D_2cqfq")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2062783403]
 color = Color(0.53382146, 0.549283, 0.9401212, 1)
+
+[node name="DawnController" type="Node" parent="." unique_id=1146240879]
+script = ExtResource("18_074og")
+canvas_modulate_path = NodePath("../CanvasModulate")
 
 [connection signal="timeout" from="SpawnManager/SpawnTimer" to="SpawnManager" method="spawn_enemy"]
