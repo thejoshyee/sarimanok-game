@@ -13,6 +13,7 @@
 - Sarimanok Survivor: The Fierce Fight
 - Sarimanok is Back
 - Sarimanok is here to save the world
+- Sarmimanok revenge of the bird
 
 # WHY
 Because we need more filipino games in this world
