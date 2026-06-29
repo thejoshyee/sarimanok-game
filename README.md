@@ -14,6 +14,7 @@
 - Sarimanok is Back
 - Sarimanok is here to save the world
 - Sarmimanok revenge of the bird
+- Sarimanok forever
 
 # WHY
 Because we need more filipino games in this world
