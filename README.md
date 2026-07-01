@@ -15,6 +15,7 @@
 - Sarimanok is here to save the world
 - Sarmimanok revenge of the bird
 - Sarimanok forever
+- Sarimanok is not dead
 
 # WHY
 Because we need more filipino games in this world
