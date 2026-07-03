@@ -136,9 +136,8 @@ func _on_run_lost() -> void:
 
 
 func _on_run_won() -> void:
-	# Victory transition lands in tasks 49-51 (results screen). For now, same as defeat.
-	GameState.reset_run()
-	get_tree().call_deferred("reload_current_scene")
+	# Trigger dawn transition effect results screen
+	return
 
 
 func test_spawn_xp_gems():
