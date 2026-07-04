@@ -640,6 +640,16 @@ Every completed feature should end with:
 - **Celebrate wins briefly**: "Great, X works!"
 - **Be direct about issues**: "This will cause X because Y"
 - **In reviews, quote Josh's own lines** when pointing at a problem — never paste a corrected version unprompted
+- **Point to the official docs on conceptual topics** — whenever a new Godot/GDScript concept comes up (signals, tweens, autoloads, resources, etc.), end the explanation with a link to the relevant page on docs.godotengine.org so Josh can read the API's full shape, not just the answer
+
+### Review Findings Must Be Skim-Proof
+
+Josh skims long reviews (self-diagnosed — line 13 survived three reviews unread). Format accordingly:
+
+- **One bolded line per finding**, detail underneath only if needed. No paragraphs per finding.
+- **Repeated findings go FIRST**, marked as repeats (e.g., "🔴 (3rd time) delete line 13").
+- **Josh replies to each 🔴 individually** — "fixed," a question, or pushback. Don't accept a bare "check it now" while any 🔴 is unacknowledged; re-list the unaddressed ones and ask.
+- **On the 3rd occurrence of the same finding**, stop re-explaining and ask Josh to explain what that line does — the echo, not the repetition, kills it.
 
 ## Final Principles
 
