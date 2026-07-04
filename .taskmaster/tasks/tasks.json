@@ -3873,7 +3873,7 @@
           "48",
           "49"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -3934,15 +3934,16 @@
               4
             ],
             "details": "Add a dawn_transition_finished signal that fires after the tween completes. Connect Task 51 results screen directly through this signal or a local method call, and keep the Sarimanok crow SFX outside trigger_dawn_transition so audio timing can be coordinated by downstream logic. Ensure the signal is emitted only once and only after the transition has fully finished, allowing the results flow to start cleanly.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Connect a temporary debug listener to dawn_transition_finished and confirm it fires once after the tween ends. Verify the results screen or stub callback can respond immediately, and that the crow SFX can be triggered from the downstream hook rather than inside the visual transition method.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-07-04T06:53:51.246Z"
           }
         ],
         "complexity": 6,
         "recommendedSubtasks": 5,
         "expansionPrompt": "Break Task 50 into ~5 subtasks: (1) constructing or refactoring the parallax sky layer scene hierarchy (ParallaxBackground, Sky, Moon, Stars) and CanvasModulate under Main, (2) implementing the visual setup for night state, including gradient sky and initial CanvasModulate color, with placeholders if needed, (3) creating a DawnController node/script that connects to GameSession.victory_reached and exposes exported NodePaths for Moon, Stars, Sky, and CanvasModulate, (4) implementing the tween-driven night-to-dawn transition sequence (fade out moon/stars, recolor sky, adjust CanvasModulate) in a way that remains functional under gameplay freeze rules, and (5) integrating signals or callbacks so that downstream systems (results screen, audio cues) can hook into a dawn_transition_finished event without tight coupling. For each subtask, identify how to test visually and how to guard against multiple triggers or defeat/victory race conditions.",
-        "updatedAt": "2026-07-02T18:02:19.555Z"
+        "updatedAt": "2026-07-04T06:53:51.246Z"
       },
       {
         "id": "51",
@@ -4035,9 +4036,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-07-02T18:02:19.559Z",
+      "lastModified": "2026-07-04T06:53:51.255Z",
       "taskCount": 55,
-      "completedCount": 46,
+      "completedCount": 47,
       "tags": [
         "master"
       ]

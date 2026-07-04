@@ -6,6 +6,8 @@ extends Node
 
 @export var dawn_color: Color = Color(1.0, 0.95, 0.9)
 
+signal dawn_transition_finished
+
 var _transition_started: bool = false
 
 func _ready() -> void:
@@ -15,4 +17,8 @@ func _on_run_won() -> void:
 	if _transition_started:
 		return
 	_transition_started = true
-	create_tween().tween_property(canvas_modulate, "color", dawn_color, 2.0)
+	var tween := create_tween()
+	tween.tween_property(canvas_modulate, "color", dawn_color, 2.0)
+	await tween.finished
+	dawn_transition_finished.emit()
+	print("Dawn transition finished")
