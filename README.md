@@ -17,6 +17,7 @@
 - Sarimanok forever
 - Sarimanok is not dead
 - Sarimanok will save the world
+- Resident Sarimanok
 
 # WHY
 Because we need more filipino games in this world
