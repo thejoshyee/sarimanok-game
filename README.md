@@ -19,6 +19,7 @@
 - Sarimanok will save the world
 - Resident Sarimanok
 - Sarimanok is here to stay
+- Sarimanok is not sorry
 
 # WHY
 Because we need more filipino games in this world
