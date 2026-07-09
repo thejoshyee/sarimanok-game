@@ -20,6 +20,7 @@
 - Resident Sarimanok
 - Sarimanok is here to stay
 - Sarimanok is not sorry
+- Sarimanok vs the world
 
 # WHY
 Because we need more filipino games in this world
