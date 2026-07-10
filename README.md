@@ -21,6 +21,7 @@
 - Sarimanok is here to stay
 - Sarimanok is not sorry
 - Sarimanok vs the world
+- Sarimanok vs Everyone
 
 # WHY
 Because we need more filipino games in this world
