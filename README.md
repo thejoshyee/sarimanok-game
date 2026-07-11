@@ -22,6 +22,7 @@
 - Sarimanok is not sorry
 - Sarimanok vs the world
 - Sarimanok vs Everyone
+- Sarimanok will not die
 
 # WHY
 Because we need more filipino games in this world
