@@ -23,11 +23,13 @@
 - Sarimanok vs the world
 - Sarimanok vs Everyone
 - Sarimanok will not die
+- Sarimanoker's Adventure
 
 # WHY
 Because we need more filipino games in this world
 And we need more Filipino games in Godot Engine
 It's a great engine, and we need more Filipino games in it obviously
+and 
 
 > *A Filipino folklore-themed bullet heaven where you play as a legendary bird defending the land until dawn*
 
