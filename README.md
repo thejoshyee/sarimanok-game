@@ -24,6 +24,7 @@
 - Sarimanok vs Everyone
 - Sarimanok will not die
 - Sarimanoker's Adventure
+- Sarimanok is here to stay
 
 # WHY
 Because we need more filipino games in this world
