@@ -25,7 +25,8 @@
 - Sarimanok will not die
 - Sarimanoker's Adventure
 - Sarimanok is here to stay
-- Sarmanok will win the war
+- Sarimanok will win the war
+- Super Sarimanok Adventures
 
 # WHY
 Because we need more filipino games in this world
