@@ -29,6 +29,7 @@
 - Super Sarimanok Adventures
 - Sarimanok vs You
 - Sari not Sarimanok
+- Sarimanok will find you
 
 # WHY
 Because we need more filipino games in this world
