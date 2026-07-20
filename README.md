@@ -49,6 +49,7 @@ Play as the **Sarimanok**—a legendary bird from Maranao folklore—defending t
 - 🌅 **Clear Win Condition** - Survive 30 minutes until dawn breaks (unlike traditional survivors)
 - 💰 **Roguelite Progression** - Earn gold to buy permanent upgrades between runs
 - ⚔️ **Auto-Attack Combat** - Weapons fire automatically—focus on positioning and dodging
+- 🎮 **Steam Early Access** - Play on Windows (Steam Early Access)
 
 ## Game Details
 
