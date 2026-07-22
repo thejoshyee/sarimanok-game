@@ -5,31 +5,11 @@
 - Sarimanok Adventures
 - Sarimanok Fighters
 - Sarimanok Legends
-- Sarimanok's Awesome Adventure Time
-- Sarimanok Tales
-- Sarimanok Survival
-- Sarimanok Survival: The Game
-- Sarimanok and friends: Revenge of the Bird
-- Sarimanok Survivor: The Fierce Fight
-- Sarimanok is Back
-- Sarimanok is here to save the world
+- Sarimanok Survivor: Night of the dead
 - Sarmimanok revenge of the bird
-- Sarimanok forever
-- Sarimanok is not dead
 - Sarimanok will save the world
-- Resident Sarimanok
-- Sarimanok is here to stay
-- Sarimanok is not sorry
 - Sarimanok vs the world
-- Sarimanok vs Everyone
-- Sarimanok will not die
 - Sarimanoker's Adventure
-- Sarimanok is here to stay
-- Sarimanok will win the war
-- Super Sarimanok Adventures
-- Sarimanok vs You
-- Sari not Sarimanok
-- Sarimanok will find you
 
 # WHY
 Because we need more filipino games in this world
