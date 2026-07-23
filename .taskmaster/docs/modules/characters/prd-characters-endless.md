@@ -5,7 +5,7 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
 
 ---
 
@@ -71,7 +71,8 @@ Endless Mode button appears on main menu
 
 - Check if Story Mode has been beaten (endless_unlocked flag)
 - Add Endless Mode button to main menu (locked initially)
-- Disable 30:00 victory condition for Endless Mode
+- Disable 30:00 victory condition for Endless Mode (`GameTimer` currently hardcodes `VICTORY_TIME` — needs a mode flag)
+- Mode-aware HUD timer: Story Mode shows a countdown to dawn (decided 2026-07-22, as built in `hud.gd`); Endless must count UP past 30:00 — `hud.gd` currently floors the countdown at 00:00 and needs a mode switch
 - Track best time for Endless Mode separately
 - Display best time on main menu
 - Reuse ALL existing systems (enemies, weapons, scaling)
@@ -98,21 +99,7 @@ Update best time if new record
 
 ## Save File Updates
 
-```json
-{
-  "gold": 350,
-  "shop_damage": 6,
-  "shop_hp": 15,
-  "shop_speed": 3,
-  "endless_unlocked": false,
-  "shadow_unlocked": false,
-  "golden_unlocked": false,
-  "high_score_story": 12450,
-  "high_score_endless": 0,
-  "best_time_story": "30:00",
-  "best_time_endless": "47:23"
-}
-```
+**Canonical schema:** [prd-progression-state.md §Save Data Format](../progression/prd-progression-state.md) — do not duplicate the JSON here. This module's keys: `endless_unlocked`, `high_score_endless`, `best_time_endless` (float seconds, formatted only at display).
 
 ## Implementation Notes
 

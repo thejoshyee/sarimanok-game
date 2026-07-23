@@ -5,7 +5,9 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
+
+> ⚠ **Calendar dates below are from the original Dec 2025 plan and have lapsed** — re-anchor to the next Steam Next Fest cycle when the launch phase begins. The weekly structure still applies.
 
 ---
 
@@ -46,7 +48,7 @@ This is feature freeze. By end of Week 10:
 │                                             │
 │         [WISHLIST NOW]  [EXIT]              │
 │                                             │
-│     Full game: $2.99-4.99 Early Access      │
+│     Full game: $2.99 Early Access           │
 │                                             │
 └─────────────────────────────────────────────┘
 ```
@@ -54,11 +56,12 @@ This is feature freeze. By end of Week 10:
 **Implementation:**
 
 ```gdscript
-# In GameState.gd or main game scene
+# is_demo is a BUILD-TIME flag (home decided at Week 10 — e.g. an export feature
+# tag or a const in the main scene). It is NOT save data and NOT on GameState.
 var is_demo: bool = true  # Set to false in full game build
 
 func _process(delta):
-    if is_demo and time_survived >= 600.0:  # 10 minutes = 600 seconds
+    if is_demo and GameTimer.elapsed_time >= 600.0:  # 10 minutes = 600 seconds
         show_demo_end_screen()
 
 func show_demo_end_screen():
@@ -85,7 +88,7 @@ func show_demo_end_screen():
 1. Install GodotSteam GDExtension from Godot Asset Library (2-3 min)
 2. Create Steam autoload with initialization code (15-30 min)
 3. Test Steam overlay (Shift+Tab)
-4. **IMPORTANT:** Use Compatibility rendering mode (Forward+ breaks overlay)
+4. **IMPORTANT:** Use Compatibility rendering mode (Forward+ breaks overlay) — ✅ already set in project.godot (2026-07-22)
 5. **IMPORTANT:** Set `SteamAppId` environment variable BEFORE `Steam.steamInit()`
 
 **Achievement Hook Example:**
@@ -104,12 +107,12 @@ Log to local file for balance decisions:
 ```gdscript
 func log_run_data():
     var run_data = {
-        "time_survived": time_survived,
+        "time_survived": GameTimer.elapsed_time,
         "death_location": player.global_position,
-        "enemies_killed": enemies_killed,
-        "weapons_chosen": weapons.map(func(w): return w.id),
-        "passives_chosen": passives.keys(),
-        "final_level": level,
+        "enemies_killed": ProgressionManager.enemies_killed,
+        "weapons_chosen": weapon_manager.weapon_slots.map(func(w): return w.weapon_data.id),
+        "passives_chosen": PassiveManager.passive_levels.keys(),
+        "final_level": ProgressionManager.current_level,
         "cause_of_death": last_damage_source,
         "timestamp": Time.get_unix_time_from_system()
     }

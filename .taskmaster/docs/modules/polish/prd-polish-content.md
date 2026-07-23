@@ -5,7 +5,7 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
 
 ---
 

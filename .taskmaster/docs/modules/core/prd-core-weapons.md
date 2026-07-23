@@ -5,7 +5,7 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
 
 ---
 
@@ -18,7 +18,7 @@ Weapons attack automatically on a cooldown. Player collects weapons through leve
 
 | Weapon              | Type       | Behavior                         | Cooldown | Base Damage |
 | ------------------- | ---------- | -------------------------------- | -------- | ----------- |
-| **Peck**            | Melee      | Quick jab in facing direction    | 0.5s     | 10          |
+| **Peck**            | Projectile | Short-range beak jabs in facing direction | 0.5s     | 10          |
 | **Wing Slap**       | AOE        | Circle around player             | 1.5s     | 8           |
 | **Feather Shot**    | Projectile | Shoots feather at nearest enemy  | 1.0s     | 12          |
 | **Spiral Feathers** | Orbital    | 4 feathers orbit player          | Passive  | 6           |
@@ -29,8 +29,8 @@ Weapons attack automatically on a cooldown. Player collects weapons through leve
 
 **Peck (Starting Weapon):**
 
-- Short range melee attack
-- Damages enemies in small cone in front of player
+- Fires short-range beak projectiles in the facing direction (as built 2026 — see `game/weapons/data/peck.tres`; originally specced as a melee cone)
+- Higher levels add extra beaks with spread instead of a wider melee arc
 - Fast attack speed
 - Player always starts with this
 
@@ -65,9 +65,9 @@ Each weapon can be upgraded to Level 5 through level-up choices:
 | ----- | ------ | ---------------------- |
 | 1 | 10 | Base |
 | 2 | 15 | +50% damage |
-| 3 | 20 | +100% damage |
+| 3 | 20 | +damage, 2 beaks |
 | 4 | 25 | Faster cooldown (0.4s) |
-| 5 | 35 | Hits in wider arc |
+| 5 | 35 | 3 beaks, wider spread |
 
 **Wing Slap Upgrades:**
 | Level | Damage | Effect |

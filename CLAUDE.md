@@ -93,7 +93,7 @@ Target FPS: 60 stable
 ```
 Map Size: 3072×2048 pixels (96×64 tiles)
 Tile Size: 32×32 pixels
-Viewport Coverage: ~1/3 of arena visible at once
+Viewport Coverage: ~1/6 of arena visible at once
 Camera: Follows player, bounded to map edges
 ```
 
@@ -184,7 +184,7 @@ func _process(delta):
 
 **Weapon types:**
 
-- Melee (Peck): Damage area in facing direction
+- Projectile jab (Peck): Short-range beak projectiles in facing direction
 - AOE (Wing Slap): Circle around player
 - Projectile (Feather Shot): Fires at nearest enemy
 - Passive (Spiral Feathers): Constantly orbiting, no cooldown
@@ -280,14 +280,14 @@ Phases in order — progress is measured by phase completion, not dates:
 ## MVP Scope (Must Ship)
 
 **Characters:** 3 (Sarimanok Classic/Shadow/Golden variants)
-**Enemies:** 5 (Green/Red/Black Duwende, Santelmo, Manananggal)
-**Weapons:** 4 (Peck, Wing Slap, Feather Shot, Spiral Feathers)
+**Enemies:** 4 (Green/Red Duwende, Santelmo, Manananggal — Black Duwende is Update 1)
+**Weapons:** 6 (Peck, Wing Slap, Feather Shot, Spiral Feathers + clones Ice Shard, Flame Wing)
 **Passives:** 4 (Iron Beak, Thick Plumage, Racing Legs, Magnetic Aura)
 **Shop Upgrades:** 3 permanent (Damage, HP, Speed)
 **Modes:** 2 (Story Mode 30min, Endless unlocks after win)
 **Stages:** 1 (Farm arena)
 
-**Hard scope limit:** See `.taskmaster/docs/prd.md` for complete specifications. No features beyond PRD until after launch.
+**Hard scope limit:** See `.taskmaster/docs/modules/` for complete specifications. No features beyond the module PRDs until after launch.
 
 ## Important Constraints
 
@@ -359,9 +359,10 @@ game/
 
 ## Key Documentation
 
-- `.taskmaster/docs/prd.md` - Complete Product Requirements Document (2200+ lines)
-- Contains all game design specs, feature definitions, art requirements, and development timeline
-- Reference this document as the single source of truth for game design decisions
+- `.taskmaster/docs/modules/` - **CANONICAL specs**: 15 module PRDs (core / progression / characters / polish / launch) — the single source of truth for game design decisions; see its README.md for the index
+- `.taskmaster/docs/full-release-roadmap.md` - EA→1.0 scope, pricing strategy, post-launch update roadmap
+- `.taskmaster/docs/drift.md` - PRD↔tasks↔code drift audit (2026-07-22) with resolutions
+- `.taskmaster/docs/prd.md` - HISTORICAL: the original monolithic PRD, superseded by the module split — do not spec new work from it
 
 ## Notes for Claude Code
 

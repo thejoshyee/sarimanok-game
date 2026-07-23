@@ -111,3 +111,36 @@ Generated 2026-07-22. Sources: the 15 PRDs in `.taskmaster/docs/modules/`, `.tas
 - **Launch-prep complete (store page live, demo in Next Fest)** (`prd-launch-execute.md:13-19`): not met — prd-launch-prep untouched.
 - **Achievements + analytics feeding launch metrics** (`prd-launch-execute.md:126-140`): absent — neither exists in code.
 - **Update 1 content pulled from a shipped EA baseline (Black Duwende, enhanced Endless scaling)** (`prd-launch-execute.md:163-175`, matching `full-release-roadmap.md:122-131`): baseline not shipped; Black Duwende and Endless Mode have no code.
+
+---
+
+## Resolutions — 2026-07-22/23 (drift fix pass)
+
+Decisions by Josh: (1) HUD timer stays a **countdown** to dawn; (2) renderer flipped to **Compatibility** now; (3) persistence = new **SaveManager** autoload, GameState stays a reset orchestrator; (4) kills/score live in **ProgressionManager**; (5) task 50's parallax sky was a wrong vision — **cut by design**.
+
+### Status-table flags
+
+- **A** ✅ Fixed — subtask 16.3 set to done (was implemented all along).
+- **B** ✅ Doc fixed — prd-core-enemies.md now documents CharacterBody2D as built, with a "revisit only if the 200+ stress test shows physics cost" caveat. No code change.
+- **C** ✅ Doc fixed — prd-core-weapons.md Peck rows/description now match the shipped projectile implementation.
+- **D** ✅ Logged — weapon placeholder SFX → task 56 (pending); tr()/translations.csv localization prep → task 57 (deferred).
+- **E** ✅ Fixed — prd-core-arena.md added to modules/README.md index; remaining arena dressing (Decorations layer + POIs) → task 58 (deferred).
+- **F** ✅ Resolved by decision — parallax sky cut; decision recorded on task 50.5 and in prd-progression-victory.md §Dawn Transition (now shows the as-built CanvasModulate/DawnController structure).
+- **G** ✅ Resolved by decision — countdown kept; prd-progression-victory.md §Timer Display rewritten; prd-characters-endless.md notes the mode-aware display Endless will need.
+- **H** ✅ Doc fixed — prd-progression-state.md rewritten: as-built state-ownership table, SaveManager spec, canonical save schema. GameState stays a 5-line reset orchestrator.
+- **I** ✅ Fixed — game/project.godot switched to gl_compatibility (features tag + rendering_method). Pending manual verification: one F5 test run.
+
+### Cross-doc contradictions
+
+1. ✅ Arena size — 3072×2048/96×64 propagated to prd-core-foundation.md, prd-core-enemies.md, prd-core-progression.md.
+2. ✅ Spawn placement — prd-core-arena.md §Spawn Zones now defers to the ring spawn (prd-core-enemies.md + enemy_spawner.gd); edge-spawn concept marked superseded.
+3. ✅ Save keys — canonical schema lives ONLY in prd-progression-state.md (`*_story`/`*_endless` keys, save_version, times as float seconds); meta/variants/endless now point to it instead of duplicating JSON.
+4. ✅ Settings schema — unified into the canonical schema (6 keys); prd-polish-feel.md points there and references SaveManager.settings (GameState.settings is gone).
+5. ✅ EA price — all PRD price headers now read "$2.99 EA → $4.99 at 1.0" citing the roadmap; demo-screen mock updated.
+6. ✅ Module index — modules/README.md says 15 files and indexes prd-core-arena.md.
+
+### Also in this pass
+
+- tasks.json: tasks 51/53 ghost `GameSession`/`RunStats` text rewritten to ProgressionManager/GameTimer (decision 4); unexpanded tasks 52/53/54 expansionPrompts de-ghosted; remaining GameSession mentions are deliberate history (task 48's "do NOT create" guard, already-expanded prompts, decision notes).
+- All 15 module PRD headers: lapsed "14 weeks → March 8, 2026" timeline replaced with phase-based wording; polish-release + launch PRDs carry a "calendar dates lapsed" banner over their date-driven bodies.
+- CLAUDE.md: modules/ promoted to canonical (prd.md marked historical), MVP scope corrected to 6 weapons / 4 EA enemies, viewport coverage 1/6, Peck weapon-type line updated.

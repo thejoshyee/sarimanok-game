@@ -5,7 +5,7 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
 
 After Week 6, you have a functionally complete, shippable MVP. Week 7 focuses on making the game **feel good** (settings, juice, controller polish).
 
@@ -46,20 +46,7 @@ After Week 6, you have a functionally complete, shippable MVP. Week 7 focuses on
 
 ### Settings Persistence
 
-Settings save to file:
-
-```json
-{
-  "settings": {
-    "music_volume": 0.8,
-    "sfx_volume": 1.0,
-    "fullscreen": true,
-    "window_mode": "fullscreen", // "fullscreen", "windowed", "borderless"
-    "screen_shake_enabled": true,
-    "reduced_motion": false
-  }
-}
-```
+Settings persist inside the save file's `settings` block, owned by `SaveManager`. **Canonical schema:** [prd-progression-state.md §Save Data Format](../progression/prd-progression-state.md) — this module's keys: `music_volume`, `sfx_volume`, `fullscreen`, `window_mode`, `screen_shake_enabled`, `reduced_motion`.
 
 ### Technical Requirements
 
@@ -96,7 +83,7 @@ Implement subtle camera shake on impactful events:
 
 ```gdscript
 func camera_shake(intensity: float, duration: float):
-    if not GameState.settings.screen_shake_enabled:
+    if not SaveManager.settings.screen_shake_enabled:
         return
 
     var tween = create_tween()

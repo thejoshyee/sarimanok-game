@@ -5,8 +5,8 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
-- **Price:** $2.99-4.99
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
+- **Price:** $2.99 EA → $4.99 at 1.0 (see full-release-roadmap.md §Pricing Strategy)
 
 By Week 4, you have a complete gameplay loop: Classic Sarimanok, 2 Duwende enemies (Green/Red), 6 weapons, 4 passives, level-up system, and XP/Gold pickups. This milestone adds the **win condition** (survive to 30:00 dawn) and remaining enemies (Santelmo, Manananggal boss).
 
@@ -29,7 +29,7 @@ By Week 4, you have a complete gameplay loop: Classic Sarimanok, 2 Duwende enemi
 # Feature 7: Game Timer & Win Condition
 
 **What It Does:**
-30-minute timer counts up. Surviving to 30:00 = VICTORY (dawn, rooster crows). HP reaching 0 = DEFEAT.
+30-minute run. The HUD shows a countdown — time remaining until dawn. Reaching 0:00 = VICTORY (dawn, rooster crows). HP reaching 0 = DEFEAT.
 
 ## Timer Display
 
@@ -40,8 +40,8 @@ By Week 4, you have a complete gameplay loop: Classic Sarimanok, 2 Duwende enemi
 ```
 
 Position: Top center of screen
-Format: MM:SS
-Counts UP from 0:00
+Format: MM:SS (time REMAINING until dawn)
+Counts DOWN from 30:00 to 0:00 — decided 2026-07-22, as built in `game/scripts/ui/hud.gd`. Internally `GameTimer.elapsed_time` counts UP; only the display inverts it. Endless Mode will need a count-up display (see prd-characters-endless.md).
 
 ## Win Condition (Story Mode)
 
@@ -94,18 +94,14 @@ Show results screen (same as win, different header)
 
 **Key Principle:** Tiles are drawn in **normal/natural colors** (as if daytime). The CanvasModulate applies the night tint during gameplay. At victory, the tint fades to reveal the "dawn" version that was there all along.
 
-**Scene Structure:**
+> **Scope decision (2026-07-22):** The originally-specced ParallaxBackground sky layer (gradient Sky, Moon, Stars) was a wrong vision and is **CUT — do not re-add**. The dawn effect is CanvasModulate-only, implemented in `game/scripts/core/dawn_controller.gd` (task 50).
+
+**Scene Structure (as built):**
 
 ```
 Main Scene
-├── ParallaxBackground (Sky Layer)
-│   ├── Sky (ColorRect or Sprite2D - gradient)
-│   ├── Moon (Sprite2D - SOURCED, not custom)
-│   └── Stars (Sprite2D or particles - SOURCED)
-│
 ├── CanvasModulate (Night Filter - tints everything below)
-│
-├── Background (Bahay kubo, trees - gets tinted)
+├── DawnController (Node - owns the dawn tween; exports canvas_modulate_path)
 ├── TileMap (Ground/decorations - gets tinted)
 ├── Player (gets tinted)
 ├── Enemies (gets tinted)
@@ -118,38 +114,25 @@ Main Scene
 | Night (gameplay) | `Color(0.6, 0.6, 0.8)` | Slight blue/cool tint |
 | Dawn (victory) | `Color(1.0, 0.95, 0.9)` | Warm white, natural colors |
 
-**Sky Elements (SOURCED - Not Custom):**
-
-- **Moon:** Source from asset pack or free sprites (32x32 or 48x48)
-- **Stars:** Source from asset pack, or use simple white dots/particles
-- **Sky gradient:** Can be created in Godot using `GradientTexture2D` (no art file needed)
-
-**Transition Code Example:**
+**Transition (as built — `game/scripts/core/dawn_controller.gd`):**
 
 ```gdscript
-func trigger_dawn_transition():
-    var tween = create_tween()
-
-    # 1. Fade out moon and stars (2 seconds)
-    tween.tween_property($Moon, "modulate:a", 0.0, 2.0)
-    tween.parallel().tween_property($Stars, "modulate:a", 0.0, 2.0)
-
-    # 2. Shift sky gradient from night blue to warm dawn
-    tween.parallel().tween_property($Sky, "modulate", Color(1.0, 0.8, 0.6), 2.0)
-
-    # 3. Shift CanvasModulate from night tint to warm dawn
-    tween.parallel().tween_property($CanvasModulate, "color", Color(1.0, 0.95, 0.9), 2.0)
-
+func _on_run_won() -> void:
+    if _transition_started:
+        return
+    _transition_started = true
+    var tween := create_tween()
+    tween.tween_property(canvas_modulate, "color", dawn_color, 2.0)
     await tween.finished
-    # Continue to victory screen, play COCKADOODLEDOO, etc.
+    dawn_transition_finished.emit()  # results screen / crow SFX hook (task 51)
 ```
 
 **Visual Timeline:**
-| Time | Sky | Moon/Stars | CanvasModulate |
-| ------------------ | --------------------- | ---------- | -------------------- |
-| 0:00-29:59 | Dark blue/purple | Visible | Night tint (blue) |
-| 30:00 (transition) | Shifts to orange/pink | Fading out | Shifts to warm white |
-| 30:02+ | Warm dawn colors | Gone | Natural colors |
+| Run time (internal) | CanvasModulate |
+| ------------------ | -------------------- |
+| 0:00-29:59 | Night tint (cool blue) |
+| 30:00 (transition) | 2-second tween to warm white |
+| 30:02+ | Natural colors |
 
 ---
 

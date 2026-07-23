@@ -5,7 +5,7 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
 
 ---
 
@@ -198,8 +198,8 @@ What's playable at end of week:
 - [ ] **Set up Audio buses in Project Settings (Master, Music, SFX) - do this Day 1, takes 5 minutes, prevents hours of headache later**
 - [ ] **Configure Input Map in Project Settings**: Map 'Spacebar' and 'Gamepad A' to 'ui_accept' (makes controller support free/automatic).
 - [ ] Create TileMap with placeholder tileset (simple colored squares)
-- [ ] Paint basic 60×34 arena with placeholder tiles
-- [ ] Set up Camera2D with limits (0,0 to 1920,1088)
+- [ ] Paint basic 96×64 arena with placeholder tiles (see [prd-core-arena.md](prd-core-arena.md))
+- [ ] Set up Camera2D with limits (0,0 to 3072,2048)
 - [ ] Add invisible boundary collision (StaticBody2D)
 - [ ] Implement player movement (WASD) using `Input.get_action_strength()` for analog support
 - [ ] Create placeholder Sarimanok sprite (colored rectangle 32x32)

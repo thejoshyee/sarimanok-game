@@ -1,12 +1,12 @@
 # PRD Modules - Split Structure
 
-This directory contains the project's PRD split into 14 smaller, focused files (~150-280 lines each) for optimal task-master-ai parsing.
+This directory contains the project's PRD split into 15 smaller, focused files (~150-300 lines each) for optimal task-master-ai parsing.
 
 ## Directory Structure
 
 ```
 modules/
-├── core/           (4 files) - Weeks 1-3 Foundation
+├── core/           (5 files) - Weeks 1-3 Foundation
 ├── progression/    (3 files) - Weeks 4-5 Win Condition & Shop
 ├── characters/     (2 files) - Week 6 Character Variants & Endless Mode
 ├── polish/         (3 files) - Weeks 7-11 Settings, Art, Audio, Balance
@@ -21,6 +21,7 @@ modules/
 - [core/prd-core-enemies.md](core/prd-core-enemies.md) - Enemy system, Duwendes, spawning (133 lines)
 - [core/prd-core-weapons.md](core/prd-core-weapons.md) - Weapon system, 6 weapons, data-driven architecture (187 lines)
 - [core/prd-core-progression.md](core/prd-core-progression.md) - Passives, level-up, pickups, Week 1-3 tasks (346 lines)
+- [core/prd-core-arena.md](core/prd-core-arena.md) - Farm arena layout, tileset, zones, camera (296 lines — added Dec 2025, indexed 2026-07-22)
 
 ### Weeks 4-5: Win Condition & Meta Progression
 
@@ -103,6 +104,7 @@ Each PRD file includes:
 
 - `core/prd-core-foundation.md` - Already parsed (Sarimanok Classic integrated separately)
 - `core/prd-core-enemies.md` - Already in progress (Duwendes integrated separately)
+- `core/prd-core-arena.md` - Tileset/art replacement handled inline (§Art Replacement)
 - `progression/prd-progression-state.md` - No art (pure code/data)
 - `characters/prd-characters-endless.md` - No art (mode logic only)
 - `launch/prd-launch-execute.md` - No art (launch logistics only)
@@ -134,6 +136,7 @@ task-master parse-prd .taskmaster/docs/modules/progression/prd-progression-victo
 | core/prd-core-enemies.md               | 133   | ✅ Compact                            |
 | core/prd-core-weapons.md               | 187   | ✅ Target                             |
 | core/prd-core-progression.md           | 346   | ⚠️ Slightly over (3 features + tasks) |
+| core/prd-core-arena.md                 | 296   | ✅ Target                             |
 | progression/prd-progression-victory.md | 255   | ✅ Target                             |
 | progression/prd-progression-meta.md    | 224   | ✅ Target                             |
 | progression/prd-progression-state.md   | 271   | ✅ Target                             |
@@ -145,7 +148,7 @@ task-master parse-prd .taskmaster/docs/modules/progression/prd-progression-victo
 | launch/prd-launch-prep.md              | 169   | ✅ Target                             |
 | launch/prd-launch-execute.md           | 253   | ✅ Target                             |
 
-**Total:** 14 files, average 233 lines per file (target: ~200-250 lines)
+**Total:** 15 files, average ~235 lines per file (target: ~200-250 lines)
 
 ## Benefits of Split Structure
 

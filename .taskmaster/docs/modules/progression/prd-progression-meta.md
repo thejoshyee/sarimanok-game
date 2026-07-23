@@ -5,7 +5,7 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
 
 ---
 
@@ -57,19 +57,7 @@ Example: Buy "Damage +2%" 10 times = +20% damage on ALL runs forever.
 
 ## Saving Shop Upgrades
 
-Shop purchases persist in save file:
-
-```json
-{
-  "gold": 350,
-  "shop_damage": 6, // +6% damage bought
-  "shop_hp": 15, // +15 HP bought
-  "shop_speed": 3, // +3% speed bought
-  "endless_unlocked": true,
-  "high_score": 12450,
-  "best_time": "23:47"
-}
-```
+Shop purchases persist in the save file via `SaveManager`. **Canonical schema:** [prd-progression-state.md §Save Data Format](prd-progression-state.md) — do not duplicate the JSON here. This module's keys: `shop_damage`, `shop_hp`, `shop_speed` (purchase counts), plus `high_score_story` / `best_time_story` bookkeeping (times are float seconds).
 
 ## Technical Requirements
 

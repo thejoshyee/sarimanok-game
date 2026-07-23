@@ -6,8 +6,8 @@
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
 - **Inspiration:** Vampire Survivors + Filipino mythology
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
-- **Price:** $2.99-4.99
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
+- **Price:** $2.99 EA → $4.99 at 1.0 (see full-release-roadmap.md §Pricing Strategy)
 
 **What is Sarimanok?**
 The Sarimanok is a legendary bird from the folklore of the Maranao people of Mindanao, Philippines. It symbolizes good fortune, prosperity, and royalty. Depicted as a colorful bird with elaborate, intricate designs, it's often shown with a fish in its beak—representing offerings to the spirit world. The Sarimanok serves as a spiritual link between the seen and unseen worlds, making it the perfect guardian against creatures of darkness.
@@ -47,7 +47,7 @@ This milestone establishes the core survivor gameplay loop: move, auto-attack, d
 
 - **Viewport:** 640×360 pixels (what camera shows)
 - **Window:** Scales to player's monitor (3× for 1080p, 4× for 1440p)
-- **Arena:** 1920×1088 pixels (60×34 tiles)
+- **Arena:** 3072×2048 pixels (96×64 tiles) — see [prd-core-arena.md](prd-core-arena.md)
 - **Tile size:** 32×32 pixels
 
 **Godot Project Settings:**

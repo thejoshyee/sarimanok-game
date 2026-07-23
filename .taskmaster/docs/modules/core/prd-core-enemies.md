@@ -5,7 +5,7 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
 
 ---
 
@@ -85,7 +85,7 @@ On contact with player:
 - Calculate spawn distance based on viewport diagonal (~730px for 640×360) plus padding
 - Spawn enemies at `viewport_diagonal / 2 + 100` pixels from player (~465px)
 - Use polar coordinates: random angle, fixed distance from player position
-- Clamp spawn positions to stay within map bounds (0-1920, 0-1088) for bounded maps
+- Clamp spawn positions to stay within map bounds (0-3072, 0-2048) for bounded maps
 - This approach works for both bounded and future infinite maps
 
 **Spawn Timeline (Weeks 1-3):**
@@ -119,13 +119,13 @@ func get_spawn_interval(elapsed_minutes: float) -> float:
 
 ## Technical Requirements
 
-- Enemy scene with **Area2D** (NOT CharacterBody2D - see note below)
+- Enemy scene is a **CharacterBody2D** with a child **DamageArea (Area2D)** for player contact — as built in `game/scripts/enemies/enemy_duwende.gd` (moves via `move_and_slide()`)
 - Simple pathfinding (just move toward player)
 - Spawn manager that tracks time and spawn rates
 - Object pooling for performance (reuse enemy instances)
 - Death: Play particle effect, drop XP gem + Gold coin, return to pool
 
-**Why Area2D instead of CharacterBody2D:** Enemies only need to move toward the player (simple vector math) and detect overlap for damage. CharacterBody2D includes physics overhead (collision response, move_and_slide) that tanks FPS with 200+ enemies on screen. Area2D is lightweight and sufficient for our needs.
+**Body-type note (updated 2026-07-22):** The original spec called for Area2D-only enemies to avoid physics overhead at 200+ on screen. The shipped enemies use CharacterBody2D + `move_and_slide()` and passed the Week-3-scale performance tests (tasks 10, 37). Revisit ONLY if the 200+ stress test shows physics cost — do not refactor preemptively.
 
 ## Placeholder Art (Week 1-3)
 

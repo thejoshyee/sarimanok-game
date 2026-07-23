@@ -5,8 +5,8 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
-- **Price:** $2.99-4.99
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
+- **Price:** $2.99 EA → $4.99 at 1.0 (see full-release-roadmap.md §Pricing Strategy)
 
 By Week 6, you have a complete, winnable game: Classic Sarimanok, 4 enemies (Green/Red Duwende, Santelmo, Manananggal boss), 6 weapons, 4 passives, level-up system, shop progression, win condition (30:00 dawn), and save system. This milestone adds **character variety** (Shadow & Golden Sarimanok variants).
 
@@ -123,30 +123,16 @@ Three Sarimanok variants with different stats encourage different playstyles. Sh
 
 ## Save File Updates
 
-Add unlock tracking to save data:
-
-```json
-{
-  "gold": 350,
-  "shop_damage": 6,
-  "shop_hp": 15,
-  "shop_speed": 3,
-  "endless_unlocked": false,
-  "shadow_unlocked": false,
-  "golden_unlocked": false,
-  "high_score_story": 12450,
-  "best_time_story": "30:00"
-}
-```
+Unlock tracking persists via `SaveManager`. **Canonical schema:** [prd-progression-state.md §Save Data Format](../progression/prd-progression-state.md) — do not duplicate the JSON here. This module's keys: `shadow_unlocked`, `golden_unlocked`.
 
 ## Unlock Logic
 
 ```gdscript
-# In GameState.gd
+# In save_manager.gd (see prd-progression-state.md — GameState is only a reset orchestrator)
 
 func check_shadow_unlock():
     """Call when run ends. Check if player survived 15:00 in Story Mode."""
-    if time_survived >= 900.0 and not shadow_unlocked:  # 15:00 = 900 seconds
+    if GameTimer.elapsed_time >= 900.0 and not shadow_unlocked:  # 15:00 = 900 seconds
         shadow_unlocked = true
         show_unlock_notification("Shadow Sarimanok")
         save_game()

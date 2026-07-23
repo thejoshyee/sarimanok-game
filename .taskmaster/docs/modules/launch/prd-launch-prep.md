@@ -5,8 +5,10 @@
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
-- **Price:** $2.99-4.99
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
+- **Price:** $2.99 EA → $4.99 at 1.0 (see full-release-roadmap.md §Pricing Strategy)
+
+> ⚠ **Calendar dates below are from the original Dec 2025 plan and have lapsed** — re-anchor to the next Steam Next Fest cycle when the launch phase begins. The weekly structure still applies.
 
 After Week 11, the game is **code complete, balanced, and bug-fixed**. Weeks 12-14 focus on **Steam launch logistics**: final build submission, Next Fest demo launch (Feb 23-Mar 2), and Early Access launch (~March 8). This is the home stretch!
 

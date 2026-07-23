@@ -194,16 +194,9 @@ Row 3 (y=96-127):
 
 ## Spawn Zones
 
-Enemies spawn just outside the visible arena, then walk in.
+**Updated 2026-07-22 — supersedes the earlier edge-spawn concept.** Enemies spawn in a ring around the PLAYER, not along the arena edges: random angle (polar coordinates) at ~405-495px from the player, clamped inside arena bounds (0-3072, 0-2048). This keeps spawn pressure constant wherever the player stands in the large arena.
 
-| Zone | Spawn Area | Notes |
-|------|------------|-------|
-| **North** | Y = -32, X = 0 to 3072 | Random X along top edge |
-| **South** | Y = 2080, X = 0 to 3072 | Random X along bottom edge |
-| **East** | X = 3104, Y = 0 to 2048 | Random Y along right edge |
-| **West** | X = -32, Y = 0 to 2048 | Random Y along left edge |
-
-**Spawn logic:** Pick random edge, pick random position along that edge, spawn enemy 32-64 pixels outside boundary.
+**Spec:** [prd-core-enemies.md §Spawn System](prd-core-enemies.md) · **Implementation:** `game/scripts/core/enemy_spawner.gd`
 
 ---
 
@@ -232,7 +225,7 @@ Invisible StaticBody2D walls prevent player from leaving arena:
 | Left | (-16, 1024) | (32, 2048) |
 | Right | (3088, 1024) | (32, 2048) |
 
-**Note:** Enemies spawn OUTSIDE these walls and walk through them (no collision with enemies, only player).
+**Note:** Walls collide with the player only. Enemies ignore them (they spawn inside the bounds just offscreen — see §Spawn Zones — and have no boundary collision).
 
 ---
 

@@ -1,38 +1,144 @@
-# Sarimanok Survivor - Save System & GameState (Weeks 4-5)
+# Sarimanok Survivor - Save System & State Architecture (Weeks 4-5)
 
 ## Project Context
 
 - **Genre:** Filipino folklore-themed survivor roguelite
 - **Platform:** Windows (Godot 4.x, GDScript)
 - **Art Style:** Top-down pixel art (32x32 sprites, 640×360 viewport)
-- **Timeline:** 14 weeks → Early Access launch ~March 8, 2026
+- **Timeline:** phase-based, no fixed dates — see CLAUDE.md
+
+> **Rewritten 2026-07-22** to match the shipped architecture (drift audit). The
+> original "GameState singleton owns everything" design was removed deliberately
+> (task 44); this file now documents state ownership as built and specs the
+> `SaveManager` autoload still to be built.
 
 ---
 
-# Save Data Format
+# Run-State Architecture (As Built — Weeks 1-4)
+
+State is NOT centralized in one singleton. Each autoload owns one job (see
+CLAUDE.md §Core Game State Architecture). `GameState` is a thin **reset
+orchestrator** — its only public method is `reset_run()`, which fans out per-run
+cleanup to the stateful autoloads (`game/autoloads/game_state.gd`).
+
+| State | Owner | Notes |
+| --- | --- | --- |
+| XP, level, gold (+ kills, score — task 51.2) | `ProgressionManager` | Per-run; gold accrues during the run |
+| Passive levels | `PassiveManager` | `get_bonus(id)` / `get_modifier(id)` helpers |
+| Elapsed time, run state, win/lose | `GameTimer` | `elapsed_time`, `is_gameplay_active()`, `run_won` / `run_lost` signals |
+| Filler stat bonuses | `LevelUpManager` | `filler_damage_bonus`, `filler_speed_bonus` |
+| Weapon slots + levels | `WeaponManager` (on Player) | `MAX_WEAPONS = 6`; run starts with Peck (granted in `player.gd _ready`) |
+| Effective stats | Computed at call sites | e.g. `stats.max_hp + PassiveManager.get_bonus("thick_plumage")` — no central getters |
+
+**Rules:**
+
+- Do NOT add run-data fields or computed-stat getters to `GameState` — that
+  design was removed on purpose (task 44).
+- New per-run state goes on the autoload that owns the domain, and MUST be wired
+  into that autoload's `reset_run()`.
+- Effective values are computed where they're used (multiply `get_modifier()`,
+  add `get_bonus()`), matching the existing passive pattern.
+
+---
+
+# SaveManager Autoload (To Build — Week 5)
+
+Persistence lives in a NEW dedicated `SaveManager` autoload (decided
+2026-07-22). GameState stays a reset orchestrator; SaveManager owns everything
+that outlives a run:
+
+- `load_game()` at startup; `save_game()` on run end, shop purchase, and
+  settings change
+- The canonical save schema (below), `SAVE_VERSION`, and `migrate_save()` for
+  format changes
+- Write-backup safety (below)
+- Persisted settings (applied at startup; the settings UI arrives in
+  prd-polish-feel)
+
+Consumers read persistent values through SaveManager (shop purchase counts,
+unlock flags, high scores). Applying those values to gameplay stays at call
+sites, same as passives — the exact shop-bonus wiring is specced in
+prd-progression-meta when that module is built.
+
+**On run end:** fold the run's gold from `ProgressionManager` into
+`SaveManager.gold`, update the high score / best time for the active mode, then
+`save_game()`. The exact hand-off is decided when SaveManager is built.
+
+```gdscript
+# save_manager.gd — Autoload sketch (build in Week 5)
+extends Node
+
+const SAVE_VERSION = 1  # Increment when the schema changes
+const SAVE_PATH = "user://save_data.json"
+
+# Persistent data — mirrors the canonical schema below
+var gold: int = 0
+var shop_damage: int = 0      # times bought
+var shop_hp: int = 0          # times bought
+var shop_speed: int = 0       # times bought
+var high_score_story: int = 0
+var high_score_endless: int = 0
+var best_time_story: float = 0.0    # seconds
+var best_time_endless: float = 0.0  # seconds
+var endless_unlocked: bool = false
+var shadow_unlocked: bool = false
+var golden_unlocked: bool = false
+var settings: Dictionary = {}  # defaults per canonical schema
+
+func save_game() -> void:
+    pass  # backup first (Save File Safety), then write the canonical schema
+
+func load_game() -> void:
+    pass  # read file, check save_version, migrate_save() if older, apply settings
+
+func migrate_save(data: Dictionary, from_version: int) -> Dictionary:
+    return data  # add migration steps as the schema evolves
+```
+
+---
+
+# Save Data Format (CANONICAL)
 
 Save file location: `user://save_data.json`
 
+**This is the single source of truth for the save schema.** Other PRDs
+(prd-progression-meta, prd-characters-variants, prd-characters-endless,
+prd-polish-feel) point here and list only the keys they introduce — do not
+duplicate this JSON elsewhere.
+
 ```json
 {
+  "save_version": 1,
   "gold": 350,
   "shop_damage": 6,
   "shop_hp": 15,
   "shop_speed": 3,
   "high_score_story": 12450,
-  "best_time_story": "30:00",
+  "high_score_endless": 0,
+  "best_time_story": 1800.0,
+  "best_time_endless": 2843.5,
   "endless_unlocked": false,
+  "shadow_unlocked": false,
+  "golden_unlocked": false,
   "settings": {
     "music_volume": 0.8,
     "sfx_volume": 1.0,
-    "fullscreen": false
+    "fullscreen": true,
+    "window_mode": "fullscreen",
+    "screen_shake_enabled": true,
+    "reduced_motion": false
   }
 }
 ```
 
+**Times are float seconds** (`1800.0`, not `"30:00"`) — format at display time
+via `GameTimer.format_time()`. Storing formatted strings was a drift source in
+the original split PRDs.
+
 ## Save File Safety
 
-**Always backup before writing** to prevent data loss from crashes or power failures:
+**Always backup before writing** to prevent data loss from crashes or power
+failures:
 
 ```gdscript
 func save_game():
@@ -48,136 +154,8 @@ func save_game():
     file.store_string(JSON.stringify(save_data))
 ```
 
-**Why this matters**: If save write fails mid-operation (crash, power loss), the backup ensures the player doesn't lose ALL progress - just the most recent run.
-
-## GameState Singleton (Critical for Week 5)
-
-```gdscript
-# GameState.gd - Autoload Singleton
-extends Node
-
-# ═══════════════════════════════════════════════
-# SAVE FILE VERSIONING
-# ═══════════════════════════════════════════════
-const SAVE_VERSION = 1  # Increment when save format changes
-
-# ═══════════════════════════════════════════════
-# PERSISTENT DATA (Saved to file)
-# ═══════════════════════════════════════════════
-var gold: int = 0
-var shop_damage: int = 0      # Times bought
-var shop_hp: int = 0          # Times bought
-var shop_speed: int = 0       # Times bought
-var high_score_story: int = 0
-var best_time_story: float = 0.0
-
-# ═══════════════════════════════════════════════
-# RUN DATA (Resets each run)
-# ═══════════════════════════════════════════════
-var current_hp: int = 100
-var max_hp: int = 100
-var current_xp: int = 0
-var xp_to_next_level: int = 5
-var level: int = 1
-var score: int = 0
-var gold_this_run: int = 0
-var time_survived: float = 0.0
-var enemies_killed: int = 0
-
-# Weapons: Array of {id, level}
-var weapons: Array = []
-const MAX_WEAPONS = 6
-
-# Passives: Dictionary of {id: level}
-var passives: Dictionary = {}
-
-# ═══════════════════════════════════════════════
-# COMPUTED STATS (Base + Shop + Passives)
-# ═══════════════════════════════════════════════
-func get_damage_multiplier() -> float:
-    var shop_bonus = shop_damage * 0.02  # +2% per purchase
-    var passive_bonus = passives.get("iron_beak", 0) * 0.10  # +10% per level
-    return 1.0 + shop_bonus + passive_bonus
-
-func get_max_hp() -> int:
-    var shop_bonus = shop_hp * 5  # +5 per purchase
-    var passive_bonus = passives.get("thick_plumage", 0) * 15  # +15 per level
-    return 100 + shop_bonus + passive_bonus
-
-func get_move_speed() -> float:
-    var base = 200.0
-    var shop_bonus = shop_speed * 0.01  # +1% per purchase
-    var passive_bonus = passives.get("racing_legs", 0) * 0.10  # +10% per level
-    return base * (1.0 + shop_bonus + passive_bonus)
-
-func get_pickup_range() -> float:
-    var base = 50.0
-    var passive_bonus = passives.get("magnetic_aura", 0) * 0.20  # +20% per level
-    return base * (1.0 + passive_bonus)
-
-# ═══════════════════════════════════════════════
-# FUNCTIONS
-# ═══════════════════════════════════════════════
-func reset_run():
-    """Call at start of each run."""
-    current_xp = 0
-    xp_to_next_level = 5
-    level = 1
-    score = 0
-    gold_this_run = 0
-    time_survived = 0.0
-    enemies_killed = 0
-    weapons = [{id = "peck", level = 1}]  # Start with Peck
-    passives = {}
-    max_hp = get_max_hp()
-    current_hp = max_hp
-
-func end_run(won: bool):
-    """Call when run ends."""
-    gold += gold_this_run
-    if won:
-        score += 1000  # Victory bonus
-    if score > high_score_story:
-        high_score_story = score
-    if won or time_survived > best_time_story:
-        best_time_story = time_survived
-    save_game()
-
-func save_game():
-    var save_data = {
-        "save_version": SAVE_VERSION,
-        "gold": gold,
-        "shop_damage": shop_damage,
-        "shop_hp": shop_hp,
-        "shop_speed": shop_speed,
-        "high_score_story": high_score_story,
-        "best_time_story": best_time_story
-    }
-    var file = FileAccess.open("user://save_data.json", FileAccess.WRITE)
-    file.store_string(JSON.stringify(save_data))
-
-func load_game():
-    if FileAccess.file_exists("user://save_data.json"):
-        var file = FileAccess.open("user://save_data.json", FileAccess.READ)
-        var data = JSON.parse_string(file.get_as_text())
-
-        # Check save version and migrate if needed
-        var version = data.get("save_version", 0)
-        if version < SAVE_VERSION:
-            data = migrate_save(data, version)
-
-        gold = data.get("gold", 0)
-        shop_damage = data.get("shop_damage", 0)
-        shop_hp = data.get("shop_hp", 0)
-        shop_speed = data.get("shop_speed", 0)
-        high_score_story = data.get("high_score_story", 0)
-        best_time_story = data.get("best_time_story", 0.0)
-
-func migrate_save(data: Dictionary, from_version: int) -> Dictionary:
-    """Migrate old save files to current version."""
-    # Add migration logic here as save format evolves
-    return data
-```
+**Why this matters**: If save write fails mid-operation (crash, power loss), the
+backup ensures the player doesn't lose ALL progress - just the most recent run.
 
 ---
 
@@ -258,7 +236,7 @@ Builds on Week 3, adds:
 
 - [ ] Save/load works correctly
 - [ ] Save file versioning works
-- [ ] GameState singleton implemented
+- [ ] SaveManager autoload implemented (schema + versioning + backup)
 - [ ] Shop bonuses calculated correctly
 - [ ] No console errors
 
@@ -268,4 +246,3 @@ Builds on Week 3, adds:
 - [Win Condition & Enemies](prd-progression-victory.md) - Features 7-8
 - [Shop System & Score](prd-progression-meta.md) - Features 9-10
 - **Next Milestone:** Week 6 (Character Select & Endless Mode) - See [../characters/prd-characters-variants.md](../characters/prd-characters-variants.md)
-
