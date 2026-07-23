@@ -3234,7 +3234,7 @@
             "dependencies": [
               1
             ],
-            "details": "Use the PRD target and the playtest result to map expected pressure at early, mid, and late game checkpoints. Identify where player durability diverges from target, especially around the 15-minute mark and into the back half of the run, so tuning can focus on the correct window.",
+            "details": "Use the PRD target and the playtest result to map expected pressure at early, mid, and late game checkpoints. Identify where player durability diverges from target, especially around the 15-minute mark and into the back half of the run, so tuning can focus on the correct window.\n<info added on 2026-07-23T07:56:57.132Z>\nNow let me read the XP and leveling system to understand the level-up pool details mentioned in the user request.Now I have enough context to generate the update text. Let me examine the existing progression system and XP curve to provide specific numbers.Now I have all the context needed. Let me formulate the update text based on the user request about extending the balance-pass scope.\n\nBalance-pass scope extended (2026-07-23). In addition to measuring the survivability curve, playtest analysis for this subtask now includes two additional design questions logged in prd-polish-release.md Open Design Questions:\n\n(a) Night length evaluation: Compare player engagement and content density at 30:00 vs 20:00. The existing content budget (4 enemies + spawn events + 1 boss) may feel denser and better-paced as a 20-minute night. Changing night length affects boss spawn timing (currently 20:00), enemy unlock thresholds, and the CanvasModulate dawn transition. Measure boredom curves, death rates, and perceived pacing during playtests at both lengths.\n\n(b) Late-run level-up pool exhaustion analysis: Current upgrade pool is ~50 real picks (6 weapons x 5 levels + 4 passives x 5 levels = 50), which sits at the low end of the 40-60 level-up target. With the linear XP curve (5 + (level-1) x 5), players reach level 30+ in a full run, meaning the final third goes filler-only once all weapons and passives are maxed. Evaluate levers: (1) flatten late XP curve slope to slow level-ups after ~level 25, (2) accept filler-heavy late game as a design choice (fillers defined in LevelUpManager: Quick Heal, Gold Bonus, Sharper Beak, Quick Feet), or (3) pull weapon evolutions forward from Update 1 to expand the real-upgrade pool. See level_up_manager.gd FILLER_OPTIONS and progression.gd get_xp_for_level() for current implementation.\n</info added on 2026-07-23T07:56:57.132Z>",
             "status": "deferred",
             "testStrategy": "Record HP, damage taken, and deaths or near-deaths at regular intervals in a 30-minute run, then compare the graph against the desired curve.",
             "updatedAt": "2026-05-16T05:47:55.356Z",
@@ -4160,12 +4160,36 @@
         "dependencies": [],
         "status": "deferred",
         "subtasks": []
+      },
+      {
+        "id": 59,
+        "title": "Fix enemy contact damage: remove despawn-on-contact, implement hit-and-back-off attack cycle",
+        "description": "Enemies currently despawn themselves after touching the player (suicide-on-contact) - a bug, not the design. Implement the hit-and-back-off model decided 2026-07-23 and specced in prd-core-enemies.md §Enemy Behaviors.",
+        "details": "Spec: on overlap deal `damage` once, then a per-enemy attack cooldown (~1.0s, @export) with a brief back-off/pause (~0.3s, @export) before resuming chase; the enemy NEVER despawns on contact. Player's 0.5s i-frames stay unchanged as the global swarm gate. Consolidate damage application to ONE owner - it is currently duplicated: enemy_duwende.gd _on_damage_area_body_entered (which also self-despawns, the bug) AND player.gd _on_damage_area_body_entered both apply damage on entry. Reset any new cooldown state in reset_state() so pooled enemies come back clean. Elites (task 60) inherit this behavior automatically via the inherited-scene pattern.",
+        "testStrategy": "Main scene: let one duwende reach you - it should hit, pause/back off briefly, and hit again ~1s later without vanishing. Stand in a swarm - damage intake capped by the 0.5s i-frames. Then kill the enemy - death/pooling still works (despawn happens via death only). Verify reset_state() clears cooldown so a recycled enemy can attack immediately.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 60,
+        "title": "Spawn events and elite duwende variants (run-density fix)",
+        "description": "Implement §Spawn Events from prd-progression-victory.md: swarm rings and elite recolor duwendes at fixed timeline beats, reusing existing pools - fixes the green-only 0:00-8:00 stretch and the post-boss dead zone.",
+        "details": "Event table lives in prd-progression-victory.md §Spawn Events (4:00 swarm ring, 12:00 first elite, 16:00 mixed ring, 22:00+ post-boss escalation; all numbers tunable at Week 11). Swarm ring = ~20 greens spawned simultaneously in a circle converging on the player, with a 1s telegraph. Elite = inherited scene from enemy_duwende.tscn (same pattern as green/red variants, task 47): ~5x HP, 2x damage, darker tint + slightly larger, 5x XP/gold drops. Events ADD to the base spawn rate, never replace it; gate on GameTimer.is_gameplay_active(); give elites small dedicated pools (they are rare). Extends the spawn controller - builds on the task 54 timeline work.",
+        "testStrategy": "Use GameTimer.debug_skip_minutes to land just before each event beat; verify the ring telegraphs then converges, elites are visibly distinct and drop 5x pickups, and frame rate holds during a ring (pool debug overlay shows reuse, no instantiate spikes).",
+        "priority": "medium",
+        "dependencies": [
+          54
+        ],
+        "status": "pending",
+        "subtasks": []
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-07-23T06:54:34.589Z",
-      "taskCount": 58,
+      "lastModified": "2026-07-23T07:57:34.799Z",
+      "taskCount": 60,
       "completedCount": 47,
       "tags": [
         "master"
