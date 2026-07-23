@@ -65,9 +65,18 @@ Every frame:
   velocity = direction * speed
   move_and_slide()
 
-On contact with player:
-  player.take_damage(damage)
+On contact with player (hit-and-back-off — decided 2026-07-23):
+  deal `damage` once
+  enter per-enemy attack_cooldown (~1.0s, @export) — brief back-off/pause (~0.3s, @export), then resume chase
+  may hit again once cooldown expires
+  enemy NEVER despawns on contact
 ```
+
+**Contact-damage rules (task 59 fixes the current code):**
+
+- The shipped code self-despawns the enemy on contact (`enemy_duwende.gd` — suicide-on-touch). That is a BUG, not the design.
+- Exactly ONE side owns damage application — today both `enemy_duwende.gd` and `player.gd` apply damage on entry; task 59 consolidates to one owner.
+- Player's 0.5s invincibility frames stay as the global gate against swarm bursts; the per-enemy cooldown paces individual attackers.
 
 **Enemy Collision Rules:**
 

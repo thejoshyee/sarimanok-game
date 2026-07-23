@@ -196,7 +196,8 @@ Behavior:
   Leaves blood trail visual effect
 
 On death:
-  Bonus gold drop (100g)
+  Big XP drop (200) + bonus gold (100g) — several late-game levels; killing it must feel worth it
+  Unlocks "Aswang Slayer" achievement (see prd-polish-release)
   Does NOT end game (still must survive to 30:00)
 ```
 
@@ -221,6 +222,29 @@ On death:
 | 20:00       | **MANANANGGAL SPAWNS**         | One-time            |
 | 20:00-30:00 | All enemies + Manananggal      | 1 per 0.3s (chaos!) |
 
+## Spawn Events (added 2026-07-23 — run-density fix, task 60)
+
+The base timeline leaves 0:00–8:00 green-only and adds nothing new after the boss. Spawn EVENTS fix the pacing by reusing existing enemies — **no new art, no new scenes beyond inherited-scene recolors** (same pattern as green/red duwende variants, task 47).
+
+**Event types:**
+
+- **Swarm ring:** ~20 Green Duwendes spawn simultaneously in a circle around the player and converge. Telegraph with a 1s warning sound/flash.
+- **Elite duwende:** inherited-scene recolor variant — ~5× HP, 2× damage, darker tint + slightly larger, 5× XP/gold drops. One spawns among the normal flow.
+
+**Event timeline (all numbers tunable at Week 11 balancing):**
+
+| Time  | Event                                    | Purpose                        |
+| ----- | ---------------------------------------- | ------------------------------ |
+| 4:00  | Swarm ring (Green)                       | Breaks up the green-only stretch |
+| 8:00  | (Red Duwende unlocks — base timeline)    |                                |
+| 12:00 | First Elite (Green)                      | Mini-boss moment before Santelmo era peaks |
+| 16:00 | Swarm ring (Green + Red mix)             | Pressure spike before boss     |
+| 22:00 | Elite (Red) + swarm ring                 | Post-boss novelty              |
+| 25:00 | Swarm ring, larger (~30)                 | Escalation                     |
+| 28:00 | Elite pair + swarm ring                  | Final-stretch climax before dawn |
+
+**Rules:** events are IN ADDITION to the base spawn rate; events pause while `GameTimer.is_gameplay_active()` is false; elites use the existing pool system (small dedicated pools are fine — they're rare).
+
 ## Updated Enemy Drops
 
 | Enemy         | XP Drop | Gold Drop |
@@ -228,7 +252,10 @@ On death:
 | Green Duwende | 1       | 1         |
 | Red Duwende   | 3       | 2         |
 | Santelmo      | 4       | 3         |
-| Manananggal   | 50      | 100       |
+| Elite Duwende | 5×base  | 5×base    |
+| Manananggal   | 200     | 100       |
+
+**Manananggal XP raised 50 → 200 (2026-07-23):** the boss is optional (killing it never ends the run), so the reward must make the fight clearly worth taking — ~200 XP is several late-game levels. A boss-kill achievement ("Aswang Slayer") reinforces it (see prd-polish-release achievements).
 
 ---
 

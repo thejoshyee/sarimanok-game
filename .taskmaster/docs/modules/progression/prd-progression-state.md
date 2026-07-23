@@ -159,6 +159,8 @@ backup ensures the player doesn't lose ALL progress - just the most recent run.
 
 ---
 
+> ⚠ **ALREADY PARSED as tasks 48–55.** This Week-4 section is kept for context only — when parsing this module with task-master, EXCLUDE it (or delete the generated duplicates). See the Parse Status table in [../README.md](../README.md).
+
 # Week 4: Win Condition
 
 **End State: "I can WIN the game"**

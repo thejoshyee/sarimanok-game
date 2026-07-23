@@ -27,13 +27,13 @@ This is the roguelite progression. It's why dying doesn't feel pointless—you a
 │                                     │
 ├─────────────────────────────────────┤
 │                                     │
-│   Damage +2%         100g    [BUY]  │
+│   Damage +2%         175g    [BUY]  │
 │   Current: +6%                      │
 │                                     │
-│   Max HP +5          100g    [BUY]  │
+│   Max HP +5          175g    [BUY]  │
 │   Current: +15                      │
 │                                     │
-│   Move Speed +1%     100g    [BUY]  │
+│   Move Speed +1%     175g    [BUY]  │
 │   Current: +3%                      │
 │                                     │
 ├─────────────────────────────────────┤
@@ -45,11 +45,13 @@ This is the roguelite progression. It's why dying doesn't feel pointless—you a
 
 ## Permanent Upgrades
 
-| Upgrade    | Cost | Effect          | Repeatable? |
-| ---------- | ---- | --------------- | ----------- |
-| Damage     | 100g | +2% base damage | ∞ (forever) |
-| Max HP     | 100g | +5 max HP       | ∞           |
-| Move Speed | 100g | +1% move speed  | ∞           |
+| Upgrade    | Cost            | Effect          | Repeatable? |
+| ---------- | --------------- | --------------- | ----------- |
+| Damage     | 100 + 25×owned  | +2% base damage | ∞ (forever) |
+| Max HP     | 100 + 25×owned  | +5 max HP       | ∞           |
+| Move Speed | 100 + 25×owned  | +1% move speed  | ∞           |
+
+**Escalating cost (decided 2026-07-23):** each purchase raises that upgrade's next price by 25g (100, 125, 150, …). The rising price is the brake on infinite meta power — flat pricing lets endless gold farming trivialize Story Mode. Tune the +25g step at Week 11.
 
 **These are SMALL bonuses that stack over many purchases.**
 

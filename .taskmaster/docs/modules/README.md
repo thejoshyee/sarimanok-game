@@ -13,6 +13,30 @@ modules/
 └── launch/         (2 files) - Weeks 12-14 Steam Launch
 ```
 
+## Parse Status
+
+**Check this table BEFORE running `parse_prd` on any module, and update it after every parse.** This is the source of truth for what's already in tasks.json — it exists so nobody has to remember.
+
+| Module | Parsed? | Tasks |
+|--------|---------|-------|
+| core/prd-core-foundation.md | ✅ | 1–10 |
+| core/prd-core-enemies.md | ✅ | 11–16 (+59 contact-damage fix) |
+| core/prd-core-weapons.md | ✅ | 17–27 |
+| core/prd-core-progression.md | ✅ | 28–37 (+56 SFX, 57 localization) |
+| core/prd-core-arena.md | ⚠ built ad-hoc, never parsed | 58 tracks remaining dressing |
+| progression/prd-progression-victory.md | ✅ | 48–55 (+60 spawn events) |
+| progression/prd-progression-state.md | ❌ | — (its Week-4 section is PRE-parsed as 48–55, see banner in file) |
+| progression/prd-progression-meta.md | ❌ | — |
+| characters/prd-characters-variants.md | ❌ | — |
+| characters/prd-characters-endless.md | ❌ | — |
+| polish/prd-polish-feel.md | ❌ | — |
+| polish/prd-polish-content.md | ❌ | — |
+| polish/prd-polish-release.md | ❌ | — |
+| launch/prd-launch-prep.md | ❌ | — |
+| launch/prd-launch-execute.md | ❌ | — |
+
+(Tasks 38–47 are ad-hoc fixes/refactors, not from any parse.)
+
 ## File Organization by Week
 
 ### Weeks 1-3: Core Foundation

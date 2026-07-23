@@ -35,6 +35,7 @@ This is feature freeze. By end of Week 10:
 | Shop Access      | DISABLED (removes meta-progression hook)        |
 | Character Select | Classic Sarimanok only                          |
 | Save Data        | Does not persist                                |
+| Spawn timeline   | Consider compressed pacing for the demo build (decide Week 10) |
 
 **Demo End Screen:**
 
@@ -70,7 +71,7 @@ func show_demo_end_screen():
     # Wishlist button opens Steam store page in browser
 ```
 
-## Steam Achievements (5-8 for EA)
+## Steam Achievements (5-9 for EA)
 
 | Achievement     | Condition                                            | Type        |
 | --------------- | ---------------------------------------------------- | ----------- |
@@ -82,6 +83,7 @@ func show_demo_end_screen():
 | Shopaholic      | Buy 10 shop upgrades total                           | Meta        |
 | Perfectionist   | Beat Story Mode without taking damage in final 5 min | Challenge   |
 | Endless Night   | Survive 45:00 in Endless Mode                        | Endurance   |
+| Aswang Slayer   | Kill the Manananggal                                 | Combat      |
 
 ## GodotSteam Integration (2-4 Hours)
 
@@ -159,6 +161,12 @@ func log_run_data():
 
 - If leveling too fast: Increase XP requirements
 - If leveling too slow: Decrease XP requirements or increase enemy XP drops
+
+### Open Design Questions (answer with playtest data — logged 2026-07-23)
+
+1. **Night length — 30:00 vs 20:00.** The content budget (4 enemies + events + 1 boss) may play denser and better as a 20-minute night. Decide from playtest boredom curves, not attachment to the number. Changes boss timing and unlock thresholds if taken.
+2. **Late-run level-up exhaustion.** ~50 real upgrade picks exist (6 weapons + 4 passives × 5 levels) vs a 40–60 level-up target — the last third of a run can go filler-only. Levers: flatten late XP curve, accept fillers knowingly, or pull weapon evolutions forward from Update 1.
+3. **Demo-slice density.** The demo cuts at 10:00 — historically the emptiest stretch. Verify the Spawn Events (prd-progression-victory) fixed this; if not, compress the demo build's timeline.
 
 ## Bug Fixing Priority
 
@@ -301,10 +309,11 @@ Steam achievements need icons (64x64 pixels, PNG format):
 | Shopaholic      | Gold coins pile                 |
 | Perfectionist   | Golden shield                   |
 | Endless Night   | Infinity symbol with moon       |
+| Aswang Slayer   | Manananggal silhouette vs. sun  |
 
 ## Verification Checklist
 
-- [ ] **All 8 Icons Created:** 64x64 PNG files
+- [ ] **All 9 Icons Created:** 64x64 PNG files
 - [ ] **Readable at Small Size:** Icons recognizable in Steam overlay
 - [ ] **Consistent Style:** All icons match game's pixel art aesthetic
 - [ ] **Locked/Unlocked States:** Gray vs color versions (optional, Steam auto-grays)

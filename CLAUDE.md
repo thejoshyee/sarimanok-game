@@ -277,6 +277,13 @@ Phases in order — progress is measured by phase completion, not dates:
 - Ericka creates art simultaneously in Aseprite
 - Art swap happens when its time, without blocking progress
 
+**Parsing module PRDs (IMPORTANT):**
+
+- BEFORE any `parse_prd`: check the **Parse Status table** in `.taskmaster/docs/modules/README.md` — it maps every module to its existing task IDs
+- Parse with `--append`; never re-parse a ✅ module
+- AFTER parsing: compare the new task titles against existing tasks and flag lookalikes (some PRDs repeat cross-module task lists; pre-parsed sections carry a ⚠ banner)
+- Update the Parse Status table as part of the same session
+
 ## MVP Scope (Must Ship)
 
 **Characters:** 3 (Sarimanok Classic/Shadow/Golden variants)
