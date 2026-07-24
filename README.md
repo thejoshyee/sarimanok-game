@@ -7,7 +7,6 @@
 - Sarimanok Legends
 - Sarimanok Survivor: Night of the dead
 - Sarmimanok revenge of the bird
-- Sarimanok will save the world
 - Sarimanok vs the world
 - Sarimanoker's Adventure
 
